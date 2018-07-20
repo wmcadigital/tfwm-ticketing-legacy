@@ -11,6 +11,9 @@
         .directive('item', ['$timeout', 'angularGridInstance', item])
         .controller('TicketDetailCtrl', ['ticketingService','$routeParams', TicketDetailCtrl
         ])
+        .directive('detailDetails', [detailDetails])
+        .directive('detailSidebar', [detailSidebar])
+        .directive('detailAlternative', [detailAlternative])
         ;
         // CONTROLLER
         function TicketingSearchCtrl($timeout, $filter, $location, ticketingService, angularGridInstance) {
@@ -252,6 +255,29 @@
             }
 
             initialise(vm.ticketID); //initialise API to get ticket
+        }
+
+          // DIRECTIVES
+
+        function detailDetails() {
+            return {
+                templateUrl: 'partials/detail/details.html',
+                restrict: 'E'
+            };
+        }
+
+        function detailSidebar() {
+            return {
+                templateUrl: 'partials/detail/sidebar.html',
+                restrict: 'E'
+            };
+        }
+
+        function detailAlternative() {
+            return {
+                templateUrl: 'partials/detail/alternative.html',
+                restrict: 'E'
+            };
         }
     
 })();
