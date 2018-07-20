@@ -1,0 +1,75 @@
+<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search">
+    <div class="boxin reset">
+        <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
+    </div>
+
+    <div class="fields new-transport-icons-blue">
+        <label class="plain" for="transportModes">Select a mode of transport</label>
+        <span class="icon-stylized-new -bus -table-cell border-right--transparent">
+            <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null">
+            <label for="jpbus">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 24 24"><style type="text/css">.st0{fill:none;}</style><path class="st0" d="M0 0h24v24H0V0z"/><path id="XMLID_63_" d="M16.5 6.9c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.6-0.3-0.6-0.6V4.7c0-0.3 0.3-0.6 0.6-0.6h7.9c0.3 0 0.6 0.3 0.6 0.6V6.9zM9.7 9.4V9c0-0.2 0.2-0.3 0.3-0.3h3.8c0.2 0 0.3 0.2 0.3 0.3v0.5c0 0.2-0.2 0.3-0.3 0.3h-3.8C9.9 9.8 9.7 9.6 9.7 9.4M16.5 14.3c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.6-0.3-0.6-0.6v-2.8c0-0.3 0.3-0.6 0.6-0.6h7.9c0.3 0 0.6 0.3 0.6 0.6V14.3zM15.7 17.6c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C16.5 17.2 16.1 17.6 15.7 17.6M8.3 17.6c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C9.2 17.2 8.8 17.6 8.3 17.6M16.5 3h-3.4 -2.2H7.5C6.9 3 6.4 3.5 6.4 4.1v14.1c0 0.6 0.5 1.1 1.1 1.1v1.4c0 0.2 0.2 0.3 0.3 0.3h1c0.2 0 0.3-0.2 0.3-0.3v-1.4h1.7 2.3 1.7v1.4c0 0.2 0.2 0.3 0.3 0.3h1c0.2 0 0.3-0.2 0.3-0.3v-1.4c0.6 0 1.1-0.5 1.1-1.1l0-14.1C17.6 3.5 17.1 3 16.5 3"/></svg>
+                <span>Bus</span>
+            </label>
+        </span>
+        <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
+            <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null">
+            <label for="jptrain">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><style type="text/css">.st0{fill:none;}</style><path class="st0" d="M0 0h24v24H0V0z"/><path d="M15.7 13.7c-0.5 0-0.8-0.4-0.8-0.8s0.4-0.8 0.8-0.8c0.5 0 0.8 0.4 0.8 0.8S16.1 13.7 15.7 13.7M12.6 8.1V4.7c0-0.3 0.3-0.6 0.6-0.6l0 0h0 0.6 0.9c0.8 0 1.6 0.8 1.6 1.7l0.1 1.1v0l0.1 1.1c0 0.3-0.2 0.6-0.5 0.6h-2.8C12.8 8.6 12.6 8.4 12.6 8.1M11.4 8.1c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.5-0.3-0.5-0.6l0.1-1.1v0l0.1-1.1c0.1-0.9 0.8-1.7 1.6-1.7h0.9 0.6 0c0.3 0 0.6 0.3 0.6 0.6V8.1zM8.3 13.7c-0.5 0-0.8-0.4-0.8-0.8S7.9 12 8.3 12c0.5 0 0.8 0.4 0.8 0.8S8.8 13.7 8.3 13.7M17.9 13.1l-0.6-7.3C17.2 4.3 15.9 3 14.5 3S12 3 12 3s-1.1 0-2.5 0C8.1 3 6.8 4.3 6.7 5.8l-0.6 7.3c-0.1 1.5 1 2.8 2.6 2.8H12h0 3.4C16.9 15.9 18.1 14.7 17.9 13.1"/><path d="M8.8 18.8L9 17.6h6 0l0.2 1.1H8.8zM15.8 17.6l-0.5-1.1h-0.2H8.9 8.6l-0.5 1.1 -1.3 3.1c-0.1 0.2 0 0.3 0.2 0.3h1c0.2 0 0.4-0.2 0.4-0.3l0.1-0.8h6.8l0.1 0.8c0 0.2 0.2 0.3 0.4 0.3h1c0.2 0 0.3-0.1 0.2-0.3L15.8 17.6z"/></svg>
+                <span>Train</span>
+            </label>
+        </span>
+        <span class="icon-stylized-new -tram -table-cell border-left--transparent">
+            <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null">
+            <label for="jptram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><style type="text/css">.st0{fill:none;}</style><path class="st0" d="M0 0h24v24H0V0z"/><path d="M15.7 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C16.5 15 16.1 15.4 15.7 15.4M12 12.6H8.2c-0.3 0-0.5-0.3-0.5-0.6L8 8.6C8 8 8.6 7.5 9.2 7.5H12h0 0 2.8C15.4 7.5 16 8 16 8.6l0.3 3.4c0 0.3-0.2 0.6-0.5 0.6H12zM8.3 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C9.2 15 8.8 15.4 8.3 15.4M10.9 5.1L12 4l1.1 1.1L12 6.3 10.9 5.1zM17.7 14.8l-0.5-6.2c-0.1-1.2-1.2-2.2-2.5-2.2h-1.5L14 5.5c0.2-0.2 0.2-0.5 0-0.7l-1.7-1.7C12.2 3 12.1 3 12 3c-0.1 0-0.2 0-0.3 0.1L10 4.8C9.8 5 9.8 5.3 10 5.5l0.9 0.9H9.3c-1.2 0-2.3 1-2.4 2.2l-0.5 6.2c-0.1 1.2 0.8 2.2 2.1 2.2H12h0 3.6C16.8 17.1 17.8 16 17.7 14.8"/><path d="M8.1 18.7l-0.8 1.9c-0.1 0.2 0 0.3 0.2 0.3h0.7c0.2 0 0.4-0.1 0.4-0.3L9 18.7l0.2-1.1H8.6L8.1 18.7z"/><path d="M15.8 18.7l-0.5-1.1h-0.6l0.2 1.1 0.3 1.9c0 0.2 0.2 0.3 0.4 0.3h0.7c0.2 0 0.3-0.1 0.2-0.3L15.8 18.7z"/></svg>
+                <span>Tram</span>
+            </label>
+        </span>
+    </div>
+
+    <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro">
+        <label class="plain" for="PassengerType">Who will use the ticket?</label>
+        <span class="stylized-select">
+            <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model='ticketing.postJSON.PassengerType'>
+                <option value="">Select who will be using this ticket</option>
+                <option value="Adult">Adult</option>
+                <option value="Child">Child</option>
+                <option value="Under16">Under 16</option>
+                <option value="Student16to18">Student 16 - 18</option>
+                <!-- <option value="Student">Student</option> -->
+                <option value="Family">Group / Family</option>
+                <option value="Concessionary">Concession</option>
+            </select>
+        </span>
+    </div>
+
+
+    <div class="fields how-long" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro)">
+        <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>
+        <div class="labels-new">
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationDay" name="TimeBand" value="Pay on day / 1 day" data-ng-model="ticketing.postJSON.TimeBand">
+                <label for="DurationDay"><span></span>a day</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationWeek" name="TimeBand" value="Less than a month" data-ng-model="ticketing.postJSON.TimeBand">
+                <label for="DurationWeek"><span></span>Less than a month</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationMonth" name="TimeBand" value="About a month" data-ng-model="ticketing.postJSON.TimeBand">
+                <label for="DurationMonth"><span></span>About a month</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationTerm" name="TimeBand" value="Longer than a month" data-ng-model="ticketing.postJSON.TimeBand">
+                <label for="DurationTerm"><span></span>Longer than a month</label>
+            </span>
+            <!-- <span class="icon-stylized-new">
+                <input type="radio" id="DurationYear" name="TimeBand" value="DurationYear=true" data-ng-model="ticketing.postJSON.TimeBand">
+                <label for="DurationYear"><span></span>a year</label>
+            </span>	 -->
+        </div>
+    </div>
+
+    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade">Find tickets</button>
+</form>

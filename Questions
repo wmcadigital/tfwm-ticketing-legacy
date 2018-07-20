@@ -1,0 +1,17 @@
+What is the logic for the quick buy button?
+---
+Currently it is set up so that it prioritises in this order...
+Buy on Swift > Buy on Direct Debit > Quick buy > Buy at travel centre
+
+
+
+What happens when you select two modes at the same time?
+---
+i.e. if you click bus and train?
+
+
+
+Can't sort by price due to format
+---
+Some prices contain words whereas others contain absolute values
+i.e. £5.40 vs Cash £5.40 - Swift PAYG £5.20

@@ -1,0 +1,25 @@
+/* New transport Icons*/
+@mixin new-transport-icons($bg,$color,$hover-bg,$hover-color){
+    .icon-stylized-new{float:left;width:32.3%;
+        &.-train{margin:0 1.5%;}
+
+        input{position: absolute;clip: rect(1px, 1px, 1px, 1px);width: 1px;height: 1px;overflow: hidden;
+            &:checked{
+                ~ label{color:$hover-color;background-color:$hover-bg;
+                &:after{color:$hover-color;font-family:"Material Icons";position:absolute;content:"\E876";font-size:24px;margin-left:-10px;top: 0;right: 4px;z-index:9999;bottom:0;margin:auto;}
+                }
+            }
+        }
+
+        label{background-color:$bg;padding-left:26px;color:$color;}
+    
+        svg{fill:$color;margin:auto 0;width:28px;}
+            input:checked ~ label svg{fill:$hover-color;}
+    }
+}
+/*End New transport Icons*/
+
+.new-transport-icons-blue{@include new-transport-icons(#009DE0,white,#036,white);}
+@media all and (max-width:938px){
+    
+}

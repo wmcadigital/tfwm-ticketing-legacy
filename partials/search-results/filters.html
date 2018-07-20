@@ -1,0 +1,138 @@
+<div class="boxin bdr-top--blue ticket-filters">
+    <h3>Filter your results</h3>
+    <hr>
+
+    <!-- Exclude Mode(s) -->
+    <div class="filter-block" data-ng-if="!ticketing.postedJSON.AllowBus || !ticketing.postedJSON.AllowTrain || !ticketing.postedJSON.AllowMetro">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('mode')">
+            Exclude mode(s)
+            <i class="material-icons">
+                {{ticketing.filterButtons.mode ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.mode">
+            <li data-ng-if="!ticketing.postedJSON.AllowBus">
+                <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowBus" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+                <label for="bus-only-radio">Bus</label>
+            </li>
+        
+            <li data-ng-if="!ticketing.postedJSON.AllowTrain">
+                <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowTrain" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+                <label for="train-only-radio">Train</label>
+            </li>
+        
+            <li data-ng-if="!ticketing.postedJSON.AllowMetro">
+                <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowMetro" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+                <label for="tram-only-radio">Tram</label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- How to Buy -->
+    <div class="filter-block">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('payment')">
+            How to Buy
+            <i class="material-icons">
+                {{ticketing.filterButtons.payment ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.payment">
+            <li>
+                <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectDebit" data-ng-change="ticketing.update()"/>
+                <label for="purchaseDebit">Direct Debit
+                     ({{ (ticketing.filteredTickets | filter: {BuyOnDirectDebit: true}).length }})
+                </label>
+            </li>
+            <li>
+                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectPurchase" data-ng-change="ticketing.update()"/>
+                <label for="purchaseDirect">Quick buy
+                     ({{ (ticketing.filteredTickets | filter: {BuyOnDirectPurchase: true}).length }})
+                </label>
+            </li>
+            <li>
+                <input id="purchaseSwift" name="purchaseSwift" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnSwift" data-ng-change="ticketing.update()"/>
+                <label for="purchaseSwift">Swift
+                     ({{ (ticketing.filteredTickets | filter: {BuyOnSwift: true}).length }})
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bus Travel Area -->
+    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowBus && ticketing.filterButtons.BusTravelArea.length">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('BusTravelAreaBtn')">
+            Bus Travel Area
+            <i class="material-icons">
+                {{ticketing.filterButtons.BusTravelAreaBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.BusTravelAreaBtn">
+            <li data-ng-repeat="filter in ticketing.filterButtons.BusTravelArea | orderBy: filter" data-ng-if="filter != null">
+                <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.BusTravelArea"
+                    data-ng-change="ticketing.update()" value="{{filter}}" />
+                <label for="busTravelArea{{$index}}">{{filter}}
+                     ({{ (ticketing.filteredTickets | filter: {BusTravelArea: filter}).length }})
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bus Operator -->
+    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowBus && ticketing.filterButtons.Operator.length">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('OperatorBtn')">
+            Bus Operator
+            <i class="material-icons">
+                {{ticketing.filterButtons.OperatorBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.OperatorBtn">
+            <li data-ng-repeat="filter in ticketing.filterButtons.Operator | orderBy: filter" data-ng-if="filter != null">
+                <input id="operator{{$index}}" name="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.Operator"
+                    data-ng-change="ticketing.update()" value="{{filter}}"/>
+                <label for="operator{{$index}}">{{filter}} 
+                    ({{ (ticketing.filteredTickets | filter: {Operator: filter}).length}})
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Train Zones (from) -->
+    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowTrain ">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('RailZoneBtn')">
+            Train/rail zones (from)
+            <i class="material-icons">
+                {{ticketing.filterButtons.RailZoneBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.RailZoneBtn">
+            <li data-ng-repeat="filter in ticketing.filterButtons.RailZones" >
+                <input id="railZone{{$index}}" name="railZone{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.RailZoneFrom"
+                    data-ng-change="ticketing.update()" value="{{filter}}" />
+                <label for="railZone{{$index}}">Zone {{filter}} ({{ (ticketing.filteredTickets | filter: {RailZoneFrom : filter}).length}})
+                </label>
+            </li>
+        </ul>
+
+        <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro">
+            <label class="plain" for="PassengerType">From:</label>
+            <span class="stylized-select">
+                <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneFrom' data-ng-change="ticketing.update()">
+                    <option value="">Any Zones</option>
+                    <option data-ng-repeat="option in ticketing.filterButtons.RailZoneFrom" value="{{option}}">Zone {{option}}</option>
+                </select>
+            </span>
+            <br/><br/>
+            <label class="plain" for="PassengerType">To:</label>
+            <span class="stylized-select">
+                <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneTo' data-ng-change="ticketing.update()">
+                    <option value="">Any Zones</option>
+                    <option data-ng-repeat="option in ticketing.filterButtons.RailZoneTo" value="{{option}}">Zone {{option}}</option>
+                </select>
+            </span>
+        </div>
+
+
+
+    </div>
+
+</div>

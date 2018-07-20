@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* New transport Icons*/
+/*End New transport Icons*/
+.new-transport-icons-blue .icon-stylized-new {
+  float: left;
+  width: 32.3%;
+}
+.new-transport-icons-blue .icon-stylized-new.-train {
+  margin: 0 1.5%;
+}
+.new-transport-icons-blue .icon-stylized-new input {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label {
+  color: white;
+  background-color: #036;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label:after {
+  color: white;
+  font-family: "Material Icons";
+  position: absolute;
+  content: "";
+  font-size: 24px;
+  margin-left: -10px;
+  top: 0;
+  right: 4px;
+  z-index: 9999;
+  bottom: 0;
+  margin: auto;
+}
+.new-transport-icons-blue .icon-stylized-new label {
+  background-color: #009DE0;
+  padding-left: 26px;
+  color: white;
+}
+.new-transport-icons-blue .icon-stylized-new svg {
+  fill: white;
+  margin: auto 0;
+  width: 28px;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label svg {
+  fill: white;
+}
+
+.ticketing-page .ticket-search .how-long .icon-stylized-new label {
+  background-color: #009DE0;
+  color: white;
+}
+.ticketing-page .ticket-item .payment-icons {
+  display: block;
+  width: 100%;
+}
+.ticketing-page .ticket-item .payment-icons > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ticketing-page .ticket-item .payment-icons .ticket-direct-debit-logo {
+  width: 85px;
+  margin-left: 10px;
+}
+.ticketing-page .ticket-item .payment-icons .ticket-swift-logo {
+  width: 35px;
+}
+.ticketing-page .ticket-item .event__title {
+  font-size: 22px;
+}
+.ticketing-page .ticket-item .price {
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 18px;
+  color: #009DE0;
+}
+.ticketing-page .ticket-item .event__date {
+  margin-bottom: 40px;
+}
+.ticketing-page .ticket-item a {
+  margin-bottom: 8px;
+}
+.ticketing-page .ticket-filters hr {
+  margin-bottom: 0;
+}
+.ticketing-page .ticket-filters .filter-block {
+  border-bottom: 1px solid #ccc;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title {
+  padding: 20px 0;
+  display: block;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title:hover {
+  color: #009DE0;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title i {
+  float: right;
+  color: #009DE0;
+  font-weight: bold;
+}
+.ticketing-page .ticket-filters ul {
+  max-height: 400px;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+.ticketing-page .ticket-filters ul label {
+  border: 0;
+}
+.ticketing-page .block--fullwidth .block--side {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 15px;
+}
