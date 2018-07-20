@@ -25,7 +25,7 @@
         </span>
     </p>
 
-    <a class="float--left" data-ng-href="https://ticketing.networkwestmidlands.com/Home/ShowTicket/{{ticket.Id}}">More details</a>
+    <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
 
 <a data-ng-if="ticket.BuyTicketUrl" class="float--right" data-ng-href="{{ticket.BuyTicketUrl}}" target="_blank">
     {{ticket.BuyOnDirectDebit ? "Buy on Direct Debit" : 

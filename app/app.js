@@ -28,10 +28,10 @@
                 templateUrl: '/partials/search-results/index.html',
                 reloadOnSearch: false
             })
-            .when('/route/:ttID-:version', {
-                templateUrl: '//static.centro.org.uk/nwmAssets/apps/timetables/partials/timetable/index.html',
-                controller: 'TimetableCtrl',
-                controllerAs: 'timetable',
+            .when('/ticket/:ticket', {
+                templateUrl: '/partials/detail/index.html',
+                controller: 'TicketDetailCtrl',
+                controllerAs: 'ticket',
                 resolve: {//Before page loads..
                     getUnique: ['savedFilter', function (savedFilter) {//Get the search page history url from cache
                         return savedFilter.get("stateless");

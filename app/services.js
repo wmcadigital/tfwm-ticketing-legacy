@@ -7,13 +7,13 @@
         .factory('updatePageView', ['$location', updatePageView]);
 
     function ticketingService($http) {
-        var uri = 'http://apisnwm.cenapps.org.uk/Ticketing/Tickets/Search';
+        var uri = 'http://apisnwm.cenapps.org.uk/Ticketing/Tickets/';
         return {
             ticketSearch: function (data){
-                return getData($http.post(uri, data, {cache: 'true'}));
+                return getData($http.post(uri + 'Search', data, {cache: true}));
             },
-            getRouteMap: function(data){
-                return getData($http.get(uri + 'getRouteMap/' + data, {cache:true}));
+            getTicket: function(data){
+                return getData($http.get(uri + data, {cache:true}));
             }
         };
 

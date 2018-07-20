@@ -9,6 +9,8 @@
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
         .directive('item', ['$timeout', 'angularGridInstance', item])
+        .controller('TicketDetailCtrl', ['ticketingService','$routeParams', TicketDetailCtrl
+        ])
         ;
         // CONTROLLER
         function TicketingSearchCtrl($timeout, $filter, $location, ticketingService, angularGridInstance) {
@@ -231,6 +233,25 @@
                     }, 0);
                 }
             };
+        }
+
+        // TICKET DETAIL CONTROLLER
+        function TicketDetailCtrl(ticketingService, $routeParams){
+            var vm = this;
+
+            vm.ticketID = $routeParams.ticket; //set Ticket ID to URL parameter
+
+            // Function to get the ticket data with api call
+            function initialise(data){
+                ticketingService.getTicket(data).then(
+                    function(response){
+                        vm.all = response;
+                        console.log(response);
+                    }
+                )
+            }
+
+            initialise(vm.ticketID); //initialise API to get ticket
         }
     
 })();
