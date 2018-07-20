@@ -1,1 +1,23 @@
-Ticket Sidebar
+<div class="block block--fullwidth">
+    <div class="boxin">
+        <h3>{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}</h3>
+        <hr>
+        <p class="type--small">
+            Buy your Swift card online and it will be sent to you in the post
+        </p>
+        <p><a href="{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now</a></p>
+    </div>
+</div>
+
+<div class="block block--fullwidth">
+    <div class="boxin bdr-top--blue">
+        <h3>Where can I use?</h3>
+        <hr>
+        <p class="type--small">
+            <ul>
+                <li>Use your Swift card on the Metro</li>
+                <li>Use your Swift card on all major bus operators within the region</li>
+            </ul>
+        </p>
+    </div>
+</div>

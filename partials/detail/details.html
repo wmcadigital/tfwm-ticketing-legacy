@@ -1,1 +1,55 @@
-Ticket Details
+<div class="boxin boxin--large bdr-top--blue">
+        <h1>{{ticket.all.Name}}</h1>
+        <p>{{ticket.all.Summary}}</p>
+        <p>{{ticket.all.Validity}}</p>
+
+        <p>Use on</p>
+        <p>
+                <!-- Valid on: -->
+                <span class="icon icon--bus" data-ng-if="ticket.all.AllowBus" title="{{ticket.all.Operator}}"></span>
+                <span class="icon icon--train" data-ng-if="ticket.all.AllowTrain"></span>
+                <span class="icon icon--tram" data-ng-if="ticket.all.AllowMetro"></span>
+            </p>
+
+        <p>
+                <!-- Features: -->
+                <div data-ng-if="ticket.all.BuyOnDirectDebit"><span class="iconcustom icon--tick"></span>Buy on Direct Debit</div>
+                <div data-ng-if="ticket.all.BuyOnSwift"><span class="iconcustom icon--tick"></span>Buy on Swift</div>
+     </p>
+</div>
+
+
+<div class="boxin boxin--large">
+
+        {{ticket.all.Description | removeHTMLTags}}
+
+<h3>Product Details</h3>
+<ul>
+    <li data-ng-if="ticket.all.AllowBus">Use on Bus</li>
+    <li data-ng-if="ticket.all.AllowMetro">Use on Metro</li>
+    <li data-ng-if="ticket.all.AllowTrain">Use on Train</li>
+    <li data-ng-if="ticket.all.AllowPeakTravel">Use on Peak Times</li>
+    <li data-ng-if="ticket.all.BuyOnDirectDebit">Buy on Direct Debit</li>
+    <li data-ng-if="ticket.all.BuyOnSwift">Buy on Swift</li>
+    <li data-ng-if="ticket.all.IsAdult">Adult Ticket</li>
+    <li data-ng-if="ticket.all.IsChild">Child Ticket</li>
+    <li data-ng-if="ticket.all.IsFamily">FamilyTicket</li>
+    <li data-ng-if="ticket.all.IsPayAsYouGo">Pay as you go</li>
+    <li data-ng-if="ticket.all.IsSeasonTicket">Season Ticket</li>
+    <li data-ng-if="ticket.all.IsStudent">Student Ticket</li>
+    <li data-ng-if="ticket.all.OutOfCounty">Can use out of county</li>
+    <li data-ng-if="ticket.all.RequiredPhotocard">Photocard required</li>
+</ul>
+
+
+        <div class="acc accordion-vertical js-accordion" data-module="accordion">
+            <div class="acc__item">
+                <a class="acc__trigger" href="#">
+                    Product Details
+                </a>
+                <div class="acc__content">
+                    ...
+                </div>
+            </div>
+        </div>
+</div>
