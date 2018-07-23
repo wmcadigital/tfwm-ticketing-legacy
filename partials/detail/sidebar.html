@@ -1,11 +1,11 @@
 <div class="block block--fullwidth">
-    <div class="boxin">
-        <h3>{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}</h3>
+    <div class="boxin bdr-top--blue">
+        <h3 class="price">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}} Price needs adding to complete api</h3>
         <hr>
         <p class="type--small">
-            Buy your Swift card online and it will be sent to you in the post
+            <span data-ng-if="ticket.all.BuyOnSwift">Buy your Swift card online and it will be sent to you in the post</span>
         </p>
-        <p><a href="{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now</a></p>
+        <p><a href="{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span></a></p>
     </div>
 </div>
 
@@ -14,10 +14,29 @@
         <h3>Where can I use?</h3>
         <hr>
         <p class="type--small">
+            <img data-ng-if="ticket.all.AllowBus" src="../../assets/nbus_nnetworkMap.png" alt="nbus Map" />
             <ul>
-                <li>Use your Swift card on the Metro</li>
-                <li>Use your Swift card on all major bus operators within the region</li>
+                <li data-ng-if="ticket.all.AllowBus">Use on the Bus</li>
+                <li data-ng-if="ticket.all.AllowTrain">Use on the Train</li>
+                <li data-ng-if="ticket.all.AllowMetro">Use on the Metro</li>
+                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major bus operators within the region</li>
+                <li data-ng-if="ticket.all.OperatorId === '0a3dc42a-7e80-e411-9265-0050568f6584'">Any Diamond Bus bus, within the West Midlands County</li>
             </ul>
         </p>
     </div>
 </div>
+
+<div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnSwift">
+        <div class="boxin bdr-top--blue">
+            <h3>How to use?</h3>
+            <hr>
+            <p class="type--small">
+                <ul>
+                    <li>Buy online</li>
+                    <li>Top up (set up auto top-up)</li>
+                    <li>Tap on card reader or pass to the driver</li>
+                    <li>Always get home</li>
+                </ul>
+            </p>
+        </div>
+    </div>

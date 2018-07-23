@@ -115,3 +115,30 @@
   position: sticky;
   top: 15px;
 }
+.ticketing-page .card-img {
+  width: 180px;
+  float: left;
+  margin: 30px 20px 20px 0;
+}
+.ticketing-page .boxin--large h1 {
+  font-size: 3rem;
+}
+.ticketing-page .ticket-detail {
+  float: right;
+}
+.ticketing-page .ticket-name {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.ticketing-page .features {
+  background: #f4f4f4 !important;
+  padding: 20px;
+}
+.ticketing-page .price {
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 24px;
+  color: #009DE0;
+}
