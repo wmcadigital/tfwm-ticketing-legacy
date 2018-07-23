@@ -4,8 +4,26 @@
         <hr>
         <p class="type--small">
             <span data-ng-if="ticket.all.BuyOnSwift">Buy your Swift card online and it will be sent to you in the post</span>
+            <span data-ng-if="ticket.all.PurchaseTic">Buy this ticket from a local travel shop</span>
+            <ul data-ng-if="ticket.all.PurchaseTic">
+                <li>
+                    <a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Travel Information Centre</a>
+                </li>
+            </ul>
         </p>
-        <p><a href="{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span></a></p>
+        <p data-ng-if="ticket.all.BuyOnDirectPurchase">
+            <a href="#" class="btn btn--arrow">Buy now</span>
+            </a>
+        </p>
+        <p data-ng-if="ticket.all.BuyOnDirectDebit">
+            <a href="#" class="btn btn--arrow">Buy now</span>
+            </a>
+        </p>
+        <p data-ng-if="ticket.all.BuyOnSwift">
+            <a href="https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now
+                <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span>
+            </a>
+        </p>
     </div>
 </div>
 
@@ -27,16 +45,16 @@
 </div>
 
 <div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnSwift">
-        <div class="boxin bdr-top--blue">
-            <h3>How to use?</h3>
-            <hr>
-            <p class="type--small">
-                <ul>
-                    <li>Buy online</li>
-                    <li>Top up (set up auto top-up)</li>
-                    <li>Tap on card reader or pass to the driver</li>
-                    <li>Always get home</li>
-                </ul>
-            </p>
-        </div>
+    <div class="boxin bdr-top--blue">
+        <h3>How to use?</h3>
+        <hr>
+        <p class="type--small">
+            <ul>
+                <li>Buy online</li>
+                <li>Top up (set up auto top-up)</li>
+                <li>Tap on card reader or pass to the driver</li>
+                <li>Always get home</li>
+            </ul>
+        </p>
     </div>
+</div>
