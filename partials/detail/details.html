@@ -43,17 +43,6 @@
     <h3>Product Description</h3>
     <div data-ng-bind-html="ticket.all.Description"></div>
 
-    <!-- <div class="acc accordion-vertical js-accordion" data-module="accordion" ng-init="item =  1">
-        <div class="acc__item" ng-class="{active:item == 1}">
-            <a class="acc__trigger" href="#" ng-click="item = 1">
-                Product Details
-            </a>
-            <div class="acc__content" ng-show="item == 1">
-                ...
-            </div>
-        </div>
-    </div>-->
-
     <!-- Accordion -->
     <div class="acc accordion-vertical js-accordion" data-module="accordion">
         <!-- Product Details -->
@@ -80,15 +69,23 @@
                 </div>
             </div>
         </div>
+         <!-- Cancelling direct debit -->
+         <div data-ng-click="ticket.toggleClick('cancelldd')">
+                <div class="{{ticket.filterAccordions.cancelldd ? 'acc__item acc--active' : 'acc__item' }}">
+                    <span class="acc__trigger">Cancelling Direct Debit</span>
+                    <div class="acc__content" data-ng-show="ticket.filterAccordions.cancelldd">
+                        <h2>Copy Here</h2>
+                    </div>
+                </div>
+            </div>
         <!-- Terms and conditions -->
         <div data-ng-click="ticket.toggleClick('terms')">
             <div class="{{ticket.filterAccordions.terms ? 'acc__item acc--active' : 'acc__item' }}">
-                <span class="acc__trigger">Terms and conditions</span>
+                <span class="acc__trigger">Terms and Conditions</span>
                 <div class="acc__content" data-ng-show="ticket.filterAccordions.terms">
                     <h2>Terms Here</h2>
                 </div>
             </div>
         </div>
     </div>
-
 </div>

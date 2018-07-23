@@ -16,7 +16,7 @@
             </a>
         </p>
         <p data-ng-if="ticket.all.BuyOnDirectDebit">
-            <a href="#" class="btn btn--arrow">Buy now</span>
+            <a href="https://ticketing.networkwestmidlands.com/DirectDebit/{{ticket.all.Id}}" class="btn btn--arrow">Apply for Direct Debit</span>
             </a>
         </p>
         <p data-ng-if="ticket.all.BuyOnSwift">
@@ -43,7 +43,7 @@
         </p>
     </div>
 </div>
-
+<!-- Swift - How to use -->
 <div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnSwift">
     <div class="boxin bdr-top--blue">
         <h3>How to use?</h3>
@@ -58,3 +58,18 @@
         </p>
     </div>
 </div>
+<!-- Direct Debit - How to use -->
+<div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnDirectDebit">
+        <div class="boxin bdr-top--blue">
+            <h3>How to use?</h3>
+            <hr>
+            <p class="type--small">
+                <ul>
+                    <li>Buy online</li>
+                    <li>Set up direct debit</li>
+                    <li>Use on transport</li>
+                    <li>Always get home</li>
+                </ul>
+            </p>
+        </div>
+    </div>
