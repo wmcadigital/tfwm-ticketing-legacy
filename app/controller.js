@@ -244,7 +244,7 @@
 
             vm.ticketID = $routeParams.ticket; //set Ticket ID to URL parameter
             vm.filterAccordions = {};
-            vm.toggleFilter = toggleFilter;
+            vm.toggleClick = toggleClick;
 
             // Function to get the ticket data with api call
             function initialise(data){
@@ -258,7 +258,7 @@
 
             initialise(vm.ticketID); //initialise API to get ticket
 
-            function toggleFilter(type) {                
+            function toggleClick(type) {                
                 vm.filterAccordions[type] = !vm.filterAccordions[type];
             }
         }

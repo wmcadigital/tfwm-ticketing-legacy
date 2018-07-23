@@ -1,75 +1,96 @@
 <div class="boxin boxin--large bdr-top--blue">
     <div class="ticket-name">
-    <span class="card-img" data-ng-if="ticket.all.BuyOnSwift && ticket.all.RequirePhotocard && ticket.all.IsAdult" title="{{ticket.all.Operator}}">
-        <img src="http://static.centro.org.uk/img/nwm/tickets/swift/adult-season-swift-card.png" />
-    </span>
-    <span data-ng-if="ticket.all.BuyOnSwift && ticket.all.RequirePhotocard && ticket.all.IsChild">
-        <img src="http://static.centro.org.uk/img/nwm/tickets/swift/child-season-swift-card.png" />
-    </span>
-    <!--<span data-ng-if="ticket.all.BuyOnSwift"><img src="http://static.centro.org.uk/img/nwm/tickets/swift/multi-day-swift-card.png" /></span>-->
-    <span data-ng-if="ticket.all.BuyOnSwift && ticket.all.IsPayAsYouGo">
-        <img src="http://static.centro.org.uk/img/nwm/tickets/swift/payg-swift-card.png" />
-    </span>
+        <span class="card-img" data-ng-if="ticket.all.BuyOnSwift && ticket.all.RequirePhotocard && ticket.all.IsAdult" title="{{ticket.all.Operator}}">
+            <img src="http://static.centro.org.uk/img/nwm/tickets/swift/adult-season-swift-card.png" />
+        </span>
+        <span data-ng-if="ticket.all.BuyOnSwift && ticket.all.RequirePhotocard && ticket.all.IsChild">
+            <img src="http://static.centro.org.uk/img/nwm/tickets/swift/child-season-swift-card.png" />
+        </span>
+        <!--<span data-ng-if="ticket.all.BuyOnSwift"><img src="http://static.centro.org.uk/img/nwm/tickets/swift/multi-day-swift-card.png" /></span>-->
+        <span data-ng-if="ticket.all.BuyOnSwift && ticket.all.IsPayAsYouGo">
+            <img src="http://static.centro.org.uk/img/nwm/tickets/swift/payg-swift-card.png" />
+        </span>
 
-    <div class="ticket-detail">
-        <h1>{{ticket.all.Name}}</h1>
-        <p data-ng-bind-html="ticket.all.Summary"></p>
-        <!-- <p>{{ticket.all.Validity}}</p>-->
-        <p ng-bind-html="myText"></p>
-        <p>Use on
-            <!-- Valid on: -->
-            <span class="icon icon--bus" data-ng-if="ticket.all.AllowBus" title="{{ticket.all.Operator}}"></span>
-            <span class="icon icon--train" data-ng-if="ticket.all.AllowTrain"></span>
-            <span class="icon icon--tram" data-ng-if="ticket.all.AllowMetro"></span>
-        </p>
+        <div class="ticket-detail">
+            <h1>{{ticket.all.Name}}</h1>
+            <p data-ng-bind-html="ticket.all.Summary"></p>
+            <!-- <p>{{ticket.all.Validity}}</p>-->
+            <p ng-bind-html="myText"></p>
+            <p>Use on
+                <!-- Valid on: -->
+                <span class="icon icon--bus" data-ng-if="ticket.all.AllowBus" title="{{ticket.all.Operator}}"></span>
+                <span class="icon icon--train" data-ng-if="ticket.all.AllowTrain"></span>
+                <span class="icon icon--tram" data-ng-if="ticket.all.AllowMetro"></span>
+            </p>
+        </div>
     </div>
-</div>
 
     <!-- Features: -->
-<div class="boxin bg--grey bg--tint ts--info">
-    <ul class="bare-list bare-list--horizontal">
-        <li data-ng-if="ticket.all.BuyOnDirectDebit">
-            <span class="iconcustom icon--tick"></span>Buy on Direct Debit</li>
-        <li data-ng-if="ticket.all.BuyOnSwift">
-            <span class="iconcustom icon--tick"></span>Buy on Swift</li>
-        <li data-ng-if="ticket.all.AllowPeakTravel">
-            <span class="iconcustom icon--tick"></span>Peak travel allowed</li>
-    </ul>
-</div>
+    <div class="boxin bg--grey bg--tint ts--info">
+        <ul class="bare-list bare-list--horizontal">
+            <li data-ng-if="ticket.all.BuyOnDirectDebit">
+                <span class="iconcustom icon--tick"></span>Buy on Direct Debit</li>
+            <li data-ng-if="ticket.all.BuyOnSwift">
+                <span class="iconcustom icon--tick"></span>Buy on Swift</li>
+            <li data-ng-if="ticket.all.AllowPeakTravel">
+                <span class="iconcustom icon--tick"></span>Peak travel allowed</li>
+        </ul>
+    </div>
 </div>
 
 
 <div class="boxin boxin--large">
-<h3>Product Description</h3>
+    <h3>Product Description</h3>
     <div data-ng-bind-html="ticket.all.Description"></div>
 
-    <h3>Product Details</h3>
-    <ul>
-        <li data-ng-if="ticket.all.AllowBus">Use on Bus</li>
-        <li data-ng-if="ticket.all.AllowMetro">Use on Metro</li>
-        <li data-ng-if="ticket.all.AllowTrain">Use on Train</li>
-        <li data-ng-if="ticket.all.AllowPeakTravel">Use on Peak Times</li>
-        <li data-ng-if="ticket.all.BuyOnDirectDebit">Buy on Direct Debit</li>
-        <li data-ng-if="ticket.all.BuyOnSwift">Buy on Swift</li>
-        <li data-ng-if="ticket.all.IsAdult">Adult Ticket</li>
-        <li data-ng-if="ticket.all.IsChild">Child Ticket</li>
-        <li data-ng-if="ticket.all.IsFamily">FamilyTicket</li>
-        <li data-ng-if="ticket.all.IsPayAsYouGo">Pay as you go</li>
-        <li data-ng-if="ticket.all.IsSeasonTicket">Season Ticket</li>
-        <li data-ng-if="ticket.all.IsStudent">Student Ticket</li>
-        <li data-ng-if="ticket.all.OutOfCounty">Can use out of county</li>
-        <li data-ng-if="ticket.all.RequirePhotocard">Photocard required</li>
-    </ul>
-
-
-    <div class="acc accordion-vertical js-accordion" data-module="accordion">
-        <div class="acc__item">
-            <a class="acc__trigger" href="#">
+    <!-- <div class="acc accordion-vertical js-accordion" data-module="accordion" ng-init="item =  1">
+        <div class="acc__item" ng-class="{active:item == 1}">
+            <a class="acc__trigger" href="#" ng-click="item = 1">
                 Product Details
             </a>
-            <div class="acc__content">
+            <div class="acc__content" ng-show="item == 1">
                 ...
             </div>
         </div>
+    </div>-->
+
+    <!-- Accordion -->
+
+
+    <div class="acc accordion-vertical js-accordion" data-module="accordion">
+        <!-- Product Details -->
+        <div data-ng-click="ticket.toggleClick('details')">
+            <div class="{{ticket.filterAccordions.details ? 'acc__item acc--active' : 'acc__item' }}">
+                <span class="acc__trigger">Product Details</span>
+                <div class="acc__content" data-ng-show="ticket.filterAccordions.details">
+                    <ul class="checkbox-list nga-fast nga-collapse">
+                        <li data-ng-if="ticket.all.AllowBus">Use on Bus</li>
+                        <li data-ng-if="ticket.all.AllowMetro">Use on Metro</li>
+                        <li data-ng-if="ticket.all.AllowTrain">Use on Train</li>
+                        <li data-ng-if="ticket.all.AllowPeakTravel">Use on Peak Times</li>
+                        <li data-ng-if="ticket.all.BuyOnDirectDebit">Buy on Direct Debit</li>
+                        <li data-ng-if="ticket.all.BuyOnSwift">Buy on Swift</li>
+                        <li data-ng-if="ticket.all.IsAdult">Adult Ticket</li>
+                        <li data-ng-if="ticket.all.IsChild">Child Ticket</li>
+                        <li data-ng-if="ticket.all.IsFamily">FamilyTicket</li>
+                        <li data-ng-if="ticket.all.IsPayAsYouGo">Pay as you go</li>
+                        <li data-ng-if="ticket.all.IsSeasonTicket">Season Ticket</li>
+                        <li data-ng-if="ticket.all.IsStudent">Student Ticket</li>
+                        <li data-ng-if="ticket.all.OutOfCounty">Can use out of county</li>
+                        <li data-ng-if="ticket.all.RequirePhotocard">Photocard required</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Terms and conditions -->
+        <div data-ng-click="ticket.toggleClick('terms')">
+            <div class="{{ticket.filterAccordions.terms ? 'acc__item acc--active' : 'acc__item' }}">
+                <span class="acc__trigger">Terms and conditions</span>
+                <div class="acc__content" data-ng-show="ticket.filterAccordions.terms">
+                    <h2>Terms Here</h2>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
