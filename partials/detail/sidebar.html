@@ -1,6 +1,6 @@
 <div class="block block--fullwidth">
     <div class="boxin bdr-top--blue">
-        <h3 class="price">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}} Price needs adding to complete api</h3>
+        <h3 class="price">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}} <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span> <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span> <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span> <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span> <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span></h3>
         <hr>
         <p class="type--small">
             <span data-ng-if="ticket.all.BuyOnSwift">Buy your Swift card online and it will be sent to you in the post</span>
@@ -24,6 +24,11 @@
                 <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span>
             </a>
         </p>
+
+        <!--<a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
+                {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : 
+                ticket.all.BuyOnSwift ? "Buy on Swift" :
+                ticket.all.HasOnlinePurchaseChannel ? "Quick buy" : "Buy at travel centre"}}</a>-->
     </div>
 </div>
 
