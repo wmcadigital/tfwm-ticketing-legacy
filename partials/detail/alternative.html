@@ -1,1 +1,14 @@
-Alternative Tickets
+<div data-ng-if="ticket.all.RelatedTickets.length >= 1">
+
+    <h2>Alternative Tickets - {{ticket.all.RelatedTickets.length}}</h2>
+    <br> {{ticket.all.RelatedTickets}}
+    <br>
+
+    <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
+        ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
+        <div class="grid" data-ng-repeat="ticket in ticketing.filteredTickets | limitTo: ticketing.limit track by $index" data-count="{{ticketing.filteredTickets.length}}">
+            <related-product></related-product>
+        </div>
+    </div>
+
+</div>

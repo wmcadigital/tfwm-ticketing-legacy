@@ -14,6 +14,7 @@
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
+        .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
         ;
         // CONTROLLER
         function TicketingSearchCtrl($timeout, $filter, $location, ticketingService, angularGridInstance) {
@@ -282,6 +283,13 @@
         function detailAlternative() {
             return {
                 templateUrl: 'partials/detail/alternative.html',
+                restrict: 'E'
+            };
+        }
+
+        function detailRelated() {
+            return {
+                templateUrl: 'partials/detail/related-product.html',
                 restrict: 'E'
             };
         }
