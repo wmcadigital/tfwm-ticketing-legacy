@@ -44,14 +44,11 @@
         <h3>Where can I use?</h3>
         <hr>
         <p class="type--small">
-            <a data-ng-if="ticket.all.AllowBus" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus">
-                <img class="Bus Travel Area" src="../../assets/nbus_nnetworkMap.png" alt="nBus Travel Area">
-            </a>
             <ul>
-                <li data-ng-if="ticket.all.AllowBus">Use on the Bus</li>
-                <li data-ng-if="ticket.all.AllowTrain">Use on the Train</li>
-                <li data-ng-if="ticket.all.AllowMetro">Use on the Metro</li>
-                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major bus operators within the region</li>
+                <li data-ng-if="ticket.all.AllowBus">Use on the <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus">Bus</a></li>
+                <li data-ng-if="ticket.all.AllowTrain">Use on the <a data-ng-if="ticket.all.AllowTrain" href="../../assets/NWMzonalcurves.png" data-lightbox="train">Train</a> <span data-ng-if="ticket.all.RailZoneFrom === ticket.all.RailZoneTo">(Zone {{ticket.all.RailZoneFrom}} only)</span><span data-ng-if="ticket.all.RailZoneFrom != ticket.all.RailZoneTo">(Zones {{ticket.all.RailZoneFrom}} to {{ticket.all.RailZoneTo}})</span></li>
+                <li data-ng-if="ticket.all.AllowMetro">Use on the <a data-ng-if="ticket.all.AllowMetro" href="../../assets/Metro-Line-Route.png" data-lightbox="metro">Metro</a></li>
+                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major <a href="https://journeyplanner.networkwestmidlands.com/operator" target="_blank">bus operators</a> within the region</li>
                 <li data-ng-if="ticket.all.OperatorId === '0a3dc42a-7e80-e411-9265-0050568f6584'">Any Diamond Bus bus, within the West Midlands County</li>
             </ul>
         </p>
