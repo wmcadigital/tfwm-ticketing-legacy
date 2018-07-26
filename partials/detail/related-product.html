@@ -1,35 +1,44 @@
-<div class="boxin bdr-top--blue ticket-item nga-fast nga-fade">
-    <h4 class="event__title">{{ticket.Name}}</h4>
-    <h5 class="price">{{ticket.PriceOverride || (ticket.TicketCurrentAmount | currency:"£")}}</h5>
+<div class="block" style="width: 33%;">
+    <div class="boxin bdr-top--blue ticket-item nga-fast nga-fade">
+        <h4 class="event__title">{{ticket.Name}}</h4>
+        <h5 class="price">{{ticket.PriceOverride || (ticket.TicketCurrentAmount | currency:"£")}}
+            <span data-ng-if="ticket.ValidityId == 450930002">
+                per month</span>
+            <span data-ng-if="ticket.ValidityId == 450930006"> per month</span>
+            <span data-ng-if="ticket.ValidityId == 450930000"> a day</span>
+            <span data-ng-if="ticket.ValidityId == 450930001"> a week</span>
+            <span data-ng-if="ticket.ValidityId == 450930003"> for 1 year</span>
+        </h5>
 
-    <p>
-        <!-- Valid on: -->
-        <span class="icon icon--bus" data-ng-if="ticket.AllowBus" title="{{ticket.Operator}}"></span>
-        <span class="icon icon--train" data-ng-if="ticket.AllowTrain"></span>
-        <span class="icon icon--tram" data-ng-if="ticket.AllowMetro"></span>
-    </p>
-    <p>
-        <strong>Summary:</strong>
-        <br/>
-        <!-- <span data-ng-bind-html="ticket.Summary"></span> -->
+        <p>
+            <!-- Valid on: -->
+            <span class="icon icon--bus" data-ng-if="ticket.AllowBus" title="{{ticket.Operator}}"></span>
+            <span class="icon icon--train" data-ng-if="ticket.AllowTrain"></span>
+            <span class="icon icon--tram" data-ng-if="ticket.AllowMetro"></span>
+        </p>
+        <p>
+            <strong>Summary:</strong>
+            <br/>
+            <!-- <span data-ng-bind-html="ticket.Summary"></span> -->
 
-        {{ticket.Summary | removeHTMLTags}}
-    </p>
-    <p data-ng-if="ticket.BuyOnDirectDebit || ticket.BuyOnSwift">
-        <strong>
-            Available on:
-        </strong>
-        <span class="payment-icons">
-            <img src="assets/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.BuyOnSwift" alt="Buy on Swift" title="This ticket can be purchased on Swift"
-            />
-            <img src="assets/direct-debit-logo.png" class="ticket-direct-debit-logo" data-ng-if="ticket.BuyOnDirectDebit" alt="Buy on Direct Debit"
-                title="This ticket can be purchased on Direct Debit" />
-        </span>
-    </p>
+            {{ticket.Summary | removeHTMLTags}}
+        </p>
+        <p data-ng-if="ticket.BuyOnDirectDebit || ticket.BuyOnSwift">
+            <strong>
+                Available on:
+            </strong>
+            <span class="payment-icons">
+                <img src="assets/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.BuyOnSwift" alt="Buy on Swift" title="This ticket can be purchased on Swift"
+                />
+                <img src="assets/direct-debit-logo.png" class="ticket-direct-debit-logo" data-ng-if="ticket.BuyOnDirectDebit" alt="Buy on Direct Debit"
+                    title="This ticket can be purchased on Direct Debit" />
+            </span>
+        </p>
 
-    <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
+        <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
 
-    <a data-ng-if="ticket.BuyTicketUrl" class="float--right" data-ng-href="{{ticket.BuyTicketUrl}}" target="_blank">
-        {{ticket.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.BuyOnSwift ? "Buy on Swift" : ticket.HasOnlinePurchaseChannel
-        ? "Quick buy" : "Buy at travel centre"}}</a>
+        <a data-ng-if="ticket.BuyTicketUrl" class="float--right" data-ng-href="{{ticket.BuyTicketUrl}}" target="_blank">
+            {{ticket.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.BuyOnSwift ? "Buy on Swift" : ticket.HasOnlinePurchaseChannel
+            ? "Quick buy" : "Buy at travel centre"}}</a>
+    </div>
 </div>

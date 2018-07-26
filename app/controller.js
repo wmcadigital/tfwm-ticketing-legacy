@@ -14,7 +14,7 @@
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
-        .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
+        .directive('detailRelated', [detailRelated])
         ;
         // CONTROLLER
         function TicketingSearchCtrl($timeout, $filter, $location, ticketingService, angularGridInstance) {
@@ -245,6 +245,7 @@
 
             vm.ticketID = $routeParams.ticket; //set Ticket ID to URL parameter
             vm.filterAccordions = {};
+            vm.relatedTickets = {};
             vm.toggleClick = toggleClick;
 
             // Function to get the ticket data with api call
@@ -253,6 +254,16 @@
                     function(response){
                         vm.all = response;
                         console.log(response);
+                        if(vm.all.RelatedTickets.length){
+                            angular.forEach(vm.all.RelatedTickets, function(item){
+                                ticketingService.getSimpleTicket(item.Id).then(
+                                    function(response){
+                                        vm.relatedTickets[item.Id] = response;    
+                                        console.log(vm.relatedTickets);
+                                    }
+                                )
+                            })
+                        }
                     }
                 )
             }

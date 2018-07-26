@@ -13,7 +13,10 @@
                 return getData($http.post(uri + 'Search', data, {cache: true}));
             },
             getTicket: function(data){
-                return getData($http.get(uri + data + '/Complete', {cache:true}));
+                return getData($http.get(uri + data, {cache:true}));
+            },
+            getSimpleTicket: function(data){
+                return getData($http.get(uri + data + '/simple', {cache:true}));
             }
         };
 
@@ -71,5 +74,4 @@
             update: update
         };
     }
-
 })();

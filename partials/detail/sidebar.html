@@ -1,4 +1,4 @@
-<div class="block block--fullwidth">
+<div class="block block--fullwidth mobile--void">
     <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}">
         <h3 class="price">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}
             <span data-ng-if="ticket.all.ValidityId == 450930002">
@@ -32,6 +32,16 @@
             </a>
         </p>
 
+       <!-- <div class="journey-overview__cost price-list" title="Estimated cost">
+            <span class="hide">Estimated cost </span>£12.50
+            <ul class="bare-list">
+                <li><b>£15.50</b> - with 1 day pass</li>
+                <li><b>£13.50</b> - with 1 week pass</li>
+                <li><b>£12.50</b> - with 1 year pass</li>
+                <li><b>£10.50</b> - with a concession</li>
+            </ul>
+        </div>-->
+        
         <!--<a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
                 {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : 
                 ticket.all.BuyOnSwift ? "Buy on Swift" :
@@ -39,7 +49,7 @@
     </div>
 </div>
 
-<div class="block block--fullwidth">
+<div class="block block--fullwidth mobile--void">
     <div class="boxin bdr-top--navy">
         <h3>Where can I use?</h3>
         <hr>
@@ -55,7 +65,7 @@
     </div>
 </div>
 <!-- Swift - How to use -->
-<div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnSwift">
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.BuyOnSwift">
     <div class="boxin bdr-top--navy">
         <h3>How to use?</h3>
         <hr>
@@ -70,7 +80,7 @@
     </div>
 </div>
 <!-- Direct Debit - How to use -->
-<div class="block block--fullwidth" data-ng-if="ticket.all.BuyOnDirectDebit">
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.BuyOnDirectDebit">
     <div class="boxin bdr-top--navy">
         <h3>How to use?</h3>
         <hr>
