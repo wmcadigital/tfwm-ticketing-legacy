@@ -1,12 +1,10 @@
 <div data-ng-if="ticket.all.RelatedTickets.length >= 1">
     <div class="boxin bdr-top--navy">
-
         <h2>Alternative Tickets</h2>
-
-        <div>
-            <div data-ng-repeat="ticket in ticket.relatedTickets" data-eq-selector=".block">
-                <detail-related></detail-related>
-            </div>
-        </div>
     </div>
+    <div class="blocks cfx">
+    <div data-ng-repeat="ticket in ticket.relatedTickets" data-eq-selector=".block">
+        <detail-related></detail-related>
+    </div>
+</div>
 </div>

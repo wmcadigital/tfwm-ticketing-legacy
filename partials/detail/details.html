@@ -47,6 +47,8 @@
                 <span class="iconcustom icon--tick"></span>Buy at travel centre</li>
             <li data-ng-if="ticket.all.PurchaseRailStation">
                 <span class="iconcustom icon--tick"></span>Buy at rail station</li>
+            <li data-ng-if="ticket.all.IsAdult">
+                <span class="iconcustom icon--tick"></span>Adult Ticket</li>
         </ul>
     </div>
     <div class="mobile-only">
@@ -75,7 +77,7 @@
         <!-- Product Details -->
         <div data-ng-click="ticket.toggleClick('details')">
             <div class="{{ticket.filterAccordions.details ? 'acc__item acc--active' : 'acc__item' }}">
-                <span class="acc__trigger">Product Details</span>
+                <span class="acc__trigger">Product Features</span>
                 <div class="acc__content" data-ng-show="ticket.filterAccordions.details">
                     <ul class="checkbox-list nga-fast nga-collapse">
                         <li data-ng-if="ticket.all.AllowBus">Use on Bus</li>
@@ -116,4 +118,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>    

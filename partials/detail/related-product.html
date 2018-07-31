@@ -1,6 +1,6 @@
-<div class="block" style="width: 33%;">
-    <div class="boxin bdr-top--blue ticket-item nga-fast nga-fade">
-        <h4 class="event__title">{{ticket.Name}}</h4>
+<div class="block" style="width: 33%; min-height: 400px;">
+    <div class="boxin bdr-top--blue ticket-item nga-fast nga-fade" ng-init="limit = 20; moreShown = false">
+        <h4 class="event__title">{{ticket.Name | limitTo: limit}}</h4>
         <h5 class="price">{{ticket.PriceOverride || (ticket.TicketCurrentAmount | currency:"£")}}
             <span data-ng-if="ticket.ValidityId == 450930002">
                 per month</span>
@@ -16,13 +16,14 @@
             <span class="icon icon--train" data-ng-if="ticket.AllowTrain"></span>
             <span class="icon icon--tram" data-ng-if="ticket.AllowMetro"></span>
         </p>
-        <p>
-            <strong>Summary:</strong>
-            <br/>
-            <!-- <span data-ng-bind-html="ticket.Summary"></span> -->
 
-            {{ticket.Summary | removeHTMLTags}}
-        </p>
+        <div ng-init="limit = 100; moreShown = false">
+            {{ticket.Summary | limitTo: limit}}{{ticket.Summary.length > limit ? '...' : ''}}
+            <a ng-show="ticket.Summary.length > limit" href ng-click="limit=text.length; moreShown = true"> More
+            </a>
+            <a ng-show="moreShown" href ng-click="limit=150; moreShown =    false"> Less </a>
+        </div>
+
         <p data-ng-if="ticket.BuyOnDirectDebit || ticket.BuyOnSwift">
             <strong>
                 Available on:
@@ -35,7 +36,8 @@
             </span>
         </p>
 
-        <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
+       <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
+        <!--<a href="#/ticket/{{ticket.Id}}" class="btn btn--arrow float--left">More details</a>-->
 
         <a data-ng-if="ticket.BuyTicketUrl" class="float--right" data-ng-href="{{ticket.BuyTicketUrl}}" target="_blank">
             {{ticket.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.BuyOnSwift ? "Buy on Swift" : ticket.HasOnlinePurchaseChannel

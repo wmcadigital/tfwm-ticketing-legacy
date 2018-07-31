@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('ticketingApp.Controller', [])
-        .controller('TicketingSearchCtrl', ['$timeout', '$filter', '$location', 'ticketingService', 'angularGridInstance',TicketingSearchCtrl])
+        .controller('TicketingSearchCtrl', ['$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance',TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
         .directive('initialSearch', [initialSearch])
@@ -17,7 +17,7 @@
         .directive('detailRelated', [detailRelated])
         ;
         // CONTROLLER
-        function TicketingSearchCtrl($timeout, $filter, $location, ticketingService, angularGridInstance) {
+        function TicketingSearchCtrl($timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
             var vm = this;
 
             vm.submit = submit; //Function to submit inital search
@@ -122,7 +122,7 @@
                     $timeout(function () {
                         if (vm.filteredTickets.length) {
                             angularGridInstance.ticketResults.refresh();
-                            // savedFilter.set("url", $location.url()); //Set local storage with current url for back button
+                            savedFilter.set("url", $location.url()); //Set local storage with current url for back button
                         }
                     }, 82, false);
                 }, 82, false);
@@ -163,6 +163,10 @@
 
             function toggleFilter(type) {                
                 vm.filterButtons[type] = !vm.filterButtons[type];
+            }
+
+            function save(data) {
+                savedFilter.set("stateless", data);
             }
         }
 

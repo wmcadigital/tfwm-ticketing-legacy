@@ -1,8 +1,13 @@
 <div class="block block--fullwidth mobile--void">
     <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}">
-        <h3 class="price">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}
+        <h3 class="price">
+            <span data-ng-if="!ticket.all.SwiftCurrentAmount">{{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}</span>
+            <span data-ng-if="ticket.all.SwiftCurrentAmount">
+                Swift: {{ticket.all.SwiftCurrentAmount | currency:"£"}}
+                <br> Cash: {{ticket.all.TicketCurrentAmount | currency:"£"}}
+            </span>
             <span data-ng-if="ticket.all.ValidityId == 450930002">
-            per month</span>
+                per month</span>
             <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
             <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
             <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
@@ -14,13 +19,9 @@
             <p data-ng-if="ticket.all.PurchaseTic">Buy this ticket from a local travel shop</p>
             <ul data-ng-if="ticket.all.PurchaseTic">
                 <li>
-                    <a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Travel Information Centre</a>
+                    <a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Purchase at a Travel Information Centre</a>
                 </li>
             </ul>
-        </p>
-        <p data-ng-if="ticket.all.BuyOnDirectPurchase">
-            <a href="#" class="btn btn--arrow">Buy now</span>
-            </a>
         </p>
         <p data-ng-if="ticket.all.BuyOnDirectDebit">
             <a href="https://ticketing.networkwestmidlands.com/DirectDebit/{{ticket.all.Id}}" class="btn btn--arrow">Apply for Direct Debit</span>
@@ -32,7 +33,15 @@
             </a>
         </p>
 
-       <!-- <div class="journey-overview__cost price-list" title="Estimated cost">
+        <span data-ng-if="ticket.all.SwiftCurrentAmount">
+            <ul>
+                <li data-ng-if="ticket.all.PurchaseRailStation">Purchase at a staffed rail station</li>
+                <li data-ng-if="ticket.all.PurchaseOnBus">Purchase on Bus</li>
+                <li data-ng-if="ticket.all.PurchaseOnMetro">Purchase on Metro</li>
+            </ul>
+        </span>
+
+        <!-- <div class="journey-overview__cost price-list" title="Estimated cost">
             <span class="hide">Estimated cost </span>£12.50
             <ul class="bare-list">
                 <li><b>£15.50</b> - with 1 day pass</li>
@@ -41,7 +50,7 @@
                 <li><b>£10.50</b> - with a concession</li>
             </ul>
         </div>-->
-        
+
         <!--<a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
                 {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : 
                 ticket.all.BuyOnSwift ? "Buy on Swift" :
@@ -55,10 +64,19 @@
         <hr>
         <p class="type--small">
             <ul>
-                <li data-ng-if="ticket.all.AllowBus">Use on the <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus">Bus</a></li>
-                <li data-ng-if="ticket.all.AllowTrain">Use on the <a data-ng-if="ticket.all.AllowTrain" href="../../assets/NWMzonalcurves.png" data-lightbox="train">Train</a> <span data-ng-if="ticket.all.RailZoneFrom === ticket.all.RailZoneTo">(Zone {{ticket.all.RailZoneFrom}} only)</span><span data-ng-if="ticket.all.RailZoneFrom != ticket.all.RailZoneTo">(Zones {{ticket.all.RailZoneFrom}} to {{ticket.all.RailZoneTo}})</span></li>
-                <li data-ng-if="ticket.all.AllowMetro">Use on the <a data-ng-if="ticket.all.AllowMetro" href="../../assets/Metro-Line-Route.png" data-lightbox="metro">Metro</a></li>
-                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major <a href="https://journeyplanner.networkwestmidlands.com/operator" target="_blank">bus operators</a> within the region</li>
+                <li data-ng-if="ticket.all.AllowBus">Use on the
+                    <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus">Bus</a>
+                </li>
+                <li data-ng-if="ticket.all.AllowTrain">Use on the
+                    <a data-ng-if="ticket.all.AllowTrain" href="../../assets/NWMzonalcurves.png" data-lightbox="train">Train</a>
+                    <span data-ng-if="ticket.all.RailZoneFrom === ticket.all.RailZoneTo">(Zone {{ticket.all.RailZoneFrom}} only)</span>
+                    <span data-ng-if="ticket.all.RailZoneFrom != ticket.all.RailZoneTo">(Zones {{ticket.all.RailZoneFrom}} to {{ticket.all.RailZoneTo}})</span>
+                </li>
+                <li data-ng-if="ticket.all.AllowMetro">Use on the
+                    <a data-ng-if="ticket.all.AllowMetro" href="../../assets/Metro-Line-Route.png" data-lightbox="metro">Metro</a>
+                </li>
+                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major
+                    <a href="https://journeyplanner.networkwestmidlands.com/operator" target="_blank">bus operators</a> within the region</li>
                 <li data-ng-if="ticket.all.OperatorId === '0a3dc42a-7e80-e411-9265-0050568f6584'">Any Diamond Bus bus, within the West Midlands County</li>
             </ul>
         </p>
