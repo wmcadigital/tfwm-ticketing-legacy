@@ -17,6 +17,9 @@
             },
             getSimpleTicket: function(data){
                 return getData($http.get(uri + data + '/simple', {cache:true}));
+            },
+            getTTHeaders: function (data){
+                return getData($http.get(uri + data, {cache: false}));
             }
         };
 
@@ -45,7 +48,7 @@
         }
     }
 
-    function savedFilter() {
+    function savedFilter() {                  
         var savedData = [];
 
         function set(savedData, data) {

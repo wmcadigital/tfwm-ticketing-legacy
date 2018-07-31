@@ -1,11 +1,17 @@
 <div class="wrap">
     <ol class="breadcrumb" aria-label="You are here">
-        <li><a href="http://www.networkwestmidlands.com/">Home</a></li>
-        <li><a href="http://localhost:8080/">Ticket finder</a></li>
-        <li><a aria-current="">{{ticket.all.Name}}</a></li>
+        <li>
+            <a href="http://www.networkwestmidlands.com/">Home</a>
+        </li>
+        <li>
+            <a href="http://localhost:8080/">Ticket finder</a>
+        </li>
+        <li>
+            <a aria-current="">{{ticket.all.Name}}</a>
+        </li>
     </ol>
 
-    <div class="blocks cfx">
+    <div class="blocks cfx" data-ng-if="ticket.loadingStatus == 'Success'">
         <div class="block block--main">
             <div class="blocks">
                 <div class="block block--fullwidth">
@@ -20,6 +26,22 @@
         </div>
     </div>
 
-    <detail-alternative></detail-alternative>
+    <div data-ng-if="ticket.loadingStatus == 'Success'">
+        <detail-alternative></detail-alternative>
+    </div>
+
+    <div class="blocks cfx">
+        <div class="block align--center" data-ng-if="ticket.loadingStatus == 'Loading'">
+            <div class="boxin boxin--large">
+                <p>
+                    <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-white.gif" alt="Loading Spinner" class="loading-spinner" height="200"
+                        width="200">
+                </p>
+                <strong class="nga-fade nga-slow ng-binding" style="font-size:24px;">
+                    Loading...
+                </strong>
+            </div>
+        </div>
+    </div>
 
 </div>
