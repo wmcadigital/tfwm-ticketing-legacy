@@ -3,11 +3,11 @@
         <h2>Alternative Tickets</h2>
     </div>
     <div class="blocks cfx">
-        <div class="" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
+        <ul class="bare-list" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="ticketResults">
-            <div data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
+            <li data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
                 <detail-related></detail-related>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </div>

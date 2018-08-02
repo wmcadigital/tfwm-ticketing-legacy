@@ -330,16 +330,7 @@
     function detailRelated() {
         return {
             templateUrl: 'partials/detail/related-product.html',
-            restrict: 'EA', //This is to stop items overlapping on Angulargrid
-            link: function (scope, elem, attrs) {
-                scope.items = JSON.parse(attrs.items);
-                scope.selected = attrs.selected;
-      
-                scope.selectItem = function(item) {
-                  scope.selected = item;
-                };
-              }
+            restrict: 'E'
         };
     }
-
 })();
