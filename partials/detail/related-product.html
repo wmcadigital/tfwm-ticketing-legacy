@@ -1,5 +1,6 @@
-<div class="block" style="width: 33%;" data-mh="alt">
-    <div class="boxin" ng-class="{'bdr-top--orange' : ticket.AllowBus==true && ticket.AllowTrain==false && ticket.AllowMetro==false, 'bdr-top--green' : ticket.AllowBus==false && ticket.AllowTrain==true && ticket.AllowMetro==false, 'bdr-top--pink' : ticket.AllowBus==false && ticket.AllowTrain==false && ticket.AllowMetro==true, 'bdr-top--blue' : ticket.AllowBus==true && ticket.AllowMetro==true && ticket.AllowTrain==false, 'bdr-009fe3' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}" ng-init="limit = 20; moreShown = false">
+<div class="block ticket-item">
+    <div class="boxin" ng-class="{'bdr-top--orange' : ticket.AllowBus==true && ticket.AllowTrain==false && ticket.AllowMetro==false, 'bdr-top--green' : ticket.AllowBus==false && ticket.AllowTrain==true && ticket.AllowMetro==false, 'bdr-top--pink' : ticket.AllowBus==false && ticket.AllowTrain==false && ticket.AllowMetro==true, 'bdr-top--blue' : ticket.AllowBus==true && ticket.AllowMetro==true && ticket.AllowTrain==false, 'bdr-009fe3' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}"
+        ng-init="limit = 20; moreShown = false">
         <h4 class="event__title">{{ticket.Name | limitTo: limit}}</h4>
         <h5 class="price">{{ticket.PriceOverride || (ticket.TicketCurrentAmount | currency:"£")}}
             <span data-ng-if="ticket.ValidityId == 450930002">
@@ -19,7 +20,7 @@
 
         <!--{{ticket.Summary}}-->
 
-       <div ng-init="limit = 100; moreShown = false">
+        <div ng-init="limit = 100; moreShown = false">
             {{ticket.Summary | limitTo: limit}}{{ticket.Summary.length > limit ? '...' : ''}}
             <a ng-show="ticket.Summary.length > limit" href ng-click="limit=text.length; moreShown = true"> More
             </a>
@@ -38,7 +39,7 @@
             </span>
         </p>
 
-       <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
+        <a class="float--left" data-ng-href="#/ticket/{{ticket.Id}}">More details</a>
         <!--<a href="#/ticket/{{ticket.Id}}" class="btn btn--arrow float--left">More details</a>-->
 
         <a data-ng-if="ticket.BuyTicketUrl" class="float--right" data-ng-href="{{ticket.BuyTicketUrl}}" target="_blank">
