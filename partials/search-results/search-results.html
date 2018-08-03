@@ -1,17 +1,19 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="ticketing.loadingStatus === 'success'">
-<h3 class="filtered-header__heading">
-    <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
+    <h3 class="filtered-header__heading">
+        <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
     <div class="filtered-header__control">
         <label>Sort by</label>
 
         <div class="field -inline">
             <div class="radio-bar">
                 <span>
-                    <input id="radio-1x" name="ordering" title="Price (Low - High)" type="radio" value="TicketCurrentAmount" data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <input id="radio-1x" name="ordering" title="Price (Low - High)" type="radio" value="TicketCurrentAmount" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
                     <label for="radio-1x" style="height: 44px;">Price (Low - High)</label>
                 </span>
                 <span>
-                    <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-TicketCurrentAmount" data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-TicketCurrentAmount" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
                     <label for="radio-3x" style="height: 44px;">Price (High - Low)</label>
                 </span>
             </div>
@@ -19,20 +21,27 @@
     </div>
 </div>
 
-<div class="blocks cfx ticketing-search" >
+<div class="blocks cfx ticketing-search">
     <div class="block block--side" data-ng-if="ticketing.all.length && ticketing.loadingStatus == 'success'">
         <filters></filters>
     </div>
 
     <div class="boxin--mask no-bg block block--main">
 
-        <div class="error-message-no-results" data-ng-if="timetables.laodingStatus == 'error' || (ticketing.loadingStatus == 'success' && !ticketing.filteredTickets.length)" data-ng-bind-html="ticketing.noResults"></div>
-        
-        <p data-ng-if="ticketing.loadingStatus == 'loading'">
-            <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner" class="loading-spinner" height="200" width="200" />
-        </p>
+        <div class="error-message-no-results" data-ng-if="timetables.laodingStatus == 'error' || (ticketing.loadingStatus == 'success' && !ticketing.filteredTickets.length)"
+            data-ng-bind-html="ticketing.noResults"></div>
 
-        <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
+        <div class="block align--center" data-ng-if="ticketing.loadingStatus == 'loading'">
+            <div class="boxin boxin--large">
+                <p>
+                    <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner" class="loading-spinner" height="200"
+                        width="200" />
+                </p>
+            </div>
+        </div>
+
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
+            ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
             <div class="grid" data-ng-repeat="ticket in ticketing.filteredTickets | limitTo: ticketing.limit track by $index" data-count="{{ticketing.filteredTickets.length}}">
                 <item></item>
             </div>

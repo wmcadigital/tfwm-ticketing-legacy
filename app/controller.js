@@ -9,7 +9,7 @@
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
         .directive('item', ['$timeout', 'angularGridInstance', item])
-        .controller('TicketDetailCtrl', ['ticketingService', '$routeParams', TicketDetailCtrl
+        .controller('TicketDetailCtrl', ['ticketingService', '$interval', '$routeParams', TicketDetailCtrl
         ])
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
@@ -265,9 +265,14 @@
     }
 
     // TICKET DETAIL CONTROLLER
-    function TicketDetailCtrl(ticketingService, $routeParams) {
+    function TicketDetailCtrl(ticketingService, $interval, $routeParams) {
         var vm = this;
-        vm.loadingStatus = "Loading";
+        vm.loadingText = 'Loading...'; //default loading text
+        vm.loadingStatus = 'Loading'; //default loading status
+        vm.loadingArray = ['Well, what are you waiting for?', 'Are we there yet?', 'Warming up the processors...', 'Reconfiguring the office coffee machine...', 'Doing something useful...', 'Are you ready?', 'So, do you come here often?', 'This may take some time...', 'I know this is painful to watch, but I have to load this.', 'Oh, no! Loading time...', 'Still Waiting... huh', 'Waiting for something in the server.', 'Creating randomly generated feature.', "It's not you. It's me.", 'Eating your internet cookies...Yummy!']; //loading messages
+        vm.loading = $interval(function () {
+            vm.loadingText = vm.loadingArray[Math.round(Math.random() * (vm.loadingArray.length - 1))];
+        }, 3500); //show random loading message based on milliseconds set
         vm.ticketID = $routeParams.ticket; //set Ticket ID to URL parameter
         vm.filterAccordions = {};
         vm.relatedTickets = {};
