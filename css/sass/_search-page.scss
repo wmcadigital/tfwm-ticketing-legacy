@@ -52,4 +52,22 @@
 .acc {margin-top: 20px;}
 
 .bdr-top--cyan{border-top: 6px solid #009fe3}
+
+input[type="checkbox"]:disabled+label {
+    background: #dddddd;
+}
+
+#orcont {
+    display: table;
+    height: 400px;
+    margin: 0 auto;
+    width: 400px;
+}
+.orcontent {
+    padding: 40px 0;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
 }

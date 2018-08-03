@@ -46,7 +46,8 @@
                 "AllowMetro": $location.search().AllowMetro || null,
                 "AllowTrain": $location.search().AllowTrain || null,
                 "PassengerType": $location.search().PassengerType || '',
-                "TimeBand": $location.search().TimeBand || ''
+                "TimeBand": $location.search().TimeBand || '',
+                "Brand": $location.search().Brand || null
 
                 // "SwiftSearch": true,
                 // "FirstClass": true,
@@ -80,7 +81,8 @@
               $location.search().AllowMetro ||
               $location.search().AllowTrain) &&
               $location.search().PassengerType &&
-              $location.search().TimeBand
+              $location.search().TimeBand &&
+              $location.search().Brand
           ) {
             submit(vm.postJSON);
         }else {
@@ -96,6 +98,7 @@
                 AllowMetro: vm.postedJSON.AllowMetro,
                 PassengerType: vm.postedJSON.PassengerType,
                 TimeBand: vm.postedJSON.TimeBand,
+                Brand: vm.postedJSON.Brand,
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search

@@ -149,3 +149,18 @@
 .ticketing-page .bdr-top--cyan {
   border-top: 6px solid #009fe3;
 }
+.ticketing-page input[type=checkbox]:disabled + label {
+  background: #dddddd;
+}
+.ticketing-page #orcont {
+  display: table;
+  height: 400px;
+  margin: 0 auto;
+  width: 400px;
+}
+.ticketing-page .orcontent {
+  padding: 40px 0;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
