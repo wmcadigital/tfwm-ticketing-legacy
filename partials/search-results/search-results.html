@@ -32,13 +32,11 @@
             data-ng-bind-html="ticketing.noResults"></div>
 
         <div class="block align--center" data-ng-if="ticketing.loadingStatus == 'loading'">
-            <div class="boxin boxin--large">
                 <p>
                     <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner" class="loading-spinner" height="200"
                         width="200" />
                 </p>
             </div>
-        </div>
 
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">

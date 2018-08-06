@@ -8,18 +8,19 @@
 
     function ticketingService($http) {
         var uri = 'http://apisnwm.cenapps.org.uk/Ticketing/Tickets/';
+        var uri2 = 'http://apisnwm.cenapps.org.uk/Ticketing/';
         return {
             ticketSearch: function (data){
                 return getData($http.post(uri + 'Search', data, {cache: true}));
             },
             getTicket: function(data){
-                return getData($http.get(uri + data, {cache:true}));
+                return getData($http.get(uri + data + '/Complete', {cache:true}));
             },
             getSimpleTicket: function(data){
                 return getData($http.get(uri + data + '/simple', {cache:true}));
             },
-            getTTHeaders: function (data){
-                return getData($http.get(uri + data, {cache: false}));
+            getTerms: function(data){
+                return getData($http.get(uri2 + '/Terms/' + data, {cache:true}));
             }
         };
 

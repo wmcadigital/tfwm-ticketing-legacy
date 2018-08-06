@@ -5,11 +5,11 @@
 
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx">
         <div class="block block--halfwidth">
-            <div class="boxin">
+            <div class="">
                 <div class="fields new-transport-icons-blue">
                     <label class="plain" for="transportModes">Select a mode of transport</label>
                     <span class="icon-stylized-new -bus -table-cell border-right--transparent">
-                        <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand">
+                        <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
                         <label for="jpbus">
                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -25,7 +25,7 @@
                         </label>
                     </span>
                     <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
-                        <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand">
+                        <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
                         <label for="jptrain">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -43,7 +43,7 @@
                         </label>
                     </span>
                     <span class="icon-stylized-new -tram -table-cell border-left--transparent">
-                        <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand">
+                        <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
                         <label for="jptram">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="block block--halfwidth">
-            <div class="boxin">
+            <div class="">
                 <div class="orcont" style="float: left;width:30px"><div class="orcontent">Or</div></div>
                 <div class="fields new-transport-icons-blue nga-fast nga-fade" style="float: right;">
                     <label class="plain" for="Brand">Select your pass</label>

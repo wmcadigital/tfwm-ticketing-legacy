@@ -109,11 +109,11 @@
             </div>
         </div>
         <!-- Terms and conditions -->
-        <div data-ng-click="ticket.toggleClick('terms')">
+        <div data-ng-click="ticket.toggleClick('terms')" data-ng-show="ticket.relatedTerms">
             <div class="{{ticket.filterAccordions.terms ? 'acc__item acc--active' : 'acc__item' }}">
                 <span class="acc__trigger">Terms and Conditions</span>
                 <div class="acc__content" data-ng-show="ticket.filterAccordions.terms">
-                    <h2>Terms Here</h2>
+                        <div data-ng-bind-html="ticket.relatedTerms | escapeFilter"></div>
                 </div>
             </div>
         </div>

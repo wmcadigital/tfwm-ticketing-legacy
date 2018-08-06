@@ -5,6 +5,7 @@
         .controller('TicketingSearchCtrl', ['$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
+        .filter('escapeFilter', [escapeFilter])
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
@@ -229,6 +230,14 @@
         }
     }
 
+    function escapeFilter() {
+        return function (text) {
+            text = text.replace(/\n/g, "<br><br>");
+
+            return text;
+        };
+    }
+
 
     // DIRECTIVES
     function initialSearch() {
@@ -297,6 +306,17 @@
                                 }
                             )
                         })
+                    }else{
+                        vm.loadingStatus = "Success";
+                    }
+                    if (vm.all.Documents.length) {
+                            ticketingService.getTerms(data).then(
+                                function (response) {
+                                    vm.relatedTerms = response;
+                                    console.log(response);
+                                    vm.loadingStatus = "Success";
+                                }
+                            )
                     }else{
                         vm.loadingStatus = "Success";
                     }
