@@ -80,7 +80,8 @@
           if (
               ($location.search().AllowBus ||
               $location.search().AllowMetro ||
-              $location.search().AllowTrain) &&
+              $location.search().AllowTrain) ||
+              ($location.search().Brand) &&
               $location.search().PassengerType &&
               $location.search().TimeBand &&
               $location.search().Brand
@@ -313,7 +314,6 @@
                             ticketingService.getTerms(data).then(
                                 function (response) {
                                     vm.relatedTerms = response;
-                                    console.log(response);
                                     vm.loadingStatus = "Success";
                                 }
                             )
