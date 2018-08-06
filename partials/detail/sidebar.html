@@ -23,15 +23,11 @@
                 </li>
             </ul>
         </p>
-        <p data-ng-if="ticket.all.BuyOnDirectDebit">
-            <a href="https://ticketing.networkwestmidlands.com/DirectDebit/{{ticket.all.Id}}" class="btn btn--arrow">Apply for Direct Debit</span>
-            </a>
-        </p>
-        <p data-ng-if="ticket.all.BuyOnSwift">
-            <a href="https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp{{ticket.all.BuyTicketUrl}}" class="btn btn--arrow">Buy now
-                <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span>
-            </a>
-        </p>
+
+        <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
+            {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel
+            ? "Quick buy" : "Buy at travel centre"}}</a>
+
 
         <span data-ng-if="ticket.all.SwiftCurrentAmount">
             <ul>
@@ -40,21 +36,6 @@
                 <li data-ng-if="ticket.all.PurchaseOnMetro">Purchase on Metro</li>
             </ul>
         </span>
-
-        <!-- <div class="journey-overview__cost price-list" title="Estimated cost">
-            <span class="hide">Estimated cost </span>£12.50
-            <ul class="bare-list">
-                <li><b>£15.50</b> - with 1 day pass</li>
-                <li><b>£13.50</b> - with 1 week pass</li>
-                <li><b>£12.50</b> - with 1 year pass</li>
-                <li><b>£10.50</b> - with a concession</li>
-            </ul>
-        </div>-->
-
-        <!--<a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
-                {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : 
-                ticket.all.BuyOnSwift ? "Buy on Swift" :
-                ticket.all.HasOnlinePurchaseChannel ? "Quick buy" : "Buy at travel centre"}}</a>-->
     </div>
 </div>
 
