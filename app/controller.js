@@ -23,6 +23,7 @@
 
         vm.submit = submit; //Function to submit inital search
         vm.clearFilter = clearFilter; //Function to reset filters
+        vm.getStations = getStations; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
         vm.loadMore = loadMore; //function to load more results
@@ -39,6 +40,7 @@
         function defaultVars() {
             vm.all = []; //Set results to blank array
             vm.filteredTickets = []; //Define filtered results as blank array
+            vm.stationList = []; //Define Station list
             vm.loadingStatus = ''; //Set results status to blank
             vm.orderBy = "TicketCurrentAmount";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
@@ -48,7 +50,8 @@
                 "AllowTrain": $location.search().AllowTrain || null,
                 "PassengerType": $location.search().PassengerType || '',
                 "TimeBand": $location.search().TimeBand || '',
-                "Brand": $location.search().Brand || null
+                "Brand": $location.search().Brand || null,
+                "StationNames": []
 
                 // "SwiftSearch": true,
                 // "FirstClass": true,
@@ -67,7 +70,6 @@
                 // "OperatorId": "84b5d172-9cb6-e411-9265-0050568f6584",
                 // "Operator": "National Express Coventry",
                 // "BusTravelArea": "Coventry",
-                // "StationNames": ["Birmingham New Street", "Wolverhampton", "Alvechurch"]
 
             }; //Define postJSON default values
 
@@ -135,6 +137,22 @@
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
                 }
+            )
+            //ticketingService.getStations(data).then(
+            //    function (response) {
+            //        vm.stationList = response;
+            //        console.log(response);
+            //    }
+            //)
+        }
+
+        function getStations() {
+            ticketingService.getStations().then(
+                function (response) {
+                    vm.stationList = response;
+                    //console.log(response);
+                }
+
             )
         }
 

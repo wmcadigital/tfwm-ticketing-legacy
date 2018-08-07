@@ -164,3 +164,6 @@
   display: table-cell;
   vertical-align: middle;
 }
+.ticketing-page form .blocks .block {
+  margin-bottom: 0px;
+}

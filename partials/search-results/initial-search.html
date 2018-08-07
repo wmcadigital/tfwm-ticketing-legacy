@@ -9,7 +9,8 @@
                 <div class="fields new-transport-icons-blue">
                     <label class="plain" for="transportModes">Select a mode of transport</label>
                     <span class="icon-stylized-new -bus -table-cell border-right--transparent">
-                        <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
+                        <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null"
+                            ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
                         <label for="jpbus">
                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -25,8 +26,9 @@
                         </label>
                     </span>
                     <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
-                        <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
-                        <label for="jptrain">
+                        <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null"
+                            ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
+                        <label for="jptrain" data-ng-click="ticketing.getStations();">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
                                     .st0 {
@@ -43,7 +45,8 @@
                         </label>
                     </span>
                     <span class="icon-stylized-new -tram -table-cell border-left--transparent">
-                        <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null" ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
+                        <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null"
+                            ng-disabled="ticketing.postJSON.Brand" ng-checked="mode">
                         <label for="jptram">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -54,10 +57,8 @@
                                 <path class="st0" d="M0 0h24v24H0V0z" />
                                 <path d="M15.7 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C16.5 15 16.1 15.4 15.7 15.4M12 12.6H8.2c-0.3 0-0.5-0.3-0.5-0.6L8 8.6C8 8 8.6 7.5 9.2 7.5H12h0 0 2.8C15.4 7.5 16 8 16 8.6l0.3 3.4c0 0.3-0.2 0.6-0.5 0.6H12zM8.3 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C9.2 15 8.8 15.4 8.3 15.4M10.9 5.1L12 4l1.1 1.1L12 6.3 10.9 5.1zM17.7 14.8l-0.5-6.2c-0.1-1.2-1.2-2.2-2.5-2.2h-1.5L14 5.5c0.2-0.2 0.2-0.5 0-0.7l-1.7-1.7C12.2 3 12.1 3 12 3c-0.1 0-0.2 0-0.3 0.1L10 4.8C9.8 5 9.8 5.3 10 5.5l0.9 0.9H9.3c-1.2 0-2.3 1-2.4 2.2l-0.5 6.2c-0.1 1.2 0.8 2.2 2.1 2.2H12h0 3.6C16.8 17.1 17.8 16 17.7 14.8"
                                 />
-                                <path d="M8.1 18.7l-0.8 1.9c-0.1 0.2 0 0.3 0.2 0.3h0.7c0.2 0 0.4-0.1 0.4-0.3L9 18.7l0.2-1.1H8.6L8.1 18.7z"
-                                />
-                                <path d="M15.8 18.7l-0.5-1.1h-0.6l0.2 1.1 0.3 1.9c0 0.2 0.2 0.3 0.4 0.3h0.7c0.2 0 0.3-0.1 0.2-0.3L15.8 18.7z"
-                                />
+                                <path d="M8.1 18.7l-0.8 1.9c-0.1 0.2 0 0.3 0.2 0.3h0.7c0.2 0 0.4-0.1 0.4-0.3L9 18.7l0.2-1.1H8.6L8.1 18.7z" />
+                                <path d="M15.8 18.7l-0.5-1.1h-0.6l0.2 1.1 0.3 1.9c0 0.2 0.2 0.3 0.4 0.3h0.7c0.2 0 0.3-0.1 0.2-0.3L15.8 18.7z" />
                             </svg>
                             <span>Tram</span>
                         </label>
@@ -67,7 +68,9 @@
         </div>
         <div class="block block--halfwidth">
             <div class="">
-                <div class="orcont" style="float: left;width:30px"><div class="orcontent">Or</div></div>
+                <div class="orcont" style="float: left;width:30px">
+                    <div class="orcontent">Or</div>
+                </div>
                 <div class="fields new-transport-icons-blue nga-fast nga-fade" style="float: right;">
                     <label class="plain" for="Brand">Select your pass</label>
                     <span class="stylized-select">
@@ -105,6 +108,47 @@
         </span>
     </div>
 
+    <!-- Rail Stations -->
+    <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
+        data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
+        <div class="block block--halfwidth">
+            <label class="plain" for="travellingFrom">Travelling from</label>
+            <span class="stylized-select">
+                <select data-ng-model="ticketing.postJSON.StationNames[0]">
+                    <option>Show All</option>
+                    <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
+                        {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
+                        <!-- <text data-ng-if="station.OutOfCounty == false">(Zone {{station.Zone}})</text>
+                        <text data-ng-if="station.OutOfCounty  == true">(Out of County) {{station.OutOfCounty}}</text> -->
+                    </option>
+                </select>
+            </span>
+
+            <!-- <span class="stylized-select">
+                    <select>
+                        <option ng-repeat="station in ticketing.stationList" value="{{station.Zone}}">{{station.Name}}
+                            <span ng-if="station.Zone != null">(Zone {{station.Zone}})</span><span ng-show="station.OutOfCounty">{{station.OutOfCounty}}</span>
+                        </option>
+                    </select>
+                </span>-->
+
+        </div>
+        <div class="block block--halfwidth">
+            <div class="">
+                <label class="plain" for="travellingTo">Travelling to</label>
+                <span class="stylized-select">
+                    <select data-ng-model="ticketing.postJSON.StationNames[1]">
+                        <option>Show All</option>
+                        <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
+                            {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
+                            <!-- <text data-ng-if="station.OutOfCounty == false">(Zone {{station.Zone}})</text>
+                                    <text data-ng-if="station.OutOfCounty  == true">(Out of County) {{station.OutOfCounty}}</text> -->
+                        </option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div>
 
     <div class="fields how-long" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>

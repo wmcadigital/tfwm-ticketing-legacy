@@ -21,6 +21,9 @@
             },
             getTerms: function(data){
                 return getData($http.get(uri2 + '/Terms/' + data, {cache:true}));
+            },
+            getStations: function(data){
+                return getData($http.get(uri2 + 'Station/Train', {cache:true}));
             }
         };
 
