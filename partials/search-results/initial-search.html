@@ -1,4 +1,4 @@
-<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search">
+<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search" data-ng-init="ticketing.getStations();">
     <div class="boxin reset">
         <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
     </div>
