@@ -95,7 +95,7 @@
 
     <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png" data-lightbox="train" target="_blank" class="view-route"><span class="icon icon--xl icon--map"></span><span class="view-route__text">View Map</span></a>
     
-    <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
+    <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro">
         <label class="plain" for="PassengerType">Who will use the ticket?</label>
         <span class="stylized-select">
             <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model='ticketing.postJSON.PassengerType'>
@@ -171,5 +171,5 @@
         </div>
     </div>
 
-    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade">Find tickets</button>
+    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand || ticketing.postJSON.Brand" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade">Find tickets</button>
 </form>
