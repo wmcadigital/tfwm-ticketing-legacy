@@ -72,7 +72,7 @@
                 // "BusTravelArea": "Coventry",
 
             }; //Define postJSON default values
-
+            vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
 
@@ -85,8 +85,8 @@
               $location.search().AllowTrain) ||
               ($location.search().Brand) &&
               $location.search().PassengerType &&
-              $location.search().TimeBand &&
-              $location.search().Brand
+              $location.search().TimeBand ||
+              $location.search().StationNames 
           ) {
             submit(vm.postJSON);
         }else {
@@ -103,6 +103,7 @@
                 PassengerType: vm.postedJSON.PassengerType,
                 TimeBand: vm.postedJSON.TimeBand,
                 Brand: vm.postedJSON.Brand,
+                StationNames: [vm.postJSON.StationNames],
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -138,12 +139,6 @@
                     vm.loadingStatus = 'success';
                 }
             )
-            //ticketingService.getStations(data).then(
-            //    function (response) {
-            //        vm.stationList = response;
-            //        console.log(response);
-            //    }
-            //)
         }
 
         function getStations() {
@@ -159,6 +154,12 @@
         function clearFilter() {
             $location.url('').replace();
             defaultVars();
+        }
+
+        function clearModes() {
+            vm.postJSON.AllowBus = null;
+            vm.postJSON.AllowTrain = null;
+            vm.postJSON.AllowMetro = null;
         }
 
         function updateGrid() {
