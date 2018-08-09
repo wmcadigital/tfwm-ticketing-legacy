@@ -10,7 +10,7 @@
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
         .directive('item', ['$timeout', 'angularGridInstance', item])
-        .controller('TicketDetailCtrl', ['ticketingService', '$interval', '$routeParams', TicketDetailCtrl
+        .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', TicketDetailCtrl
         ])
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
@@ -160,6 +160,11 @@
             vm.postJSON.AllowBus = null;
             vm.postJSON.AllowTrain = null;
             vm.postJSON.AllowMetro = null;
+            vm.postJSON.StationNames = null;
+        }
+
+        function backButton() {
+            vm.backToSearch = getURL; //use session storage
         }
 
         function updateGrid() {
@@ -297,7 +302,7 @@
     }
 
     // TICKET DETAIL CONTROLLER
-    function TicketDetailCtrl(ticketingService, $interval, $routeParams) {
+    function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams) {
         var vm = this;
         vm.loadingText = 'Loading...'; //default loading text
         vm.loadingStatus = 'Loading'; //default loading status
@@ -339,8 +344,14 @@
                     }else{
                         vm.loadingStatus = "Success";
                     }
+                    backButtonLogic(); //Determine back button logic
                 }
             )
+        }
+
+        function backButtonLogic() {
+            vm.backToSearch = getURL; //use session storage
+            console.log(vm.backToSearch);
         }
 
         initialise(vm.ticketID); //initialise API to get ticket

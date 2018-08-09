@@ -161,3 +161,7 @@
 .ticketing-page form .blocks .block {
   margin-bottom: 0px;
 }
+.ticketing-page label.plain-small {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+}

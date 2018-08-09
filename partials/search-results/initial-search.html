@@ -93,6 +93,8 @@
         </div>
     </div>
 
+    <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png" data-lightbox="train" target="_blank" class="view-route"><span class="icon icon--xl icon--map"></span><span class="view-route__text">View Map</span></a>
+    
     <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
         <label class="plain" for="PassengerType">Who will use the ticket?</label>
         <span class="stylized-select">
@@ -110,13 +112,14 @@
     </div>
 
     <!-- Rail Stations -->
+    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations will you use?</label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
         data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
         <div class="block block--halfwidth">
-            <label class="plain" for="travellingFrom">Travelling from</label>
+            <label class="plain-small" for="travellingFrom">From</label>
             <span class="stylized-select">
                 <select id="travellingFrom" data-ng-model="ticketing.postJSON.StationNames[0]">
-                    <option>Show All</option>
+                    <option>Optional</option>
                     <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
                         {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
                     </option>
@@ -125,10 +128,10 @@
         </div>
         <div class="block block--halfwidth">
             <div class="">
-                <label class="plain" for="travellingTo">Travelling to</label>
+                <label class="plain-small" for="travellingTo">To</label>
                 <span class="stylized-select">
                     <select id="travellingTo" data-ng-model="ticketing.postJSON.StationNames[1]">
-                        <option>Show All</option>
+                        <option>Optional</option>
                         <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
                             {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
                         </option>

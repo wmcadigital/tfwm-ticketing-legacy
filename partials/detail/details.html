@@ -15,9 +15,9 @@
         <div class="ticket-detail">
             <h1>{{ticket.all.Name}}</h1>
             <h3 class="price mobile-only">Price: {{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}
-                <span data-ng-if="ticket.all.ValidityId == 450930002">
-                    per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930010"> per month</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
