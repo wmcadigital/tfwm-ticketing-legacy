@@ -28,7 +28,7 @@
                     </span>
                     <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
                         <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.AllowTrain" data-ng-false-value="null"
-                        ng-disabled="ticketing.postJSON.Brand && ticketing.postJSON.Brand != ''">
+                            ng-disabled="ticketing.postJSON.Brand && ticketing.postJSON.Brand != ''">
                         <label for="jptrain" data-ng-click="ticketing.getStations();">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -47,7 +47,7 @@
                     </span>
                     <span class="icon-stylized-new -tram -table-cell border-left--transparent">
                         <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.AllowMetro" data-ng-false-value="null"
-                        ng-disabled="ticketing.postJSON.Brand && ticketing.postJSON.Brand != ''">
+                            ng-disabled="ticketing.postJSON.Brand && ticketing.postJSON.Brand != ''">
                         <label for="jptram">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <style type="text/css">
@@ -93,8 +93,12 @@
         </div>
     </div>
 
-    <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png" data-lightbox="train" target="_blank" class="view-route"><span class="icon icon--xl icon--map"></span><span class="view-route__text">View Map</span></a>
-    
+    <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png"
+        data-lightbox="train" target="_blank" class="view-route">
+        <span class="icon icon--xl icon--map"></span>
+        <span class="view-route__text">View Map</span>
+    </a>
+
     <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro">
         <label class="plain" for="PassengerType">Who will use the ticket?</label>
         <span class="stylized-select">
@@ -112,31 +116,52 @@
     </div>
 
     <!-- Rail Stations -->
-    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations will you use?</label>
+    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations
+        will you use?</label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
         data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
         <div class="block block--halfwidth">
-            <label class="plain-small" for="travellingFrom">From</label>
-            <span class="stylized-select">
+            <label class="plain-small" for="travellingFrom_value">From</label>
+
+            <angucomplete-alt id="ex1" placeholder="Search Stations" pause="100" selected-object="travellingFrom" local-data="ticketing.stationList"
+                search-fields="Name" title-field="Name" minlength="1" input-class="form-control form-control-small" />
+
+            <input type="text" ng-value="travellingFrom.originalObject.Name" data-ng-value="station.Name" data-ng-model="ticketing.postJSON.StationNames[0]">
+            <div ng-show="travellingFrom">
+                You selected <span><strong>{{travellingFrom.originalObject.Name}}</strong></span> station which is <strong>{{
+                    travellingFrom.originalObject.OutOfCounty ? station.Name + ' Out of County': station.Name + ' Zone '
+                    + travellingFrom.originalObject.Zone }}</strong>
+            </div>
+
+            <!-- <span class="stylized-select">
                 <select id="travellingFrom" data-ng-model="ticketing.postJSON.StationNames[0]">
                     <option>Optional</option>
                     <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
                         {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
                     </option>
                 </select>
-            </span>
+            </span>-->
         </div>
         <div class="block block--halfwidth">
             <div class="">
-                <label class="plain-small" for="travellingTo">To</label>
-                <span class="stylized-select">
+                <label class="plain-small" for="travellingTo_value">To</label>
+
+                <angucomplete-alt id="ex1" placeholder="Search Stations" pause="100" selected-object="travellingTo" local-data="ticketing.stationList"
+                    search-fields="Name" title-field="Name" minlength="1" input-class="form-control form-control-small" />
+
+                <div ng-show="travellingTo">
+                    You selected <strong>{{travellingTo.originalObject.Name}}</strong> station which is <strong>{{ travellingTo.originalObject.OutOfCounty
+                        ? station.Name + ' Out of County': station.Name + ' Zone ' + travellingTo.originalObject.Zone }}</strong>
+                </div>
+
+                <!--<span class="stylized-select">
                     <select id="travellingTo" data-ng-model="ticketing.postJSON.StationNames[1]">
                         <option>Optional</option>
                         <option data-ng-repeat="station in ticketing.stationList | orderBy: 'Name'" data-ng-value="station.Name">
                             {{ station.OutOfCounty ? station.Name + ' (Out of County)': station.Name + ' (Zone ' + station.Zone + ')' }}
                         </option>
                     </select>
-                </span>
+                </span>-->
             </div>
         </div>
     </div>
@@ -171,5 +196,6 @@
         </div>
     </div>
 
-    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand || ticketing.postJSON.Brand" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy">Find tickets</button>
+    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand || ticketing.postJSON.Brand" type="submit"
+        class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy">Find tickets</button>
 </form>

@@ -1,8 +1,8 @@
 (function () {
     'use strict';
     angular
-        .module('ticketingApp.Controller', [])
-        .controller('TicketingSearchCtrl', ['$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
+        .module('ticketingApp.Controller', ["angucomplete-alt"])
+        .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
         .filter('escapeFilter', [escapeFilter])
@@ -18,7 +18,7 @@
         .directive('detailRelated', [detailRelated])
         ;
     // CONTROLLER
-    function TicketingSearchCtrl($timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
+    function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
         var vm = this;
 
         vm.submit = submit; //Function to submit inital search
@@ -135,6 +135,7 @@
                             vm.filterButtons.RailZoneTo.push(item.RailZoneTo);
                         }
                     });
+                    
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
                 }
@@ -162,6 +163,22 @@
             vm.postJSON.AllowMetro = null;
             vm.postJSON.StationNames = null;
         }
+
+        function fromStation() {
+            vm.postJSON.StationNames[0] =  $scope.searchStr = value;
+        }
+
+        $scope.travellingFrom = function(selected) {
+            if (selected) {
+                vm.postJSON.StationNames[0] = selected.originalObject.Name;
+            }
+        };
+
+        $scope.travellingTo = function(selected) {
+            if (selected) {
+                vm.postJSON.StationNames[1] = selected.originalObject.Name;
+            }
+        };
 
         function backButton() {
             vm.backToSearch = getURL; //use session storage
