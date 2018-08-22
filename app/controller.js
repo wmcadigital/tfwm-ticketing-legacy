@@ -16,6 +16,7 @@
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
         .directive('detailRelated', [detailRelated])
+        .directive('modalDialog', [modalDialog])
         ;
     // CONTROLLER
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
@@ -329,6 +330,8 @@
         vm.filterAccordions = {};
         vm.relatedTickets = {};
         vm.toggleClick = toggleClick;
+        vm.modalShown = false;
+        vm.toggleModal = toggleModal;
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -375,6 +378,11 @@
             vm.filterAccordions[type] = !vm.filterAccordions[type];
         }
 
+        function toggleModal() {
+            console.log("Toggle Model");
+            vm.modalShown = !vm.modalShown;
+        }
+
     }
 
     // DIRECTIVES
@@ -406,4 +414,27 @@
             restrict: 'E'
         };
     }
+
+    function modalDialog() {
+        return {
+            restrict: 'E',
+            scope: {
+              show: '='
+            },
+            replace: true, // Replace with the template below
+            transclude: true, // we want to insert custom content inside the directive
+            link: function(scope, element, attrs) {
+              scope.dialogStyle = {};
+              if (attrs.width)
+                scope.dialogStyle.width = attrs.width;
+              if (attrs.height)
+                scope.dialogStyle.height = attrs.height;
+              scope.hideModal = function() {
+                scope.show = false;
+              };
+            },
+            template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+          };
+    }
+
 })();
