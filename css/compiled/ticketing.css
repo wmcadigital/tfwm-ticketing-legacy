@@ -168,3 +168,13 @@
 .ticketing-page .highlight {
   color: #009DE0;
 }
+.ticketing-page .col {
+  width: 50%;
+  float: left;
+}
+.ticketing-page .summary {
+  font-weight: bold;
+}
+.ticketing-page .useon {
+  font-weight: bold;
+}
