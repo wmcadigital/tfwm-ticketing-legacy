@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('ticketingApp.Controller', ["angucomplete-alt", "ngTagsInput"])
+        .module('ticketingApp.Controller', ["angucomplete-alt"])
         .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
