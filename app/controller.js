@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('ticketingApp.Controller', ["angucomplete-alt"])
+        .module('ticketingApp.Controller', ["angucomplete-alt", "ngTagsInput"])
         .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
@@ -164,18 +164,16 @@
             vm.postJSON.StationNames = null;
         }
 
-        function fromStation() {
-            vm.postJSON.StationNames[0] =  $scope.searchStr = value;
-        }
-
-        $scope.travellingFrom = function(selected) {
+        $scope.stationFrom = function(selected) {
             if (selected) {
+                console.log(selected);
                 vm.postJSON.StationNames[0] = selected.originalObject.Name;
             }
         };
 
-        $scope.travellingTo = function(selected) {
+        $scope.stationTo = function(selected) {
             if (selected) {
+                console.log(selected);
                 vm.postJSON.StationNames[1] = selected.originalObject.Name;
             }
         };
