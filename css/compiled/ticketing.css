@@ -231,3 +231,11 @@
   background-color: #333;
   color: white;
 }
+.ticketing-page .buy .price {
+  color: #333;
+  font-size: 30px;
+  font-weight: 600;
+}
+.ticketing-page .buy .online {
+  color: #009DE0;
+}
