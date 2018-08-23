@@ -72,7 +72,7 @@ label.plain-small{
 
 .highlight{color: #009DE0;}
 
-.col{width: 50%;float: left;}
+.col{width: 50%;float: left;padding-right: 10px;}
 
 .summary {font-weight: bold;}
 .useon {font-weight: bold;}
@@ -116,6 +116,8 @@ label.plain-small{
     font-weight: bold;
     font-family: 'arial', 'sans-serif';
   }
+
+  /* Tab Styling */
 
   .tab-pane.ng-scope.ng-isolate-scope {display: none}
   .tab-pane.ng-scope.ng-isolate-scope.active {display: block;}

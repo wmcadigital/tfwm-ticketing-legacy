@@ -43,9 +43,9 @@
 
 <div class="block block--fullwidth">
     <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}">
-        <h3><span data-ng-if="ticket.all.AllowBus" class="icon icon--bus ng-scope" title="Use on Bus" style=""></span><span
+        <h3><!--<span data-ng-if="ticket.all.AllowBus" class="icon icon--bus ng-scope" title="Use on Bus" style=""></span><span
                 data-ng-if="ticket.all.AllowTrain" class="icon icon--train ng-scope" title="Use on Train" style=""></span><span
-                data-ng-if="ticket.all.AllowMetro" class="icon icon--tram ng-scope" title="Use on Metro" style=""></span> Where
+                data-ng-if="ticket.all.AllowMetro" class="icon icon--tram ng-scope" title="Use on Metro" style=""></span>--> Where
             can I use?</h3>
         <hr>
         <p class="type--small">
@@ -70,10 +70,10 @@
                             <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png"
                                 /></a>
                             <p class="summary">Train operators who accept this ticket</p>
-                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
                             <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Bus" style=""></span> Bus operators</h2>
+                                <h2><span class="icon icon--train ng-scope" title="Use on Train" style=""></span> Train operators</h2>
                                 <p>List of operators here</p>
                             </modal-dialog>
                         </div>
@@ -82,10 +82,10 @@
                         <div>
                             <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
                                 /></a>
-                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See metro operators</button>
 
                             <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Bus" style=""></span> Bus operators</h2>
+                                <h2><span class="icon icon--tram ng-scope" title="Use on Metro" style=""></span> Tram operators</h2>
                                 <p>List of operators here</p>
                             </modal-dialog>
                         </div>
