@@ -5,10 +5,10 @@
         </div>
     </div>
     <div class="block block--fullwidth">
-        <ul class="bare-list" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
-            <li data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
+       <div class="bare-list" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
+            <div data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
                 <detail-related></detail-related>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </div>
