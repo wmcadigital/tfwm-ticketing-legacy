@@ -275,9 +275,7 @@
 
     function escapeFilter() {
         return function (text) {
-            text = text.replace(/\n/g, "<br><br>");
-
-            return text;
+            return text ? String(text).replace(/\n/gm, '<br><br>') : '';
         };
     }
 
@@ -473,12 +471,7 @@
             replace: true
         };
     }
-
-
-
-
-
-
+    
     function pane() {
         return {
             require: '^tabs',
