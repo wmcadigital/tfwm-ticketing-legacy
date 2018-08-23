@@ -17,6 +17,8 @@
         .directive('detailAlternative', [detailAlternative])
         .directive('detailRelated', [detailRelated])
         .directive('modalDialog', [modalDialog])
+        .directive('tabs', [tabs])
+        .directive('pane', [pane])
         ;
     // CONTROLLER
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
@@ -79,18 +81,18 @@
 
         defaultVars();
 
-          //If location.search contains search criteria force the submit on page load 
-          if (
-              ($location.search().AllowBus ||
-              $location.search().AllowMetro ||
-              $location.search().AllowTrain) ||
-              ($location.search().Brand) &&
-              $location.search().PassengerType &&
-              $location.search().TimeBand ||
-              $location.search().StationNames 
-          ) {
+        //If location.search contains search criteria force the submit on page load 
+        if (
+            ($location.search().AllowBus ||
+                $location.search().AllowMetro ||
+                $location.search().AllowTrain) ||
+            ($location.search().Brand) &&
+            $location.search().PassengerType &&
+            $location.search().TimeBand ||
+            $location.search().StationNames
+        ) {
             submit(vm.postJSON);
-        }else {
+        } else {
             $location.url('').replace();
         }
 
@@ -136,7 +138,7 @@
                             vm.filterButtons.RailZoneTo.push(item.RailZoneTo);
                         }
                     });
-                    
+
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
                 }
@@ -165,14 +167,14 @@
             vm.postJSON.StationNames = null;
         }
 
-        $scope.stationFrom = function(selected) {
+        $scope.stationFrom = function (selected) {
             if (selected) {
                 console.log(selected);
                 vm.postJSON.StationNames[0] = selected.originalObject.Name;
             }
         };
 
-        $scope.stationTo = function(selected) {
+        $scope.stationTo = function (selected) {
             if (selected) {
                 console.log(selected);
                 vm.postJSON.StationNames[1] = selected.originalObject.Name;
@@ -349,17 +351,17 @@
                                 }
                             )
                         })
-                    }else{
+                    } else {
                         vm.loadingStatus = "Success";
                     }
                     if (vm.all.Documents.length) {
-                            ticketingService.getTerms(data).then(
-                                function (response) {
-                                    vm.relatedTerms = response;
-                                    vm.loadingStatus = "Success";
-                                }
-                            )
-                    }else{
+                        ticketingService.getTerms(data).then(
+                            function (response) {
+                                vm.relatedTerms = response;
+                                vm.loadingStatus = "Success";
+                            }
+                        )
+                    } else {
                         vm.loadingStatus = "Success";
                     }
                     backButtonLogic(); //Determine back button logic
@@ -418,22 +420,79 @@
         return {
             restrict: 'E',
             scope: {
-              show: '='
+                show: '='
             },
             replace: true, // Replace with the template below
             transclude: true, // we want to insert custom content inside the directive
-            link: function(scope, element, attrs) {
-              scope.dialogStyle = {};
-              if (attrs.width)
-                scope.dialogStyle.width = attrs.width;
-              if (attrs.height)
-                scope.dialogStyle.height = attrs.height;
-              scope.hideModal = function() {
-                scope.show = false;
-              };
+            link: function (scope, element, attrs) {
+                scope.dialogStyle = {};
+                if (attrs.width)
+                    scope.dialogStyle.width = attrs.width;
+                if (attrs.height)
+                    scope.dialogStyle.height = attrs.height;
+                scope.hideModal = function () {
+                    scope.show = false;
+                };
             },
             template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog boxin bdr-top--blue' ng-style='dialogStyle'><div class='ng-modal-close modal__close js-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-          };
+        };
+    }
+
+    function tabs() {
+        return {
+            restrict: 'E',
+            transclude: true,
+            scope: {},
+            controller: ["$scope", function ($scope) {
+                var panes = $scope.panes = [];
+
+                $scope.select = function (pane) {
+                    angular.forEach(panes, function (pane) {
+                        pane.selected = false;
+                    });
+                    pane.selected = true;
+                }
+
+                this.addPane = function (pane) {
+                    if (panes.length == 0) $scope.select(pane);
+                    panes.push(pane);
+                }
+            }],
+            template:
+                '<div class="cfx">' +
+                '<div class="arrdep-filters__toggle">' +
+                '<div class="radio-bar">' +
+                '<span ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
+                '<input name="option" id="{{pane.title}}" type="radio">' +
+                '<label ng-click="select(pane)" for="{{pane.title}}" style="height: 44px;">{{pane.title}}</label>' +
+                '</span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="tab-content" ng-transclude></div>' +
+                '</div>',
+            replace: true
+        };
+    }
+
+
+
+
+
+
+    function pane() {
+        return {
+            require: '^tabs',
+            restrict: 'E',
+            transclude: true,
+            scope: { title: '@' },
+            link: function (scope, element, attrs, tabsCtrl) {
+                tabsCtrl.addPane(scope);
+            },
+            template:
+                '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +
+                '</div>',
+            replace: true
+        };
     }
 
 })();

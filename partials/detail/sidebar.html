@@ -1,45 +1,3 @@
-<style>
-.ng-modal-overlay {
-  /* A dark translucent div that covers the whole screen */
-  position:absolute;
-  z-index:9999;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-}
-.ng-modal-dialog {
-  /* A centered div above the overlay with a box shadow. */
-  z-index:10000;
-  position: absolute;
-  width: 50%; /* Default */
-
-  /* Center the dialog */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-
-  background-color: #fff;
-}
-.ng-modal-dialog-content {
-  padding:10px;
-  text-align: left;
-}
-.ng-modal-close {
-  position: absolute;
-  top: 3px;
-  right: 5px;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 120%;
-  display: inline-block;
-  font-weight: bold;
-  font-family: 'arial', 'sans-serif';
-}
-</style>
-
 <div class="block block--fullwidth mobile--void">
     <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.AllowBus==true && ticket.AllowTrain==true && ticket.AllowMetro==false}">
         <h3 class="price">
@@ -92,10 +50,22 @@
 
                 <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
                     
-                <modal-dialog show='ticket.modalShown' width='80%' height='50%'>
-                     <h2>Bus operators</h2>
+                <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
+                     <h2><span class="icon icon--bus ng-scope" title="Use on Bus" style=""></span> Bus operators</h2>
+                     <p>List of operators here</p>
                 </modal-dialog>
 
+                    <tabs>
+                        <pane title="Bus">
+                            <div><h2>Bus</h2></div>
+                        </pane>
+                        <pane title="Train">
+                            <div><h2>Train</h2></div>
+                        </pane>
+                        <pane title="Tram">
+                                <div><h2>Tram</h2></div>
+                            </pane>
+                    </tabs>
 
             <!--<ul>
                 <li data-ng-if="ticket.all.AllowBus">Use on the

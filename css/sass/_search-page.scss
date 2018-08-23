@@ -77,4 +77,48 @@ label.plain-small{
 .summary {font-weight: bold;}
 .useon {font-weight: bold;}
 
+.ng-modal-overlay {
+    /* A dark translucent div that covers the whole screen */
+    position:absolute;
+    z-index:9999;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+  .ng-modal-dialog {
+    /* A centered div above the overlay with a box shadow. */
+    z-index:10000;
+    position: fixed;
+    width: 50%; /* Default */
+  
+    /* Center the dialog */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+  
+    background-color: #fff;
+  }
+  .ng-modal-dialog-content {
+    padding:10px;
+    text-align: left;
+  }
+  .ng-modal-close {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 120%;
+    display: inline-block;
+    font-weight: bold;
+    font-family: 'arial', 'sans-serif';
+  }
+
+  .tab-pane.ng-scope.ng-isolate-scope {display: none}
+  .tab-pane.ng-scope.ng-isolate-scope.active {display: block;}
+  span.ng-scope.active {background-color:#333;color: white;}
+
 }
