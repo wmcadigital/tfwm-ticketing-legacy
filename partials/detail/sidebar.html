@@ -83,7 +83,15 @@
 
                             <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
                                 <h2><span class="icon icon--bus ng-scope" title="Use on Bus" style=""></span> Bus operators</h2>
-                                <p>List of operators here</p>
+
+                                <div class="operators">
+                                        <div data-ng-repeat="ticket in ticket.operatorList">
+                                            <operators></operators>
+                                        </div>
+                                    </div>
+
+
+
                             </modal-dialog>
                         </div>
                     </pane>
@@ -123,6 +131,12 @@
                 <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
                     <h2><span class="icon icon--bus ng-scope" title="Use on Bus" style=""></span> Bus operators</h2>
                     <p>List of operators here</p>
+                    <div class="ticketing-results-grid search-container" angular-grid="ticket.operatorList" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
+                            <div data-ng-repeat="ticket in ticket.operatorList" class="grid">
+                                <p>test</p>
+                                <operator></operator>>
+                            </div>
+                        </div>
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && ticket.all.AllowTrain && !ticket.all.AllowMetro">

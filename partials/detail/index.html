@@ -17,9 +17,20 @@
                 <div class="block block--fullwidth">
                     <detail-details></detail-details>
                 </div>
-                <div data-ng-if="ticket.loadingStatus == 'Success'">
+
+
+                <div class="block" data-ng-if="ticket.loadingStatus == 'Success'">
+                        <div class="blocks">
+                            <div class="block block--fullwidth">
+                               <detail-alternative></detail-alternative>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <!--<div data-ng-if="ticket.loadingStatus == 'Success'">
                     <detail-alternative></detail-alternative>
-                </div>
+                </div>-->
                 <div class="blocks cfx">
                     <div class="block align--center" data-ng-cloak data-ng-if="ticket.loadingStatus == 'Loading'">
                         <div class="boxin boxin--large">

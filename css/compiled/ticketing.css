@@ -239,3 +239,7 @@
 .ticketing-page .buy .online {
   color: #009DE0;
 }
+.ticketing-page .operators {
+  max-height: 200px;
+  overflow-y: scroll;
+}

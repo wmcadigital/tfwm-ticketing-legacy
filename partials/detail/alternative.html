@@ -1,13 +1,15 @@
 <div data-ng-if="ticket.all.RelatedTickets.length >= 1">
-    <div class="block block--fullwidth">
-        <div class="boxin bdr-top--cyan">
-            <h3>Alternative tickets</h3>
+        <div class="blocks cfx ticketing-search">
+        <div class="block block--fullwidth">
+            <div class="boxin bdr-top--cyan">
+                <h3>Alternative tickets</h3>
+            </div>
         </div>
-    </div>
-    <div class="block block--fullwidth">
-       <div class="bare-list" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
-            <div data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
-                <detail-related></detail-related>
+        <div class="block block--fullwidth">
+            <div class="ticketing-results-grid search-container" angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
+                <div data-ng-repeat="ticket in ticket.relatedTickets" class="grid">
+                    <detail-related></detail-related>
+                </div>
             </div>
         </div>
     </div>

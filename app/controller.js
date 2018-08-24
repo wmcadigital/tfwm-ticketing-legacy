@@ -10,16 +10,15 @@
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
         .directive('item', ['$timeout', 'angularGridInstance', item])
-        .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', TicketDetailCtrl
-        ])
+        .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', TicketDetailCtrl])
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
         .directive('detailRelated', [detailRelated])
+        .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
-        .directive('pane', [pane])
-        ;
+        .directive('pane', [pane]);
     // CONTROLLER
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
         var vm = this;
@@ -332,6 +331,8 @@
         vm.toggleClick = toggleClick;
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
+        vm.operatorList = []; //Define Operator list
+       
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -344,7 +345,7 @@
                             ticketingService.getSimpleTicket(item.Id).then(
                                 function (response) {
                                     vm.relatedTickets[item.Id] = response;
-                                    console.log(vm.relatedTickets);
+                                    //console.log(vm.relatedTickets);
                                     vm.loadingStatus = "Success";
                                 }
                             )
@@ -362,10 +363,22 @@
                     } else {
                         vm.loadingStatus = "Success";
                     }
+                    if (vm.all.Type == "Ticket") {
+                        ticketingService.getOperators().then(
+                            function (response) {
+                                vm.operatorList = response;
+                                console.log(response);
+                                vm.loadingStatus = "Success";
+                            }
+                        )
+                    } else {
+                        vm.loadingStatus = "Success";
+                    }
                     backButtonLogic(); //Determine back button logic
                 }
             )
         }
+
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
@@ -410,6 +423,13 @@
     function detailRelated() {
         return {
             templateUrl: 'partials/detail/related-product.html',
+            restrict: 'E'
+        };
+    }
+
+    function operators() {
+        return {
+            templateUrl: 'partials/detail/operator.html',
             restrict: 'E'
         };
     }
