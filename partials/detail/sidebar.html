@@ -4,8 +4,10 @@
         <hr>
         <p><strong>Ticket: </strong>{{ticket.all.Name}}</p>
 
-        <div data-ng-if="ticket.all.SwiftCurrentAmount">
-            <p class="price online">{{ticket.all.SwiftCurrentAmount | currency:"£"}}
+        <div data-ng-if="ticket.all.SwiftCurrentAmount || ticket.all.BuyOnSwift">
+            <p class="price online">
+                <span data-ng-if="ticket.all.SwiftCurrentAmount">{{ticket.all.SwiftCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="!ticket.all.SwiftCurrentAmount">{{ticket.all.TicketCurrentAmount | currency:"£"}}</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930002">
                     per month</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
