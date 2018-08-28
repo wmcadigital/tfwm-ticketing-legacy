@@ -37,6 +37,7 @@
             "RailZoneTo": []
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
+        vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
 
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
@@ -232,6 +233,14 @@
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
 
+        function swiftPAYG() {
+            vm.ProductStatus = vm.postJSON.Brand;
+
+            if (vm.ProductStatus == 'Swift PAYG') {
+                vm.isHideCheck = !vm.isHideCheck;
+            }
+        }
+
         function save(data) {
             savedFilter.set("stateless", data);
         }
@@ -332,7 +341,7 @@
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
         vm.operatorList = []; //Define Operator list
-       
+
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -491,7 +500,7 @@
             replace: true
         };
     }
-    
+
     function pane() {
         return {
             require: '^tabs',

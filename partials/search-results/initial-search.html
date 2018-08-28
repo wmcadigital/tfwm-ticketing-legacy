@@ -75,7 +75,7 @@
                 <div class="fields new-transport-icons-blue nga-fast nga-fade" style="float: right;">
                     <label class="plain" for="Brand">Select your pass</label>
                     <span class="stylized-select">
-                        <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();">
+                        <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();">
                             <option value="">Select your pass</option>
                             <option value="Diamond Bus">Diamond Bus</option>
                             <option value="National Express">National Express</option>
@@ -99,10 +99,10 @@
         <span class="view-route__text">View Map</span>
     </a>
 
-    <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
+    <div class="fields new-transport-icons-blue nga-fast nga-fade" ng-hide="ticketing.ProductStatus == 'Swift PAYG'" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
         <label class="plain" for="PassengerType">Who will use the ticket?</label>
         <span class="stylized-select">
-            <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model='ticketing.postJSON.PassengerType'>
+            <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model="ticketing.postJSON.PassengerType">
                 <option value="">Select who will be using this ticket</option>
                 <option value="Adult">Adult</option>
                 <option value="Child">Child</option>
@@ -264,6 +264,6 @@
         </div>
     </div>
 
-    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand || ticketing.postJSON.Brand" type="submit"
+    <button data-ng-if="ticketing.postJSON.PassengerType && ticketing.postJSON.TimeBand || ticketing.postJSON.Brand == 'Swift PAYG'" type="submit"
         class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy">Find tickets</button>
 </form>

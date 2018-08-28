@@ -243,3 +243,9 @@
   max-height: 200px;
   overflow-y: scroll;
 }
+.ticketing-page .hideCheck {
+  display: none;
+}
+.ticketing-page .hideSave {
+  display: none;
+}
