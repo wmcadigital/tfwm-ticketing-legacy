@@ -238,6 +238,9 @@
 
             if (vm.ProductStatus == 'Swift PAYG') {
                 vm.isHideCheck = !vm.isHideCheck;
+                vm.postJSON.PassengerType = null;
+                vm.postJSON.TimeBand = null;
+                vm.postJSON.StationNames = null;
             }
         }
 

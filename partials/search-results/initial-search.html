@@ -116,7 +116,8 @@
     </div>
 
     <!-- Rail Stations -->
-    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations
+    <div ng-hide="ticketing.ProductStatus == 'Swift PAYG'">
+    <label class="plain"  data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations
         will you use?</label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
         data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
@@ -233,8 +234,9 @@
         </div>
         
     </div>
+    </div>
 
-    <div class="fields how-long" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
+    <div class="fields how-long" ng-hide="ticketing.ProductStatus == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>
         <div class="labels-new">
             <span class="icon-stylized-new">
