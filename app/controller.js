@@ -45,6 +45,7 @@
             vm.filteredTickets = []; //Define filtered results as blank array
             vm.stationList = []; //Define Station list
             vm.loadingStatus = ''; //Set results status to blank
+            vm.passValue = ''; //Set pass select value to blank
             vm.orderBy = "TicketCurrentAmount";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
             vm.postJSON = {
@@ -234,9 +235,9 @@
         }
 
         function swiftPAYG() {
-            vm.ProductStatus = vm.postJSON.Brand;
+            vm.passValue = vm.postJSON.Brand;
 
-            if (vm.ProductStatus == 'Swift PAYG') {
+            if (vm.passValue == 'Swift PAYG') {
                 vm.isHideCheck = !vm.isHideCheck;
                 vm.postJSON.PassengerType = null;
                 vm.postJSON.TimeBand = null;
