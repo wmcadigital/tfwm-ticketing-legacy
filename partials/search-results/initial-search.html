@@ -108,7 +108,7 @@
                 <option value="Child">Child</option>
                 <option value="Under16">Under 16</option>
                 <option value="Student16to18">Student 16 - 18</option>
-                <!-- <option value="Student">Student</option> -->
+                <option value="Student">Student</option>
                 <option value="Family">Group / Family</option>
                 <option value="Concessionary">Concession</option>
             </select>
@@ -236,7 +236,7 @@
     </div>
     </div>
 
-    <div class="fields how-long" ng-hide="ticketing.ProductStatus == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
+    <div class="fields how-long"  data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>
         <div class="labels-new">
             <span class="icon-stylized-new">
