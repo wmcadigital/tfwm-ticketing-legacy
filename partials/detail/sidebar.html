@@ -33,9 +33,10 @@
             <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
                 {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
-
             <hr>
         </div>
+
+        <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.SwiftCurrentAmount">
 
         <div data-ng-if="ticket.all.IsPayAsYouGo">
                 <p class="price">{{ticket.all.PriceOverride}}</p>
@@ -58,6 +59,7 @@
             <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</li>
             <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
         </ul>
+        </div>
 
     </div>
 </div>
