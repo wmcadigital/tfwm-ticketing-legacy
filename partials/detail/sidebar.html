@@ -21,7 +21,7 @@
                 Buy this ticket using your
                 <a href="/#/ticket/810">Swift Pay as You Go card</a>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
-                    Bus</span>
+                        <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</span>
                 <span data-ng-if="!ticket.all.PurchaseOnBus && ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
                     Train</span>
                 <span data-ng-if="!ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
@@ -55,7 +55,7 @@
                     target="_blank">Travel Information Centre</a></li>
             <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
             <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
-            <li data-ng-if="ticket.all.PurchaseOnBus">On Bus</li>
+            <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</li>
             <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
         </ul>
 
