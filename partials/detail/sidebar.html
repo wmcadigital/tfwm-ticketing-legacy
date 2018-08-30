@@ -178,52 +178,36 @@
                     <p>List of operators here</p>
                 </modal-dialog>
             </div>
-            <!--<ul>
-                <li data-ng-if="ticket.all.AllowBus">Use on the
-                    <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus">Bus</a>
-                </li>
-                <li data-ng-if="ticket.all.AllowTrain">Use on the
-                    <a data-ng-if="ticket.all.AllowTrain" href="../../assets/NWMzonalcurves.png" data-lightbox="train">Train</a>
-                    <span data-ng-if="ticket.all.RailZoneFrom === ticket.all.RailZoneTo">(Zone {{ticket.all.RailZoneFrom}} only)</span>
-                    <span data-ng-if="ticket.all.RailZoneFrom != ticket.all.RailZoneTo">(Zones {{ticket.all.RailZoneFrom}} to {{ticket.all.RailZoneTo}})</span>
-                </li>
-                <li data-ng-if="ticket.all.AllowMetro">Use on the
-                    <a data-ng-if="ticket.all.AllowMetro" href="../../assets/Metro-Line-Route.png" data-lightbox="metro">Metro</a>
-                </li>
-                <li data-ng-if="ticket.all.AllowBus && ticket.all.BuyOnSwift">Use your Swift card on all major
-                    <a href="https://journeyplanner.networkwestmidlands.com/operator" target="_blank">bus operators</a> within the region</li>
-                <li data-ng-if="ticket.all.OperatorId === '0a3dc42a-7e80-e411-9265-0050568f6584'">Any Diamond Bus bus, within the West Midlands County</li>
-            </ul>-->
         </p>
     </div>
 </div>
+<!-- Swift PAYG - How to use -->
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.IsPayAsYouGo">
+        <div class="boxin bdr-top--navy">
+            <h3>How to use?</h3>
+            <hr>
+            <p class="type--small">
+                <ul>
+                    <li>Buy your <a href="https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:%27AAC001%27}]" target="_blank">Pay As You Go</a> card</li>
+                    <li>Top it up and activate auto top-up if needed</li>
+                    <li>Pay for reduced price tickets using the card</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
 <!-- Swift - How to use -->
-<!--<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.BuyOnSwift">
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
     <div class="boxin bdr-top--navy">
         <h3>How to use?</h3>
         <hr>
         <p class="type--small">
             <ul>
-                <li>Buy online</li>
-                <li>Top up (set up auto top-up)</li>
-                <li>Tap on card reader or pass to the driver</li>
-                <li>Always get home</li>
+                <li>Place your car on the reader and leave it there</li>
+                <li>Tell the driver or conductor which pass you would like to buy</li>
+                <li>Your ticket will then be printed and given to you</li>
+                <li>Your card balance will be shown on screen and your ticket</li>
             </ul>
         </p>
     </div>
-</div>-->
-<!-- Direct Debit - How to use -->
-<!--<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.BuyOnDirectDebit">
-    <div class="boxin bdr-top--navy">
-        <h3>How to use?</h3>
-        <hr>
-        <p class="type--small">
-            <ul>
-                <li>Buy online</li>
-                <li>Set up direct debit</li>
-                <li>Use on transport</li>
-                <li>Always get home</li>
-            </ul>
-        </p>
-    </div>
-</div>-->
+</div>
