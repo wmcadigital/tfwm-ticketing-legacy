@@ -206,6 +206,23 @@
   -moz-transform: translate(-50%, -50%);
   background-color: #fff;
 }
+.ticketing-page .ng-modal-overlay::after {
+  content: "";
+  position: fixed;
+  background: rgba(51, 51, 51, 0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.ticketing-page .ng-modal-overlay::before {
+  position: absolute;
+  left: -9999px;
+  top: -999999px;
+  visibility: hidden;
+  content: "fixed";
+}
 .ticketing-page .ng-modal-dialog-content {
   padding: 10px;
   text-align: left;
@@ -240,7 +257,7 @@
   color: #009DE0;
 }
 .ticketing-page .operators {
-  max-height: 200px;
+  max-height: 100%;
   overflow-y: scroll;
 }
 .ticketing-page .hideCheck {

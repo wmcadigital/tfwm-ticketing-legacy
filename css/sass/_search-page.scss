@@ -101,6 +101,26 @@ label.plain-small{
   
     background-color: #fff;
   }
+
+  .ng-modal-overlay::after {
+    content: '';
+    position: fixed;
+    background: rgba(51, 51, 51, 0.4);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.ng-modal-overlay::before {
+    position: absolute;
+    left: -9999px;
+    top: -999999px;
+    visibility: hidden;
+    content: 'fixed';
+}
+
   .ng-modal-dialog-content {
     padding:10px;
     text-align: left;
@@ -128,7 +148,7 @@ label.plain-small{
   .buy .online {color: #009DE0}
 
   .operators {
-    max-height: 200px;
+    max-height: 100%;
     overflow-y: scroll;
   }
 

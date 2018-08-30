@@ -83,17 +83,15 @@
                             <p class="summary">Bus operators who accept this ticket</p>
                             <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
 
-                            <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
 
+                            <modal-dialog show='ticket.modalShown' width='50%' height='50%'>
+                                <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
+                                <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
                                 <div class="operators">
                                         <div data-ng-repeat="ticket in ticket.operatorList">
                                             <operators></operators>
                                         </div>
                                     </div>
-
-
-
                             </modal-dialog>
                         </div>
                     </pane>
@@ -106,6 +104,7 @@
 
                             <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
                                 <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+                                <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
                                 <p>List of operators here</p>
                             </modal-dialog>
                         </div>
@@ -118,6 +117,7 @@
 
                             <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
                                 <h2><span class="icon icon--tram ng-scope" title="Use on Metro"></span> Tram operators</h2>
+                                <p>See tram operators that accept <strong>{{ticket.all.Name}}</strong></p>
                                 <p>List of operators here</p>
                             </modal-dialog>
                         </div>
@@ -130,21 +130,26 @@
                 
                 <div data-ng-if="ticket.all.Brand == 'National Express' ">
                         <a href="../../assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img src="/assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png" />
-                        <br>View National Express network map
-                        </a>
+                        <br>View National Express network map</a>
+                        <p>Use on National Express buses only</p>
                     </div>
                 <div data-ng-if="ticket.all.Brand == 'Diamond Bus' ">
                     <a href="https://www.diamondbuses.com/about-us/network-maps/" target="_blank" title="View Diamond network maps">
                         <img src="/assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
                     <br>View Diamond network maps</a>
+                    <p>Use on Diamond buses only</p>
                 </div>
                 <div data-ng-if="ticket.all.Brand == 'Stagecoach' ">
                     <a href="https://www.stagecoachbus.com/maps" target="_blank" title="View Diamond network maps">
                         <img src="/assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
                     <br>View Stagecoach network maps</a>
+                    <p>Use on Stagecoach buses only</p>
                 </div>
-                <p class="summary">Bus operators who accept this ticket</p> 
-                <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+
+                <div data-ng-if="!ticket.all.IsSingleOperatorTicket">
+                    <p class="summary">Bus operators who accept this ticket</p>
+                    <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                </div>
 
                 <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
                     <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
