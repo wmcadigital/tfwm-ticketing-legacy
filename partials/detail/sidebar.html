@@ -83,15 +83,21 @@
                             <p class="summary">Bus operators who accept this ticket</p>
                             <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
 
-
                             <modal-dialog show='ticket.modalShown' width='50%' height='50%'>
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
+                                <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
                                 <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
                                 <div class="operators">
-                                        <div data-ng-repeat="ticket in ticket.operatorList">
+                                    <div data-ng-if="ticket.all.Brand == 'nbus'">
+                                        <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true}">
                                             <operators></operators>
                                         </div>
                                     </div>
+                                    <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                        <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true}">
+                                            <operators></operators>
+                                        </div>
+                                    </div>
+                                </div>
                             </modal-dialog>
                         </div>
                     </pane>
@@ -102,24 +108,28 @@
                             <p class="summary">Train operators who accept this ticket</p>
                             <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
-                            <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
+                            <modal-dialog show='ticket.modalShown' width='50%' height='50%'>
                                 <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
                                 <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
-                                <p>List of operators here</p>
+                                <div class="operators">
+                                    <div data-ng-if="ticket.all.Brand == 'ntrain'">
+                                        <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true}">
+                                            <operators></operators>
+                                        </div>
+                                    </div>
+                                    <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                            <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'}">
+                                                <operators></operators>
+                                            </div>
+                                        </div>
+                                </div>
                             </modal-dialog>
                         </div>
                     </pane>
                     <pane data-ng-if="ticket.all.AllowMetro" title="Tram">
                         <div>
-                            <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
-                                /></a>
-                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See metro operators</button>
-
-                            <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                                <h2><span class="icon icon--tram ng-scope" title="Use on Metro"></span> Tram operators</h2>
-                                <p>See tram operators that accept <strong>{{ticket.all.Name}}</strong></p>
-                                <p>List of operators here</p>
-                            </modal-dialog>
+                            <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png" /></a>
+                            <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands Metro</a></p>
                         </div>
                     </pane>
                 </tabs>
@@ -151,37 +161,39 @@
                     <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
                 </div>
 
-                <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
+                <modal-dialog show='ticket.modalShown' width='50%' height='50%'>
                     <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                    <p>List of operators here</p>
-                    <div class="ticketing-results-grid search-container" angular-grid="ticket.operatorList" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
-                            <div data-ng-repeat="ticket in ticket.operatorList" class="grid">
-                                <p>test</p>
-                                <operator></operator>>
+                    <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    <div class="operators">
+                        <div data-ng-if="ticket.all.Brand == 'nbus'">
+                            <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true}">
+                                <operators></operators>
                             </div>
                         </div>
+                    </div>
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && ticket.all.AllowTrain && !ticket.all.AllowMetro">
                 <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png" /></a>
                 <p class="summary">Train operators who accept this ticket</p>
-                <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
-                <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                    <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                    <p>List of operators here</p>
+                <modal-dialog show='ticket.modalShown' width='50%' height='50%'>
+                    <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+                    <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    <div class="operators">
+                            <div data-ng-if="ticket.all.Brand == 'ntrain'">
+                                    <div data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true}">
+                                        <operators></operators>
+                                    </div>
+                                </div>
+                        </div>
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && !ticket.all.AllowTrain && ticket.all.AllowMetro">
                 <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
                     /></a>
-                <p class="summary">Tram operators who accept this ticket</p>
-                <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
-
-                <modal-dialog show='ticket.modalShown' width='60%' height='50%'>
-                    <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                    <p>List of operators here</p>
-                </modal-dialog>
+                <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands Metro</a></p>
             </div>
         </p>
     </div>

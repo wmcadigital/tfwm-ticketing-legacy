@@ -27,6 +27,9 @@
             },
             getOperators: function(){
                 return getData($http.get(uri2 + '/operators', {cache:true}));
+            },
+            getBrands: function(){
+                return getData($http.get(uri2 + '/brands', {cache:true}));
             }
         };
 
