@@ -1,11 +1,2 @@
-
-
-
-<div class="">
-    <p>{{ticket.Name}} -
-       <!-- <span data-ng-if="ticket.AcceptnBus"><span class="iconcustom icon--tick"></span> nBus</span>
-        <span data-ng-if="ticket.AcceptnNetwork"><span class="iconcustom icon--tick"></span> nNetwork</span>
-        <span data-ng-if="ticket.AcceptnTrain"><span class="iconcustom icon--tick"></span> nTrain</span>-->
-        <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span>
-    </p>
-</div>
+<td>{{ticket.Name}}</td>
+<td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
