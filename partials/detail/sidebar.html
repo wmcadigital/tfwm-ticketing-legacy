@@ -89,8 +89,10 @@
                         <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
 
                         <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
-                            <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
-                            <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            <div class="header">
+                                <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
+                                <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            </div>
                             <div class="operators">
                                 <div data-ng-if="ticket.all.Brand == 'nbus'">
                                     <table class="disruption-detail__table">
@@ -124,16 +126,10 @@
                         <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
                         <modal-dialog show='ticket.modalShown' class="bdr-top--green">
-
-                            <div class="ng-modal-dialog boxin bdr-top--green modal-content" ng-style="dialogStyle">
-                                <div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>
-                                <div class="ng-modal-dialog-content" ng-transclude="">
-
-
-
-
-                            <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                            <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            <div class="header">
+                                <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+                                <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            </div>
                             <div class="operators">
                                 <div data-ng-if="ticket.all.Brand == 'ntrain'">
                                     <table class="disruption-detail__table">
@@ -157,8 +153,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            </div>
                             </div>
                         </modal-dialog>
                     </pane>
@@ -202,8 +196,10 @@
                 </div>
 
                 <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
-                    <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                    <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    <div class="header">
+                        <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
+                        <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    </div>
                     <div class="operators">
                         <div data-ng-if="ticket.all.Brand == 'nbus'">
                             <table class="disruption-detail__table">
@@ -225,8 +221,10 @@
                 <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
                 <modal-dialog show='ticket.modalShown' class="bdr-top--green">
-                    <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                    <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    <div class="header">
+                        <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+                        <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                    </div>
                     <div class="operators">
                         <div data-ng-if="ticket.all.Brand == 'ntrain'">
                             <table class="disruption-detail__table">

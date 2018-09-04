@@ -49,6 +49,11 @@
 .ticketing-page {
   /* Tab Styling */
   /* Modal Styling */
+  /* Scrollbar Styling */
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
 }
 .ticketing-page .ticket-search .how-long .icon-stylized-new label {
   background-color: #009DE0;
@@ -183,6 +188,9 @@
 .ticketing-page .useon {
   font-weight: bold;
 }
+.ticketing-page .tab-content {
+  position: initial;
+}
 .ticketing-page .tab-pane.ng-scope.ng-isolate-scope {
   display: none;
 }
@@ -201,46 +209,64 @@
 .ticketing-page .buy .online {
   color: #009DE0;
 }
-.ticketing-page .operators {
-  max-height: 100%;
-  overflow-y: scroll;
-}
 .ticketing-page .hideCheck {
   display: none;
 }
 .ticketing-page .hideSave {
   display: none;
 }
-.ticketing-page .tab-content {
-  position: initial;
-}
 .ticketing-page .ng-modal-dialog {
-  z-index: 10000;
+  display: block;
+  width: 600px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
   position: absolute;
-  width: 80%;
-  top: 50%;
+  z-index: 10000;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+  top: 50%;
   -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-left: 1px solid #009DE0;
-  border-right: 1px solid #009DE0;
-  border-bottom: 1px solid #009DE0;
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
-.ticketing-page .ng-modal-dialog-content {
-  padding: 30px;
+.ticketing-page .ng-modal-dialog .modal__close {
+  top: 0;
 }
-.ticketing-page .ng-modal-dialog.boxin.bdr-top--blue.modal-content {
-  margin-top: 250px;
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  position: absolute;
+  width: 575px;
+  height: 465px;
+  margin-bottom: 120px;
 }
-.ticketing-page .operators table {
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table {
   width: 100%;
 }
-.ticketing-page .operators table tr {
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table tr {
   border-bottom: 1px solid #ccc;
 }
-.ticketing-page .operators table td {
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table td {
   padding: 25px 0 15px 0;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .header {
+  background: white;
+  padding: 15px 0;
+  height: 120px;
+}
+.ticketing-page .ng-modal-dialog.boxin.modal-content {
+  padding: 0px 15px 15px 15px !important;
+}
+.ticketing-page ::-webkit-scrollbar {
+  width: 10px;
+}
+.ticketing-page ::-webkit-scrollbar-track {
+  background: #fff;
+}
+.ticketing-page ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.ticketing-page ::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
