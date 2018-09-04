@@ -38,6 +38,7 @@
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
+        vm.ntrainOOC = ntrainOOC; //Function for adding stations if ntrain Out of County is selected
 
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
@@ -55,7 +56,7 @@
                 "PassengerType": $location.search().PassengerType || '',
                 "TimeBand": $location.search().TimeBand || '',
                 "Brand": $location.search().Brand || null,
-                "StationNames": []
+                "StationNames": [$location.search().StationNames || null]
 
                 // "SwiftSearch": true,
                 // "FirstClass": true,
@@ -209,8 +210,6 @@
                 }
             });
 
-
-
             // Filter results by the filters selected
             filtered = $filter('filter')(filtered, vm.searchFilters);
 
@@ -242,6 +241,16 @@
                 vm.postJSON.PassengerType = null;
                 vm.postJSON.TimeBand = null;
                 vm.postJSON.StationNames = null;
+            }
+        }
+
+        function ntrainOOC() {
+            vm.passValue = vm.postJSON.Brand;
+
+            if (vm.passValue == 'ntrain - Out of County') {
+                vm.postJSON.Brand = null;
+                vm.postedJSON.AllowTrain = true;
+                vm.postJSON.StationNames = ["Birmingham New Street", "Rugeley Trent Valley"];
             }
         }
 
