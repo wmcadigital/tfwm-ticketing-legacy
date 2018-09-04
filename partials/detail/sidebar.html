@@ -61,7 +61,8 @@
                 <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
                 <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
                     <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
-                        Express</span> Bus</li>
+                        Express
+                    </span> Bus</li>
                 <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
             </ul>
         </div>
@@ -82,74 +83,84 @@
             <div data-ng-if="ticket.all.AllowBus && ticket.all.AllowTrain || ticket.all.AllowBus && ticket.all.AllowMetro || ticket.all.AllowTrain && ticket.all.AllowMetro || ticket.all.AllowBus && ticket.all.AllowTrain && ticket.all.AllowMetro">
                 <tabs>
                     <pane data-ng-if="ticket.all.AllowBus" title="Bus">
-                        <div>
-                            <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap.png"
-                                /></a>
-                            <p class="summary">Bus operators who accept this ticket</p>
-                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                        <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap.png"
+                            /></a>
+                        <p class="summary">Bus operators who accept this ticket</p>
+                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
 
-                            <modal-dialog show='ticket.modalShown'>
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
-                                <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
-                                <div class="operators">
-                                    <div data-ng-if="ticket.all.Brand == 'nbus'">
-                                        <table class="disruption-detail__table">
-                                            <tbody>
-                                                <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'}">
-                                                    <td>{{ticket.Name}}</td>
-                                                    <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div data-ng-if="ticket.all.Brand == 'nnetwork'">
-                                        <table class="disruption-detail__table">
-                                            <tbody>
-                                                <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'}">
-                                                    <td>{{ticket.Name}}</td>
-                                                    <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
+                            <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
+                            <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            <div class="operators">
+                                <div data-ng-if="ticket.all.Brand == 'nbus'">
+                                    <table class="disruption-detail__table">
+                                        <tbody>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'}">
+                                                <td>{{ticket.Name}}</td>
+                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                            target="_blank">Website</a></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </modal-dialog>
-                        </div>
+                                <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                    <table class="disruption-detail__table">
+                                        <tbody>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'}">
+                                                <td>{{ticket.Name}}</td>
+                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                            target="_blank">Website</a></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </modal-dialog>
                     </pane>
                     <pane data-ng-if="ticket.all.AllowTrain" title="Train">
-                        <div>
-                            <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png"
-                                /></a>
-                            <p class="summary">Train operators who accept this ticket</p>
-                            <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
+                        <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png"
+                            /></a>
+                        <p class="summary">Train operators who accept this ticket</p>
+                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
-                            <modal-dialog show='ticket.modalShown'>
-                                <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                                <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
-                                <div class="operators">
-                                    <div data-ng-if="ticket.all.Brand == 'ntrain'">
-                                        <table class="disruption-detail__table">
-                                            <tbody>
-                                                <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true}">
-                                                    <td>{{ticket.Name}}</td>
-                                                    <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div data-ng-if="ticket.all.Brand == 'nnetwork'">
-                                        <table class="disruption-detail__table">
-                                            <tbody>
-                                                <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'}">
-                                                    <td>{{ticket.Name}}</td>
-                                                    <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        <modal-dialog show='ticket.modalShown' class="bdr-top--green">
+
+                            <div class="ng-modal-dialog boxin bdr-top--green modal-content" ng-style="dialogStyle">
+                                <div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>
+                                <div class="ng-modal-dialog-content" ng-transclude="">
+
+
+
+
+                            <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+                            <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                            <div class="operators">
+                                <div data-ng-if="ticket.all.Brand == 'ntrain'">
+                                    <table class="disruption-detail__table">
+                                        <tbody>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true}">
+                                                <td>{{ticket.Name}}</td>
+                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                            target="_blank">Website</a></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </modal-dialog>
-                        </div>
+                                <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                    <table class="disruption-detail__table">
+                                        <tbody>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'}">
+                                                <td>{{ticket.Name}}</td>
+                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                            target="_blank">Website</a></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </modal-dialog>
                     </pane>
                     <pane data-ng-if="ticket.all.AllowMetro" title="Tram">
                         <div>
@@ -190,7 +201,7 @@
                     <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
                 </div>
 
-                <modal-dialog show='ticket.modalShown'>
+                <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
                     <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
                     <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
                     <div class="operators">
@@ -199,7 +210,8 @@
                                 <tbody>
                                     <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'}">
                                         <td>{{ticket.Name}}</td>
-                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
+                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    target="_blank">Website</a></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -212,7 +224,7 @@
                 <p class="summary">Train operators who accept this ticket</p>
                 <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
-                <modal-dialog show='ticket.modalShown'>
+                <modal-dialog show='ticket.modalShown' class="bdr-top--green">
                     <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
                     <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
                     <div class="operators">
@@ -221,7 +233,8 @@
                                 <tbody>
                                     <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'}">
                                         <td>{{ticket.Name}}</td>
-                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Website</a></span></td>
+                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    target="_blank">Website</a></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -233,7 +246,8 @@
                 <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
                     /></a>
                 <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands
-                        Metro</a></p>
+                        Metro
+                    </a></p>
             </div>
         </p>
     </div>

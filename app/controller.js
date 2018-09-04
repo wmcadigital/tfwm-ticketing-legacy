@@ -461,12 +461,19 @@
                     scope.dialogStyle.width = attrs.width;
                 if (attrs.height)
                     scope.dialogStyle.height = attrs.height;
+                if (attrs.class)
+                    scope.dialogStyle.class = attrs.class;
                 scope.hideModal = function () {
                     scope.show = false;
                 };
             },
-            template: "<div ng-show='show'><div ng-show='show' class='modal' ng-click='hideModal()'></div><div class='ng-modal-dialog boxin bdr-top--blue modal-content' ng-style='dialogStyle'><div class='ng-modal-close modal__close js-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-        };
+            template: '<div ng-show="show">' +
+            '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
+            '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
+            '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
+            '<div class="ng-modal-dialog-content" ng-transclude></div>' +
+            '</div>' +
+            '</div>'        };
     }
 
     function tabs() {
