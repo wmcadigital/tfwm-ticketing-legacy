@@ -127,8 +127,10 @@
                                         <tbody>
                                             <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
-                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                            target="_blank">Website</a></span></td>
+                                                <td>
+                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -138,8 +140,10 @@
                                         <tbody>
                                             <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
-                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                            target="_blank">Website</a></span></td>
+                                                <td>
+                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -149,8 +153,10 @@
                                         <tbody>
                                             <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator' | orderBy:'Name'}">
                                                 <td>{{ticket.Name}}</td>
-                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                            target="_blank">Website</a></span></td>
+                                                <td>
+                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -175,8 +181,10 @@
                                         <tbody>
                                             <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
-                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                            target="_blank">Website</a></span></td>
+                                                <td>
+                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -186,8 +194,10 @@
                                         <tbody>
                                             <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
-                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                            target="_blank">Website</a></span></td>
+                                                <td>
+                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -245,8 +255,10 @@
                                 <tbody>
                                     <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
                                         <td>{{ticket.Name}}</td>
-                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                    target="_blank">Website</a></span></td>
+                                        <td>
+                                            <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                            <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -270,8 +282,10 @@
                                 <tbody>
                                     <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'} | orderBy:'Name'">
                                         <td>{{ticket.Name}}</td>
-                                        <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
-                                                    target="_blank">Website</a></span></td>
+                                        <td>
+                                            <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>
+                                            <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}" target="_blank">Operator Information</a></span> 
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -282,8 +296,7 @@
             <div data-ng-if="!ticket.all.AllowBus && !ticket.all.AllowTrain && ticket.all.AllowMetro">
                 <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
                     /></a>
-                <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands
-                        Metro
+                <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands Metro
                     </a></p>
             </div>
         </p>
