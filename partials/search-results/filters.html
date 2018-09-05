@@ -96,43 +96,35 @@
         </ul>
     </div>
 
-    <!-- Train Zones (from) -->
-    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowTrain ">
+    <!-- Train Zones-->
+    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowTrain || ticketing.postedJSON.Brand == 'ntrain' || ticketing.postedJSON.Brand == 'nnetwork'">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('RailZoneBtn')">
-            Train/rail zones (from)
+            Train/rail zones
             <i class="material-icons">
                 {{ticketing.filterButtons.RailZoneBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
             </i>
         </div>
-        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.RailZoneBtn">
-            <li data-ng-repeat="filter in ticketing.filterButtons.RailZones" >
-                <input id="railZone{{$index}}" name="railZone{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.RailZoneFrom"
-                    data-ng-change="ticketing.update()" value="{{filter}}" />
-                <label for="railZone{{$index}}">Zone {{filter}} ({{ (ticketing.filteredTickets | filter: {RailZoneFrom : filter}).length}})
-                </label>
-            </li>
-        </ul>
-
-        <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro">
-            <label class="plain" for="PassengerType">From:</label>
-            <span class="stylized-select">
-                <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneFrom' data-ng-change="ticketing.update()">
-                    <option value="">Any Zones</option>
-                    <option data-ng-repeat="option in ticketing.filterButtons.RailZoneFrom" value="{{option}}">Zone {{option}}</option>
-                </select>
-            </span>
-            <br/><br/>
-            <label class="plain" for="PassengerType">To:</label>
-            <span class="stylized-select">
-                <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneTo' data-ng-change="ticketing.update()">
-                    <option value="">Any Zones</option>
-                    <option data-ng-repeat="option in ticketing.filterButtons.RailZoneTo" value="{{option}}">Zone {{option}}</option>
-                </select>
-            </span>
+        <div class="nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.RailZoneBtn">
+            <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postedJSON.Brand == 'ntrain' || ticketing.postedJSON.Brand == 'nnetwork'">
+                <label class="plain" for="PassengerType">From:</label>
+                <span class="stylized-select">
+                    <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneFrom'
+                        data-ng-change="ticketing.update()">
+                        <option value="">Any Zones</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.RailZoneFrom" value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+                <br/><br/>
+                <label class="plain" for="PassengerType">To:</label>
+                <span class="stylized-select">
+                    <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneTo' data-ng-change="ticketing.update()">
+                        <option value="">Any Zones</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.RailZoneTo" value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+            </div>
+    
         </div>
-
-
-
     </div>
 
 </div>
