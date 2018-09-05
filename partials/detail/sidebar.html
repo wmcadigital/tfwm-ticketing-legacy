@@ -151,7 +151,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'Swift PAYG'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator' | orderBy:'Name'}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
                                                 <td>
                                                     <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}" target="_blank">Operator Website</a></span>

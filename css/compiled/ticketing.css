@@ -215,6 +215,12 @@
 .ticketing-page .hideSave {
   display: none;
 }
+.ticketing-page label.blue {
+  color: #009DE0;
+}
+.ticketing-page .mobile-only .stylized-select {
+  margin: 15px 0 0 0;
+}
 .ticketing-page .ng-modal-dialog {
   display: block;
   width: 600px;

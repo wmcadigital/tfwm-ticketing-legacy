@@ -67,8 +67,26 @@
                 </div>
             </div>
         </div>
-        <div class="block block--halfwidth">
-            <div class="">
+        <div class="block block--halfwidth mobile-only">
+            <label class="blue">Or Select your pass <input type="checkbox" ng-model="showPass" /></label><br />
+            <div ng-show="showPass">
+                <span class="stylized-select">
+                    <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();">
+                        <option value="">Select your pass</option>
+                        <option value="Diamond Bus">Diamond Bus</option>
+                        <option value="National Express">National Express</option>
+                        <option value="nbus">nbus</option>
+                        <option value="nnetwork">nnetwork</option>
+                        <option value="ntrain">ntrain</option>
+                        <option value="ntrain - Out of County">ntrain - Out of County</option>
+                        <option value="Stagecoach">Stagecoach</option>
+                        <option value="Swift PAYG">Swift PAYG</option>
+                        <option value="West Midlands Metro">West Midlands Metro</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="block block--halfwidth mobile--void">
                 <div class="orcont" style="float: left;width:30px">
                     <div class="orcontent">Or</div>
                 </div>
@@ -89,7 +107,7 @@
                         </select>
                     </span>
                 </div>
-            </div>
+
         </div>
     </div>
 
