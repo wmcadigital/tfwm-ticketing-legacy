@@ -1,4 +1,10 @@
 @charset "UTF-8";
+/*********************
+VARIABLES
+*********************/
+/*********************
+BREAKPOINTS
+*********************/
 /* New transport Icons*/
 /*End New transport Icons*/
 .new-transport-icons-blue .icon-stylized-new {
@@ -56,7 +62,7 @@
   /* Handle on hover */
 }
 .ticketing-page .ticket-search .how-long .icon-stylized-new label {
-  background-color: #009DE0;
+  background-color: #009fe3;
   color: white;
 }
 .ticketing-page .ticket-item .payment-icons {
@@ -81,7 +87,7 @@
   font-weight: normal;
   margin-top: 0;
   font-size: 18px;
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .ticket-item .event__date {
   margin-bottom: 40px;
@@ -104,11 +110,11 @@
   text-align: left;
 }
 .ticketing-page .ticket-filters .filter-block .filter-title:hover {
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .ticket-filters .filter-block .filter-title i {
   float: right;
-  color: #009DE0;
+  color: #009fe3;
   font-weight: bold;
 }
 .ticketing-page .ticket-filters ul {
@@ -150,7 +156,7 @@
   font-weight: normal;
   margin-top: 0;
   font-size: 24px;
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .acc {
   margin-top: 20px;
@@ -175,12 +181,19 @@
   margin: 0 0 5px 0;
 }
 .ticketing-page .highlight {
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .col {
   width: 50%;
   float: left;
   padding-right: 10px;
+}
+@media (max-width: 37.5em) {
+  .ticketing-page .col {
+    width: 100%;
+    float: left;
+    padding-right: 10px;
+  }
 }
 .ticketing-page .summary {
   font-weight: bold;
@@ -207,7 +220,7 @@
   font-weight: 600;
 }
 .ticketing-page .buy .online {
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .hideCheck {
   display: none;
@@ -216,7 +229,7 @@
   display: none;
 }
 .ticketing-page label.blue {
-  color: #009DE0;
+  color: #009fe3;
 }
 .ticketing-page .mobile-only .stylized-select {
   margin: 15px 0 0 0;

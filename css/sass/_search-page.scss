@@ -1,6 +1,6 @@
 .ticketing-page{
 
-    .ticket-search .how-long .icon-stylized-new label{background-color:#009DE0;color:white;}
+    .ticket-search .how-long .icon-stylized-new label{background-color:$cyan;color:white;}
 
 
     .ticket-item{
@@ -10,7 +10,7 @@
             .ticket-swift-logo{width:35px;}
         }
         .event__title{font-size:22px;}
-        .price{font-weight:normal;margin-top:0;font-size:18px;color:#009DE0;}
+        .price{font-weight:normal;margin-top:0;font-size:18px;color:$cyan;}
         .event__date{margin-bottom:40px;}
         a{margin-bottom:8px;}
     }
@@ -26,8 +26,8 @@
                  cursor: pointer;
                  width: 100%;
                  text-align: left;
-                 &:hover{color:#009DE0;}
-                 i{float:right;color:#009DE0;font-weight:bold;}
+                 &:hover{color:$cyan;}
+                 i{float:right;color:$cyan;font-weight:bold;}
              }
         }
             
@@ -47,11 +47,11 @@
 
     .features {background: #f4f4f4!important;padding:20px;}
 
-    .price{font-weight:normal;margin-top:0;font-size:24px;color:#009DE0;}
+    .price{font-weight:normal;margin-top:0;font-size:24px;color:$cyan;}
 
 .acc {margin-top: 20px;}
 
-.bdr-top--cyan{border-top: 6px solid #009fe3}
+.bdr-top--cyan{border-top: 6px solid $cyan}
 
 input[type="checkbox"]:disabled+label {
     background: #dddddd;
@@ -70,9 +70,13 @@ label.plain-small{
     margin: 0 0 5px 0;
 }
 
-.highlight{color: #009DE0;}
+.highlight{color: $cyan;}
 
 .col{width: 50%;float: left;padding-right: 10px;}
+
+@include breakpoint(mobileonly) {
+    .col{width:100%;float: left;padding-right: 10px;}
+}
 
 .summary {font-weight: bold;}
 .useon {font-weight: bold;}
@@ -85,14 +89,14 @@ label.plain-small{
   .tab-pane.ng-scope.ng-isolate-scope.active {display: block;}
   span.ng-scope.active {background-color:#333;color: white;}
 
-  .buy .price {color: #333;font-size: 30px;font-weight: 600;}
+  .buy .price {color: $darkgrey;font-size: 30px;font-weight: 600;}
 
-  .buy .online {color: #009DE0}
+  .buy .online {color: $cyan}
 
   .hideCheck{display:none}
   .hideSave{display:none}
 
-  label.blue{color: #009DE0;}
+  label.blue{color: $cyan;}
   .mobile-only .stylized-select{margin: 15px 0 0 0;}
 
   /* Modal Styling */
