@@ -7,9 +7,9 @@
         <div data-ng-if="ticket.all.SwiftCurrentAmount || ticket.all.BuyOnSwift">
             <p class="price online">
                 <span data-ng-if="ticket.all.SwiftCurrentAmount">{{ticket.all.SwiftCurrentAmount | currency:"£"}}</span>
-                <span data-ng-if="!ticket.all.SwiftCurrentAmount">{{ticket.all.TicketCurrentAmount | currency:"£"}}</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930002">
-                    per month</span>
+                <span data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">{{ticket.all.TicketCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="ticket.all.TicketCurrentAmount == '0'">{{ticket.all.PriceOverride}}</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
                 <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
