@@ -11,18 +11,21 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.mode">
-            <li data-ng-if="!ticketing.postedJSON.AllowBus">
-                <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowBus" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+            <li data-ng-if="(ticketing.filteredTickets | filter: {AllowBus: true}).length != '0'">
+                <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowBus"
+                    data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="bus-only-radio">Bus</label>
             </li>
-        
-            <li data-ng-if="!ticketing.postedJSON.AllowTrain">
-                <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowTrain" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+
+            <li data-ng-if="(ticketing.filteredTickets | filter: {AllowTrain: true}).length != '0'">
+                <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowTrain"
+                    data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="train-only-radio">Train</label>
             </li>
-        
-            <li data-ng-if="!ticketing.postedJSON.AllowMetro">
-                <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowMetro" data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true"/>
+
+            <li data-ng-if="(ticketing.filteredTickets | filter: {AllowMetro: true}).length != '0'">
+                <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.AllowMetro"
+                    data-ng-change="ticketing.update()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="tram-only-radio">Tram</label>
             </li>
         </ul>
@@ -37,29 +40,31 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.payment">
-            <li>
-                <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectDebit" data-ng-change="ticketing.update()"/>
-                <label for="purchaseDebit">Direct Debit
-                     ({{ (ticketing.filteredTickets | filter: {BuyOnDirectDebit: true}).length }})
+            <li data-ng-if="(ticketing.filteredTickets | filter: {BuyOnDirectDebit: true}).length != '0'">
+                <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectDebit"
+                    data-ng-change="ticketing.update()" />
+                <label for="purchaseDebit">Direct Debit ({{ (ticketing.filteredTickets | filter: {BuyOnDirectDebit: true}).length
+                    }})
                 </label>
             </li>
-            <li>
-                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectPurchase" data-ng-change="ticketing.update()"/>
-                <label for="purchaseDirect">Quick buy
-                     ({{ (ticketing.filteredTickets | filter: {BuyOnDirectPurchase: true}).length }})
+            <li data-ng-if="(ticketing.filteredTickets | filter: {BuyOnDirectPurchase: true}).length != '0'">
+                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnDirectPurchase"
+                    data-ng-change="ticketing.update()" />
+                <label for="purchaseDirect">Quick buy ({{ (ticketing.filteredTickets | filter: {BuyOnDirectPurchase: true}).length
+                    }})
                 </label>
             </li>
-            <li>
-                <input id="purchaseSwift" name="purchaseSwift" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnSwift" data-ng-change="ticketing.update()"/>
-                <label for="purchaseSwift">Swift
-                     ({{ (ticketing.filteredTickets | filter: {BuyOnSwift: true}).length }})
+            <li data-ng-if="(ticketing.filteredTickets | filter: {BuyOnSwift: true}).length != '0'">
+                <input id="purchaseSwift" name="purchaseSwift" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.BuyOnSwift"
+                    data-ng-change="ticketing.update()" />
+                <label for="purchaseSwift">Swift ({{ (ticketing.filteredTickets | filter: {BuyOnSwift: true}).length }})
                 </label>
             </li>
         </ul>
     </div>
 
     <!-- Bus Travel Area -->
-    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowBus && ticketing.filterButtons.BusTravelArea.length">
+    <div class="filter-block" data-ng-if="ticketing.postedJSON.AllowBus || ticketing.postedJSON.Brand == 'National Express' || ticketing.postedJSON.Brand == 'nbus' || ticketing.postedJSON.Brand == 'Diamond Bus' || ticketing.postedJSON.Brand == 'Stagecoach' && ticketing.filterButtons.BusTravelArea.length">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('BusTravelAreaBtn')">
             Bus Travel Area
             <i class="material-icons">
@@ -70,8 +75,8 @@
             <li data-ng-repeat="filter in ticketing.filterButtons.BusTravelArea | orderBy: filter" data-ng-if="filter != null">
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.BusTravelArea"
                     data-ng-change="ticketing.update()" value="{{filter}}" />
-                <label for="busTravelArea{{$index}}">{{filter}}
-                     ({{ (ticketing.filteredTickets | filter: {BusTravelArea: filter}).length }})
+                <label for="busTravelArea{{$index}}">
+                    {{filter}} ({{ (ticketing.filteredTickets | filter: {BusTravelArea:filter}).length }})
                 </label>
             </li>
         </ul>
@@ -88,9 +93,8 @@
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.OperatorBtn">
             <li data-ng-repeat="filter in ticketing.filterButtons.Operator | orderBy: filter" data-ng-if="filter != null">
                 <input id="operator{{$index}}" name="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.Operator"
-                    data-ng-change="ticketing.update()" value="{{filter}}"/>
-                <label for="operator{{$index}}">{{filter}} 
-                    ({{ (ticketing.filteredTickets | filter: {Operator: filter}).length}})
+                    data-ng-change="ticketing.update()" value="{{filter}}" />
+                <label for="operator{{$index}}">{{filter}} ({{ (ticketing.filteredTickets | filter: {Operator: filter}).length}})
                 </label>
             </li>
         </ul>
@@ -123,7 +127,7 @@
                     </select>
                 </span>
             </div>
-    
+
         </div>
     </div>
 
