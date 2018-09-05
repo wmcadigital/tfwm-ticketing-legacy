@@ -116,6 +116,17 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div data-ng-if="ticket.all.Brand == 'Swift PAYG'">
+                                    <table class="disruption-detail__table">
+                                        <tbody>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator'}">
+                                                <td>{{ticket.Name}}</td>
+                                                <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                            target="_blank">Website</a></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </modal-dialog>
                     </pane>

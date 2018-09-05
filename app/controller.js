@@ -385,7 +385,6 @@
                     } else {
                         vm.loadingStatus = "Success";
                     }
-                    if (vm.all.Type == "Ticket") {
                         ticketingService.getOperators().then(
                             function (response) {
                                 vm.operatorList = response;
@@ -393,9 +392,6 @@
                                 vm.loadingStatus = "Success";
                             }
                         )
-                    } else {
-                        vm.loadingStatus = "Success";
-                    }
                     backButtonLogic(); //Determine back button logic
                 }
             )
