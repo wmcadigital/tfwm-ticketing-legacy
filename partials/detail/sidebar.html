@@ -97,7 +97,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'nbus'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
                                                 <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                             target="_blank">Website</a></span></td>
@@ -108,7 +108,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
                                                 <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                             target="_blank">Website</a></span></td>
@@ -119,7 +119,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'Swift PAYG'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator'}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator' | orderBy:'Name'}">
                                                 <td>{{ticket.Name}}</td>
                                                 <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                             target="_blank">Website</a></span></td>
@@ -145,7 +145,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'ntrain'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
                                                 <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                             target="_blank">Website</a></span></td>
@@ -156,7 +156,7 @@
                                 <div data-ng-if="ticket.all.Brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'}">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'} | orderBy:'Name'">
                                                 <td>{{ticket.Name}}</td>
                                                 <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                             target="_blank">Website</a></span></td>
@@ -215,7 +215,7 @@
                         <div data-ng-if="ticket.all.Brand == 'nbus'">
                             <table class="disruption-detail__table">
                                 <tbody>
-                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'}">
+                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
                                         <td>{{ticket.Name}}</td>
                                         <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                     target="_blank">Website</a></span></td>
@@ -240,7 +240,7 @@
                         <div data-ng-if="ticket.all.Brand == 'ntrain'">
                             <table class="disruption-detail__table">
                                 <tbody>
-                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'}">
+                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'} | orderBy:'Name'">
                                         <td>{{ticket.Name}}</td>
                                         <td><span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
                                                     target="_blank">Website</a></span></td>
