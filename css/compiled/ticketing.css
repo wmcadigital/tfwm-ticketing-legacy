@@ -195,15 +195,13 @@ BREAKPOINTS
 .ticketing-page .passselect {
   float: right;
 }
-@media (max-width: 37.5em) {
-  .ticketing-page .col {
-    width: 100%;
-    float: left;
-    padding-right: 10px;
+@media (max-width: 55em) {
+  .ticketing-page .block--fullwidth .block--side {
+    position: static;
+    top: 15px;
   }
-  .ticketing-page .summary {
-    margin: 15px 0 0 0;
-  }
+}
+@media (max-width: 58em) {
   .ticketing-page .orcontent {
     height: 40px;
     width: 100%;
@@ -218,8 +216,29 @@ BREAKPOINTS
     float: left;
     display: contents;
   }
+  .ticketing-page .blocks--halves .block {
+    width: 100%;
+  }
 }
-.ticketing-page .summary {
+@media (max-width: 32.125em) {
+  .ticketing-page .col {
+    width: 100%;
+    float: left;
+    padding-right: 10px;
+  }
+  .ticketing-page .summary {
+    margin: 15px 0 0 0;
+  }
+  .ticketing-page .ticketing-results-grid {
+    background: white;
+  }
+}
+@media (max-width: 1000px) and (min-width: 890px) {
+  .ticketing-page .orcontent {
+    padding: 60px 0 0px 0px;
+  }
+}
+.ticketing-page ​ .summary {
   font-weight: bold;
 }
 .ticketing-page .useon {

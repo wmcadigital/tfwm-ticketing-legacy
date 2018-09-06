@@ -80,9 +80,11 @@ label.plain-small{
 
 .passselect{float: right;}
 
-@include breakpoint(mobileonly) {
-    .col{width:100%;float: left;padding-right: 10px;}
-    .summary {margin: 15px 0 0 0}
+@include breakpoint(tablet) {
+    .block--fullwidth .block--side{position: static; top:15px;}
+}
+
+@include breakpoint(tablet2) {
     .orcontent {
         height: 40px;
         width: 100%;
@@ -97,7 +99,22 @@ label.plain-small{
         float: left;
         display: contents;
     }
+    .blocks--halves .block{
+        width: 100%;
+    }
 }
+
+@include breakpoint(mobileonly) {
+    .col{width:100%;float: left;padding-right: 10px;}
+    .summary {margin: 15px 0 0 0}
+    .ticketing-results-grid {background: white;}
+}
+
+@media (max-width:1000px) and (min-width:890px) {
+    .orcontent {
+        padding: 60px 0 0px 0px;
+    }
+}​
 
 .summary {font-weight: bold;}
 .useon {font-weight: bold;}
