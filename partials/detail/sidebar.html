@@ -95,6 +95,34 @@
             </ul>
         </div>
 
+        <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.PurchaseRailStation">
+        
+            <div data-ng-if="ticket.all.IsPayAsYouGo">
+                <p class="price">{{ticket.all.PriceOverride}}</p>
+            </div>
+        
+            <p data-ng-if="!ticket.all.IsPayAsYouGo" class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
+                <span data-ng-if="ticket.all.ValidityId == 450930002">
+                    per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
+            </p>
+            <p><span data-ng-if="ticket.all.SwiftCurrentAmount">when you</span> buy from</p>
+            <ul>
+                <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
+                        target="_blank">Travel Information Centre</a></li>
+                <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
+                <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
+                <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
+                    <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
+                        Express
+                    </span> Bus</li>
+                <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
+            </ul>
+        </div>
+
     </div>
 </div>
 
