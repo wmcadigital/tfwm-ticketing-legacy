@@ -56,6 +56,10 @@
 input[type="checkbox"]:disabled+label {
     background: #dddddd;
 }
+.orcont{
+    float: left;
+    width:30px
+}
 .orcontent {
     padding: 60px 0 20px 20px;
     text-align: center;
@@ -74,8 +78,25 @@ label.plain-small{
 
 .col{width: 50%;float: left;padding-right: 10px;}
 
+.passselect{float: right;}
+
 @include breakpoint(mobileonly) {
     .col{width:100%;float: left;padding-right: 10px;}
+    .summary {margin: 15px 0 0 0}
+    .orcontent {
+        height: 40px;
+        width: 100%;
+        text-align: left;
+        display: table-row;
+    }
+    .orcont{
+        float: none;
+        width:100%
+    }
+    .passselect{
+        float: left;
+        display: contents;
+    }
 }
 
 .summary {font-weight: bold;}

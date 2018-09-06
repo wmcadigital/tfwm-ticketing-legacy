@@ -67,7 +67,8 @@
                 </div>
             </div>
         </div>
-        <div class="block block--halfwidth mobile-only">
+        <!-- Ability to hide pass on mobile and show when clicked on -->
+       <!-- <div class="block block--halfwidth mobile-only">
             <label class="blue">Or Select your pass <input type="checkbox" ng-model="showPass" /></label><br />
             <div ng-show="showPass">
                 <span class="stylized-select">
@@ -85,12 +86,12 @@
                     </select>
                 </span>
             </div>
-        </div>
-        <div class="block block--halfwidth mobile--void">
-                <div class="orcont" style="float: left;width:30px">
+        </div>-->
+        <div class="block block--halfwidth">
+                <div class="orcont">
                     <div class="orcontent">Or</div>
                 </div>
-                <div class="fields new-transport-icons-blue nga-fast nga-fade" style="float: right;">
+                <div class="fields passselect nga-fast nga-fade">
                     <label class="plain" for="Brand">Select your pass</label>
                     <span class="stylized-select">
                         <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();">

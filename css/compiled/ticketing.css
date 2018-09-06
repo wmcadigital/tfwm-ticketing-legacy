@@ -167,6 +167,10 @@ BREAKPOINTS
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
 }
+.ticketing-page .orcont {
+  float: left;
+  width: 30px;
+}
 .ticketing-page .orcontent {
   padding: 60px 0 20px 20px;
   text-align: center;
@@ -188,11 +192,31 @@ BREAKPOINTS
   float: left;
   padding-right: 10px;
 }
+.ticketing-page .passselect {
+  float: right;
+}
 @media (max-width: 37.5em) {
   .ticketing-page .col {
     width: 100%;
     float: left;
     padding-right: 10px;
+  }
+  .ticketing-page .summary {
+    margin: 15px 0 0 0;
+  }
+  .ticketing-page .orcontent {
+    height: 40px;
+    width: 100%;
+    text-align: left;
+    display: table-row;
+  }
+  .ticketing-page .orcont {
+    float: none;
+    width: 100%;
+  }
+  .ticketing-page .passselect {
+    float: left;
+    display: contents;
   }
 }
 .ticketing-page .summary {
