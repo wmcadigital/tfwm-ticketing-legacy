@@ -41,10 +41,6 @@
 
         <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.SwiftCurrentAmount">
 
-            <div data-ng-if="ticket.all.IsPayAsYouGo">
-                <p class="price">{{ticket.all.PriceOverride}}</p>
-            </div>
-
             <p data-ng-if="!ticket.all.IsPayAsYouGo" class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
                 <span data-ng-if="ticket.all.ValidityId == 450930002">
                     per month</span>
@@ -58,7 +54,7 @@
                 <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
                 <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
-                <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
+                <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail station</a></li>
                 <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
                     <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
                         Express
@@ -69,10 +65,6 @@
 
         <div data-ng-if="ticket.all.PurchaseTic && ticket.all.BuyTicketUrl && !ticket.all.HasOnlinePurchaseChannel">
         
-            <div data-ng-if="ticket.all.IsPayAsYouGo">
-                <p class="price">{{ticket.all.PriceOverride}}</p>
-            </div>
-        
             <p data-ng-if="!ticket.all.IsPayAsYouGo" class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
                 <span data-ng-if="ticket.all.ValidityId == 450930002">
                     per month</span>
@@ -86,7 +78,7 @@
                 <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
                 <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
-                <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
+                <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail station</a></li>
                 <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
                     <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
                         Express
@@ -95,11 +87,7 @@
             </ul>
         </div>
 
-        <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.PurchaseRailStation">
-        
-            <div data-ng-if="ticket.all.IsPayAsYouGo">
-                <p class="price">{{ticket.all.PriceOverride}}</p>
-            </div>
+        <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.BuyOnDirectPurchase || !ticket.all.BuyTicketUrl">
         
             <p data-ng-if="!ticket.all.IsPayAsYouGo" class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
                 <span data-ng-if="ticket.all.ValidityId == 450930002">
@@ -114,7 +102,7 @@
                 <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
                 <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
-                <li data-ng-if="ticket.all.PurchaseRailStation">Rail station</li>
+                <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail station</a></li>
             </ul>
         </div>
 
@@ -135,12 +123,11 @@
                 <tabs>
                     <pane data-ng-if="ticket.all.AllowBus" title="Bus">
                         <div class="imgwrapper">
-                            <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap.png" />
+                            <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap-thumbnail.png" />
                                 <i class="material-icons">
-                                        fullscreen
+                                        zoom_out_map
                                     </i>
                             </a>
-                            
                         </div>
                         <p class="summary">Bus operators who accept this ticket</p>
                         <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
@@ -195,10 +182,10 @@
                     </pane>
                     <pane data-ng-if="ticket.all.AllowTrain" title="Train">
                             <div class="imgwrapper">
-                        <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png"
+                        <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png"
                             />
                             <i class="material-icons">
-                                    fullscreen
+                                    zoom_out_map
                                 </i>
                         </a>
                             </div>
@@ -243,9 +230,9 @@
                     <pane data-ng-if="ticket.all.AllowMetro" title="Tram">
                         <div>
                             <div class="imgwrapper">
-                                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png" />
+                                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png" />
                                     <i class="material-icons">
-                                            fullscreen
+                                            zoom_out_map
                                         </i>
                                 </a>
                             </div>
@@ -259,9 +246,9 @@
             <div data-ng-if="ticket.all.AllowBus && !ticket.all.AllowTrain && !ticket.all.AllowMetro">
                     <div class="imgwrapper">
                 <a data-ng-if="ticket.all.Brand == 'nbus'" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
-                        src="/assets/nbus_nnetworkMap.png" />
+                        src="/assets/nbus_nnetworkMap-thumbnail.png" />
                         <i class="material-icons">
-                                fullscreen
+                                zoom_out_map
                             </i>
                     </a>
                         </div>
@@ -272,7 +259,7 @@
                         />
                         <br>View National Express network map
                         <i class="material-icons">
-                                fullscreen
+                                zoom_out_map
                             </i>
                     </a>
                         </div>
@@ -284,7 +271,7 @@
                         <img src="/assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
                         <br>View Diamond network maps
                         <i class="material-icons">
-                                fullscreen
+                                zoom_out_map
                             </i>
                     </a>
                         </div>
@@ -296,7 +283,7 @@
                         <img src="/assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
                         <br>View Stagecoach network maps
                         <i class="material-icons">
-                                fullscreen
+                                zoom_out_map
                             </i>
                     </a>
                         </div>
@@ -331,12 +318,12 @@
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && ticket.all.AllowTrain && !ticket.all.AllowMetro">
-                    <div class="imgwrapper">
-                <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png" />
-                    <i class="material-icons">
-                            fullscreen
+                <div class="imgwrapper">
+                    <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png" />
+                        <i class="material-icons">
+                            zoom_out_map
                         </i>
-                </a>
+                    </a>
                 </div>
                 <p class="summary">Train operators who accept this ticket</p>
                 <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
@@ -365,10 +352,10 @@
             </div>
             <div data-ng-if="!ticket.all.AllowBus && !ticket.all.AllowTrain && ticket.all.AllowMetro">
                     <div class="imgwrapper">
-                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
+                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png"
                     />
                     <i class="material-icons">
-                            fullscreen
+                            zoom_out_map
                         </i>
                 </a>
                     </div>
