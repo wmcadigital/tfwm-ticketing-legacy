@@ -109,6 +109,11 @@
         </div>
         <div class="nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.RailZoneBtn">
             <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postedJSON.Brand == 'ntrain' || ticketing.postedJSON.Brand == 'nnetwork'">
+                    <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png"
+                        data-lightbox="train" target="_blank" class="view-route">
+                        <span class="icon icon--xl icon--map"></span>
+                        <span class="view-route__text">View Map</span>
+                    </a>
                 <label class="plain" for="PassengerType">From:</label>
                 <span class="stylized-select">
                     <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.RailZoneFrom'

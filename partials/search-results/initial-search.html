@@ -112,12 +112,6 @@
         </div>
     </div>
 
-    <a data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" href="../../assets/NWMzonalcurves.png"
-        data-lightbox="train" target="_blank" class="view-route">
-        <span class="icon icon--xl icon--map"></span>
-        <span class="view-route__text">View Map</span>
-    </a>
-
     <div class="fields new-transport-icons-blue nga-fast nga-fade" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
         <label class="plain" for="PassengerType">Who will use the ticket?</label>
         <span class="stylized-select">
