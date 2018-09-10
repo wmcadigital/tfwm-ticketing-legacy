@@ -140,6 +140,7 @@
         data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
         <div class="block block--halfwidth">
             <label class="plain-small" for="travellingFrom">From</label>
+
                 <div class="large-padded-row">
                     <div angucomplete-alt
                       id="ex14"
@@ -217,7 +218,7 @@
     </div>
 
         <!-- Help section if station is not listed in auto complete -->
-       <div data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
+       <div data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType" class="help-section">
             <label class="blue">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
             <div ng-show="stationNotListed">
                 <p>Please refer to <a href="http://www.nationalrail.co.uk/" target="_blank">National Rail</a> for journeys from or to a station not listed</p>

@@ -344,6 +344,16 @@ BREAKPOINTS
   padding: 12px;
   color: white;
 }
+.ticketing-page .help-section {
+  margin: 5px 0;
+}
+.ticketing-page .help-section label {
+  font-weight: bold;
+  color: black;
+}
+.ticketing-page .help-section p {
+  margin: 10px 0;
+}
 .ticketing-page ::-webkit-scrollbar {
   width: 10px;
 }

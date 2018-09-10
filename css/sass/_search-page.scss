@@ -210,6 +210,12 @@ label.plain-small{
     }
   }
 
+  .help-section{
+      margin: 5px 0;
+      label{font-weight: bold;color: black;}
+      p{margin: 10px 0;}
+  }
+
 /* Scrollbar Styling */
 
   /* width */
