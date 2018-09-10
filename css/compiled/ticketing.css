@@ -53,7 +53,6 @@ BREAKPOINTS
 }
 
 .ticketing-page {
-  /* Tab Styling */
   /* Modal Styling */
   /* Tooltip Styling */
   /* Icon over image popup */
@@ -160,6 +159,12 @@ BREAKPOINTS
   font-size: 24px;
   color: #009fe3;
 }
+.ticketing-page .summary {
+  font-weight: bold;
+}
+.ticketing-page .useon {
+  font-weight: bold;
+}
 .ticketing-page .acc {
   margin-top: 20px;
 }
@@ -222,15 +227,6 @@ BREAKPOINTS
     width: 100%;
   }
 }
-.ticketing-page .tooltip {
-  position: absolute;
-  background: #009DE0;
-  color: white;
-  padding: 1.5em;
-  max-width: 20em;
-  width: 80%;
-  z-index: 100;
-}
 @media (max-width: 32.125em) {
   .ticketing-page .col {
     width: 100%;
@@ -249,13 +245,7 @@ BREAKPOINTS
     padding: 60px 0 0px 0px;
   }
 }
-.ticketing-page ​ .summary {
-  font-weight: bold;
-}
-.ticketing-page .useon {
-  font-weight: bold;
-}
-.ticketing-page .tab-content {
+.ticketing-page ​ .tab-content {
   position: initial;
 }
 .ticketing-page .tab-pane.ng-scope.ng-isolate-scope {
