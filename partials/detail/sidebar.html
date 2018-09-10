@@ -134,8 +134,14 @@
             <div data-ng-if="ticket.all.AllowBus && ticket.all.AllowTrain || ticket.all.AllowBus && ticket.all.AllowMetro || ticket.all.AllowTrain && ticket.all.AllowMetro || ticket.all.AllowBus && ticket.all.AllowTrain && ticket.all.AllowMetro">
                 <tabs>
                     <pane data-ng-if="ticket.all.AllowBus" title="Bus">
-                        <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap.png"
-                            /></a>
+                        <div class="imgwrapper">
+                            <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap.png" />
+                                <i class="material-icons">
+                                        fullscreen
+                                    </i>
+                            </a>
+                            
+                        </div>
                         <p class="summary">Bus operators who accept this ticket</p>
                         <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
 
@@ -188,8 +194,14 @@
                         </modal-dialog>
                     </pane>
                     <pane data-ng-if="ticket.all.AllowTrain" title="Train">
+                            <div class="imgwrapper">
                         <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png"
-                            /></a>
+                            />
+                            <i class="material-icons">
+                                    fullscreen
+                                </i>
+                        </a>
+                            </div>
                         <p class="summary">Train operators who accept this ticket</p>
                         <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
@@ -230,8 +242,13 @@
                     </pane>
                     <pane data-ng-if="ticket.all.AllowMetro" title="Tram">
                         <div>
-                            <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
-                                /></a>
+                            <div class="imgwrapper">
+                                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png" />
+                                    <i class="material-icons">
+                                            fullscreen
+                                        </i>
+                                </a>
+                            </div>
                             <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West
                                     Midlands Metro</a></p>
                         </div>
@@ -240,25 +257,49 @@
 
             </div>
             <div data-ng-if="ticket.all.AllowBus && !ticket.all.AllowTrain && !ticket.all.AllowMetro">
+                    <div class="imgwrapper">
                 <a data-ng-if="ticket.all.Brand == 'nbus'" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
-                        src="/assets/nbus_nnetworkMap.png" /></a>
+                        src="/assets/nbus_nnetworkMap.png" />
+                        <i class="material-icons">
+                                fullscreen
+                            </i>
+                    </a>
+                        </div>
 
                 <div data-ng-if="ticket.all.Brand == 'National Express' ">
+                        <div class="imgwrapper">
                     <a href="../../assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img src="/assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
                         />
-                        <br>View National Express network map</a>
+                        <br>View National Express network map
+                        <i class="material-icons">
+                                fullscreen
+                            </i>
+                    </a>
+                        </div>
                     <p>Use on National Express buses only</p>
                 </div>
                 <div data-ng-if="ticket.all.Brand == 'Diamond Bus' ">
+                        <div class="imgwrapper">
                     <a href="https://www.diamondbuses.com/about-us/network-maps/" target="_blank" title="View Diamond network maps">
                         <img src="/assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
-                        <br>View Diamond network maps</a>
+                        <br>View Diamond network maps
+                        <i class="material-icons">
+                                fullscreen
+                            </i>
+                    </a>
+                        </div>
                     <p>Use on Diamond buses only</p>
                 </div>
                 <div data-ng-if="ticket.all.Brand == 'Stagecoach' ">
+                        <div class="imgwrapper">
                     <a href="https://www.stagecoachbus.com/maps" target="_blank" title="View Diamond network maps">
                         <img src="/assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
-                        <br>View Stagecoach network maps</a>
+                        <br>View Stagecoach network maps
+                        <i class="material-icons">
+                                fullscreen
+                            </i>
+                    </a>
+                        </div>
                     <p>Use on Stagecoach buses only</p>
                 </div>
 
@@ -290,7 +331,13 @@
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && ticket.all.AllowTrain && !ticket.all.AllowMetro">
-                <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png" /></a>
+                    <div class="imgwrapper">
+                <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves.png" />
+                    <i class="material-icons">
+                            fullscreen
+                        </i>
+                </a>
+                </div>
                 <p class="summary">Train operators who accept this ticket</p>
                 <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
 
@@ -317,8 +364,14 @@
                 </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.AllowBus && !ticket.all.AllowTrain && ticket.all.AllowMetro">
+                    <div class="imgwrapper">
                 <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route.png"
-                    /></a>
+                    />
+                    <i class="material-icons">
+                            fullscreen
+                        </i>
+                </a>
+                    </div>
                 <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands Metro
                     </a></p>
             </div>

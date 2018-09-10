@@ -216,6 +216,24 @@ label.plain-small{
       p{margin: 10px 0;}
   }
 
+  /* Icon over image popup */
+
+  .imgwrapper {
+    position: relative;
+ }
+
+ .imgwrapper:hover img {
+    opacity: 0.5;
+  }
+ 
+ .imgwrapper .material-icons {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   font-size: 60px;
+    color: #009FE3;
+ }
+
 /* Scrollbar Styling */
 
   /* width */
