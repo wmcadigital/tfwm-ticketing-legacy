@@ -1,7 +1,7 @@
 <form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search" data-ng-init="ticketing.getStations();">
     <div class="boxin reset">
         <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
-    </div>
+    </div>                      
 
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx">
         <div class="block block--halfwidth">
@@ -134,14 +134,12 @@
         </span>
     </div>
 
-    <!-- Rail Stations -->
-    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations
-        will you use?</label>
+    <!-- Rail Stations --> 
+    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations will you use? </label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
         data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
         <div class="block block--halfwidth">
             <label class="plain-small" for="travellingFrom">From</label>
-
                 <div class="large-padded-row">
                     <div angucomplete-alt
                       id="ex14"
@@ -155,7 +153,7 @@
                       minlength="1"
                       input-class="form-control form-control-small"
                       match-class="highlight"
-                      initial-value="Bloxwich"
+                      override-suggestions="true"
                       >
                     </div>
             
@@ -217,6 +215,14 @@
         </div>
         
     </div>
+
+        <!-- Help section if station is not listed in auto complete -->
+       <div data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
+            <label class="blue">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
+            <div ng-show="stationNotListed">
+                <p>Please refer to <a href="http://www.nationalrail.co.uk/" target="_blank">National Rail</a> for journeys from or to a station not listed</p>
+            </div>
+        </div>
 
     <div class="fields how-long" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>

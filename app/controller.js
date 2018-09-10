@@ -18,7 +18,8 @@
         .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
-        .directive('pane', [pane]);
+        .directive('pane', [pane])
+        .directive('tooltip', [tooltip]);
     // CONTROLLER
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
         var vm = this;
@@ -531,6 +532,30 @@
                 '</div>',
             replace: true
         };
+    }
+
+    function tooltip() {
+        return {
+            restrict: 'A',
+            controller: function ($scope, $element) {
+                $scope.isShown = false;
+                this.showHover = function () {
+                    $scope.isShown = $scope.isShown == true ? false : true;
+                }
+            },
+            transclude: true,
+            link: function (scope, element, attr, ctrl) {
+                element.bind('click', function () {
+                    scope.$apply(function () {
+                        ctrl.showHover();
+                    });
+                });
+            },
+            template: '<div ng-transclude></div>' +
+                '<p class="tooltipPopup" ng-class="field-help tooltip" ng-show="isShown">' +
+                '<span>I am the Hover Popup</span>' +
+                '</p>'
+        }
     }
 
 })();

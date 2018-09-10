@@ -55,6 +55,7 @@ BREAKPOINTS
 .ticketing-page {
   /* Tab Styling */
   /* Modal Styling */
+  /* Tooltip Styling */
   /* Scrollbar Styling */
   /* width */
   /* Track */
@@ -220,6 +221,15 @@ BREAKPOINTS
     width: 100%;
   }
 }
+.ticketing-page .tooltip {
+  position: absolute;
+  background: #009DE0;
+  color: white;
+  padding: 1.5em;
+  max-width: 20em;
+  width: 80%;
+  z-index: 100;
+}
 @media (max-width: 32.125em) {
   .ticketing-page .col {
     width: 100%;
@@ -319,6 +329,20 @@ BREAKPOINTS
 }
 .ticketing-page .ng-modal-dialog.boxin.modal-content {
   padding: 0px 15px 15px 15px !important;
+}
+.ticketing-page .tooltips {
+  cursor: pointer;
+  position: relative;
+}
+.ticketing-page .tooltipPopup {
+  position: absolute;
+  top: -26px;
+  left: 45px;
+}
+.ticketing-page .tooltipPopup span {
+  background-color: #009DE0;
+  padding: 12px;
+  color: white;
 }
 .ticketing-page ::-webkit-scrollbar {
   width: 10px;
