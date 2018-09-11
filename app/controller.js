@@ -119,6 +119,8 @@
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
+                    console.log('ticket search');
+                    console.log(response);
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
                         // Check the operator and push it to filters
@@ -154,7 +156,6 @@
                     vm.stationList = response;
                     //console.log(response);
                 }
-
             )
         }
 
@@ -184,10 +185,6 @@
             }
         };
 
-        function backButton() {
-            vm.backToSearch = getURL; //use session storage
-        }
-
         function updateGrid() {
             $timeout(function () {
                 $timeout(function () {
@@ -201,6 +198,7 @@
 
         function update() {
             var filtered = vm.all;
+
             console.log(vm.searchFilters);
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
             angular.forEach(vm.searchFilters, function (val, key) {
@@ -213,7 +211,6 @@
 
             // Filter results by the filters selected
             filtered = $filter('filter')(filtered, vm.searchFilters);
-
 
             // Sort results by selected option
             vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);

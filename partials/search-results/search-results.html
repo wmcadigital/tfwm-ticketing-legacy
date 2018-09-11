@@ -45,6 +45,19 @@
             </div>
         </div>
 
+        <div data-ng-if="ticketing.postJSON.Brand == 'Swift PAYG'">
+            <hr>
+            <h3>Tickets you can buy on Swift Pay As You Go</h3>
+            {{ticketing.submit}}
+
+            <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
+                ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in ticketing.filteredTickets" data-count="{{ticketing.filteredTickets.length}}">
+                    <item></item>
+                </div>
+            </div>
+        </div>
+
         <div class="event-results__more" data-ng-if="ticketing.filteredTickets.length > 6 && ticketing.limit < ticketing.filteredTickets.length">
             <button data-event-step="6" id="loadMore" class="btn align--center" data-ng-click="ticketing.loadMore();">Load more</button>
         </div>
