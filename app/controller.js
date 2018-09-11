@@ -14,7 +14,8 @@
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
-        .directive('detailRelated', [detailRelated])
+        //.directive('detailRelated', [detailRelated])
+        .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
         .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
@@ -352,6 +353,7 @@
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
         vm.operatorList = []; //Define Operator list
+        vm.limit = 4; //Set paging limit for Alt tickets
 
 
         // Function to get the ticket data with api call
@@ -365,7 +367,7 @@
                             ticketingService.getSimpleTicket(item.Id).then(
                                 function (response) {
                                     vm.relatedTickets[item.Id] = response;
-                                    //console.log(vm.relatedTickets);
+                                    console.log(vm.relatedTickets);
                                     vm.loadingStatus = "Success";
                                 }
                             )
@@ -436,10 +438,25 @@
         };
     }
 
-    function detailRelated() {
+    //function detailRelated() {
+    //    return {
+    //        templateUrl: 'partials/detail/related-product.html',
+    //        restrict: 'E'
+    //    };
+    //}
+
+    function detailRelated($timeout, angularGridInstance) {
         return {
             templateUrl: 'partials/detail/related-product.html',
-            restrict: 'E'
+            restrict: 'E',
+            //this fixes a bug where the cards weren't loading on initial load in slow loading browsers
+            link: function (scope, element, attrs) {
+                $timeout(function () {
+                    if (scope.$last) {
+                        angularGridInstance.alternativeResults.refresh();
+                    }
+                }, 0);
+            }
         };
     }
 
