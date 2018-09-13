@@ -4,16 +4,23 @@
 
 
     .ticket-item{
+        .paygimg{float: right;}
         .payment-icons{display: block;width: 100%;
             > *{display:inline-block; vertical-align: middle;}
             .ticket-direct-debit-logo{width:85px;margin-left:10px;}
             .ticket-swift-logo{width:35px;}
         }
         .event__title{font-size:22px;}
-        .price{font-weight:normal;margin-top:0;font-size:18px;color:$cyan;}
+        .price{font-weight:normal;margin-top:10px;font-size:18px;color:$cyan;}
         .event__date{margin-bottom:40px;}
         a{margin-bottom:8px;}
+       // .bdr-top--orange {padding: 0px}
+        //.bdr-top--blue {padding: 0px}
+       // .bdr-top--green {padding: 0px}
+       // .itemContent{padding:15px 20px 20px 20px}
     }
+    //.angular-grid-item .boxin{padding: 0px}
+
     .ticket-filters{
         hr{margin-bottom:0;}
         .filter-block{
@@ -36,6 +43,12 @@
         }
     }
 
+    .angular-grid-item{
+        .bdr-top--purple.boxin{padding: 0px;
+            .itemContent{padding:70px 20px 45px 20px}
+        }
+    }
+
     .block--fullwidth .block--side{position:sticky; top:15px;}
 
     .card-img{width:180px;float:left;margin: 30px 20px 20px 0;}
@@ -53,8 +66,6 @@
 .useon {font-weight: bold}
 
 .acc {margin-top: 20px;}
-
-.bdr-top--cyan{border-top: 6px solid $cyan}
 
 input[type="checkbox"]:disabled+label {
     background: #dddddd;
@@ -82,6 +93,9 @@ label.plain-small{
 .col{width: 50%;float: left;padding-right: 10px;}
 
 .passselect{float: right;}
+.bdr-top--cyan{border-top: 6px solid $cyan}
+.nnetwork{border-top: 6px solid $cyan}
+.bdr-top--purple{border-top: 6px solid $purple}
 
 @include breakpoint(tablet) {
     .block--fullwidth .block--side{position: static; top:15px;}

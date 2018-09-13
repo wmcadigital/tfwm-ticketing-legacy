@@ -66,6 +66,9 @@ BREAKPOINTS
   background-color: #009fe3;
   color: white;
 }
+.ticketing-page .ticket-item .paygimg {
+  float: right;
+}
 .ticketing-page .ticket-item .payment-icons {
   display: block;
   width: 100%;
@@ -86,7 +89,7 @@ BREAKPOINTS
 }
 .ticketing-page .ticket-item .price {
   font-weight: normal;
-  margin-top: 0;
+  margin-top: 10px;
   font-size: 18px;
   color: #009fe3;
 }
@@ -125,6 +128,12 @@ BREAKPOINTS
 }
 .ticketing-page .ticket-filters ul label {
   border: 0;
+}
+.ticketing-page .angular-grid-item .bdr-top--purple.boxin {
+  padding: 0px;
+}
+.ticketing-page .angular-grid-item .bdr-top--purple.boxin .itemContent {
+  padding: 70px 20px 45px 20px;
 }
 .ticketing-page .block--fullwidth .block--side {
   position: -webkit-sticky;
@@ -168,9 +177,6 @@ BREAKPOINTS
 .ticketing-page .acc {
   margin-top: 20px;
 }
-.ticketing-page .bdr-top--cyan {
-  border-top: 6px solid #009fe3;
-}
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
 }
@@ -201,6 +207,15 @@ BREAKPOINTS
 }
 .ticketing-page .passselect {
   float: right;
+}
+.ticketing-page .bdr-top--cyan {
+  border-top: 6px solid #009fe3;
+}
+.ticketing-page .nnetwork {
+  border-top: 6px solid #009fe3;
+}
+.ticketing-page .bdr-top--purple {
+  border-top: 6px solid #6e2f80;
 }
 @media (max-width: 55em) {
   .ticketing-page .block--fullwidth .block--side {

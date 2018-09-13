@@ -32,7 +32,7 @@
                 <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
             </ul>
 
-            <p data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
+            <div data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
                 Buy this ticket using your
                 <a href="/#/ticket/810">Swift Pay as You Go card</a>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
@@ -46,7 +46,8 @@
                 </span>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
                     Bus or Metro</span>
-            </p>
+                <br><br><a href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
+                </div>
 
             <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
                 {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel

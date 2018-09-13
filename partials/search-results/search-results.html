@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div data-ng-if="ticketing.postJSON.Brand == 'Swift PAYG'">
+        <div data-ng-if="ticketing.all.length && ticketing.postJSON.Brand == 'Swift PAYG'">
             <hr>
             <h3>Tickets you can buy on Swift Pay As You Go</h3>
             {{ticketing.submit}}

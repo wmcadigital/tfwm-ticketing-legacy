@@ -367,7 +367,7 @@
                             ticketingService.getSimpleTicket(item.Id).then(
                                 function (response) {
                                     vm.relatedTickets[item.Id] = response;
-                                    console.log(vm.relatedTickets);
+                                    console.log(vm.relatedTickets[item.Id]);
                                     vm.loadingStatus = "Success";
                                 }
                             )
