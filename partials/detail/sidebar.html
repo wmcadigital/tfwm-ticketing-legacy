@@ -1,5 +1,5 @@
 <div class="block block--fullwidth mobile--void">
-    <div class="boxin buy" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false}">
+    <div class="boxin buy" ng-class="{'bdr-top--purple' : ticket.all.SwiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'nnetwork' : ticket.all.SwiftCurrentAmount!=='' && ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false}">
         <h3>Price & How to buy </h3>
         <hr>
         <p><strong>Ticket: </strong>{{ticket.all.Name}}</p>
@@ -380,8 +380,8 @@
         <hr>
         <p class="type--small">
             <ul>
-                <li>Place your car on the reader and leave it there</li>
-                <li>Tell the driver or conductor which pass you would like to buy</li>
+                <li>Place your card on the reader and leave it there</li>
+                <li>Tell the driver or conductor you want to buy a  <strong>{{ticket.all.Name}}</strong> ticket</li>
                 <li>Your ticket will then be printed and given to you</li>
                 <li>Your card balance will be shown on screen and your ticket</li>
             </ul>
