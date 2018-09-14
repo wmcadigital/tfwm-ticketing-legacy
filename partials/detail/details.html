@@ -8,14 +8,7 @@
         <div class="col">
             <p class="summary">Summary</p>
             <p data-ng-bind-html="ticket.all.Summary"></p>
-            <h3 class="price mobile-only">Price: {{ticket.all.PriceOverride || (ticket.all.TicketCurrentAmount | currency:"£")}}
-                <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930010"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
-            </h3>
+       
             <p class="useon">Use on
                 <!-- Valid on: -->
                 <span class="icon icon--bus" data-ng-if="ticket.all.AllowBus" title="{{ticket.all.Operator}}"></span>
@@ -43,6 +36,80 @@
         </ul>
     </div>
     <div class="mobile-only">
+        <hr>
+            <p class="price online">
+                <span data-ng-if="ticket.all.SwiftCurrentAmount">{{ticket.all.SwiftCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">{{ticket.all.TicketCurrentAmount
+                    | currency:"£"}}</span>
+                <span data-ng-if="ticket.all.TicketCurrentAmount == '0'">{{ticket.all.PriceOverride}}</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930010"> per month</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
+                <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
+            </p>
+            <p data-ng-if="ticket.all.BuyTicketUrl" class="online">when you buy online</p>
+            <ul data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">
+                    <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
+                            target="_blank">Travel Information Centre</a></li>
+                    <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
+                    <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
+                            station</a></li>
+                    <li data-ng-if="ticket.all.PurchaseOnBus">Purchase on <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
+                        <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
+                            Express
+                        </span> Bus</li>
+                    <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
+                </ul>
+                <div data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
+                        Buy this ticket using your
+                        <a href="/#/ticket/810">Swift Pay as You Go card</a>
+                        <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
+                            <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span>
+                            <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</span>
+                        <span data-ng-if="!ticket.all.PurchaseOnBus && ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
+                            Train.
+                        </span>
+                        <span data-ng-if="!ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
+                            Metro.
+                        </span>
+                        <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
+                            Bus or Metro.</span>
+                        <br><br><a href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
+                        </div>
+        
+                    <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
+                        {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel
+                        ? "Quick buy" : "Buy at travel centre"}}</a>
+        
+                    <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.SwiftCurrentAmount">
+                        <hr>
+                        <p class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
+                            <span data-ng-if="ticket.all.ValidityId == 450930002">
+                                per month</span>
+                            <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
+                            <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
+                            <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
+                            <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
+                        </p>
+                        <p><span data-ng-if="ticket.all.SwiftCurrentAmount">when you</span> buy from</p>
+                        <ul>
+                            <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
+                                    target="_blank">Travel Information Centre</a></li>
+                            <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
+                            <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
+                                    station</a></li>
+                            <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
+                                <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
+                                    Express
+                                </span> Bus</li>
+                            <li data-ng-if="ticket.all.PurchaseOnMetro"><a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a></li>
+                        </ul>
+        
+                    </div>
+        </div>
+   <!-- <div class="mobile-only">
         <p data-ng-if="ticket.all.BuyOnDirectPurchase">
             <a href="#" class="btn btn--arrow">Buy now</span>
             </a>
@@ -56,7 +123,7 @@
                 <span data-ng-if="ticket.all.BuyOnSwift">on Swift</span>
             </a>
         </p>
-    </div>
+    </div>-->
 </div>
 
 <div class="boxin boxin--large" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false}">

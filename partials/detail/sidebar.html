@@ -22,7 +22,7 @@
             <ul data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">
                 <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
-                <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
+                <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
                 <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
                         station</a></li>
                 <li data-ng-if="ticket.all.PurchaseOnBus">Purchase on <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
@@ -39,13 +39,13 @@
                     <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span>
                     <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</span>
                 <span data-ng-if="!ticket.all.PurchaseOnBus && ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
-                    Train
+                    Train.
                 </span>
                 <span data-ng-if="!ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
-                    Metro
+                    Metro.
                 </span>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
-                    Bus or Metro</span>
+                    Bus or Metro.</span>
                 <br><br><a href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
                 </div>
 
@@ -67,14 +67,14 @@
                 <ul>
                     <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                             target="_blank">Travel Information Centre</a></li>
-                    <li data-ng-if="ticket.all.PurchasePayzone">Payzone outlet</li>
+                    <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
                     <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
                             station</a></li>
                     <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
                         <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
                             Express
                         </span> Bus</li>
-                    <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
+                    <li data-ng-if="ticket.all.PurchaseOnMetro"><a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a></li>
                 </ul>
 
             </div>

@@ -254,6 +254,9 @@ BREAKPOINTS
   .ticketing-page .ticketing-results-grid {
     background: white;
   }
+  .ticketing-page .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+    width: 100% !important;
+  }
 }
 @media (max-width: 1000px) and (min-width: 890px) {
   .ticketing-page .orcontent {
@@ -261,7 +264,7 @@ BREAKPOINTS
   }
 }
 .ticketing-page ​ .tab-content {
-  position: initial;
+  position: initial !important;
 }
 .ticketing-page .tab-pane.ng-scope.ng-isolate-scope {
   display: none;
@@ -315,7 +318,7 @@ BREAKPOINTS
   margin: 0;
   overflow-y: scroll;
   position: absolute;
-  width: 575px;
+  width: 96%;
   height: 465px;
   margin-bottom: 120px;
 }
