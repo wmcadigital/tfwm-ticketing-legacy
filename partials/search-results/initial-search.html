@@ -94,7 +94,7 @@
                 <div class="fields passselect nga-fast nga-fade">
                     <label class="plain" for="Brand">Select your pass</label>
                     <span class="stylized-select">
-                        <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();">
+                        <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();">
                             <option value="">Select your pass</option>
                             <option value="Diamond Bus">Diamond Bus</option>
                             <option value="National Express">National Express</option>

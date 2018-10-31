@@ -30,6 +30,9 @@
             },
             getBrands: function(){
                 return getData($http.get(uri2 + '/brands', {cache:true}));
+            },
+            getSwiftSearch: function (){
+                return getData($http.post(uri + 'Search', {cache: true}));
             }
         };
 

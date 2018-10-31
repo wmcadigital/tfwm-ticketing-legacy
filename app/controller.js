@@ -28,6 +28,7 @@
         vm.submit = submit; //Function to submit inital search
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
+        vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
         vm.loadMore = loadMore; //function to load more results
@@ -47,6 +48,7 @@
             vm.all = []; //Set results to blank array
             vm.filteredTickets = []; //Define filtered results as blank array
             vm.stationList = []; //Define Station list
+            vm.swiftPaygTickets = []; //Define Swift PAYG tickets
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
             vm.orderBy = "TicketCurrentAmount";
@@ -98,6 +100,11 @@
             submit(vm.postJSON);
         } else {
             $location.url('').replace();
+        }
+
+        if($location.search().Brand == 'Swift PAYG'){
+            console.log('YES it does');
+            getSwiftPAYG();
         }
 
         function submit(data) {
@@ -241,6 +248,16 @@
                 vm.postJSON.TimeBand = null;
                 vm.postJSON.StationNames = null;
             }
+        }
+        
+        function getSwiftPAYG() {
+            ticketingService.getSwiftSearch().then(
+                function (response) {
+                    vm.swiftPaygTickets = response;
+                    console.log('swift search');
+                    console.log(response);
+                }
+            )
         }
 
         function ntrainOOC() {
@@ -396,7 +413,6 @@
                 }
             )
         }
-
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
