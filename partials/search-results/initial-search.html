@@ -7,7 +7,7 @@
         <div class="block block--halfwidth">
             <div class="">
                 <div class="fields new-transport-icons-blue">
-                    <label class="plain">Select a mode of transport</label>
+                    <label class="plain">Mode</label>
                     <!--<label>Select All  <input type="checkbox" ng-model="isChecked" /></label>-->
                     <span class="icon-stylized-new -bus -table-cell border-right--transparent">
                         <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.AllowBus" data-ng-false-value="null"
@@ -92,7 +92,7 @@
                     <div class="orcontent">Or</div>
                 </div>
                 <div class="fields passselect nga-fast nga-fade">
-                    <label class="plain" for="Brand">Select your pass</label>
+                    <label class="plain" for="Brand">Pass</label>
                     <span class="stylized-select">
                         <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand' data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();">
                             <option value="">Select your pass</option>
@@ -108,12 +108,11 @@
                         </select>
                     </span>
                 </div>
-
         </div>
     </div>
 
     <div class="fields new-transport-icons-blue nga-fast nga-fade" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
-        <label class="plain" for="PassengerType">Who will use the ticket?</label>
+        <label class="plain" for="PassengerType">Traveller</label>
         <span class="stylized-select">
             <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model="ticketing.postJSON.PassengerType">
                 <option value="">Select who will be using this ticket</option>
@@ -220,7 +219,7 @@
         </div>
 
     <div class="fields how-long" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
-        <label class="plain" for="TimeBand">How long will the ticket be needed for?</label>
+        <label class="plain" for="TimeBand">Duration</label>
         <div class="labels-new">
             <span class="icon-stylized-new">
                 <input type="radio" id="DurationDay" name="TimeBand" value="Pay on day / 1 day" data-ng-model="ticketing.postJSON.TimeBand">
