@@ -46,8 +46,9 @@
                 </span>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
                     Bus or Metro.</span>
-                <br><br><a href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
-                </div>
+                <a class="BuyOnSwift" href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
+                
+            </div>
 
             <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
                 {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel
