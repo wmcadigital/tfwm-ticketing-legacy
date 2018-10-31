@@ -105,6 +105,7 @@
         if($location.search().Brand == 'Swift PAYG'){
             console.log('YES it does');
             getSwiftPAYG();
+            swiftPAYG();
         }
 
         function submit(data) {
