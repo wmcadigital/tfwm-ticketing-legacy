@@ -102,8 +102,8 @@
             $location.url('').replace();
         }
 
+        //if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevent tickets are shown
         if($location.search().Brand == 'Swift PAYG'){
-            console.log('YES it does');
             getSwiftPAYG();
             swiftPAYG();
         }
@@ -265,9 +265,8 @@
             vm.passValue = vm.postJSON.Brand;
 
             if (vm.passValue == 'ntrain - Out of County') {
-                vm.postJSON.Brand = null;
                 vm.postedJSON.AllowTrain = true;
-                vm.postJSON.StationNames = ["Birmingham New Street", "Rugeley Trent Valley"];
+                vm.postJSON.StationNames = ["Rugeley Trent Valley"];
             }
         }
 
@@ -300,8 +299,6 @@
                 }
             })
 
-
-
             //for every item in array
             angular.forEach(items, function (item) {
 
@@ -316,7 +313,6 @@
             return text ? String(text).replace(/\n/gm, '<br><br>') : '';
         };
     }
-
 
     // DIRECTIVES
     function initialSearch() {
@@ -454,13 +450,6 @@
             restrict: 'E'
         };
     }
-
-    //function detailRelated() {
-    //    return {
-    //        templateUrl: 'partials/detail/related-product.html',
-    //        restrict: 'E'
-    //    };
-    //}
 
     function detailRelated($timeout, angularGridInstance) {
         return {
