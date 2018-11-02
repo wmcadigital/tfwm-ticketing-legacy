@@ -190,6 +190,9 @@ BREAKPOINTS
   display: table-cell;
   vertical-align: middle;
 }
+.ticketing-page .BuyOnSwift {
+  margin: 50px;
+}
 .ticketing-page form .blocks .block {
   margin-bottom: 0px;
 }

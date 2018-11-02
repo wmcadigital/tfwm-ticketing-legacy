@@ -129,9 +129,9 @@
     </div>
 
     <!-- Rail Stations --> 
-    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">Which rail stations will you use? </label>
+    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County'">Which rail stations will you use? </label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
-        data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType">
+        data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County'">
         <div class="block block--halfwidth">
             <label class="plain-small" for="travellingFrom">From</label>
 
