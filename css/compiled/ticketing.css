@@ -294,7 +294,7 @@ BREAKPOINTS
   display: none;
 }
 .ticketing-page label.blue {
-  color: #009fe3;
+  color: #009fe3 !important;
 }
 .ticketing-page .mobile-only .stylized-select {
   margin: 15px 0 0 0;

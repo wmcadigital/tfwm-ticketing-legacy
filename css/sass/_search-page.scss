@@ -151,7 +151,7 @@ label.plain-small{
   .hideCheck{display:none}
   .hideSave{display:none}
 
-  label.blue{color: $cyan;}
+  label.blue{color: $cyan!important;}
   .mobile-only .stylized-select{margin: 15px 0 0 0;}
 
   /* Modal Styling */
