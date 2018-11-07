@@ -60,8 +60,8 @@
                 "PassengerType": $location.search().PassengerType || '',
                 "TimeBand": $location.search().TimeBand || '',
                 "Brand": $location.search().Brand || null,
-                "StationNames": [$location.search().StationNames || null]
-
+                "StationNames": [$location.search().StationNames || []]
+                
                 // "SwiftSearch": true,
                 // "FirstClass": true,
                 // "BuyOnDirectDebit": true,
@@ -87,11 +87,15 @@
 
         defaultVars();
 
+        if($location.search().StationNames === undefined){
+            console.log("no stations");
+        }
+
         //If location.search contains search criteria force the submit on page load 
         if (
             ($location.search().AllowBus ||
-                $location.search().AllowMetro ||
-                $location.search().AllowTrain) ||
+            $location.search().AllowMetro ||
+            $location.search().AllowTrain) ||
             ($location.search().Brand) &&
             $location.search().PassengerType &&
             $location.search().TimeBand ||
@@ -184,6 +188,7 @@
             if (selected) {
                 console.log(selected);
                 vm.postJSON.StationNames[0] = selected.originalObject.Name;
+                vm.train = 'yes';
             }
         };
 
