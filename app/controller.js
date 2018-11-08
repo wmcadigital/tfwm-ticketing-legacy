@@ -87,10 +87,6 @@
 
         defaultVars();
 
-        if($location.search().StationNames === undefined){
-            console.log("no stations");
-        }
-
         //If location.search contains search criteria force the submit on page load 
         if (
             ($location.search().AllowBus ||
@@ -181,7 +177,7 @@
             vm.postJSON.AllowBus = null;
             vm.postJSON.AllowTrain = null;
             vm.postJSON.AllowMetro = null;
-            vm.postJSON.StationNames = null;
+            vm.postJSON.StationNames = [];
         }
 
         $scope.stationFrom = function (selected) {
@@ -252,7 +248,7 @@
                 vm.isHideCheck = !vm.isHideCheck;
                 vm.postJSON.PassengerType = null;
                 vm.postJSON.TimeBand = null;
-                vm.postJSON.StationNames = null;
+                vm.postJSON.StationNames = [];
             }
         }
         
