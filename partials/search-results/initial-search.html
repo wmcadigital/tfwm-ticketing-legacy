@@ -91,7 +91,7 @@
                 <label class="plain" for="Brand">Pass</label>
                 <span class="stylized-select">
                     <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.Brand'
-                        data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();">
+                        data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();ticketing.ntrainOOC();">
                         <option value="">Select your pass</option>
                         <option value="Diamond Bus">Diamond Bus</option>
                         <option value="National Express">National Express</option>
@@ -127,10 +127,10 @@
     </div>
 
     <!-- Rail Stations -->
-    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County'">Which
+    <label class="plain" data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County' && ticketing.postJSON.PassengerType">Which
         rail stations will you use? </label>
     <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx"
-        data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County'">
+        data-ng-if="ticketing.postJSON.AllowTrain && ticketing.postJSON.PassengerType || ticketing.postJSON.Brand == 'ntrain - Out of County' && ticketing.postJSON.PassengerType">
         <div class="block block--halfwidth">
             <label class="plain-small" for="travellingFrom">From</label>
             <div class="large-padded-row">

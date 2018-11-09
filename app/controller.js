@@ -41,7 +41,7 @@
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
-
+        vm.ntrainOOC = ntrainOOC; //Function for setting out of county tickets
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
             vm.all = []; //Set results to blank array
@@ -162,7 +162,7 @@
             ticketingService.getStations().then(
                 function (response) {
                     vm.stationList = response;
-                    //console.log(response);
+                    console.log(response);
                 }
             )
         }
@@ -248,6 +248,15 @@
                 vm.postJSON.PassengerType = null;
                 vm.postJSON.TimeBand = null;
                 vm.postJSON.StationNames = [];
+            }
+        }
+
+        function ntrainOOC() {
+            vm.passValue = vm.postJSON.Brand;
+
+            if (vm.passValue == 'ntrain - Out of County') {
+                vm.isHideCheck = !vm.isHideCheck;
+
             }
         }
         
