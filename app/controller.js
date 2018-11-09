@@ -41,7 +41,6 @@
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
-        vm.ntrainOOC = ntrainOOC; //Function for adding stations if ntrain Out of County is selected
 
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
@@ -118,7 +117,7 @@
                 PassengerType: vm.postedJSON.PassengerType,
                 TimeBand: vm.postedJSON.TimeBand,
                 Brand: vm.postedJSON.Brand,
-                StationNames: [vm.postJSON.StationNames],
+                StationNames: [vm.postedJSON.StationNames],
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -183,8 +182,8 @@
         $scope.stationFrom = function (selected) {
             if (selected) {
                 console.log(selected);
+                console.log("From station" + selected.originalObject.Name);
                 vm.postJSON.StationNames[0] = selected.originalObject.Name;
-                vm.train = 'yes';
             }
         };
 
@@ -260,15 +259,6 @@
                     console.log(response);
                 }
             )
-        }
-
-        function ntrainOOC() {
-            vm.passValue = vm.postJSON.Brand;
-
-            if (vm.passValue == 'ntrain - Out of County') {
-                vm.postedJSON.AllowTrain = true;
-                vm.postJSON.StationNames = ["Rugeley Trent Valley"];
-            }
         }
 
         function save(data) {
