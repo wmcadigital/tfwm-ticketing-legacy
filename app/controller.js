@@ -28,6 +28,7 @@
         vm.submit = submit; //Function to submit inital search
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
+        vm.getoocStations = getoocStations; //Function to retreive out of county stations
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -47,6 +48,7 @@
             vm.all = []; //Set results to blank array
             vm.filteredTickets = []; //Define filtered results as blank array
             vm.stationList = []; //Define Station list
+            vm.stationoocList = []; //Define out of county Station list
             vm.swiftPaygTickets = []; //Define Swift PAYG tickets
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
@@ -59,7 +61,7 @@
                 "PassengerType": $location.search().PassengerType || '',
                 "TimeBand": $location.search().TimeBand || '',
                 "Brand": $location.search().Brand || null,
-                "StationNames": [$location.search().StationNames || []]
+                "StationNames": [$location.search().StationNames || [[]]]
                 
                 // "SwiftSearch": true,
                 // "FirstClass": true,
@@ -167,6 +169,16 @@
             )
         }
 
+        function getoocStations() {
+            ticketingService.getStations().then(
+                function (response) {
+                    var OutOfCounty = $filter('filter')(response, { OutOfCounty: "true" });
+                    vm.stationoocList = OutOfCounty;
+                    console.log(OutOfCounty);
+                }
+            )
+        }
+
         function clearFilter() {
             $location.url('').replace();
             defaultVars();
@@ -179,13 +191,28 @@
             vm.postJSON.StationNames = [];
         }
 
-        $scope.stationFrom = function (selected) {
-            if (selected) {
-                console.log(selected);
+
+        $scope.stationFromName = {Name: ''};
+        $scope.stationFrom = function(selected) {
+          if (selected) {
+            $scope.stationFromName = selected.originalObject.Name;
+            console.log(selected);
                 console.log("From station" + selected.originalObject.Name);
                 vm.postJSON.StationNames[0] = selected.originalObject.Name;
-            }
-        };
+          } else {
+            $scope.stationFromName = null;
+                vm.postJSON.StationNames[0] = null;
+          }
+        }
+
+
+        //$scope.stationFrom = function (selected) {
+        //    if (selected) {
+        //        console.log(selected);
+        //        console.log("From station" + selected.originalObject.Name);
+        //        vm.postJSON.StationNames[0] = selected.originalObject.Name;
+        //    }
+        //};
 
         $scope.stationTo = function (selected) {
             if (selected) {
