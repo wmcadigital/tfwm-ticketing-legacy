@@ -68,6 +68,7 @@ BREAKPOINTS
 }
 .ticketing-page .ticket-item .paygimg {
   float: right;
+  margin: 0 0 25px 0;
 }
 .ticketing-page .ticket-item .payment-icons {
   display: block;
