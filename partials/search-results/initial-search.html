@@ -195,7 +195,7 @@
     <div class="fields how-long" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">Duration</label>
         <div class="labels-new">
-            <span class="icon-stylized-new">
+            <span class="icon-stylized-new" ng-hide="ticketing.postJSON.Brand == 'ntrain - Out of County' || ticketing.postJSON.Brand == 'ntrain'">
                 <input type="radio" id="DurationDay" name="TimeBand" value="Pay on day / 1 day" data-ng-model="ticketing.postJSON.TimeBand">
                 <label for="DurationDay">
                     <span></span>a day</label>

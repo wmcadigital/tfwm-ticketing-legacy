@@ -1,7 +1,7 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
         <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
-    <div class="filtered-header__control">
+    <div class="filtered-header__control" ng-hide="ticketing.filteredTickets.length == '0'">
         <label>Sort by</label>
 
         <div class="field -inline">
@@ -19,6 +19,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div data-ng-if="ticketing.filteredTickets.length == '0'">
+    <p>No tickets have been found. Please try changing your search settings.</p>
 </div>
 
 <div class="blocks cfx ticketing-search">
