@@ -46,8 +46,12 @@
                 </span>
                 <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
                     Bus or Metro.</span>
-                <a class="BuyOnSwift" href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
-                
+                <a href="/#/ticket/810"><img class="BuyOnSwift" src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
+            </div>
+
+            <div data-ng-if="ticket.all.Id == '379' || ticket.all.Id == '373' || ticket.all.Id == '380002' || ticket.all.Id == '375'">
+                <span>Buy this ticket on the Swift on Mobile Android App</span>
+                <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" src="/assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
             <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">

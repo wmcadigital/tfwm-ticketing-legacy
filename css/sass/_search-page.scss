@@ -4,7 +4,7 @@
 
 
     .ticket-item{
-        .paygimg{float: right;}
+        .paygimg{float: right;margin: 0 0 25px 0}
         .payment-icons{display: block;width: 100%;
             > *{display:inline-block; vertical-align: middle;}
             .ticket-direct-debit-logo{width:85px;margin-left:10px;}
@@ -81,7 +81,7 @@ input[type="checkbox"]:disabled+label {
     vertical-align: middle;
 }
 
-.BuyOnSwift{margin: 50px}
+.BuyOnSwift{margin: 15px 0}
 
 form .blocks .block {margin-bottom: 0px}
 
