@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div data-ng-if="ticketing.filteredTickets.length == '0'">
+<div data-ng-if="ticketing.filteredTickets.length == '0' && ticketing.loadingStatus === 'success'">
     <p>No tickets have been found. Please try changing your search settings.</p>
 </div>
 
