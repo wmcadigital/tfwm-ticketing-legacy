@@ -23,20 +23,10 @@
         <ul class="bare-list bare-list--horizontal">
             <li ng-repeat="features in ticket.all.Features">
                 <span class="iconcustom icon--tick"></span> {{features.Name}}
+                <span data-ng-if="features.Description != ''" tooltip class="help-link"></span>
             </li>
-            <li> <a class="help-link float--right" data-ng-click='ticket.toggleHelp()'><span>Help</span></a></li>
         </ul>
     </div>
-
-    <help-dialog show='ticket.helpShown' class="help">
-        <div class="header">
-            <h2>Ticket Features</h2>
-        </div>
-        <div ng-repeat="features in ticket.all.Features">
-            <h3>{{features.Name}}</h3>
-            <div data-ng-bind-html="features.Description"></div>
-        </div>
-    </help-dialog>
 
     <div class="mobile-only">
         <hr>

@@ -197,52 +197,15 @@ label.plain-small{
     padding: 0px 15px 15px 15px!important;
   }
 
-  /* Help Styling */
-
-  .help__close {
-    float: right;
-	width: 35px;
-	height: 35px;
-	text-indent: -9999px;
-	background-color: $cyan;
-	transition: 250ms ease-out;
-	&:hover { background-color: $navy; }
-	&:after {
-		text-indent: 0;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		content: '+';
-		font-family: "WF_Network", sans-serif;
-		color: white;
-		font-size: 28px;
-        font-size: 2.8rem;
-		transform: translate(-50%, -50%) rotate(45deg);
-	}
-}
 
 /* Tooltip Styling */
 
-  .tooltips {
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .tooltipPopup {
-    position: absolute;
-    top: -26px;
-    left: 45px;
-    span {
-        background-color: #009DE0;
-        padding: 12px;
-        color: white;
-    }
-  }
+.tooltip{
+    a{color: white;text-decoration: underline;}
+}
 
-  .help-section{
-      margin: 5px 0;
-      label{font-weight: bold;color: black;}
-      p{margin: 10px 0;}
+  .help-link:after{
+      vertical-align: middle;
   }
 
   /* Icon over image popup */

@@ -54,7 +54,6 @@ BREAKPOINTS
 
 .ticketing-page {
   /* Modal Styling */
-  /* Help Styling */
   /* Tooltip Styling */
   /* Icon over image popup */
   /* Scrollbar Styling */
@@ -345,56 +344,12 @@ BREAKPOINTS
 .ticketing-page .ng-modal-dialog.boxin.modal-content {
   padding: 0px 15px 15px 15px !important;
 }
-.ticketing-page .help__close {
-  float: right;
-  width: 35px;
-  height: 35px;
-  text-indent: -9999px;
-  background-color: #009fe3;
-  -webkit-transition: 250ms ease-out;
-  -o-transition: 250ms ease-out;
-  transition: 250ms ease-out;
-}
-.ticketing-page .help__close:hover {
-  background-color: #003366;
-}
-.ticketing-page .help__close:after {
-  text-indent: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  content: "+";
-  font-family: "WF_Network", sans-serif;
+.ticketing-page .tooltip a {
   color: white;
-  font-size: 28px;
-  font-size: 2.8rem;
-  -webkit-transform: translate(-50%, -50%) rotate(45deg);
-      -ms-transform: translate(-50%, -50%) rotate(45deg);
-          transform: translate(-50%, -50%) rotate(45deg);
+  text-decoration: underline;
 }
-.ticketing-page .tooltips {
-  cursor: pointer;
-  position: relative;
-}
-.ticketing-page .tooltipPopup {
-  position: absolute;
-  top: -26px;
-  left: 45px;
-}
-.ticketing-page .tooltipPopup span {
-  background-color: #009DE0;
-  padding: 12px;
-  color: white;
-}
-.ticketing-page .help-section {
-  margin: 5px 0;
-}
-.ticketing-page .help-section label {
-  font-weight: bold;
-  color: black;
-}
-.ticketing-page .help-section p {
-  margin: 10px 0;
+.ticketing-page .help-link:after {
+  vertical-align: middle;
 }
 .ticketing-page .imgwrapper {
   position: relative;
