@@ -19,22 +19,25 @@
     </div>
 
     <!-- Features: -->
-    <div class="boxin bg--grey bg--tint ts--info">
+    <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.Features">
         <ul class="bare-list bare-list--horizontal">
-            <li data-ng-if="ticket.all.BuyOnDirectDebit">
-                <span class="iconcustom icon--tick"></span>Buy on Direct Debit</li>
-            <li data-ng-if="ticket.all.BuyOnSwift">
-                <span class="iconcustom icon--tick"></span>Buy on Swift</li>
-            <li data-ng-if="ticket.all.AllowPeakTravel">
-                <span class="iconcustom icon--tick"></span>Peak travel allowed</li>
-            <li data-ng-if="ticket.all.PurchaseTic">
-                <span class="iconcustom icon--tick"></span>Buy at travel centre</li>
-            <li data-ng-if="ticket.all.PurchaseRailStation">
-                <span class="iconcustom icon--tick"></span>Buy at rail station</li>
-            <li data-ng-if="ticket.all.IsAdult">
-                <span class="iconcustom icon--tick"></span>Adult Ticket</li>
+            <li ng-repeat="features in ticket.all.Features">
+                <span class="iconcustom icon--tick"></span> {{features.Name}}
+            </li>
+            <li> <a class="help-link float--right" data-ng-click='ticket.toggleHelp()'><span>Help</span></a></li>
         </ul>
     </div>
+
+    <help-dialog show='ticket.helpShown' class="help">
+        <div class="header">
+            <h2>Ticket Features</h2>
+        </div>
+        <div ng-repeat="features in ticket.all.Features">
+            <h3>{{features.Name}}</h3>
+            <div data-ng-bind-html="features.Description"></div>
+        </div>
+    </help-dialog>
+
     <div class="mobile-only">
         <hr>
             <p class="price online">

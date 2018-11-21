@@ -18,6 +18,7 @@
         .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
         .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
+        .directive('helpDialog', [helpDialog])
         .directive('tabs', [tabs])
         .directive('pane', [pane])
         .directive('tooltip', [tooltip]);
@@ -393,6 +394,8 @@
         vm.toggleClick = toggleClick;
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
+        vm.helpShown = false;
+        vm.toggleHelp = toggleHelp;
         vm.operatorList = []; //Define Operator list
         vm.limit = 4; //Set paging limit for Alt tickets
 
@@ -451,6 +454,10 @@
 
         function toggleModal() {
             vm.modalShown = !vm.modalShown;
+        }
+
+        function toggleHelp() {
+            vm.helpShown = !vm.helpShown;
         }
 
     }
@@ -525,6 +532,35 @@
             '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
             '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
             '<div class="ng-modal-dialog-content" ng-transclude></div>' +
+            '</div>' +
+            '</div>'        };
+    }
+
+    function helpDialog() {
+        return {
+            restrict: 'E',
+            scope: {
+                show: '='
+            },
+            replace: true, // Replace with the template below
+            transclude: true, // we want to insert custom content inside the directive
+            link: function (scope, element, attrs) {
+                scope.dialogStyle = {};
+                if (attrs.width)
+                    scope.dialogStyle.width = attrs.width;
+                if (attrs.height)
+                    scope.dialogStyle.height = attrs.height;
+                if (attrs.class)
+                    scope.dialogStyle.class = attrs.class;
+                scope.hideModal = function () {
+                    scope.show = false;
+                };
+            },
+            template: '<div ng-show="show">' +
+            '<div ng-show="show" ng-click="hideModal()"></div>' +
+            '<div class="ng-help-dialog {{dialogStyle.class}}" ng-style="dialogStyle">' +
+            '<div class="ng-modal-close help__close js-modal-close" ng-click="hideModal()">X</div>' +
+            '<div class="ng-help-dialog-content" ng-transclude></div>' +
             '</div>' +
             '</div>'        };
     }
