@@ -4,7 +4,7 @@
 
 
     .ticket-item{
-        .paygimg{float: right;margin: 0 0 25px 0}
+        .paygimg{float: right;margin: 0 0 25px 0;width: 75%;}
         .payment-icons{display: block;width: 100%;
             > *{display:inline-block; vertical-align: middle;}
             .ticket-direct-debit-logo{width:85px;margin-left:10px;}
