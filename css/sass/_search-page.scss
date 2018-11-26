@@ -70,6 +70,8 @@
 input[type="checkbox"]:disabled+label {
     background: #dddddd;
 }
+
+input[type=text]{text-align: center;}
 .orcont{
     float: left;
     width:30px

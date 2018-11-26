@@ -109,10 +109,10 @@
     </div>
 
     <!-- Traveller -->
-    <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx">
+    <div data-eq-cols="{&quot;one&quot;: 1, &quot;two&quot; : 2}" data-eq-selector=".boxin" class="blocks blocks--halves cfx" ng-hide="ticketing.passValue == 'Swift PAYG'"
+    data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
         <div class="block block--halfwidth">
-            <div class="fields new-transport-icons-blue nga-fast nga-fade" ng-hide="ticketing.passValue == 'Swift PAYG'"
-            data-ng-if="ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand">
+            <div class="fields new-transport-icons-blue nga-fast nga-fade">
             <label class="plain" for="PassengerType">Traveller</label>
             <span class="stylized-select">
                 <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model="ticketing.postJSON.PassengerType">
@@ -143,7 +143,7 @@
         <div class="block block--halfwidth">
             <label class="plain-small" for="travellingFrom">From</label>
             <div class="large-padded-row">
-                <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="Search stations" pause="100"
+                <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100"
                     selected-object="stationFrom" local-data="ticketing.stationList" search-fields="Name"
                     title-field="Name" minlength="1" input-class="form-control" match-class="highlight"
                     override-suggestions="true" initial-value="stationFromName">
@@ -168,7 +168,7 @@
                 <label class="plain-small" for="travellingTo_value">To <span data-ng-if="ticketing.postJSON.Brand == 'ntrain - Out of County' && ticketing.postJSON.PassengerType">Out of County Station</span></label>
 
                 <div class="large-padded-row" data-ng-if="ticketing.postJSON.Brand != 'ntrain - Out of County'">
-                    <div angucomplete-alt id="stationTo" placeholder="Search stations" pause="100" selected-object="stationTo"
+                    <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
                         local-data="ticketing.stationList" search-fields="Name" title-field="Name" minlength="1"
                         input-class="form-control form-control-small" match-class="highlight" initial-value="">
                     </div>
@@ -204,7 +204,7 @@
         </div>
     </div>
 
-    <div class="fields how-long" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
+    <div class="fields how-long blocks cfx" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.PassengerType != '' && (ticketing.postJSON.AllowBus || ticketing.postJSON.AllowTrain || ticketing.postJSON.AllowMetro || ticketing.postJSON.Brand)">
         <label class="plain" for="TimeBand">Duration</label>
         <div class="labels-new">
             <span class="icon-stylized-new" ng-hide="ticketing.postJSON.Brand == 'ntrain - Out of County' || ticketing.postJSON.Brand == 'ntrain'">

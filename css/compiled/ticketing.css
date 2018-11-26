@@ -182,6 +182,9 @@ BREAKPOINTS
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
 }
+.ticketing-page input[type=text] {
+  text-align: center;
+}
 .ticketing-page .orcont {
   float: left;
   width: 30px;
