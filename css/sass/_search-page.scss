@@ -90,13 +90,17 @@ form .blocks .block {margin-bottom: 0px}
 label.plain-small{
     font-size: 14px;
     margin: 0 0 5px 0;
+    display: block;
+}
+
+.to{
+    .orcontent{padding: 40px 0 20px 20px}
 }
 
 .highlight{color: $cyan;}
 
 .col{width: 50%;float: left;padding-right: 10px;}
 
-.passselect{float: right;}
 .bdr-top--cyan{border-top: 6px solid $cyan}
 .nnetwork{border-top: 6px solid $cyan}
 .bdr-top--purple{border-top: 6px solid $purple}
@@ -251,5 +255,37 @@ label.plain-small{
     }
 
 }
+
+
+$grid-columns: 12;
+
+@for $i from 1 through $grid-columns {
+  .grid-#{$i} {
+    width: percentage($i / $grid-columns);
+    display: block;
+  }
+}
+
+
+// styles
+[class^='grid-'] {
+  box-sizing: border-box;
+  float: left;
+}
+
+.or {padding: 60px 0 20px 0;
+    text-align: center;
+}
+
+.rowcontainer{
+    display: inline-block;
+    width: 100%;
+}
+
+.form-control{width: 100%!important}
+
+.railhelp{margin: 10px 0}
+
+.ie10-or-better .stylized-select > select{padding-right: 80px}
 
   

@@ -204,6 +204,10 @@ BREAKPOINTS
 .ticketing-page label.plain-small {
   font-size: 14px;
   margin: 0 0 5px 0;
+  display: block;
+}
+.ticketing-page .to .orcontent {
+  padding: 40px 0 20px 20px;
 }
 .ticketing-page .highlight {
   color: #009fe3;
@@ -212,9 +216,6 @@ BREAKPOINTS
   width: 50%;
   float: left;
   padding-right: 10px;
-}
-.ticketing-page .passselect {
-  float: right;
 }
 .ticketing-page .bdr-top--cyan {
   border-top: 6px solid #009fe3;
@@ -379,4 +380,92 @@ BREAKPOINTS
 }
 .ticketing-page ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.grid-1 {
+  width: 8.3333333333%;
+  display: block;
+}
+
+.grid-2 {
+  width: 16.6666666667%;
+  display: block;
+}
+
+.grid-3 {
+  width: 25%;
+  display: block;
+}
+
+.grid-4 {
+  width: 33.3333333333%;
+  display: block;
+}
+
+.grid-5 {
+  width: 41.6666666667%;
+  display: block;
+}
+
+.grid-6 {
+  width: 50%;
+  display: block;
+}
+
+.grid-7 {
+  width: 58.3333333333%;
+  display: block;
+}
+
+.grid-8 {
+  width: 66.6666666667%;
+  display: block;
+}
+
+.grid-9 {
+  width: 75%;
+  display: block;
+}
+
+.grid-10 {
+  width: 83.3333333333%;
+  display: block;
+}
+
+.grid-11 {
+  width: 91.6666666667%;
+  display: block;
+}
+
+.grid-12 {
+  width: 100%;
+  display: block;
+}
+
+[class^=grid-] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  float: left;
+}
+
+.or {
+  padding: 60px 0 20px 0;
+  text-align: center;
+}
+
+.rowcontainer {
+  display: inline-block;
+  width: 100%;
+}
+
+.form-control {
+  width: 100% !important;
+}
+
+.railhelp {
+  margin: 10px 0;
+}
+
+.ie10-or-better .stylized-select > select {
+  padding-right: 80px;
 }
