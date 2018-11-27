@@ -178,13 +178,13 @@ label.plain-small{
         }
         .ng-modal-dialog-content{
             .operators{
-                padding: 0;
+                padding: 20px;
                 margin: 0;
                 overflow-y: scroll;
                 position: absolute;
                 width: 96%;
-                height: 465px;
-                margin-bottom: 120px;
+                height: 420px;
+                margin-bottom: 140px;
                 table{
                     width: 100%;
                     tr{border-bottom: 1px solid #ccc;}
@@ -193,8 +193,8 @@ label.plain-small{
             }
             .header{
                 background: white;
-                padding: 15px 0;
-                height: 120px;
+                padding: 25px 20px;
+                height: 140px;
             }
         }
   }

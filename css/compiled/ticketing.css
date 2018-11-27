@@ -324,13 +324,13 @@ BREAKPOINTS
   top: 0;
 }
 .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
-  padding: 0;
+  padding: 20px;
   margin: 0;
   overflow-y: scroll;
   position: absolute;
   width: 96%;
-  height: 465px;
-  margin-bottom: 120px;
+  height: 420px;
+  margin-bottom: 140px;
 }
 .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table {
   width: 100%;
@@ -343,8 +343,8 @@ BREAKPOINTS
 }
 .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .header {
   background: white;
-  padding: 15px 0;
-  height: 120px;
+  padding: 25px 20px;
+  height: 140px;
 }
 .ticketing-page .ng-modal-dialog.boxin.modal-content {
   padding: 0px 15px 15px 15px !important;
