@@ -1,85 +1,85 @@
 <div class="block block--fullwidth mobile--void">
-    <div class="boxin buy" ng-class="{'bdr-top--purple' : ticket.all.SwiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'nnetwork' : ticket.all.SwiftCurrentAmount!=='' && ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false}">
+    <div class="boxin buy" ng-class="{'bdr-top--purple' : ticket.all.swiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'nnetwork' : ticket.all.swiftCurrentAmount!=='' && ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
         <h3>Price & How to buy </h3>
         <hr>
-        <p><strong>Ticket: </strong>{{ticket.all.Name}}</p>
+        <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
 
         <div>
             <p class="price online">
-                <span data-ng-if="ticket.all.SwiftCurrentAmount">{{ticket.all.SwiftCurrentAmount | currency:"£"}}</span>
-                <span data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">{{ticket.all.TicketCurrentAmount
+                <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">{{ticket.all.ticketCurrentAmount
                     | currency:"£"}}</span>
-                <span data-ng-if="ticket.all.TicketCurrentAmount == '0'">{{ticket.all.PriceOverride}}</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930002"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930010"> per month</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
-                <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
+                <span data-ng-if="ticket.all.ticketCurrentAmount == '0'">{{ticket.all.priceOverride}}</span>
+                <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
+                <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
+                <span data-ng-if="ticket.all.validityId == 450930010"> per month</span>
+                <span data-ng-if="ticket.all.validityId == 450930000"> a day</span>
+                <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
+                <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
             </p>
-            <p data-ng-if="ticket.all.BuyTicketUrl" class="online">when you buy online</p>
+            <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
 
-            <ul data-ng-if="!ticket.all.SwiftCurrentAmount && ticket.all.TicketCurrentAmount != '0'">
-                <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
+            <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">
+                <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
-                <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
-                <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
+                <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
+                <li data-ng-if="ticket.all.purchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
                         station</a></li>
-                <li data-ng-if="ticket.all.PurchaseOnBus">Purchase on <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
-                    <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
+                <li data-ng-if="ticket.all.purchaseOnBus">Purchase on <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
+                    <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.brand == 'National Express'">National
                         Express
                     </span> Bus</li>
-                <li data-ng-if="ticket.all.PurchaseOnMetro">On Metro</li>
+                <li data-ng-if="ticket.all.purchaseOnMetro">On Metro</li>
             </ul>
 
-            <div data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
+            <div data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
                 Buy this ticket using your
                 <a href="/#/ticket/810">Swift Pay as You Go card</a>
-                <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
-                    <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span>
-                    <span data-ng-if="ticket.all.Brand == 'National Express'">National Express</span> Bus</span>
-                <span data-ng-if="!ticket.all.PurchaseOnBus && ticket.all.PurchaseOnTrain && !ticket.all.PurchaseOnMetro">on
+                <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
+                    <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
+                    <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
+                <span data-ng-if="!ticket.all.purchaseOnBus && ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
                     Train.
                 </span>
-                <span data-ng-if="!ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
+                <span data-ng-if="!ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Metro.
                 </span>
-                <span data-ng-if="ticket.all.PurchaseOnBus && !ticket.all.PurchaseOnTrain && ticket.all.PurchaseOnMetro">on
+                <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Bus or Metro.</span>
                 <a href="/#/ticket/810"><img class="BuyOnSwift" src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
             </div>
 
-            <div data-ng-if="ticket.all.Id == '379' || ticket.all.Id == '373' || ticket.all.Id == '380002' || ticket.all.Id == '375'">
+            <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
                 <span>Buy this ticket on the Swift on Mobile Android App</span>
                 <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" src="/assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
-            <a data-ng-if="ticket.all.BuyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.BuyTicketUrl}}" target="_blank">
-                {{ticket.all.BuyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.BuyOnSwift ? "Buy on Swift" : ticket.all.HasOnlinePurchaseChannel
+            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
+                {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
-            <div data-ng-if="ticket.all.TicketCurrentAmount && ticket.all.SwiftCurrentAmount">
+            <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount">
                 <hr>
-                <p class="price">{{ticket.all.TicketCurrentAmount | currency:"£"}}
-                    <span data-ng-if="ticket.all.ValidityId == 450930002">
+                <p class="price">{{ticket.all.ticketCurrentAmount | currency:"£"}}
+                    <span data-ng-if="ticket.all.validityId == 450930002">
                         per month</span>
-                    <span data-ng-if="ticket.all.ValidityId == 450930006"> per month</span>
-                    <span data-ng-if="ticket.all.ValidityId == 450930000"> a day</span>
-                    <span data-ng-if="ticket.all.ValidityId == 450930001"> a week</span>
-                    <span data-ng-if="ticket.all.ValidityId == 450930003"> for 1 year</span>
+                    <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
+                    <span data-ng-if="ticket.all.validityId == 450930000"> a day</span>
+                    <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
+                    <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
                 </p>
-                <p><span data-ng-if="ticket.all.SwiftCurrentAmount">when you</span> buy from</p>
+                <p><span data-ng-if="ticket.all.swiftCurrentAmount">when you</span> buy from</p>
                 <ul>
-                    <li data-ng-if="ticket.all.PurchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
+                    <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                             target="_blank">Travel Information Centre</a></li>
-                    <li data-ng-if="ticket.all.PurchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
-                    <li data-ng-if="ticket.all.PurchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
+                    <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
+                    <li data-ng-if="ticket.all.purchaseRailStation"><a href="https://journeyplanner.networkwestmidlands.com/station">Rail
                             station</a></li>
-                    <li data-ng-if="ticket.all.PurchaseOnBus">On <span data-ng-if="ticket.all.Brand == 'Stagecoach'">Stagecoach</span>
-                        <span data-ng-if="ticket.all.Brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.Brand == 'National Express'">National
+                    <li data-ng-if="ticket.all.purchaseOnBus">On <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
+                        <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> <span data-ng-if="ticket.all.brand == 'National Express'">National
                             Express
                         </span> Bus</li>
-                    <li data-ng-if="ticket.all.PurchaseOnMetro"><a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a></li>
+                    <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a></li>
                 </ul>
 
             </div>
@@ -89,18 +89,18 @@
 </div>
 
 <div class="block block--fullwidth">
-    <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.AllowBus==true && ticket.all.AllowTrain==false && ticket.all.AllowMetro==false, 'bdr-top--green' : ticket.all.AllowBus==false && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false, 'bdr-top--pink' : ticket.all.AllowBus==false && ticket.all.AllowTrain==false && ticket.all.AllowMetro==true, 'bdr-top--blue' : ticket.all.AllowBus==true && ticket.all.AllowMetro==true && ticket.all.AllowTrain==false, 'bdr-009fe3' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==true, 'bdr-top--cyan' : ticket.all.AllowBus==true && ticket.all.AllowTrain==true && ticket.all.AllowMetro==false}">
+    <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
         <h3>
-            <!--<span data-ng-if="ticket.all.AllowBus" class="icon icon--bus ng-scope" title="Use on Bus" style=""></span><span
-                data-ng-if="ticket.all.AllowTrain" class="icon icon--train ng-scope" title="Use on Train" style=""></span><span
-                data-ng-if="ticket.all.AllowMetro" class="icon icon--tram ng-scope" title="Use on Metro" style=""></span>-->Where can I use?
+            <!--<span data-ng-if="ticket.all.allowBus" class="icon icon--bus ng-scope" title="Use on Bus" style=""></span><span
+                data-ng-if="ticket.all.allowTrain" class="icon icon--train ng-scope" title="Use on Train" style=""></span><span
+                data-ng-if="ticket.all.allowMetro" class="icon icon--tram ng-scope" title="Use on Metro" style=""></span>-->Where can I use?
         </h3>
         <hr>
         <p class="type--small">
 
-            <div data-ng-if="ticket.all.AllowBus && ticket.all.AllowTrain || ticket.all.AllowBus && ticket.all.AllowMetro || ticket.all.AllowTrain && ticket.all.AllowMetro || ticket.all.AllowBus && ticket.all.AllowTrain && ticket.all.AllowMetro">
+            <div data-ng-if="ticket.all.allowBus && ticket.all.allowTrain || ticket.all.allowBus && ticket.all.allowMetro || ticket.all.allowTrain && ticket.all.allowMetro || ticket.all.allowBus && ticket.all.allowTrain && ticket.all.allowMetro">
                 <tabs>
-                    <pane data-ng-if="ticket.all.AllowBus" title="Bus">
+                    <pane data-ng-if="ticket.all.allowBus" title="Bus">
                         <div class="imgwrapper">
                             <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap-thumbnail.png"
                                 />
@@ -118,45 +118,45 @@
                                 <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
                             </div>
                             <div class="operators">
-                                <div data-ng-if="ticket.all.Brand == 'nbus'">
+                                <div data-ng-if="ticket.all.brand == 'nbus'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
-                                                <td>{{ticket.Name}}</td>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, Type:'Bus Operator'} | orderBy:'name'">
+                                                <td>{{ticket.name}}</td>
                                                 <td>
-                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                             target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                             target="_blank">Operator Information</a></span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                <div data-ng-if="ticket.all.brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Bus Operator'} | orderBy:'Name'">
-                                                <td>{{ticket.Name}}</td>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, Type:'Bus Operator'} | orderBy:'name'">
+                                                <td>{{ticket.name}}</td>
                                                 <td>
-                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                             target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                             target="_blank">Operator Information</a></span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div data-ng-if="ticket.all.Brand == 'Swift PAYG'">
+                                <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptPayg:true, Type:'Bus Operator'} | orderBy:'Name'">
-                                                <td>{{ticket.Name}}</td>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, Type:'Bus Operator'} | orderBy:'name'">
+                                                <td>{{ticket.name}}</td>
                                                 <td>
-                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                             target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                             target="_blank">Operator Information</a></span>
                                                 </td>
                                             </tr>
@@ -166,7 +166,7 @@
                             </div>
                         </modal-dialog>
                     </pane>
-                    <pane data-ng-if="ticket.all.AllowTrain" title="Train">
+                    <pane data-ng-if="ticket.all.allowTrain" title="Train">
                         <div class="imgwrapper">
                             <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png"
                                 />
@@ -181,33 +181,33 @@
                         <modal-dialog show='ticket.modalShown' class="bdr-top--green">
                             <div class="header">
                                 <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                                <p>See train operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                                <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
                             </div>
                             <div class="operators">
-                                <div data-ng-if="ticket.all.Brand == 'ntrain'">
+                                <div data-ng-if="ticket.all.brand == 'ntrain'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true} | orderBy:'Name'">
-                                                <td>{{ticket.Name}}</td>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true} | orderBy:'name'">
+                                                <td>{{ticket.name}}</td>
                                                 <td>
-                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                             target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                             target="_blank">Operator Information</a></span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div data-ng-if="ticket.all.Brand == 'nnetwork'">
+                                <div data-ng-if="ticket.all.brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnNetwork:true, Type:'Rail Operator'} | orderBy:'Name'">
-                                                <td>{{ticket.Name}}</td>
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, Type:'Rail Operator'} | orderBy:'name'">
+                                                <td>{{ticket.name}}</td>
                                                 <td>
-                                                    <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                             target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                             target="_blank">Operator Information</a></span>
                                                 </td>
                                             </tr>
@@ -217,7 +217,7 @@
                             </div>
                         </modal-dialog>
                     </pane>
-                    <pane data-ng-if="ticket.all.AllowMetro" title="Tram">
+                    <pane data-ng-if="ticket.all.allowMetro" title="Tram">
                         <div>
                             <div class="imgwrapper">
                                 <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png"
@@ -234,9 +234,9 @@
                 </tabs>
 
             </div>
-            <div data-ng-if="ticket.all.AllowBus && !ticket.all.AllowTrain && !ticket.all.AllowMetro">
+            <div data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a data-ng-if="ticket.all.Brand == 'nbus'" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
+                    <a data-ng-if="ticket.all.brand == 'nbus'" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
                             src="/assets/nbus_nnetworkMap-thumbnail.png" />
                         <i class="material-icons">
                             zoom_out_map
@@ -244,7 +244,7 @@
                     </a>
                 </div>
 
-                <div data-ng-if="ticket.all.Brand == 'National Express' ">
+                <div data-ng-if="ticket.all.brand == 'National Express' ">
                     <div class="imgwrapper">
                         <a href="../../assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img src="/assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
                             />
@@ -256,7 +256,7 @@
                     </div>
                     <p>Use on National Express buses only</p>
                 </div>
-                <div data-ng-if="ticket.all.Brand == 'Diamond Bus' ">
+                <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
                     <div class="imgwrapper">
                         <a href="https://www.diamondbuses.com/about-us/network-maps/" target="_blank" title="View Diamond network maps">
                             <img src="/assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
@@ -268,7 +268,7 @@
                     </div>
                     <p>Use on Diamond buses only</p>
                 </div>
-                <div data-ng-if="ticket.all.Brand == 'Stagecoach' ">
+                <div data-ng-if="ticket.all.brand == 'Stagecoach' ">
                     <div class="imgwrapper">
                         <a href="https://www.stagecoachbus.com/maps" target="_blank" title="View Diamond network maps">
                             <img src="/assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
@@ -281,7 +281,7 @@
                     <p>Use on Stagecoach buses only</p>
                 </div>
 
-                <div data-ng-if="!ticket.all.IsSingleOperatorTicket">
+                <div data-ng-if="!ticket.all.isSingleOperatorTicket">
                     <p class="summary">Bus operators who accept this ticket</p>
                     <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
                 </div>
@@ -289,18 +289,18 @@
                 <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
                     <div class="header">
                         <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                        <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                        <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
                     </div>
                     <div class="operators">
-                        <div data-ng-if="ticket.all.Brand == 'nbus'">
+                        <div data-ng-if="ticket.all.brand == 'nbus'">
                             <table class="disruption-detail__table">
                                 <tbody>
-                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnBus:true, Type:'Bus Operator'} | orderBy:'Name'">
-                                        <td>{{ticket.Name}}</td>
+                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, Type:'Bus Operator'} | orderBy:'name'">
+                                        <td>{{ticket.name}}</td>
                                         <td>
-                                            <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                            <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                     target="_blank">Operator Website</a></span>
-                                            <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                            <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                     target="_blank">Operator Information</a></span>
                                         </td>
                                     </tr>
@@ -310,7 +310,7 @@
                     </div>
                 </modal-dialog>
             </div>
-            <div data-ng-if="!ticket.all.AllowBus && ticket.all.AllowTrain && !ticket.all.AllowMetro">
+            <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
                     <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png"
                         />
@@ -325,18 +325,18 @@
                 <modal-dialog show='ticket.modalShown' class="bdr-top--green">
                     <div class="header">
                         <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                        <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                        <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
                     </div>
                     <div class="operators">
-                        <div data-ng-if="ticket.all.Brand == 'ntrain'">
+                        <div data-ng-if="ticket.all.brand == 'ntrain'">
                             <table class="disruption-detail__table">
                                 <tbody>
                                     <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'} | orderBy:'Name'">
-                                        <td>{{ticket.Name}}</td>
+                                        <td>{{ticket.name}}</td>
                                         <td>
-                                            <span class="align--right" data-ng-if="ticket.Website"><a href="{{ticket.Website}}"
+                                            <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
                                                     target="_blank">Operator Website</a></span>
-                                            <span class="align--right" data-ng-if="!ticket.Website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                            <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                                     target="_blank">Operator Information</a></span>
                                         </td>
                                     </tr>
@@ -346,7 +346,7 @@
                     </div>
                 </modal-dialog>
             </div>
-            <div data-ng-if="!ticket.all.AllowBus && !ticket.all.AllowTrain && ticket.all.AllowMetro">
+            <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
                 <div class="imgwrapper">
                     <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png"
                         />
@@ -363,7 +363,7 @@
     </div>
 </div>
 <!-- Swift PAYG - How to use -->
-<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.IsPayAsYouGo">
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.isPayAsYouGo">
     <div class="boxin bdr-top--navy">
         <h3>How to use?</h3>
         <hr>
@@ -379,14 +379,14 @@
 </div>
 
 <!-- Swift - How to use -->
-<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.SwiftCurrentAmount && !ticket.all.BuyOnSwift">
+<div class="block block--fullwidth mobile--void" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
     <div class="boxin bdr-top--navy">
         <h3>How to use?</h3>
         <hr>
         <p class="type--small">
             <ul>
                 <li>Place your card on the reader and leave it there</li>
-                <li>Tell the driver or conductor you want to buy a  <strong>{{ticket.all.Name}}</strong> ticket</li>
+                <li>Tell the driver or conductor you want to buy a  <strong>{{ticket.all.name}}</strong> ticket</li>
                 <li>Your ticket will then be printed and given to you</li>
                 <li>Your card balance will be shown on screen and your ticket</li>
             </ul>

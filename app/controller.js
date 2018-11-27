@@ -35,11 +35,11 @@
         vm.update = update; //Do filtering logic in controller so sessions can be stored
         vm.loadMore = loadMore; //function to load more results
         vm.filterButtons = {
-            "Operator": [],
-            "OperatorLength": 0,
-            "BusTravelArea": [],
-            "RailZoneFrom": [],
-            "RailZoneTo": []
+            "operator": [],
+            "operatorLength": 0,
+            "busTravelArea": [],
+            "railZoneFrom": [],
+            "railZoneTo": []
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
@@ -56,31 +56,31 @@
             vm.orderBy = "TicketCurrentAmount";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
             vm.postJSON = {
-                "AllowBus": $location.search().AllowBus || null,
-                "AllowMetro": $location.search().AllowMetro || null,
-                "AllowTrain": $location.search().AllowTrain || null,
-                "PassengerType": $location.search().PassengerType || '',
-                "TimeBand": $location.search().TimeBand || '',
-                "Brand": $location.search().Brand || null,
-                "StationNames": [$location.search().StationNames || [[]]]
+                "allowBus": $location.search().allowBus || null,
+                "allowMetro": $location.search().allowMetro || null,
+                "allowTrain": $location.search().allowTrain || null,
+                "passengerType": $location.search().passengerType || '',
+                "timeBand": $location.search().timeBand || '',
+                "brand": $location.search().brand || null,
+                "stationNames": [$location.search().stationNames || [[]]]
                 
-                // "SwiftSearch": true,
-                // "FirstClass": true,
-                // "BuyOnDirectDebit": true,
-                // "BuyOnDirectPurchase": true,
-                // "BuyOnSwift": true,
-                // "PurchaseOnMetro": true,
-                // "PurchaseNatEx": true,
-                // "PurchasePayzone": true,
-                // "PurchaseRailStation": true,
-                // "PurchaseTic": true,
-                // "PurchaseOnBus": true,
-                // "PassengerType": "Adult",
-                // "BrandId": "43ab38e2-9cb6-e411-842f-0050568f6585",
-                // "Brand": "nbus",
-                // "OperatorId": "84b5d172-9cb6-e411-9265-0050568f6584",
-                // "Operator": "National Express Coventry",
-                // "BusTravelArea": "Coventry",
+                // "swiftSearch": true,
+                // "firstClass": true,
+                // "buyOnDirectDebit": true,
+                // "buyOnDirectPurchase": true,
+                // "buyOnSwift": true,
+                // "purchaseOnMetro": true,
+                // "purchaseNatEx": true,
+                // "purchasePayzone": true,
+                // "purchaseRailStation": true,
+                // "purchaseTic": true,
+                // "purchaseOnBus": true,
+                // "passengerType": "Adult",
+                // "brandId": "43ab38e2-9cb6-e411-842f-0050568f6585",
+                // "brand": "nbus",
+                // "operatorId": "84b5d172-9cb6-e411-9265-0050568f6584",
+                // "operator": "National Express Coventry",
+                // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
             vm.clearModes = clearModes;
@@ -91,13 +91,13 @@
 
         //If location.search contains search criteria force the submit on page load 
         if (
-            ($location.search().AllowBus ||
-            $location.search().AllowMetro ||
-            $location.search().AllowTrain) ||
-            ($location.search().Brand) &&
-            $location.search().PassengerType &&
-            $location.search().TimeBand ||
-            $location.search().StationNames
+            ($location.search().allowBus ||
+            $location.search().allowMetro ||
+            $location.search().allowTrain) ||
+            ($location.search().brand) &&
+            $location.search().passengerType &&
+            $location.search().timeBand ||
+            $location.search().stationNames
         ) {
             submit(vm.postJSON);
         } else {
@@ -105,7 +105,7 @@
         }
 
         //if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevent tickets are shown
-        if($location.search().Brand == 'Swift PAYG'){
+        if($location.search().brand == 'Swift PAYG'){
             getSwiftPAYG();
             swiftPAYG();
         }
@@ -114,13 +114,13 @@
             vm.loadingStatus = 'loading';
             angular.copy(vm.postJSON, vm.postedJSON); //save initial search variables
             $location.search({
-                AllowBus: vm.postedJSON.AllowBus,
-                AllowTrain: vm.postedJSON.AllowTrain,
-                AllowMetro: vm.postedJSON.AllowMetro,
-                PassengerType: vm.postedJSON.PassengerType,
-                TimeBand: vm.postedJSON.TimeBand,
-                Brand: vm.postedJSON.Brand,
-                StationNames: [vm.postedJSON.StationNames],
+                allowBus: vm.postedJSON.allowBus,
+                allowTrain: vm.postedJSON.allowTrain,
+                allowMetro: vm.postedJSON.allowMetro,
+                passengerType: vm.postedJSON.passengerType,
+                timeBand: vm.postedJSON.timeBand,
+                brand: vm.postedJSON.brand,
+                stationNames: [vm.postedJSON.stationNames],
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -135,23 +135,23 @@
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
                         // Check the operator and push it to filters
-                        if (vm.filterButtons.Operator.indexOf(item.Operator) == -1) {
-                            vm.filterButtons.Operator.push(item.Operator);
+                        if (vm.filterButtons.operator.indexOf(item.Operator) == -1) {
+                            vm.filterButtons.operator.push(item.Operator);
                         }
 
                         // Check bus area
-                        if (vm.filterButtons.BusTravelArea.indexOf(item.BusTravelArea) == -1) {
-                            vm.filterButtons.BusTravelArea.push(item.BusTravelArea);
+                        if (vm.filterButtons.busTravelArea.indexOf(item.BusTravelArea) == -1) {
+                            vm.filterButtons.busTravelArea.push(item.BusTravelArea);
                         }
 
                         // Check bus area
-                        if (vm.filterButtons.RailZoneFrom.indexOf(item.RailZoneFrom) == -1) {
-                            vm.filterButtons.RailZoneFrom.push(item.RailZoneFrom);
+                        if (vm.filterButtons.railZoneFrom.indexOf(item.RailZoneFrom) == -1) {
+                            vm.filterButtons.railZoneFrom.push(item.RailZoneFrom);
                         }
 
                         // Check bus area
-                        if (vm.filterButtons.RailZoneTo.indexOf(item.RailZoneTo) == -1) {
-                            vm.filterButtons.RailZoneTo.push(item.RailZoneTo);
+                        if (vm.filterButtons.railZoneTo.indexOf(item.RailZoneTo) == -1) {
+                            vm.filterButtons.railZoneTo.push(item.RailZoneTo);
                         }
                     });
 
@@ -186,20 +186,20 @@
         }
 
         function clearModes() {
-            vm.postJSON.AllowBus = null;
-            vm.postJSON.AllowTrain = null;
-            vm.postJSON.AllowMetro = null;
-            vm.postJSON.StationNames = [];
+            vm.postJSON.allowBus = null;
+            vm.postJSON.allowTrain = null;
+            vm.postJSON.allowMetro = null;
+            vm.postJSON.stationNames = [];
         }
 
 
         $scope.stationFromName = {Name: ''};
         $scope.stationFrom = function(selected) {
           if (selected) {
-            $scope.stationFromName = selected.originalObject.Name;
+            $scope.stationFromName = selected.originalObject.name;
             console.log(selected);
                 console.log("From station" + selected.originalObject.Name);
-                vm.postJSON.StationNames[0] = selected.originalObject.Name;
+                vm.postJSON.stationNames[0] = selected.originalObject.Name;
           } else {
             $scope.stationFromName = null;
                 vm.postJSON.StationNames[0] = null;
@@ -218,7 +218,7 @@
         $scope.stationTo = function (selected) {
             if (selected) {
                 console.log(selected);
-                vm.postJSON.StationNames[1] = selected.originalObject.Name;
+                vm.postJSON.stationNames[1] = selected.originalObject.Name;
             }
         };
 
@@ -240,7 +240,7 @@
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
             angular.forEach(vm.searchFilters, function (val, key) {
                 // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
-                if ((key.indexOf('Allow') !== -1 && val) || (val == false && key.indexOf('Allow') === -1)) {
+                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
                     // Delete the filter and value
                     delete vm.searchFilters[key];
                 }
@@ -269,18 +269,18 @@
         }
 
         function swiftPAYG() {
-            vm.passValue = vm.postJSON.Brand;
+            vm.passValue = vm.postJSON.brand;
 
             if (vm.passValue == 'Swift PAYG') {
                 vm.isHideCheck = !vm.isHideCheck;
-                vm.postJSON.PassengerType = null;
-                vm.postJSON.TimeBand = null;
-                vm.postJSON.StationNames = [];
+                vm.postJSON.passengerType = null;
+                vm.postJSON.timeBand = null;
+                vm.postJSON.stationNames = [];
             }
         }
 
         function ntrainOOC() {
-            vm.passValue = vm.postJSON.Brand;
+            vm.passValue = vm.postJSON.brand;
 
             if (vm.passValue == 'ntrain - Out of County') {
                 vm.isHideCheck = !vm.isHideCheck;
@@ -414,12 +414,12 @@
                 function (response) {
                     vm.all = response;
                     console.log(response);
-                    if (vm.all.RelatedTickets.length) {
-                        angular.forEach(vm.all.RelatedTickets, function (item) {
-                            ticketingService.getSimpleTicket(item.Id).then(
+                    if (vm.all.relatedTickets.length) {
+                        angular.forEach(vm.all.relatedTickets, function (item) {
+                            ticketingService.getSimpleTicket(item.id).then(
                                 function (response) {
-                                    vm.relatedTickets[item.Id] = response;
-                                    console.log(vm.relatedTickets[item.Id]);
+                                    vm.relatedTickets[item.id] = response;
+                                    console.log(vm.relatedTickets[item.id]);
                                     vm.loadingStatus = "Success";
                                 }
                             )
@@ -427,7 +427,7 @@
                     } else {
                         vm.loadingStatus = "Success";
                     }
-                    if (vm.all.Documents.length) {
+                    if (vm.all.documents.length) {
                         ticketingService.getTerms(data).then(
                             function (response) {
                                 vm.relatedTerms = response;
@@ -615,7 +615,7 @@
             },
             template: '<div ng-transclude></div>' +
                 '<p class="field-help tooltip" ng-class="field-help tooltip" ng-show="isShown">' +
-                '<span data-ng-bind-html="features.Description">{{features.Description}}</span>' +
+                '<span data-ng-bind-html="features.description">{{features.description}}</span>' +
                 '</p>'
         }
     }
