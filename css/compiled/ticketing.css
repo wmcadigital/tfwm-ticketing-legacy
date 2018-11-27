@@ -469,3 +469,11 @@ BREAKPOINTS
 .ie10-or-better .stylized-select > select {
   padding-right: 80px;
 }
+
+p.plain, .duration {
+  margin: 20px 0 5px 0;
+}
+
+label.plain, .label.plain {
+  display: table;
+}
