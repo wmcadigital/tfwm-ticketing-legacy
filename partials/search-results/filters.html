@@ -75,7 +75,9 @@
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.BusTravelArea"
                     data-ng-change="ticketing.update()" value="{{filter}}" />
                 <label for="busTravelArea{{$index}}">
-                    {{filter}} ({{ (ticketing.filteredTickets | filter: {BusTravelArea:filter}).length }})
+                    <span data-ng-if="ticketing.postedJSON.Brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} ({{ (ticketing.filteredTickets | filter: {BusTravelArea:filter}).length }})</span>
+                    <span data-ng-if="ticketing.postedJSON.Brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} ({{ (ticketing.filteredTickets | filter: {BusTravelArea:filter}).length }})</span>
+                    <span data-ng-if="ticketing.postedJSON.Brand != 'Diamond Bus' || ticketing.postedJSON.Brand != 'Stagecoach'">{{filter}} ({{ (ticketing.filteredTickets | filter: {BusTravelArea:filter}).length }})</span>
                 </label>
             </li>
         </ul>
