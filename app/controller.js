@@ -6,6 +6,7 @@
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
         .filter('escapeFilter', [escapeFilter])
+        .filter('replace', [replace])
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
@@ -339,6 +340,16 @@
         return function (text) {
             return text ? String(text).replace(/\n/gm, '<br><br>') : '';
         };
+    }
+
+    function replace() {
+        return function (input, from, to) {
+            if(input === undefined) {
+              return;
+            }
+            var regex = new RegExp(from, 'g');
+            return input.replace(regex, to);
+          };
     }
 
     // DIRECTIVES
