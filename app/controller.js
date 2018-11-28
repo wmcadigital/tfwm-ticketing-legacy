@@ -83,6 +83,9 @@
                 // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
+            vm.postJSON2 = {
+                "stationNames": [$location.search().stationNames || [[]]]
+            }
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
@@ -120,7 +123,7 @@
                 passengerType: vm.postedJSON.passengerType,
                 timeBand: vm.postedJSON.timeBand,
                 brand: vm.postedJSON.brand,
-                stationNames: [vm.postedJSON.stationNames],
+                //stationNames: [vm.postedJSON.stationNames],
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -189,37 +192,30 @@
             vm.postJSON.allowBus = null;
             vm.postJSON.allowTrain = null;
             vm.postJSON.allowMetro = null;
-            vm.postJSON.stationNames = [];
         }
 
-
-        $scope.stationFromName = {Name: ''};
+        // Set From & To Rail Stations
         $scope.stationFrom = function(selected) {
           if (selected) {
-            $scope.stationFromName = selected.originalObject.name;
+            $scope.stationFromName = selected.originalObject.name; //Set From station
             console.log(selected);
-                console.log("From station" + selected.originalObject.Name);
-                vm.postJSON.stationNames[0] = selected.originalObject.Name;
+                console.log("From station" + selected.originalObject.name);
+                vm.postJSON.stationNames[0] = selected.originalObject.name;
           } else {
             $scope.stationFromName = null;
-                vm.postJSON.StationNames[0] = null;
+                vm.postJSON.stationNames[0] = [[]];
           }
         }
 
-
-        //$scope.stationFrom = function (selected) {
-        //    if (selected) {
-        //        console.log(selected);
-        //        console.log("From station" + selected.originalObject.Name);
-        //        vm.postJSON.StationNames[0] = selected.originalObject.Name;
-        //    }
-        //};
-
         $scope.stationTo = function (selected) {
             if (selected) {
+                $scope.stationToName = selected.originalObject.name; //Set To Station
                 console.log(selected);
-                vm.postJSON.stationNames[1] = selected.originalObject.Name;
-            }
+                vm.postJSON.stationNames[1] = selected.originalObject.name;
+            } else {
+                $scope.stationToName = null;
+                    vm.postJSON.stationNames[1] = [[]];
+              }
         };
 
         function updateGrid() {
@@ -276,6 +272,10 @@
                 vm.postJSON.passengerType = null;
                 vm.postJSON.timeBand = null;
                 vm.postJSON.stationNames = [];
+            } else { // Clear stationNames list if non-rail pass selected
+                if (vm.passValue == 'nbus' || vm.passValue == 'National Express' || vm.passValue == 'Diamond Bus' || vm.passValue == 'Stagecoach' || vm.passValue == 'Swift PAYG' || vm.passValue == 'West Midlands Metro') {
+                    vm.postJSON.stationNames = [[]];
+                }
             }
         }
 

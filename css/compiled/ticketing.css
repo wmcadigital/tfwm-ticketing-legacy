@@ -470,14 +470,20 @@ BREAKPOINTS
   padding-right: 80px;
 }
 
-p.plain, .duration {
-  margin: 20px 0 5px 0;
-}
-
 label.plain, .label.plain {
   display: table;
 }
 
 .stylized-select {
   display: block;
+}
+
+form .title {
+  margin: 20px 0 10px 0;
+}
+form .padding-right {
+  padding-right: 15px;
+}
+form .padding-left {
+  padding-left: 15px;
 }
