@@ -477,3 +477,7 @@ p.plain, .duration {
 label.plain, .label.plain {
   display: table;
 }
+
+.stylized-select {
+  display: block;
+}
