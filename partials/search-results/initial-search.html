@@ -111,14 +111,13 @@
     <!-- /Traveller -->
 
     <!-- Rail Stations -->
-    <div class="grid-12" data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">
+    <div class="grid-12" data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType">
         <div class="grid-12">
             <p class="plain">Which rail stations will you use?</p>
         </div>
 
         <div class="grid-5">
-            <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType"
-                data-ng-init="ticketing.setStations();">
+            <div data-ng-init="ticketing.setStations();">
                 <label class="plain-small" for="travellingFrom">From</label>
                 <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100"
                     selected-object="stationFrom" local-data="ticketing.stationList" search-fields="name" title-field="name"
@@ -127,11 +126,11 @@
                 </div>
 
                 <!--<div class="result">
-                                        <div data-ng-show="stationFrom">
-                                            You selected <strong>{{ticketing.stationFrom.originalObject.Name}}</strong> station which is
-                                            <strong>{{ ticketing.stationFrom.originalObject.OutOfCounty
-                                                ? station.Name + ' Out of County': station.Name + ' Zone ' +
-                                                ticketing.stationFrom.originalObject.Zone }}</strong>
+                                        <div data-ng-show="ticketing.stationList">
+                                            You selected <strong>{{ticketing.stationFrom.originalObject.name}}</strong> station which is
+                                            <strong>{{ ticketing.stationFrom.originalObject.outOfCounty
+                                                ? station.Name + ' Out of County': station.name + ' Zone ' +
+                                                ticketing.stationFrom.originalObject.zone }}</strong>
                                         </div>
                                     </div>-->
             </div>
