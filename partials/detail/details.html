@@ -19,10 +19,10 @@
     </div>
 
     <!-- Features: -->
-    <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.features">
+    <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.features.length != '0'">
         <ul class="bare-list bare-list--horizontal">
             <li ng-repeat="features in ticket.all.features">
-                <span class="iconcustom icon--tick"></span> {{features.Name}}
+                <span class="iconcustom icon--tick"></span> {{features.name}}
                 <span data-ng-if="features.description != ''" tooltip class="help-link"></span>
             </li>
         </ul>
