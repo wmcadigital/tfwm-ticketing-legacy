@@ -104,7 +104,7 @@
 
     <!-- Train Zones-->
     <div class="filter-block" data-ng-if="ticketing.postedJSON.allowTrain || ticketing.postedJSON.brand == 'ntrain' || ticketing.postedJSON.brand == 'nnetwork'">
-        <div class="filter-title" data-ng-click="ticketing.toggleFilter('RailZoneBtn')">
+        <div class="filter-title" data-ng-click="ticketing.toggleFilter('railZoneBtn')">
             Train/rail zones
             <i class="material-icons">
                 {{ticketing.filterButtons.railZoneBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
@@ -112,11 +112,6 @@
         </div>
         <div class="nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.railZoneBtn">
             <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postedJSON.brand == 'ntrain' || ticketing.postedJSON.brand == 'nnetwork'">
-                    <a data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType" href="../../assets/NWMzonalcurves.png"
-                        data-lightbox="train" target="_blank" class="view-route">
-                        <span class="icon icon--xl icon--map"></span>
-                        <span class="view-route__text">View Map</span>
-                    </a>
                 <label class="plain" for="PassengerType">From:</label>
                 <span class="stylized-select">
                     <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneFrom'

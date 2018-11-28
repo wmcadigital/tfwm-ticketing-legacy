@@ -147,14 +147,14 @@
                             vm.filterButtons.busTravelArea.push(item.BusTravelArea);
                         }
 
-                        // Check bus area
-                        if (vm.filterButtons.railZoneFrom.indexOf(item.RailZoneFrom) == -1) {
-                            vm.filterButtons.railZoneFrom.push(item.RailZoneFrom);
+                        // Check rail zone from
+                        if (vm.filterButtons.railZoneFrom.indexOf(item.railZoneFrom) == -1) {
+                            vm.filterButtons.railZoneFrom.push(item.railZoneFrom);
                         }
 
-                        // Check bus area
-                        if (vm.filterButtons.railZoneTo.indexOf(item.RailZoneTo) == -1) {
-                            vm.filterButtons.railZoneTo.push(item.RailZoneTo);
+                        // Check rail zone to
+                        if (vm.filterButtons.railZoneTo.indexOf(item.railZoneTo) == -1) {
+                            vm.filterButtons.railZoneTo.push(item.railZoneTo);
                         }
                     });
 
