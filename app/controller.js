@@ -30,6 +30,7 @@
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
         vm.getoocStations = getoocStations; //Function to retreive out of county stations
+        vm.geticStations = geticStations; //Function to retreive in county stations
         vm.clearFromStation = clearFromStation; //Function to clear from station
         vm.clearToStation = clearToStation; //Function to clear to station
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
@@ -52,6 +53,7 @@
             vm.filteredTickets = []; //Define filtered results as blank array
             vm.stationList = []; //Define Station list
             vm.stationoocList = []; //Define out of county Station list
+            vm.stationicList = []; //Define in county Station list
             vm.swiftPaygTickets = []; //Define Swift PAYG tickets
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
@@ -182,7 +184,20 @@
                 function (response) {
                     var OutOfCounty = $filter('filter')(response, { OutOfCounty: "true" });
                     vm.stationoocList = OutOfCounty;
+                    console.log('Out of County')
                     console.log(OutOfCounty);
+                }
+            )
+        }
+
+        // Get In County Rail stations for autocomplete
+        function geticStations() {
+            ticketingService.getStations().then(
+                function (response) {
+                    var inCounty = $filter('filter')(response, { OutOfCounty: "false" });
+                    vm.stationicList = inCounty;
+                    console.log('In County')
+                    console.log(inCounty);
                 }
             )
         }
@@ -209,15 +224,21 @@
             console.log(selected);
                 console.log("From station" + selected.originalObject.name);
                 vm.postJSON.stationNames[0] = selected.originalObject.name;
+                $scope.stationFromTitle = selected.originalObject.name;
+                $scope.stationFromNameZone = selected.originalObject.zone;
+                $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
           } else {
-            $scope.stationFromName = null;
+                $scope.stationFromName = null;
                 vm.postJSON.stationNames[0] = [[]];
+                $scope.stationFromTitle = null;
           }
         }
 
          // Reset from station
          function clearFromStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
+            $scope.stationFromName = null;
+            vm.postJSON.stationNames = [[]];
         }
 
         // Set To Rail Station
@@ -226,15 +247,21 @@
                 $scope.stationToName = selected.originalObject.name; //Set To Station
                 console.log(selected);
                 vm.postJSON.stationNames[1] = selected.originalObject.name;
+                $scope.stationToTitle = selected.originalObject.name;
+                $scope.stationToNameZone = selected.originalObject.zone;
+                $scope.stationToNameOoc = selected.originalObject.outOfCounty;
             } else {
                 $scope.stationToName = null;
-                    vm.postJSON.stationNames[1] = [[]];
+                vm.postJSON.stationNames[1] = [[]];
+                $scope.stationToTitle = null;
               }
         };
 
         // Reset to station
         function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
+            $scope.stationToName = null;
+            vm.postJSON.stationNames = [[]];
         }
 
         function updateGrid() {

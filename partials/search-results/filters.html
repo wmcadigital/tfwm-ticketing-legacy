@@ -3,7 +3,7 @@
     <hr>
     
     <!-- Exclude Mode(s) -->
-    <div class="filter-block" data-ng-if="!ticketing.postedJSON.allowBus || !ticketing.postedJSON.allowTrain || !ticketing.postedJSON.allowMetro">
+    <div class="filter-block" data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'" data-ng-if="!ticketing.postedJSON.allowBus || !ticketing.postedJSON.allowTrain || !ticketing.postedJSON.allowMetro">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('mode')">
             Exclude mode(s)
             <i class="material-icons">

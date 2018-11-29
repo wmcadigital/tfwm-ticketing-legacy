@@ -487,3 +487,7 @@ form .padding-right {
 form .padding-left {
   padding-left: 15px;
 }
+
+.result {
+  margin: 0 0 10px 0;
+}
