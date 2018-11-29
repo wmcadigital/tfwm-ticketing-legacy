@@ -53,7 +53,7 @@
             vm.swiftPaygTickets = []; //Define Swift PAYG tickets
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
-            vm.orderBy = "TicketCurrentAmount";
+            vm.orderBy = "ticketCurrentAmount";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
             vm.postJSON = {
                 "allowBus": $location.search().allowBus || null,
@@ -138,13 +138,13 @@
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
                         // Check the operator and push it to filters
-                        if (vm.filterButtons.operator.indexOf(item.Operator) == -1) {
-                            vm.filterButtons.operator.push(item.Operator);
+                        if (vm.filterButtons.operator.indexOf(item.operator) == -1) {
+                            vm.filterButtons.operator.push(item.operator);
                         }
 
                         // Check bus area
-                        if (vm.filterButtons.busTravelArea.indexOf(item.BusTravelArea) == -1) {
-                            vm.filterButtons.busTravelArea.push(item.BusTravelArea);
+                        if (vm.filterButtons.busTravelArea.indexOf(item.busTravelArea) == -1) {
+                            vm.filterButtons.busTravelArea.push(item.busTravelArea);
                         }
 
                         // Check rail zone from
