@@ -183,9 +183,12 @@
             )
         }
 
+        // Reset search
         function clearFilter() {
             $location.url('').replace();
             defaultVars();
+            $scope.stationFromName = null;// Clear Stations
+            $scope.stationToName = null;
         }
 
         function clearModes() {
