@@ -30,6 +30,8 @@
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
         vm.getoocStations = getoocStations; //Function to retreive out of county stations
+        vm.clearFromStation = clearFromStation; //Function to clear from station
+        vm.clearToStation = clearToStation; //Function to clear to station
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -164,6 +166,7 @@
             )
         }
 
+        // Get Rail stations for autocomplete
         function getStations() {
             ticketingService.getStations().then(
                 function (response) {
@@ -173,6 +176,7 @@
             )
         }
 
+        // Get Out Of County Rail stations for autocomplete
         function getoocStations() {
             ticketingService.getStations().then(
                 function (response) {
@@ -191,13 +195,14 @@
             $scope.stationToName = null;
         }
 
+        // If a pass is selected deselect all modes
         function clearModes() {
             vm.postJSON.allowBus = null;
             vm.postJSON.allowTrain = null;
             vm.postJSON.allowMetro = null;
         }
 
-        // Set From & To Rail Stations
+        // Set From Rail Station
         $scope.stationFrom = function(selected) {
           if (selected) {
             $scope.stationFromName = selected.originalObject.name; //Set From station
@@ -210,6 +215,12 @@
           }
         }
 
+         // Reset from station
+         function clearFromStation() {
+            $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
+        }
+
+        // Set To Rail Station
         $scope.stationTo = function (selected) {
             if (selected) {
                 $scope.stationToName = selected.originalObject.name; //Set To Station
@@ -220,6 +231,11 @@
                     vm.postJSON.stationNames[1] = [[]];
               }
         };
+
+        // Reset to station
+        function clearToStation() {
+            $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
+        }
 
         function updateGrid() {
             $timeout(function () {

@@ -125,6 +125,8 @@
                     initial-value="stationFromName">
                 </div>
 
+                <a data-ng-if="stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
+
                 <!--<div class="result">
                                         <div data-ng-show="ticketing.stationList">
                                             You selected <strong>{{ticketing.stationFrom.originalObject.name}}</strong> station which is
@@ -154,6 +156,7 @@
                     field-required-class="required" initial-value="stationToName">
                 </div>
             </div>
+            <a  data-ng-if="stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
         </div>
     </div>
     <!-- Help section if station is not listed in auto complete -->
