@@ -78,7 +78,7 @@
                 <label for="busTravelArea{{$index}}">
                     <span data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} ({{ (ticketing.filteredTickets | filter: {busTravelArea:filter}).length }})</span>
                     <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} ({{ (ticketing.filteredTickets | filter: {busTravelArea:filter}).length }})</span>
-                    <span data-ng-hide="ticketing.postedJSON.brand != 'Diamond Bus' || ticketing.postedJSON.brand != 'Stagecoach'">{{filter}} ({{ (ticketing.filteredTickets | filter: {busTravelArea:filter}).length }})</span>
+                    <span data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'">{{filter}} ({{ (ticketing.filteredTickets | filter: {busTravelArea:filter}).length }})</span>
                 </label>
             </li>
         </ul>
