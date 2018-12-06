@@ -87,9 +87,6 @@
                 // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
-            vm.postJSON2 = {
-                "stationNames": [$location.search().stationNames || [[]]]
-            }
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
@@ -104,9 +101,24 @@
             ($location.search().brand) &&
             $location.search().passengerType &&
             $location.search().timeBand ||
-            $location.search().stationNames
+            $location.search().stationNames ||
+            $location.search().brand
         ) {
             submit(vm.postJSON);
+            var str = $location.search().stationNames;
+           
+            //alert(typeof str);
+            var test2 = JSON.stringify(str);
+            var test5 = test2.split(',');
+console.log('test5' + test5);
+
+
+var splitted = test2.split(","); 
+console.log('test 6' + splitted)
+
+
+
+            console.log('Sations List ' + $location.search().stationNames + test2);
         } else {
             $location.url('').replace();
         }
@@ -127,7 +139,7 @@
                 passengerType: vm.postedJSON.passengerType,
                 timeBand: vm.postedJSON.timeBand,
                 brand: vm.postedJSON.brand,
-                //stationNames: [vm.postedJSON.stationNames],
+                stationNames: [vm.postedJSON.stationNames],
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -208,6 +220,8 @@
             defaultVars();
             $scope.stationFromName = null;// Clear Stations
             $scope.stationToName = null;
+            $scope.stationFromTitle = null;
+            $scope.stationToTitle = null;
         }
 
         // If a pass is selected deselect all modes
@@ -218,6 +232,7 @@
         }
 
         // Set From Rail Station
+        $scope.stationFromTitle = vm.postedJSON.stationNames;
         $scope.stationFrom = function(selected) {
           if (selected) {
             $scope.stationFromName = selected.originalObject.name; //Set From station
