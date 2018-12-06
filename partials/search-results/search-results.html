@@ -55,7 +55,7 @@
 
             <div class="ticketing-results-grid search-container" angular-grid="ticketing.swiftPaygTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
                 ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.SwiftCurrentAmount" data-count="{{ticket.SwiftCurrentAmount}}">
+                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount" data-count="{{ticket.swiftCurrentAmount}}">
                     <item></item>
                 </div>
             </div>
