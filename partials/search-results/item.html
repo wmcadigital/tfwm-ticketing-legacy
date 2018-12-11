@@ -3,9 +3,9 @@
     <div class="itemContent">
     <h4 class="event__title">{{ticket.name}}</h4>
     <h5 class="price">
-        <span data-ng-if="!ticket.swiftCurrentAmount">{{ticket.priceOverride || (ticket.ticketCurrentAmount | currency:"£")}}</span>
-        <span data-ng-if="ticket.swiftCurrentAmount"><strong>Swift PAYG Price:</strong> {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
-        <span data-ng-if="ticket.swiftCurrentAmount"><br><strong>Cash Price:</strong> {{(ticket.ticketCurrentAmount | currency:"£")}}</span>
+        <span data-ng-if="!ticket.swiftCurrentAmount">{{(ticket.ticketCurrentAmount | currency:"£") || ticket.priceOverride}}</span>
+        <span data-ng-if="ticket.swiftCurrentAmount">{{(ticket.swiftCurrentAmount | currency:"£")}}: Swift PAYG price</span>
+        <span data-ng-if="ticket.swiftCurrentAmount"><br>{{(ticket.ticketCurrentAmount | currency:"£")}}: Standard price</span>
         <span data-ng-if="ticket.validityId == 450930002"> per month</span>
         <span data-ng-if="ticket.validityId == 450930006"> per month</span>
         <span data-ng-if="ticket.validityId == 450930010"> per month</span>
@@ -44,6 +44,6 @@
     ticket.buyOnSwift ? "Buy on Swift" :
     ticket.hasOnlinePurchaseChannel ? "Quick buy" : "Buy at travel centre"}}</a>
 <a data-ng-if="ticket.swiftCurrentAmount" class="float--right" data-ng-href="/#/ticket/810" target="_blank">
-    Buy Swift PAYG</a>
+    Buy Swift PAYG credit</a>
 </div>
 </div>

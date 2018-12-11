@@ -491,3 +491,11 @@ form .padding-left {
 .result {
   margin: 0 0 10px 0;
 }
+
+.blue {
+  color: #009fe3;
+}
+
+.swift .btn {
+  margin-top: 10px;
+}

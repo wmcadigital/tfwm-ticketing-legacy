@@ -178,6 +178,7 @@
         function getStations() {
             ticketingService.getStations().then(
                 function (response) {
+                    console.log(response);
                     vm.stationList = response;
                 }
             )

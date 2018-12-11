@@ -32,9 +32,9 @@
                 <li data-ng-if="ticket.all.purchaseOnMetro">On Metro</li>
             </ul>
 
-            <div data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
-                Buy this ticket using your
-                <a href="/#/ticket/810">Swift Pay as You Go card</a>
+            <!-- Swift PAYG credit tickets -->
+            <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
+                when you buy this ticket with Swift PAYG credit 
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
                     <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
                     <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
@@ -46,7 +46,7 @@
                 </span>
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Bus or Metro.</span>
-                <a href="/#/ticket/810"><img class="BuyOnSwift" src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
+                    <a href="/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
             </div>
 
             <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
@@ -68,7 +68,7 @@
                     <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
                     <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
                 </p>
-                <p><span data-ng-if="ticket.all.swiftCurrentAmount">when you</span> buy from</p>
+                <p><span data-ng-if="ticket.all.swiftCurrentAmount">when you</span> buy this ticket from</p>
                 <ul>
                     <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                             target="_blank">Travel Information Centre</a></li>
