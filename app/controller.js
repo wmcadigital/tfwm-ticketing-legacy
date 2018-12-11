@@ -66,7 +66,7 @@
                 "passengerType": $location.search().passengerType || '',
                 "timeBand": $location.search().timeBand || '',
                 "brand": $location.search().brand || null,
-                "stationNames": [$location.search().stationNames || [[]]]
+                "stationNames": $location.search().stationNames || [[]]
                 
                 // "swiftSearch": true,
                 // "firstClass": true,
@@ -105,20 +105,6 @@
             $location.search().brand
         ) {
             submit(vm.postJSON);
-            var str = $location.search().stationNames;
-           
-            //alert(typeof str);
-            var test2 = JSON.stringify(str);
-            var test5 = test2.split(',');
-console.log('test5' + test5);
-
-
-var splitted = test2.split(","); 
-console.log('test 6' + splitted)
-
-
-
-            console.log('Sations List ' + $location.search().stationNames + test2);
         } else {
             $location.url('').replace();
         }
@@ -132,14 +118,15 @@ console.log('test 6' + splitted)
         function submit(data) {
             vm.loadingStatus = 'loading';
             angular.copy(vm.postJSON, vm.postedJSON); //save initial search variables
+
             $location.search({
                 allowBus: vm.postedJSON.allowBus,
                 allowTrain: vm.postedJSON.allowTrain,
-                allowMetro: vm.postedJSON.allowMetro,
+                allowMetro: vm.postedJSON.allowMetro, 
                 passengerType: vm.postedJSON.passengerType,
                 timeBand: vm.postedJSON.timeBand,
                 brand: vm.postedJSON.brand,
-                stationNames: [vm.postedJSON.stationNames],
+                stationNames: vm.postedJSON.stationNames,
                 limit: vm.limit
             }); //set search url for sharing/tracking
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -174,6 +161,13 @@ console.log('test 6' + splitted)
                         }
                     });
 
+                    //Set initial value of from & to stations if in Url
+                    var stations = $location.search().stationNames;
+                    var stationSel = stations.toString();
+                    var stationSplit = stationSel.split(',');
+                    $scope.stationFromName = stationSplit[0];
+                    $scope.stationToName = stationSplit[1];
+
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
                 }
@@ -185,7 +179,6 @@ console.log('test 6' + splitted)
             ticketingService.getStations().then(
                 function (response) {
                     vm.stationList = response;
-                    console.log(response);
                 }
             )
         }
@@ -196,8 +189,6 @@ console.log('test 6' + splitted)
                 function (response) {
                     var OutOfCounty = $filter('filter')(response, { OutOfCounty: "true" });
                     vm.stationoocList = OutOfCounty;
-                    console.log('Out of County')
-                    console.log(OutOfCounty);
                 }
             )
         }
@@ -208,8 +199,6 @@ console.log('test 6' + splitted)
                 function (response) {
                     var inCounty = $filter('filter')(response, { OutOfCounty: "false" });
                     vm.stationicList = inCounty;
-                    console.log('In County')
-                    console.log(inCounty);
                 }
             )
         }
@@ -232,21 +221,18 @@ console.log('test 6' + splitted)
         }
 
         // Set From Rail Station
-        $scope.stationFromTitle = vm.postedJSON.stationNames;
-        $scope.stationFrom = function(selected) {
-          if (selected) {
-            $scope.stationFromName = selected.originalObject.name; //Set From station
-            console.log(selected);
-                console.log("From station" + selected.originalObject.name);
+        $scope.stationFrom = function (selected) {
+            if (selected) {
+                $scope.stationFromName = selected.originalObject.name; //Set From station
                 vm.postJSON.stationNames[0] = selected.originalObject.name;
                 $scope.stationFromTitle = selected.originalObject.name;
                 $scope.stationFromNameZone = selected.originalObject.zone;
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
-          } else {
+            } else {
                 $scope.stationFromName = null;
                 vm.postJSON.stationNames[0] = [[]];
                 $scope.stationFromTitle = null;
-          }
+            }
         }
 
          // Reset from station
@@ -260,7 +246,6 @@ console.log('test 6' + splitted)
         $scope.stationTo = function (selected) {
             if (selected) {
                 $scope.stationToName = selected.originalObject.name; //Set To Station
-                console.log(selected);
                 vm.postJSON.stationNames[1] = selected.originalObject.name;
                 $scope.stationToTitle = selected.originalObject.name;
                 $scope.stationToNameZone = selected.originalObject.zone;
@@ -309,7 +294,9 @@ console.log('test 6' + splitted)
             // Sort results by selected option
             vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
 
+            console.log("Fitered Tickets:");
             console.log(vm.filteredTickets);
+            console.log("Search Filters:");
             console.log(vm.searchFilters);
 
             vm.updateGrid();
@@ -378,8 +365,8 @@ console.log('test 6' + splitted)
 
             //for every filter selected
             angular.forEach(filters, function (val, key) {
-                console.log(key, val);
-                console.log(item[key]);
+                //console.log(key, val);
+                //console.log(item[key]);
                 if (val) {
 
                     // if(angular.equals(item[key], val)){
@@ -466,6 +453,7 @@ console.log('test 6' + splitted)
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
         vm.operatorList = []; //Define Operator list
+        vm.checkStations = checkStations;
         vm.limit = 4; //Set paging limit for Alt tickets
 
 
@@ -513,6 +501,10 @@ console.log('test 6' + splitted)
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
             console.log(vm.backToSearch);
+        }
+
+        function checkStations() {
+            console.log("hello" + sessionStorage.getItem(savedData));
         }
 
         initialise(vm.ticketID); //initialise API to get ticket
@@ -675,7 +667,7 @@ console.log('test 6' + splitted)
                 });
             },
             template: '<div ng-transclude></div>' +
-                '<p class="field-help tooltip" ng-class="field-help tooltip" ng-show="isShown">' +
+                '<p class="field-help tooltip" ng-show="isShown">' +
                 '<span data-ng-bind-html="features.description">{{features.description}}</span>' +
                 '</p>'
         }
