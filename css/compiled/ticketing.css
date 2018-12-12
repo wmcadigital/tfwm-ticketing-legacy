@@ -312,7 +312,7 @@ BREAKPOINTS
   max-width: 100%;
   height: 600px;
   max-height: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 10000;
   left: 50%;
   top: 50%;

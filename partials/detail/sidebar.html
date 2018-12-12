@@ -115,13 +115,13 @@
                         <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
                             <div class="header">
                                 <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
-                                <p>See bus operators that accept <strong>{{ticket.all.Name}}</strong></p>
+                                <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
                             </div>
                             <div class="operators">
                                 <div data-ng-if="ticket.all.brand == 'nbus'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, Type:'Bus Operator'} | orderBy:'name'">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
                                                 <td>{{ticket.name}}</td>
                                                 <td>
                                                     <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
@@ -136,7 +136,7 @@
                                 <div data-ng-if="ticket.all.brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, Type:'Bus Operator'} | orderBy:'name'">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
                                                 <td>{{ticket.name}}</td>
                                                 <td>
                                                     <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
@@ -151,7 +151,7 @@
                                 <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, Type:'Bus Operator'} | orderBy:'name'">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
                                                 <td>{{ticket.name}}</td>
                                                 <td>
                                                     <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
@@ -202,7 +202,7 @@
                                 <div data-ng-if="ticket.all.brand == 'nnetwork'">
                                     <table class="disruption-detail__table">
                                         <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, Type:'Rail Operator'} | orderBy:'name'">
+                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
                                                 <td>{{ticket.name}}</td>
                                                 <td>
                                                     <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
