@@ -129,6 +129,7 @@
                 stationNames: vm.postedJSON.stationNames,
                 limit: vm.limit
             }); //set search url for sharing/tracking
+
             vm.searchFilters = {};//set scope for search filters and reset on every search
             console.log('this is posted');
             console.log(vm.postedJSON);
@@ -229,6 +230,13 @@
                 $scope.stationFromTitle = selected.originalObject.name;
                 $scope.stationFromNameZone = selected.originalObject.zone;
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
+                $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
+                //if station is out of county but is within zone 5 (chase line)
+                if ($scope.stationFromNameOocZ5) {
+                    vm.postJSON.brand = 'ntrain';
+                    vm.postJSON.allowBus = null;
+                    vm.postJSON.allowMetro = null;
+                }
             } else {
                 $scope.stationFromName = null;
                 vm.postJSON.stationNames[0] = [[]];
@@ -251,6 +259,13 @@
                 $scope.stationToTitle = selected.originalObject.name;
                 $scope.stationToNameZone = selected.originalObject.zone;
                 $scope.stationToNameOoc = selected.originalObject.outOfCounty;
+                $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
+                //if station is out of county but is within zone 5 (chase line)
+                if ($scope.stationToNameOocZ5) {
+                    vm.postJSON.brand = 'ntrain';
+                    vm.postJSON.allowBus = null;
+                    vm.postJSON.allowMetro = null;
+                }
             } else {
                 $scope.stationToName = null;
                 vm.postJSON.stationNames[1] = [[]];

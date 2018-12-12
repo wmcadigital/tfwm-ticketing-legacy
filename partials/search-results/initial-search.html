@@ -129,7 +129,9 @@
                     <div>
                         You selected <strong>{{stationFromTitle}}</strong> station which is
                         <strong>{{ stationFromNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
-                            stationFromNameZone }}</strong>
+                            stationFromNameZone }}</strong>.
+                            <span data-ng-if="stationFromNameOocZ5"><br><br>This station covers the nTrain Zone but not nNetwork.<br><br>
+                                Pass has been changed to nTrain.</span>
                     </div>
                 </div>
             </div>
@@ -168,7 +170,9 @@
                     <div>
                         You selected <strong>{{stationToTitle}}</strong> station which is
                         <strong>{{ stationToNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
-                            stationToNameZone }}</strong>
+                            stationToNameZone }}</strong>.
+                            <span data-ng-if="stationToNameOocZ5"><br><br>This station covers the nTrain Zone but not nNetwork.<br><br>
+                            Pass has been changed to nTrain.</span>
                     </div>
                 </div>
 
