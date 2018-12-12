@@ -675,7 +675,8 @@
                 }
             },
             transclude: true,
-            link: function (scope, element, attr, ctrl) {
+            link: function (scope, element, attrs, ctrl) {
+                scope.copy = attrs.tooltipc;
                 element.bind('click', function () {
                     scope.$apply(function () {
                         ctrl.showHover();
@@ -684,7 +685,7 @@
             },
             template: '<div ng-transclude></div>' +
                 '<p class="field-help tooltip" ng-show="isShown">' +
-                '<span data-ng-bind-html="features.description">{{features.description}}</span>' +
+                '<span data-ng-bind-html="copy"></span>' +
                 '</p>'
         }
     }

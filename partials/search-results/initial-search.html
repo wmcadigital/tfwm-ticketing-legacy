@@ -91,6 +91,26 @@
     <!-- Traveller -->
     <div class="rowcontainer">
         <div class="grid-5" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand">
+            <span tooltip tooltipc="Young Person up to 18: - 5-15 years and
+            holders of our 16-18 photocard. <br><br>
+
+            Student 18+: - full-time students
+            aged 18+ and 16-18 years who are
+            not entitled to our 16-18 photocard.<br><br>
+
+            Group/Family: these
+            vary; check full
+            ticket descriptions.<br><br>
+
+            Older Persons Passholder: - those
+            with the English National
+            Concessionary Travel Pass for
+            age or disability.<br><br>
+
+            If you don't match any criteria -
+            search for adult tickets." 
+            class="help-link float--right"></span>
+    
             <label class="plain" for="PassengerType">Traveller</label>
             <span class="stylized-select">
                 <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model="ticketing.postJSON.passengerType">

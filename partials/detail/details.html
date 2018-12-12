@@ -23,7 +23,7 @@
         <ul class="bare-list bare-list--horizontal">
             <li ng-repeat="features in ticket.all.features">
                 <span class="iconcustom icon--tick"></span> {{features.name}}
-                <span data-ng-if="features.description != ''" tooltip class="help-link"></span>
+                <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="help-link"></span>
             </li>
         </ul>
     </div>
