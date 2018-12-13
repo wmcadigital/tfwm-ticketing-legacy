@@ -85,7 +85,7 @@
     </div>
 
     <!-- Bus Operator -->
-    <div class="filter-block" data-ng-if="ticketing.postedJSON.allowBus && ticketing.filterButtons.operator.length && ticketing.filterButtons.operator.length > '1'">
+    <div class="filter-block" data-ng-hide="ticketing.postedJSON.allowBus && ticketing.postedJSON.allowMetro && ticketing.postedJSON.allowTrain || ticketing.postedJSON.brand == 'nnetwork'" data-ng-if="ticketing.postedJSON.allowBus && ticketing.filterButtons.operator.length && ticketing.filterButtons.operator.length > '1'">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('operatorBtn')">
             Bus Operator
             <i class="material-icons">
