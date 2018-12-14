@@ -45,6 +45,7 @@
             "railZoneTo": []
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
+        vm.toggleFilterClose = toggleFilterClose;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
         vm.ntrainOOC = ntrainOOC; //Function for setting out of county tickets
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
@@ -168,6 +169,20 @@
                     var stationSplit = stationSel.split(',');
                     $scope.stationFromName = stationSplit[0];
                     $scope.stationToName = stationSplit[1];
+
+                    var bus = vm.postedJSON.allowBus;
+                    var train = vm.postedJSON.allowTrain;
+                    var metro = vm.postedJSON.allowMetro;
+
+                    //if 1 or 2 modes selected open up the exclude mode filter
+                    if (bus != null || bus != null && train != null || bus != null && metro != null || train != null && metro != null) {
+                        vm.toggleFilter('mode');
+                    }
+
+                    //if all modes selected open up how to buy filter
+                    if (bus != null && train != null && metro != null) {
+                        vm.toggleFilter('payment');
+                    }
 
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
@@ -326,6 +341,11 @@
 
         function toggleFilter(type) {
             vm.filterButtons[type] = !vm.filterButtons[type];
+        }
+
+        function toggleFilterClose() {
+            $('.filter-title')
+            .collapse('hide');
         }
 
         function swiftPAYG() {
