@@ -13,7 +13,9 @@
         <span data-ng-if="ticket.validityId == 450930001"> a week</span>
         <span data-ng-if="ticket.validityId == 450930003"> for 1 year</span>
     </h5>
-    
+
+    <p data-ng-if="ticket.ticketFutureAmount">The price of this ticket increases to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span> on {{ticket.ticketFutureDate | date : format : shortDate}}</p>
+
     <p>
         <!-- Valid on: -->
         <span class="icon icon--bus" data-ng-if="ticket.allowBus" title="{{ticket.operator}}"></span>

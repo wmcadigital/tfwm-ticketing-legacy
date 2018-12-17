@@ -385,6 +385,9 @@
         function save(data) {
             savedFilter.set("stateless", data);
         }
+
+        //set current date to test for ticketFutureDate
+        $scope.date = new Date();
     }
 
     // FILTERS
