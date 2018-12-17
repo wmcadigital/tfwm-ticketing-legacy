@@ -94,6 +94,7 @@ BREAKPOINTS
   margin-top: 10px;
   font-size: 18px;
   color: #009fe3;
+  line-height: 30px;
 }
 .ticketing-page .ticket-item .event__date {
   margin-bottom: 40px;
