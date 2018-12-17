@@ -1,20 +1,18 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
         <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
-    <div class="filtered-header__control" ng-hide="ticketing.filteredTickets.length == '0'">
-        <label>Sort by</label>
-
+    <div class="arrdep-filters cfx" ng-hide="ticketing.filteredTickets.length == '0'">
         <div class="field -inline">
             <div class="radio-bar">
                 <span>
-                    <input id="radio-1x" name="ordering" title="Price (Low - High)" type="radio" value="ticketCurrentAmount" data-ng-model="ticketing.orderBy"
-                        data-ng-change="ticketing.update();">
-                    <label for="radio-1x" style="height: 44px;">Price (Low - High)</label>
+                    <input id="radio-1x" name="ordering" title="Price (Low - High)" type="radio" value="ticketCurrentAmount"
+                        data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <label for="radio-1x">Price (Low - High)</label>
                 </span>
                 <span>
-                    <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-ticketCurrentAmount" data-ng-model="ticketing.orderBy"
-                        data-ng-change="ticketing.update();">
-                    <label for="radio-3x" style="height: 44px;">Price (High - Low)</label>
+                    <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-ticketCurrentAmount"
+                        data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <label for="radio-3x">Price (High - Low)</label>
                 </span>
             </div>
         </div>
