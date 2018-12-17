@@ -208,6 +208,9 @@ label.plain-small{
 
 .tooltip{
     a{color: white;text-decoration: underline;}
+    @include breakpoint(mobileonly) {
+        right: 5px;
+    }
 }
 
   .help-link:after{
@@ -263,6 +266,9 @@ $grid-columns: 12;
   .grid-#{$i} {
     width: percentage($i / $grid-columns);
     display: block;
+    @include breakpoint(mobileonly) {
+        width:100%;
+    }
   }
 }
 
@@ -275,6 +281,10 @@ $grid-columns: 12;
 
 .or {padding: 60px 0 20px 0;
     text-align: center;
+    @include breakpoint(mobileonly) {
+        text-align: left;
+        padding: 0px;
+    }
 }
 
 .rowcontainer{

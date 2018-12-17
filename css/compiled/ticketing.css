@@ -354,6 +354,11 @@ BREAKPOINTS
   color: white;
   text-decoration: underline;
 }
+@media (max-width: 32.125em) {
+  .ticketing-page .tooltip {
+    right: 5px;
+  }
+}
 .ticketing-page .help-link:after {
   vertical-align: middle;
 }
@@ -387,60 +392,120 @@ BREAKPOINTS
   width: 8.3333333333%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-1 {
+    width: 100%;
+  }
+}
 
 .grid-2 {
   width: 16.6666666667%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-2 {
+    width: 100%;
+  }
 }
 
 .grid-3 {
   width: 25%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-3 {
+    width: 100%;
+  }
+}
 
 .grid-4 {
   width: 33.3333333333%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-4 {
+    width: 100%;
+  }
 }
 
 .grid-5 {
   width: 41.6666666667%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-5 {
+    width: 100%;
+  }
+}
 
 .grid-6 {
   width: 50%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-6 {
+    width: 100%;
+  }
 }
 
 .grid-7 {
   width: 58.3333333333%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-7 {
+    width: 100%;
+  }
+}
 
 .grid-8 {
   width: 66.6666666667%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-8 {
+    width: 100%;
+  }
 }
 
 .grid-9 {
   width: 75%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-9 {
+    width: 100%;
+  }
+}
 
 .grid-10 {
   width: 83.3333333333%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-10 {
+    width: 100%;
+  }
 }
 
 .grid-11 {
   width: 91.6666666667%;
   display: block;
 }
+@media (max-width: 32.125em) {
+  .grid-11 {
+    width: 100%;
+  }
+}
 
 .grid-12 {
   width: 100%;
   display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-12 {
+    width: 100%;
+  }
 }
 
 [class^=grid-] {
@@ -452,6 +517,12 @@ BREAKPOINTS
 .or {
   padding: 60px 0 20px 0;
   text-align: center;
+}
+@media (max-width: 32.125em) {
+  .or {
+    text-align: left;
+    padding: 0px;
+  }
 }
 
 .rowcontainer {
