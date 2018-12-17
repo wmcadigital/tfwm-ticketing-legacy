@@ -19,6 +19,8 @@
             </p>
             <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
 
+            <p data-ng-if="ticket.all.ticketFutureAmount">The price of this ticket increases to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
+
             <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">
                 <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                         target="_blank">Travel Information Centre</a></li>
