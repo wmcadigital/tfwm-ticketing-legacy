@@ -180,6 +180,9 @@ BREAKPOINTS
 .ticketing-page .acc {
   margin-top: 20px;
 }
+.ticketing-page .modalSwift {
+  padding: 30px;
+}
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
 }

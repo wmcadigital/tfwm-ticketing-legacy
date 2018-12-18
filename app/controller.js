@@ -477,7 +477,7 @@
     }
 
     // TICKET DETAIL CONTROLLER
-    function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams) {
+    function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope) {
         var vm = this;
         vm.loadingText = 'Loading...'; //default loading text
         vm.loadingStatus = 'Loading'; //default loading status
@@ -491,6 +491,7 @@
         vm.toggleClick = toggleClick;
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
+        vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
         vm.checkStations = checkStations;
         vm.limit = 4; //Set paging limit for Alt tickets
@@ -551,9 +552,17 @@
         function toggleClick(type) {
             vm.filterAccordions[type] = !vm.filterAccordions[type];
         }
-
+        
+        //hide modal on page load - where can i use modals
+        vm.modalShown = false;
         function toggleModal() {
             vm.modalShown = !vm.modalShown;
+        }
+
+        //hide modal on page load - swift payg modal
+        vm.modalShownSwift = false;
+        function toggleModalSwift() {
+            vm.modalShownSwift = !vm.modalShownSwift;
         }
 
         function toggleHelp() {
@@ -628,12 +637,13 @@
                 };
             },
             template: '<div ng-show="show">' +
-            '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
-            '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
-            '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
-            '<div class="ng-modal-dialog-content" ng-transclude></div>' +
-            '</div>' +
-            '</div>'        };
+                '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
+                '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
+                '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
+                '<div class="ng-modal-dialog-content" ng-transclude></div>' +
+                '</div>' +
+                '</div>'
+        };
     }
 
     function tabs() {
@@ -712,5 +722,4 @@
                 '</p>'
         }
     }
-
 })();
