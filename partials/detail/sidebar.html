@@ -62,21 +62,6 @@
 
                 <button data-ng-if="ticket.all.id == '810'" class="btn btn--arrow" data-ng-click='ticket.toggleModalSwift()'>Buy on Swift</button>
 
-                <modal-dialog show='ticket.modalShownSwift' class="bdr-top--cyan">
-                    <div class="modalSwift">
-                        <h2> Swift Pay As You go Card</h2>
-                        <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
-                            alt="Swift Card" />
-                        <p>Please note that it take around 5 working days for your new Swift Card to be delivered.</p>
-                        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
-                            target="_blank">
-                            {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" :
-                            ticket.all.hasOnlinePurchaseChannel
-                            ? "Quick buy" : "Buy at travel centre"}}</a>
-                    </div>
-                </modal-dialog>
-
-
             <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount">
                 <hr>
                 <p class="price">{{ticket.all.ticketCurrentAmount | currency:"£"}}
@@ -100,10 +85,8 @@
                         </span> Bus</li>
                     <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a></li>
                 </ul>
-
             </div>
         </div>
-
     </div>
 </div>
 
@@ -129,61 +112,9 @@
                             </a>
                         </div>
                         <p class="summary">Bus operators who accept this ticket</p>
-                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
 
-                        <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
-                            <div class="header">
-                                <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
-                                <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
-                            </div>
-                            <div class="operators">
-                                <div data-ng-if="ticket.all.brand == 'nbus'">
-                                    <table class="disruption-detail__table">
-                                        <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
-                                                <td>{{ticket.name}}</td>
-                                                <td>
-                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                            target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                            target="_blank">Operator Information</a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div data-ng-if="ticket.all.brand == 'nnetwork'">
-                                    <table class="disruption-detail__table">
-                                        <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
-                                                <td>{{ticket.name}}</td>
-                                                <td>
-                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                            target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                            target="_blank">Operator Information</a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
-                                    <table class="disruption-detail__table">
-                                        <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
-                                                <td>{{ticket.name}}</td>
-                                                <td>
-                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                            target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                            target="_blank">Operator Information</a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </modal-dialog>
+                       
                     </pane>
                     <pane data-ng-if="ticket.all.allowTrain" title="Train">
                         <div class="imgwrapper">
@@ -195,46 +126,9 @@
                             </a>
                         </div>
                         <p class="summary">Train operators who accept this ticket</p>
-                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
+                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
 
-                        <modal-dialog show='ticket.modalShown' class="bdr-top--green">
-                            <div class="header">
-                                <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                                <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
-                            </div>
-                            <div class="operators">
-                                <div data-ng-if="ticket.all.brand == 'ntrain'">
-                                    <table class="disruption-detail__table">
-                                        <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true} | orderBy:'name'">
-                                                <td>{{ticket.name}}</td>
-                                                <td>
-                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                            target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                            target="_blank">Operator Information</a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div data-ng-if="ticket.all.brand == 'nnetwork'">
-                                    <table class="disruption-detail__table">
-                                        <tbody>
-                                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
-                                                <td>{{ticket.name}}</td>
-                                                <td>
-                                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                            target="_blank">Operator Website</a></span>
-                                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                            target="_blank">Operator Information</a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </modal-dialog>
+                       
                     </pane>
                     <pane data-ng-if="ticket.all.allowMetro" title="Tram">
                         <div>
@@ -302,32 +196,8 @@
 
                 <div data-ng-if="!ticket.all.isSingleOperatorTicket">
                     <p class="summary">Bus operators who accept this ticket</p>
-                    <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See bus operators</button>
+                    <button class="btn btn--arrow" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
                 </div>
-
-                <modal-dialog show='ticket.modalShown' class="bdr-top--orange">
-                    <div class="header">
-                        <h2><span class="icon icon--bus ng-scope" title="Use on Bus"></span> Bus operators</h2>
-                        <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
-                    </div>
-                    <div class="operators">
-                        <div data-ng-if="ticket.all.brand == 'nbus'">
-                            <table class="disruption-detail__table">
-                                <tbody>
-                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, Type:'Bus Operator'} | orderBy:'name'">
-                                        <td>{{ticket.name}}</td>
-                                        <td>
-                                            <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                    target="_blank">Operator Website</a></span>
-                                            <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                    target="_blank">Operator Information</a></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </modal-dialog>
             </div>
             <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
@@ -339,31 +209,7 @@
                     </a>
                 </div>
                 <p class="summary">Train operators who accept this ticket</p>
-                <button class="btn btn--arrow" data-ng-click='ticket.toggleModal()'>See train operators</button>
-
-                <modal-dialog show='ticket.modalShown' class="bdr-top--green">
-                    <div class="header">
-                        <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-                        <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
-                    </div>
-                    <div class="operators">
-                        <div data-ng-if="ticket.all.brand == 'ntrain'">
-                            <table class="disruption-detail__table">
-                                <tbody>
-                                    <tr data-ng-repeat="ticket in ticket.operatorList | filter:{AcceptnTrain:true, Type:'Rail Operator'} | orderBy:'Name'">
-                                        <td>{{ticket.name}}</td>
-                                        <td>
-                                            <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                                    target="_blank">Operator Website</a></span>
-                                            <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
-                                                    target="_blank">Operator Information</a></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </modal-dialog>
+                <button class="btn btn--arrow" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
             </div>
             <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
                 <div class="imgwrapper">
@@ -381,3 +227,112 @@
         </p>
     </div>
 </div>
+
+<!-- pop-up modals -->
+<modal-dialog show='ticket.modalShownSwift' class="bdr-top--cyan">
+        <div class="modalSwift">
+            <h2> Swift Pay As You go Card</h2>
+            <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
+                alt="Swift Card" />
+            <p>Please note that it take around 5 working days for your new Swift Card to be delivered.</p>
+            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
+                target="_blank">
+                {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" :
+                ticket.all.hasOnlinePurchaseChannel
+                ? "Quick buy" : "Buy at travel centre"}}</a>
+        </div>
+    </modal-dialog>
+
+
+    <modal-dialog show='ticket.modalShownBus' class="bdr-top--orange">
+            <div class="header">
+                <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
+                <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
+            </div>
+            <div class="operators">
+                <div data-ng-if="ticket.all.brand == 'nbus'">
+                    <table class="disruption-detail__table">
+                        <tbody>
+                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
+                                <td>{{ticket.name}}</td>
+                                <td>
+                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                            target="_blank">Operator Website</a></span>
+                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                            target="_blank">Operator Information</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div data-ng-if="ticket.all.brand == 'nnetwork'">
+                    <table class="disruption-detail__table">
+                        <tbody>
+                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
+                                <td>{{ticket.name}}</td>
+                                <td>
+                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                            target="_blank">Operator Website</a></span>
+                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                            target="_blank">Operator Information</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
+                    <table class="disruption-detail__table">
+                        <tbody>
+                            <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
+                                <td>{{ticket.name}}</td>
+                                <td>
+                                    <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                            target="_blank">Operator Website</a></span>
+                                    <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                            target="_blank">Operator Information</a></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </modal-dialog>
+
+<modal-dialog show='ticket.modalShownTrain' class="bdr-top--green">
+        <div class="header">
+            <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+            <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
+        </div>
+        <div class="operators">
+            <div data-ng-if="ticket.all.brand == 'ntrain'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div data-ng-if="ticket.all.brand == 'nnetwork'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </modal-dialog>

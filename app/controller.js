@@ -491,6 +491,8 @@
         vm.toggleClick = toggleClick;
         vm.modalShown = false;
         vm.toggleModal = toggleModal;
+        vm.toggleModalBus = toggleModalBus;
+        vm.toggleModalTrain = toggleModalTrain;
         vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
         vm.checkStations = checkStations;
@@ -553,13 +555,27 @@
             vm.filterAccordions[type] = !vm.filterAccordions[type];
         }
         
-        //hide modal on page load - where can i use modals
-        vm.modalShown = false;
+        //popup modals
+        
+        //bus
+        vm.modalShownBus = false;
+        function toggleModalBus() {
+            vm.modalShownBus = !vm.modalShownBus;
+        }
+
+        //train
+        vm.modalShownTrain = false;
+        function toggleModalTrain() {
+            vm.modalShownTrain = !vm.modalShownTrain;
+        }
+
+        //general
+        vm.modalShown = false;//hide modal on page load
         function toggleModal() {
             vm.modalShown = !vm.modalShown;
         }
 
-        //hide modal on page load - swift payg modal
+        //swift
         vm.modalShownSwift = false;
         function toggleModalSwift() {
             vm.modalShownSwift = !vm.modalShownSwift;
