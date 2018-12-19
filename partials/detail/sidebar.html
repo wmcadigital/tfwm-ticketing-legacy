@@ -19,7 +19,10 @@
             </p>
             <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
 
-            <p data-ng-if="ticket.all.ticketFutureAmount">The price of this ticket increases to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
+            <!-- Price increase message -->
+            <p data-ng-if="ticket.all.ticketFutureAmount" data-ng-hide="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">The price of this ticket increases to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> <span data-ng-if="ticket.all.swiftFutureAmount">standed ticket and <span class="blue">{{ticket.all.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
+
+            <p data-ng-if="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">Price is frozen from {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
 
             <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">
                 <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
