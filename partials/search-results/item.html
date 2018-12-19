@@ -14,15 +14,10 @@
         <span data-ng-if="ticket.validityId == 450930003"> for 1 year</span>
     </h5>
 
-    <div data-ng-if="ticket.ticketFutureDate > ticket.date">
-        <p>Yes</p>
-    </div>
-
-    <p>Date = {{date | date:'yyyyMMdd'}}</p>
-
-
     <!-- Price increase message -->
-    <p data-ng-if="ticket.ticketFutureAmount">The price of this ticket increases to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span> on {{ticket.ticketFutureDate | date : format : shortDate}}</p>
+    <p data-ng-if="ticket.ticketFutureAmount" data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">The price of this ticket increases to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span> <span data-ng-if="ticket.swiftFutureAmount">standed ticket and <span class="price">{{ticket.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </span> on {{ticket.ticketFutureDate | date : format : shortDate}}</p>
+
+    <p data-ng-if="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">Price is frozen from {{ticket.ticketFutureDate | date : format : shortDate}}</p>
 
     <p>
         <!-- Valid on: -->
