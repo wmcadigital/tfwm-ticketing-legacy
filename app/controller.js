@@ -48,6 +48,7 @@
         vm.toggleFilterClose = toggleFilterClose;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
         vm.ntrainOOC = ntrainOOC; //Function for setting out of county tickets
+        vm.toggleModalSwift = toggleModalSwift;
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
             vm.all = []; //Set results to blank array
@@ -333,6 +334,12 @@
             vm.updateGrid();
         }
 
+        //swift
+        vm.modalShownSwift = false;
+        function toggleModalSwift() {
+            vm.modalShownSwift = !vm.modalShownSwift;
+        }
+
         function loadMore() {
             vm.limit += 6;
             $location.search('limit', vm.limit);
@@ -497,7 +504,6 @@
         vm.operatorList = []; //Define Operator list
         vm.checkStations = checkStations;
         vm.limit = 4; //Set paging limit for Alt tickets
-
 
         // Function to get the ticket data with api call
         function initialise(data) {

@@ -59,3 +59,21 @@
         </div>
     </div>
 </div>
+
+<!-- pop-up modals -->
+<modal-dialog show='ticket.modalShownSwift' class="bdr-top--cyan">
+    <div class="modalSwift">
+        <h2>Swift Card</h2>
+        <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
+            alt="Swift Card" />
+
+        <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
+            bought online.</p>
+
+        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
+            target="_blank">
+            {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" :
+            ticket.all.hasOnlinePurchaseChannel
+            ? "Quick buy" : "Buy at travel centre"}}</a>
+    </div>
+</modal-dialog>

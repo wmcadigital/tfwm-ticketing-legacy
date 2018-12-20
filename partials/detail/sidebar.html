@@ -232,7 +232,7 @@
 </div>
 
 <!-- pop-up modals -->
-<modal-dialog show='ticket.modalShownSwift' class="bdr-top--cyan">
+<modal-dialog ng-cloak show='ticket.modalShownSwift' class="bdr-top--cyan ng-cloak" data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo && ticket.loadingStatus == 'success'">
     <div class="modalSwift">
         <h2>Swift Card</h2>
         <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
@@ -249,7 +249,7 @@
     </div>
 </modal-dialog>
 
-<modal-dialog show='ticket.modalShownBus' class="bdr-top--orange">
+<modal-dialog ng-cloak show='ticket.modalShownBus' class="bdr-top--orange ng-cloak" data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork' && ticket.loadingStatus == 'success'">
     <div class="header">
         <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
         <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -303,7 +303,7 @@
     </div>
 </modal-dialog>
 
-<modal-dialog show='ticket.modalShownTrain' class="bdr-top--green">
+<modal-dialog ng-cloak show='ticket.modalShownTrain' class="bdr-top--green ng-cloak" data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork' && ticket.loadingStatus == 'success'">
     <div class="header">
         <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
         <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
