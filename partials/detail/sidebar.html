@@ -17,7 +17,9 @@
                 <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
                 <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
             </p>
-            <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
+            <p data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="!ticket.all.swiftCurrentAmount || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="online">when you buy online</p>
+
+            <p data-ng-if="ticket.all.purchaseTic || ticket.all.purchaseRailStation" data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810'">buy from</p>
 
             <!-- Price increase message -->
             <p data-ng-if="ticket.all.ticketFutureAmount" data-ng-hide="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">The price of this ticket increases to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> <span data-ng-if="ticket.all.swiftFutureAmount">standed ticket and <span class="blue">{{ticket.all.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
@@ -59,7 +61,7 @@
                 <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" src="/assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
-            <a data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
+            <a data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
                 {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
@@ -232,8 +234,8 @@
 </div>
 
 <!-- pop-up modals -->
-<modal-dialog ng-cloak show='ticket.modalShownSwift' class="bdr-top--cyan ng-cloak" data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo && ticket.loadingStatus == 'success'">
-    <div class="modalSwift">
+<modal-dialog show='ticket.modalShownSwift' modalclass="bdr-top--cyan" data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
+    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
         <h2>Swift Card</h2>
         <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
             alt="Swift Card" />
@@ -249,7 +251,7 @@
     </div>
 </modal-dialog>
 
-<modal-dialog ng-cloak show='ticket.modalShownBus' class="bdr-top--orange ng-cloak" data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork' && ticket.loadingStatus == 'success'">
+<modal-dialog  show='ticket.modalShownBus' modalclass="bdr-top--orange" data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
     <div class="header">
         <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
         <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -303,7 +305,7 @@
     </div>
 </modal-dialog>
 
-<modal-dialog ng-cloak show='ticket.modalShownTrain' class="bdr-top--green ng-cloak" data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork' && ticket.loadingStatus == 'success'">
+<modal-dialog show='ticket.modalShownTrain' modalclass="bdr-top--green" data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
     <div class="header">
         <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
         <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>

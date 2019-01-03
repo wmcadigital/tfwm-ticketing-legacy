@@ -233,6 +233,13 @@ BREAKPOINTS
 .ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
   display: none !important;
 }
+.ticketing-page .block--side p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.ticketing-page .block--side ul {
+  margin-top: 5px;
+}
 @media (max-width: 55em) {
   .ticketing-page .block--fullwidth .block--side {
     position: static;

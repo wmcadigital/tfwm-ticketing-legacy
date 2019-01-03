@@ -109,8 +109,13 @@ label.plain-small{
 
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
+    display:none!important;
   }
+
+  .block--side{
+    p{margin-top: 5px;margin-bottom: 5px;}
+    ul{margin-top: 5px;}
+}
 
 @include breakpoint(tablet) {
     .block--fullwidth .block--side{position: static; top:15px;}
