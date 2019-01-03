@@ -94,7 +94,7 @@
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.operatorBtn">
             <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter" data-ng-if="filter != null">
-                <input id="operator{{$index}}" name="operator{{$index}}" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.operator"
+                <input id="operator{{$index}}" name="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
                     data-ng-change="ticketing.update()" value="{{filter}}" />
                 <label for="operator{{$index}}">{{filter}} ({{ (ticketing.filteredTickets | filter: {operator: filter}).length}})
                 </label>
