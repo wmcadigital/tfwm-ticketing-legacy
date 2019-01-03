@@ -11,7 +11,7 @@
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
         .directive('item', ['$timeout', 'angularGridInstance', item])
-        .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', TicketDetailCtrl])
+        .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', '$scope', '$timeout', TicketDetailCtrl])
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
@@ -289,6 +289,9 @@
               }
         };
 
+        $scope.stationFromName = true;
+    $scope.stationToName = true;
+
         // Reset to station
         function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
@@ -484,10 +487,10 @@
     }
 
     // TICKET DETAIL CONTROLLER
-    function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope) {
+    function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope, $timeout) {
         var vm = this;
         vm.loadingText = 'Loading...'; //default loading text
-        vm.loadingStatus = 'Loading'; //default loading status
+        vm.loadingStatus = 'loading'; //default loading status
         vm.loadingArray = ['Well, what are you waiting for?', 'Are we there yet?', 'Warming up the processors...', 'Reconfiguring the office coffee machine...', 'Doing something useful...', 'Are you ready?', 'So, do you come here often?', 'This may take some time...', 'I know this is painful to watch, but I have to load this.', 'Oh, no! Loading time...', 'Still Waiting... huh', 'Waiting for something in the server.', 'Creating randomly generated feature.', "It's not you. It's me.", 'Eating your internet cookies...Yummy!']; //loading messages
         vm.loading = $interval(function () {
             vm.loadingText = vm.loadingArray[Math.round(Math.random() * (vm.loadingArray.length - 1))];
@@ -517,28 +520,28 @@
                                 function (response) {
                                     vm.relatedTickets[item.id] = response;
                                     //console.log(vm.relatedTickets[item.id]);
-                                    vm.loadingStatus = "Success";
+                                    
                                 }
                             )
                         })
                     } else {
-                        vm.loadingStatus = "Success";
+                        
                     }
                     if (vm.all.documents.length) {
                         ticketingService.getTerms(data).then(
                             function (response) {
                                 vm.relatedTerms = response;
-                                vm.loadingStatus = "Success";
+                                
                             }
                         )
                     } else {
-                        vm.loadingStatus = "Success";
+                       
                     }
                         ticketingService.getOperators().then(
                             function (response) {
                                 vm.operatorList = response;
                                 console.log(response);
-                                vm.loadingStatus = "Success";
+                             
                             }
                         )
                     backButtonLogic(); //Determine back button logic
@@ -590,6 +593,10 @@
         function toggleHelp() {
             vm.helpShown = !vm.helpShown;
         }
+
+        $timeout(function () {
+            vm.loadingStatus = "success";
+        }, 2000);
 
     }
 
@@ -652,8 +659,8 @@
                     scope.dialogStyle.width = attrs.width;
                 if (attrs.height)
                     scope.dialogStyle.height = attrs.height;
-                if (attrs.class)
-                    scope.dialogStyle.class = attrs.class;
+                if (attrs.modalclass)
+                    scope.dialogStyle.class = attrs.modalclass;
                 scope.hideModal = function () {
                     scope.show = false;
                 };
