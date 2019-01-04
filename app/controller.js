@@ -187,6 +187,8 @@
 
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
+
+                    console.log("stations test " + $scope.stationFromName + $scope.stationToName);
                 }
             )
         }
@@ -195,7 +197,7 @@
         function getStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    console.log(response);
+                    //console.log(response);
                     vm.stationList = response;
                 }
             )
@@ -241,6 +243,7 @@
         //rail stations - at least 2 required for api to work
 
         // Set From Rail Station
+        $scope.stationFromName = null;//set from station to blank
         $scope.stationFromReq = false;//set from station to not required
         $scope.stationFrom = function (selected) {
             if (selected) {
@@ -275,6 +278,7 @@
         }
 
         // Set To Rail Station
+        $scope.stationToName = null;//set to station to blank
         $scope.stationToReq = false;//set to station to not required
         $scope.stationTo = function (selected) {
             if (selected) {
