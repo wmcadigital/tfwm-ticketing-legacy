@@ -43,6 +43,27 @@
         }
     }
 
+    .error{margin-bottom: 15px}
+
+    .stationlist{margin: 10px 0;}
+
+//style for disabled buttons
+    button:disabled,
+    button[disabled]{
+      border: 1px solid #999999;
+      background-color: #cccccc;
+      color: #666666;
+      &::after{display: none;}
+      &::before{display: none;}
+      &:hover{border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;cursor: not-allowed;}
+    }
+
+  form input.ng-invalid-autocomplete-required, .field-required-class, input.ng-invalid-field-required-class {border: red 1px solid}
+
+  .errors{margin: 10px 0;}
+
     .angular-grid-item{
         .bdr-top--purple.boxin{padding: 0px;
             .itemContent{padding:70px 20px 45px 20px}

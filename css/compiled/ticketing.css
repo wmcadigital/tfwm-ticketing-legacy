@@ -131,6 +131,39 @@ BREAKPOINTS
 .ticketing-page .ticket-filters ul label {
   border: 0;
 }
+.ticketing-page .error {
+  margin-bottom: 15px;
+}
+.ticketing-page .stationlist {
+  margin: 10px 0;
+}
+.ticketing-page button:disabled,
+.ticketing-page button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.ticketing-page button:disabled::after,
+.ticketing-page button[disabled]::after {
+  display: none;
+}
+.ticketing-page button:disabled::before,
+.ticketing-page button[disabled]::before {
+  display: none;
+}
+.ticketing-page button:disabled:hover,
+.ticketing-page button[disabled]:hover {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+.ticketing-page form input.ng-invalid-autocomplete-required, .ticketing-page .field-required-class, .ticketing-page input.ng-invalid-field-required-class {
+  border: red 1px solid;
+}
+.ticketing-page .errors {
+  margin: 10px 0;
+}
 .ticketing-page .angular-grid-item .bdr-top--purple.boxin {
   padding: 0px;
 }

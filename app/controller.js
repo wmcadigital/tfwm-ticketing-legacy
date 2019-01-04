@@ -238,7 +238,10 @@
             vm.postJSON.allowMetro = null;
         }
 
+        //rail stations - at least 2 required for api to work
+
         // Set From Rail Station
+        $scope.stationFromReq = false;//set from station to not required
         $scope.stationFrom = function (selected) {
             if (selected) {
                 $scope.stationFromName = selected.originalObject.name; //Set From station
@@ -247,6 +250,8 @@
                 $scope.stationFromNameZone = selected.originalObject.zone;
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
+                $scope.stationToReq = true;//set to station to required
+
                 //if station is out of county but is within zone 5 (chase line)
                 if ($scope.stationFromNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
@@ -265,9 +270,12 @@
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
             $scope.stationFromName = null;
             vm.postJSON.stationNames = [[]];
+            $scope.stationFromReq = false;//set from station to not required
+            $scope.stationFromNameOocZ5 = null;//clear zone 5 in county
         }
 
         // Set To Rail Station
+        $scope.stationToReq = false;//set to station to not required
         $scope.stationTo = function (selected) {
             if (selected) {
                 $scope.stationToName = selected.originalObject.name; //Set To Station
@@ -276,6 +284,8 @@
                 $scope.stationToNameZone = selected.originalObject.zone;
                 $scope.stationToNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
+                $scope.stationFromReq = true;//set from station to required
+
                 //if station is out of county but is within zone 5 (chase line)
                 if ($scope.stationToNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
@@ -289,14 +299,13 @@
               }
         };
 
-        $scope.stationFromName = true;
-    $scope.stationToName = true;
-
         // Reset to station
         function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
             $scope.stationToName = null;
             vm.postJSON.stationNames = [[]];
+            $scope.stationToReq = false;//set to station to not required
+            $scope.stationToNameOocZ5 = null;//clear zone 5 in county
         }
 
         function updateGrid() {

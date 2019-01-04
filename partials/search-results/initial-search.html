@@ -1,4 +1,4 @@
-<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search">
+<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search" name="tsearch" novalidate>
     <div class="boxin reset grid-12">
         <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
     </div>
@@ -138,23 +138,23 @@
         <div class="grid-12">
             <label for="stationFrom_value" class="plain title">Which rail stations will you use?</label>
         </div>
-
+        
         <div class="grid-6 padding-right">
             <div data-ng-init="ticketing.getStations();ticketing.setStations();">
                 <label class="plain-small hide" for="travellingFrom">From</label>
+              
                 <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100"
                     selected-object="stationFrom" local-data="ticketing.stationList" search-fields="name" title-field="name"
                     minlength="1" input-class="form-control padding-right" match-class="highlight" override-suggestions="true"
-                    initial-value="stationFromName">
+                    initial-value="stationFromName" field-required-class="field-required-class" field-required="stationFromReq"
+                    input-name="fromStation">>
                 </div>
                 <a data-ng-if="stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
-                <div class="result" data-ng-show="stationFromTitle">
+                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationFromTitle">
                     <div>
                         You selected <strong>{{stationFromTitle}}</strong> station which is
                         <strong>{{ stationFromNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
                             stationFromNameZone }}</strong>.
-                            <span data-ng-if="stationFromNameOocZ5"><br><br>This station covers the nTrain Zone but not nNetwork.<br><br>
-                                Pass has been changed to nTrain.</span>
                     </div>
                 </div>
             </div>
@@ -167,7 +167,8 @@
                 <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">
                     <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
-                        input-class="form-control form-control-small" match-class="highlight" initial-value="stationToName">
+                        input-class="form-control form-control-small" match-class="highlight" initial-value="stationToName" 
+                        field-required-class="field-required-class" field-required="stationToReq" input-name="toStation">
                     </div>
                 </div>
             </div>
@@ -187,20 +188,41 @@
                     field-required-class="required" initial-value="stationToName">
                 </div>
             </div>-->
-            <a  data-ng-if="stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
+            <a data-ng-if="stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
 
-            <div class="result" data-ng-show="stationToTitle">
+            <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationToTitle">
                     <div>
                         You selected <strong>{{stationToTitle}}</strong> station which is
                         <strong>{{ stationToNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
                             stationToNameZone }}</strong>.
-                            <span data-ng-if="stationToNameOocZ5"><br><br>This station covers the nTrain Zone but not nNetwork.<br><br>
-                            Pass has been changed to nTrain.</span>
                     </div>
                 </div>
-
         </div>
     </div>
+
+    <!-- error messages -->
+    <div data-ng-if="stationFromNameOocZ5" class="grid-12 errors">
+        <div class="boxin -messages">
+            <strong>{{stationFromTitle}}</strong>
+            station covers the nTrain Zone but not nNetwork.<br><br>
+            <strong>Pass has been changed to nTrain.</strong>
+        </div>
+    </div>
+
+    <div data-ng-if="stationToNameOocZ5" class="grid-12 errors">
+        <div class="boxin -messages">
+            <strong>{{stationToTitle}}</strong>
+            station covers the nTrain Zone but not nNetwork.<br><br>
+            <strong>Pass has been changed to nTrain.</strong>
+        </div>
+    </div>
+
+    <div data-ng-if="stationToName != null && stationFromName == null || stationToName == null && stationFromName != null" class="grid-12 errors">
+        <div class="boxin -messages">
+            In order to carry out a rail station search you need to add the To & From stations.
+        </div>
+    </div>
+
     <!-- Help section if station is not listed in auto complete -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType" class="help-section grid-12">
         <label class="blue btn-link">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
@@ -210,7 +232,6 @@
         </div>
     </div>
     <!-- /Rail Stations -->
-
 
     <!-- Duration -->
     <div class="fields how-long grid-12" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.passengerType != '' && (ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand)">
@@ -245,5 +266,5 @@
     <!-- /Duration -->
 
     <button data-ng-if="ticketing.postJSON.passengerType && ticketing.postJSON.timeBand || ticketing.postJSON.brand == 'Swift PAYG'"
-        type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy">Find tickets</button>
+        type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy" ng-disabled="tsearch.$invalid">Find tickets</button>
 </form>
