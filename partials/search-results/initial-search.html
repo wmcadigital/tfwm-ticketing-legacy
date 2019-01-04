@@ -226,7 +226,7 @@
     <!-- Help section if station is not listed in auto complete -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType" class="help-section grid-12">
         <label class="blue btn-link">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
-        <div ng-show="stationNotListed" class="railhelp">
+        <div ng-show="stationNotListed" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
             <p>Please refer to <a href="http://www.nationalrail.co.uk/" target="_blank">National Rail</a> for journeys
                 from or to a station not listed</p>
         </div>
