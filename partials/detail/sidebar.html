@@ -198,6 +198,18 @@
                     </div>
                     <p>Use on Stagecoach buses only</p>
                 </div>
+                <div data-ng-if="ticket.all.brand == 'Johnsons' ">
+                    <div class="imgwrapper">
+                        <a href="http://www.johnsonscoaches.co.uk/bus-route-maps/" target="_blank" title="View Johnsons network maps">
+                            <img src="/assets/Johnsons-Map.jpg" alt="Johnsons network maps" />
+                            <br>View Johnsons network maps
+                            <i class="material-icons">
+                                exit_to_app
+                            </i>
+                        </a>
+                    </div>
+                    <p>Use on Johnsons buses only</p>
+                </div>
 
                 <div data-ng-if="!ticket.all.isSingleOperatorTicket">
                     <p class="summary">Bus operators who accept this ticket</p>
