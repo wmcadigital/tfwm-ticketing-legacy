@@ -231,6 +231,8 @@
             $scope.stationToName = null;
             $scope.stationFromTitle = null;
             $scope.stationToTitle = null;
+            $scope.stationFromNameOocZ5 = null;
+            $scope.stationToNameOocZ5 = null;
         }
 
         // If a pass is selected deselect all modes
