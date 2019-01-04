@@ -107,6 +107,7 @@
             $location.search().brand
         ) {
             submit(vm.postJSON);
+            
         } else {
             $location.url('').replace();
         }
@@ -256,7 +257,6 @@
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationToReq = true;//set to station to required
-
                 //if station is out of county but is within zone 5 (chase line)
                 if ($scope.stationFromNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
@@ -291,7 +291,6 @@
                 $scope.stationToNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationFromReq = true;//set from station to required
-
                 //if station is out of county but is within zone 5 (chase line)
                 if ($scope.stationToNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
@@ -567,6 +566,7 @@
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
             console.log(vm.backToSearch);
+            $scope.stationFromNameZone = '1';
         }
 
         function checkStations() {
