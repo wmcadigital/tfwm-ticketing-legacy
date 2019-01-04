@@ -139,8 +139,8 @@ BREAKPOINTS
 }
 .ticketing-page button:disabled,
 .ticketing-page button[disabled] {
-  border: 1px solid #999999;
-  background-color: #cccccc;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
   color: #666666;
 }
 .ticketing-page button:disabled::after,
@@ -154,9 +154,16 @@ BREAKPOINTS
 .ticketing-page button:disabled:hover,
 .ticketing-page button[disabled]:hover {
   border: 1px solid #999999;
-  background-color: #cccccc;
+  background-color: #f1f1f1;
   color: #666666;
   cursor: not-allowed;
+}
+.ticketing-page select:disabled,
+.ticketing-page select[disabled] {
+  border: 2px solid #ccc;
+  background-color: #f1f1f1;
+  color: #666666;
+  background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y;
 }
 .ticketing-page form input.ng-invalid-autocomplete-required, .ticketing-page .field-required-class, .ticketing-page input.ng-invalid-field-required-class {
   border: red 1px solid;

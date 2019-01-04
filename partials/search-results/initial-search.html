@@ -71,7 +71,8 @@
             <label class="plain" for="Brand">Pass</label>
             <span class="stylized-select">
                 <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.brand'
-                    data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();ticketing.ntrainOOC();">
+                    data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();ticketing.ntrainOOC();"
+                    ng-disabled="ticketing.postJSON.allowMetro || ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain">
                     <option value="">Select your pass</option>
                     <option value="Diamond Bus">Diamond Bus</option>
                     <option value="National Express">National Express</option>
