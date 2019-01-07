@@ -608,8 +608,18 @@ form .title {
 form .padding-right {
   padding-right: 15px;
 }
+@media (max-width: 32.125em) {
+  form .padding-right {
+    padding-right: 0px;
+  }
+}
 form .padding-left {
   padding-left: 15px;
+}
+@media (max-width: 32.125em) {
+  form .padding-left {
+    padding-left: 0px;
+  }
 }
 
 .result {

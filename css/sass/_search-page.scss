@@ -345,8 +345,16 @@ label.plain, .label.plain{display:table;}
 
 form{
      .title{margin: 20px 0 10px 0}
-     .padding-right{padding-right: 15px}
-     .padding-left{padding-left: 15px}
+     .padding-right{padding-right: 15px;
+        @include breakpoint(mobileonly) {
+            padding-right: 0px
+        }
+    }
+     .padding-left{padding-left: 15px;
+        @include breakpoint(mobileonly) {
+            padding-left: 0px
+        }
+    }
 }
 
 .result{margin: 0 0 10px 0}
