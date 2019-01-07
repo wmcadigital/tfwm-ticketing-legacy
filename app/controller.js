@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('ticketingApp.Controller', ["angucomplete-alt"])
-        .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', TicketingSearchCtrl])
+        .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', '$httpParamSerializer', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('modeFilter', [modeFilter])
         .filter('escapeFilter', [escapeFilter])
@@ -23,7 +23,7 @@
         .directive('pane', [pane])
         .directive('tooltip', [tooltip]);
     // CONTROLLER
-    function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance) {
+    function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
 
         vm.submit = submit; //Function to submit inital search
@@ -67,9 +67,11 @@
                 "allowTrain": $location.search().allowTrain || null,
                 "passengerType": $location.search().passengerType || '',
                 "timeBand": $location.search().timeBand || '',
+                "busTravelArea": $location.search().busTravelArea || null,
+                "operator": $location.search().operator || null,
                 "brand": $location.search().brand || null,
-                "stationNames": $location.search().stationNames || [[]]
-                
+                "stationNames": $location.search().stationNames || [[]],
+
                 // "swiftSearch": true,
                 // "firstClass": true,
                 // "buyOnDirectDebit": true,
@@ -95,7 +97,7 @@
 
         defaultVars();
 
-        //If location.search contains search criteria force the submit on page load 
+        //If location.search contains search criteria force the submit on page load
         if (
             ($location.search().allowBus ||
             $location.search().allowMetro ||
@@ -103,11 +105,13 @@
             ($location.search().brand) &&
             $location.search().passengerType &&
             $location.search().timeBand ||
+            $location.search().busTravelArea ||
+            $location.search().operator ||
             $location.search().stationNames ||
             $location.search().brand
         ) {
             submit(vm.postJSON);
-            
+
         } else {
             $location.url('').replace();
         }
@@ -125,9 +129,11 @@
             $location.search({
                 allowBus: vm.postedJSON.allowBus,
                 allowTrain: vm.postedJSON.allowTrain,
-                allowMetro: vm.postedJSON.allowMetro, 
+                allowMetro: vm.postedJSON.allowMetro,
                 passengerType: vm.postedJSON.passengerType,
                 timeBand: vm.postedJSON.timeBand,
+                busTravelArea: vm.postedJSON.busTravelArea,
+                operator: vm.postedJSON.operator,
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
                 limit: vm.limit
@@ -189,7 +195,6 @@
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
 
-                    console.log("stations test " + $scope.stationFromName + $scope.stationToName);
                 }
             )
         }
@@ -318,7 +323,26 @@
                 $timeout(function () {
                     if (vm.filteredTickets.length) {
                         angularGridInstance.ticketResults.refresh();
-                        savedFilter.set("url", $location.url()); //Set local storage with current url for back button
+
+                        var obj = {
+                            allowBus: vm.postedJSON.allowBus,
+                            allowTrain: vm.postedJSON.allowTrain,
+                            allowMetro: vm.postedJSON.allowMetro,
+                            passengerType: vm.postedJSON.passengerType,
+                            timeBand: vm.postedJSON.timeBand,
+                            brand: vm.postedJSON.brand,
+                            stationNames: vm.postedJSON.stationNames,
+                            busTravelArea: vm.searchFilters.busTravelArea,
+                            operator: vm.searchFilters.operator,
+                            limit: vm.limit
+                        }
+            
+                        var urlstring = $httpParamSerializer(obj);
+            
+                        savedFilter.set("url", "/?" + urlstring);
+
+
+                        //savedFilter.set("url", $location.url()); //Set local storage with current url for back button
                     }
                 }, 82, false);
             }, 82, false);
@@ -395,7 +419,7 @@
 
             }
         }
-        
+
         function getSwiftPAYG() {
             ticketingService.getSwiftSearch().then(
                 function (response) {
@@ -534,28 +558,28 @@
                                 function (response) {
                                     vm.relatedTickets[item.id] = response;
                                     //console.log(vm.relatedTickets[item.id]);
-                                    
+
                                 }
                             )
                         })
                     } else {
-                        
+
                     }
                     if (vm.all.documents.length) {
                         ticketingService.getTerms(data).then(
                             function (response) {
                                 vm.relatedTerms = response;
-                                
+
                             }
                         )
                     } else {
-                       
+
                     }
                         ticketingService.getOperators().then(
                             function (response) {
                                 vm.operatorList = response;
                                 console.log(response);
-                             
+
                             }
                         )
                     backButtonLogic(); //Determine back button logic
@@ -578,9 +602,9 @@
         function toggleClick(type) {
             vm.filterAccordions[type] = !vm.filterAccordions[type];
         }
-        
+
         //popup modals
-        
+
         //bus
         vm.modalShownBus = false;
         function toggleModalBus() {
