@@ -27,7 +27,7 @@
             <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
                 <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.allowTrain"
                     data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
-                <label for="jptrain" data-ng-click="ticketing.getStations();">
+                <label for="jptrain" data-ng-click="ticketing.getStations();ticketing.clearStation();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <style type="text/css">
                             .st0 {
@@ -230,7 +230,7 @@
         </div>
     </div>
 
-    <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName " class="grid-12 errors">
+    <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName" data-ng-hide="stationFromName == '[]'" class="grid-12 errors">
         <div class="boxin -messages">
             In order to carry out a rail station search you need to add the To & From stations.
         </div>

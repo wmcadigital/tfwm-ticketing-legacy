@@ -38,7 +38,7 @@
                     }],
                     getURL: ['savedFilter', function (savedFilter) {//get saved url from cache
                         return savedFilter.get('url');
-                    }]
+                    }],
                 },
                 reloadOnSearch: false
             })

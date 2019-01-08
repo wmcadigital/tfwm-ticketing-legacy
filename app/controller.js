@@ -33,6 +33,7 @@
         vm.geticStations = geticStations; //Function to retreive in county stations
         vm.clearFromStation = clearFromStation; //Function to clear from station
         vm.clearToStation = clearToStation; //Function to clear to station
+        vm.clearStation = clearStation; //Function to clear to from station if not in url - []
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -70,7 +71,7 @@
                 "busTravelArea": $location.search().busTravelArea || null,
                 "operator": $location.search().operator || null,
                 "brand": $location.search().brand || null,
-                "stationNames": $location.search().stationNames || [[]],
+                "stationNames": $location.search().stationNames || [[]]
 
                 // "swiftSearch": true,
                 // "firstClass": true,
@@ -172,6 +173,7 @@
                     });
 
                     //Set initial value of from & to stations if in Url
+                    if ($location.search().stationNames){
                     var stations = $location.search().stationNames;
                     var stationSel = stations.toString();
                     var stationSplit = stationSel.split(',');
@@ -181,6 +183,7 @@
                     var bus = vm.postedJSON.allowBus;
                     var train = vm.postedJSON.allowTrain;
                     var metro = vm.postedJSON.allowMetro;
+                    }
 
                     //if 1 or 2 modes selected open up the exclude mode filter
                     if (bus != null || bus != null && train != null || bus != null && metro != null || train != null && metro != null) {
@@ -246,6 +249,13 @@
             vm.postJSON.allowBus = null;
             vm.postJSON.allowTrain = null;
             vm.postJSON.allowMetro = null;
+        }
+
+         // if no stations set in url make sure from station is set to null
+         function clearStation() {
+            if ($scope.stationFromName == "[]") {
+                $scope.stationFromName = null;//set from station to blank if no stations in url
+            }
         }
 
         //rail stations - at least 2 required for api to work
@@ -324,10 +334,10 @@
                     if (vm.filteredTickets.length) {
                         angularGridInstance.ticketResults.refresh();
 
+                        // set storage url according to search filters
+
+                        //set data to bbe displayed in serializer
                         var obj = {
-                            allowBus: vm.postedJSON.allowBus,
-                            allowTrain: vm.postedJSON.allowTrain,
-                            allowMetro: vm.postedJSON.allowMetro,
                             passengerType: vm.postedJSON.passengerType,
                             timeBand: vm.postedJSON.timeBand,
                             brand: vm.postedJSON.brand,
@@ -338,10 +348,73 @@
                         }
             
                         var urlstring = $httpParamSerializer(obj);
-            
-                        savedFilter.set("url", "/?" + urlstring);
 
+                        var abus;
+                        if(vm.postedJSON.allowBus){
+                            var abus = "allowBus";
+                        }
 
+                        var atrain;
+                        if(vm.postedJSON.allowTrain){
+                            var atrain = "allowTrain";
+                        }
+
+                        var ametro;
+                        if(vm.postedJSON.allowMetro){
+                            var ametro = "allowMetro";
+                        }
+
+                        // bus only
+                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + abus + "&" + urlstring;
+                            console.log("bus only - " + searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                         // bus and train
+                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // bus and metro
+                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // train only
+                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + atrain + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // train and metro
+                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // metro only
+                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + ametro + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // all modes selected
+                        if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // no modes selected
+                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            var searchURL = "/?" + urlstring;
+                            console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        //Set local storage with current url for back button
+
+                        //savedFilter.set("url", "/?" + urlstring);
                         //savedFilter.set("url", $location.url()); //Set local storage with current url for back button
                     }
                 }, 82, false);
