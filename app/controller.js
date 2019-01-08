@@ -859,6 +859,7 @@
             },
             template: '<div ng-transclude></div>' +
                 '<p class="field-help tooltip" ng-show="isShown">' +
+                '<span class="close modal__close"></span>' +
                 '<span data-ng-bind-html="copy"></span>' +
                 '</p>'
         }
