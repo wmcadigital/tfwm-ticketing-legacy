@@ -50,25 +50,25 @@
 //style for disabled buttons
     button:disabled,
     button[disabled]{
-      border: 1px solid #ccc;
-      background-color: #f1f1f1;
-      color: #666666;
-      &::after{display: none;}
-      &::before{display: none;}
-      &:hover{border: 1px solid #999999;
-        background-color: #f1f1f1;
-        color: #666666;cursor: not-allowed;}
+      border: 1px solid #ccc!important;
+      background-color: #f1f1f1!important;
+      color: #666666!important;
+      &::after{display: none!important;}
+      &::before{display: none!important;}
+      &:hover{border: 1px solid #999999!important;
+        background-color: #f1f1f1!important;
+        color: #666666;cursor: not-allowed!important;}
     }
 
     select:disabled,
     select[disabled]{
-      border: 2px solid #ccc;
-      background-color: #f1f1f1;
-      color: #666666;
-      background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y;
+      border: 2px solid #ccc!important;
+      background-color: #f1f1f1!important;
+      color: #666666!important;
+      background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y!important;
     }
 
-  form input.ng-invalid-autocomplete-required, .field-required-class, input.ng-invalid-field-required-class {border: red 1px solid}
+  form input.ng-invalid-autocomplete-required, .field-required-class, input.ng-invalid-field-required-class {border: red 1px solid!important;}
 
   .errors{margin: 10px 0;}
 

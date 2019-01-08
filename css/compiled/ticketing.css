@@ -139,34 +139,34 @@ BREAKPOINTS
 }
 .ticketing-page button:disabled,
 .ticketing-page button[disabled] {
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  color: #666666;
+  border: 1px solid #ccc !important;
+  background-color: #f1f1f1 !important;
+  color: #666666 !important;
 }
 .ticketing-page button:disabled::after,
 .ticketing-page button[disabled]::after {
-  display: none;
+  display: none !important;
 }
 .ticketing-page button:disabled::before,
 .ticketing-page button[disabled]::before {
-  display: none;
+  display: none !important;
 }
 .ticketing-page button:disabled:hover,
 .ticketing-page button[disabled]:hover {
-  border: 1px solid #999999;
-  background-color: #f1f1f1;
+  border: 1px solid #999999 !important;
+  background-color: #f1f1f1 !important;
   color: #666666;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 .ticketing-page select:disabled,
 .ticketing-page select[disabled] {
-  border: 2px solid #ccc;
-  background-color: #f1f1f1;
-  color: #666666;
-  background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y;
+  border: 2px solid #ccc !important;
+  background-color: #f1f1f1 !important;
+  color: #666666 !important;
+  background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
 }
 .ticketing-page form input.ng-invalid-autocomplete-required, .ticketing-page .field-required-class, .ticketing-page input.ng-invalid-field-required-class {
-  border: red 1px solid;
+  border: red 1px solid !important;
 }
 .ticketing-page .errors {
   margin: 10px 0;
