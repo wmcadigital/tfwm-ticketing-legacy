@@ -276,6 +276,7 @@
                 if ($scope.stationFromNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
                     vm.postJSON.allowBus = null;
+                    vm.postJSON.allowTrain = null;
                     vm.postJSON.allowMetro = null;
                 }
             } else {
@@ -310,6 +311,7 @@
                 if ($scope.stationToNameOocZ5) {
                     vm.postJSON.brand = 'ntrain';
                     vm.postJSON.allowBus = null;
+                    vm.postJSON.allowTrain = null;
                     vm.postJSON.allowMetro = null;
                 }
             } else {
