@@ -2,7 +2,6 @@
 
     .ticket-search .how-long .icon-stylized-new label{background-color:$cyan;color:white;}
 
-
     .ticket-item{
         .paygimg{float: right;margin: 0 0 25px 0;width: 75%;}
         .payment-icons{display: block;width: 100%;
@@ -43,6 +42,11 @@
         }
     }
 
+    .detail{
+        div{font-family: "WF_Droid_Sans", sans-serif;font-weight: 400;font-size: 1.6rem;line-height: 2.6rem;}
+        
+    }
+
     .error{margin-bottom: 15px}
 
     .stationlist{margin: 10px 0;}
@@ -77,6 +81,8 @@
             .itemContent{padding:70px 20px 45px 20px}
         }
     }
+
+   
 
     .block--fullwidth .block--side{position:sticky; top:15px;}
 
@@ -300,7 +306,7 @@ label.plain-small{
 
 }
 
-
+/* Custom Grid */
 $grid-columns: 12;
 
 @for $i from 1 through $grid-columns {
