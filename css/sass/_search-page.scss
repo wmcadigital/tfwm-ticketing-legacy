@@ -1,6 +1,7 @@
 .ticketing-page{
 
     .ticket-search .how-long .icon-stylized-new label{background-color:$cyan;color:white;}
+    .help-section{display: inline-block;margin: 15px 0;}
 
     .ticket-item{
         .paygimg{float: right;margin: 0 0 25px 0;width: 75%;}
@@ -42,8 +43,9 @@
         }
     }
 
-    .detail{
+    #detail{
         div{font-family: "WF_Droid_Sans", sans-serif;font-weight: 400;font-size: 1.6rem;line-height: 2.6rem;}
+        
         
     }
 

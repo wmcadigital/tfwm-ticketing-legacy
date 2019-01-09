@@ -66,6 +66,10 @@ BREAKPOINTS
   background-color: #009fe3;
   color: white;
 }
+.ticketing-page .help-section {
+  display: inline-block;
+  margin: 15px 0;
+}
 .ticketing-page .ticket-item .paygimg {
   float: right;
   margin: 0 0 25px 0;
@@ -131,7 +135,7 @@ BREAKPOINTS
 .ticketing-page .ticket-filters ul label {
   border: 0;
 }
-.ticketing-page .detail div {
+.ticketing-page #detail div {
   font-family: "WF_Droid_Sans", sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
