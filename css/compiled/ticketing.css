@@ -141,6 +141,18 @@ BREAKPOINTS
   font-size: 1.6rem;
   line-height: 2.6rem;
 }
+.ticketing-page #detail .icon--tick::after {
+  background-position: -70px -190px;
+}
+.ticketing-page #detail .iconcustom::after {
+  background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+  background-size: 300px auto;
+  content: "";
+  height: 32px;
+  left: 0;
+  position: absolute;
+  width: 30px;
+}
 .ticketing-page .error {
   margin-bottom: 15px;
 }

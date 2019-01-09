@@ -45,8 +45,19 @@
 
     #detail{
         div{font-family: "WF_Droid_Sans", sans-serif;font-weight: 400;font-size: 1.6rem;line-height: 2.6rem;}
-        
-        
+        //make custom tick icon smaller
+        .icon--tick::after {
+            background-position: -70px -190px;
+        }
+        .iconcustom::after {
+            background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+            background-size: 300px auto;
+            content: "";
+            height: 32px;
+            left: 0;
+            position: absolute;
+            width: 30px;
+        }
     }
 
     .error{margin-bottom: 15px}

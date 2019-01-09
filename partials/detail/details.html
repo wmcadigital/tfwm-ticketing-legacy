@@ -22,8 +22,9 @@
     <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.features.length != '0'">
         <ul class="bare-list bare-list--horizontal">
             <li ng-repeat="features in ticket.all.features">
-                <span class="iconcustom icon--tick"></span> {{features.name}}
-                <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="help-link"></span>
+               <span data-ng-if="features.description == ''"><span class="iconcustom icon--tick"></span> {{features.name}}</span>
+               <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="blue"><span class="iconcustom icon--tick"></span> {{features.name}}</span>
+                
             </li>
         </ul>
     </div>
