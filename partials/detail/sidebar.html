@@ -9,7 +9,7 @@
                 <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
                 <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">{{ticket.all.ticketCurrentAmount
                     | currency:"£"}}</span>
-                <span data-ng-if="ticket.all.ticketCurrentAmount == '0'">{{ticket.all.priceOverride}}</span>
+                <span data-ng-if="ticket.all.ticketCurrentAmount == '0'">{{ticket.all.priceOverride}} Credit</span>
                 <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930010"> per month</span>
