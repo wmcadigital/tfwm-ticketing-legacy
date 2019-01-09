@@ -1,7 +1,7 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
         <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
-    <div class="arrdep-filters cfx" ng-hide="ticketing.filteredTickets.length == '0'">
+    <div class="arrdep-filters cfx" ng-hide="ticketing.filteredTickets.length <= '1'">
         <div class="field">
             <div class="radio-bar">
                 <span>
