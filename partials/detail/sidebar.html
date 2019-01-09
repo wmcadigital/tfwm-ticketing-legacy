@@ -162,7 +162,7 @@
                     </a>
                 </div>
 
-                <div data-ng-if="ticket.all.brand == 'National Express' ">
+                <div data-ng-if="ticket.all.brand == 'National Express'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                     <div class="imgwrapper">
                         <a href="../../assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img src="/assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
                             />
@@ -173,6 +173,32 @@
                         </a>
                     </div>
                     <p>Use on National Express buses only</p>
+                </div>
+                <!-- walsall low fare zone -->
+                <div data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
+                        <div class="imgwrapper">
+                            <a href="https://nxbus.co.uk/walsall" target="_blank"><img src="/assets/walsall-low-fare-zone-map.png"
+                                />
+                                <br>View National Express Walsall low fare zone map
+                                <i class="material-icons">
+                                    exit_to_app
+                                </i>
+                            </a>
+                        </div>
+                    <p>Use on National Express Walsall low fare zone</p>
+                </div>
+                <!-- sandwell and dudley low fare zone -->
+                <div data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
+                        <div class="imgwrapper">
+                            <a href="https://nxbus.co.uk/paylocal" target="_blank"><img src="/assets/s-d-low-fare-zone-map.png"
+                                />
+                                <br>View National Express Sandwell & Dudley low fare zone map
+                                <i class="material-icons">
+                                    exit_to_app
+                                </i>
+                            </a>
+                        </div>
+                    <p>Use on National Express Sandwell & Dudley low fare zone</p>
                 </div>
                 <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
                     <div class="imgwrapper">
