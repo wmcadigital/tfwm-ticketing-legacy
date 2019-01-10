@@ -7,6 +7,7 @@
         .filter('modeFilter', [modeFilter])
         .filter('escapeFilter', [escapeFilter])
         .filter('replace', [replace])
+        .filter('buyOnSwiftPAYG', [buyOnSwiftPAYG])
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
@@ -21,7 +22,7 @@
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
         .directive('pane', [pane])
-        .directive('tooltip', [tooltip]);
+        .directive('tooltip', [tooltip]);   
     // CONTROLLER
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
@@ -272,13 +273,6 @@
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationToReq = true;//set to station to required
-                //if station is out of county but is within zone 5 (chase line)
-                if ($scope.stationFromNameOocZ5) {
-                    vm.postJSON.brand = 'ntrain';
-                    vm.postJSON.allowBus = null;
-                    vm.postJSON.allowTrain = null;
-                    vm.postJSON.allowMetro = null;
-                }
             } else {
                 $scope.stationFromName = null;
                 vm.postJSON.stationNames[0] = [[]];
@@ -307,13 +301,6 @@
                 $scope.stationToNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationFromReq = true;//set from station to required
-                //if station is out of county but is within zone 5 (chase line)
-                if ($scope.stationToNameOocZ5) {
-                    vm.postJSON.brand = 'ntrain';
-                    vm.postJSON.allowBus = null;
-                    vm.postJSON.allowTrain = null;
-                    vm.postJSON.allowMetro = null;
-                }
             } else {
                 $scope.stationToName = null;
                 vm.postJSON.stationNames[1] = [[]];
@@ -415,6 +402,7 @@
                             savedFilter.set("url", searchURL);
                         }
                         //Set local storage with current url for back button
+
 
                         //savedFilter.set("url", "/?" + urlstring);
                         //savedFilter.set("url", $location.url()); //Set local storage with current url for back button
@@ -553,6 +541,16 @@
     }
 
     function replace() {
+        return function (input, from, to) {
+            if(input === undefined) {
+              return;
+            }
+            var regex = new RegExp(from, 'g');
+            return input.replace(regex, to);
+          };
+    }
+
+    function buyOnSwiftPAYG() {
         return function (input, from, to) {
             if(input === undefined) {
               return;
@@ -866,4 +864,5 @@
                 '</p>'
         }
     }
+
 })();

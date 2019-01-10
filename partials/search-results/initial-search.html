@@ -214,22 +214,6 @@
     <!-- /Help section if station is not listed in auto complete -->
 
     <!-- error messages -->
-    <div data-ng-if="stationFromNameOocZ5" class="grid-12 errors">
-        <div class="boxin -messages">
-            <strong>{{stationFromTitle}}</strong>
-            station covers the nTrain Zone but not nNetwork.<br><br>
-            <strong>Pass has been changed to nTrain.</strong>
-        </div>
-    </div>
-
-    <div data-ng-if="stationToNameOocZ5" class="grid-12 errors">
-        <div class="boxin -messages">
-            <strong>{{stationToTitle}}</strong>
-            station covers the nTrain Zone but not nNetwork.<br><br>
-            <strong>Pass has been changed to nTrain.</strong>
-        </div>
-    </div>
-
     <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName" data-ng-hide="stationFromName == '[]'" class="grid-12 errors">
         <div class="boxin -messages">
             In order to carry out a rail station search you need to add the To & From stations.
