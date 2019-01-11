@@ -358,7 +358,7 @@ $grid-columns: 12;
 
 .ie10-or-better .stylized-select > select{padding-right: 80px}
 
-label.plain, .label.plain{display:table;}
+label.plain, .label.plain{display:table!important;}
 
 .stylized-select{display: block;}
 
