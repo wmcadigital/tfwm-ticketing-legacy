@@ -108,6 +108,13 @@ BREAKPOINTS
 }
 .ticketing-page .ticket-filters hr {
   margin-bottom: 0;
+  background-color: #009fe3;
+}
+.ticketing-page .ticket-filters .icon {
+  color: #009fe3;
+}
+.ticketing-page .ticket-filters .icon:after {
+  background-image: none;
 }
 .ticketing-page .ticket-filters .filter-block {
   border-bottom: 1px solid #ccc;
@@ -127,6 +134,9 @@ BREAKPOINTS
   float: right;
   color: #009fe3;
   font-weight: bold;
+}
+.ticketing-page .ticket-filters .checkbox-list label {
+  background-color: transparent;
 }
 .ticketing-page .ticket-filters ul {
   padding: 0 0 20px 0;
