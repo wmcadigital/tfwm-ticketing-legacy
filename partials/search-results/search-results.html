@@ -40,12 +40,42 @@
                 </p>
             </div>
 
+
+           <!-- Exact matched to search -->
+<div class="filtered-header boxin bdr-top--navy">
+        <h3 class="filtered-header__heading">{{ticketing.origTickets.length}} Exact matches to your search</h3>
+    </div>
+
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
+            ag-id="origTicketResults" data-ng-if="ticketing.loadingStatus == 'success'">
+            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index" data-count="{{ticketing.origTickets.length}}">
+                <item></item>
+            </div>
+        </div>
+
+        <div class="event-results__more" data-ng-if="ticketing.origTickets.length > 6 && ticketing.limit < ticketing.origTickets.length">
+            <button data-event-step="6" id="loadMoreExact" class="btn align--center" data-ng-click="ticketing.loadMoreExact();">Load more</button>
+        </div>
+
+
+
+        <!-- Other matches -->
+        <div class="filtered-header boxin bdr-top--navy">
+                <h3 class="filtered-header__heading">xx other matches to your search</h3>
+            </div>
+
+
+
+    
+        <!-- All results -->
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
             <div class="grid" data-ng-repeat="ticket in ticketing.filteredTickets | limitTo: ticketing.limit track by $index" data-count="{{ticketing.filteredTickets.length}}">
                 <item></item>
             </div>
         </div>
+
+
 
         <div data-ng-if="ticketing.all.length && ticketing.postJSON.brand == 'Swift PAYG'">
             <hr>

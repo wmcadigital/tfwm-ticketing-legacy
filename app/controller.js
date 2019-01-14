@@ -39,6 +39,7 @@
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
         vm.loadMore = loadMore; //function to load more results
+        vm.loadMoreExact = loadMoreExact; //function to load more exact results
         vm.filterButtons = {
             "operator": [],
             "operatorLength": 0,
@@ -55,6 +56,7 @@
         function defaultVars() {
             vm.all = []; //Set results to blank array
             vm.filteredTickets = []; //Define filtered results as blank array
+            vm.origTickets = []; //Define original filtered results as blank array
             vm.stationList = []; //Define Station list
             vm.stationoocList = []; //Define out of county Station list
             vm.stationicList = []; //Define in county Station list
@@ -63,6 +65,7 @@
             vm.passValue = ''; //Set pass select value to blank
             vm.orderBy = "ticketCurrentAmount";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
+            vm.limitExact = parseInt($location.search().limitExact) || 6; //Set paging limit for exact results to what's in url or default to 6
             vm.postJSON = {
                 "allowBus": $location.search().allowBus || null,
                 "allowMetro": $location.search().allowMetro || null,
@@ -138,18 +141,42 @@
                 operator: vm.postedJSON.operator,
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
-                limit: vm.limit
+                limit: vm.limit,
+                limitExact: vm.limitExact
             }); //set search url for sharing/tracking
 
             vm.searchFilters = {};//set scope for search filters and reset on every search
+            vm.origFilters = {};//set scope for original search filters and reset on every search
             console.log('this is posted');
             console.log(vm.postedJSON);
 
+            //work out ticket which exactly match search
+            ticketingService.ticketSearch(data).then(
+                function (response) {
+                    vm.all = response;
+                    console.log('orig search');
+                    console.log(response);
+
+                    var fbus = vm.postedJSON.allowBus || false;
+                    var ftrain = vm.postedJSON.allowTrain || false;
+                    var fmetro = vm.postedJSON.allowMetro || false;
+                    var fpassengerType = vm.postedJSON.passengerType || null;
+
+                    vm.testing = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+
+                    console.log('orig search 123');
+                    console.log(vm.testing);
+
+                }
+            ),
+
+            //work out all tickets available
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
                     console.log('ticket search');
                     console.log(response);
+                    vm.original = response;
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
                         // Check the operator and push it to filters
@@ -322,6 +349,7 @@
                 $timeout(function () {
                     if (vm.filteredTickets.length) {
                         angularGridInstance.ticketResults.refresh();
+                        angularGridInstance.origTicketResults.refresh();
 
                         // set storage url according to search filters
 
@@ -333,7 +361,8 @@
                             stationNames: vm.postedJSON.stationNames,
                             busTravelArea: vm.searchFilters.busTravelArea,
                             operator: vm.searchFilters.operator,
-                            limit: vm.limit
+                            limit: vm.limit,
+                            limitExact: vm.limitExact
                         }
             
                         var urlstring = $httpParamSerializer(obj);
@@ -413,6 +442,7 @@
 
         function update() {
             var filtered = vm.all;
+            var filteredorg = vm.testing;
 
             console.log(vm.searchFilters);
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
@@ -424,16 +454,31 @@
                 }
             });
 
+            angular.forEach(vm.origFilters, function (val, key) {
+                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
+                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
+                    // Delete the filter and value
+                    delete vm.origFilters[key];
+                }
+            });
+
             // Filter results by the filters selected
             filtered = $filter('filter')(filtered, vm.searchFilters);
+            filteredorg = $filter('filter')(filteredorg, vm.origFilters);
+
+            
 
             // Sort results by selected option
             vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
+            vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
 
-            console.log("Fitered Tickets:");
-            console.log(vm.filteredTickets);
+            
             console.log("Search Filters:");
             console.log(vm.searchFilters);
+            console.log("Fitered Tickets:");
+            console.log(vm.filteredTickets);
+            console.log("Original Search:");
+            console.log(vm.original);
 
             vm.updateGrid();
         }
@@ -447,6 +492,12 @@
         function loadMore() {
             vm.limit += 6;
             $location.search('limit', vm.limit);
+            vm.updateGrid();
+        }
+
+        function loadMoreExact() {
+            vm.limitExact += 6;
+            $location.search('limitExact', vm.limitExact);
             vm.updateGrid();
         }
 
