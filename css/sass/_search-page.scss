@@ -4,8 +4,13 @@
     .help-section{display: inline-block;margin: 15px 0;}
     .transparent--bg{background: none!important}
     .boxin:last-child{margin-bottom: none!important}
+    .block--main{
+        .title{display: flex;}
+        .errors{margin: 0 0 15px 0;}
+    }
 
     .ticket-item{
+        a{padding: 0px!important}
         .paygimg{float: right;margin: 0 0 25px 0;width: 75%;}
         .payment-icons{display: block;width: 100%;
             > *{display:inline-block; vertical-align: middle;}

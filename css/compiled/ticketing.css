@@ -76,6 +76,18 @@ BREAKPOINTS
 .ticketing-page .boxin:last-child {
   margin-bottom: none !important;
 }
+.ticketing-page .block--main .title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.ticketing-page .block--main .errors {
+  margin: 0 0 15px 0;
+}
+.ticketing-page .ticket-item a {
+  padding: 0px !important;
+}
 .ticketing-page .ticket-item .paygimg {
   float: right;
   margin: 0 0 25px 0;
