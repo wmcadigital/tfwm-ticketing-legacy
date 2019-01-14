@@ -91,14 +91,14 @@
 
 
         <div data-ng-if="ticketing.all.length && ticketing.postJSON.brand == 'Swift PAYG'">
-            <div class="filtered-header boxin bdr-top--navy">
-                <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
-            </div>
+                <div class="filtered-header boxin bdr-top--navy">
+                        <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
+                    </div>
+
 
             <div class="ticketing-results-grid search-container" angular-grid="ticketing.swiftPaygTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
                 ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount"
-                    data-count="{{ticketing.swiftPaygTickets.length}}">
+                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount" data-count="{{ticketing.swiftPaygTickets.length}}">
                     <item></item>
                 </div>
             </div>

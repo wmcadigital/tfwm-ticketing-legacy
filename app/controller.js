@@ -471,26 +471,10 @@
                 }
             });
 
-            angular.forEach(vm.origFilters, function (val, key) {
-                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
-                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
-                    // Delete the filter and value
-                    delete vm.origFilters[key];
-                }
-            });
-
-            angular.forEach(vm.otherFilters, function (val, key) {
-                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
-                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
-                    // Delete the filter and value
-                    delete vm.otherFilters[key];
-                }
-            });
-
             // Filter results by the filters selected
             filtered = $filter('filter')(filtered, vm.searchFilters);
-            filteredorg = $filter('filter')(filteredorg, vm.origFilters);
-            filteredother = $filter('filter')(filteredother, vm.otherFilters);
+            filteredorg = $filter('filter')(filteredorg, vm.searchFilters);
+            filteredother = $filter('filter')(filteredother, vm.searchFilters);
 
             
 
