@@ -42,7 +42,7 @@
 
 
            <!-- Exact matched to search -->
-<div class="filtered-header boxin bdr-top--navy">
+<div data-ng-hide="ticketing.origTickets.length == '0'" class="filtered-header boxin bdr-top--navy">
         <h3 class="filtered-header__heading">{{ticketing.origTickets.length}} Exact matches to your search</h3>
     </div>
 
@@ -60,8 +60,8 @@
 
 
         <!-- Other matches -->
-        <div class="filtered-header boxin bdr-top--navy">
-                <h3 class="filtered-header__heading">xx other matches to your search</h3>
+        <div data-ng-hide="ticketing.origTickets.length == '0'" class="filtered-header boxin bdr-top--navy">
+                <h3 class="filtered-header__heading">{{ticketing.filteredTickets.length}} other matches to your search</h3>
             </div>
 
 

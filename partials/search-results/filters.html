@@ -72,6 +72,13 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.busTravelAreaBtn">
+        <li>
+            <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
+                data-ng-change="ticketing.update();" value="{{filter}}" />
+            <label for="busTravelArea{{$index}}">
+                All Areas ({{ticketing.filteredTickets.length}})
+            </label>
+        </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter" data-ng-if="filter != null">
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
                     data-ng-change="ticketing.update();" value="{{filter}}" />
@@ -93,8 +100,14 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.operatorBtn">
+        <li>
+            <input id="operator00" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
+                data-ng-change="ticketing.update();ticketing.updateFilters();" value="{{filter}}" />
+            <label for="operator00">All Operators ({{ticketing.filteredTickets.length}})
+            </label>
+        </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter" data-ng-if="filter != null">
-                <input id="operator{{$index}}" name="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
+                <input id="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
                     data-ng-change="ticketing.update();ticketing.updateFilters();" value="{{filter}}" />
                 <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}} ({{ (ticketing.filteredTickets | filter: {operator: filter}).length}})
                 </label>
