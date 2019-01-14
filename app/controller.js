@@ -57,6 +57,7 @@
             vm.all = []; //Set results to blank array
             vm.filteredTickets = []; //Define filtered results as blank array
             vm.origTickets = []; //Define original filtered results as blank array
+            vm.otherTickets = []; //Define other filtered results as blank array
             vm.stationList = []; //Define Station list
             vm.stationoocList = []; //Define out of county Station list
             vm.stationicList = []; //Define in county Station list
@@ -154,7 +155,7 @@
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
-                    console.log('orig search');
+                    console.log('Full search');
                     console.log(response);
 
                     var fbus = vm.postedJSON.allowBus || false;
@@ -162,11 +163,26 @@
                     var fmetro = vm.postedJSON.allowMetro || false;
                     var fpassengerType = vm.postedJSON.passengerType || null;
 
-                    vm.testing = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+                    vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
 
-                    console.log('orig search 123');
-                    console.log(vm.testing);
+                    console.log('Exact Matches');
+                    console.log(vm.exactMatch);
 
+                    //compare search reults and exact search results and display difference
+                    var searchAll = vm.all;
+                    var searchExact = vm.exactMatch;
+
+                    for (var i = 0; i < searchExact.length; i++) {
+                        var arrlen = searchAll.length;
+                        for (var j = 0; j < arrlen; j++) {
+                            if (searchExact[i] == searchAll[j]) {
+                                searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
+                            }
+                        }
+                    }
+                    console.log("Array Update");
+                    console.log(searchAll);
+                    vm.otherResults = searchAll;
                 }
             ),
 
@@ -442,7 +458,8 @@
 
         function update() {
             var filtered = vm.all;
-            var filteredorg = vm.testing;
+            var filteredorg = vm.exactMatch;
+            var filteredother = vm.otherResults;
 
             console.log(vm.searchFilters);
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
@@ -462,23 +479,34 @@
                 }
             });
 
+            angular.forEach(vm.otherFilters, function (val, key) {
+                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
+                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
+                    // Delete the filter and value
+                    delete vm.otherFilters[key];
+                }
+            });
+
             // Filter results by the filters selected
             filtered = $filter('filter')(filtered, vm.searchFilters);
             filteredorg = $filter('filter')(filteredorg, vm.origFilters);
+            filteredother = $filter('filter')(filteredother, vm.otherFilters);
 
             
 
             // Sort results by selected option
             vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
             vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
-
+            vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
             
             console.log("Search Filters:");
             console.log(vm.searchFilters);
             console.log("Fitered Tickets:");
             console.log(vm.filteredTickets);
             console.log("Original Search:");
-            console.log(vm.original);
+            console.log(vm.origTickets);
+            console.log("Other Results:");
+            console.log(vm.otherTickets);
 
             vm.updateGrid();
         }

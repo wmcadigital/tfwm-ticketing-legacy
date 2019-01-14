@@ -70,6 +70,12 @@ BREAKPOINTS
   display: inline-block;
   margin: 15px 0;
 }
+.ticketing-page .transparent--bg {
+  background: none !important;
+}
+.ticketing-page .boxin:last-child {
+  margin-bottom: none !important;
+}
 .ticketing-page .ticket-item .paygimg {
   float: right;
   margin: 0 0 25px 0;
