@@ -155,8 +155,8 @@
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
-                    console.log('Full search');
-                    console.log(response);
+                    //console.log('Full search');
+                    //console.log(response);
 
                     var fbus = vm.postedJSON.allowBus || false;
                     var ftrain = vm.postedJSON.allowTrain || false;
@@ -165,8 +165,8 @@
 
                     vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
 
-                    console.log('Exact Matches');
-                    console.log(vm.exactMatch);
+                    //console.log('Exact Matches');
+                    //console.log(vm.exactMatch);
 
                     //compare search reults and exact search results and display difference
                     var searchAll = vm.all;
@@ -180,8 +180,8 @@
                             }
                         }
                     }
-                    console.log("Array Update");
-                    console.log(searchAll);
+                    //console.log("Array Update");
+                    //console.log(searchAll);
                     vm.otherResults = searchAll;
                 }
             ),
@@ -476,21 +476,19 @@
             filteredorg = $filter('filter')(filteredorg, vm.searchFilters);
             filteredother = $filter('filter')(filteredother, vm.searchFilters);
 
-            
-
             // Sort results by selected option
             vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
             vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
             vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
             
-            console.log("Search Filters:");
-            console.log(vm.searchFilters);
-            console.log("Fitered Tickets:");
-            console.log(vm.filteredTickets);
-            console.log("Original Search:");
-            console.log(vm.origTickets);
-            console.log("Other Results:");
-            console.log(vm.otherTickets);
+            //console.log("Search Filters:");
+            //console.log(vm.searchFilters);
+            //console.log("Fitered Tickets:");
+            //console.log(vm.filteredTickets);
+            //console.log("Original Search:");
+            //console.log(vm.origTickets);
+            //console.log("Other Results:");
+            //console.log(vm.otherTickets);
 
             vm.updateGrid();
         }
