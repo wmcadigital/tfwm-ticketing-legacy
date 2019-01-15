@@ -218,16 +218,16 @@
                     });
 
                     //Set initial value of from & to stations if in Url
-                    if ($location.search().stationNames){
-                    var stations = $location.search().stationNames;
-                    var stationSel = stations.toString();
-                    var stationSplit = stationSel.split(',');
-                    $scope.stationFromName = stationSplit[0];
-                    $scope.stationToName = stationSplit[1];
+                    if ($location.search().stationNames) {
+                        var stations = $location.search().stationNames;
+                        var stationSel = stations.toString();
+                        var stationSplit = stationSel.split(',');
+                        $scope.stationFromName = stationSplit[0];
+                        $scope.stationToName = stationSplit[1];
 
-                    var bus = vm.postedJSON.allowBus;
-                    var train = vm.postedJSON.allowTrain;
-                    var metro = vm.postedJSON.allowMetro;
+                        var bus = vm.postedJSON.allowBus;
+                        var train = vm.postedJSON.allowTrain;
+                        var metro = vm.postedJSON.allowMetro;
                     }
 
                     //if 1 or 2 modes selected open up the exclude mode filter
@@ -377,7 +377,7 @@
                             brand: vm.postedJSON.brand,
                             stationNames: vm.postedJSON.stationNames,
                             busTravelArea: vm.searchFilters.busTravelArea,
-                            operator: vm.searchFilters.operator,
+                            //operator: vm.searchFilters.operator,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         }
@@ -399,12 +399,24 @@
                             var ametro = "allowMetro";
                         }
 
+                        var aoperator;
+                        if(vm.searchFilters.operator){
+                            var aoperator = "operator" + "=" + vm.searchFilters.operator;
+                        }
+                        
+                        var test34
+
                         // bus only
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             var searchURL = "/?" + abus + "&" + urlstring;
                             console.log("bus only - " + searchURL);
                             savedFilter.set("url", searchURL);
+
+                            var qwertyqw = vm.searchFilters.operator;
+                            
+                            savedFilter.set("operator", qwertyqw);
                         }
+
                          // bus and train
                          if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             var searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
@@ -447,6 +459,9 @@
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
+
+                        
+
                         //Set local storage with current url for back button
 
 
@@ -490,7 +505,7 @@
             //console.log(vm.origTickets);
             //console.log("Other Results:");
             //console.log(vm.otherTickets);
-
+        
             vm.updateGrid();
         }
 
