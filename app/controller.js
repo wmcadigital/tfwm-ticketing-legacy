@@ -116,6 +116,7 @@
             $location.search().stationNames ||
             $location.search().brand
         ) {
+            vm.clearStation();
             submit(vm.postJSON);
 
         } else {
@@ -295,10 +296,11 @@
             vm.postJSON.allowMetro = null;
         }
 
-         // if no stations set in url make sure from station is set to null
+         // if no stations set in url make sure from station is set to null. This is to fix back function adding [] in from station
          function clearStation() {
-            if ($scope.stationFromName == "[]") {
+            if ($location.search().stationNames == "[]") {
                 $scope.stationFromName = null;//set from station to blank if no stations in url
+                vm.postJSON.stationNames = null;
             }
         }
 
@@ -318,7 +320,7 @@
                 $scope.stationToReq = true;//set to station to required
             } else {
                 $scope.stationFromName = null;
-                vm.postJSON.stationNames[0] = [[]];
+                vm.postJSON.stationNames[0] = null;
                 $scope.stationFromTitle = null;
             }
         }
@@ -346,7 +348,7 @@
                 $scope.stationFromReq = true;//set from station to required
             } else {
                 $scope.stationToName = null;
-                vm.postJSON.stationNames[1] = [[]];
+                vm.postJSON.stationNames[1] = null;
                 $scope.stationToTitle = null;
               }
         };
