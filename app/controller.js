@@ -299,8 +299,7 @@
          // if no stations set in url make sure from station is set to null. This is to fix back function adding [] in from station
          function clearStation() {
             if ($location.search().stationNames == "[]") {
-                $scope.stationFromName = null;//set from station to blank if no stations in url
-                vm.postJSON.stationNames = null;
+                vm.clearFromStation();
             }
         }
 
