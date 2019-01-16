@@ -64,7 +64,6 @@
             vm.swiftPaygTickets = []; //Define Swift PAYG tickets
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
-            vm.orderBy = "ticketCurrentAmount";
             vm.orderBy = "orderSequence";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
             vm.limitExact = parseInt($location.search().limitExact) || 6; //Set paging limit for exact results to what's in url or default to 6
@@ -72,13 +71,14 @@
                 "allowBus": $location.search().allowBus || null,
                 "allowMetro": $location.search().allowMetro || null,
                 "allowTrain": $location.search().allowTrain || null,
+                //"buyOnDirectDebit": $location.search().buyOnDirectDebit || null,
                 "passengerType": $location.search().passengerType || '',
                 "timeBand": $location.search().timeBand || '',
                 "busTravelArea": $location.search().busTravelArea || null,
                 "operator": $location.search().operator || null,
                 "brand": $location.search().brand || null,
                 "stationNames": $location.search().stationNames || [[]]
-
+                
                 // "swiftSearch": true,
                 // "firstClass": true,
                 // "buyOnDirectDebit": true,
@@ -98,6 +98,17 @@
                 // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
+            $scope.buyOnDirectDebitq = $location.search().buyOnDirectDebit || "no dd";
+
+if($scope.buyOnDirectDebitq){
+    console.log("dd is a yes");
+    $scope.buyOnDirectDebit = {
+        isActive: true
+    }
+}
+
+
+
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
@@ -144,8 +155,9 @@
                 operator: vm.postedJSON.operator,
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
+                buyOnDirectDebit: $scope.buyOnDirectDebitq,
                 limit: vm.limit,
-                limitExact: vm.limitExact
+                limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
 
             vm.searchFilters = {};//set scope for search filters and reset on every search
@@ -379,6 +391,7 @@
                             stationNames: vm.postedJSON.stationNames,
                             busTravelArea: vm.searchFilters.busTravelArea,
                             //operator: vm.searchFilters.operator,
+                            buyOnDirectDebit: vm.postedJSON.buyOnDirectDebit,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         }
@@ -477,7 +490,7 @@
             var filtered = vm.all;
             var filteredorg = vm.exactMatch;
             var filteredother = vm.otherResults;
-
+            console.log("Search Filters");
             console.log(vm.searchFilters);
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
             angular.forEach(vm.searchFilters, function (val, key) {
@@ -506,6 +519,10 @@
             //console.log(vm.origTickets);
             //console.log("Other Results:");
             //console.log(vm.otherTickets);
+
+            if($location.search().buyOnDirectDebit){
+                console.log("Direct Debit Test");
+            }
         
             vm.updateGrid();
         }
