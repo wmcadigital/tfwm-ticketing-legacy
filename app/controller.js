@@ -99,8 +99,27 @@
 
             }; //Define postJSON default values
 
-            //if url include buyOnDirectDebit
+            //url parameters
+            //direct debit
             $scope.buyOnDirectDebitParameter = $location.search().buyOnDirectDebit || null;
+
+            //quick buy
+            $scope.buyOnDirectPurchaseParameter = $location.search().buyOnDirectPurchase || null;
+
+             //swift
+             $scope.buyOnSwiftParameter = $location.search().buyOnSwift || null;
+
+             //buy online
+             $scope.hasOnlinePurchaseChannelParameter = $location.search().hasOnlinePurchaseChannel || null;
+
+             //tic
+             $scope.purchaseTicParameter = $location.search().purchaseTic || null;
+
+              //rail station
+              $scope.purchaseRailStationParameter = $location.search().purchaseRailStation || null;
+
+              //payzone
+              $scope.purchasePayzoneParameter = $location.search().purchasePayzone || null;
 
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
@@ -149,6 +168,12 @@
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
                 buyOnDirectDebit: $scope.buyOnDirectDebitParameter,
+                buyOnDirectPurchase: $scope.buyOnDirectPurchaseParameter,
+                buyOnSwift: $scope.buyOnSwiftParameter,
+                hasOnlinePurchaseChannel: $scope.hasOnlinePurchaseChannelParameter,
+                purchaseTic: $scope.purchaseTicParameter,
+                purchaseRailStation: $scope.purchaseRailStationParameter,
+                purchasePayzone: $scope.purchasePayzoneParameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -478,16 +503,90 @@
         }
 
         // control filters according to url parameters
+        //direct debit
         if ($scope.buyOnDirectDebitParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
             //set search filters to include DD
             vm.searchFilters.buyOnDirectDebit = true;
             //Make sure DD is ticked
-            $scope.rememberMeUserInfoCheck=function() { 
+            $scope.buyOnDirectDebitCheck=function() { 
                 return true; 
             }
         }
+
+        //quick buy
+        if ($scope.buyOnDirectPurchaseParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.buyOnDirectPurchase = true;
+            //Make sure quick buy is ticked
+            $scope.buyOnDirectPurchaseCheck=function() { 
+                return true; 
+            }
+        }
+
+        //buy on swift
+        if ($scope.buyOnSwiftParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.buyOnSwift = true;
+            //Make sure quick buy is ticked
+            $scope.buyOnSwiftCheck=function() { 
+                return true; 
+            }
+        }
+
+        //buy online
+        if ($scope.hasOnlinePurchaseChannelParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.hasOnlinePurchaseChannel = true;
+            //Make sure quick buy is ticked
+            $scope.hasOnlinePurchaseChannelCheck=function() { 
+                return true; 
+            }
+        }
+
+        //buy online
+        if ($scope.purchaseTicParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.purchaseTic = true;
+            //Make sure quick buy is ticked
+            $scope.purchaseTicCheck=function() { 
+                return true; 
+            }
+        }
+
+        //buy rail station
+        if ($scope.purchaseRailStationParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.purchaseRailStation = true;
+            //Make sure quick buy is ticked
+            $scope.purchaseRailStationCheck=function() { 
+                return true; 
+            }
+        }
+
+        //payzone
+        if ($scope.purchasePayzoneParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include quick buy
+            vm.searchFilters.purchasePayzone = true;
+            //Make sure quick buy is ticked
+            $scope.purchasePayzoneCheck=function() { 
+                return true; 
+            }
+        }
+        
 
         function update() {
             var filtered = vm.all;

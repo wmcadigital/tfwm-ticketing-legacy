@@ -42,37 +42,37 @@
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.payment">
             <li data-ng-hide="(ticketing.original | filter: {buyOnDirectDebit: true}).length == '0'">
                 <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.buyOnDirectDebit"
-                data-ng-checked="rememberMeUserInfoCheck()" data-ng-change="ticketing.update()" ng-true-value="true" ng-false-value="false" />
+                data-ng-checked="buyOnDirectDebitCheck()" data-ng-change="ticketing.update()" ng-true-value="true" ng-false-value="false" />
                 <label for="purchaseDebit">Direct Debit ({{ (ticketing.original | filter: {buyOnDirectDebit: true}).length}})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {buyOnDirectPurchase: true}).length == '0'">
-                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.buyOnDirectPurchase"
-                    data-ng-change="ticketing.update()" />
+                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.buyOnDirectPurchase" 
+                data-ng-checked="buyOnDirectPurchaseCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchaseDirect">Quick buy ({{ (ticketing.original | filter: {buyOnDirectPurchase: true}).length}})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {buyOnSwift: true}).length == '0'">
                 <input id="purchaseSwift" name="purchaseSwift" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.buyOnSwift"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="buyOnSwiftCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchaseSwift">Swift ({{ (ticketing.original | filter: {buyOnSwift: true}).length }})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {hasOnlinePurchaseChannel: true}).length == '0'">
                 <input id="purchaseOnline" name="purchaseOnline" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.hasOnlinePurchaseChannel"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="hasOnlinePurchaseChannelCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchaseOnline">Buy Online ({{ (ticketing.original | filter: {hasOnlinePurchaseChannel: true}).length }})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {purchaseTic: true}).length == '0'">
                 <input id="purchaseTic" name="purchaseTic" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.purchaseTic"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="purchaseTicCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchaseTic">Buy at Travel Shop ({{ (ticketing.original | filter: {purchaseTic: true}).length}})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {purchaseRailStation: true}).length == '0'">
                 <input id="purchaseRailStation" name="purchaseRailStation" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.purchaseRailStation"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="purchaseRailStationCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchaseRailStation">Buy at Rail Station ({{ (ticketing.original | filter: {purchaseRailStation: true}).length}})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {purchasePayzone: true}).length == '0'">
                 <input id="purchasePayzone" name="purchasePayzone" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.purchasePayzone"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="purchasePayzoneCheck()" data-ng-change="ticketing.update()" />
                 <label for="purchasePayzone">Buy at Payzone Outlet ({{ (ticketing.original | filter: {purchasePayzone: true}).length}})</label>
             </li>
         </ul>
