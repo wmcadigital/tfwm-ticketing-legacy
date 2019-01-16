@@ -5,9 +5,14 @@
         <div class="field">
             <div class="radio-bar">
                 <span>
-                    <input id="radio-1x" name="ordering" title="Price (Low - High)" type="radio" value="ticketCurrentAmount"
+                    <input id="radio-1x" name="ordering" title="Popularity" type="radio" value="orderSequence"
                         data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
-                    <label for="radio-1x">Price (Low - High)</label>
+                    <label for="radio-1x">Popularity</label>
+                </span>
+                <span>
+                    <input id="radio-2x" name="ordering" title="Price (Low - High)" type="radio" value="ticketCurrentAmount"
+                        data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <label for="radio-2x">Price (Low - High)</label>
                 </span>
                 <span>
                     <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-ticketCurrentAmount"

@@ -65,6 +65,7 @@
             vm.loadingStatus = ''; //Set results status to blank
             vm.passValue = ''; //Set pass select value to blank
             vm.orderBy = "ticketCurrentAmount";
+            vm.orderBy = "orderSequence";
             vm.limit = parseInt($location.search().limit) || 6; //Set paging limit to what's in url or default to 6
             vm.limitExact = parseInt($location.search().limitExact) || 6; //Set paging limit for exact results to what's in url or default to 6
             vm.postJSON = {

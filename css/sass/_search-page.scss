@@ -8,6 +8,12 @@
         .title{display: flex;}
         .errors{margin: 0 0 15px 0;}
     }
+    .radio-bar {
+        display: -webkit-box;
+    }
+    .arrdep-filters > div{
+        width: 50%;
+    }
 
     .ticket-item{
         a{padding: 0px!important}
