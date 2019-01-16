@@ -11,19 +11,19 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.mode">
-            <li data-ng-if="!ticketing.postedJSON.allowBus" data-ng-hide="(ticketing.filteredTickets | filter: {allowBus: true}).length == '0'">
+            <li data-ng-if="!ticketing.postedJSON.allowBus"> <!-- (ticketing.filteredTickets | filter: {allowBus: true}).length == '0' -->
                 <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowBus"
                     data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="bus-only-radio">Bus ({{ (ticketing.original | filter: {allowBus: true}).length }})</label>
             </li>
     
-            <li data-ng-if="!ticketing.postedJSON.allowTrain" data-ng-hide="(ticketing.filteredTickets | filter: {allowTrain: true}).length == '0'">
+            <li data-ng-if="!ticketing.postedJSON.allowTrain">
                 <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowTrain"
                     data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="train-only-radio">Train  ({{ (ticketing.original | filter: {allowTrain: true}).length }})</label>
             </li>
     
-            <li data-ng-if="!ticketing.postedJSON.allowMetro" data-ng-hide="(ticketing.filteredTickets | filter: {allowMetro: true}).length == '0'">
+            <li data-ng-if="!ticketing.postedJSON.allowMetro">
                 <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowMetro"
                     data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
                 <label for="tram-only-radio">Tram  ({{ (ticketing.original | filter: {allowMetro: true}).length }})</label>
@@ -34,7 +34,7 @@
     <!-- How to Buy -->
     <div class="filter-block">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('payment')">
-            How to Buy
+            How to Buy - {{ticketing.paymentbuy.length}}
             <i class="material-icons">
                 {{ticketing.filterButtons.payment ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
             </i>
@@ -164,5 +164,3 @@
 </div>
 
 dd = {{buyOnDirectDebitq}}
-
-<p>Bus - {{(ticketing.filteredTickets | filter: {allowBus: true}).length}}</p>

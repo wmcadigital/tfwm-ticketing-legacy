@@ -63,7 +63,7 @@
 
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="origTicketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index" data-count="{{ticketing.origTickets.length}}">
+            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index">
                 <item></item>
             </div>
         </div>
@@ -80,7 +80,7 @@
         <!-- Other Results -->
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.otherTickets | limitTo: ticketing.limit track by $index" data-count="{{ticketing.otherTickets.length}}">
+            <div class="grid" data-ng-repeat="ticket in ticketing.otherTickets | limitTo: ticketing.limit track by $index">
                 <item></item>
             </div>
         </div>
@@ -103,7 +103,7 @@
 
             <div class="ticketing-results-grid search-container" angular-grid="ticketing.swiftPaygTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
                 ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount" data-count="{{ticketing.swiftPaygTickets.length}}">
+                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount">
                     <item></item>
                 </div>
             </div>

@@ -523,7 +523,7 @@ if($scope.buyOnDirectDebitq){
             if($location.search().buyOnDirectDebit){
                 console.log("Direct Debit Test");
             }
-        
+
             vm.updateGrid();
         }
 
