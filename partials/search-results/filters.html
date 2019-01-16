@@ -34,7 +34,7 @@
     <!-- How to Buy -->
     <div class="filter-block">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('payment')">
-            How to Buy - {{ticketing.paymentbuy.length}}
+            How to Buy
             <i class="material-icons">
                 {{ticketing.filterButtons.payment ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
             </i>
@@ -42,7 +42,7 @@
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.payment">
             <li data-ng-hide="(ticketing.original | filter: {buyOnDirectDebit: true}).length == '0'">
                 <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.buyOnDirectDebit"
-                    data-ng-change="ticketing.update()" />
+                data-ng-checked="rememberMeUserInfoCheck()" data-ng-change="ticketing.update()" ng-true-value="true" ng-false-value="false" />
                 <label for="purchaseDebit">Direct Debit ({{ (ticketing.original | filter: {buyOnDirectDebit: true}).length}})</label>
             </li>
             <li data-ng-hide="(ticketing.original | filter: {buyOnDirectPurchase: true}).length == '0'">
@@ -157,10 +157,6 @@
                     </select>
                 </span>
             </div>
-
         </div>
     </div>
-
 </div>
-
-dd = {{buyOnDirectDebitq}}

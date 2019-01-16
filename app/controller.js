@@ -98,16 +98,9 @@
                 // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
-            $scope.buyOnDirectDebitq = $location.search().buyOnDirectDebit || "no dd";
 
-if($scope.buyOnDirectDebitq){
-    console.log("dd is a yes");
-    $scope.buyOnDirectDebit = {
-        isActive: true
-    }
-}
-
-
+            //if url include buyOnDirectDebit
+            $scope.buyOnDirectDebitParameter = $location.search().buyOnDirectDebit || null;
 
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
@@ -155,7 +148,7 @@ if($scope.buyOnDirectDebitq){
                 operator: vm.postedJSON.operator,
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
-                buyOnDirectDebit: $scope.buyOnDirectDebitq,
+                buyOnDirectDebit: $scope.buyOnDirectDebitParameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -474,8 +467,6 @@ if($scope.buyOnDirectDebitq){
                             savedFilter.set("url", searchURL);
                         }
 
-                        
-
                         //Set local storage with current url for back button
 
 
@@ -484,6 +475,18 @@ if($scope.buyOnDirectDebitq){
                     }
                 }, 82, false);
             }, 82, false);
+        }
+
+        // control filters according to url parameters
+        if ($scope.buyOnDirectDebitParameter) {
+            //open how to buy filter
+            vm.filterButtons.payment = !vm.filterButtons.payment;
+            //set search filters to include DD
+            vm.searchFilters.buyOnDirectDebit = true;
+            //Make sure DD is ticked
+            $scope.rememberMeUserInfoCheck=function() { 
+                return true; 
+            }
         }
 
         function update() {
