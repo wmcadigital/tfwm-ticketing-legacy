@@ -71,11 +71,10 @@
                 "allowBus": $location.search().allowBus || null,
                 "allowMetro": $location.search().allowMetro || null,
                 "allowTrain": $location.search().allowTrain || null,
-                //"buyOnDirectDebit": $location.search().buyOnDirectDebit || null,
                 "passengerType": $location.search().passengerType || '',
                 "timeBand": $location.search().timeBand || '',
-                "busTravelArea": $location.search().busTravelArea || null,
-                "operator": $location.search().operator || null,
+                //"busTravelArea": $location.search().busTravelArea || null,
+                //"operator": $location.search().operator || null,
                 "brand": $location.search().brand || null,
                 "stationNames": $location.search().stationNames || [[]]
                 
@@ -120,6 +119,9 @@
 
               //payzone
               $scope.purchasePayzoneParameter = $location.search().purchasePayzone || null;
+
+              //bus travel area
+              $scope.busTravelAreaParameter = $location.search().busTravelArea || null;
 
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
@@ -174,6 +176,7 @@
                 purchaseTic: $scope.purchaseTicParameter,
                 purchaseRailStation: $scope.purchaseRailStationParameter,
                 purchasePayzone: $scope.purchasePayzoneParameter,
+                busTravelArea: $scope.busTravelAreaParameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -587,6 +590,26 @@
             }
         }
         
+        //bus travel area
+        if ($scope.busTravelAreaParameter) {
+            //open how to buy filter
+            vm.filterButtons.busTravelAreaBtn = !vm.filterButtons.busTravelAreaBtn;
+            //set search filters to include quick buy
+            //vm.searchFilters.busTravelArea = true;
+            //Make sure quick buy is ticked
+            $scope.busTravelAreaCheck=function() { 
+                if ($scope.busTravelAreaParameter=="Walsall"){
+                    return true; 
+                }
+            }
+
+            console.log("postes test");
+            console.log($scope.busTravelAreaParameter);
+
+            if ($scope.busTravelAreaParameter=="Walsall"){
+                console.log("Walsall selected");
+            }
+        }
 
         function update() {
             var filtered = vm.all;
@@ -625,6 +648,14 @@
             if($location.search().buyOnDirectDebit){
                 console.log("Direct Debit Test");
             }
+
+            
+
+           // angular.copy(vm.searchFilters.busTravelArea, vm.postedArea); 
+            //vm.postedArea = vm.searchFilters.busTravelArea
+            //console.log("posted area");
+            //console.log(vm.postedArea);
+            //console.log(vm.searchFilters.busTravelArea);
 
             vm.updateGrid();
         }
