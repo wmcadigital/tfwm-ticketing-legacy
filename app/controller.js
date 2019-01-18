@@ -38,7 +38,6 @@
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
-        vm.updated = updated;
         vm.loadMore = loadMore; //function to load more results
         vm.loadMoreExact = loadMoreExact; //function to load more exact results
         vm.filterButtons = {
@@ -124,6 +123,9 @@
               //bus travel area
               $scope.busTravelAreaParameter = $location.search().busTravelArea || null;
 
+              //bus operator
+              $scope.operatorParameter = $location.search().operator || null;
+
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
@@ -178,6 +180,7 @@
                 purchaseRailStation: $scope.purchaseRailStationParameter,
                 purchasePayzone: $scope.purchasePayzoneParameter,
                 busTravelArea: $scope.busTravelAreaParameter,
+                operator: $scope.operatorParameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -412,7 +415,7 @@
                             brand: vm.postedJSON.brand,
                             stationNames: vm.postedJSON.stationNames,
                             busTravelArea: vm.searchFilters.busTravelArea,
-                            //operator: vm.searchFilters.operator,
+                            operator: vm.searchFilters.operator,
                             buyOnDirectDebit: vm.postedJSON.buyOnDirectDebit,
                             limit: vm.limit,
                             limitExact: vm.limitExact
@@ -598,31 +601,14 @@
             //set search filters to include quick buy
             vm.searchFilters.busTravelArea = $scope.busTravelAreaParameter;
             //Make sure quick buy is ticked
-            $scope.busTravelAreaCheck=function() { 
-                console.log("yes");
-                //return true; 
-            }
         }
 
-        $scope.busTravelAreaChecktest=function() { 
-            if ($scope.busTravelAreaParameter=="Walsall"){
-                $scope.busAreaTest = true;
-                return true; 
-                //$scope.checked = true;
-                //$scope.busTravelArea3.checked = true;
-            }
-
-        }
-
-        $scope.busTravelAreaChecknulltest = function() { 
-            console.log("no");
-            return true; 
-        }
-        function updated() {
-            if ($scope.busTravelAreaParameter != null) {
-                console.log("updated test");
-                vm.update();
-            }
+        //bus operator
+        if ($scope.operatorParameter) {
+            //open how to buy filter
+            vm.filterButtons.operatorBtn = !vm.filterButtons.operatorBtn;
+            //set search filters to include quick buy
+            vm.searchFilters.operator = $scope.operatorParameter;
         }
 
         function update() {
