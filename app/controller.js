@@ -38,6 +38,7 @@
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
+        vm.updated = updated;
         vm.loadMore = loadMore; //function to load more results
         vm.loadMoreExact = loadMoreExact; //function to load more exact results
         vm.filterButtons = {
@@ -589,25 +590,38 @@
                 return true; 
             }
         }
-        
+
         //bus travel area
         if ($scope.busTravelAreaParameter) {
             //open how to buy filter
             vm.filterButtons.busTravelAreaBtn = !vm.filterButtons.busTravelAreaBtn;
             //set search filters to include quick buy
-            //vm.searchFilters.busTravelArea = true;
+            vm.searchFilters.busTravelArea = $scope.busTravelAreaParameter;
             //Make sure quick buy is ticked
             $scope.busTravelAreaCheck=function() { 
-                if ($scope.busTravelAreaParameter=="Walsall"){
-                    return true; 
-                }
+                console.log("yes");
+                //return true; 
+            }
+        }
+
+        $scope.busTravelAreaChecktest=function() { 
+            if ($scope.busTravelAreaParameter=="Walsall"){
+                $scope.busAreaTest = true;
+                return true; 
+                //$scope.checked = true;
+                //$scope.busTravelArea3.checked = true;
             }
 
-            console.log("postes test");
-            console.log($scope.busTravelAreaParameter);
+        }
 
-            if ($scope.busTravelAreaParameter=="Walsall"){
-                console.log("Walsall selected");
+        $scope.busTravelAreaChecknulltest = function() { 
+            console.log("no");
+            return true; 
+        }
+        function updated() {
+            if ($scope.busTravelAreaParameter != null) {
+                console.log("updated test");
+                vm.update();
             }
         }
 
@@ -648,8 +662,6 @@
             if($location.search().buyOnDirectDebit){
                 console.log("Direct Debit Test");
             }
-
-            
 
            // angular.copy(vm.searchFilters.busTravelArea, vm.postedArea); 
             //vm.postedArea = vm.searchFilters.busTravelArea

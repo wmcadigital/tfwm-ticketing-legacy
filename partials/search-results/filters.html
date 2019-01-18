@@ -89,14 +89,14 @@
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.busTravelAreaBtn">
         <li>
             <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
-            data-ng-change="ticketing.update();" />
+            data-ng-checked="'{{busTravelAreaParameter}}' == '{{filter}}'" data-ng-change="ticketing.update();" />
             <label for="busTravelArea{{$index}}">
                 All Areas ({{ticketing.original.length}})
             </label>
         </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter" data-ng-if="filter != null">
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
-                data-ng-checked="busTravelAreaCheck()" data-ng-change="ticketing.update();" value="{{filter}}" />
+                data-ng-checked="('{{busTravelAreaParameter}}' == '{{filter}}') ? true : false" data-ng-change="ticketing.update();" value="{{filter}}" data-ng-true-value="true" data-ng-false-value="false" />
                 <label for="busTravelArea{{$index}}">
                     <span data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} ({{ (ticketing.original | filter: {busTravelArea:filter}).length }})</span>
                     <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} ({{ (ticketing.original | filter: {busTravelArea:filter}).length }})</span>
