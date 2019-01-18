@@ -97,6 +97,12 @@
                 // "busTravelArea": "Coventry",
 
             }; //Define postJSON default values
+            $scope.stationFromName = null;// Clear Stations
+            $scope.stationToName = null;
+            $scope.stationFromTitle = null;
+            $scope.stationToTitle = null;
+            $scope.stationFromNameOocZ5 = null;
+            $scope.stationToNameOocZ5 = null;
 
             //url parameters
             //direct debit
@@ -319,12 +325,17 @@
         function clearFilter() {
             $location.url('').replace();
             defaultVars();
-            $scope.stationFromName = null;// Clear Stations
-            $scope.stationToName = null;
-            $scope.stationFromTitle = null;
-            $scope.stationToTitle = null;
-            $scope.stationFromNameOocZ5 = null;
-            $scope.stationToNameOocZ5 = null;
+            //clear filter checkboxes
+            $scope.buyOnDirectDebitCheck=function() { return false;}
+            $scope.buyOnDirectPurchaseCheck=function() { return false; }
+            $scope.buyOnSwiftCheck=function() { return false; }
+            $scope.hasOnlinePurchaseChannelCheck=function() { return false; }
+            $scope.purchaseTicCheck=function() { return false; }
+            $scope.purchaseRailStationCheck=function() { return false; }
+            $scope.purchasePayzoneCheck=function() { return false; }
+
+            
+            
         }
 
         // If a pass is selected deselect all modes
@@ -416,7 +427,13 @@
                             stationNames: vm.postedJSON.stationNames,
                             busTravelArea: vm.searchFilters.busTravelArea,
                             operator: vm.searchFilters.operator,
-                            buyOnDirectDebit: vm.postedJSON.buyOnDirectDebit,
+                            buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
+                            buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
+                            buyOnSwift: vm.searchFilters.buyOnSwift,
+                            hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
+                            purchaseTic: vm.searchFilters.purchaseTic,
+                            purchaseRailStation: vm.searchFilters.purchaseRailStation,
+                            purchasePayzone: vm.searchFilters.purchasePayzone,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         }
