@@ -132,6 +132,12 @@
               //bus operator
               $scope.operatorParameter = $location.search().operator || null;
 
+              //rail from zone
+              $scope.railZoneFromParameter = $location.search().railZoneFrom || null;
+
+              //rail to zone
+              $scope.railZoneToParameter = $location.search().railZoneTo || null;
+
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
         }
@@ -187,6 +193,8 @@
                 purchasePayzone: $scope.purchasePayzoneParameter,
                 busTravelArea: $scope.busTravelAreaParameter,
                 operator: $scope.operatorParameter,
+                railZoneFrom: $scope.railZoneFromParameter,
+                railZoneTo: $scope.railZoneToParameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -434,6 +442,8 @@
                             purchaseTic: vm.searchFilters.purchaseTic,
                             purchaseRailStation: vm.searchFilters.purchaseRailStation,
                             purchasePayzone: vm.searchFilters.purchasePayzone,
+                            railZoneFrom: vm.searchFilters.railZoneFrom,
+                            railZoneTo: vm.searchFilters.railZoneTo,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         }
@@ -626,6 +636,22 @@
             vm.filterButtons.operatorBtn = !vm.filterButtons.operatorBtn;
             //set search filters to include quick buy
             vm.searchFilters.operator = $scope.operatorParameter;
+        }
+
+        //from rail zone
+        if ($scope.railZoneFromParameter) {
+            //open how to buy filter
+            vm.filterButtons.railZoneBtn = !vm.filterButtons.railZoneBtn;
+            //set search filters to include quick buy
+            vm.searchFilters.railZoneFrom = $scope.railZoneFromParameter;
+        }
+
+        //to rail zone
+        if ($scope.railZoneToParameter) {
+            //open how to buy filter
+            vm.filterButtons.railZoneBtn = !vm.filterButtons.railZoneBtn;
+            //set search filters to include quick buy
+            vm.searchFilters.railZoneTo = $scope.railZoneToParameter;
         }
 
         function update() {
