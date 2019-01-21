@@ -24,7 +24,7 @@
             .ticket-swift-logo{width:35px;}
         }
         .event__title{font-size:22px;}
-        .price{font-weight:normal;margin-top:10px;font-size:18px;color:$cyan;line-height: 30px;}
+        .price{font-weight:normal;margin-top:10px;font-size:18px;line-height: 30px;}
         .event__date{margin-bottom:40px;}
         a{margin-bottom:8px;}
        // .bdr-top--orange {padding: 0px}
@@ -127,7 +127,7 @@
 
     .features {background: #f4f4f4!important;padding:20px;}
 
-    .price{font-weight:normal;margin-top:0;font-size:24px;color:$cyan;}
+    .price{font-weight:normal;margin-top:0;font-size:24px;}
 
     .summary {font-weight: bold}
 .useon {font-weight: bold}
@@ -231,7 +231,7 @@ label.plain-small{
 
   .buy .price {color: $darkgrey;font-size: 30px;font-weight: 600;line-height: 45px;}
 
-  .buy .online {color: $cyan}
+  .online {color: $cyan!important}
 
   .hideCheck{display:none}
   .hideSave{display:none}

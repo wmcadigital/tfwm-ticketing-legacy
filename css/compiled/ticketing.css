@@ -121,7 +121,6 @@ BREAKPOINTS
   font-weight: normal;
   margin-top: 10px;
   font-size: 18px;
-  color: #009fe3;
   line-height: 30px;
 }
 .ticketing-page .ticket-item .event__date {
@@ -264,7 +263,6 @@ BREAKPOINTS
   font-weight: normal;
   margin-top: 0;
   font-size: 24px;
-  color: #009fe3;
 }
 .ticketing-page .summary {
   font-weight: bold;
@@ -400,8 +398,8 @@ BREAKPOINTS
   font-weight: 600;
   line-height: 45px;
 }
-.ticketing-page .buy .online {
-  color: #009fe3;
+.ticketing-page .online {
+  color: #009fe3 !important;
 }
 .ticketing-page .hideCheck {
   display: none;
