@@ -21,7 +21,7 @@
             </p>
             <p data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="!ticket.all.swiftCurrentAmount || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="online">when you buy online</p>
 
-            <p data-ng-if="ticket.all.onlineCurrentAmount" data-ng-hide="" class="online">when you buy online</p>
+            <p data-ng-if="ticket.all.onlineCurrentAmount" class="online">when you buy online</p>
 
             <p data-ng-if="ticket.all.purchaseTic || ticket.all.purchaseRailStation" data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount">buy from</p>
 
@@ -287,9 +287,7 @@
 
         <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
             target="_blank">
-            {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" :
-            ticket.all.hasOnlinePurchaseChannel
-            ? "Quick buy" : "Buy at travel centre"}}</a>
+            Buy on Swift</a>
     </div>
 </modal-dialog>
 
