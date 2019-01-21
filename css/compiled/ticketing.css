@@ -401,6 +401,9 @@ BREAKPOINTS
 .ticketing-page .online {
   color: #009fe3 !important;
 }
+.ticketing-page .itemContent .price {
+  color: #009fe3 !important;
+}
 .ticketing-page .hideCheck {
   display: none;
 }
