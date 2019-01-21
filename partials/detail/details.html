@@ -32,8 +32,8 @@
         <hr>
             <p class="price online">
                 <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
-                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">{{ticket.all.ticketCurrentAmount
-                    | currency:"£"}}</span>
+                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.onlineCurrentAmount != '0'">{{ticket.all.onlineCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'" data-ng-hide="ticket.all.onlineCurrentAmount">{{ticket.all.ticketCurrentAmount | currency:"£"}}</span>
                 <span data-ng-if="ticket.all.ticketCurrentAmount == '0'">{{ticket.all.priceOverride}}</span>
                 <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
@@ -43,7 +43,7 @@
                 <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
             </p>
             <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
-            <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'">
+            <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'" data-ng-hide="ticket.all.onlineCurrentAmount">
                     <li data-ng-if="ticket.all.purchaseTic"><a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres"
                             target="_blank">Travel Information Centre</a></li>
                     <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a></li>
@@ -76,7 +76,7 @@
                         {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                         ? "Quick buy" : "Buy at travel centre"}}</a>
         
-                    <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount">
+                    <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount || ticket.all.onlineCurrentAmount && ticket.all.ticketCurrentAmount">
                         <hr>
                         <p class="price">{{ticket.all.ticketCurrentAmount | currency:"£"}}
                             <span data-ng-if="ticket.all.validityId == 450930002">
