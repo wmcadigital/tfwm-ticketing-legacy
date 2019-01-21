@@ -55,22 +55,22 @@
                         </span> Bus</li>
                     <li data-ng-if="ticket.all.purchaseOnMetro">On Metro</li>
                 </ul>
-                <div data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
-                        Buy this ticket using your
-                        <a href="/#/ticket/810">Swift Pay as You Go card</a>
-                        <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
-                            <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
-                            <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
-                        <span data-ng-if="!ticket.all.purchaseOnBus && ticket.all.PurchaseOnTrain && !ticket.all.purchaseOnMetro">on
-                            Train.
-                        </span>
-                        <span data-ng-if="!ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
-                            Metro.
-                        </span>
-                        <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
-                            Bus or Metro.</span>
-                        <br><br><a href="/#/ticket/810"><img src="/assets/PAYG-ticket.png" alt="Buy Swift Pay As you Go Card" /></a>
-                        </div>
+                <!-- Swift PAYG credit tickets -->
+                <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
+                    when you buy this ticket with Swift PAYG credit
+                    <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
+                        <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
+                        <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
+                    <span data-ng-if="!ticket.all.purchaseOnBus && ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
+                        Train.
+                    </span>
+                    <span data-ng-if="!ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
+                        Metro.
+                    </span>
+                    <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
+                        Bus or Metro.</span>
+                    <a href="/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
+                </div>
         
                     <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
                         {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
