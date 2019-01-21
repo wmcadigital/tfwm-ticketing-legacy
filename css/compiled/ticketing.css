@@ -85,11 +85,11 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
-.ticketing-page .radio-bar {
-  display: -webkit-box;
+.ticketing-page .arrdep-filters .radio-bar {
+  display: -webkit-box !important;
 }
 .ticketing-page .arrdep-filters > div {
-  width: 50%;
+  width: 50% !important;
 }
 .ticketing-page .ticket-item a {
   padding: 0px !important;

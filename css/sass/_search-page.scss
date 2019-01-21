@@ -8,11 +8,14 @@
         .title{display: flex;}
         .errors{margin: 0 0 15px 0;}
     }
-    .radio-bar {
-        display: -webkit-box;
-    }
-    .arrdep-filters > div{
-        width: 50%;
+
+    .arrdep-filters{
+        .radio-bar {
+            display: -webkit-box!important;
+        }
+        > div{
+            width: 50%!important;
+        }
     }
 
     .ticket-item{

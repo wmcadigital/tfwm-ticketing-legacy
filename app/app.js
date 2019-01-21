@@ -43,9 +43,9 @@
                 reloadOnSearch: false
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/#'
             });
-        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
     }
 
     // Safely instantiate dataLayer  - This is so Google Analytics tracks properly via Tag Manager
