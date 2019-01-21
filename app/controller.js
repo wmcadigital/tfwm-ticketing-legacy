@@ -4,7 +4,6 @@
         .module('ticketingApp.Controller', ["angucomplete-alt"])
         .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', '$httpParamSerializer', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
-        .filter('modeFilter', [modeFilter])
         .filter('escapeFilter', [escapeFilter])
         .filter('replace', [replace])
         .filter('buyOnSwiftPAYG', [buyOnSwiftPAYG])
@@ -165,7 +164,7 @@
         }
 
         //if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevent tickets are shown
-        if($location.search().brand == 'Swift PAYG'){
+        if($location.search().brand === 'Swift PAYG'){
             getSwiftPAYG();
             swiftPAYG();
         }
@@ -180,8 +179,6 @@
                 allowMetro: vm.postedJSON.allowMetro,
                 passengerType: vm.postedJSON.passengerType,
                 timeBand: vm.postedJSON.timeBand,
-                busTravelArea: vm.postedJSON.busTravelArea,
-                operator: vm.postedJSON.operator,
                 brand: vm.postedJSON.brand,
                 stationNames: vm.postedJSON.stationNames,
                 buyOnDirectDebit: $scope.buyOnDirectDebitParameter,
@@ -214,7 +211,6 @@
                     var fbus = vm.postedJSON.allowBus || false;
                     var ftrain = vm.postedJSON.allowTrain || false;
                     var fmetro = vm.postedJSON.allowMetro || false;
-                    var fpassengerType = vm.postedJSON.passengerType || null;
 
                     vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
 
@@ -228,7 +224,7 @@
                     for (var i = 0; i < searchExact.length; i++) {
                         var arrlen = searchAll.length;
                         for (var j = 0; j < arrlen; j++) {
-                            if (searchExact[i] == searchAll[j]) {
+                            if (searchExact[i] === searchAll[j]) {
                                 searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
                             }
                         }
@@ -249,22 +245,22 @@
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
                         // Check the operator and push it to filters
-                        if (vm.filterButtons.operator.indexOf(item.operator) == -1) {
+                        if (vm.filterButtons.operator.indexOf(item.operator) === -1) {
                             vm.filterButtons.operator.push(item.operator);
                         }
 
                         // Check bus area
-                        if (vm.filterButtons.busTravelArea.indexOf(item.busTravelArea) == -1) {
+                        if (vm.filterButtons.busTravelArea.indexOf(item.busTravelArea) === -1) {
                             vm.filterButtons.busTravelArea.push(item.busTravelArea);
                         }
 
                         // Check rail zone from
-                        if (vm.filterButtons.railZoneFrom.indexOf(item.railZoneFrom) == -1) {
+                        if (vm.filterButtons.railZoneFrom.indexOf(item.railZoneFrom) === -1) {
                             vm.filterButtons.railZoneFrom.push(item.railZoneFrom);
                         }
 
                         // Check rail zone to
-                        if (vm.filterButtons.railZoneTo.indexOf(item.railZoneTo) == -1) {
+                        if (vm.filterButtons.railZoneTo.indexOf(item.railZoneTo) === -1) {
                             vm.filterButtons.railZoneTo.push(item.railZoneTo);
                         }
                     });
@@ -276,19 +272,19 @@
                         var stationSplit = stationSel.split(',');
                         $scope.stationFromName = stationSplit[0];
                         $scope.stationToName = stationSplit[1];
-
-                        var bus = vm.postedJSON.allowBus;
-                        var train = vm.postedJSON.allowTrain;
-                        var metro = vm.postedJSON.allowMetro;
                     }
 
+                    var bus = vm.postedJSON.allowBus;
+                    var train = vm.postedJSON.allowTrain;
+                    var metro = vm.postedJSON.allowMetro;
+
                     //if 1 or 2 modes selected open up the exclude mode filter
-                    if (bus != null || bus != null && train != null || bus != null && metro != null || train != null && metro != null) {
+                    if (bus !== null || bus !== null && train !== null || bus !== null && metro !== null || train !== null && metro !== null) {
                         vm.toggleFilter('mode');
                     }
 
                     //if all modes selected open up how to buy filter
-                    if (bus != null && train != null && metro != null) {
+                    if (bus !== null && train !==null && metro !== null) {
                         vm.toggleFilter('payment');
                     }
 
@@ -306,7 +302,7 @@
                     //console.log(response);
                     vm.stationList = response;
                 }
-            )
+            );
         }
 
         // Get Out Of County Rail stations for autocomplete
@@ -316,7 +312,7 @@
                     var OutOfCounty = $filter('filter')(response, { OutOfCounty: "true" });
                     vm.stationoocList = OutOfCounty;
                 }
-            )
+            );
         }
 
         // Get In County Rail stations for autocomplete
@@ -326,7 +322,7 @@
                     var inCounty = $filter('filter')(response, { OutOfCounty: "false" });
                     vm.stationicList = inCounty;
                 }
-            )
+            );
         }
 
         // Reset search
@@ -334,13 +330,13 @@
             $location.url('').replace();
             defaultVars();
             //clear filter checkboxes
-            $scope.buyOnDirectDebitCheck=function() { return false;}
-            $scope.buyOnDirectPurchaseCheck=function() { return false; }
-            $scope.buyOnSwiftCheck=function() { return false; }
-            $scope.hasOnlinePurchaseChannelCheck=function() { return false; }
-            $scope.purchaseTicCheck=function() { return false; }
-            $scope.purchaseRailStationCheck=function() { return false; }
-            $scope.purchasePayzoneCheck=function() { return false; }
+            $scope.buyOnDirectDebitCheck=function() { return false;};
+            $scope.buyOnDirectPurchaseCheck=function() { return false; };
+            $scope.buyOnSwiftCheck=function() { return false; };
+            $scope.hasOnlinePurchaseChannelCheck=function() { return false; };
+            $scope.purchaseTicCheck=function() { return false; };
+            $scope.purchaseRailStationCheck=function() { return false; };
+            $scope.purchasePayzoneCheck=function() { return false; };
 
             
             
@@ -355,7 +351,7 @@
 
          // if no stations set in url make sure from station is set to null. This is to fix back function adding [] in from station
          function clearStation() {
-            if ($location.search().stationNames == "[]") {
+            if ($location.search().stationNames === "[]") {
                 vm.clearFromStation();
             }
         }
@@ -379,7 +375,7 @@
                 vm.postJSON.stationNames[0] = null;
                 $scope.stationFromTitle = null;
             }
-        }
+        };
 
          // Reset from station
          function clearFromStation() {
@@ -446,35 +442,35 @@
                             railZoneTo: vm.searchFilters.railZoneTo,
                             limit: vm.limit,
                             limitExact: vm.limitExact
-                        }
+                        };
             
                         var urlstring = $httpParamSerializer(obj);
 
                         var abus;
                         if(vm.postedJSON.allowBus){
-                            var abus = "allowBus";
+                            abus = "allowBus";
                         }
 
                         var atrain;
                         if(vm.postedJSON.allowTrain){
-                            var atrain = "allowTrain";
+                            atrain = "allowTrain";
                         }
 
                         var ametro;
                         if(vm.postedJSON.allowMetro){
-                            var ametro = "allowMetro";
+                            ametro = "allowMetro";
                         }
 
                         var aoperator;
                         if(vm.searchFilters.operator){
                             var aoperator = "operator" + "=" + vm.searchFilters.operator;
                         }
-                        
-                        var test34
+
+                        var searchURL;
 
                         // bus only
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + abus + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + urlstring;
                             console.log("bus only - " + searchURL);
                             savedFilter.set("url", searchURL);
 
@@ -485,43 +481,43 @@
 
                          // bus and train
                          if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // bus and metro
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train only
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + atrain + "&" + urlstring;
+                            searchURL = "/?" + atrain + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train and metro
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // metro only
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + ametro + "&" + urlstring;
+                            searchURL = "/?" + ametro + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // all modes selected
                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // no modes selected
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            var searchURL = "/?" + urlstring;
+                            searchURL = "/?" + urlstring;
                             console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
@@ -546,7 +542,7 @@
             //Make sure DD is ticked
             $scope.buyOnDirectDebitCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //quick buy
@@ -558,7 +554,7 @@
             //Make sure quick buy is ticked
             $scope.buyOnDirectPurchaseCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //buy on swift
@@ -570,7 +566,7 @@
             //Make sure quick buy is ticked
             $scope.buyOnSwiftCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //buy online
@@ -582,7 +578,7 @@
             //Make sure quick buy is ticked
             $scope.hasOnlinePurchaseChannelCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //buy online
@@ -594,7 +590,7 @@
             //Make sure quick buy is ticked
             $scope.purchaseTicCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //buy rail station
@@ -606,7 +602,7 @@
             //Make sure quick buy is ticked
             $scope.purchaseRailStationCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //payzone
@@ -618,7 +614,7 @@
             //Make sure quick buy is ticked
             $scope.purchasePayzoneCheck=function() { 
                 return true; 
-            }
+            };
         }
 
         //bus travel area
@@ -663,7 +659,7 @@
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
             angular.forEach(vm.searchFilters, function (val, key) {
                 // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
-                if ((key.indexOf('allow') !== -1 && val) || (val == false && key.indexOf('allow') === -1)) {
+                if ((key.indexOf('allow') !== -1 && val) || (val === false && key.indexOf('allow') === -1)) {
                     // Delete the filter and value
                     delete vm.searchFilters[key];
                 }
@@ -731,13 +727,13 @@
         function swiftPAYG() {
             vm.passValue = vm.postJSON.brand;
 
-            if (vm.passValue == 'Swift PAYG') {
+            if (vm.passValue === 'Swift PAYG') {
                 vm.isHideCheck = !vm.isHideCheck;
                 vm.postJSON.passengerType = null;
                 vm.postJSON.timeBand = null;
                 vm.postJSON.stationNames = [];
             } else { // Clear stationNames list if non-rail pass selected
-                if (vm.passValue == 'nbus' || vm.passValue == 'National Express' || vm.passValue == 'Diamond Bus' || vm.passValue == 'Stagecoach' || vm.passValue == 'Swift PAYG' || vm.passValue == 'West Midlands Metro') {
+                if (vm.passValue === 'nbus' || vm.passValue === 'National Express' || vm.passValue === 'Diamond Bus' || vm.passValue === 'Stagecoach' || vm.passValue === 'Swift PAYG' || vm.passValue === 'West Midlands Metro') {
                     vm.postJSON.stationNames = [[]];
                 }
             }
@@ -746,7 +742,7 @@
         function ntrainOOC() {
             vm.passValue = vm.postJSON.brand;
 
-            if (vm.passValue == 'ntrain - Out of County') {
+            if (vm.passValue === 'ntrain - Out of County') {
                 vm.isHideCheck = !vm.isHideCheck;
 
             }
@@ -759,12 +755,12 @@
                     console.log('swift search');
                     console.log(response);
                 }
-            )
+            );
         }
 
-        function save(data) {
-            savedFilter.set("stateless", data);
-        }
+        //function save(data) {
+        //    savedFilter.set("stateless", data);
+        //}
 
         //set current date to test for ticketFutureDate
         $scope.date = new Date();
@@ -775,32 +771,6 @@
         return function (text) {
             return text ? String(text).replace(/<[^>]+>/gm, '') : '';
         };
-    }
-
-    function modeFilter() {
-        return function (items, filters) {
-            var arr = [];
-            var filters = {};
-
-            //for every filter selected
-            angular.forEach(filters, function (val, key) {
-                //console.log(key, val);
-                //console.log(item[key]);
-                if (val) {
-
-                    // if(angular.equals(item[key], val)){
-                    //     arr.push(item);
-                    // }
-                }
-            })
-
-            //for every item in array
-            angular.forEach(items, function (item) {
-
-            })
-
-            return arr;
-        }
     }
 
     function escapeFilter() {
@@ -885,7 +855,6 @@
         vm.toggleModalTrain = toggleModalTrain;
         vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
-        vm.checkStations = checkStations;
         vm.limit = 4; //Set paging limit for Alt tickets
 
         // Function to get the ticket data with api call
@@ -902,8 +871,8 @@
                                     //console.log(vm.relatedTickets[item.id]);
 
                                 }
-                            )
-                        })
+                            );
+                        });
                     } else {
 
                     }
@@ -913,7 +882,7 @@
                                 vm.relatedTerms = response;
 
                             }
-                        )
+                        );
                     } else {
 
                     }
@@ -923,20 +892,16 @@
                                 console.log(response);
 
                             }
-                        )
+                        );
                     backButtonLogic(); //Determine back button logic
                 }
-            )
+            );
         }
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
             console.log(vm.backToSearch);
             $scope.stationFromNameZone = '1';
-        }
-
-        function checkStations() {
-            console.log("hello" + sessionStorage.getItem(savedData));
         }
 
         initialise(vm.ticketID); //initialise API to get ticket
@@ -969,10 +934,6 @@
         vm.modalShownSwift = false;
         function toggleModalSwift() {
             vm.modalShownSwift = !vm.modalShownSwift;
-        }
-
-        function toggleHelp() {
-            vm.helpShown = !vm.helpShown;
         }
 
         $timeout(function () {
@@ -1069,12 +1030,12 @@
                         pane.selected = false;
                     });
                     pane.selected = true;
-                }
+                };
 
                 this.addPane = function (pane) {
                     if (panes.length == 0) $scope.select(pane);
                     panes.push(pane);
-                }
+                };
             }],
             template:
                 '<div class="cfx">' +
@@ -1115,7 +1076,7 @@
                 $scope.isShown = false;
                 this.showHover = function () {
                     $scope.isShown = $scope.isShown == true ? false : true;
-                }
+                };
             },
             transclude: true,
             link: function (scope, element, attrs, ctrl) {
@@ -1131,7 +1092,7 @@
                 '<span class="close modal__close"></span>' +
                 '<span data-ng-bind-html="copy"></span>' +
                 '</p>'
-        }
+        };
     }
 
 })();
