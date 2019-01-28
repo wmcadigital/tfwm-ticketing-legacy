@@ -102,6 +102,11 @@ BREAKPOINTS
   margin: 0 0 25px 0;
   width: 75%;
 }
+@media (max-width: 32.125em) {
+  .ticketing-page .ticket-item .paygimg {
+    width: 65%;
+  }
+}
 .ticketing-page .ticket-item .payment-icons {
   display: block;
   width: 100%;
@@ -325,6 +330,9 @@ BREAKPOINTS
 }
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
+  -webkit-border-image: url(../assets/Swift-BG.png);
+       -o-border-image: url(../assets/Swift-BG.png);
+          border-image: url(../assets/Swift-BG.png);
 }
 .ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
   display: none !important;
