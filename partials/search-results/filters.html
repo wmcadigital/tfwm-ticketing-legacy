@@ -94,7 +94,7 @@
                 All Areas ({{ticketing.original.length}})
             </label>
         </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter" data-ng-if="filter != null">
+            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {busTravelArea: filter}).length}} == '0'">
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
                 data-ng-checked="('{{busTravelAreaParameter}}' == '{{filter}}') ? true : false" data-ng-change="ticketing.update();" value="{{filter}}" data-ng-true-value="true" data-ng-false-value="false" />
                 <label for="busTravelArea{{$index}}">
@@ -121,7 +121,7 @@
             <label for="operator00">All Operators ({{ticketing.original.length}})
             </label>
         </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter" data-ng-if="filter != null">
+            <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {operator: filter}).length}} == '0'">
                 <input id="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
                     data-ng-change="ticketing.update();" value="{{filter}}" />
                 <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}} ({{ (ticketing.original | filter: {operator: filter}).length}})
@@ -145,7 +145,7 @@
                     <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneFrom'
                         data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
-                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneFrom" value="{{option}}">Zone {{option}}</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneFrom" value="{{option}}" data-ng-hide="{{option}} == null">Zone {{option}}</option>
                     </select>
                 </span>
                 <br/><br/>
@@ -153,7 +153,7 @@
                 <span class="stylized-select">
                     <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneTo' data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
-                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneTo" value="{{option}}">Zone {{option}}</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneTo | orderBy:'+option'" value="{{option}}" data-ng-hide="{{option}} == null">Zone {{option}}</option>
                     </select>
                 </span>
             </div>

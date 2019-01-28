@@ -43,7 +43,7 @@
                 reloadOnSearch: false
             })
             .otherwise({
-                redirectTo: '/#'
+                redirectTo: '/'
             });
         // $locationProvider.html5Mode(true);
     }

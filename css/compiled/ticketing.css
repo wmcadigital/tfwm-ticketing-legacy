@@ -88,6 +88,9 @@ BREAKPOINTS
 .ticketing-page .arrdep-filters .radio-bar {
   display: -webkit-box !important;
 }
+.ticketing-page .arrdep-filters .radio-bar input:checked + label {
+  height: 100% !important;
+}
 .ticketing-page .arrdep-filters > div {
   width: 50% !important;
 }
@@ -324,6 +327,9 @@ BREAKPOINTS
   border-top: 6px solid #773289;
 }
 .ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
+  display: none !important;
+}
+.ticketing-page .ng-hide {
   display: none !important;
 }
 .ticketing-page .block--side p {

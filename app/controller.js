@@ -34,6 +34,7 @@
         vm.clearFromStation = clearFromStation; //Function to clear from station
         vm.clearToStation = clearToStation; //Function to clear to station
         vm.clearStation = clearStation; //Function to clear to from station if not in url - []
+        vm.refreshGrid = refreshGrid; //Function to refresh grid
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -295,6 +296,59 @@
             )
         }
 
+        function update() {
+            var filtered = vm.all;
+            var filteredorg = vm.exactMatch;
+            var filteredother = vm.otherResults;
+            console.log("Search Filters");
+            console.log(vm.searchFilters);
+            // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
+            angular.forEach(vm.searchFilters, function (val, key) {
+                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
+                if ((key.indexOf('allow') !== -1 && val) || (val === false && key.indexOf('allow') === -1)) {
+                    // Delete the filter and value
+                    delete vm.searchFilters[key];
+                }
+            });
+
+            // Filter results by the filters selected
+            filtered = $filter('filter')(filtered, vm.searchFilters);
+            filteredorg = $filter('filter')(filteredorg, vm.searchFilters);
+            filteredother = $filter('filter')(filteredother, vm.searchFilters);
+
+            // Sort results by selected option
+            vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
+            vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
+            vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
+            
+            console.log("Search Filters:");
+            console.log(vm.searchFilters);
+            console.log("Fitered Tickets:");
+            console.log(vm.filteredTickets);
+            console.log("Original Search:");
+            console.log(vm.origTickets);
+            console.log("Other Results:");
+            console.log(vm.otherTickets);
+
+           // angular.copy(vm.searchFilters.busTravelArea, vm.postedArea); 
+            //vm.postedArea = vm.searchFilters.busTravelArea
+            //console.log("posted area");
+            //console.log(vm.postedArea);
+            //console.log(vm.searchFilters.busTravelArea);
+
+        //update grid if less then 6 items
+                //console.log(vm.origTickets.length)
+                //if(vm.origTickets.length < '6'){
+                //vm.limitExact = vm.origTickets.length;
+                //console.log(vm.limitExact);
+               // vm.refreshGrid();
+                        
+                //}
+            
+
+            vm.updateGrid();
+        }
+
         // Get Rail stations for autocomplete
         function getStations() {
             ticketingService.getStations().then(
@@ -414,6 +468,11 @@
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
         }
 
+        function refreshGrid() {
+            angularGridInstance.ticketResults.refresh();
+            angularGridInstance.origTicketResults.refresh();
+        }
+
         function updateGrid() {
             $timeout(function () {
                 $timeout(function () {
@@ -459,11 +518,6 @@
                         var ametro;
                         if(vm.postedJSON.allowMetro){
                             ametro = "allowMetro";
-                        }
-
-                        var aoperator;
-                        if(vm.searchFilters.operator){
-                            var aoperator = "operator" + "=" + vm.searchFilters.operator;
                         }
 
                         var searchURL;
@@ -523,13 +577,13 @@
                         }
 
                         //Set local storage with current url for back button
-
+                        vm.loadingStatus = "success";
 
                         //savedFilter.set("url", "/?" + urlstring);
                         //savedFilter.set("url", $location.url()); //Set local storage with current url for back button
                     }
-                }, 82, false);
-            }, 82, false);
+                }, 0, false);
+            }, 0, false);
         }
 
         // control filters according to url parameters
@@ -648,53 +702,6 @@
             vm.filterButtons.railZoneBtn = !vm.filterButtons.railZoneBtn;
             //set search filters to include quick buy
             vm.searchFilters.railZoneTo = $scope.railZoneToParameter;
-        }
-
-        function update() {
-            var filtered = vm.all;
-            var filteredorg = vm.exactMatch;
-            var filteredother = vm.otherResults;
-            console.log("Search Filters");
-            console.log(vm.searchFilters);
-            // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
-            angular.forEach(vm.searchFilters, function (val, key) {
-                // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
-                if ((key.indexOf('allow') !== -1 && val) || (val === false && key.indexOf('allow') === -1)) {
-                    // Delete the filter and value
-                    delete vm.searchFilters[key];
-                }
-            });
-
-            // Filter results by the filters selected
-            filtered = $filter('filter')(filtered, vm.searchFilters);
-            filteredorg = $filter('filter')(filteredorg, vm.searchFilters);
-            filteredother = $filter('filter')(filteredother, vm.searchFilters);
-
-            // Sort results by selected option
-            vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
-            vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
-            vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
-            
-            //console.log("Search Filters:");
-            //console.log(vm.searchFilters);
-            //console.log("Fitered Tickets:");
-            //console.log(vm.filteredTickets);
-            //console.log("Original Search:");
-            //console.log(vm.origTickets);
-            //console.log("Other Results:");
-            //console.log(vm.otherTickets);
-
-            if($location.search().buyOnDirectDebit){
-                console.log("Direct Debit Test");
-            }
-
-           // angular.copy(vm.searchFilters.busTravelArea, vm.postedArea); 
-            //vm.postedArea = vm.searchFilters.busTravelArea
-            //console.log("posted area");
-            //console.log(vm.postedArea);
-            //console.log(vm.searchFilters.busTravelArea);
-
-            vm.updateGrid();
         }
 
         //swift
@@ -938,7 +945,7 @@
 
         $timeout(function () {
             vm.loadingStatus = "success";
-        }, 2000);
+        }, 0);
 
     }
 

@@ -12,6 +12,7 @@
     .arrdep-filters{
         .radio-bar {
             display: -webkit-box!important;
+            input:checked + label{height: 100%!important}
         }
         > div{
             width: 50%!important;
@@ -181,6 +182,8 @@ label.plain-small{
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display:none!important;
   }
+
+  .ng-hide{display:none!important;}
 
   .block--side{
     p{margin-top: 5px;margin-bottom: 5px;}
