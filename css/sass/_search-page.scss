@@ -10,8 +10,14 @@
     }
 
     .arrdep-filters{
+        @include breakpoint(mobileonly) {
+            display:flex;
+        }
         .radio-bar {
-            display: -webkit-box!important;
+            display: -webkit-box;
+            @include breakpoint(mobileonly) {
+                display:inline-block;
+            }
             input:checked + label{height: 100%!important}
         }
         > div{

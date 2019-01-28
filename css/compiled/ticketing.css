@@ -85,8 +85,21 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
+@media (max-width: 32.125em) {
+  .ticketing-page .arrdep-filters {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
 .ticketing-page .arrdep-filters .radio-bar {
-  display: -webkit-box !important;
+  display: -webkit-box;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .arrdep-filters .radio-bar {
+    display: inline-block;
+  }
 }
 .ticketing-page .arrdep-filters .radio-bar input:checked + label {
   height: 100% !important;
