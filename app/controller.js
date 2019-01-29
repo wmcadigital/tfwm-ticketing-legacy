@@ -6,7 +6,6 @@
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('escapeFilter', [escapeFilter])
         .filter('replace', [replace])
-        .filter('buyOnSwiftPAYG', [buyOnSwiftPAYG])
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
@@ -72,29 +71,8 @@
                 "allowTrain": $location.search().allowTrain || null,
                 "passengerType": $location.search().passengerType || '',
                 "timeBand": $location.search().timeBand || '',
-                //"busTravelArea": $location.search().busTravelArea || null,
-                //"operator": $location.search().operator || null,
                 "brand": $location.search().brand || null,
                 "stationNames": $location.search().stationNames || [[]]
-                
-                // "swiftSearch": true,
-                // "firstClass": true,
-                // "buyOnDirectDebit": true,
-                // "buyOnDirectPurchase": true,
-                // "buyOnSwift": true,
-                // "purchaseOnMetro": true,
-                // "purchaseNatEx": true,
-                // "purchasePayzone": true,
-                // "purchaseRailStation": true,
-                // "purchaseTic": true,
-                // "purchaseOnBus": true,
-                // "passengerType": "Adult",
-                // "brandId": "43ab38e2-9cb6-e411-842f-0050568f6585",
-                // "brand": "nbus",
-                // "operatorId": "84b5d172-9cb6-e411-9265-0050568f6584",
-                // "operator": "National Express Coventry",
-                // "busTravelArea": "Coventry",
-
             }; //Define postJSON default values
             $scope.stationFromName = null;// Clear Stations
             $scope.stationToName = null;
@@ -110,32 +88,32 @@
             //quick buy
             $scope.buyOnDirectPurchaseParameter = $location.search().buyOnDirectPurchase || null;
 
-             //swift
-             $scope.buyOnSwiftParameter = $location.search().buyOnSwift || null;
+            //swift
+            $scope.buyOnSwiftParameter = $location.search().buyOnSwift || null;
 
-             //buy online
-             $scope.hasOnlinePurchaseChannelParameter = $location.search().hasOnlinePurchaseChannel || null;
+            //buy online
+            $scope.hasOnlinePurchaseChannelParameter = $location.search().hasOnlinePurchaseChannel || null;
 
-             //tic
-             $scope.purchaseTicParameter = $location.search().purchaseTic || null;
+            //tic
+            $scope.purchaseTicParameter = $location.search().purchaseTic || null;
 
-              //rail station
-              $scope.purchaseRailStationParameter = $location.search().purchaseRailStation || null;
+            //rail station
+            $scope.purchaseRailStationParameter = $location.search().purchaseRailStation || null;
 
-              //payzone
-              $scope.purchasePayzoneParameter = $location.search().purchasePayzone || null;
+            //payzone
+            $scope.purchasePayzoneParameter = $location.search().purchasePayzone || null;
 
-              //bus travel area
-              $scope.busTravelAreaParameter = $location.search().busTravelArea || null;
+            //bus travel area
+            $scope.busTravelAreaParameter = $location.search().busTravelArea || null;
 
-              //bus operator
-              $scope.operatorParameter = $location.search().operator || null;
+            //bus operator
+            $scope.operatorParameter = $location.search().operator || null;
 
-              //rail from zone
-              $scope.railZoneFromParameter = $location.search().railZoneFrom || null;
+            //rail from zone
+            $scope.railZoneFromParameter = $location.search().railZoneFrom || null;
 
-              //rail to zone
-              $scope.railZoneToParameter = $location.search().railZoneTo || null;
+            //rail to zone
+            $scope.railZoneToParameter = $location.search().railZoneTo || null;
 
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
@@ -205,17 +183,10 @@
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
-                    //console.log('Full search');
-                    //console.log(response);
-
                     var fbus = vm.postedJSON.allowBus || false;
                     var ftrain = vm.postedJSON.allowTrain || false;
                     var fmetro = vm.postedJSON.allowMetro || false;
-
                     vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
-
-                    //console.log('Exact Matches');
-                    //console.log(vm.exactMatch);
 
                     //compare search reults and exact search results and display difference
                     var searchAll = vm.all;
@@ -229,8 +200,6 @@
                             }
                         }
                     }
-                    //console.log("Array Update");
-                    //console.log(searchAll);
                     vm.otherResults = searchAll;
                 }
             ),
@@ -239,8 +208,6 @@
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
-                    console.log('ticket search');
-                    console.log(response);
                     vm.original = response;
                     // For each item in the results
                     angular.forEach(vm.all, function (item) {
@@ -290,7 +257,6 @@
 
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
-
                 }
             )
         }
@@ -299,8 +265,7 @@
             var filtered = vm.all;
             var filteredorg = vm.exactMatch;
             var filteredother = vm.otherResults;
-            console.log("Search Filters");
-            console.log(vm.searchFilters);
+
             // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
             angular.forEach(vm.searchFilters, function (val, key) {
                 // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
@@ -320,29 +285,14 @@
             vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
             vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
             
-            console.log("Search Filters:");
-            console.log(vm.searchFilters);
-            console.log("Fitered Tickets:");
-            console.log(vm.filteredTickets);
-            console.log("Original Search:");
-            console.log(vm.origTickets);
-            console.log("Other Results:");
-            console.log(vm.otherTickets);
-
-           // angular.copy(vm.searchFilters.busTravelArea, vm.postedArea); 
-            //vm.postedArea = vm.searchFilters.busTravelArea
-            //console.log("posted area");
-            //console.log(vm.postedArea);
-            //console.log(vm.searchFilters.busTravelArea);
-
-        //update grid if less then 6 items
-                //console.log(vm.origTickets.length)
-                //if(vm.origTickets.length < '6'){
-                //vm.limitExact = vm.origTickets.length;
-                //console.log(vm.limitExact);
-                        
-                //}
-            
+            //console.log("Search Filters:");
+            //console.log(vm.searchFilters);
+            //console.log("Fitered Tickets:");
+            //console.log(vm.filteredTickets);
+            //console.log("Original Search:");
+            //console.log(vm.origTickets);
+            //console.log("Other Results:");
+            //console.log(vm.otherTickets);
 
             vm.updateGrid();
         }
@@ -515,62 +465,55 @@
                         // bus only
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             searchURL = "/?" + abus + "&" + urlstring;
-                            console.log("bus only - " + searchURL);
+                            //console.log("bus only - " + searchURL);
                             savedFilter.set("url", searchURL);
-
                             var qwertyqw = vm.searchFilters.operator;
-                            
                             savedFilter.set("operator", qwertyqw);
                         }
 
                          // bus and train
                          if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // bus and metro
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
                             searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train only
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             searchURL = "/?" + atrain + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train and metro
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
                             searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // metro only
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
                             searchURL = "/?" + ametro + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // all modes selected
                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
                             searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // no modes selected
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
                             searchURL = "/?" + urlstring;
-                            console.log(searchURL);
+                            //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
-
-                        //Set local storage with current url for back button
                         vm.loadingStatus = "success";
-
-                        //savedFilter.set("url", "/?" + urlstring);
-                        //savedFilter.set("url", $location.url()); //Set local storage with current url for back button
                     }
                 }, 0, false);
             }, 0, false);
@@ -605,9 +548,9 @@
         if ($scope.buyOnSwiftParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
-            //set search filters to include quick buy
+            //set search filters to include swift
             vm.searchFilters.buyOnSwift = true;
-            //Make sure quick buy is ticked
+            //Make sure swift is ticked
             $scope.buyOnSwiftCheck=function() { 
                 return true; 
             };
@@ -617,21 +560,21 @@
         if ($scope.hasOnlinePurchaseChannelParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
-            //set search filters to include quick buy
+            //set search filters to include buy online
             vm.searchFilters.hasOnlinePurchaseChannel = true;
-            //Make sure quick buy is ticked
+            //Make sure buy online is ticked
             $scope.hasOnlinePurchaseChannelCheck=function() { 
                 return true; 
             };
         }
 
-        //buy online
+        //buy at tic
         if ($scope.purchaseTicParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
-            //set search filters to include quick buy
+            //set search filters to include buy from tic
             vm.searchFilters.purchaseTic = true;
-            //Make sure quick buy is ticked
+            //Make sure tic is ticked
             $scope.purchaseTicCheck=function() { 
                 return true; 
             };
@@ -641,9 +584,9 @@
         if ($scope.purchaseRailStationParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
-            //set search filters to include quick buy
+            //set search filters to include rail station
             vm.searchFilters.purchaseRailStation = true;
-            //Make sure quick buy is ticked
+            //Make sure rail stationis ticked
             $scope.purchaseRailStationCheck=function() { 
                 return true; 
             };
@@ -653,9 +596,9 @@
         if ($scope.purchasePayzoneParameter) {
             //open how to buy filter
             vm.filterButtons.payment = !vm.filterButtons.payment;
-            //set search filters to include quick buy
+            //set search filters to include payzone
             vm.searchFilters.purchasePayzone = true;
-            //Make sure quick buy is ticked
+            //Make sure payzone is ticked
             $scope.purchasePayzoneCheck=function() { 
                 return true; 
             };
@@ -663,55 +606,57 @@
 
         //bus travel area
         if ($scope.busTravelAreaParameter) {
-            //open how to buy filter
+            //open bus area filter
             vm.filterButtons.busTravelAreaBtn = !vm.filterButtons.busTravelAreaBtn;
-            //set search filters to include quick buy
+            //set search filters to include bus area
             vm.searchFilters.busTravelArea = $scope.busTravelAreaParameter;
-            //Make sure quick buy is ticked
         }
 
         //bus operator
         if ($scope.operatorParameter) {
-            //open how to buy filter
+            //open bus operator filter
             vm.filterButtons.operatorBtn = !vm.filterButtons.operatorBtn;
-            //set search filters to include quick buy
+            //set search filters to include bus operator
             vm.searchFilters.operator = $scope.operatorParameter;
         }
 
         //from rail zone
         if ($scope.railZoneFromParameter) {
-            //open how to buy filter
+            //open rail zones filter
             vm.filterButtons.railZoneBtn = !vm.filterButtons.railZoneBtn;
-            //set search filters to include quick buy
+            //set search filters to include from rail zone
             vm.searchFilters.railZoneFrom = $scope.railZoneFromParameter;
         }
 
         //to rail zone
         if ($scope.railZoneToParameter) {
-            //open how to buy filter
+            //open rail zone filter
             vm.filterButtons.railZoneBtn = !vm.filterButtons.railZoneBtn;
-            //set search filters to include quick buy
+            //set search filters to include to rail zone
             vm.searchFilters.railZoneTo = $scope.railZoneToParameter;
         }
 
-        //swift
+        //toggle swift modal popup
         vm.modalShownSwift = false;
         function toggleModalSwift() {
             vm.modalShownSwift = !vm.modalShownSwift;
         }
 
+        //other matches and swift load more button
         function loadMore() {
             vm.limit += 6;
             $location.search('limit', vm.limit);
             vm.updateGrid();
         }
 
+        //exact matches load more button
         function loadMoreExact() {
             vm.limitExact += 6;
             $location.search('limitExact', vm.limitExact);
             vm.updateGrid();
         }
 
+        //toggle filter accordions
         function toggleFilter(type) {
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
@@ -721,9 +666,9 @@
             .collapse('hide');
         }
 
+        //if pass is swift payg
         function swiftPAYG() {
             vm.passValue = vm.postJSON.brand;
-
             if (vm.passValue === 'Swift PAYG') {
                 vm.isHideCheck = !vm.isHideCheck;
                 vm.postJSON.passengerType = null;
@@ -736,28 +681,24 @@
             }
         }
 
+        //if brand is ntrain out of county
         function ntrainOOC() {
             vm.passValue = vm.postJSON.brand;
-
             if (vm.passValue === 'ntrain - Out of County') {
                 vm.isHideCheck = !vm.isHideCheck;
-
             }
         }
 
+        //get tickets you can buy on swift
         function getSwiftPAYG() {
             ticketingService.getSwiftSearch().then(
                 function (response) {
                     vm.swiftPaygTickets = response;
-                    console.log('swift search');
-                    console.log(response);
+                    //console.log('swift search');
+                    //console.log(response);
                 }
             );
         }
-
-        //function save(data) {
-        //    savedFilter.set("stateless", data);
-        //}
 
         //set current date to test for ticketFutureDate
         $scope.date = new Date();
@@ -770,23 +711,15 @@
         };
     }
 
+    //escape filter for ticket t&c's
     function escapeFilter() {
         return function (text) {
             return text ? String(text).replace(/\n/gm, '<br><br>') : '';
         };
     }
 
+    //filter to replace text
     function replace() {
-        return function (input, from, to) {
-            if(input === undefined) {
-              return;
-            }
-            var regex = new RegExp(from, 'g');
-            return input.replace(regex, to);
-          };
-    }
-
-    function buyOnSwiftPAYG() {
         return function (input, from, to) {
             if(input === undefined) {
               return;
