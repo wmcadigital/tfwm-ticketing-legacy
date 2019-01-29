@@ -343,9 +343,6 @@ BREAKPOINTS
 }
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
-  -webkit-border-image: url(../../assets/Swift-BG.png);
-       -o-border-image: url(../../assets/Swift-BG.png);
-          border-image: url(../../assets/Swift-BG.png);
 }
 .ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
   display: none !important;

@@ -34,7 +34,6 @@
         vm.clearFromStation = clearFromStation; //Function to clear from station
         vm.clearToStation = clearToStation; //Function to clear to station
         vm.clearStation = clearStation; //Function to clear to from station if not in url - []
-        vm.refreshGrid = refreshGrid; //Function to refresh grid
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -341,7 +340,6 @@
                 //if(vm.origTickets.length < '6'){
                 //vm.limitExact = vm.origTickets.length;
                 //console.log(vm.limitExact);
-               // vm.refreshGrid();
                         
                 //}
             
@@ -391,9 +389,6 @@
             $scope.purchaseTicCheck=function() { return false; };
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
-
-            
-            
         }
 
         // If a pass is selected deselect all modes
@@ -466,11 +461,6 @@
             vm.postJSON.stationNames = [[]];
             $scope.stationToReq = false;//set to station to not required
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
-        }
-
-        function refreshGrid() {
-            angularGridInstance.ticketResults.refresh();
-            angularGridInstance.origTicketResults.refresh();
         }
 
         function updateGrid() {
