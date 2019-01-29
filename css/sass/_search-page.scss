@@ -187,7 +187,7 @@ label.plain-small{
 .bdr-top--cyan{border-top: 6px solid $cyan}
 .nnetwork{border-top: 6px solid $cyan}
 .bdr-top--purple{border-top: 6px solid $purple}
-
+.mobile--void {display: none!important}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display:none!important;
@@ -303,7 +303,7 @@ label.plain-small{
 
 /* Tooltip Styling */
 
-.tooltip{
+.tooltip{z-index: 99999;
     a{color: white;text-decoration: underline;}
     @include breakpoint(mobileonly) {
         right: 5px;

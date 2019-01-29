@@ -344,6 +344,9 @@ BREAKPOINTS
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
 }
+.ticketing-page .mobile--void {
+  display: none !important;
+}
 .ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
   display: none !important;
 }
@@ -482,6 +485,9 @@ BREAKPOINTS
 }
 .ticketing-page .ng-modal-dialog.boxin.modal-content {
   padding: 0px 15px 15px 15px !important;
+}
+.ticketing-page .tooltip {
+  z-index: 99999;
 }
 .ticketing-page .tooltip a {
   color: white;
