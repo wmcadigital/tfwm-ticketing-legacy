@@ -116,6 +116,9 @@
 
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
+
+            $scope.stationFromReq = false;//set from station to not required
+            $scope.stationToReq = false;//set from station to not required
         }
 
         defaultVars();
@@ -406,8 +409,8 @@
         function getStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    console.log("rail stations");
-                    console.log(response);
+                    //console.log("rail stations");
+                    //console.log(response);
                     vm.stationList = response;
                 }
             );
@@ -417,8 +420,8 @@
         function getoocStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    console.log("out of county stations");
-                    console.log(response);
+                    //console.log("out of county stations");
+                    //console.log(response);
                     var OutOfCounty = $filter('filter')(response, { outOfCounty: "true" });
                     vm.stationoocList = OutOfCounty;
                 }
