@@ -297,6 +297,112 @@
             vm.updateGrid();
         }
 
+        function updateGrid() {
+            $timeout(function () {
+                $timeout(function () {
+                    if (vm.filteredTickets.length) {
+                        angularGridInstance.ticketResults.refresh();
+                        angularGridInstance.origTicketResults.refresh();
+
+                        // set storage url according to search filters
+
+                        //set data to bbe displayed in serializer
+                        var obj = {
+                            passengerType: vm.postedJSON.passengerType,
+                            timeBand: vm.postedJSON.timeBand,
+                            brand: vm.postedJSON.brand,
+                            stationNames: vm.postedJSON.stationNames,
+                            busTravelArea: vm.searchFilters.busTravelArea,
+                            operator: vm.searchFilters.operator,
+                            buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
+                            buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
+                            buyOnSwift: vm.searchFilters.buyOnSwift,
+                            hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
+                            purchaseTic: vm.searchFilters.purchaseTic,
+                            purchaseRailStation: vm.searchFilters.purchaseRailStation,
+                            purchasePayzone: vm.searchFilters.purchasePayzone,
+                            railZoneFrom: vm.searchFilters.railZoneFrom,
+                            railZoneTo: vm.searchFilters.railZoneTo,
+                            limit: vm.limit,
+                            limitExact: vm.limitExact
+                        };
+            
+                        var urlstring = $httpParamSerializer(obj);
+
+                        var abus;
+                        if(vm.postedJSON.allowBus){
+                            abus = "allowBus";
+                        }
+
+                        var atrain;
+                        if(vm.postedJSON.allowTrain){
+                            atrain = "allowTrain";
+                        }
+
+                        var ametro;
+                        if(vm.postedJSON.allowMetro){
+                            ametro = "allowMetro";
+                        }
+
+                        var searchURL;
+
+                        // bus only
+                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            searchURL = "/?" + abus + "&" + urlstring;
+                            //console.log("bus only - " + searchURL);
+                            savedFilter.set("url", searchURL);
+                            var qwertyqw = vm.searchFilters.operator;
+                            savedFilter.set("operator", qwertyqw);
+                        }
+
+                         // bus and train
+                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // bus and metro
+                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // train only
+                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            searchURL = "/?" + atrain + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // train and metro
+                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // metro only
+                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            searchURL = "/?" + ametro + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // all modes selected
+                        if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
+                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        // no modes selected
+                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
+                            searchURL = "/?" + urlstring;
+                            //console.log(searchURL);
+                            savedFilter.set("url", searchURL);
+                        }
+                        vm.loadingStatus = "success";
+                    }
+                }, 0, false);
+            }, 0, false);
+        }
+
         // Get Rail stations for autocomplete
         function getStations() {
             ticketingService.getStations().then(
@@ -414,112 +520,6 @@
             vm.postJSON.stationNames = [[]];
             $scope.stationToReq = false;//set to station to not required
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
-        }
-
-        function updateGrid() {
-            $timeout(function () {
-                $timeout(function () {
-                    if (vm.filteredTickets.length) {
-                        angularGridInstance.ticketResults.refresh();
-                        angularGridInstance.origTicketResults.refresh();
-
-                        // set storage url according to search filters
-
-                        //set data to bbe displayed in serializer
-                        var obj = {
-                            passengerType: vm.postedJSON.passengerType,
-                            timeBand: vm.postedJSON.timeBand,
-                            brand: vm.postedJSON.brand,
-                            stationNames: vm.postedJSON.stationNames,
-                            busTravelArea: vm.searchFilters.busTravelArea,
-                            operator: vm.searchFilters.operator,
-                            buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
-                            buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
-                            buyOnSwift: vm.searchFilters.buyOnSwift,
-                            hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
-                            purchaseTic: vm.searchFilters.purchaseTic,
-                            purchaseRailStation: vm.searchFilters.purchaseRailStation,
-                            purchasePayzone: vm.searchFilters.purchasePayzone,
-                            railZoneFrom: vm.searchFilters.railZoneFrom,
-                            railZoneTo: vm.searchFilters.railZoneTo,
-                            limit: vm.limit,
-                            limitExact: vm.limitExact
-                        };
-            
-                        var urlstring = $httpParamSerializer(obj);
-
-                        var abus;
-                        if(vm.postedJSON.allowBus){
-                            abus = "allowBus";
-                        }
-
-                        var atrain;
-                        if(vm.postedJSON.allowTrain){
-                            atrain = "allowTrain";
-                        }
-
-                        var ametro;
-                        if(vm.postedJSON.allowMetro){
-                            ametro = "allowMetro";
-                        }
-
-                        var searchURL;
-
-                        // bus only
-                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + urlstring;
-                            //console.log("bus only - " + searchURL);
-                            savedFilter.set("url", searchURL);
-                            var qwertyqw = vm.searchFilters.operator;
-                            savedFilter.set("operator", qwertyqw);
-                        }
-
-                         // bus and train
-                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // bus and metro
-                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // train only
-                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // train and metro
-                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // metro only
-                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + ametro + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // all modes selected
-                        if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // no modes selected
-                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + urlstring;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        vm.loadingStatus = "success";
-                    }
-                }, 0, false);
-            }, 0, false);
         }
 
         // control filters according to url parameters
