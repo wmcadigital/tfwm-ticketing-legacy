@@ -46,7 +46,6 @@
             "railZoneTo": []
         }; //set an object for the filters show/hide toggle to fall into
         vm.toggleFilter = toggleFilter;
-        vm.toggleFilterClose = toggleFilterClose;
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
         vm.ntrainOOC = ntrainOOC; //Function for setting out of county tickets
         vm.toggleModalSwift = toggleModalSwift;
@@ -258,7 +257,7 @@
                     vm.update(); //When feed is loaded run it through the filters
                     vm.loadingStatus = 'success';
                 }
-            )
+            );
         }
 
         function update() {
@@ -662,11 +661,6 @@
         //toggle filter accordions
         function toggleFilter(type) {
             vm.filterButtons[type] = !vm.filterButtons[type];
-        }
-
-        function toggleFilterClose() {
-            $('.filter-title')
-            .collapse('hide');
         }
 
         //if pass is swift payg
