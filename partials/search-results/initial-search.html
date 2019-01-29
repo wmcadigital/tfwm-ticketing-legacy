@@ -166,7 +166,7 @@
             <div class="fields passselect nga-fast nga-fade" style="margin:0px">
                 <label class="plain-small hide" for="travellingTo_value">To <span data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">Out
                         of County Station</span></label>
-                <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">
+                <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == 'ntrain'">
                     <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
                         input-class="form-control form-control-small" match-class="highlight" initial-value="stationToName" 
@@ -174,7 +174,15 @@
                     </div>
                 </div>
             </div>
-            <!-- If pass is Out of County-->
+            <!-- If pass is ntrain-->
+            <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'" data-ng-if="ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType" data-ng-init="ticketing.geticStations();">
+                    <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
+                        local-data="ticketing.stationicList" search-fields="name" title-field="name" minlength="1"
+                        input-class="form-control form-control-small" match-class="highlight" field-required="true"
+                        field-required-class="required" initial-value="stationToName">
+                    </div>
+                </div>
+            <!-- If pass is ntrain - Out of County-->
             <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType" data-ng-init="ticketing.getoocStations();">
                 <div angucomplete-alt id="stationTo" placeholder="To Out of County Station" pause="100" selected-object="stationTo"
                     local-data="ticketing.stationoocList" search-fields="name" title-field="name" minlength="1"
@@ -207,6 +215,7 @@
         class="help-section grid-12">
         <label class="blue btn-link">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
         <div ng-show="stationNotListed" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
+            <p data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">Is your station out of county? Try changing the pass to ntrain - Out of County</p>
             <p>Please refer to <a href="http://www.nationalrail.co.uk/" target="_blank">National Rail</a> for journeys
                 from or to a station not listed</p>
         </div>

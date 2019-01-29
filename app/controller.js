@@ -301,7 +301,8 @@
         function getStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    //console.log(response);
+                    console.log("rail stations");
+                    console.log(response);
                     vm.stationList = response;
                 }
             );
@@ -311,7 +312,9 @@
         function getoocStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    var OutOfCounty = $filter('filter')(response, { OutOfCounty: "true" });
+                    console.log("out of county stations");
+                    console.log(response);
+                    var OutOfCounty = $filter('filter')(response, { outOfCounty: "true" });
                     vm.stationoocList = OutOfCounty;
                 }
             );
@@ -321,7 +324,7 @@
         function geticStations() {
             ticketingService.getStations().then(
                 function (response) {
-                    var inCounty = $filter('filter')(response, { OutOfCounty: "false" });
+                    var inCounty = $filter('filter')(response, { outOfCounty: "false" });
                     vm.stationicList = inCounty;
                 }
             );
