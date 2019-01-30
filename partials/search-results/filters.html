@@ -145,7 +145,7 @@
                     <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneFrom'
                         data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
-                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneFrom" value="{{option}}" data-ng-hide="{{option}} == null">Zone {{option}}</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneFrom | filter:''" value="{{option}}">Zone {{option}}</option>
                     </select>
                 </span>
                 <br/><br/>
@@ -153,7 +153,7 @@
                 <span class="stylized-select">
                     <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneTo' data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
-                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneTo | orderBy:'+option'" value="{{option}}" data-ng-hide="{{option}} == null">Zone {{option}}</option>
+                        <option data-ng-repeat="option in ticketing.filterButtons.railZoneTo | orderBy:'+option' | filter:''" value="{{option}}">Zone {{option}}</option>
                     </select>
                 </span>
             </div>
