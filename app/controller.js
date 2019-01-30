@@ -183,32 +183,7 @@
             //console.log('this is posted');
             //console.log(vm.postedJSON);
 
-            //work out ticket which exactly match search
-            ticketingService.ticketSearch(data).then(
-                function (response) {
-                    vm.all = response;
-                    var fbus = vm.postedJSON.allowBus || false;
-                    var ftrain = vm.postedJSON.allowTrain || false;
-                    var fmetro = vm.postedJSON.allowMetro || false;
-                    vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
-
-                    //compare search reults and exact search results and display difference
-                    var searchAll = vm.all;
-                    var searchExact = vm.exactMatch;
-
-                    for (var i = 0; i < searchExact.length; i++) {
-                        var arrlen = searchAll.length;
-                        for (var j = 0; j < arrlen; j++) {
-                            if (searchExact[i] === searchAll[j]) {
-                                searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
-                            }
-                        }
-                    }
-                    vm.otherResults = searchAll;
-                }
-            ),
-
-            //work out all tickets available
+            //work out exact and all tickets available
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
@@ -235,6 +210,25 @@
                             vm.filterButtons.railZoneTo.push(item.railZoneTo);
                         }
                     });
+
+                    var fbus = vm.postedJSON.allowBus || false;
+                    var ftrain = vm.postedJSON.allowTrain || false;
+                    var fmetro = vm.postedJSON.allowMetro || false;
+                    vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+
+                    //compare search reults and exact search results and display difference
+                    var searchAll = vm.all;
+                    var searchExact = vm.exactMatch;
+                    vm.otherResults = searchAll;
+
+                    for (var i = 0; i < searchExact.length; i++) {
+                        var arrlen = searchAll.length;
+                        for (var j = 0; j < arrlen; j++) {
+                            if (searchExact[i] === searchAll[j]) {
+                                searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
+                            }
+                        }
+                    }
 
                     //Set initial value of from & to stations if in Url
                     if ($location.search().stationNames) {
