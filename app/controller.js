@@ -23,7 +23,7 @@
         ; 
         
     // CONTROLLER
-    /* @ngInject */
+    
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
 
@@ -1004,12 +1004,12 @@
     function tooltip() {
         return {
             restrict: 'A',
-            controller: function ($scope, $element) {
+            controller: ["$scope", function ($scope, $element) {
                 $scope.isShown = false;
                 this.showHover = function () {
                     $scope.isShown = $scope.isShown == true ? false : true;
                 };
-            },
+            }],
             transclude: true,
             link: function (scope, element, attrs, ctrl) {
                 scope.copy = attrs.tooltipc;
