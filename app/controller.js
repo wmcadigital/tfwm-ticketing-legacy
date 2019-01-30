@@ -180,8 +180,8 @@
 
             vm.searchFilters = {};//set scope for search filters and reset on every search
             vm.origFilters = {};//set scope for original search filters and reset on every search
-            console.log('this is posted');
-            console.log(vm.postedJSON);
+            //console.log('this is posted');
+            //console.log(vm.postedJSON);
 
             //work out ticket which exactly match search
             ticketingService.ticketSearch(data).then(
@@ -291,7 +291,7 @@
             
             //console.log("Search Filters:");
             //console.log(vm.searchFilters);
-            //console.log("Fitered Tickets:");
+            ///console.log("Fitered Tickets:");
             //console.log(vm.filteredTickets);
             //console.log("Original Search:");
             //console.log(vm.origTickets);
@@ -355,8 +355,6 @@
                             searchURL = "/?" + abus + "&" + urlstring;
                             //console.log("bus only - " + searchURL);
                             savedFilter.set("url", searchURL);
-                            var qwertyqw = vm.searchFilters.operator;
-                            savedFilter.set("operator", qwertyqw);
                         }
 
                          // bus and train
@@ -452,6 +450,7 @@
             $scope.purchaseTicCheck=function() { return false; };
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
+            savedFilter.set("url", '');
         }
 
         // If a pass is selected deselect all modes
@@ -794,7 +793,7 @@
             ticketingService.getTicket(data).then(
                 function (response) {
                     vm.all = response;
-                    console.log(response);
+                    //console.log(response);
                     if (vm.all.relatedTickets.length) {
                         angular.forEach(vm.all.relatedTickets, function (item) {
                             ticketingService.getSimpleTicket(item.id).then(
@@ -821,7 +820,7 @@
                         ticketingService.getOperators().then(
                             function (response) {
                                 vm.operatorList = response;
-                                console.log(response);
+                                //console.log(response);
 
                             }
                         );
@@ -832,7 +831,7 @@
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
-            console.log(vm.backToSearch);
+            //console.log(vm.backToSearch);
             $scope.stationFromNameZone = '1';
         }
 
