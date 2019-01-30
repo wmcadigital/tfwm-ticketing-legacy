@@ -241,7 +241,9 @@ BREAKPOINTS
   color: #666666 !important;
   background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
 }
-.ticketing-page form input.ng-invalid-autocomplete-required, .ticketing-page .field-required-class, .ticketing-page input.ng-invalid-field-required-class {
+.ticketing-page form input.ng-invalid-autocomplete-required,
+.ticketing-page .field-required-class,
+.ticketing-page input.ng-invalid-field-required-class {
   border: red 1px solid !important;
 }
 .ticketing-page .errors {
@@ -344,10 +346,17 @@ BREAKPOINTS
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
 }
-.ticketing-page .mobile--void {
-  display: none !important;
+@media (max-width: 32.125em) {
+  .ticketing-page .mobile--void {
+    display: none !important;
+  }
 }
-.ticketing-page [ng\:cloak], .ticketing-page [ng-cloak], .ticketing-page [data-ng-cloak], .ticketing-page [x-ng-cloak], .ticketing-page .ng-cloak, .ticketing-page .x-ng-cloak {
+.ticketing-page [ng\:cloak],
+.ticketing-page [ng-cloak],
+.ticketing-page [data-ng-cloak],
+.ticketing-page [x-ng-cloak],
+.ticketing-page .ng-cloak,
+.ticketing-page .x-ng-cloak {
   display: none !important;
 }
 .ticketing-page .ng-hide {
@@ -682,7 +691,8 @@ BREAKPOINTS
   padding-right: 80px;
 }
 
-label.plain, .label.plain {
+label.plain,
+.label.plain {
   display: table !important;
 }
 
