@@ -94,7 +94,7 @@
                 All Areas ({{ticketing.original.length}})
             </label>
         </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {busTravelArea: filter}).length}} == '0'">
+            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {busTravelArea: filter}).length}} == '0'">
                 <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
                 data-ng-checked="('{{busTravelAreaParameter}}' == '{{filter}}') ? true : false" data-ng-change="ticketing.update();" value="{{filter}}" data-ng-true-value="true" data-ng-false-value="false" />
                 <label for="busTravelArea{{$index}}">
@@ -121,7 +121,7 @@
             <label for="operator00">All Operators ({{ticketing.original.length}})
             </label>
         </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {operator: filter}).length}} == '0'">
+            <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {operator: filter}).length}} == '0'">
                 <input id="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
                     data-ng-change="ticketing.update();" value="{{filter}}" />
                 <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}} ({{ (ticketing.original | filter: {operator: filter}).length}})
