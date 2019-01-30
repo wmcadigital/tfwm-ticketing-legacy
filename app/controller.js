@@ -14,14 +14,16 @@
         .directive('detailDetails', [detailDetails])
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
-        //.directive('detailRelated', [detailRelated])
         .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
         .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
         .directive('pane', [pane])
-        .directive('tooltip', [tooltip]);   
+        .directive('tooltip', [tooltip])
+        ; 
+        
     // CONTROLLER
+    /* @ngInject */
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
 
@@ -910,7 +912,7 @@
         };
     }
 
-    function operators() {
+    function operators() { 
         return {
             templateUrl: 'partials/detail/operator.html',
             restrict: 'E'
@@ -1024,5 +1026,4 @@
                 '</p>'
         };
     }
-
 })();
