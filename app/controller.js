@@ -183,7 +183,7 @@
             //console.log('this is posted');
             //console.log(vm.postedJSON);
 
-            //work out exact and all tickets available
+            //work out all tickets available
             ticketingService.ticketSearch(data).then(
                 function (response) {
                     vm.all = response;
@@ -219,7 +219,6 @@
                     //compare search reults and exact search results and display difference
                     var searchAll = vm.all;
                     var searchExact = vm.exactMatch;
-                    vm.otherResults = searchAll;
 
                     for (var i = 0; i < searchExact.length; i++) {
                         var arrlen = searchAll.length;
@@ -229,6 +228,7 @@
                             }
                         }
                     }
+                    vm.otherResults = searchAll;
 
                     //Set initial value of from & to stations if in Url
                     if ($location.search().stationNames) {
