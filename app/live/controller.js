@@ -8,7 +8,6 @@
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('item', ['$timeout', 'angularGridInstance', item])
-        .directive('trainTimetables', [trainTimetables])
         .controller('TimetableCtrl', ['$http', '$routeParams', '$location', 'timetablesService', 'getUnique', 'getURL', '$interval', '$filter', '$timeout', '$window', 'updatePageView', timetableCtrl])
         .directive('topSection', [topSection])
         .directive('route', [route])
@@ -185,13 +184,6 @@
                     }
                 }, 0);
             }
-        };
-    }
-
-    function trainTimetables() {
-        return {
-            templateUrl: '//static.centro.org.uk/nwmAssets/apps/timetables/partials/search-results/train.html',
-            restrict: 'E'
         };
     }
 
