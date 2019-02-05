@@ -69,7 +69,7 @@
                     </span>
                     <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                         Bus or Metro.</span>
-                    <a href="/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
+                    <a ng-href="{{ticketUrl}}#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
                 </div>
         
                     <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">

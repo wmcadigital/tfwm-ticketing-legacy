@@ -1,4 +1,5 @@
 <div class="block block--fullwidth mobile--void">
+        path = {{assetPath}}
     <div class="boxin buy" ng-class="{'bdr-top--purple' : ticket.all.swiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'nnetwork' : ticket.all.swiftCurrentAmount!=='' && ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
         <h3>Price & How to buy </h3>
         <hr>
@@ -57,12 +58,12 @@
                 </span>
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Bus or Metro.</span>
-                    <a href="/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
+                    <a ng-href="{{ticketUrl}}#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
             </div>
 
             <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
                 <span>Buy this ticket on the Swift on Mobile Android App</span>
-                <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" src="/assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
+                <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" ng-src="{{assetPath}}assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
             <a data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
@@ -113,7 +114,7 @@
                 <tabs>
                     <pane data-ng-if="ticket.all.allowBus" title="Bus">
                         <div class="imgwrapper">
-                            <a href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img src="/assets/nbus_nnetworkMap-thumbnail.png"
+                            <a ng-href="{{assetPath}}assets/nbus_nnetworkMap.png" data-lightbox="bus"><img ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png"
                                 />
                                 <i class="material-icons">
                                     zoom_out_map
@@ -127,7 +128,7 @@
                     </pane>
                     <pane data-ng-if="ticket.all.allowTrain" title="Train">
                         <div class="imgwrapper">
-                            <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png"
+                            <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png"
                                 />
                                 <i class="material-icons">
                                     zoom_out_map
@@ -142,7 +143,7 @@
                     <pane data-ng-if="ticket.all.allowMetro" title="Tram">
                         <div>
                             <div class="imgwrapper">
-                                <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png"
+                                <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png"
                                     />
                                     <i class="material-icons">
                                         zoom_out_map
@@ -158,8 +159,8 @@
             </div>
             <div data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a data-ng-if="ticket.all.brand == 'nbus'" href="../../assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
-                            src="/assets/nbus_nnetworkMap-thumbnail.png" />
+                    <a data-ng-if="ticket.all.brand == 'nbus'" ng-href="{{assetPath}}assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
+                            ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png" />
                         <i class="material-icons">
                             zoom_out_map
                         </i>
@@ -168,7 +169,7 @@
 
                 <div data-ng-if="ticket.all.brand == 'National Express'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                     <div class="imgwrapper">
-                        <a href="../../assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img src="/assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
+                        <a ng-href="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img ng-src="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
                             />
                             <br>View National Express network map
                             <i class="material-icons">
@@ -181,7 +182,7 @@
                 <!-- walsall low fare zone -->
                 <div data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
                         <div class="imgwrapper">
-                            <a href="https://nxbus.co.uk/walsall" target="_blank"><img src="/assets/walsall-low-fare-zone-map.png"
+                            <a href="https://nxbus.co.uk/walsall" target="_blank"><img ng-src="{{assetPath}}assets/walsall-low-fare-zone-map.png"
                                 />
                                 <br>View National Express Walsall low fare zone map
                                 <i class="material-icons">
@@ -194,7 +195,7 @@
                 <!-- sandwell and dudley low fare zone -->
                 <div data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                         <div class="imgwrapper">
-                            <a href="https://nxbus.co.uk/paylocal" target="_blank"><img src="/assets/s-d-low-fare-zone-map.png"
+                            <a href="https://nxbus.co.uk/paylocal" target="_blank"><img ng-src="{{assetPath}}assets/s-d-low-fare-zone-map.png"
                                 />
                                 <br>View National Express Sandwell & Dudley low fare zone map
                                 <i class="material-icons">
@@ -207,7 +208,7 @@
                 <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
                     <div class="imgwrapper">
                         <a href="https://www.diamondbuses.com/about-us/network-maps/" target="_blank" title="View Diamond network maps">
-                            <img src="/assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
+                            <img ng-src="{{assetPath}}assets/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps" />
                             <br>View Diamond network maps
                             <i class="material-icons">
                                 exit_to_app
@@ -219,7 +220,7 @@
                 <div data-ng-if="ticket.all.brand == 'Stagecoach' ">
                     <div class="imgwrapper">
                         <a href="https://www.stagecoachbus.com/maps" target="_blank" title="View Diamond network maps">
-                            <img src="/assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
+                            <img ng-src="{{assetPath}}assets/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps" />
                             <br>View Stagecoach network maps
                             <i class="material-icons">
                                 exit_to_app
@@ -231,7 +232,7 @@
                 <div data-ng-if="ticket.all.brand == 'Johnsons' ">
                     <div class="imgwrapper">
                         <a href="http://www.johnsonscoaches.co.uk/bus-route-maps/" target="_blank" title="View Johnsons network maps">
-                            <img src="/assets/Johnsons-Map.jpg" alt="Johnsons network maps" />
+                            <img ng-src="{{assetPath}}assets/Johnsons-Map.jpg" alt="Johnsons network maps" />
                             <br>View Johnsons network maps
                             <i class="material-icons">
                                 exit_to_app
@@ -248,7 +249,7 @@
             </div>
             <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a href="../../assets/NWMzonalcurves.png" data-lightbox="train"><img src="/assets/NWMzonalcurves-thumbnail.png"
+                    <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png"
                         />
                         <i class="material-icons">
                             zoom_out_map
@@ -260,7 +261,7 @@
             </div>
             <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a href="../../assets/Metro-Line-Route.png" data-lightbox="tram"><img src="/assets/Metro-Line-Route-thumbnail.png"
+                    <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png"
                         />
                         <i class="material-icons">
                             zoom_out_map

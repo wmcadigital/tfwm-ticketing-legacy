@@ -26,7 +26,8 @@
     
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
-
+        $scope.assetPath = assetPath;
+        $scope.ticketUrl = ticketUrl;
         vm.submit = submit; //Function to submit inital search
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
@@ -727,28 +728,28 @@
     // DIRECTIVES
     function initialSearch() {
         return {
-            templateUrl: 'partials/search-results/initial-search.html',
+            templateUrl: assetPath + 'partials/search-results/initial-search.html',
             restrict: 'E'
         };
     }
 
     function searchResults() {
         return {
-            templateUrl: 'partials/search-results/search-results.html',
+            templateUrl: assetPath + 'partials/search-results/search-results.html',
             restrict: 'E'
         };
     }
 
     function filters() {
         return {
-            templateUrl: 'partials/search-results/filters.html',
+            templateUrl: assetPath + 'partials/search-results/filters.html',
             restrict: 'E'
         };
     }
 
     function item($timeout, angularGridInstance) {
         return {
-            templateUrl: 'partials/search-results/item.html',
+            templateUrl: assetPath + 'partials/search-results/item.html',
             restrict: 'E',
             //this fixes a bug where the cards weren't loading on initial load in slow loading browsers
             link: function (scope, element, attrs) {
@@ -764,6 +765,8 @@
     // TICKET DETAIL CONTROLLER
     function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope, $timeout) {
         var vm = this;
+        $scope.assetPath = assetPath;
+        $scope.ticketUrl = ticketUrl;
         vm.loadingText = 'Loading...'; //default loading text
         vm.loadingStatus = 'loading'; //default loading status
         vm.loadingArray = ['Well, what are you waiting for?', 'Are we there yet?', 'Warming up the processors...', 'Reconfiguring the office coffee machine...', 'Doing something useful...', 'Are you ready?', 'So, do you come here often?', 'This may take some time...', 'I know this is painful to watch, but I have to load this.', 'Oh, no! Loading time...', 'Still Waiting... huh', 'Waiting for something in the server.', 'Creating randomly generated feature.', "It's not you. It's me.", 'Eating your internet cookies...Yummy!']; //loading messages
@@ -871,28 +874,28 @@
 
     function detailDetails() {
         return {
-            templateUrl: 'partials/detail/details.html',
+            templateUrl: assetPath + 'partials/detail/details.html',
             restrict: 'E'
         };
     }
 
     function detailSidebar() {
         return {
-            templateUrl: 'partials/detail/sidebar.html',
+            templateUrl: assetPath + 'partials/detail/sidebar.html',
             restrict: 'E'
         };
     }
 
     function detailAlternative() {
         return {
-            templateUrl: 'partials/detail/alternative.html',
+            templateUrl: assetPath + 'partials/detail/alternative.html',
             restrict: 'E'
         };
     }
 
     function detailRelated($timeout, angularGridInstance) {
         return {
-            templateUrl: 'partials/detail/related-product.html',
+            templateUrl: assetPath + 'partials/detail/related-product.html',
             restrict: 'E',
             //this fixes a bug where the cards weren't loading on initial load in slow loading browsers
             link: function (scope, element, attrs) {
@@ -907,7 +910,7 @@
 
     function operators() { 
         return {
-            templateUrl: 'partials/detail/operator.html',
+            templateUrl: assetPath + 'partials/detail/operator.html',
             restrict: 'E'
         };
     }

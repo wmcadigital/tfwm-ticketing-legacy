@@ -25,11 +25,11 @@
             .when('/:query?', {
                 controller: 'TicketingSearchCtrl',
                 controllerAs: 'ticketing',
-                templateUrl: '/partials/search-results/index.html',
+                templateUrl: assetPath + 'partials/search-results/index.html',
                 reloadOnSearch: false
             })
             .when('/ticket/:ticket', {
-                templateUrl: '/partials/detail/index.html',
+                templateUrl: assetPath + 'partials/detail/index.html',
                 controller: 'TicketDetailCtrl',
                 controllerAs: 'ticket',
                 resolve: {//Before page loads..
