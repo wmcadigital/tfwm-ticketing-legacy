@@ -1,0 +1,270 @@
+<form data-ng-submit="ticketing.limit = 6;ticketing.submit(ticketing.postJSON);" class="ticket-search" name="tsearch" novalidate>
+    <div class="grid-12">
+        <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
+    </div>
+
+    <!-- Mode & Pass -->
+    <div class="grid-5">
+        <div class="fields new-transport-icons-blue">
+            <label for="jpbus" class="plain">Mode</label>
+            <!--<label>Select All  <input type="checkbox" ng-model="isChecked" /></label>-->
+            <span class="icon-stylized-new -bus -table-cell border-right--transparent">
+                <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.allowBus"
+                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                <label for="jpbus">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 24 24">
+                        <style type="text/css">
+                            .st0 {
+                                fill: none;
+                            }
+                        </style>
+                        <path class="st0" d="M0 0h24v24H0V0z" />
+                        <path id="XMLID_63_" d="M16.5 6.9c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.6-0.3-0.6-0.6V4.7c0-0.3 0.3-0.6 0.6-0.6h7.9c0.3 0 0.6 0.3 0.6 0.6V6.9zM9.7 9.4V9c0-0.2 0.2-0.3 0.3-0.3h3.8c0.2 0 0.3 0.2 0.3 0.3v0.5c0 0.2-0.2 0.3-0.3 0.3h-3.8C9.9 9.8 9.7 9.6 9.7 9.4M16.5 14.3c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.6-0.3-0.6-0.6v-2.8c0-0.3 0.3-0.6 0.6-0.6h7.9c0.3 0 0.6 0.3 0.6 0.6V14.3zM15.7 17.6c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C16.5 17.2 16.1 17.6 15.7 17.6M8.3 17.6c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C9.2 17.2 8.8 17.6 8.3 17.6M16.5 3h-3.4 -2.2H7.5C6.9 3 6.4 3.5 6.4 4.1v14.1c0 0.6 0.5 1.1 1.1 1.1v1.4c0 0.2 0.2 0.3 0.3 0.3h1c0.2 0 0.3-0.2 0.3-0.3v-1.4h1.7 2.3 1.7v1.4c0 0.2 0.2 0.3 0.3 0.3h1c0.2 0 0.3-0.2 0.3-0.3v-1.4c0.6 0 1.1-0.5 1.1-1.1l0-14.1C17.6 3.5 17.1 3 16.5 3" />
+                    </svg>
+                    <span>Bus</span>
+                </label>
+            </span>
+            <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
+                <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.allowTrain"
+                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                <label for="jptrain" data-ng-click="ticketing.getStations();ticketing.clearStation();">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <style type="text/css">
+                            .st0 {
+                                fill: none;
+                            }
+                        </style>
+                        <path class="st0" d="M0 0h24v24H0V0z" />
+                        <path d="M15.7 13.7c-0.5 0-0.8-0.4-0.8-0.8s0.4-0.8 0.8-0.8c0.5 0 0.8 0.4 0.8 0.8S16.1 13.7 15.7 13.7M12.6 8.1V4.7c0-0.3 0.3-0.6 0.6-0.6l0 0h0 0.6 0.9c0.8 0 1.6 0.8 1.6 1.7l0.1 1.1v0l0.1 1.1c0 0.3-0.2 0.6-0.5 0.6h-2.8C12.8 8.6 12.6 8.4 12.6 8.1M11.4 8.1c0 0.3-0.3 0.6-0.6 0.6H8.1c-0.3 0-0.5-0.3-0.5-0.6l0.1-1.1v0l0.1-1.1c0.1-0.9 0.8-1.7 1.6-1.7h0.9 0.6 0c0.3 0 0.6 0.3 0.6 0.6V8.1zM8.3 13.7c-0.5 0-0.8-0.4-0.8-0.8S7.9 12 8.3 12c0.5 0 0.8 0.4 0.8 0.8S8.8 13.7 8.3 13.7M17.9 13.1l-0.6-7.3C17.2 4.3 15.9 3 14.5 3S12 3 12 3s-1.1 0-2.5 0C8.1 3 6.8 4.3 6.7 5.8l-0.6 7.3c-0.1 1.5 1 2.8 2.6 2.8H12h0 3.4C16.9 15.9 18.1 14.7 17.9 13.1" />
+                        <path d="M8.8 18.8L9 17.6h6 0l0.2 1.1H8.8zM15.8 17.6l-0.5-1.1h-0.2H8.9 8.6l-0.5 1.1 -1.3 3.1c-0.1 0.2 0 0.3 0.2 0.3h1c0.2 0 0.4-0.2 0.4-0.3l0.1-0.8h6.8l0.1 0.8c0 0.2 0.2 0.3 0.4 0.3h1c0.2 0 0.3-0.1 0.2-0.3L15.8 17.6z" />
+                    </svg>
+                    <span>Train</span>
+                </label>
+            </span>
+            <span class="icon-stylized-new -tram -table-cell border-left--transparent">
+                <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.allowMetro"
+                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                <label for="jptram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <style type="text/css">
+                            .st0 {
+                                fill: none;
+                            }
+                        </style>
+                        <path class="st0" d="M0 0h24v24H0V0z" />
+                        <path d="M15.7 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C16.5 15 16.1 15.4 15.7 15.4M12 12.6H8.2c-0.3 0-0.5-0.3-0.5-0.6L8 8.6C8 8 8.6 7.5 9.2 7.5H12h0 0 2.8C15.4 7.5 16 8 16 8.6l0.3 3.4c0 0.3-0.2 0.6-0.5 0.6H12zM8.3 15.4c-0.5 0-0.8-0.4-0.8-0.8 0-0.5 0.4-0.8 0.8-0.8 0.5 0 0.8 0.4 0.8 0.8C9.2 15 8.8 15.4 8.3 15.4M10.9 5.1L12 4l1.1 1.1L12 6.3 10.9 5.1zM17.7 14.8l-0.5-6.2c-0.1-1.2-1.2-2.2-2.5-2.2h-1.5L14 5.5c0.2-0.2 0.2-0.5 0-0.7l-1.7-1.7C12.2 3 12.1 3 12 3c-0.1 0-0.2 0-0.3 0.1L10 4.8C9.8 5 9.8 5.3 10 5.5l0.9 0.9H9.3c-1.2 0-2.3 1-2.4 2.2l-0.5 6.2c-0.1 1.2 0.8 2.2 2.1 2.2H12h0 3.6C16.8 17.1 17.8 16 17.7 14.8" />
+                        <path d="M8.1 18.7l-0.8 1.9c-0.1 0.2 0 0.3 0.2 0.3h0.7c0.2 0 0.4-0.1 0.4-0.3L9 18.7l0.2-1.1H8.6L8.1 18.7z" />
+                        <path d="M15.8 18.7l-0.5-1.1h-0.6l0.2 1.1 0.3 1.9c0 0.2 0.2 0.3 0.4 0.3h0.7c0.2 0 0.3-0.1 0.2-0.3L15.8 18.7z" />
+                    </svg>
+                    <span>Tram</span>
+                </label>
+            </span>
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="or">
+            <span>Or</span>
+        </div>
+    </div>
+    <div class="grid-5">
+        <div class="fields nga-fast nga-fade">
+            <label class="plain" for="SelectedBrand">Pass</label>
+            <span class="stylized-select">
+                <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model='ticketing.postJSON.brand'
+                    data-ng-change="ticketing.clearModes();ticketing.swiftPAYG();ticketing.getSwiftPAYG();ticketing.ntrainOOC();"
+                    ng-disabled="ticketing.postJSON.allowMetro || ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain">
+                    <option value="">Select your pass</option>
+                    <option value="Diamond Bus">Diamond Bus</option>
+                    <option value="Johnsons">Johnsons</option>
+                    <option value="National Express">National Express</option>
+                    <option value="nbus">nbus</option>
+                    <option value="nnetwork">nnetwork</option>
+                    <option value="ntrain">ntrain</option>
+                    <option value="ntrain - Out of County">ntrain - Out of County</option>
+                    <option value="Stagecoach">Stagecoach</option>
+                    <option value="Swift PAYG">Swift PAYG</option>
+                    <option value="West Midlands Metro">West Midlands Metro</option>
+                </select>
+            </span>
+        </div>
+    </div>
+    <!-- /Mode & Pass -->
+
+    <!-- Traveller -->
+    <div class="rowcontainer">
+        <div class="grid-5" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand">
+            <span tooltip tooltipc=
+            "
+            Young Person up to 18: - For children aged 5-15 inclusive and holders of the Network West Midlands 
+            <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/' target='_blank'>16-18 photocard</a>. <br><br>
+
+            Student 18+: - For students who are in full time education aged 18+ or those aged 16-18 who are NOT entitled to the 
+            Network West Midlands <a href='https://journeyplanner.networkwestmidlands.com/operator' target='_blank'>16-18 photocard</a>. 
+            Proof of full-time education and two passport sized photographs will be required to buy this ticket (if purchasing from rail station). 
+            Or, it may be loaded to a Swift photocard.<br><br>
+
+            Group/Family: these
+            vary; check full
+            ticket descriptions.<br><br>
+
+            Older Persons Passholder: - holder of an English National Concessionary Travel Pass <br><br>
+
+            Disabled Passholder  - holder of an English National Concessionary Travel Pass<br><br>
+
+            If you don't match any criteria -
+            search for adult tickets.
+            " 
+            class="help-link float--right"></span>
+    
+            <label class="plain" for="SelectedPassengerType">Traveller</label>
+            <span class="stylized-select">
+                <select id="SelectedPassengerType" name="PassengerType" aria-disabled="false" data-ng-model="ticketing.postJSON.passengerType">
+                    <option value="">Select Traveller</option>
+                    <option value="Adult">Adult</option>
+                    <option value="Child">Young Person up to 18</option>
+                    <!--<option value="Under16">Under 16</option>-->
+                    <!--<option value="Student16to18">Student 16 - 18</option>-->
+                    <option value="Student">Student 18+</option>
+                    <option value="Family">Group / Family</option>
+                    <option value="Concessionary">Older Persons Passholder</option>
+                    <option value="Concessionary">Disabled Passholder</option>
+                </select>
+            </span>
+        </div>
+        <div class="grid-7"></div>
+    </div>
+    <!-- /Traveller -->
+
+    <!-- Rail Stations -->
+    <div class="grid-12" data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType">
+        <div class="grid-12">
+            <label for="stationFrom" class="plain title">Which rail stations will you use? <strong>(Optional)</strong></label>
+        </div>
+        
+        <div class="grid-6 padding-right">
+            <div data-ng-init="ticketing.getStations();ticketing.setStations();">
+                <label class="plain-small hide" for="travellingFrom">From</label>
+              
+                <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100"
+                    selected-object="stationFrom" local-data="ticketing.stationList" search-fields="name" title-field="name"
+                    minlength="1" input-class="form-control padding-right" match-class="highlight" override-suggestions="true"
+                    initial-value="stationFromName" field-required-class="field-required-class" field-required="stationFromReq"
+                    input-name="fromStation">>
+                </div>
+                <a data-ng-if="stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
+                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationFromName">
+                    <div>
+                        You selected <strong>{{stationFromName}}</strong> station which is
+                        <strong>{{ stationFromNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
+                            stationFromNameZone }}</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="grid-6 padding-left">
+            <div class="fields passselect nga-fast nga-fade" style="margin:0px">
+                <label class="plain-small hide" for="travellingTo_value">To <span data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">Out
+                        of County Station</span></label>
+                <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == 'ntrain'">
+                    <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
+                        local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
+                        input-class="form-control form-control-small" match-class="highlight" initial-value="stationToName" 
+                        field-required-class="field-required-class" field-required="stationToReq" input-name="toStation">
+                    </div>
+                </div>
+            </div>
+            <!-- If pass is ntrain-->
+            <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'" data-ng-if="ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType" data-ng-init="ticketing.geticStations();">
+                    <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
+                        local-data="ticketing.stationicList" search-fields="name" title-field="name" minlength="1"
+                        input-class="form-control form-control-small" match-class="highlight" field-required="true"
+                        field-required-class="required" initial-value="stationToName">
+                    </div>
+                </div>
+            <!-- If pass is ntrain - Out of County-->
+            <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType" data-ng-init="ticketing.getoocStations();">
+                <div angucomplete-alt id="stationTo" placeholder="To Out of County Station" pause="100" selected-object="stationTo"
+                    local-data="ticketing.stationoocList" search-fields="name" title-field="name" minlength="1"
+                    input-class="form-control form-control-small" match-class="highlight" field-required="true"
+                    field-required-class="required" initial-value="stationToName">
+                </div>
+            </div>
+            <!-- If pass is In County-->
+            <!--<div data-ng-if="ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType" data-ng-init="ticketing.geticStations();">
+                <div angucomplete-alt id="stationTo" placeholder="To In County Station" pause="100" selected-object="stationTo"
+                    local-data="ticketing.stationicList" search-fields="name" title-field="name" minlength="1"
+                    input-class="form-control form-control-small" match-class="highlight" field-required="true"
+                    field-required-class="required" initial-value="stationToName">
+                </div>
+            </div>-->
+            <a data-ng-if="stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
+
+            <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationToName">
+                    <div>
+                        You selected <strong>{{stationToName}}</strong> station which is
+                        <strong>{{ stationToNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
+                            stationToNameZone }}</strong>.
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Help section if station is not listed in auto complete -->
+    <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
+        class="help-section grid-12">
+        <label class="blue btn-link">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
+        <div ng-show="stationNotListed" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
+            <p data-ng-hide="ticketing.postJSON.brand == 'ntrain' || ticketing.postJSON.brand == null">Is your station in county? Try changing the pass to ntrain</p>
+            <p data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == null">Is your station out of county? Try changing the pass to ntrain - Out of County</p>
+            <p>Please refer to <a href="http://www.nationalrail.co.uk/" target="_blank">National Rail</a> for journeys
+                from or to a station not listed</p>
+        </div>
+    </div>
+    <!-- /Help section if station is not listed in auto complete -->
+
+    <!-- error messages -->
+    <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName" data-ng-hide="stationFromName == '[]'" class="grid-12 errors">
+        <div class="boxin -messages">
+            In order to carry out a rail station search you need to add the To & From stations.
+        </div>
+    </div>
+    <!-- /error messages -->
+
+    <!-- /Rail Stations -->
+
+    <!-- Duration -->
+    <div class="fields how-long grid-12" ng-hide="ticketing.passValue == 'Swift PAYG' || !ticketing.postJSON.passengerType" data-ng-if="ticketing.postJSON.passengerType != '' && (ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand)">
+        <label class="plain duration" for="DurationDay">Duration</label>
+        <div class="labels-new">
+            <span class="icon-stylized-new" ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == 'ntrain'">
+                <input type="radio" id="DurationDay" name="TimeBand" value="Pay on day / 1 day" data-ng-model="ticketing.postJSON.timeBand">
+                <label for="DurationDay">
+                    <span></span>a day</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationWeek" name="TimeBand" value="Less than a month" data-ng-model="ticketing.postJSON.timeBand">
+                <label for="DurationWeek">
+                    <span></span>Less than a month</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationMonth" name="TimeBand" value="About a month" data-ng-model="ticketing.postJSON.timeBand">
+                <label for="DurationMonth">
+                    <span></span>About a month</label>
+            </span>
+            <span class="icon-stylized-new">
+                <input type="radio" id="DurationTerm" name="TimeBand" value="Longer than a month" data-ng-model="ticketing.postJSON.timeBand">
+                <label for="DurationTerm">
+                    <span></span>Longer than a month</label>
+            </span>
+            <!-- <span class="icon-stylized-new">
+                <input type="radio" id="DurationYear" name="TimeBand" value="DurationYear=true" data-ng-model="ticketing.postJSON.timeBand">
+                <label for="DurationYear"><span></span>a year</label>
+            </span>	 -->
+        </div>
+    </div>
+    <!-- /Duration -->
+
+    <button data-ng-if="ticketing.postJSON.passengerType && ticketing.postJSON.timeBand || ticketing.postJSON.brand == 'Swift PAYG'"
+        type="submit" class="btn btn-purple submitSpinner nga-fast nga-fade" ng-disabled="tsearch.$invalid">Find tickets</button>
+</form>

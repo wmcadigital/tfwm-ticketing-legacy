@@ -1,0 +1,827 @@
+@charset "UTF-8";
+/*********************
+VARIABLES
+*********************/
+/*********************
+BREAKPOINTS
+*********************/
+/* New transport Icons*/
+/*End New transport Icons*/
+.new-transport-icons-blue .icon-stylized-new {
+  float: left;
+  width: 32.3%;
+}
+.new-transport-icons-blue .icon-stylized-new.-train {
+  margin: 0 1.5%;
+}
+.new-transport-icons-blue .icon-stylized-new input {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label {
+  color: white;
+  background-color: #036;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label:after {
+  color: white;
+  font-family: "Material Icons";
+  position: absolute;
+  content: "";
+  font-size: 24px;
+  margin-left: -10px;
+  top: 0;
+  right: 4px;
+  z-index: 9999;
+  bottom: 0;
+  margin: auto;
+}
+.new-transport-icons-blue .icon-stylized-new label {
+  background-color: #009DE0;
+  padding-left: 26px;
+  color: white;
+}
+.new-transport-icons-blue .icon-stylized-new svg {
+  fill: white;
+  margin: auto 0;
+  width: 28px;
+}
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label svg {
+  fill: white;
+}
+
+.ticketing-page {
+  /* Modal Styling */
+  /* Tooltip Styling */
+  /* Icon over image popup */
+  /* Scrollbar Styling */
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+.ticketing-page .ticket-search .how-long .icon-stylized-new label {
+  background-color: #ffffff !important;
+  color: #773289;
+}
+.ticketing-page .icon-stylized-new label {
+  background-color: #ffffff !important;
+  color: #773289;
+}
+.ticketing-page .new-transport-icons-blue .icon-stylized-new input:checked ~ label {
+  background-color: #773289 !important;
+  color: #fff !important;
+}
+.ticketing-page .icon-stylized-new svg {
+  fill: #773289;
+}
+.ticketing-page .btn-purple, .ticketing-page .swift-forms > .row form .contourNavigation > .col-md-12 input[type=submit] {
+  width: auto;
+  border-radius: 30px;
+  background-color: #3C1053;
+  color: white;
+  font-size: 16px;
+  padding: 15px 30px;
+  white-space: pre-wrap;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  -webkit-box-shadow: 0 0 1px transparent;
+          box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+     transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  -webkit-transition-property: background-color, -webkit-box-shadow;
+  transition-property: background-color, -webkit-box-shadow;
+  -o-transition-property: box-shadow, background-color;
+  transition-property: box-shadow, background-color;
+  transition-property: box-shadow, background-color, -webkit-box-shadow;
+}
+.ticketing-page .btn-purple:hover, .ticketing-page .swift-forms > .row form .contourNavigation > .col-md-12 input[type=submit]:hover, .ticketing-page .btn-purple:focus, .ticketing-page .swift-forms > .row form .contourNavigation > .col-md-12 input[type=submit]:focus {
+  color: white;
+  background-color: #2D0D42;
+  font-weight: normal;
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+}
+.ticketing-page .btn-light-purple {
+  width: auto;
+  border-radius: 30px;
+  background-color: #84329B;
+  color: white;
+  font-size: 16px;
+  padding: 15px 30px;
+  white-space: pre-wrap;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  -webkit-box-shadow: 0 0 1px transparent;
+          box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+     transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  -webkit-transition-property: background-color, -webkit-box-shadow;
+  transition-property: background-color, -webkit-box-shadow;
+  -o-transition-property: box-shadow, background-color;
+  transition-property: box-shadow, background-color;
+  transition-property: box-shadow, background-color, -webkit-box-shadow;
+}
+.ticketing-page .btn-light-purple:hover, .ticketing-page .btn-light-purple:focus {
+  color: white;
+  background-color: #622871;
+  font-weight: normal;
+  -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+}
+.ticketing-page .btn {
+  text-transform: lowercase;
+}
+.ticketing-page .acc__trigger {
+  background: #edf8fd;
+  color: #773289;
+}
+.ticketing-page .stylized-select > select {
+  color: #773289;
+  border: none;
+  background: white url(//static.centro.org.uk/nwmAssets/img/select-swift.png) right center repeat-y;
+}
+.ticketing-page .stylized-select:before, .ticketing-page .stylized-select:after {
+  background: #fff !important;
+}
+.ticketing-page .help-section {
+  display: inline-block;
+  margin: 15px 0;
+}
+.ticketing-page .transparent--bg {
+  background: none !important;
+}
+.ticketing-page .boxin:last-child {
+  margin-bottom: none !important;
+}
+.ticketing-page .block--main .title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.ticketing-page .block--main .errors {
+  margin: 0 0 15px 0;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .arrdep-filters {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+.ticketing-page .arrdep-filters .radio-bar {
+  display: -webkit-box;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .arrdep-filters .radio-bar {
+    display: inline-block;
+  }
+}
+.ticketing-page .arrdep-filters .radio-bar input:checked + label {
+  height: 100% !important;
+}
+.ticketing-page .arrdep-filters > div {
+  width: 50% !important;
+}
+.ticketing-page .ticket-item a {
+  padding: 0px !important;
+}
+.ticketing-page .ticket-item .paygimg {
+  float: right;
+  margin: 0 0 25px 0;
+  width: 75%;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .ticket-item .paygimg {
+    width: 65%;
+  }
+}
+.ticketing-page .ticket-item .payment-icons {
+  display: block;
+  width: 100%;
+}
+.ticketing-page .ticket-item .payment-icons > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ticketing-page .ticket-item .payment-icons .ticket-direct-debit-logo {
+  width: 85px;
+  margin-left: 10px;
+}
+.ticketing-page .ticket-item .payment-icons .ticket-swift-logo {
+  width: 35px;
+}
+.ticketing-page .ticket-item .event__title {
+  font-size: 22px;
+}
+.ticketing-page .ticket-item .price {
+  font-weight: normal;
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 30px;
+}
+.ticketing-page .ticket-item .event__date {
+  margin-bottom: 40px;
+}
+.ticketing-page .ticket-item a {
+  margin-bottom: 8px;
+}
+.ticketing-page .ticket-filters hr {
+  margin-bottom: 0;
+  background-color: #009fe3;
+}
+.ticketing-page .ticket-filters .icon {
+  color: #009fe3;
+}
+.ticketing-page .ticket-filters .icon:after {
+  background-image: none;
+}
+.ticketing-page .ticket-filters .filter-block {
+  border-bottom: 1px solid #ccc;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title {
+  padding: 20px 0;
+  display: block;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title:hover {
+  color: #009fe3;
+}
+.ticketing-page .ticket-filters .filter-block .filter-title i {
+  float: right;
+  color: #009fe3;
+  font-weight: bold;
+}
+.ticketing-page .ticket-filters .checkbox-list label {
+  background-color: transparent;
+}
+.ticketing-page .ticket-filters ul {
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+.ticketing-page .ticket-filters ul label {
+  border: 0;
+}
+.ticketing-page #detail div {
+  font-family: "WF_Droid_Sans", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+}
+.ticketing-page #detail .icon--tick::after {
+  background-position: -70px -190px;
+}
+.ticketing-page #detail .iconcustom::after {
+  background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+  background-size: 300px auto;
+  content: "";
+  height: 32px;
+  left: 0;
+  position: absolute;
+  width: 30px;
+}
+.ticketing-page .error {
+  margin-bottom: 15px;
+}
+.ticketing-page .stationlist {
+  margin: 10px 0;
+}
+.ticketing-page button:disabled,
+.ticketing-page button[disabled] {
+  border: 1px solid #ccc !important;
+  background-color: #f1f1f1 !important;
+  color: #666666 !important;
+}
+.ticketing-page button:disabled::after,
+.ticketing-page button[disabled]::after {
+  display: none !important;
+}
+.ticketing-page button:disabled::before,
+.ticketing-page button[disabled]::before {
+  display: none !important;
+}
+.ticketing-page button:disabled:hover,
+.ticketing-page button[disabled]:hover {
+  border: 1px solid #999999 !important;
+  background-color: #f1f1f1 !important;
+  color: #666666;
+  cursor: not-allowed !important;
+}
+.ticketing-page select:disabled,
+.ticketing-page select[disabled] {
+  border: 2px solid #ccc !important;
+  background-color: #f1f1f1 !important;
+  color: #666666 !important;
+  background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
+}
+.ticketing-page form input.ng-invalid-autocomplete-required,
+.ticketing-page .field-required-class,
+.ticketing-page input.ng-invalid-field-required-class {
+  border: red 1px solid !important;
+}
+.ticketing-page .errors {
+  margin: 10px 0;
+}
+.ticketing-page .angular-grid-item .bdr-top--purple.boxin {
+  padding: 0px;
+}
+.ticketing-page .angular-grid-item .bdr-top--purple.boxin .itemContent {
+  padding: 70px 20px 45px 20px;
+}
+.ticketing-page .block--fullwidth .block--side {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 15px;
+}
+.ticketing-page .card-img {
+  width: 180px;
+  float: left;
+  margin: 30px 20px 20px 0;
+}
+.ticketing-page .boxin--large h1 {
+  font-size: 3rem;
+  line-height: 3.5rem;
+}
+.ticketing-page .ticket-detail {
+  float: right;
+}
+.ticketing-page .ticket-name {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.ticketing-page .features {
+  background: #f4f4f4 !important;
+  padding: 20px;
+}
+.ticketing-page .price {
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 24px;
+}
+.ticketing-page .summary {
+  font-weight: bold;
+}
+.ticketing-page .useon {
+  font-weight: bold;
+}
+.ticketing-page .acc {
+  margin-top: 20px;
+}
+.ticketing-page .modalSwift {
+  padding: 30px;
+}
+.ticketing-page input[type=checkbox]:disabled + label {
+  background: #dddddd;
+}
+.ticketing-page input[type=text] {
+  text-align: center;
+}
+.ticketing-page .orcont {
+  float: left;
+  width: 30px;
+}
+.ticketing-page .orcontent {
+  padding: 60px 0 20px 20px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+.ticketing-page .BuyOnSwift {
+  margin: 15px 0;
+}
+.ticketing-page form .blocks .block {
+  margin-bottom: 0px;
+}
+.ticketing-page label.plain-small {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  display: block;
+}
+.ticketing-page .to .orcontent {
+  padding: 40px 0 20px 20px;
+}
+.ticketing-page .highlight {
+  color: #009fe3;
+}
+.ticketing-page .col {
+  width: 50%;
+  float: left;
+  padding-right: 10px;
+}
+.ticketing-page .nnetwork {
+  border-top: 6px solid #009fe3;
+}
+.ticketing-page .bdr-top--purple {
+  border-top: 6px solid #773289;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .mobile--void {
+    display: none !important;
+  }
+}
+.ticketing-page [ng\:cloak],
+.ticketing-page [ng-cloak],
+.ticketing-page [data-ng-cloak],
+.ticketing-page [x-ng-cloak],
+.ticketing-page .ng-cloak,
+.ticketing-page .x-ng-cloak {
+  display: none !important;
+}
+.ticketing-page .ng-hide {
+  display: none !important;
+}
+.ticketing-page .block--side p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.ticketing-page .block--side ul {
+  margin-top: 5px;
+}
+@media (max-width: 55em) {
+  .ticketing-page .block--fullwidth .block--side {
+    position: static;
+    top: 15px;
+  }
+}
+@media (max-width: 58em) {
+  .ticketing-page .orcontent {
+    height: 40px;
+    width: 100%;
+    text-align: left;
+    display: table-row;
+  }
+  .ticketing-page .orcont {
+    float: none;
+    width: 100%;
+  }
+  .ticketing-page .passselect {
+    float: left;
+    display: contents;
+  }
+  .ticketing-page .blocks--halves .block {
+    width: 100%;
+  }
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .col {
+    width: 100%;
+    float: left;
+    padding-right: 10px;
+  }
+  .ticketing-page .summary {
+    margin: 15px 0 0 0;
+  }
+  .ticketing-page .ticketing-results-grid {
+    background: white;
+  }
+  .ticketing-page .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+    width: 100% !important;
+  }
+}
+@media (max-width: 1000px) and (min-width: 890px) {
+  .ticketing-page .orcontent {
+    padding: 60px 0 0px 0px;
+  }
+}
+.ticketing-page ​ .tab-content {
+  position: initial !important;
+}
+.ticketing-page .tab-pane.ng-scope.ng-isolate-scope {
+  display: none;
+}
+.ticketing-page .tab-pane.ng-scope.ng-isolate-scope.active {
+  display: block;
+}
+.ticketing-page span.ng-scope.active {
+  background-color: #773289;
+  color: white;
+}
+.ticketing-page .radio-bar {
+  color: #773289;
+}
+.ticketing-page .radio-bar input:checked + label {
+  background-color: #773289;
+  color: white;
+}
+.ticketing-page .buy .price {
+  color: #333;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 45px;
+}
+.ticketing-page .online {
+  color: #009fe3 !important;
+}
+.ticketing-page .itemContent .price {
+  color: #009fe3 !important;
+}
+.ticketing-page .hideCheck {
+  display: none;
+}
+.ticketing-page .hideSave {
+  display: none;
+}
+.ticketing-page label.blue {
+  color: #773289 !important;
+}
+.ticketing-page .mobile-only .stylized-select {
+  margin: 15px 0 0 0;
+}
+.ticketing-page .ng-modal-dialog {
+  display: block;
+  width: 600px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.ticketing-page .ng-modal-dialog .modal__close {
+  top: 0;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+  padding: 20px;
+  margin: 0;
+  overflow-y: scroll;
+  position: absolute;
+  width: 96%;
+  height: 420px;
+  margin-bottom: 140px;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table {
+  width: 100%;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table tr {
+  border-bottom: 1px solid #ccc;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators table td {
+  padding: 25px 0 15px 0;
+}
+.ticketing-page .ng-modal-dialog .ng-modal-dialog-content .header {
+  background: white;
+  padding: 25px 20px;
+  height: 140px;
+}
+.ticketing-page .ng-modal-dialog.boxin.modal-content {
+  padding: 0px 15px 15px 15px !important;
+}
+.ticketing-page .tooltip {
+  z-index: 99999;
+}
+.ticketing-page .tooltip a {
+  color: white;
+  text-decoration: underline;
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .tooltip {
+    right: 5px;
+  }
+}
+.ticketing-page .help-link:after {
+  vertical-align: middle;
+}
+.ticketing-page .imgwrapper {
+  position: relative;
+}
+.ticketing-page .imgwrapper:hover img {
+  opacity: 0.5;
+}
+.ticketing-page .imgwrapper .material-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 50px;
+  color: #009FE3;
+}
+.ticketing-page ::-webkit-scrollbar {
+  width: 10px;
+}
+.ticketing-page ::-webkit-scrollbar-track {
+  background: #fff;
+}
+.ticketing-page ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.ticketing-page ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom Grid */
+.grid-1 {
+  width: 8.3333333333%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-1 {
+    width: 100%;
+  }
+}
+
+.grid-2 {
+  width: 16.6666666667%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-2 {
+    width: 100%;
+  }
+}
+
+.grid-3 {
+  width: 25%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-3 {
+    width: 100%;
+  }
+}
+
+.grid-4 {
+  width: 33.3333333333%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-4 {
+    width: 100%;
+  }
+}
+
+.grid-5 {
+  width: 41.6666666667%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-5 {
+    width: 100%;
+  }
+}
+
+.grid-6 {
+  width: 50%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-6 {
+    width: 100%;
+  }
+}
+
+.grid-7 {
+  width: 58.3333333333%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-7 {
+    width: 100%;
+  }
+}
+
+.grid-8 {
+  width: 66.6666666667%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-8 {
+    width: 100%;
+  }
+}
+
+.grid-9 {
+  width: 75%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-9 {
+    width: 100%;
+  }
+}
+
+.grid-10 {
+  width: 83.3333333333%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-10 {
+    width: 100%;
+  }
+}
+
+.grid-11 {
+  width: 91.6666666667%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-11 {
+    width: 100%;
+  }
+}
+
+.grid-12 {
+  width: 100%;
+  display: block;
+}
+@media (max-width: 32.125em) {
+  .grid-12 {
+    width: 100%;
+  }
+}
+
+[class^=grid-] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  float: left;
+}
+
+.or {
+  padding: 60px 0 20px 0;
+  text-align: center;
+}
+@media (max-width: 32.125em) {
+  .or {
+    text-align: left;
+    padding: 0px;
+  }
+}
+
+.rowcontainer {
+  display: inline-block;
+  width: 100%;
+}
+
+.form-control {
+  width: 100% !important;
+}
+
+.railhelp {
+  margin: 10px 0;
+}
+
+.ie10-or-better .stylized-select > select {
+  padding-right: 80px;
+}
+
+label.plain,
+.label.plain {
+  display: table !important;
+}
+
+.stylized-select {
+  display: block;
+}
+
+form .title {
+  margin: 20px 0 10px 0;
+}
+form .padding-right {
+  padding-right: 15px;
+}
+@media (max-width: 32.125em) {
+  form .padding-right {
+    padding-right: 0px;
+  }
+}
+form .padding-left {
+  padding-left: 15px;
+}
+@media (max-width: 32.125em) {
+  form .padding-left {
+    padding-left: 0px;
+  }
+}
+
+.result {
+  margin: 0 0 10px 0;
+}
+
+.blue {
+  color: #773289;
+}
+
+.swift .btn {
+  margin-top: 10px;
+}

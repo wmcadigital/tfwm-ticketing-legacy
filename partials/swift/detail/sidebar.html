@@ -1,7 +1,6 @@
 <div class="block block--fullwidth mobile--void">
-    <div class="boxin buy" ng-class="{'bdr-top--purple' : ticket.all.swiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'nnetwork' : ticket.all.swiftCurrentAmount!=='' && ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+    <div class="boxin buy">
         <h3>Price & How to buy </h3>
-        <hr>
         <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
 
         <div>
@@ -57,7 +56,7 @@
                 </span>
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Bus or Metro.</span>
-                    <a ng-href="{{ticketUrl}}#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
+                    <a ng-href="{{ticketUrl}}#/ticket/810"><button class="btn btn-purple">Buy Swift PAYG credit</button></a>
             </div>
 
             <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
@@ -69,7 +68,7 @@
                 {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
-                <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift" class="btn btn--arrow" data-ng-click='ticket.toggleModalSwift()'>Buy on Swift</button>
+                <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift" class="btn btn-purple" data-ng-click='ticket.toggleModalSwift()'>Buy on Swift</button>
 
             <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount || ticket.all.onlineCurrentAmount && ticket.all.ticketCurrentAmount">
                 <hr>
@@ -100,13 +99,10 @@
 </div>
 
 <div class="block block--fullwidth">
-    <div class="boxin" ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+    <div class="boxin">
         <h3>
-            <!--<span data-ng-if="ticket.all.allowBus" class="icon icon--bus ng-scope" title="Use on Bus" style=""></span><span
-                data-ng-if="ticket.all.allowTrain" class="icon icon--train ng-scope" title="Use on Train" style=""></span><span
-                data-ng-if="ticket.all.allowMetro" class="icon icon--tram ng-scope" title="Use on Metro" style=""></span>-->Where can I use?
+           Where can I use?
         </h3>
-        <hr>
         <p class="type--small">
 
             <div data-ng-if="ticket.all.allowBus && ticket.all.allowTrain || ticket.all.allowBus && ticket.all.allowMetro || ticket.all.allowTrain && ticket.all.allowMetro || ticket.all.allowBus && ticket.all.allowTrain && ticket.all.allowMetro">
@@ -121,7 +117,7 @@
                             </a>
                         </div>
                         <p class="summary">Bus operators who accept this ticket</p>
-                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
+                        <button class="btn btn-purple" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
 
                        
                     </pane>
@@ -135,7 +131,7 @@
                             </a>
                         </div>
                         <p class="summary">Train operators who accept this ticket</p>
-                        <button class="btn btn--arrow" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
+                        <button class="btn btn-purple" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
 
                        
                     </pane>
@@ -243,7 +239,7 @@
 
                 <div data-ng-if="!ticket.all.isSingleOperatorTicket">
                     <p class="summary">Bus operators who accept this ticket</p>
-                    <button class="btn btn--arrow" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
+                    <button class="btn btn-purple" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
                 </div>
             </div>
             <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
@@ -256,7 +252,7 @@
                     </a>
                 </div>
                 <p class="summary">Train operators who accept this ticket</p>
-                <button class="btn btn--arrow" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
+                <button class="btn btn-purple" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
             </div>
             <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
                 <div class="imgwrapper">
@@ -285,7 +281,7 @@
         <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
             bought online.</p>
 
-        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
+        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn-purple" data-ng-href="{{ticket.all.buyTicketUrl}}"
             target="_blank">
             Buy on Swift</a>
     </div>

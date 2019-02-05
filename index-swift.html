@@ -46,7 +46,7 @@
     <!--[if gte IE 9]><!-->
     <link rel="stylesheet" type="text/css" href="//static.centro.org.uk/nwmAssets/css/screen.css?v=0.1" />
     <link rel="stylesheet" type="text/css" href="//static.centro.org.uk/Staging/nwmAssets/css/nwm-custom.css" />
-    <link rel="stylesheet" type="text/css" href="/css/compiled/ticketing.css" />
+    <link rel="stylesheet" type="text/css" href="/css/compiled/ticketing-swift.css" />
     <link rel="stylesheet" type="text/css" href="/css/angucomplete.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <!--<![endif]-->
@@ -108,12 +108,6 @@
     <script src="https://static.centro.org.uk/js/jquery/jquery.ba-replacetext.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js" integrity="sha256-DiHJ7hbvMejsMyP76bpVWacb5HSHQ2sQlrJV8n7KEvA="
         crossorigin="anonymous"></script>
-
-
-    <script type="text/javascript">
-        var _baTheme = 0, _baMode = 'Listen or Translate', _baUseCookies = true, _baHideOnLoad = true;
-    </script>
-    <!-- <script type="text/javascript" src="//www.browsealoud.com/plus/scripts/ba.js"></script> -->
 
 
 
@@ -188,6 +182,11 @@
         }
     </style>
 
+    <script>
+        var assetPath = '/';
+        var ticketUrl = '/';
+    </script>
+
     <link rel="stylesheet" type="text/css" href="//static.centro.org.uk/nwmAssets/apps/shared/angular/nganimate.css" />
     <!-- IE required polyfills, in this exact order -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
@@ -198,18 +197,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
     <script src="assets/angular-grid.min.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/controller.js"></script>
+    <script src="app/swift/app.js"></script>
+    <script src="app/swift/controller.js"></script>
     <script src="app/services.js"></script>
     <script src="assets/angucomplete-alt.min.js"></script>
     <script src="//static.centro.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
-    <script>
-        /*NOTE: individual filenames are added in JS
-            - change this to your CDN asset path
-            - be sure to include the trailing /
-    */
-        var assetPath = '//static.centro.org.uk/nwmAssets/img/';
-    </script>
     <script src="//static.centro.org.uk/Staging/nwmAssets/js/nwm.js"></script>
     <script src="//static.centro.org.uk/nwmAssets/js/nwm-custom.js"></script>
 </body>

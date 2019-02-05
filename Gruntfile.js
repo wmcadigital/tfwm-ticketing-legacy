@@ -4,7 +4,8 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
-                    'css/compiled/ticketing.css' : 'css/sass/ticketing.scss'
+                    'css/compiled/ticketing.css' : 'css/sass/ticketing.scss',
+                    'css/compiled/ticketing-swift.css' : 'css/sass/ticketing-swift.scss'
                 }
             }
         },
@@ -17,7 +18,8 @@ module.exports = function(grunt) {
             },
             dist:{
                 files: {
-                    'css/compiled/ticketing.css' : 'css/compiled/ticketing.css'
+                    'css/compiled/ticketing.css' : 'css/compiled/ticketing.css',
+                    'css/compiled/ticketing-swift.css' : 'css/compiled/ticketing-swift.css'
                 }
             }
         },
@@ -30,7 +32,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    src: ['app/*.js', '!app/*.min.js', 'app/live/*.js','!app/live/*.min.js'],
+                    src: ['app/*.js', '!app/*.min.js', 'app/live/*.js','!app/live/*.min.js', 'app/swift/*.js','!app/swift/*.min.js'],
                     dest: '.',
                     cwd: '.',
                     rename: function (dst, src) {

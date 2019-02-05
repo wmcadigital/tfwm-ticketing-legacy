@@ -1,0 +1,787 @@
+.ticketing-page {
+
+    .ticket-search .how-long .icon-stylized-new label {
+        background-color: $white!important;
+        color: $purple;
+    }
+
+    .icon-stylized-new label {
+        background-color: $white!important;
+        color: $purple; 
+    }
+
+    .new-transport-icons-blue .icon-stylized-new input:checked ~ label{
+        background-color: $purple!important;
+        color: #fff!important;
+    }
+
+    .icon-stylized-new{
+        svg{fill: $purple;}
+
+    }
+
+    .btn-purple, .swift-forms > .row form .contourNavigation > .col-md-12 input[type="submit"] {
+        width: auto;
+        border-radius: 30px;
+        background-color: #3C1053;
+        color: white;
+        font-size: 16px;
+        padding: 15px 30px;
+        white-space: pre-wrap;
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px transparent;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow;
+        transition-property: box-shadow, background-color; }
+        .btn-purple:hover, .swift-forms > .row form .contourNavigation > .col-md-12 input[type="submit"]:hover, .btn-purple:focus, .swift-forms > .row form .contourNavigation > .col-md-12 input[type="submit"]:focus {
+          color: white;
+          background-color: #2D0D42;
+          font-weight: normal;
+          -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5); }
+      
+      .btn-light-purple {
+        width: auto;
+        border-radius: 30px;
+        background-color: #84329B;
+        color: white;
+        font-size: 16px;
+        padding: 15px 30px;
+        white-space: pre-wrap;
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px transparent;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow;
+        transition-property: box-shadow, background-color; }
+        .btn-light-purple:hover, .btn-light-purple:focus {
+          color: white;
+          background-color: #622871;
+          font-weight: normal;
+          -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5); }
+      
+      .btn {
+        text-transform: lowercase; }
+
+        .acc__trigger{background: #edf8fd;color: $purple}
+      
+
+    .stylized-select > select {
+        color: $purple;
+        border: none;
+        background:white url(//static.centro.org.uk/nwmAssets/img/select-swift.png) right center repeat-y;
+    }
+
+    .stylized-select:before, .stylized-select:after{
+        background: #fff!important;
+    }
+
+    .help-section {
+        display: inline-block;
+        margin: 15px 0;
+    }
+
+    .transparent--bg {
+        background: none !important
+    }
+
+    .boxin:last-child {
+        margin-bottom: none !important
+    }
+
+    .block--main {
+        .title {
+            display: flex;
+        }
+
+        .errors {
+            margin: 0 0 15px 0;
+        }
+    }
+
+    .arrdep-filters {
+        @include breakpoint(mobileonly) {
+            display: flex;
+        }
+
+        .radio-bar {
+            display: -webkit-box;
+
+            @include breakpoint(mobileonly) {
+                display: inline-block;
+            }
+
+            input:checked+label {
+                height: 100% !important
+            }
+        }
+
+        >div {
+            width: 50% !important;
+        }
+    }
+
+    .ticket-item {
+        a {
+            padding: 0px !important
+        }
+
+        .paygimg {
+            float: right;
+            margin: 0 0 25px 0;
+            width: 75%;
+
+            @include breakpoint(mobileonly) {
+                width: 65%;
+            }
+        }
+
+        .payment-icons {
+            display: block;
+            width: 100%;
+
+            >* {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .ticket-direct-debit-logo {
+                width: 85px;
+                margin-left: 10px;
+            }
+
+            .ticket-swift-logo {
+                width: 35px;
+            }
+        }
+
+        .event__title {
+            font-size: 22px;
+        }
+
+        .price {
+            font-weight: normal;
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 30px;
+        }
+
+        .event__date {
+            margin-bottom: 40px;
+        }
+
+        a {
+            margin-bottom: 8px;
+        }
+    }
+
+    .ticket-filters {
+        hr {
+            margin-bottom: 0;
+            background-color: $cyan
+        }
+
+        .icon {
+            color: $cyan;
+
+            &:after {
+                background-image: none
+            }
+        }
+
+        .filter-block {
+            border-bottom: 1px solid #ccc;
+
+            .filter-title {
+                padding: 20px 0;
+                display: block;
+                font-weight: bold;
+                cursor: pointer;
+                width: 100%;
+                text-align: left;
+
+                &:hover {
+                    color: $cyan;
+                }
+
+                i {
+                    float: right;
+                    color: $cyan;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .checkbox-list {
+            label {
+                background-color: transparent;
+            }
+        }
+
+        ul {
+            padding: 0 0 20px 0;
+            margin: 0;
+
+            label {
+                border: 0;
+            }
+        }
+    }
+
+    #detail {
+        div {
+            font-family: "WF_Droid_Sans", sans-serif;
+            font-weight: 400;
+            font-size: 1.6rem;
+            line-height: 2.6rem;
+        }
+
+        //make custom tick icon smaller
+        .icon--tick::after {
+            background-position: -70px -190px;
+        }
+
+        .iconcustom::after {
+            background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+            background-size: 300px auto;
+            content: "";
+            height: 32px;
+            left: 0;
+            position: absolute;
+            width: 30px;
+        }
+    }
+
+    .error {
+        margin-bottom: 15px
+    }
+
+    .stationlist {
+        margin: 10px 0;
+    }
+
+    //style for disabled buttons
+    button:disabled,
+    button[disabled] {
+        border: 1px solid #ccc !important;
+        background-color: #f1f1f1 !important;
+        color: #666666 !important;
+
+        &::after {
+            display: none !important;
+        }
+
+        &::before {
+            display: none !important;
+        }
+
+        &:hover {
+            border: 1px solid #999999 !important;
+            background-color: #f1f1f1 !important;
+            color: #666666;
+            cursor: not-allowed !important;
+        }
+    }
+
+    select:disabled,
+    select[disabled] {
+        border: 2px solid #ccc !important;
+        background-color: #f1f1f1 !important;
+        color: #666666 !important;
+        background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
+    }
+
+    form input.ng-invalid-autocomplete-required,
+    .field-required-class,
+    input.ng-invalid-field-required-class {
+        border: red 1px solid !important;
+    }
+
+    .errors {
+        margin: 10px 0;
+    }
+
+    .angular-grid-item {
+        .bdr-top--purple.boxin {
+            padding: 0px;
+
+            .itemContent {
+                padding: 70px 20px 45px 20px
+            }
+        }
+    }
+
+    .block--fullwidth .block--side {
+        position: sticky;
+        top: 15px;
+    }
+
+    .card-img {
+        width: 180px;
+        float: left;
+        margin: 30px 20px 20px 0;
+    }
+
+    .boxin--large h1 {
+        font-size: 3rem;
+        line-height: 3.5rem
+    }
+
+    .ticket-detail {
+        float: right;
+    }
+
+    .ticket-name {
+        display: inline-flex;
+    }
+
+    .features {
+        background: #f4f4f4 !important;
+        padding: 20px;
+    }
+
+    .price {
+        font-weight: normal;
+        margin-top: 0;
+        font-size: 24px;
+    }
+
+    .summary {
+        font-weight: bold
+    }
+
+    .useon {
+        font-weight: bold
+    }
+
+    .acc {
+        margin-top: 20px;
+    }
+
+    .modalSwift {
+        padding: 30px
+    }
+
+    input[type="checkbox"]:disabled+label {
+        background: #dddddd;
+    }
+
+    input[type=text] {
+        text-align: center;
+    }
+
+    .orcont {
+        float: left;
+        width: 30px
+    }
+
+    .orcontent {
+        padding: 60px 0 20px 20px;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .BuyOnSwift {
+        margin: 15px 0
+    }
+
+    form .blocks .block {
+        margin-bottom: 0px
+    }
+
+    label.plain-small {
+        font-size: 14px;
+        margin: 0 0 5px 0;
+        display: block;
+    }
+
+    .to {
+        .orcontent {
+            padding: 40px 0 20px 20px
+        }
+    }
+
+    .highlight {
+        color: $cyan;
+    }
+
+    .col {
+        width: 50%;
+        float: left;
+        padding-right: 10px;
+    }
+
+    .nnetwork {
+        border-top: 6px solid $cyan
+    }
+
+    .bdr-top--purple {
+        border-top: 6px solid $purple
+    }
+
+    @include breakpoint(mobileonly) {
+        .mobile--void {
+            display: none !important
+        }
+    }
+
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+        display: none !important;
+    }
+
+    .ng-hide {
+        display: none !important;
+    }
+
+    .block--side {
+        p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            margin-top: 5px;
+        }
+    }
+
+    @include breakpoint(tablet) {
+        .block--fullwidth .block--side {
+            position: static;
+            top: 15px;
+        }
+    }
+
+    @include breakpoint(tablet2) {
+        .orcontent {
+            height: 40px;
+            width: 100%;
+            text-align: left;
+            display: table-row;
+        }
+
+        .orcont {
+            float: none;
+            width: 100%
+        }
+
+        .passselect {
+            float: left;
+            display: contents;
+        }
+
+        .blocks--halves .block {
+            width: 100%;
+        }
+    }
+
+    @include breakpoint(mobileonly) {
+        .col {
+            width: 100%;
+            float: left;
+            padding-right: 10px;
+        }
+
+        .summary {
+            margin: 15px 0 0 0
+        }
+
+        .ticketing-results-grid {
+            background: white;
+        }
+
+        .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+            width: 100% !important
+        }
+    }
+
+    @media (max-width:1000px) and (min-width:890px) {
+        .orcontent {
+            padding: 60px 0 0px 0px;
+        }
+    }
+
+    ​
+    /* Tab Styling */
+
+    .tab-content {
+        position: initial !important;
+    }
+
+    .tab-pane.ng-scope.ng-isolate-scope {
+        display: none
+    }
+
+    .tab-pane.ng-scope.ng-isolate-scope.active {
+        display: block;
+    }
+
+    span.ng-scope.active {
+        background-color: $purple;
+        color: white;
+    }
+
+    .radio-bar{
+        color: $purple;
+    }
+
+    .radio-bar input:checked + label{
+        background-color: $purple;
+        color: white;
+    }
+
+    .buy .price {
+        color: $darkgrey;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 45px;
+    }
+
+    .online {
+        color: $cyan !important
+    }
+
+    .itemContent .price {
+        color: $cyan !important
+    }
+
+    .hideCheck {
+        display: none
+    }
+
+    .hideSave {
+        display: none
+    }
+
+    label.blue {
+        color: $purple!important;
+    }
+
+    .mobile-only .stylized-select {
+        margin: 15px 0 0 0;
+    }
+
+    /* Modal Styling */
+
+    .ng-modal-dialog {
+        display: block;
+        width: 600px;
+        max-width: 100%;
+        height: 600px;
+        max-height: 100%;
+        position: fixed;
+        z-index: 10000;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        .modal__close {
+            top: 0;
+        }
+
+        .ng-modal-dialog-content {
+            .operators {
+                padding: 20px;
+                margin: 0;
+                overflow-y: scroll;
+                position: absolute;
+                width: 96%;
+                height: 420px;
+                margin-bottom: 140px;
+
+                table {
+                    width: 100%;
+
+                    tr {
+                        border-bottom: 1px solid #ccc;
+                    }
+
+                    td {
+                        padding: 25px 0 15px 0;
+                    }
+                }
+            }
+
+            .header {
+                background: white;
+                padding: 25px 20px;
+                height: 140px;
+            }
+        }
+    }
+
+    .ng-modal-dialog.boxin.modal-content {
+        padding: 0px 15px 15px 15px !important;
+    }
+
+
+    /* Tooltip Styling */
+
+    .tooltip {
+        z-index: 99999;
+
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @include breakpoint(mobileonly) {
+            right: 5px;
+        }
+    }
+
+    .help-link:after {
+        vertical-align: middle;
+    }
+
+    /* Icon over image popup */
+
+    .imgwrapper {
+        position: relative;
+    }
+
+    .imgwrapper:hover img {
+        opacity: 0.5;
+    }
+
+    .imgwrapper .material-icons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 50px;
+        color: #009FE3;
+    }
+
+    /* Scrollbar Styling */
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+}
+
+/* Custom Grid */
+$grid-columns: 12;
+
+@for $i from 1 through $grid-columns {
+    .grid-#{$i} {
+        width: percentage($i / $grid-columns);
+        display: block;
+
+        @include breakpoint(mobileonly) {
+            width: 100%;
+        }
+    }
+}
+
+
+// styles
+[class^='grid-'] {
+    box-sizing: border-box;
+    float: left;
+}
+
+.or {
+    padding: 60px 0 20px 0;
+    text-align: center;
+
+    @include breakpoint(mobileonly) {
+        text-align: left;
+        padding: 0px;
+    }
+}
+
+.rowcontainer {
+    display: inline-block;
+    width: 100%;
+}
+
+.form-control {
+    width: 100% !important
+}
+
+.railhelp {
+    margin: 10px 0
+}
+
+.ie10-or-better .stylized-select>select {
+    padding-right: 80px
+}
+
+label.plain,
+.label.plain {
+    display: table !important;
+}
+
+.stylized-select {
+    display: block;
+}
+
+form {
+    .title {
+        margin: 20px 0 10px 0
+    }
+
+    .padding-right {
+        padding-right: 15px;
+
+        @include breakpoint(mobileonly) {
+            padding-right: 0px
+        }
+    }
+
+    .padding-left {
+        padding-left: 15px;
+
+        @include breakpoint(mobileonly) {
+            padding-left: 0px
+        }
+    }
+}
+
+.result {
+    margin: 0 0 10px 0
+}
+
+.blue {
+    color: $purple
+}
+
+.swift {
+    .btn {
+        margin-top: 10px
+    }
+}

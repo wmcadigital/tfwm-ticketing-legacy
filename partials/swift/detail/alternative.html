@@ -1,0 +1,23 @@
+<div data-ng-if="ticket.all.relatedTickets.length >= 1">
+    <div class="blocks cfx ticketing-search">
+        <div class="block block--fullwidth">
+            <div class="boxin bdr-top--navy">
+                <h3 class="filtered-header__heading">
+                    <span class="type--blue">{{ticket.relatedTickets.length}} {{counter}}</span> Related Tickets</h3>
+            </div>
+        </div>
+        <div class="block block--fullwidth">
+            <div angular-grid="ticket.relatedTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="alternativeResults">
+                <div data-ng-repeat="ticket in ticket.relatedTickets | limitTo: 4 track by $index" data-count="{{ticket.relatedTickets.length}}">
+                    <detail-related></detail-related>
+                </div>
+            </div>
+
+            <div class="event-results__more" data-ng-if="ticket.relatedTickets.length > 4 && ticketing.limit < ticket.relatedTickets.length">
+                <button data-event-step="6" id="loadMore" class="btn align--center" data-ng-click="ticketing.loadMore();">Load
+                    more</button>
+            </div>
+
+        </div>
+    </div>
+</div>
