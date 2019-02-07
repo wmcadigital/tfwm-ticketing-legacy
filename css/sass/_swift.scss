@@ -84,6 +84,8 @@
         background:white url(//static.centro.org.uk/nwmAssets/img/select-swift.png) right center repeat-y;
     }
 
+    .boxin > h4{font-weight: normal;}
+
     .stylized-select:before, .stylized-select:after{
         background: #fff!important;
     }
@@ -297,11 +299,13 @@
 
     select:disabled,
     select[disabled] {
-        border: 2px solid #ccc !important;
+        border: none!important;
         background-color: #f1f1f1 !important;
         color: #666666 !important;
         background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
     }
+
+    .radio-bar > span ~ span{border-left: 2px solid $purple}
 
     form input.ng-invalid-autocomplete-required,
     .field-required-class,

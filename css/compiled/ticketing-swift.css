@@ -153,6 +153,9 @@ BREAKPOINTS
   border: none;
   background: white url(//static.centro.org.uk/nwmAssets/img/select-swift.png) right center repeat-y;
 }
+.ticketing-page .boxin > h4 {
+  font-weight: normal;
+}
 .ticketing-page .stylized-select:before, .ticketing-page .stylized-select:after {
   background: #fff !important;
 }
@@ -326,10 +329,13 @@ BREAKPOINTS
 }
 .ticketing-page select:disabled,
 .ticketing-page select[disabled] {
-  border: none!important;
+  border: none !important;
   background-color: #f1f1f1 !important;
   color: #666666 !important;
   background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
+}
+.ticketing-page .radio-bar > span ~ span {
+  border-left: 2px solid #773289;
 }
 .ticketing-page form input.ng-invalid-autocomplete-required,
 .ticketing-page .field-required-class,
@@ -391,21 +397,7 @@ BREAKPOINTS
 }
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
-  color: #ccc;
 }
-
-.ticketing-page input[type=checkbox]:disabled + label svg {
-  fill: #ccc;
-}
-
-.modal__close{
-  position: relative;
-}
-
-
-.help-txt{padding: 15px 0}
-.help-txt p{font-size: 1.2rem;line-height: 1.9rem;margin: 10px 0;}
-
 .ticketing-page input[type=text] {
   text-align: center;
 }

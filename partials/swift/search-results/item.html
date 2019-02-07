@@ -1,6 +1,6 @@
-<div class="boxin ticket-item nga-fast nga-fade" ng-class="{'bdr-top--purple' : ticket.swiftCurrentAmount>='0', 'bdr-top--orange' : ticket.allowBus==true && ticket.allowTrain==false && ticket.allowMetro==false, 'bdr-top--green' : ticket.allowBus==false && ticket.allowTrain==true && ticket.allowMetro==false, 'bdr-top--pink' : ticket.allowBus==false && ticket.allowTrain==false && ticket.allowMetro==true, 'bdr-top--blue' : ticket.allowBus==true && ticket.allowMetro==true && ticket.allowTrain==false, 'nnetwork' : ticket.swiftCurrentAmount!=='' && ticket.allowBus==true && ticket.allowTrain==true && ticket.allowMetro==true, 'bdr-top--cyan' : ticket.allowBus==true && ticket.allowTrain==true && ticket.allowMetro==false}">  
+<div class="ticket-item nga-fast nga-fade">  
     <span data-ng-if="ticket.swiftCurrentAmount"><a ng-href="{{ticketUrl}}#/ticket/810"><img class="paygimg" ng-src="{{assetPath}}assets/PAYG.png" /></a></span>
-    <div class="itemContent">
+    <div class="boxin itemContent">
     <h4 class="event__title">{{ticket.name}}</h4>
     <h5 class="price">
         <span data-ng-if="ticket.ticketCurrentAmount == '0'">{{ticket.priceOverride}} Credit</span>
