@@ -1,6 +1,6 @@
 <div class="filtered-header boxin" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
-        <span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</h3>
+        <span class="type--blue">{{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}}</span> tickets matching your criteria</h3>
 
     <div class="mobile-only">
         <!--<a class="btn btn--tertiary" ng-model="filter">Filter</a>-->
@@ -55,18 +55,18 @@
 
 
         <!-- Exact matched to search -->
-        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.origTickets.length == '0'" class="filtered-header boxin">
-            <h3 class="filtered-header__heading">{{ticketing.origTickets.length}} Exact matches to your search</h3>
+        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="(ticketing.origTickets | filter: {displayInSwiftSearch: true}).length == '0'" class="filtered-header boxin">
+            <h3 class="filtered-header__heading">{{(ticketing.origTickets | filter: {displayInSwiftSearch: true}).length }} Exact matches to your search</h3>
         </div>
 
         <!-- error messages -->
-        <div data-ng-if="ticketing.filteredTickets.length == '0' && ticketing.loadingStatus === 'success'" class="grid-12 errors">
+        <div data-ng-if="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length == '0' && ticketing.loadingStatus === 'success'" class="grid-12 errors">
                 <div class="boxin -messages">
                         No tickets have been found. Please try changing your search settings.
                 </div>
         </div>
 
-        <div data-ng-if="ticketing.origTickets.length == '0' && ticketing.otherTickets.length != '0' && ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.postJSON.brand != null" class="grid-12 errors">
+        <div data-ng-if="(ticketing.origTickets | filter: {displayInSwiftSearch: true}).length == '0' && (ticketing.otherTickets | filter: {displayInSwiftSearch: true}).length != '0' && ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.postJSON.brand != null" class="grid-12 errors">
             <div class="boxin -messages">
                     No exact match found, please see below tickets that match some of your search or search our full product range on the <a href="https://www.networkwestmidlands.com/tickets/#/" target="_parent">Network West Midlands Ticket Finder</a>.
             </div>
@@ -75,7 +75,7 @@
 
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="origTicketResults" data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.origTickets.length == '0'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index">
+            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | filter:{displayInSwiftSearch:true} | limitTo: ticketing.limitExact track by $index">
                 <item></item>
             </div>
         </div>
@@ -85,14 +85,14 @@
         </div>
 
         <!-- Other matches -->
-        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.otherTickets.length == '0' || ticketing.postJSON.brand != null" class="boxin title">
-                <h3 class="filtered-header__heading">{{ticketing.otherTickets.length}} matches to some of your search</h3>
+        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="(ticketing.otherTickets | filter: {displayInSwiftSearch: true}).length == '0' || ticketing.postJSON.brand != null" class="boxin title">
+                <h3 class="filtered-header__heading">{{(ticketing.otherTickets | filter: {displayInSwiftSearch: true}).length}} matches to some of your search</h3>
         </div>
 
         <!-- Other Results -->
         <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
             ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.otherTickets.length == '0'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.otherTickets | limitTo: ticketing.limit track by $index">
+            <div class="grid" data-ng-repeat="ticket in ticketing.otherTickets | filter:{displayInSwiftSearch:true} | limitTo: ticketing.limit track by $index">
                 <item></item>
             </div>
         </div>
