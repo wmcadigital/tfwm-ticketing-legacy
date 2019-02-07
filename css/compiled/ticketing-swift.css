@@ -391,7 +391,13 @@ BREAKPOINTS
 }
 .ticketing-page input[type=checkbox]:disabled + label {
   background: #dddddd;
+  color: #ccc;
 }
+
+.ticketing-page input[type=checkbox]:disabled + label svg {
+  fill: #ccc;
+}
+
 .ticketing-page input[type=text] {
   text-align: center;
 }
