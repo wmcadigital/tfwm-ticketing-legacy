@@ -93,28 +93,7 @@
     <!-- Traveller -->
     <div class="rowcontainer">
         <div class="grid-5" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand">
-            <span tooltip tooltipc=
-            "
-            Young Person up to 18: - For children aged 5-15 inclusive and holders of the Network West Midlands 
-            <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/' target='_blank'>16-18 photocard</a>. <br><br>
-
-            Student 18+: - For students who are in full time education aged 18+ or those aged 16-18 who are NOT entitled to the 
-            Network West Midlands <a href='https://journeyplanner.networkwestmidlands.com/operator' target='_blank'>16-18 photocard</a>. 
-            Proof of full-time education and two passport sized photographs will be required to buy this ticket (if purchasing from rail station). 
-            Or, it may be loaded to a Swift photocard.<br><br>
-
-            Group/Family: these
-            vary; check full
-            ticket descriptions.<br><br>
-
-            Older Persons Passholder: - holder of an English National Concessionary Travel Pass <br><br>
-
-            Disabled Passholder  - holder of an English National Concessionary Travel Pass<br><br>
-
-            If you don't match any criteria -
-            search for adult tickets.
-            " 
-            class="help-link float--right"></span>
+            <span class="help-link float--right" ng-click="ticketing.showDetails=!ticketing.showDetails"></span>
     
             <label class="plain" for="SelectedPassengerType">Traveller</label>
             <span class="stylized-select">
@@ -131,7 +110,30 @@
                 </select>
             </span>
         </div>
-        <div class="grid-7"></div>
+        <div class="grid-7">
+        </div>
+        <div class="rowcontainer">
+        <div class="grid-7">
+                <div class="help-txt" ng-show="ticketing.showDetails">
+                        <a ng-click="ticketing.showDetails=!ticketing.showDetails" class="modal__close float--right">Close</a>
+                        <p><strong>Young Person up to 18</strong> - For children aged 5-15 inclusive and holders of the Network West Midlands 
+                        <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/' target='_blank'>16-18 photocard</a>.</p>
+                    
+                        <p><strong>Student 18+</strong> - For students who are in full time education aged 18+ or those aged 16-18 who are NOT entitled to the 
+                        Network West Midlands <a href='https://journeyplanner.networkwestmidlands.com/operator' target='_blank'>16-18 photocard</a>. 
+                        Proof of full-time education and two passport sized photographs will be required to buy this ticket (if purchasing from rail station). 
+                        Or, it may be loaded to a Swift photocard.</p>
+                    
+                        <p><strong>Group/Family</strong> - these vary; check full ticket descriptions.</p>
+                    
+                        <p><strong>Older Persons Passholder</strong> - holder of an English National Concessionary Travel Pass</p>
+                    
+                        <p><strong>Disabled Passholder</strong> - holder of an English National Concessionary Travel Pass</p>
+                    
+                        <p>If you don't match any criteria - search for adult tickets.</p>
+                    </div>
+        </div>
+    </div>
     </div>
     <!-- /Traveller -->
 

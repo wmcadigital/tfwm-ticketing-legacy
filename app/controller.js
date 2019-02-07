@@ -146,6 +146,8 @@
             $location.url('').replace();
         }
 
+        $scope.showDetails = false;
+
         //if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevent tickets are shown
         if($location.search().brand === 'Swift PAYG'){
             getSwiftPAYG();

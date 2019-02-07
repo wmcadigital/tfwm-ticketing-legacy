@@ -326,7 +326,7 @@ BREAKPOINTS
 }
 .ticketing-page select:disabled,
 .ticketing-page select[disabled] {
-  border: 2px solid #ccc !important;
+  border: none!important;
   background-color: #f1f1f1 !important;
   color: #666666 !important;
   background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
@@ -397,6 +397,14 @@ BREAKPOINTS
 .ticketing-page input[type=checkbox]:disabled + label svg {
   fill: #ccc;
 }
+
+.modal__close{
+  position: relative;
+}
+
+
+.help-txt{padding: 15px 0}
+.help-txt p{font-size: 1.2rem;line-height: 1.9rem;margin: 10px 0;}
 
 .ticketing-page input[type=text] {
   text-align: center;
