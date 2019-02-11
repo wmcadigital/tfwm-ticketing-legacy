@@ -5,7 +5,7 @@
         <div class="mobile-only" ng-hide="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length <= '1'">
             <div class="rowcontainer">
                 <div class="grid-6">
-                    <button class="btn btn--tertiary" ng-click='ticketing.toggleModalFilters();'>Filter</button>
+                    <button class="btn btn--tertiary btn--filter" ng-click='ticketing.toggleModalFilters();'>Filter</button>
                 </div>
                 <div class="grid-6">
                     <span class="stylized-select">

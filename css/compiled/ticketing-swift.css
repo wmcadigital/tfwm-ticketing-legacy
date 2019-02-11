@@ -62,6 +62,9 @@ BREAKPOINTS
   /* Handle */
   /* Handle on hover */
 }
+.ticketing-page h3 {
+  margin: 0px;
+}
 .ticketing-page .ticket-search .how-long .icon-stylized-new label {
   background-color: #ffffff !important;
   color: #773289;
@@ -76,6 +79,35 @@ BREAKPOINTS
 }
 .ticketing-page .icon-stylized-new svg {
   fill: #773289;
+}
+.ticketing-page .btn--filter {
+  min-width: 0;
+  width: 100%;
+  padding: 18px 60px 18px 25px;
+  height: auto;
+  min-height: 0;
+  position: relative;
+  clear: right;
+  -webkit-perspective: 400px;
+  perspective: 400px;
+}
+.ticketing-page .btn--filter:after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+  background-position: -385px -256px;
+  background-size: 308px auto;
+  z-index: 10;
+  -webkit-transition: transform 300ms ease-out;
+  -webkit-transition: -webkit-transform 300ms ease-out;
+  transition: -webkit-transform 300ms ease-out;
+  -o-transition: transform 300ms ease-out;
+  transition: transform 300ms ease-out;
+  transition: transform 300ms ease-out, -webkit-transform 300ms ease-out;
 }
 .ticketing-page .btn-purple, .ticketing-page .swift-forms > .row form .contourNavigation > .col-md-12 input[type=submit] {
   width: auto;

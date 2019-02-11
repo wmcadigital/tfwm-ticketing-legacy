@@ -1,4 +1,5 @@
 .ticketing-page {
+    h3{margin: 0px;}
 
     .ticket-search .how-long .icon-stylized-new label {
         background-color: $white!important;
@@ -18,6 +19,34 @@
     .icon-stylized-new{
         svg{fill: $purple;}
 
+    }
+
+    .btn--filter {
+        min-width: 0;
+        width: 100%;
+        padding: 18px 60px 18px 25px;
+        height: auto;
+        min-height: 0;
+        position: relative;
+        clear: right;
+        -webkit-perspective: 400px;
+        -moz-perspective: 400px;
+        perspective: 400px;
+        &:after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            width: 28px;
+            height: 28px;
+            background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+            background-position: -385px -256px;
+            background-size: 308px auto;
+            z-index: 10;
+            -webkit-transition: transform 300ms ease-out;
+            -moz-transition: transform 300ms ease-out;
+            transition: transform 300ms ease-out;
+        }
     }
 
     .btn-purple, .swift-forms > .row form .contourNavigation > .col-md-12 input[type="submit"] {
