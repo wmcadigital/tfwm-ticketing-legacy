@@ -2,7 +2,7 @@
     <h3 class="filtered-header__heading">
         <span class="type--blue">{{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}}</span> tickets matching your criteria</h3>
         
-        <div class="mobile-only" ng-hide="ticketing.filteredTickets.length <= '1'">
+        <div class="mobile-only" ng-hide="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length <= '1'">
             <div class="rowcontainer">
                 <div class="grid-6">
                     <button class="btn btn--tertiary" ng-click='ticketing.toggleModalFilters();'>Filter</button>
@@ -10,7 +10,7 @@
                 <div class="grid-6">
                     <span class="stylized-select">
                         <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy">
-                            <option value="orderSequence">Sott by popularity</option>
+                            <option value="orderSequence">Sort by popularity</option>
                             <option value="ticketCurrentAmount">Sort by price (Low - High)</option>
                             <option value="-ticketCurrentAmount">Sort by price (High - Low)</option>
                         </select>
@@ -20,7 +20,7 @@
             <!--<a class="btn btn--tertiary" ng-model="filter">Filter</a>-->
         </div>
 
-    <div class="arrdep-filters cfx mobile--void" ng-hide="ticketing.filteredTickets.length <= '1'">
+    <div class="arrdep-filters cfx mobile--void" ng-hide="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length <= '1'">
         <div class="field">
             <div class="radio-bar">
                 <span>
