@@ -25,6 +25,9 @@ BREAKPOINTS
    @else if $point == laptop {
      @media (min-width: 64em) { @content ; }
   }
+  @else if $point == laptop2 {
+    @media (min-width: 929px) and (max-width: 1010px) { @content ; }
+ }
     @else if $point == tablet {
      @media (max-width: 55em) { @content ; }
   }

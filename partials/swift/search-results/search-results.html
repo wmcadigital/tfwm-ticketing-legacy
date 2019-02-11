@@ -48,7 +48,7 @@
         <filters></filters>
     </div>
 
-    <div class="boxin--mask no-bg block block--main">
+    <div class="no-bg block block--main">
 
         <div class="error-message-no-results" data-ng-if="timetables.laodingStatus == 'error' || (ticketing.loadingStatus == 'success' && !ticketing.filteredTickets.length)"
             data-ng-bind-html="ticketing.noResults"></div>
@@ -115,7 +115,7 @@
 
 
         <div data-ng-if="ticketing.all.length && ticketing.postJSON.brand == 'Swift PAYG'">
-                <div class="filtered-header boxin bdr-top--navy">
+                <div class="filtered-header boxin">
                         <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
                     </div>
 

@@ -1,5 +1,7 @@
 .ticketing-page {
     h3{margin: 0px;}
+    .search{margin-bottom: 40px}
+    .search-results{padding-top:40px}
 
     .ticket-search .how-long .icon-stylized-new label {
         background-color: $white!important;
@@ -144,14 +146,13 @@
 
     .block{
         @include breakpoint(tablet2) {
-        padding-left: 25px}
+        padding-left: 25px;padding-right: 10px;}
     }
 
     .arrdep-filters {
         @include breakpoint(mobileonly) {
             display: flex;
         }
-
         .radio-bar {
             display: -webkit-box;
 
@@ -165,11 +166,14 @@
         }
 
         >div {
-            width: 50% !important;
+            width: 50%;
+            @include breakpoint(laptop2) {
+                width: 55%;
+            }
         }
     }
 
-    .ticket-item {
+    .ticket-item {border-bottom: 10px solid #f4f4f4;
         a {
             padding: 0px !important
         }
@@ -629,13 +633,18 @@
         display: block;
         width: 600px;
         max-width: 100%;
-        height: 600px;
+        //height: 600px;
         max-height: 100%;
         position: fixed;
         z-index: 10000;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        @include breakpoint(mobileonly) {
+            min-height: 200px!important;
+            position:absolute;
+            top: 800px;
+        }
 
         .modal__close {
             top: 0;

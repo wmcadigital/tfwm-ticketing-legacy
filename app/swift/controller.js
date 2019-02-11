@@ -9,6 +9,7 @@
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
+        .directive('filtersMobile', [filtersMobile])
         .directive('item', ['$timeout', 'angularGridInstance', item])
         .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', '$scope', '$timeout', TicketDetailCtrl])
         .directive('detailDetails', [detailDetails])
@@ -751,6 +752,13 @@
     function filters() {
         return {
             templateUrl: assetPath + 'partials/swift/search-results/filters.html',
+            restrict: 'E'
+        };
+    }
+
+    function filtersMobile() {
+        return {
+            templateUrl: assetPath + 'partials/swift/search-results/filters-mobile.html',
             restrict: 'E'
         };
     }

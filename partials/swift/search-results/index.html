@@ -1,22 +1,12 @@
-<div class="blocks cfx timetable-search-page">
-    <div class="wrap wrap--padded homepage--block">
-        <div class="blocks">
-            <div class="block block--fullwidth">
-                <div class="boxin bg--blue bg--tint">
-                    <initial-search data-ng-cloak></initial-search>
-                </div>
-            </div>
-        </div>
+<div class="wrap wrap--padded search">
+    <div class="boxin boxin--large bg--blue bg--tint">
+        <initial-search data-ng-cloak></initial-search>
     </div>
 </div>
 
-<div data-ng-if="ticketing.loadingStatus === 'success'" class="blocks cfx bg--grey bg--tint" style="padding-top:20px">
-    <div class="wrap wrap--padded homepage--block">
-        <div class="blocks">
-            <div class="block block--fullwidth">
-                <search-results data-ng-cloak></search-results>
-            </div>
-        </div>
+<div data-ng-if="ticketing.loadingStatus === 'success'" class="bg--grey bg--tint search-results">
+    <div class="wrap wrap--padded">
+        <search-results data-ng-cloak></search-results>
     </div>
 </div>
 
@@ -39,7 +29,5 @@
 </modal-dialog>
 
 <modal-dialog show='ticketing.modalShowFilter' class="bdr-top--cyan mobile-only">
-    <div class="">
-            <filters></filters>
-    </div>
+    <filters-mobile></filtersmobile>
 </modal-dialog>

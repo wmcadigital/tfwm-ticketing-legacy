@@ -65,6 +65,12 @@ BREAKPOINTS
 .ticketing-page h3 {
   margin: 0px;
 }
+.ticketing-page .search {
+  margin-bottom: 40px;
+}
+.ticketing-page .search-results {
+  padding-top: 40px;
+}
 .ticketing-page .ticket-search .how-long .icon-stylized-new label {
   background-color: #ffffff !important;
   color: #773289;
@@ -213,6 +219,7 @@ BREAKPOINTS
 @media (max-width: 58em) {
   .ticketing-page .block {
     padding-left: 25px;
+    padding-right: 10px;
   }
 }
 @media (max-width: 32.125em) {
@@ -235,7 +242,15 @@ BREAKPOINTS
   height: 100% !important;
 }
 .ticketing-page .arrdep-filters > div {
-  width: 50% !important;
+  width: 50%;
+}
+@media (min-width: 929px) and (max-width: 1010px) {
+  .ticketing-page .arrdep-filters > div {
+    width: 55%;
+  }
+}
+.ticketing-page .ticket-item {
+  border-bottom: 10px solid #f4f4f4;
 }
 .ticketing-page .ticket-item a {
   padding: 0px !important;
@@ -602,7 +617,6 @@ BREAKPOINTS
   display: block;
   width: 600px;
   max-width: 100%;
-  height: 600px;
   max-height: 100%;
   position: fixed;
   z-index: 10000;
@@ -611,6 +625,13 @@ BREAKPOINTS
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+@media (max-width: 32.125em) {
+  .ticketing-page .ng-modal-dialog {
+    min-height: 200px !important;
+    position: absolute;
+    top: 800px;
+  }
 }
 .ticketing-page .ng-modal-dialog .modal__close {
   top: 0;
