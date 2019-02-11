@@ -82,6 +82,7 @@
             $scope.stationToTitle = null;
             $scope.stationFromNameOocZ5 = null;
             $scope.stationToNameOocZ5 = null;
+            vm.toggleModalFilters = toggleModalFilters;
 
             //url parameters
             //direct debit
@@ -662,6 +663,13 @@
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
 
+        //FILTERS popup
+        vm.modalShowFilter = false;
+        function toggleModalFilters() {
+            console.log("Filters Open");
+            vm.modalShowFilter = !vm.modalShowFilter;
+        }
+
         //if pass is swift payg
         function swiftPAYG() {
             vm.passValue = vm.postJSON.brand;
@@ -784,6 +792,7 @@
         vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
         vm.limit = 4; //Set paging limit for Alt tickets
+        vm.toggleModalFilters = toggleModalFilters;
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -862,6 +871,13 @@
         vm.modalShownSwift = false;
         function toggleModalSwift() {
             vm.modalShownSwift = !vm.modalShownSwift;
+        }
+
+        //FILTERS
+        vm.modalShowFilter = false;
+        function toggleModalFilters() {
+            console.log("Filters Open");
+            vm.modalShowFilter = !vm.modalShowFilter;
         }
 
         $timeout(function () {

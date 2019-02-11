@@ -31,6 +31,9 @@ BREAKPOINTS
   @else if $point == tablet2 {
     @media (max-width: 58em) { @content ; }
  }
+ @else if $point == tablet3 {
+  @media (max-width: 750px) { @content ; }
+}
    @else if $point == phablet {
      @media (min-width: 37.5em)  { @content ; }
   }

@@ -82,6 +82,8 @@
             $scope.stationToTitle = null;
             $scope.stationFromNameOocZ5 = null;
             $scope.stationToNameOocZ5 = null;
+            vm.toggleModalSwift = toggleModalSwift;
+            vm.toggleModalFilters = toggleModalFilters;
 
             //url parameters
             //direct debit
@@ -396,7 +398,7 @@
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
-                        vm.loadingStatus = "success";
+                        //vm.loadingStatus = "success";
                     }
                 }, 0, false);
             }, 0, false);
@@ -727,6 +729,13 @@
           };
     }
 
+
+    //FILTERS
+    vm.modalShowFilter = false;
+    function toggleModalFilters() {
+        vm.modalShowFilter = !vm.modalShowFilter;
+    }
+
     // DIRECTIVES
     function initialSearch() {
         return {
@@ -759,7 +768,7 @@
                     if (scope.$last) {
                         angularGridInstance.ticketResults.refresh();
                     }
-                }, 0);
+                }, 1000);
             }
         };
     }

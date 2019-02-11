@@ -346,7 +346,7 @@ h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:la
 .ui-datepicker-next:after, .navbar__menu > li > ul a:before, .price-list:before {
   content: "";
   position: absolute;
-  background-image: url("../img/icons.png");
+  background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
   background-size: 308px auto;
   background-position: 0 0;
   background-repeat: no-repeat;
@@ -462,34 +462,6 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
-
-@font-face {
-  font-family: 'WF_Network';
-  src: url("../fonts/NetworkTT-Regular.eot");
-  src: url("../fonts/NetworkTT-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/NetworkTT-Regular.woff") format("woff"), url("../fonts/NetworkTT-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'WF_Network';
-  src: url("../fonts/NetworkTT-Bold.eot");
-  src: url("../fonts/NetworkTT-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/NetworkTT-Bold.woff") format("woff"), url("../fonts/NetworkTT-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'WF_Droid_Sans';
-  src: url("../fonts/DroidSans.eot");
-  src: url("../fonts/DroidSans.eot?#iefix") format("embedded-opentype"), url("../fonts/DroidSans.woff") format("woff"), url("../fonts/DroidSans.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'WF_Droid_Sans';
-  src: url("../fonts/DroidSans-Bold.eot");
-  src: url("../fonts/DroidSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/DroidSans-Bold.woff") format("woff"), url("../fonts/DroidSans-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal; }
 
 /* SET UP BORDER BOX SIZING */
 *, *:before, *:after {
@@ -616,10 +588,6 @@ html {
 * {
   margin: 0; }
 
-html,
-body {
-  height: 100%; }
-
 body {
   color: #333333;
   font-family: "WF_Droid_Sans", sans-serif;
@@ -724,7 +692,7 @@ a.link--arrow {
     content: '';
     vertical-align: middle;
     margin-left: 5px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 190px auto;
     width: 8px;
     height: 15px;
@@ -1675,7 +1643,7 @@ label.required:after {
   display: inline-block;
   width: 27px;
   height: 22px;
-  background: url(../img/checkbox.svg) 0 2px no-repeat;
+  background: url(//static.centro.org.uk/nwmAssets/img/checkbox.svg) 0 2px no-repeat;
   vertical-align: -3px;
   margin-right: 7px; }
 
@@ -2261,7 +2229,7 @@ td.ui-datepicker-unselectable span {
   .icon:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -2718,7 +2686,7 @@ button.btn {
     margin-top: -5px;
     width: 28px;
     height: 12px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -137px -383px;
     background-size: 308px auto;
     z-index: 10; }
@@ -2841,7 +2809,7 @@ button.btn {
     top: 17px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -255px -18px;
     background-size: 308px auto;
     z-index: 10; }
@@ -2864,7 +2832,7 @@ button.btn {
     top: 12px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -558px -373px;
     background-size: 308px auto;
     z-index: 10;
@@ -2894,7 +2862,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -21px -614px;
     background-size: 308px auto;
     z-index: 10;
@@ -2924,7 +2892,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -129px -566px;
     background-size: 308px auto;
     z-index: 10;
@@ -2960,7 +2928,7 @@ button.btn {
     top: 6px;
     width: 25px;
     height: 26px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-position: -21px -567px;
     background-size: 308px auto;
     z-index: 10; }
@@ -2968,7 +2936,7 @@ button.btn {
 .btn--changemethod:after {
   width: 28px;
   height: 28px;
-  background-image: url("../img/icons.png");
+  background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
   background-position: -72px -566px; }
 
 .combined-submit {
@@ -3041,7 +3009,7 @@ button.btn {
   width: 53px;
   height: 53px;
   background-color: #666666;
-  background-image: url("../img/icons.png");
+  background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
   background-size: 308px auto;
   text-indent: -9999px;
   overflow: hidden;
@@ -3129,7 +3097,7 @@ hr + .linklist {
   position: absolute;
   width: 10px;
   height: 16px;
-  background-image: url("../img/icons.png");
+  background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
   background-size: 308px auto;
   background-position: -203px -379px;
   right: 0;
@@ -3233,7 +3201,7 @@ hr + .linklist {
     right: 20px;
     width: 19px;
     height: 30px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     background-position: -254px -417px;
     z-index: 1; }
@@ -3785,7 +3753,7 @@ hr + .linklist {
   .disruption__header:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -3826,7 +3794,7 @@ hr + .linklist {
   .disruption__alert:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -3960,7 +3928,7 @@ hr + .linklist {
       right: 15px;
       width: 30px;
       height: 30px;
-      background-image: url("../img/icons.png");
+      background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
       background-size: 308px auto;
       background-position: -248px -417px;
       z-index: 1; }
@@ -4421,7 +4389,7 @@ hr + .linklist {
       right: 15px;
       width: 30px;
       height: 30px;
-      background-image: url("../img/icons.png");
+      background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
       background-size: 308px auto;
       background-position: -248px -417px;
       z-index: 1; }
@@ -4470,7 +4438,7 @@ hr + .linklist {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 0;
@@ -4550,7 +4518,7 @@ hr + .linklist {
   .swap-fields__btn:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     background-position: -254px -689px;
     width: 20px;
@@ -4643,7 +4611,7 @@ hr + .linklist {
   .journey-overview__steps > li.delayed .icon:before {
     content: '';
     position: absolute;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 282px auto;
     width: 24px;
     height: 22px;
@@ -5926,7 +5894,7 @@ p.tabbed-search__title {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 15px;
@@ -6654,7 +6622,7 @@ p.tabbed-search__title {
     top: 10px;
     left: 50%;
     margin-left: -16px;
-    background-image: url("../img/icons.png");
+    background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
     background-size: 308px auto;
     background-position: -19px -611px;
     -webkit-transition: transform 150ms ease-in-out;
@@ -7022,7 +6990,7 @@ td.arrdep__mob {
   position: absolute;
   width: 125px;
   height: 138px;
-  background-image: url("../img/icons.png");
+  background-image: url("//static.centro.org.uk/nwmAssets/img/icons.png");
   background-size: 462px auto;
   top: 0;
   left: 0; }

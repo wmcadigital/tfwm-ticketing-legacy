@@ -113,6 +113,11 @@
         }
     }
 
+    .block{
+        @include breakpoint(tablet2) {
+        padding-left: 25px}
+    }
+
     .arrdep-filters {
         @include breakpoint(mobileonly) {
             display: flex;
@@ -121,7 +126,7 @@
         .radio-bar {
             display: -webkit-box;
 
-            @include breakpoint(mobileonly) {
+            @include breakpoint(tablet2) {
                 display: inline-block;
             }
 
@@ -171,6 +176,7 @@
 
         .event__title {
             font-size: 22px;
+            display: inline-block;
         }
 
         .price {
@@ -436,7 +442,7 @@
         border-top: 6px solid $purple
     }
 
-    @include breakpoint(mobileonly) {
+    @include breakpoint(tablet3) {
         .mobile--void {
             display: none !important
         }
@@ -578,9 +584,13 @@
         color: $purple!important;
     }
 
-    .mobile-only .stylized-select {
-        margin: 15px 0 0 0;
+    .mobile-only {
+    .stylized-select {
+        border: 2px solid #ccc;
+        height: 57px;
     }
+    .grid-6{padding:10px;}
+}
 
     /* Modal Styling */
 

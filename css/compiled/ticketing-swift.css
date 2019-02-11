@@ -178,6 +178,11 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
+@media (max-width: 58em) {
+  .ticketing-page .block {
+    padding-left: 25px;
+  }
+}
 @media (max-width: 32.125em) {
   .ticketing-page .arrdep-filters {
     display: -webkit-box;
@@ -189,7 +194,7 @@ BREAKPOINTS
 .ticketing-page .arrdep-filters .radio-bar {
   display: -webkit-box;
 }
-@media (max-width: 32.125em) {
+@media (max-width: 58em) {
   .ticketing-page .arrdep-filters .radio-bar {
     display: inline-block;
   }
@@ -230,6 +235,7 @@ BREAKPOINTS
 }
 .ticketing-page .ticket-item .event__title {
   font-size: 22px;
+  display: inline-block;
 }
 .ticketing-page .ticket-item .price {
   font-weight: normal;
@@ -439,7 +445,7 @@ BREAKPOINTS
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
 }
-@media (max-width: 32.125em) {
+@media (max-width: 750px) {
   .ticketing-page .mobile--void {
     display: none !important;
   }
@@ -550,7 +556,11 @@ BREAKPOINTS
   color: #773289 !important;
 }
 .ticketing-page .mobile-only .stylized-select {
-  margin: 15px 0 0 0;
+  border: 2px solid #ccc;
+  height: 57px;
+}
+.ticketing-page .mobile-only .grid-6 {
+  padding: 10px;
 }
 .ticketing-page .ng-modal-dialog {
   display: block;

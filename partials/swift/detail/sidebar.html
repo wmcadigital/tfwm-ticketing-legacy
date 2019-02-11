@@ -3,6 +3,8 @@
         <h3>Price & How to buy </h3>
         <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
 
+        <button class="btn btn-purple" ng-click='ticket.toggleModalFilters();'>Open Filters</button>
+
         <div>
             <p class="price online">
                 <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
@@ -377,5 +379,12 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</modal-dialog>
+
+<modal-dialog show='ticket.modalShowFilter' class="bdr-top--cyan">
+    <div class="modalSwift">
+        <h2>Filter content here</h2>
+       
     </div>
 </modal-dialog>

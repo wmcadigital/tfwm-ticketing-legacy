@@ -1,17 +1,24 @@
 <div class="filtered-header boxin" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
         <span class="type--blue">{{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}}</span> tickets matching your criteria</h3>
-
-    <div class="mobile-only">
-        <!--<a class="btn btn--tertiary" ng-model="filter">Filter</a>-->
-        <span class="stylized-select">
-            <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy">
-                <option value="orderSequence">Popularity</option>
-                <option value="ticketCurrentAmount">Price (Low - High)</option>
-                <option value="-ticketCurrentAmount">Price (High - Low)</option>
-            </select>
-        </span>
-    </div>
+        
+        <div class="mobile-only" ng-hide="ticketing.filteredTickets.length <= '1'">
+            <div class="rowcontainer">
+                <div class="grid-6">
+                    <button class="btn btn--tertiary" ng-click='ticketing.toggleModalFilters();'>Filter</button>
+                </div>
+                <div class="grid-6">
+                    <span class="stylized-select">
+                        <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy">
+                            <option value="orderSequence">Sott by popularity</option>
+                            <option value="ticketCurrentAmount">Sort by price (Low - High)</option>
+                            <option value="-ticketCurrentAmount">Sort by price (High - Low)</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <!--<a class="btn btn--tertiary" ng-model="filter">Filter</a>-->
+        </div>
 
     <div class="arrdep-filters cfx mobile--void" ng-hide="ticketing.filteredTickets.length <= '1'">
         <div class="field">
@@ -37,7 +44,7 @@
 </div>
 
 <div class="blocks cfx ticketing-search">
-    <div class="block block--side" data-ng-if="ticketing.all.length && ticketing.loadingStatus == 'success'">
+    <div class="block block--side mobile--void" data-ng-if="ticketing.all.length && ticketing.loadingStatus == 'success'">
         <filters></filters>
     </div>
 
@@ -62,7 +69,7 @@
         <!-- error messages -->
         <div data-ng-if="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length == '0' && ticketing.loadingStatus === 'success'" class="grid-12 errors">
                 <div class="boxin -messages">
-                        No tickets have been found. Please try changing your search settings.
+                    No Swift tickets were found that match your search criteria. You can either search our full product range on the <a href="https://www.networkwestmidlands.com/tickets" target="_blank">Network West Midlands</a> Ticket Finder or amend your search
                 </div>
         </div>
 
