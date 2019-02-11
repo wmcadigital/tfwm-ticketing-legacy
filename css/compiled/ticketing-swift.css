@@ -402,7 +402,11 @@ BREAKPOINTS
   padding: 30px;
 }
 .ticketing-page input[type=checkbox]:disabled + label {
-  background: #dddddd;
+  background: #dddddd !important;
+  color: #B7B5B5;
+}
+.ticketing-page input[type=checkbox]:disabled + label svg {
+  fill: #fff;
 }
 .ticketing-page input[type=text] {
   text-align: center;

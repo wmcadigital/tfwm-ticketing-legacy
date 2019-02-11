@@ -385,7 +385,9 @@
     }
 
     input[type="checkbox"]:disabled+label {
-        background: #dddddd;
+        background: #dddddd!important;
+        color: #B7B5B5;
+        svg{fill: #fff;}
     }
 
     input[type=text] {
