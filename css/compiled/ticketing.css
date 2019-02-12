@@ -218,6 +218,11 @@ BREAKPOINTS
   position: absolute;
   width: 30px;
 }
+@media (max-width: 55.625em) and (min-width: 36.25em) {
+  .ticketing-page #detail .block--side .block {
+    width: 100%;
+  }
+}
 .ticketing-page .error {
   margin-bottom: 15px;
 }

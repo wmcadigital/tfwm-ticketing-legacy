@@ -195,6 +195,12 @@
             position: absolute;
             width: 30px;
         }
+
+        @media (max-width: 55.625em) and (min-width: 36.25em){
+            .block--side .block {
+            width: 100%;
+            }
+        }
     }
 
     .error {
