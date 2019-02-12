@@ -616,6 +616,9 @@ BREAKPOINTS
   font-weight: 600;
   line-height: 45px;
 }
+.ticketing-page h5.price {
+  color: #773289;
+}
 .ticketing-page a, .ticketing-page .btn-link {
   color: #773289;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, #773289));
