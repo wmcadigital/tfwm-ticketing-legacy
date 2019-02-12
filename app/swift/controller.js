@@ -811,15 +811,17 @@
                     vm.all = response;
                     //console.log(response);
                     if (vm.all.relatedTickets.length) {
+                        vm.related = [];
                         angular.forEach(vm.all.relatedTickets, function (item) {
                             ticketingService.getSimpleTicket(item.id).then(
                                 function (response) {
-                                    vm.relatedTickets[item.id] = response;
-                                    //console.log(vm.relatedTickets[item.id]);
-
+                                     vm.relatedTickets[item.id] = response;
+                                     vm.relatedList = vm.relatedTickets[item.id];
+                                     //push items into a single array
+                                     vm.related.push(vm.relatedList);
                                 }
                             );
-                        });
+                        }, vm.related);
                     } else {
 
                     }
@@ -827,7 +829,6 @@
                         ticketingService.getTerms(data).then(
                             function (response) {
                                 vm.relatedTerms = response;
-
                             }
                         );
                     } else {
@@ -837,7 +838,6 @@
                             function (response) {
                                 vm.operatorList = response;
                                 //console.log(response);
-
                             }
                         );
                     backButtonLogic(); //Determine back button logic
