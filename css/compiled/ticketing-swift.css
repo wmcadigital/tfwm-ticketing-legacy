@@ -350,11 +350,17 @@ BREAKPOINTS
 .ticketing-page .ticket-filters ul label {
   border: 0;
 }
+.ticketing-page #detail {
+  margin-top: -20px;
+}
 .ticketing-page #detail div {
   font-family: "WF_Droid_Sans", sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 2.6rem;
+}
+.ticketing-page #detail .breadcrumb {
+  margin-top: 15px;
 }
 .ticketing-page #detail .icon--tick::after {
   background-position: -70px -190px;

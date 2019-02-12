@@ -290,13 +290,15 @@
         }
     }
 
-    #detail {
+    #detail {margin-top: -20px;
         div {
             font-family: "WF_Droid_Sans", sans-serif;
             font-weight: 400;
             font-size: 1.6rem;
             line-height: 2.6rem;
         }
+
+        .breadcrumb{margin-top:15px;}
 
         //make custom tick icon smaller
         .icon--tick::after {
