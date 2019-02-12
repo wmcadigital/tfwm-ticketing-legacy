@@ -29,6 +29,10 @@
 
     .type--blue{color: $purple;}
 
+    .help-txt {border: 2px solid $purple;padding:10px;margin:15px;
+    .modal__close{position: relative;}
+    }
+
     .btn--filter {
         min-width: 0;
         width: 100%;

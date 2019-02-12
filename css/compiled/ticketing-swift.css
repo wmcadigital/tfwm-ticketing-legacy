@@ -92,6 +92,14 @@ BREAKPOINTS
 .ticketing-page .type--blue {
   color: #773289;
 }
+.ticketing-page .help-txt {
+  border: 2px solid #773289;
+  padding: 10px;
+  margin: 15px;
+}
+.ticketing-page .help-txt .modal__close {
+  position: relative;
+}
 .ticketing-page .btn--filter {
   min-width: 0;
   width: 100%;
