@@ -449,6 +449,7 @@
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
             savedFilter.set("url", '');
+            vm.showDetails=false;
         }
 
         // If a pass is selected deselect all modes
