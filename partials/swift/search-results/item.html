@@ -5,9 +5,9 @@
     <h5 class="price">
         <span data-ng-if="ticket.ticketCurrentAmount == '0'">{{ticket.priceOverride}} Credit</span>
         <span data-ng-hide="ticket.ticketCurrentAmount == '0' || ticket.onlineCurrentAmount" data-ng-if="!ticket.swiftCurrentAmount">{{(ticket.ticketCurrentAmount | currency:"£") || ticket.priceOverride}}</span>
-        <span data-ng-if="ticket.swiftCurrentAmount">{{(ticket.swiftCurrentAmount | currency:"£")}}&#124; Swift PAYG price</span>
-        <span data-ng-if="ticket.onlineCurrentAmount"><br>{{(ticket.onlineCurrentAmount | currency:"£")}}&#124; Online price</span>
-        <span data-ng-if="ticket.swiftCurrentAmount || ticket.onlineCurrentAmount"><br>{{(ticket.ticketCurrentAmount | currency:"£")}}&#124; Standard price</span>
+        <span data-ng-if="ticket.swiftCurrentAmount">{{(ticket.swiftCurrentAmount | currency:"£")}} - Swift PAYG price</span>
+        <span data-ng-if="ticket.onlineCurrentAmount"><br>{{(ticket.onlineCurrentAmount | currency:"£")}} - Online price</span>
+        <span data-ng-if="ticket.swiftCurrentAmount || ticket.onlineCurrentAmount"><br>{{(ticket.ticketCurrentAmount | currency:"£")}} - Standard price</span>
         <span data-ng-if="ticket.validityId == 450930002"> per month</span>
         <span data-ng-if="ticket.validityId == 450930006"> per month</span>
         <span data-ng-if="ticket.validityId == 450930010"> per month</span>
@@ -46,11 +46,11 @@
 
     <a class="float--left" data-ng-href="#/ticket/{{ticket.id}}">More details</a>
 
-<a data-ng-if="ticket.buyTicketUrl && !ticket.swiftCurrentAmount" class="float--right" data-ng-href="{{ticket.buyTicketUrl}}">
+<a data-ng-if="ticket.buyTicketUrl && !ticket.swiftCurrentAmount" class="float--right" data-ng-href="{{ticket.buyTicketUrl}}" target="_parent">
     {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" : 
     ticket.buyOnSwift ? "Buy on Swift" :
     ticket.hasOnlinePurchaseChannel ? "Quick buy" : "Buy at travel centre"}}</a>
-<a data-ng-if="ticket.swiftCurrentAmount" class="float--right" ng-href="{{ticketUrl}}#/ticket/810">
+<a data-ng-if="ticket.swiftCurrentAmount" class="float--right" ng-href="{{ticketUrl}}#/ticket/810" target="_parent">
     Buy Swift PAYG credit</a>
 </div>
 </div>

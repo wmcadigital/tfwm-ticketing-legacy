@@ -1,4 +1,4 @@
-<div class="boxin ticket-item nga-fast nga-fade" ng-class="{'bdr-top--orange' : ticket.allowBus==true && ticket.allowTrain==false && ticket.allowMetro==false, 'bdr-top--green' : ticket.allowBus==false && ticket.allowTrain==true && ticket.allowMetro==false, 'bdr-top--pink' : ticket.allowBus==false && ticket.allowTrain==false && ticket.allowMetro==true, 'bdr-top--blue' : ticket.allowBus==true && ticket.allowMetro==true && ticket.allowTrain==false, 'bdr-009fe3' : ticket.allowBus==true && ticket.allowTrain==true && ticket.allowMetro==true, 'bdr-top--cyan' : ticket.allowBus==true && ticket.allowTrain==true && ticket.allowMetro==false}">
+<div class="boxin ticket-item nga-fast nga-fade">
         <h4 class="event__title">{{ticket.name | limitTo: limit}}</h4>
         <h5 class="price">{{ticket.priceOverride || (ticket.ticketCurrentAmount | currency:"£")}}
                 <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>

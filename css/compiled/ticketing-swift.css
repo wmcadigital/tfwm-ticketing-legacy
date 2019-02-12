@@ -86,6 +86,12 @@ BREAKPOINTS
 .ticketing-page .icon-stylized-new svg {
   fill: #773289;
 }
+.ticketing-page .icon-stylized-new input:checked ~ label:after, .ticketing-page a.icon-stylized-new:active span:after, .ticketing-page a.icon-stylized-new:focus span:after {
+  z-index: 10;
+}
+.ticketing-page .type--blue {
+  color: #773289;
+}
 .ticketing-page .btn--filter {
   min-width: 0;
   width: 100%;
@@ -121,8 +127,6 @@ BREAKPOINTS
   background-color: #3C1053;
   color: white;
   font-size: 16px;
-  padding: 15px 30px;
-  white-space: pre-wrap;
   text-decoration: none;
   display: inline-block;
   vertical-align: middle;
@@ -300,6 +304,9 @@ BREAKPOINTS
   margin-bottom: 0;
   background-color: #009fe3;
 }
+.ticketing-page .ticket-filters .modal__close {
+  right: 10px;
+}
 .ticketing-page .ticket-filters .icon {
   color: #009fe3;
 }
@@ -344,6 +351,9 @@ BREAKPOINTS
 .ticketing-page #detail .icon--tick::after {
   background-position: -70px -190px;
 }
+.ticketing-page #detail .icon--tickSwift::after {
+  background-position: -70px -309px;
+}
 .ticketing-page #detail .iconcustom::after {
   background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
   background-size: 300px auto;
@@ -352,6 +362,16 @@ BREAKPOINTS
   left: 0;
   position: absolute;
   width: 30px;
+}
+.ticketing-page #detail .ng-modal-dialog {
+  height: 600px;
+  border: 2px solid #773289;
+}
+.ticketing-page #detail .modal:after {
+  background: none;
+}
+.ticketing-page #detail .tooltip {
+  background: #773289;
 }
 .ticketing-page .error {
   margin-bottom: 15px;
@@ -591,11 +611,18 @@ BREAKPOINTS
   font-weight: 600;
   line-height: 45px;
 }
+.ticketing-page a, .ticketing-page .btn-link {
+  color: #773289;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, #773289));
+  background-image: -webkit-linear-gradient(transparent 50%, #773289 50%);
+  background-image: -o-linear-gradient(transparent 50%, #773289 50%);
+  background-image: linear-gradient(transparent 50%, #773289 50%);
+}
 .ticketing-page .online {
-  color: #009fe3 !important;
+  color: #773289 !important;
 }
 .ticketing-page .itemContent .price {
-  color: #009fe3 !important;
+  color: #773289 !important;
 }
 .ticketing-page .hideCheck {
   display: none;
@@ -613,6 +640,9 @@ BREAKPOINTS
 .ticketing-page .mobile-only .grid-6 {
   padding: 10px;
 }
+.ticketing-page .modal__close {
+  background: #3C1053;
+}
 .ticketing-page .ng-modal-dialog {
   display: block;
   width: 600px;
@@ -626,7 +656,7 @@ BREAKPOINTS
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
-@media (max-width: 32.125em) {
+@media (max-width: 58em) {
   .ticketing-page .ng-modal-dialog {
     min-height: 200px !important;
     position: absolute;
@@ -897,4 +927,20 @@ form .padding-left {
 
 .swift .btn {
   margin-top: 10px;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 9999;
+}
+.overlay .overlay-content {
+  height: 100%;
+  overflow-y: scroll;
 }

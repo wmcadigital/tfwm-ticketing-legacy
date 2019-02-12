@@ -3,8 +3,6 @@
         <h3>Price & How to buy </h3>
         <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
 
-        <button class="btn btn-purple" ng-click='ticket.toggleModalFilters();'>Open Filters</button>
-
         <div>
             <p class="price online">
                 <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
@@ -16,7 +14,7 @@
                 <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930010"> per month</span>
-                <span data-ng-if="ticket.all.validityId == 450930000 && ticket.all.type == 'Ticket' || ticket.all.type == 'Ticket with Rail Add On'"> a day</span>
+                <span data-ng-if="ticket.all.validityId == 450930000"> a day</span>
                 <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
                 <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
             </p>
@@ -58,7 +56,7 @@
                 </span>
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
                     Bus or Metro.</span>
-                    <a ng-href="{{ticketUrl}}#/ticket/810"><button class="btn btn-purple">Buy Swift PAYG credit</button></a>
+                    <a ng-href="{{ticketUrl}}#/ticket/810" target="_parent"><button class="btn btn-purple">Buy Swift PAYG credit</button></a>
             </div>
 
             <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
@@ -66,11 +64,11 @@
                 <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB" target="_blank"><img class="BuyOnSwift" ng-src="{{assetPath}}assets/play_badge_new.png" alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
-            <a data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
+            <a data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="btn btn-purple" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_parent">
                 {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
-                <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift" class="btn btn-purple" data-ng-click='ticket.toggleModalSwift()'>Buy on Swift</button>
+                <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift" class="btn btn-purple" data-ng-click='ticket.toggleModalSwift()' target="_parent">Buy on Swift</button>
 
             <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount || ticket.all.onlineCurrentAmount && ticket.all.ticketCurrentAmount">
                 <hr>
@@ -274,7 +272,7 @@
 </div>
 
 <!-- pop-up modals -->
-<modal-dialog show='ticket.modalShownSwift' modalclass="bdr-top--cyan" data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
+<modal-dialog show='ticket.modalShownSwift' data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
     <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
         <h2>Swift Card</h2>
         <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
@@ -283,13 +281,13 @@
         <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
             bought online.</p>
 
-        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn-purple" data-ng-href="{{ticket.all.buyTicketUrl}}"
+        <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn-purple" target="_parent" data-ng-href="{{ticket.all.buyTicketUrl}}"
             target="_blank">
             Buy on Swift</a>
     </div>
 </modal-dialog>
 
-<modal-dialog  show='ticket.modalShownBus' modalclass="bdr-top--orange" data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
+<modal-dialog  show='ticket.modalShownBus' data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
     <div class="header">
         <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
         <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -343,7 +341,7 @@
     </div>
 </modal-dialog>
 
-<modal-dialog show='ticket.modalShownTrain' modalclass="bdr-top--green" data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
+<modal-dialog show='ticket.modalShownTrain' data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
     <div class="header">
         <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
         <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -379,12 +377,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</modal-dialog>
-
-<modal-dialog show='ticket.modalShowFilter' class="bdr-top--cyan">
-    <div class="modalSwift">
-        <h2>Filter content here</h2>
-       
     </div>
 </modal-dialog>

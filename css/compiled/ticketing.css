@@ -85,6 +85,9 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
+.ticketing-page .icon-stylized-new input:checked ~ label:after, .ticketing-page a.icon-stylized-new:active span:after, .ticketing-page a.icon-stylized-new:focus span:after {
+  z-index: 10;
+}
 @media (max-width: 32.125em) {
   .ticketing-page .arrdep-filters {
     display: -webkit-box;
@@ -96,7 +99,7 @@ BREAKPOINTS
 .ticketing-page .arrdep-filters .radio-bar {
   display: -webkit-box;
 }
-@media (max-width: 32.125em) {
+@media (max-width: 58em) {
   .ticketing-page .arrdep-filters .radio-bar {
     display: inline-block;
   }
@@ -106,6 +109,11 @@ BREAKPOINTS
 }
 .ticketing-page .arrdep-filters > div {
   width: 50% !important;
+}
+@media (min-width: 929px) and (max-width: 1010px) {
+  .ticketing-page .arrdep-filters > div {
+    width: 55% !important;
+  }
 }
 .ticketing-page .ticket-item a {
   padding: 0px !important;
@@ -153,6 +161,9 @@ BREAKPOINTS
 .ticketing-page .ticket-filters hr {
   margin-bottom: 0;
   background-color: #009fe3;
+}
+.ticketing-page .ticket-filters .modal__close {
+  right: 10px;
 }
 .ticketing-page .ticket-filters .icon {
   color: #009fe3;
@@ -346,7 +357,7 @@ BREAKPOINTS
 .ticketing-page .bdr-top--purple {
   border-top: 6px solid #773289;
 }
-@media (max-width: 32.125em) {
+@media (max-width: 750px) {
   .ticketing-page .mobile--void {
     display: none !important;
   }
@@ -449,14 +460,10 @@ BREAKPOINTS
 .ticketing-page label.blue {
   color: #009fe3 !important;
 }
-.ticketing-page .mobile-only .stylized-select {
-  margin: 15px 0 0 0;
-}
 .ticketing-page .ng-modal-dialog {
   display: block;
   width: 600px;
   max-width: 100%;
-  height: 600px;
   max-height: 100%;
   position: fixed;
   z-index: 10000;
@@ -465,6 +472,13 @@ BREAKPOINTS
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+@media (max-width: 58em) {
+  .ticketing-page .ng-modal-dialog {
+    min-height: 200px !important;
+    position: absolute !important;
+    top: 800px !important;
+  }
 }
 .ticketing-page .ng-modal-dialog .modal__close {
   top: 0;
@@ -494,6 +508,11 @@ BREAKPOINTS
 }
 .ticketing-page .ng-modal-dialog.boxin.modal-content {
   padding: 0px 15px 15px 15px !important;
+}
+@media (max-width: 58em) {
+  .ticketing-page .ng-modal-dialog.boxin.modal-content {
+    padding: 0px !important;
+  }
 }
 .ticketing-page .tooltip {
   z-index: 99999;
@@ -730,4 +749,57 @@ form .padding-left {
 
 .swift .btn {
   margin-top: 10px;
+}
+
+.btn--filter {
+  min-width: 0;
+  width: 100%;
+  padding: 18px 60px 18px 25px;
+  height: auto;
+  min-height: 0;
+  position: relative;
+  clear: right;
+  -webkit-perspective: 400px;
+  perspective: 400px;
+}
+.btn--filter:after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  width: 28px;
+  height: 28px;
+  background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
+  background-position: -385px -256px;
+  background-size: 308px auto;
+  z-index: 10;
+  -webkit-transition: transform 300ms ease-out;
+  -webkit-transition: -webkit-transform 300ms ease-out;
+  transition: -webkit-transform 300ms ease-out;
+  -o-transition: transform 300ms ease-out;
+  transition: transform 300ms ease-out;
+  transition: transform 300ms ease-out, -webkit-transform 300ms ease-out;
+}
+
+.mobile-only .stylized-select {
+  margin: none !important;
+}
+.mobile-only .grid-6 {
+  padding: 10px;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 9999;
+}
+.overlay .overlay-content {
+  height: 100%;
+  overflow-y: scroll;
 }

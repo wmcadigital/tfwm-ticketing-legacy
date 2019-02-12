@@ -83,7 +83,8 @@
             $scope.stationToTitle = null;
             $scope.stationFromNameOocZ5 = null;
             $scope.stationToNameOocZ5 = null;
-            vm.toggleModalFilters = toggleModalFilters;
+            vm.openFilters = openFilters;
+            vm.closeFilters = closeFilters;
 
             //url parameters
             //direct debit
@@ -664,11 +665,12 @@
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
 
-        //FILTERS popup
-        vm.modalShowFilter = false;
-        function toggleModalFilters() {
-            console.log("Filters Open");
-            vm.modalShowFilter = !vm.modalShowFilter;
+        function openFilters() {
+            document.getElementById("filterOverlay").style.display = "block";
+        }
+           
+        function closeFilters() {
+            document.getElementById("filterOverlay").style.display = "none";
         }
 
         //if pass is swift payg

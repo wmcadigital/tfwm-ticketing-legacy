@@ -9,6 +9,7 @@
         .directive('initialSearch', [initialSearch])
         .directive('searchResults', [searchResults])
         .directive('filters', [filters])
+        .directive('filtersMobile', [filtersMobile])
         .directive('item', ['$timeout', 'angularGridInstance', item])
         .controller('TicketDetailCtrl', ['ticketingService', '$interval', 'getURL', '$routeParams', '$scope', '$timeout', TicketDetailCtrl])
         .directive('detailDetails', [detailDetails])
@@ -83,7 +84,8 @@
             $scope.stationFromNameOocZ5 = null;
             $scope.stationToNameOocZ5 = null;
             vm.toggleModalSwift = toggleModalSwift;
-            vm.toggleModalFilters = toggleModalFilters;
+            vm.openFilters = openFilters;
+            vm.closeFilters = closeFilters;
 
             //url parameters
             //direct debit
@@ -666,6 +668,14 @@
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
 
+        function openFilters() {
+            document.getElementById("filterOverlay").style.display = "block";
+        }
+           
+        function closeFilters() {
+            document.getElementById("filterOverlay").style.display = "none";
+        }
+
         //if pass is swift payg
         function swiftPAYG() {
             vm.passValue = vm.postJSON.brand;
@@ -729,13 +739,6 @@
           };
     }
 
-
-    //FILTERS
-    vm.modalShowFilter = false;
-    function toggleModalFilters() {
-        vm.modalShowFilter = !vm.modalShowFilter;
-    }
-
     // DIRECTIVES
     function initialSearch() {
         return {
@@ -754,6 +757,13 @@
     function filters() {
         return {
             templateUrl: assetPath + 'partials/search-results/filters.html',
+            restrict: 'E'
+        };
+    }
+
+    function filtersMobile() {
+        return {
+            templateUrl: assetPath + 'partials/search-results/filters-mobile.html',
             restrict: 'E'
         };
     }
