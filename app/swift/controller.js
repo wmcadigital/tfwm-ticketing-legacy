@@ -821,10 +821,10 @@
                                      vm.relatedList = vm.relatedTickets[item.id];
                                      //push items into a single array
                                      vm.related.push(vm.relatedList);
-                                     vm.loadingStatus = "success";
                                 }
                             );
                         }, vm.related);
+                        vm.loadingStatus = "success";
                     } else {
                         vm.loadingStatus = "success";
                     }
