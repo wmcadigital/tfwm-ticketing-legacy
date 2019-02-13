@@ -821,11 +821,12 @@
                                      vm.relatedList = vm.relatedTickets[item.id];
                                      //push items into a single array
                                      vm.related.push(vm.relatedList);
+                                     vm.loadingStatus = "success";
                                 }
                             );
                         }, vm.related);
                     } else {
-
+                        vm.loadingStatus = "success";
                     }
                     if (vm.all.documents.length) {
                         ticketingService.getTerms(data).then(
@@ -834,7 +835,7 @@
                             }
                         );
                     } else {
-
+                        vm.loadingStatus = "success";
                     }
                         ticketingService.getOperators().then(
                             function (response) {
@@ -843,6 +844,7 @@
                             }
                         );
                     backButtonLogic(); //Determine back button logic
+                    vm.loadingStatus = "success";
                 }
             );
         }

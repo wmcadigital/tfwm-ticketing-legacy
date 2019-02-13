@@ -228,12 +228,6 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
-@media (max-width: 58em) {
-  .ticketing-page .block {
-    padding-left: 25px;
-    padding-right: 10px;
-  }
-}
 @media (max-width: 32.125em) {
   .ticketing-page .arrdep-filters {
     display: -webkit-box;
