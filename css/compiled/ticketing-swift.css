@@ -351,7 +351,7 @@ BREAKPOINTS
   border: 0;
 }
 .ticketing-page #detail {
-  margin-top: -20px;
+  padding: 20px 0;
 }
 .ticketing-page #detail div {
   font-family: "WF_Droid_Sans", sans-serif;
