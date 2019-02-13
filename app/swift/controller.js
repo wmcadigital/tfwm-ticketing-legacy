@@ -125,6 +125,7 @@
 
             $scope.stationFromReq = false;//set from station to not required
             $scope.stationToReq = false;//set from station to not required
+            $scope.stationFromOOCReq = true;//if Train OOC pass selected make station required
         }
 
         defaultVars();
