@@ -204,6 +204,25 @@
     <script src="//static.centro.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
     <script src="//static.centro.org.uk/Staging/nwmAssets/js/nwm.js"></script>
     <script src="//static.centro.org.uk/nwmAssets/js/nwm-custom.js"></script>
+
+
+    <script>
+
+window.onload = function(){
+  var anchors = document.getElementsByTagName('a');
+  for (var i=0; i<anchors.length; i++){
+    anchors[i].setAttribute('target', '_blank');
+  }
+}
+
+       // $(document).ready(function() {
+         //   $(function(){ $('a').attr('target', '_blank'); });
+            //$('a').attr('target', '_blank');
+            //jQuery("#detail a").attr("target", "_blank");
+           // console.log("complete");
+        //});
+        </script>
+  
 </body>
 
 </html>
