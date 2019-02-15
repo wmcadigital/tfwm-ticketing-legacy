@@ -88,6 +88,19 @@ BREAKPOINTS
 .ticketing-page .icon-stylized-new input:checked ~ label:after, .ticketing-page a.icon-stylized-new:active span:after, .ticketing-page a.icon-stylized-new:focus span:after {
   z-index: 10;
 }
+@media (max-width: 890px) {
+  .ticketing-page .block--side {
+    display: none;
+  }
+}
+.ticketing-page .display--tablet {
+  display: none;
+}
+@media (max-width: 890px) {
+  .ticketing-page .display--tablet {
+    display: block;
+  }
+}
 @media (max-width: 32.125em) {
   .ticketing-page .arrdep-filters {
     display: -webkit-box;
@@ -384,12 +397,6 @@ BREAKPOINTS
 }
 .ticketing-page .block--side ul {
   margin-top: 5px;
-}
-@media (max-width: 55em) {
-  .ticketing-page .block--fullwidth .block--side {
-    position: static;
-    top: 15px;
-  }
 }
 @media (max-width: 58em) {
   .ticketing-page .orcontent {

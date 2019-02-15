@@ -158,6 +158,18 @@
         }
     }
 
+    .block--side{
+        @include breakpoint(tablet) {
+            display: none;
+        }
+    }
+
+    .display--tablet{display: none;
+        @include breakpoint(tablet) {
+            display: block;
+        }
+    }
+
     .arrdep-filters {
         @include breakpoint(mobileonly) {
             display: flex;
@@ -536,13 +548,6 @@
 
         ul {
             margin-top: 5px;
-        }
-    }
-
-    @include breakpoint(tablet) {
-        .block--fullwidth .block--side {
-            position: static;
-            top: 15px;
         }
     }
 

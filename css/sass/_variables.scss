@@ -30,7 +30,7 @@ BREAKPOINTS
     @media (min-width: 929px) and (max-width: 1010px) { @content ; }
  }
     @else if $point == tablet {
-     @media (max-width: 55em) { @content ; }
+     @media (max-width: 890px) { @content ; }
   }
   @else if $point == tablet2 {
     @media (max-width: 58em) { @content ; }

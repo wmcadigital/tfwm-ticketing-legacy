@@ -16,6 +16,7 @@
         .directive('detailSidebar', [detailSidebar])
         .directive('detailAlternative', [detailAlternative])
         .directive('detailRelated', ['$timeout', 'angularGridInstance', detailRelated])
+        .directive('detailWhere', [detailWhere])
         .directive('operators', [operators])
         .directive('modalDialog', [modalDialog])
         .directive('tabs', [tabs])
@@ -929,6 +930,13 @@
                     }
                 }, 0);
             }
+        };
+    }
+
+    function detailWhere() {
+        return {
+            templateUrl: assetPath + 'partials/detail/where-can-i-use.html',
+            restrict: 'E'
         };
     }
 
