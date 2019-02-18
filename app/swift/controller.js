@@ -852,8 +852,7 @@
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
-            //console.log(vm.backToSearch);
-            $scope.stationFromNameZone = '1';
+            //console.log(vm.backToSearch);        
         }
 
         initialise(vm.ticketID); //initialise API to get ticket

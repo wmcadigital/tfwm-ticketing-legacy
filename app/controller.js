@@ -160,6 +160,9 @@
             swiftPAYG();
         }
 
+        $scope.fromZoneNumber = savedFilter.get('fromZone');
+        $scope.toZoneNumber = savedFilter.get('toZone');
+
         function submit(data) {
             vm.loadingStatus = 'loading';
             angular.copy(vm.postJSON, vm.postedJSON); //save initial search variables
@@ -223,7 +226,48 @@
                     var fbus = vm.postedJSON.allowBus || false;
                     var ftrain = vm.postedJSON.allowTrain || false;
                     var fmetro = vm.postedJSON.allowMetro || false;
-                    vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+
+                    var fromZoneNumber = savedFilter.get('fromZone');
+                    var toZoneNumber = savedFilter.get('toZone');
+                    
+                    var ffromzone
+                    if(fromZoneNumber == 1){
+                        var ffromzone = 1;
+                    }else if(fromZoneNumber == 2){
+                        var ffromzone = 2;
+                    }else if(fromZoneNumber == 3){
+                       var ffromzone = 3;
+                    }else if(fromZoneNumber == 4){
+                        var ffromzone = 4;
+                    }else if(fromZoneNumber == 5){
+                        var ffromzone = 5;
+                    }else{
+                        var ffromzone = "";
+                    }
+
+                    var ftozone
+                    if(toZoneNumber == 1){
+                        var ftozone = 1;
+                    }else if(toZoneNumber == 2){
+                        var ftozone = 2;
+                    }else if(toZoneNumber == 3){
+                        var ftozone = 3;
+                    }else if(toZoneNumber == 4){
+                        var ftozone = 4;
+                    }else if(toZoneNumber == 5){
+                       var ftozone = 5;
+                    }else{
+                        var ftozone = "";
+                    }
+
+                    console.log(savedFilter.get('fromZone'));
+                    console.log(savedFilter.get('toZone'));
+
+                    if(vm.postedJSON.allowTrain){
+                        vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: ffromzone, railZoneTo: ftozone}, true);
+                    }else{
+                        vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+                    }
 
                     //compare search reults and exact search results and display difference
                     var searchAll = vm.all;
@@ -415,6 +459,21 @@
                     //console.log("rail stations");
                     //console.log(response);
                     vm.stationList = response;
+                    if ($location.search().stationNames != null) {
+                        var fromRail = $scope.stationFromName || null;
+                        var toRail = $scope.stationToName || null;
+                        var dataFromRail = $filter('filter')(response, {name: fromRail});
+                        var dataToRail = $filter('filter')(response, {name: toRail});
+                        var dataFromRailData = dataFromRail[0];
+                        var dataToRailData = dataToRail[0];
+                        vm.fromStationInfo = dataFromRailData;
+                        vm.toStationInfo = dataToRailData;
+
+                        if (vm.fromStationInfo != null) {
+                            savedFilter.set("fromZone", vm.fromStationInfo.zone);
+                            savedFilter.set("toZone", vm.toStationInfo.zone);
+                        }
+                    }
                 }
             );
         }
@@ -454,6 +513,8 @@
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
             savedFilter.set("url", '');
+            savedFilter.set("fromZone", '');
+            savedFilter.set("toZone", '');
         }
 
         // If a pass is selected deselect all modes
@@ -484,10 +545,13 @@
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationToReq = true;//set to station to required
+                savedFilter.set("fromZone", $scope.stationFromNameZone);
+                $scope.fromZoneNumber = savedFilter.get('fromZone');
             } else {
                 $scope.stationFromName = null;
                 vm.postJSON.stationNames[0] = null;
                 $scope.stationFromTitle = null;
+                savedFilter.set("fromZone", "");
             }
         };
 
@@ -512,10 +576,13 @@
                 $scope.stationToNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 $scope.stationFromReq = true;//set from station to required
+                savedFilter.set("toZone", $scope.stationToNameZone);
+                $scope.toZoneNumber = savedFilter.get('toZone');
             } else {
                 $scope.stationToName = null;
                 vm.postJSON.stationNames[1] = null;
                 $scope.stationToTitle = null;
+                savedFilter.set("toZone", "");
               }
         };
 
