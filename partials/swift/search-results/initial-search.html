@@ -224,7 +224,7 @@
     <!-- Help section if station is not listed in auto complete -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
         class="help-section grid-12">
-        <label class="blue btn-link">Station not listed? <input type="checkbox" ng-model="stationNotListed" /></label><br />
+        <label class="blue btn-link">Station not listed? <input class="hidden" type="checkbox" ng-model="stationNotListed" /></label><br />
         <div ng-show="stationNotListed" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
             <p data-ng-hide="ticketing.postJSON.brand == 'ntrain' || ticketing.postJSON.brand == null">Is your station in county? Try changing the pass to ntrain</p>
             <p data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == null">Is your station out of county? Try changing the pass to ntrain - Out of County</p>
