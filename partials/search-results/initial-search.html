@@ -2,7 +2,7 @@
     <div class="grid-12">
         <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
     </div>
-
+{{ticketing.postJSON.allowBus}}{{ticketing.postJSON.allowTrain}}
     <!-- Mode & Pass -->
     <div class="grid-5">
         <div class="fields new-transport-icons-blue">
@@ -232,7 +232,7 @@
     <!-- /Help section if station is not listed in auto complete -->
 
     <!-- error messages -->
-    <div data-ng-if="ticketing.stationFromName && !stationToName || !ticketing.stationFromName && stationToName" data-ng-hide="stationFromName == '[]' || ticketing.stationFromName && stationToName" class="grid-12 errors">
+    <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName" data-ng-hide="stationFromName == '[]' || stationFromName && stationToName" class="grid-12 errors">
         <div class="boxin -messages">
             In order to carry out a rail station search you need to add the To & From stations.
         </div>

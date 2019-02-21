@@ -597,7 +597,7 @@
         $scope.stationToReq = false;//set to station to not required
         $scope.stationTo = function (selected) {
             if (selected) {
-                $scope.stationToName = selected.originalObject.name; //Set To Station
+                vm.stationToName = selected.originalObject.name; //Set To Station
                 vm.postJSON.stationNames[1] = selected.originalObject.name;
                 $scope.stationToTitle = selected.originalObject.name;
                 $scope.stationToNameZone = selected.originalObject.zone;
