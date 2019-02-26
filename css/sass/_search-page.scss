@@ -391,6 +391,9 @@
         .mobile--void {
             display: none !important
         }
+        .mobile-only {
+            display: block
+        }
     }
 
     [ng\:cloak],

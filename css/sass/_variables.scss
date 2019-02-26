@@ -14,7 +14,6 @@ $purple: #773289;
 $darkpurple: #3C1053;
 $white: #ffffff;
 
-
 /*********************
 BREAKPOINTS
 *********************/
@@ -36,13 +35,12 @@ BREAKPOINTS
     @media (max-width: 58em) { @content ; }
  }
  @else if $point == tablet3 {
-  @media (max-width: 750px) { @content ; }
+  @media (max-width: 890px) { @content ; }
 }
    @else if $point == phablet {
      @media (min-width: 37.5em)  { @content ; }
   }
   @else if $point == mobileonly {
      @media (max-width: 32.125em)  { @content ; }
-
   }
 }
