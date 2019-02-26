@@ -162,12 +162,12 @@
                         input-name="fromStation">
                     </div>
                 </div>
-                <a data-ng-if="stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
-                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationFromName">
+                <a data-ng-if="ticketing.stationFromName || stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
+                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationFromName || stationFromName">
                     <div>
-                        You selected <strong>{{stationFromName}}</strong> station which is
+                        You selected <strong>{{ticketing.stationFromName}}</strong> station which is
                         <strong>{{ stationFromNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
-                            stationFromNameZone }}</strong>.
+                                ticketing.fromZoneNumber }}</strong>.
                     </div>
                 </div>
             </div>
@@ -209,15 +209,15 @@
                     field-required-class="required" initial-value="stationToName">
                 </div>
             </div>-->
-            <a data-ng-if="stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
+            <a data-ng-if="ticketing.stationToName || stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
 
-            <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="stationToName">
-                    <div>
-                        You selected <strong>{{stationToName}}</strong> station which is
-                        <strong>{{ stationToNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
-                            stationToNameZone }}</strong>.
-                    </div>
+            <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationToName || stationToName">
+                <div>
+                    You selected <strong>{{ticketing.stationToName}}</strong> station which is
+                    <strong>{{ stationToNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
+                        ticketing.toZoneNumber }}</strong>.
                 </div>
+            </div>
         </div>
     </div>
 
