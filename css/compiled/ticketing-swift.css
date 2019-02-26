@@ -546,6 +546,9 @@ BREAKPOINTS
   .ticketing-page .mobile--void {
     display: none !important;
   }
+  .ticketing-page .mobile-only {
+    display: block;
+  }
 }
 .ticketing-page [ng\:cloak],
 .ticketing-page [ng-cloak],
