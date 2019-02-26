@@ -2,7 +2,7 @@
     <div class="grid-12">
         <a class="btn-link float--right" href="" data-ng-click="ticketing.clearFilter();">Reset</a>
     </div>
-{{ticketing.postJSON.allowBus}}{{ticketing.postJSON.allowTrain}}
+
     <!-- Mode & Pass -->
     <div class="grid-5">
         <div class="fields new-transport-icons-blue">
@@ -10,7 +10,7 @@
             <!--<label>Select All  <input type="checkbox" ng-model="isChecked" /></label>-->
             <span class="icon-stylized-new -bus -table-cell border-right--transparent">
                 <input type="checkbox" id="jpbus" name="transportModeBus" data-ng-model="ticketing.postJSON.allowBus"
-                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                    data-ng-false-value="false" data-ng-true-value="true" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
                 <label for="jpbus">
                     <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 24 24">
                         <style type="text/css">
@@ -26,7 +26,7 @@
             </span>
             <span class="icon-stylized-new -train -table-cell border-left--transparent border-right--transparent">
                 <input type="checkbox" id="jptrain" name="transportModeTrain" data-ng-model="ticketing.postJSON.allowTrain"
-                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                    data-ng-false-value="false" data-ng-true-value="true" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
                 <label for="jptrain" data-ng-click="ticketing.clearStation();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <style type="text/css">
@@ -43,7 +43,7 @@
             </span>
             <span class="icon-stylized-new -tram -table-cell border-left--transparent">
                 <input type="checkbox" id="jptram" name="transportModeTram" data-ng-model="ticketing.postJSON.allowMetro"
-                    data-ng-false-value="null" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
+                    data-ng-false-value="false" data-ng-true-value="true" ng-disabled="ticketing.postJSON.brand && ticketing.postJSON.brand != ''">
                 <label for="jptram">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <style type="text/css">

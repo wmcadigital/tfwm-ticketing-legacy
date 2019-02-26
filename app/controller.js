@@ -149,7 +149,8 @@
         ) {
             vm.clearStation();
             //Set initial value of from & to stations if in Url
-            if ($location.search().stationNames) {
+            if ($location.search().stationNames && vm.postJSON.allowTrain == true || vm.postJSON.brand == "nnetwork" || vm.postJSON.brand == "ntrain") {
+                console.log("test 1");
                 var stations = $location.search().stationNames;
                 var stationSel = stations.toString();
                 var stationSplit = stationSel.split(',');
@@ -158,6 +159,12 @@
                 vm.stationFromName = stationSplit[0];
                 vm.stationToName = stationSplit[1];
                 console.log("1 " + $scope.stationFromName + " to " + $scope.stationToName);
+            }else{
+                console.log("test 2");
+                $scope.stationFromName = null;
+                $scope.stationToName = null;
+                vm.stationFromName = null;
+                vm.stationToName = null;
             }
             vm.getStations();
             submit(vm.postJSON);
@@ -237,8 +244,8 @@
 
             vm.searchFilters = {};//set scope for search filters and reset on every search
             vm.origFilters = {};//set scope for original search filters and reset on every search
-            //console.log('this is posted');
-            //console.log(vm.postedJSON);
+            console.log('this is posted');
+            console.log(vm.postedJSON);
 
             //work out all tickets available
             ticketingService.ticketSearch(data).then(
@@ -320,19 +327,25 @@
                         var ftozone = null;
                     }
 
-                    if(fromZoneNumber != null){
-                        vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: ffromzone, railZoneTo: ftozone}, true);
-                    }else{
+                    if(vm.postJSON.allowTrain == true || vm.postJSON.brand == "nnetwork" || vm.postJSON.brand == "ntrain"){
+                        console.log("Exact Search with rail");
+                        if(fromZoneNumber != null && toZoneNumber != null){
+                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: ffromzone, railZoneTo: ftozone}, true);
+                        }else{
+                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+                        }}else{
+                        console.log("Exact Search without rail");
+                        //vm.postJSON.stationNames = null;
                         vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
                     }
 
                     //compare search reults and exact search results and display difference
                     var searchAll = vm.all;
                     var searchExact = vm.exactMatch;
-                    //console.log("all results");
-                    //console.log(searchAll);
-                    //console.log("search exact results");
-                    //console.log(searchExact);
+                    console.log("all results");
+                    console.log(searchAll);
+                    console.log("search exact results");
+                    console.log(searchExact);
 
                     for (var i = 0; i < searchExact.length; i++) {
                         var arrlen = searchAll.length;
@@ -389,14 +402,14 @@
             vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
             vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
             
-            //console.log("Search Filters:");
-            //console.log(vm.searchFilters);
-            //console.log("Fitered Tickets:");
-            //console.log(vm.filteredTickets);
-            //console.log("Original Search:");
-            //console.log(vm.origTickets);
-            //console.log("Other Results:");
-            //console.log(vm.otherTickets);
+            console.log("Search Filters:");
+            console.log(vm.searchFilters);
+            console.log("Fitered Tickets:");
+            console.log(vm.filteredTickets);
+            console.log("Original Search:");
+            console.log(vm.origTickets);
+            console.log("Other Results:");
+            console.log(vm.otherTickets);
 
             vm.updateGrid();
         }
@@ -590,6 +603,7 @@
             vm.postJSON.stationNames = [[]];
             $scope.stationFromReq = false;//set from station to not required
             $scope.stationFromNameOocZ5 = null;//clear zone 5 in county
+            vm.fromStationInfoZone = null;
         }
 
         // Set To Rail Station
@@ -617,9 +631,11 @@
         function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
             $scope.stationToName = null;
+            vm.stationToName = null;
             vm.postJSON.stationNames = [[]];
             $scope.stationToReq = false;//set to station to not required
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
+            vm.toStationInfoZone = null;
         }
 
         // control filters according to url parameters
