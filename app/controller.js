@@ -917,6 +917,8 @@
         vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
         vm.limit = 4; //Set paging limit for Alt tickets
+        vm.openFilters = openFilters;
+        vm.closeFilters = closeFilters;
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -959,6 +961,14 @@
                     backButtonLogic(); //Determine back button logic
                 }
             );
+        }
+
+        function openFilters() {
+            document.getElementById("filterOverlay").style.display = "block";
+        }
+
+        function closeFilters() {
+            document.getElementById("filterOverlay").style.display = "none";
         }
 
         function backButtonLogic() {
@@ -1079,7 +1089,7 @@
             },
             template: '<div ng-show="show">' +
                 '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
-                '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
+                '<div class="overlay boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
                 '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
                 '<div class="ng-modal-dialog-content" ng-transclude></div>' +
                 '</div>' +

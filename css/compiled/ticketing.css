@@ -479,6 +479,7 @@ BREAKPOINTS
   display: block;
   width: 600px;
   max-width: 100%;
+  height: 600px;
   max-height: 100%;
   position: fixed;
   z-index: 10000;
@@ -490,13 +491,31 @@ BREAKPOINTS
 }
 @media (max-width: 58em) {
   .ticketing-page .ng-modal-dialog {
-    min-height: 200px !important;
-    position: absolute !important;
-    top: 800px !important;
+    min-height: 200px;
+    position: absolute;
+    top: 800px;
+  }
+}
+@media (max-width: 890px) {
+  .ticketing-page .ng-modal-dialog {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 9999;
   }
 }
 .ticketing-page .ng-modal-dialog .modal__close {
   top: 0;
+}
+@media (max-width: 890px) {
+  .ticketing-page .ng-modal-dialog .ng-modal-dialog-content {
+    height: 100%;
+    overflow-y: scroll;
+  }
 }
 .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
   padding: 20px;
@@ -804,17 +823,39 @@ form .padding-left {
 }
 
 .overlay {
-  height: 100%;
-  width: 100%;
-  display: none;
+  width: 600px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
   position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: white;
-  z-index: 9999;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
-.overlay .overlay-content {
-  height: 100%;
+.overlay .operators {
+  height: 450px;
   overflow-y: scroll;
+}
+@media (max-width: 890px) {
+  .overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    z-index: 9999;
+  }
+  .overlay .ng-modal-dialog-content {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 890px) {
+  .boxin {
+    margin: 0px;
+  }
 }
