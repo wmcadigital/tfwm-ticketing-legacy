@@ -99,6 +99,6 @@
     </div>
 </div>
 
-<div class="mobile--void">
+<div class="mobile--void" data-ng-if="ticket.all.allowBus || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
     <detail-where></detail-where>
 </div>

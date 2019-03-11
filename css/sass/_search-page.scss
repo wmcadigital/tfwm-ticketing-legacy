@@ -796,9 +796,13 @@ form {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        background-color: #fff;
         .operators{
             height: 450px;
             overflow-y: scroll;
+            @include breakpoint(tablet3){
+                height: 100%
+            }
         }
     @include breakpoint(tablet3) {
     height: 100%;
@@ -814,9 +818,14 @@ form {
         overflow-y: scroll;
     }
 }
+.bg--blue.bg--tint{
+    @include breakpoint(tablet3) {
+        background-color: #fff;
+    }
+}
 }
 
-.boxin {
+.overlay.boxin {
     @include breakpoint(tablet3) {
         margin:0px
     }

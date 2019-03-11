@@ -1,5 +1,6 @@
 <div class="bg--blue bg--tint bdr-top--blue ticket-filters boxin">
-        <a class="modal__close js-modal-close" data-ng-click="ticketing.closeFilters()" >Close</a>
+        <!--<a class="modal__close js-modal-close" data-ng-click="ticketing.closeFilters()" >Close</a>-->
+        <div class="boxin">
         <h3>Filter your results</h3>
         <p><span class="type--blue">{{ticketing.filteredTickets.length}}</span> tickets matching your criteria</p>
     <!-- Exclude Mode(s) -->
@@ -159,5 +160,6 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn--arrow btn--blue boxin" ng-click='ticketing.closeFilters();'>Done</button>
+    <button type="submit" class="btn btn--arrow btn--blue boxin" ng-click='ticketing.hideModalFilter();'>Done</button>
+</div>
 </div>

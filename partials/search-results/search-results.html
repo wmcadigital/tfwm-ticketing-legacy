@@ -5,7 +5,7 @@
         <div class="mobile-only">
                 <div class="rowcontainer">
                     <div class="grid-6">
-                        <button class="btn btn--tertiary btn--filter" ng-click='ticketing.openFilters();'>Filter</button>
+                        <button class="btn btn--tertiary btn--filter" ng-click='ticketing.toggleModalFilter();'>Filter</button>
                     </div>
                     <div class="grid-6">
                         <span class="stylized-select">
@@ -133,8 +133,16 @@
 
     </div>
 </div>
+
+
+<!--
 <div id="filterOverlay" class="overlay">
     <div class="overlay-content">
         <filters-mobile></filters-mobile>
     </div>
 </div>
+-->
+
+<modal-dialog show="ticketing.modalShownFilter">
+    <filters-mobile></filters-mobile>
+</modal-dialog>

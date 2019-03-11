@@ -834,10 +834,16 @@ form .padding-left {
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  background-color: #fff;
 }
 .overlay .operators {
   height: 450px;
   overflow-y: scroll;
+}
+@media (max-width: 890px) {
+  .overlay .operators {
+    height: 100%;
+  }
 }
 @media (max-width: 890px) {
   .overlay {
@@ -853,9 +859,14 @@ form .padding-left {
     overflow-y: scroll;
   }
 }
+@media (max-width: 890px) {
+  .overlay .bg--blue.bg--tint {
+    background-color: #fff;
+  }
+}
 
 @media (max-width: 890px) {
-  .boxin {
+  .overlay.boxin {
     margin: 0px;
   }
 }

@@ -970,17 +970,51 @@ form .padding-left {
 }
 
 .overlay {
-  height: 100%;
-  width: 100%;
-  display: none;
+  width: 600px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
   position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: white;
-  z-index: 9999;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid #3C1053;
 }
-.overlay .overlay-content {
-  height: 100%;
+.overlay .operators {
+  height: 450px;
   overflow-y: scroll;
+}
+@media (max-width: 890px) {
+  .overlay .operators {
+    height: 100%;
+  }
+}
+@media (max-width: 890px) {
+  .overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    z-index: 9999;
+  }
+  .overlay .ng-modal-dialog-content {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+@media (max-width: 890px) {
+  .overlay .bg--blue.bg--tint {
+    background-color: #fff;
+  }
+}
+
+@media (max-width: 890px) {
+  .overlay.boxin {
+    margin: 0px;
+  }
 }

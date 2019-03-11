@@ -1,7 +1,7 @@
 <div class="block block--fullwidth">
     <div class="boxin">
         <h3>
-           Where can I use?
+            Where can I use?
         </h3>
         <p class="type--small">
 
@@ -9,8 +9,7 @@
                 <tabs>
                     <pane data-ng-if="ticket.all.allowBus" title="Bus">
                         <div class="imgwrapper">
-                            <a ng-href="{{assetPath}}assets/nbus_nnetworkMap.png" data-lightbox="bus"><img ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png"
-                                />
+                            <a ng-href="{{assetPath}}assets/nbus_nnetworkMap.png" data-lightbox="bus"><img ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png" />
                                 <i class="material-icons">
                                     zoom_out_map
                                 </i>
@@ -19,12 +18,11 @@
                         <p class="summary">Bus operators who accept this ticket</p>
                         <button class="btn btn-purple" data-ng-click='ticket.toggleModalBus()'>See bus operators</button>
 
-                       
+
                     </pane>
                     <pane data-ng-if="ticket.all.allowTrain" title="Train">
                         <div class="imgwrapper">
-                            <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png"
-                                />
+                            <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png" />
                                 <i class="material-icons">
                                     zoom_out_map
                                 </i>
@@ -33,13 +31,12 @@
                         <p class="summary">Train operators who accept this ticket</p>
                         <button class="btn btn-purple" data-ng-click='ticket.toggleModalTrain()'>See train operators</button>
 
-                       
+
                     </pane>
                     <pane data-ng-if="ticket.all.allowMetro" title="Tram">
                         <div>
                             <div class="imgwrapper">
-                                <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png"
-                                    />
+                                <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png" />
                                     <i class="material-icons">
                                         zoom_out_map
                                     </i>
@@ -54,8 +51,8 @@
             </div>
             <div data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a data-ng-if="ticket.all.brand == 'nbus'" ng-href="{{assetPath}}assets/nbus_nnetworkMap.png" data-lightbox="bus"><img
-                            ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png" />
+                    <a data-ng-if="ticket.all.brand == 'nbus'" ng-href="{{assetPath}}assets/nbus_nnetworkMap.png"
+                        data-lightbox="bus"><img ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png" />
                         <i class="material-icons">
                             zoom_out_map
                         </i>
@@ -64,8 +61,8 @@
 
                 <div data-ng-if="ticket.all.brand == 'National Express'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                     <div class="imgwrapper">
-                        <a ng-href="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img ng-src="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png"
-                            />
+                        <a ng-href="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img
+                                ng-src="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png" />
                             <br>View National Express network map
                             <i class="material-icons">
                                 zoom_out_map
@@ -76,28 +73,26 @@
                 </div>
                 <!-- walsall low fare zone -->
                 <div data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
-                        <div class="imgwrapper">
-                            <a href="https://nxbus.co.uk/walsall" target="_blank"><img ng-src="{{assetPath}}assets/walsall-low-fare-zone-map.png"
-                                />
-                                <br>View National Express Walsall low fare zone map
-                                <i class="material-icons">
-                                    exit_to_app
-                                </i>
-                            </a>
-                        </div>
+                    <div class="imgwrapper">
+                        <a href="https://nxbus.co.uk/walsall" target="_blank"><img ng-src="{{assetPath}}assets/walsall-low-fare-zone-map.png" />
+                            <br>View National Express Walsall low fare zone map
+                            <i class="material-icons">
+                                exit_to_app
+                            </i>
+                        </a>
+                    </div>
                     <p>Use on National Express Walsall low fare zone</p>
                 </div>
                 <!-- sandwell and dudley low fare zone -->
                 <div data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
-                        <div class="imgwrapper">
-                            <a href="https://nxbus.co.uk/paylocal" target="_blank"><img ng-src="{{assetPath}}assets/s-d-low-fare-zone-map.png"
-                                />
-                                <br>View National Express Sandwell & Dudley low fare zone map
-                                <i class="material-icons">
-                                    exit_to_app
-                                </i>
-                            </a>
-                        </div>
+                    <div class="imgwrapper">
+                        <a href="https://nxbus.co.uk/paylocal" target="_blank"><img ng-src="{{assetPath}}assets/s-d-low-fare-zone-map.png" />
+                            <br>View National Express Sandwell & Dudley low fare zone map
+                            <i class="material-icons">
+                                exit_to_app
+                            </i>
+                        </a>
+                    </div>
                     <p>Use on National Express Sandwell & Dudley low fare zone</p>
                 </div>
                 <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
@@ -144,8 +139,7 @@
             </div>
             <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png"
-                        />
+                    <a ng-href="{{assetPath}}assets/NWMzonalcurves.png" data-lightbox="train"><img ng-src="{{assetPath}}assets/NWMzonalcurves-thumbnail.png" />
                         <i class="material-icons">
                             zoom_out_map
                         </i>
@@ -156,14 +150,14 @@
             </div>
             <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
                 <div class="imgwrapper">
-                    <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png"
-                        />
+                    <a ng-href="{{assetPath}}assets/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="{{assetPath}}assets/Metro-Line-Route-thumbnail.png" />
                         <i class="material-icons">
                             zoom_out_map
                         </i>
                     </a>
                 </div>
-                <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West Midlands
+                <p class="summary">Trams are operated by <a href="https://westmidlandsmetro.com/" target="_blank">West
+                        Midlands
                         Metro
                     </a></p>
             </div>
@@ -173,21 +167,25 @@
 
 <!-- pop-up modals -->
 <modal-dialog show='ticket.modalShownSwift' data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
-        <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
+    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
+        <div class="boxin">
             <h2>Swift Card</h2>
             <img src="//www.networkwestmidlands.com/media/1940/payg-swift-cardx2.png?width=200px&height=126px&mode=crop&center=0,0"
                 alt="Swift Card" />
-    
-            <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
+
+            <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive
+                when
                 bought online.</p>
-    
+
             <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn-purple" target="_parent" data-ng-href="{{ticket.all.buyTicketUrl}}"
                 target="_blank">
                 Buy on Swift</a>
         </div>
-    </modal-dialog>
-    
-    <modal-dialog  show='ticket.modalShownBus' data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
+    </div>
+</modal-dialog>
+
+<modal-dialog show='ticket.modalShownBus' data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
+    <div class="boxin">
         <div class="header">
             <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
             <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -199,7 +197,8 @@
                         <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}" target="_blank">Operator
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
                                         Website</a></span>
                                 <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                         target="_blank">Operator Information</a></span>
@@ -214,7 +213,8 @@
                         <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}" target="_blank">Operator
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
                                         Website</a></span>
                                 <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                         target="_blank">Operator Information</a></span>
@@ -229,7 +229,8 @@
                         <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}" target="_blank">Operator
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
                                         Website</a></span>
                                 <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                         target="_blank">Operator Information</a></span>
@@ -239,9 +240,11 @@
                 </table>
             </div>
         </div>
-    </modal-dialog>
-    
-    <modal-dialog show='ticket.modalShownTrain' data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
+    </div>
+</modal-dialog>
+
+<modal-dialog show='ticket.modalShownTrain' data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
+    <div class="boxin">
         <div class="header">
             <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
             <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
@@ -253,7 +256,8 @@
                         <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}" target="_blank">Operator
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
                                         Website</a></span>
                                 <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                         target="_blank">Operator Information</a></span>
@@ -268,7 +272,8 @@
                         <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}" target="_blank">Operator
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
                                         Website</a></span>
                                 <span class="align--right" data-ng-if="!ticket.website"><a href="https://journeyplanner.networkwestmidlands.com/operator/{{ticket.Name}}"
                                         target="_blank">Operator Information</a></span>
@@ -278,4 +283,5 @@
                 </table>
             </div>
         </div>
-    </modal-dialog>
+    </div>
+</modal-dialog>

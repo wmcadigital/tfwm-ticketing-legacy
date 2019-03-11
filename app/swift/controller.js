@@ -54,6 +54,7 @@
         vm.swiftPAYG = swiftPAYG; //Function for hiding fields if Swift PAYG is selected
         vm.ntrainOOC = ntrainOOC; //Function for setting out of county tickets
         vm.toggleModalSwift = toggleModalSwift;
+        vm.toggleModalFilter = toggleModalFilter;
         //Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
         function defaultVars() {
             vm.all = []; //Set results to blank array
@@ -84,9 +85,8 @@
             $scope.stationToTitle = null;
             $scope.stationFromNameOocZ5 = null;
             $scope.stationToNameOocZ5 = null;
-            vm.toggleModalSwift = toggleModalSwift;
-            vm.openFilters = openFilters;
-            vm.closeFilters = closeFilters;
+            //vm.openFilters = openFilters;
+           // vm.closeFilters = closeFilters;
             vm.fromStationInfo = null;
 
             //url parameters
@@ -761,6 +761,15 @@
             vm.modalShownSwift = !vm.modalShownSwift;
         }
 
+         //filters
+         vm.hideModalFilter = function () {
+            vm.modalShownFilter = !vm.modalShownFilter;
+        };
+         vm.modalShownFilter = false;
+         function toggleModalFilter() {
+             vm.modalShownFilter = !vm.modalShownFilter;
+         }
+
         //other matches and swift load more button
         function loadMore() {
             vm.limit += 6;
@@ -780,13 +789,13 @@
             vm.filterButtons[type] = !vm.filterButtons[type];
         }
 
-        function openFilters() {
-            document.getElementById("filterOverlay").style.display = "block";
-        }
+       // function openFilters() {
+         //   document.getElementById("filterOverlay").style.display = "block";
+       ///}
            
-        function closeFilters() {
-            document.getElementById("filterOverlay").style.display = "none";
-        }
+       // function closeFilters() {
+       //     document.getElementById("filterOverlay").style.display = "none";
+       // }
 
         //if pass is swift payg
         function swiftPAYG() {
@@ -917,6 +926,8 @@
         vm.toggleModalSwift = toggleModalSwift;
         vm.operatorList = []; //Define Operator list
         vm.limit = 4; //Set paging limit for Alt tickets
+        vm.openFilters = openFilters;
+        vm.closeFilters = closeFilters;
 
         // Function to get the ticket data with api call
         function initialise(data) {
@@ -959,6 +970,14 @@
                     backButtonLogic(); //Determine back button logic
                 }
             );
+        }
+
+        function openFilters() {
+            document.getElementById("filterOverlay").style.display = "block";
+        }
+
+        function closeFilters() {
+            document.getElementById("filterOverlay").style.display = "none";
         }
 
         function backButtonLogic() {
@@ -1077,9 +1096,9 @@
                     scope.show = false;
                 };
             },
-            template: '<div ng-show="show">' +
+            template: '<div ng-show="show" class="mod">' +
                 '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
-                '<div class="ng-modal-dialog boxin modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
+                '<div class="overlay modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
                 '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
                 '<div class="ng-modal-dialog-content" ng-transclude></div>' +
                 '</div>' +
