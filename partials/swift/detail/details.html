@@ -23,7 +23,7 @@
             <ul class="bare-list bare-list--horizontal">
                 <li ng-repeat="features in ticket.all.features | orderBy:'referenceCode'">
                    <span data-ng-if="features.description == ''"><span class="iconcustom icon--tickSwift"></span> {{features.name}}</span>
-                   <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="blue"><span class="iconcustom icon--tickSwift"></span> {{features.name}}</span>
+                   <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="blue"><span class="iconcustom icon--tickSwift"></span>{{features.name}}</span>
                 </li>
             </ul>
         </div>

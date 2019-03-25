@@ -437,8 +437,8 @@ BREAKPOINTS
   border-left: 2px solid #773289;
 }
 .ticketing-page form input.ng-invalid-autocomplete-required,
-.ticketing-page .field-required-class,
-.ticketing-page input.ng-invalid-field-required-class {
+.ticketing-page .field-required,
+.ticketing-page input.ng-invalid-field-required {
   border: red 1px solid !important;
 }
 .ticketing-page .errors {

@@ -147,14 +147,14 @@
                 <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">
                     <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100" selected-object="stationFrom"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
-                        match-class="highlight" override-suggestions="true" initial-value="ticketing.stationFromName"
+                        match-class="highlight" initial-value="ticketing.stationFromName"
                         field-required-class="field-required-class" field-required="stationFromReq" input-name="fromStation">
                     </div>
                 </div>
                 <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">
                     <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From / To Station" pause="100"
                         selected-object="stationFrom" local-data="ticketing.stationList" search-fields="name" title-field="name"
-                        minlength="1" input-class="form-control padding-right" match-class="highlight" override-suggestions="true"
+                        minlength="1" input-class="form-control padding-right" match-class="highlight"
                         initial-value="ticketing.stationFromName" field-required-class="field-required-class" field-required="stationFromOOCReq"
                         input-name="fromStation">
                     </div>

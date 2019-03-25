@@ -391,8 +391,8 @@
     .radio-bar > span ~ span{border-left: 2px solid $purple}
 
     form input.ng-invalid-autocomplete-required,
-    .field-required-class,
-    input.ng-invalid-field-required-class {
+    .field-required,
+    input.ng-invalid-field-required {
         border: red 1px solid !important;
     }
 

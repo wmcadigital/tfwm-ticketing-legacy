@@ -28,8 +28,8 @@
     
     function TicketingSearchCtrl($scope, $timeout, $filter, $location, savedFilter, ticketingService, angularGridInstance, $httpParamSerializer) {
         var vm = this;
-        $scope.assetPath = assetPath;
-        $scope.ticketUrl = ticketUrl;
+        $scope.assetPath = assetPath;//Assign asset URL. e.g. to CDN location
+        $scope.ticketUrl = ticketUrl;//Assign ticket URL. to be used to direct link to tickets such as Swift PAYG
         vm.submit = submit; //Function to submit inital search
         vm.clearFilter = clearFilter; //Function to reset filters
         vm.getStations = getStations; //Function to retreive stations
@@ -149,7 +149,7 @@
         ) {
             vm.clearStation();
             //Set initial value of from & to stations if in Url
-            if ($location.search().stationNames && vm.postJSON.allowTrain == true || vm.postJSON.brand == "nnetwork" || vm.postJSON.brand == "ntrain") {
+            if ($location.search().stationNames && vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain") {
                 //console.log("test 1");
                 var stations = $location.search().stationNames;
                 var stationSel = stations.toString();
@@ -190,7 +190,7 @@
                     //console.log("rail stations");
                     //console.log(response);
                     vm.stationList = response;
-                    if (vm.stationFromName != null) {
+                    if (vm.stationFromName !== null) {
                         //console.log("2 " + $scope.stationFromName + " to " + $scope.stationToName);
                         //console.log("2 " + vm.stationFromName + " to " + vm.stationToName);
                         var fromRail = vm.stationFromName || null;
@@ -280,62 +280,61 @@
                     var fmetro = vm.postedJSON.allowMetro || false;
 
                     if (vm.postedJSON.allowTrain) {
+                   
                         if (vm.fromStationInfoZone != null) {
-                            var fromZoneNumber = vm.fromStationInfoZone;
+                            vm.fromZoneNumber = vm.fromStationInfoZone;
                         } else if (vm.fromStationInfo != null) {
-                            var fromZoneNumber = vm.fromStationInfo.zone;
+                            vm.fromZoneNumber = vm.fromStationInfo.zone;
                         } else {
-                            var fromZoneNumber = null;
+                            vm.fromZoneNumber = null;
                         }
 
                         if (vm.toStationInfoZone != null) {
-                            var toZoneNumber = vm.toStationInfoZone;
+                            vm.toZoneNumber = vm.toStationInfoZone;
                         } else if (vm.toStationInfo != null) {
-                            var toZoneNumber = vm.toStationInfo.zone;
+                            vm.toZoneNumber = vm.toStationInfo.zone;
                         } else {
-                            var toZoneNumber = null;
+                            vm.toZoneNumber = null;
+                        }
+
+                        if (vm.fromZoneNumber == 1) {
+                            vm.ffromzone = 1;
+                        } else if (vm.fromZoneNumber == 2) {
+                            vm.ffromzone = 2;
+                        } else if (vm.fromZoneNumber == 3) {
+                            vm.ffromzone = 3;
+                        } else if (vm.fromZoneNumber == 4) {
+                            vm.ffromzone = 4;
+                        } else if (vm.fromZoneNumber == 5) {
+                            vm.ffromzone = 5;
+                        } else {
+                            vm.ffromzone = null;
+                        }
+
+                        if (vm.toZoneNumber == 1) {
+                            vm.ftozone = 1;
+                        } else if (vm.toZoneNumber == 2) {
+                            vm.ftozone = 2;
+                        } else if (vm.toZoneNumber == 3) {
+                            vm.ftozone = 3;
+                        } else if (vm.toZoneNumber == 4) {
+                            vm.ftozone = 4;
+                        } else if (vm.toZoneNumber == 5) {
+                            vm.ftozone = 5;
+                        } else {
+                            vm.ftozone = null;
                         }
                     }
                     
-                    var ffromzone
-                    if(fromZoneNumber == 1){
-                        var ffromzone = 1;
-                    }else if(fromZoneNumber == 2){
-                        var ffromzone = 2;
-                    }else if(fromZoneNumber == 3){
-                       var ffromzone = 3;
-                    }else if(fromZoneNumber == 4){
-                        var ffromzone = 4;
-                    }else if(fromZoneNumber == 5){
-                        var ffromzone = 5;
-                    }else{
-                        var ffromzone = null;
-                    }
-
-                    var ftozone
-                    if(toZoneNumber == 1){
-                        var ftozone = 1;
-                    }else if(toZoneNumber == 2){
-                        var ftozone = 2;
-                    }else if(toZoneNumber == 3){
-                        var ftozone = 3;
-                    }else if(toZoneNumber == 4){
-                        var ftozone = 4;
-                    }else if(toZoneNumber == 5){
-                       var ftozone = 5;
-                    }else{
-                        var ftozone = null;
-                    }
-
-                    if(vm.postJSON.allowTrain == true || vm.postJSON.brand == "nnetwork" || vm.postJSON.brand == "ntrain"){
+                    if(vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain"){
                         //console.log("Exact Search with rail");
-                        if(fromZoneNumber != null && toZoneNumber != null){
-                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: ffromzone, railZoneTo: ftozone}, true);
+                        if(vm.fromZoneNumber !== null && vm.toZoneNumber !== null){
+                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone}, true);
                         }else{
                             vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
                         }}else{
                         //console.log("Exact Search without rail");
-                        //vm.postJSON.stationNames = null;
+                        vm.postedJSON.stationNames = null;//make sure no stations are included if train not checked. 
                         vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
                     }
 
@@ -419,8 +418,13 @@
             $timeout(function () {
                 $timeout(function () {
                     if (vm.filteredTickets.length) {
-                        angularGridInstance.ticketResults.refresh();
-                        angularGridInstance.origTicketResults.refresh();
+                        if(vm.otherTickets.length){
+                            angularGridInstance.origTicketResults.refresh();
+                        }
+
+                        if(vm.origTickets.length){
+                            angularGridInstance.ticketResults.refresh();
+                        }
 
                         // set storage url according to search filters
                         //set data to bbe displayed in serializer
@@ -572,10 +576,34 @@
         }
 
         //rail stations - at least 2 required for api to work
-
+        
         // Set From Rail Station
+        $scope.fromEmpty = 'none';
+
+        $scope.fromStationInputChanged = function (str) {
+            $scope.fromStationText = str;
+        };
+
+        $scope.fromfocusState = 'None';
+        $scope.fromFocusIn = function () {
+            $scope.fromfocusState = 'In';
+            
+        };
+        $scope.fromFocusOut = function () {
+            $scope.fromfocusState = 'Out';
+
+            if(vm.stationToName != null){
+                $scope.stationFromReq = true;
+            }
+
+            if($scope.fromStationText != null && vm.stationFromName == null){
+                $scope.stationFromReq = true;
+            }
+        };
+
         $scope.stationFromName = null;//set from station to blank
         $scope.stationFromReq = false;//set from station to not required
+        $scope.stationFromReqOOC = true;//set ooc station to required
         $scope.stationFrom = function (selected) {
             if (selected) {
                 //$scope.stationFromName = selected.originalObject.name; //Set From station
@@ -587,12 +615,17 @@
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
                 vm.fromZoneNumber = selected.originalObject.zone;
                 vm.fromStationInfoZone = selected.originalObject.zone;
-                $scope.stationToReq = true;//set to station to required
+                //$scope.stationToReq = true;//set to station to required
+                $scope.stationFromReq = false;//set from to required to ensure slection is made from list
+                $scope.fromEmpty = true;
             } else {
                 //$scope.stationFromName = null;
                 vm.stationFromName = null;
                 vm.postJSON.stationNames[0] = null;
                 $scope.stationFromTitle = null;
+                $scope.stationFromReq = false;//set from to required to ensure slection is made from list
+                //vm.stationFromReq = true;//set from to required to ensure slection is made from list
+                $scope.fromEmpty = false;
             }
         };
 
@@ -604,11 +637,42 @@
             $scope.stationFromReq = false;//set from station to not required
             $scope.stationFromNameOocZ5 = null;//clear zone 5 in county
             vm.fromStationInfoZone = null;
+            $scope.fromStationText = null;
         }
 
         // Set To Rail Station
+        $scope.toEmpty = 'none';
+
+        $scope.toStationInputChanged = function (str) {
+            $scope.toStationText = str;
+        };
+
+        $scope.tofocusState = 'None';
+        $scope.toFocusIn = function () {
+            $scope.tofocusState = 'In';
+
+
+            if(vm.stationFromName != null){
+                $scope.stationToReq = true;
+            }
+
+        };
+        $scope.toFocusOut = function () {
+            $scope.tofocusState = 'Out';
+
+            if(vm.stationFromName != null){
+                $scope.stationToReq = true;
+            }
+
+            if($scope.toStationText != null && vm.stationToName == null){
+                $scope.stationToReq = true;
+            }
+
+        };
+
         $scope.stationToName = null;//set to station to blank
         $scope.stationToReq = false;//set to station to not required
+        $scope.stationToReqOOC = true;
         $scope.stationTo = function (selected) {
             if (selected) {
                 vm.stationToName = selected.originalObject.name; //Set To Station
@@ -619,11 +683,15 @@
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 vm.toZoneNumber = selected.originalObject.zone;
                 vm.toStationInfoZone = selected.originalObject.zone;
-                $scope.stationFromReq = true;//set from station to required
+                //$scope.stationFromReq = true;//set from station to required
+                $scope.stationToReq = false;//set to to required to ensure slection is made from list
+                $scope.toEmpty = true;
             } else {
                 $scope.stationToName = null;
                 vm.postJSON.stationNames[1] = null;
                 $scope.stationToTitle = null;
+                //$scope.stationToReq = true;
+                $scope.toEmpty = false;
               }
         };
 
@@ -636,6 +704,7 @@
             $scope.stationToReq = false;//set to station to not required
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
             vm.toStationInfoZone = null;
+            $scope.toStationText = null;
         }
 
         // control filters according to url parameters
@@ -817,6 +886,24 @@
             vm.passValue = vm.postJSON.brand;
             if (vm.passValue === 'ntrain - Out of County') {
                 vm.isHideCheck = !vm.isHideCheck;
+                $scope.stationFromReqOOC = true;//set from station to required
+                $scope.stationToReqOOC = true;//set to station to required
+                vm.stationFromName = null;
+                vm.stationToName = null;
+                $scope.stationFromName = null;
+                $scope.stationToName = null;
+            }else{
+                $scope.stationFromReqOOC = false;//set from station to not required
+                $scope.stationToReqOOC = false;//set to station to not required
+                if($location.search().stationNames){//if station names in url assign station vars
+                    var stations = $location.search().stationNames;
+                    var stationSel = stations.toString();
+                    var stationSplit = stationSel.split(',');
+                    $scope.stationFromName = stationSplit[0];
+                    $scope.stationToName = stationSplit[1];
+                    vm.stationFromName = stationSplit[0];
+                    vm.stationToName = stationSplit[1];
+                }
             }
         }
 
@@ -1122,7 +1209,7 @@
                 };
 
                 this.addPane = function (pane) {
-                    if (panes.length == 0) $scope.select(pane);
+                    if (panes.length === 0) $scope.select(pane);
                     panes.push(pane);
                 };
             }],
@@ -1164,7 +1251,7 @@
             controller: ["$scope", function ($scope, $element) {
                 $scope.isShown = false;
                 this.showHover = function () {
-                    $scope.isShown = $scope.isShown == true ? false : true;
+                    $scope.isShown = $scope.isShown === true ? false : true;
                 };
             }],
             transclude: true,
