@@ -144,22 +144,24 @@
         <div class="grid-6 padding-right">
             <div data-ng-init="ticketing.getStations();ticketing.setStations();">
                 <label class="plain-small hide" for="travellingFrom">From</label>
+
                 <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">
-                    <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From" pause="100" selected-object="stationFrom"
+                    <div angucomplete-alt id="stationFrom" placeholder="From" pause="100" selected-object="stationFrom"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
                         match-class="highlight" initial-value="ticketing.stationFromName"
-                        field-required-class="field-required-class" field-required="stationFromReq" input-name="fromStation">
+                        field-required-class="field-required" field-required="stationFromReq" input-name="fromStation" input-changed="fromStationInputChanged"
+                        focus-in="fromFocusIn()" focus-out="fromFocusOut()">
                     </div>
                 </div>
                 <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">
-                    <div angucomplete-alt id="stationFrom" focus-in="focusIn()" placeholder="From / To Station" pause="100"
-                        selected-object="stationFrom" local-data="ticketing.stationList" search-fields="name" title-field="name"
-                        minlength="1" input-class="form-control padding-right" match-class="highlight"
-                        initial-value="ticketing.stationFromName" field-required-class="field-required-class" field-required="stationFromOOCReq"
-                        input-name="fromStation">
+                    <div angucomplete-alt id="stationFrom" placeholder="To / From" pause="100" selected-object="stationFrom"
+                        local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
+                        match-class="highlight" initial-value="ticketing.stationFromName"
+                        field-required-class="field-required" field-required="stationFromReqOOC" input-name="fromStationOOC" input-changed="fromStationInputChanged"
+                        focus-in="fromFocusIn()" focus-out="fromFocusOut()">
                     </div>
                 </div>
-                <a data-ng-if="ticketing.stationFromName || stationFromName" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
+                <a data-ng-if="ticketing.stationFromName || stationFromName || fromStationText != null && ticketing.stationFromName == null && stationFromReq == true" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
                 <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationFromName || stationFromName">
                     <div>
                         You selected <strong>{{ticketing.stationFromName}}</strong> station which is
@@ -178,24 +180,27 @@
                     <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
                         input-class="form-control form-control-small" match-class="highlight" initial-value="ticketing.stationToName" 
-                        field-required-class="field-required-class" field-required="stationToReq" input-name="toStation">
+                        field-required-class="field-required" field-required="stationToReq" input-name="toStation" input-changed="toStationInputChanged"
+                        focus-in="toFocusIn()" focus-out="toFocusOut()">
                     </div>
                 </div>
             </div>
             <!-- If pass is ntrain-->
             <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'" data-ng-if="ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType" data-ng-init="ticketing.geticStations();">
-                    <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
-                        local-data="ticketing.stationicList" search-fields="name" title-field="name" minlength="1"
-                        input-class="form-control form-control-small" match-class="highlight"
-                        field-required-class="field-required-class" initial-value="ticketing.stationToName" field-required="stationToReq" input-name="toStation">
-                    </div>
+                <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
+                    local-data="ticketing.stationicList" search-fields="name" title-field="name" minlength="1"
+                    input-class="form-control form-control-small" match-class="highlight" initial-value="ticketing.stationToName"
+                    field-required-class="field-required" field-required="stationToReq" input-name="toStation"
+                    input-changed="toStationInputChanged" focus-in="toFocusIn()" focus-out="toFocusOut()">
                 </div>
+            </div>
             <!-- If pass is ntrain - Out of County-->
             <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType" data-ng-init="ticketing.getoocStations();">
-                <div angucomplete-alt id="stationTo" placeholder="From / To Out of County Station" pause="100" selected-object="stationTo"
+                <div angucomplete-alt id="stationTo" placeholder="To / From out of county station" pause="100" selected-object="stationTo"
                     local-data="ticketing.stationoocList" search-fields="name" title-field="name" minlength="1"
-                    input-class="form-control form-control-small" match-class="highlight"
-                    field-required-class="field-required-class" initial-value="ticketing.stationToName" field-required="stationToReq" input-name="toStation">
+                    input-class="form-control form-control-small" match-class="highlight" initial-value="ticketing.stationToName"
+                    field-required-class="field-required" field-required="stationToReqOOC" input-name="toStationOOC"
+                    input-changed="toStationInputChanged" focus-in="toFocusIn()" focus-out="toFocusOut()">
                 </div>
             </div>
             <!-- If pass is In County-->
@@ -206,7 +211,7 @@
                     field-required-class="required" initial-value="stationToName">
                 </div>
             </div>-->
-            <a data-ng-if="ticketing.stationToName || stationToName" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
+            <a data-ng-if="ticketing.stationToName || stationToName || toStationText != null && ticketing.stationToName == null && stationToReq == true" class="btn-link float--right" href="" data-ng-click="ticketing.clearToStation();">Clear</a>
 
             <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationToName || stationToName">
                 <div>
@@ -232,9 +237,29 @@
     <!-- /Help section if station is not listed in auto complete -->
 
     <!-- error messages -->
-    <div data-ng-if="stationFromName && !stationToName || !stationFromName && stationToName" data-ng-hide="stationFromName == '[]' || stationFromName && stationToName" class="grid-12 errors">
+    <div data-ng-if="ticketing.stationFromName && !ticketing.stationToName || !ticketing.stationFromName && ticketing.stationToName" data-ng-hide="stationFromName == '[]' || ticketing.postJSON.brand == 'ntrain - Out of County'" class="grid-12 errors">
         <div class="boxin -messages">
             In order to carry out a rail station search you need to add the To & From stations.
+        </div>
+    </div>
+    <div data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType" data-ng-hide="ticketing.stationFromName && ticketing.stationToName" class="grid-12 errors">
+        <div class="boxin -messages">
+            In order to carry out an out of county rail station search you need to add the To & From stations.
+        </div>
+    </div>
+    <div data-ng-if="fromStationText != null && ticketing.stationFromName == null && stationFromReq == true && ticketing.stationToName != null" class="grid-12 errors">
+        <div class="boxin -messages">
+            We do not provide tickets from {{fromStationText}}. Please choose another.
+        </div>
+    </div>
+    <div data-ng-if="toStationText != null && ticketing.stationToName == null && stationToReq == true && ticketing.stationFromName != null" class="grid-12 errors">
+        <div class="boxin -messages">
+            We do not provide tickets to {{toStationText}}. Please choose another.
+        </div>
+    </div>
+    <div data-ng-if="fromfocusState == 'Out' && ticketing.stationFromName == null && stationFromReq == true && tofocusState == 'Out' && ticketing.stationToName == null && stationToReq == true" class="grid-12 errors">
+        <div class="boxin -messages">
+            We do not provide tickets from {{fromStationText}} to {{toStationText}}. Please choose another.
         </div>
     </div>
     <!-- /error messages -->
