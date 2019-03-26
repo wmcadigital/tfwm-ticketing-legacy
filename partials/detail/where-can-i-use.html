@@ -54,7 +54,7 @@
 
             </div>
             <div data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro">
-                <div class="imgwrapper">
+                <div class="imgwrapper" data-ng-hide="ticket.all.busTravelArea == 'Walsall' || ticket.all.busTravelArea == 'Sandwell & Dudley'">
                     <a data-ng-if="ticket.all.brand == 'nbus'" ng-href="{{assetPath}}assets/nbus_nnetworkMap.png"
                         data-lightbox="bus"><img ng-src="{{assetPath}}assets/nbus_nnetworkMap-thumbnail.png" />
                         <i class="material-icons">
@@ -65,7 +65,7 @@
 
                 <div data-ng-if="ticket.all.brand == 'National Express'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                     <div class="imgwrapper">
-                        <a ng-href="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="bus"><img
+                        <a ng-href="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area.png" data-lightbox="nx"><img
                                 ng-src="{{assetPath}}assets/NX-West-Midlands-Travelcard-Area-Thumbnail.png" />
                             <br>View National Express network map
                             <i class="material-icons">
@@ -74,6 +74,18 @@
                         </a>
                     </div>
                     <p>Use on National Express buses only</p>
+                </div>
+                 <!-- walsall nbus zone -->
+                 <div data-ng-if="ticket.all.busTravelArea == 'Walsall'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
+                    <div class="imgwrapper">
+                        <a ng-href="{{assetPath}}assets/nbus_walsall.png" data-lightbox="nbus walsall"><img
+                                ng-src="{{assetPath}}assets/nbus_walsall.png" />
+                            <br>View Walsall nBus network map
+                            <i class="material-icons">
+                                zoom_out_map
+                            </i>
+                        </a>
+                    </div>
                 </div>
                 <!-- walsall low fare zone -->
                 <div data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
@@ -87,6 +99,18 @@
                     </div>
                     <p>Use on National Express Walsall low fare zone</p>
                 </div>
+                <!-- sandwell and dudley nbus zone -->
+                <div data-ng-if="ticket.all.busTravelArea == 'Sandwell & Dudley'" data-ng-hide="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
+                    <div class="imgwrapper">
+                        <a ng-href="{{assetPath}}assets/nbus_sandwell_dudley.png" data-lightbox="nbus sandwell & dudley">
+                            <img ng-src="{{assetPath}}assets/nbus_sandwell_dudley.png" />
+                            <br>View Sandwell &amp; Dudley nBus network map
+                            <i class="material-icons">
+                                zoom_out_map
+                            </i>
+                        </a>
+                    </div>
+                </div>
                 <!-- sandwell and dudley low fare zone -->
                 <div data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
                     <div class="imgwrapper">
@@ -97,7 +121,7 @@
                             </i>
                         </a>
                     </div>
-                    <p>Use on National Express Sandwell & Dudley low fare zone</p>
+                    <p>Use on National Express Sandwell &amp; Dudley low fare zone</p>
                 </div>
                 <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
                     <div class="imgwrapper">
