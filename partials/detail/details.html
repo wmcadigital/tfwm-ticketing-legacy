@@ -18,15 +18,25 @@
         </div>
     </div>
 
-     <!-- Features: -->
-     <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.features.length != '0'">
-            <ul class="bare-list bare-list--horizontal">
-                <li ng-repeat="features in ticket.all.features | orderBy:'referenceCode'">
-                   <span data-ng-if="features.description == ''"><span class="iconcustom icon--tick"></span> {{features.name}}</span>
-                   <span data-ng-if="features.description != ''" tooltip tooltipc="{{features.description}}" class="blue"><span class="iconcustom icon--tick"></span> {{features.name}}</span>
-                </li>
-            </ul>
-        </div>
+    <style type="text/css">
+        
+    </style>
+
+    <!-- Features: -->
+    <div class="boxin bg--grey bg--tint ts--info" data-ng-if="ticket.all.features.length != '0'" ng-init="tooltip=false">
+        <ul class="bare-list bare-list--horizontal">
+            <li ng-repeat="features in ticket.all.features | orderBy:'referenceCode'" data-ng-mouseover="tooltip=true"
+                data-ng-mouseleave="tooltip=false">
+                <span data-ng-if="features.description == ''"><span class="iconcustom icon--tick"></span>
+                    {{features.name}}</span>
+                <span data-ng-if="features.description != ''" class="blue rollover"><span
+                        class="iconcustom icon--tick"></span> {{features.name}}</span>
+                <div data-ng-if="features.description != ''" class="field-help tooltip" ng-show="tooltip"><span
+                        class="close modal__close" data-ng-click="tooltip=false"></span><span
+                        data-ng-bind-html="features.description"></span></div>
+            </li>
+        </ul>
+    </div>
 
     <div class="display--tablet">
         <hr>

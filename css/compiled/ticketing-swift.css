@@ -366,6 +366,9 @@ BREAKPOINTS
   font-size: 1.6rem;
   line-height: 2.6rem;
 }
+.ticketing-page #detail .rollover {
+  cursor: help;
+}
 .ticketing-page #detail .breadcrumb {
   margin-top: 15px;
 }

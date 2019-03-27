@@ -193,6 +193,8 @@
             line-height: 2.6rem;
         }
 
+        .rollover{cursor: help}
+
         //make custom tick icon smaller
         .icon--tick::after {
             background-position: -70px -190px;
