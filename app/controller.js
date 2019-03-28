@@ -329,7 +329,17 @@
                     if(vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain"){
                         //console.log("Exact Search with rail");
                         if(vm.fromZoneNumber !== null && vm.toZoneNumber !== null){
-                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone}, true);
+                            //exact results won't work if from zone is greater then the to zone so do a check
+                            if(vm.fromZoneNumber < vm.toZoneNumber){
+                                console.log("zone check 1");
+                                vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone}, true);
+                            }else if (vm.fromZoneNumber > vm.toZoneNumber){
+                                console.log("zone check 2");
+                                vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ftozone, railZoneTo: vm.ffromzone}, true);
+                            }else if(vm.fromZoneNumber === vm.toZoneNumber){
+                                console.log("zone check 3");
+                                vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: 1, railZoneTo: vm.ftozone}, true);
+                            }
                         }else{
                             vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
                         }}else{
