@@ -124,6 +124,18 @@
             //rail to zone
             $scope.railZoneToParameter = $location.search().railZoneTo || null;
 
+            //pre 9.30
+            $scope.timePeriod1Parameter = $location.search().timePeriod1 || null;
+
+            //9.30 - 3.30
+            $scope.timePeriod2Parameter = $location.search().timePeriod2 || null;
+            
+            //3.30 - 6
+            $scope.timePeriod3Parameter = $location.search().timePeriod3 || null;
+
+            //after 6
+            $scope.timePeriod4Parameter = $location.search().timePeriod4 || null;
+
             vm.clearModes = clearModes;
             vm.postedJSON = {}; //Define the object to hold the initial search criteria
 
@@ -243,6 +255,10 @@
                 operator: $scope.operatorParameter,
                 railZoneFrom: $scope.railZoneFromParameter,
                 railZoneTo: $scope.railZoneToParameter,
+                timePeriod1: $scope.timePeriod1Parameter,
+                timePeriod2: $scope.timePeriod2Parameter,
+                timePeriod3: $scope.timePeriod3Parameter,
+                timePeriod4: $scope.timePeriod4Parameter,
                 limit: vm.limit,
                 limitExact: vm.limitExact,
             }); //set search url for sharing/tracking
@@ -481,6 +497,10 @@
                             purchasePayzone: vm.searchFilters.purchasePayzone,
                             railZoneFrom: vm.searchFilters.railZoneFrom,
                             railZoneTo: vm.searchFilters.railZoneTo,
+                            timePeriod1: vm.searchFilters.timePeriod1,
+                            timePeriod2: vm.searchFilters.timePeriod2,
+                            timePeriod3: vm.searchFilters.timePeriod3,
+                            timePeriod4: vm.searchFilters.timePeriod4,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         };
@@ -593,6 +613,10 @@
             $scope.purchaseTicCheck=function() { return false; };
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
+            $scope.timePeriod1Check=function() { return false; };
+            $scope.timePeriod2Check=function() { return false; };
+            $scope.timePeriod3Check=function() { return false; };
+            $scope.timePeriod4Check=function() { return false; };
             savedFilter.set("url", '');
             clearFromStation();
             clearToStation();
@@ -915,6 +939,54 @@
             vm.searchFilters.railZoneTo = $scope.railZoneToParameter;
         }
 
+         //pre 9.30
+         if ($scope.timePeriod1Parameter) {
+            //open time of day filter
+            vm.filterButtons.time = !vm.filterButtons.time;
+            //set search filters to include ptimePeriod1
+            vm.searchFilters.timePeriod1 = true;
+            //Make sure payzone is ticked
+            $scope.timePeriod1Check=function() { 
+                return true; 
+            };
+        }
+
+        //9.30 - 3.30
+        if ($scope.timePeriod2Parameter) {
+            //open time of day filter
+            vm.filterButtons.time = !vm.filterButtons.time;
+            //set search filters to include ptimePeriod1
+            vm.searchFilters.timePeriod2 = true;
+            //Make sure payzone is ticked
+            $scope.timePeriod2Check=function() { 
+                return true; 
+            };
+        }
+
+        //3.30 - 6
+        if ($scope.timePeriod3Parameter) {
+            //open time of day filter
+            vm.filterButtons.time = !vm.filterButtons.time;
+            //set search filters to include ptimePeriod1
+            vm.searchFilters.timePeriod3 = true;
+            //Make sure payzone is ticked
+            $scope.timePeriod3Check=function() { 
+                return true; 
+            };
+        }
+
+        //after 6
+        if ($scope.timePeriod4Parameter) {
+            //open time of day filter
+            vm.filterButtons.time = !vm.filterButtons.time;
+            //set search filters to include ptimePeriod1
+            vm.searchFilters.timePeriod4 = true;
+            //Make sure payzone is ticked
+            $scope.timePeriod4Check=function() { 
+                return true; 
+            };
+        }
+
         //toggle swift modal popup
         vm.modalShownSwift = false;
         function toggleModalSwift() {
@@ -1162,7 +1234,7 @@
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
-            //console.log(vm.backToSearch);
+            console.log(vm.backToSearch);
             $scope.stationFromNameZone = '1';
         }
 

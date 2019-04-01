@@ -7,8 +7,8 @@
         .factory('updatePageView', ['$location', updatePageView]);
 
     function ticketingService($http) {
-        var uri = 'https://apis.networkwestmidlands.com/Ticketing/Tickets/';
-        var uri2 = 'https://apis.networkwestmidlands.com/Ticketing/';
+        var uri = 'http://apisnwm.cenapps.org.uk/Ticketing/Tickets/';
+        var uri2 = 'http://apisnwm.cenapps.org.uk/Ticketing/';
         return {  
             ticketSearch: function (data){
                 return getData($http.post(uri + 'Search', data, {cache: true}));
