@@ -23,6 +23,12 @@
 
     }
 
+    .-messages{
+        a{color: #fff;
+            background-image: linear-gradient(transparent 50%, #ffffff 50%);
+        }
+    }
+
     .icon-stylized-new input:checked ~ label:after, a.icon-stylized-new:active span:after, a.icon-stylized-new:focus span:after{
         z-index: 10;
     }

@@ -37,6 +37,7 @@
         vm.geticStations = geticStations; //Function to retreive in county stations
         vm.clearFromStation = clearFromStation; //Function to clear from station
         vm.clearToStation = clearToStation; //Function to clear to station
+        vm.clearViaOneStation = clearViaOneStation; //Function to clear via one station
         vm.clearStation = clearStation; //Function to clear to from station if not in url - []
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
@@ -158,6 +159,7 @@
                 $scope.stationToName = stationSplit[1];
                 vm.stationFromName = stationSplit[0];
                 vm.stationToName = stationSplit[1];
+                vm.stationViaOneName = stationSplit[2];
                 //console.log("1 " + $scope.stationFromName + " to " + $scope.stationToName);
             }else{
                 //console.log("test 2");
@@ -190,24 +192,27 @@
                     //console.log("rail stations");
                     //console.log(response);
                     vm.stationList = response;
+                    //if going direct to page with stations work out zone information
                     if (vm.stationFromName !== null) {
-                        //console.log("2 " + $scope.stationFromName + " to " + $scope.stationToName);
-                        //console.log("2 " + vm.stationFromName + " to " + vm.stationToName);
                         var fromRail = vm.stationFromName || null;
                         var toRail = vm.stationToName || null;
+                        var ViaOneRail = vm.stationViaOneName || null;
                         var dataFromRail = $filter('filter')(response, {name: fromRail});
                         var dataToRail = $filter('filter')(response, {name: toRail});
+                        var dataViaOnRail = $filter('filter')(response, {name: ViaOneRail});
                         var dataFromRailData = dataFromRail[0];
                         var dataToRailData = dataToRail[0];
+                        var dataViaOneRailData = dataViaOnRail[0];
                         vm.fromStationInfo = dataFromRailData;
                         vm.toStationInfo = dataToRailData;
-                        //console.log("3");
-                        //console.log(vm.fromStationInfo.zone);
-                        //console.log(vm.toStationInfo.zone);
+                        vm.ViaOneStationInfo = dataViaOneRailData;
 
                         if (vm.fromStationInfo != null) {
                             vm.fromZoneNumber = vm.fromStationInfo.zone;
                             vm.toZoneNumber = vm.toStationInfo.zone;
+                            if(vm.ViaOneStationInfo != null){
+                                vm.ViaOneZoneNumber = vm.ViaOneStationInfo.zone;
+                            }
                         }
                     }
                 }
@@ -324,18 +329,50 @@
                         } else {
                             vm.ftozone = null;
                         }
+
+                        if (vm.ViaOneZoneNumber == 1) {
+                            vm.fViaOnezone = 1;
+                        } else if (vm.ViaOneZoneNumber == 2) {
+                            vm.fViaOnezone = 2;
+                        } else if (vm.ViaOneZoneNumber == 3) {
+                            vm.fViaOnezone = 3;
+                        } else if (vm.ViaOneZoneNumber == 4) {
+                            vm.fViaOnezone = 4;
+                        } else if (vm.ViaOneZoneNumber == 5) {
+                            vm.fViaOnezone = 5;
+                        } else {
+                            vm.fViaOnezone = null;
+                        }
+
+                        if(vm.ViaOneZoneNumber != null){
+                            if(vm.ViaOneZoneNumber <  vm.fromZoneNumber){
+                                console.log("via greater then from");
+                                vm.ffromzone = vm.ViaOneZoneNumber;
+                            }else if(vm.ViaOneZoneNumber > vm.toZoneNumber){
+                                console.log("via greater then to");
+                                vm.ftozone = vm.ViaOneZoneNumber;
+                            }
+                        }
                     }
                     
                     if(vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain"){
+                        vm.exactMatch = [];
                         //console.log("Exact Search with rail");
                         if(vm.fromZoneNumber !== null && vm.toZoneNumber !== null){
-                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone}, true);
+                            //exact results won't work if from zone is greater then the to zone so do a check
+                            if(vm.ffromzone < vm.ftozone){
+                                vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone});
+                            }else if (vm.ffromzone > vm.ftozone){
+                                vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: vm.ftozone, railZoneTo: vm.ffromzone});
+                            }else if(vm.ffromzone === vm.ftozone){
+                                    vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro, railZoneFrom: 1, railZoneTo: vm.ftozone});
+                            }
                         }else{
-                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+                            vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro});
                         }}else{
                         //console.log("Exact Search without rail");
                         vm.postedJSON.stationNames = null;//make sure no stations are included if train not checked. 
-                        vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro}, true);
+                        vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro});
                     }
 
                     //compare search reults and exact search results and display difference
@@ -557,8 +594,9 @@
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
             savedFilter.set("url", '');
-            vm.stationFromName = null;
-            vm.stationToName = null;
+            clearFromStation();
+            clearToStation();
+            clearViaOneStation();
         }
 
         // If a pass is selected deselect all modes
@@ -695,8 +733,8 @@
               }
         };
 
-        // Reset to station
-        function clearToStation() {
+         // Reset to station
+         function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
             $scope.stationToName = null;
             vm.stationToName = null;
@@ -705,6 +743,59 @@
             $scope.stationToNameOocZ5 = null;//clear zone 5 in county
             vm.toStationInfoZone = null;
             $scope.toStationText = null;
+        }
+
+        // Via station
+        $scope.viaOneStationInputChanged = function (str) {
+            $scope.viaOneStationText = str;
+        };
+
+        $scope.viaOnefocusState = 'None';
+        $scope.stationViaOneFocusIn = function () {
+            $scope.viaOnefocusState = 'In';
+            
+        };
+        $scope.stationViaOneFocusOut = function () {
+            $scope.viaOnefocusState = 'Out';
+
+            if(vm.stationViaOneName != null){
+                $scope.stationviaOneReq = true;
+            }
+
+            if($scope.viaOneStationText != null || vm.stationViaOneName == null){
+                $scope.stationViaOneReq = true;
+                $scope.stationToReq = true;
+                $scope.stationFromReq = true;
+            }
+        };
+
+        $scope.stationViaOne = function (selected) {
+            if (selected) {
+                vm.stationViaOneName = selected.originalObject.name; //Set To Station
+                vm.postJSON.stationNames[2] = selected.originalObject.name;
+                $scope.stationViaOneTitle = selected.originalObject.name;
+                $scope.stationViaOneNameZone = selected.originalObject.zone;
+                $scope.stationViaOneNameOoc = selected.originalObject.outOfCounty;
+                $scope.stationViaOneNameOocZ5 = selected.originalObject.zone5InCounty;
+                vm.ViaOneZoneNumber = selected.originalObject.zone;
+                vm.ViaOneStationInfoZone = selected.originalObject.zone;
+            } else {
+             
+              }
+        };
+
+        //show via station if not null
+        if(vm.stationViaOneName != null){
+            $scope.stationVia = true;
+        }
+
+        // Reset via one station
+        function clearViaOneStation() {
+            $scope.$broadcast('angucomplete-alt:clearInput', 'stationViaOne');
+            $scope.stationViaOneName = null;
+            $scope.viaOneStationText = null;
+            vm.stationViaOneName = null;
+            vm.postJSON.stationNames = [[]];
         }
 
         // control filters according to url parameters
@@ -890,6 +981,7 @@
                 $scope.stationToReqOOC = true;//set to station to required
                 vm.stationFromName = null;
                 vm.stationToName = null;
+                vm.stationViaOneName = null;
                 $scope.stationFromName = null;
                 $scope.stationToName = null;
             }else{
@@ -903,6 +995,7 @@
                     $scope.stationToName = stationSplit[1];
                     vm.stationFromName = stationSplit[0];
                     vm.stationToName = stationSplit[1];
+                    vm.stationViaOneName = stationSplit[2];
                 }
             }
         }

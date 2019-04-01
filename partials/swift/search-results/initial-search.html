@@ -225,6 +225,36 @@
         </div>
     </div>
 
+     <!-- Via station -->
+     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
+         class="help-section grid-12">
+         <label class="blue btn-link">Add via stations<input class="hidden" type="checkbox"
+                 ng-model="stationVia" /></label><br />
+         <div ng-show="stationVia" class="railhelp boxin">
+             <p>Add Via stations</p>
+             <div angucomplete-alt id="stationViaOne" placeholder="Via" pause="100" selected-object="stationViaOne"
+                 local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
+                 input-class="form-control padding-right" match-class="highlight"
+                 initial-value="ticketing.stationViaOneName" input-name="stationViaOne"
+                 input-changed="viaOneStationInputChanged" field-required-class="field-required"
+                 field-required="stationViaOneReq" focus-in="stationViaOneFocusIn()"
+                 focus-out="stationViaOneFocusOut()">
+             </div>
+             <a data-ng-if="ticketing.stationViaOneName != null || viaOneStationText != null"
+                 class="btn-link float--right" href="" data-ng-click="ticketing.clearViaOneStation();">Clear</a>
+
+             <div class="result boxin bg--grey bg--tint"
+                 data-ng-show="ticketing.stationViaOneName || stationViaOneName">
+                 <div>
+                     You selected <strong>{{ticketing.stationViaOneName}}</strong> station which is
+                     <strong>{{ stationViaOneNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
+                                 ticketing.ViaOneZoneNumber }}</strong>.
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- /Via station -->
+
     <!-- Help section if station is not listed in auto complete -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
         class="help-section grid-12">
@@ -237,41 +267,9 @@
         </div>
     </div>
     <!-- /Help section if station is not listed in auto complete -->
-<!--
-<div class="grid-12">
-<div class="grid-6">
-   <p>fromStationText - {{fromStationText}}</p>
-<p>fromfocusState - {{fromfocusState}}</p>
-<p>fromEmpty - {{fromEmpty}}</p>
-<p>stationFromReq - {{stationFromReq}}</p>
-<p>fromStationInfoZone - {{ticketing.fromStationInfoZone}}</p>
-<p>fromStationInfo - {{ticketing.fromStationInfo}}</p>
-<p>stationFromReqOOC - {{stationFromReqOOC}}</p>
-<p>stationFromName - {{ticketing.stationFromName}}</p>
-<p>stationFromName - {{$scope.stationFromName}}</p>
-<p>ticketing.postJSON.brand - {{ticketing.postJSON.brand}}</p>
-<p>ticketing.postJSON.allowTrain - {{ticketing.postJSON.allowTrain}}</p>
-</div>
-<div class="grid-6">
-  <p>toStationText - {{toStationText}}</p>
-<p>tofocusState - {{tofocusState}}</p>
-<p>toEmpty - {{toEmpty}}</p>
-<p>stationToReq - {{stationToReq}}</p>
-<p>toStationInfoZone - {{ticketing.toStationInfoZone}}</p>
-<p>toStationInfo - {{ticketing.toStationInfo}} - {{toStationInfo}}</p>
-<p>stationToReqOOC - {{stationToReqOOC}}</p>
-<p>stationToName - {{ticketing.stationToName}}</p>
-<p>stationToName - {{$scope.stationToName}}</p>
-</div>
-</div>
-
-<div class="grid-12">
-<hr>
-</div>
--->
 
     <!-- error messages -->
-    <div data-ng-if="ticketing.stationFromName && !ticketing.stationToName || !ticketing.stationFromName && ticketing.stationToName" data-ng-hide="stationFromName == '[]' || ticketing.postJSON.brand == 'ntrain - Out of County'" class="grid-12 errors">
+    <div data-ng-if="ticketing.stationFromName && !ticketing.stationToName || !ticketing.stationFromName && ticketing.stationToName || viaOneStationText != null && !ticketing.stationFromName && !ticketing.stationToName" data-ng-hide="stationFromName == '[]' || ticketing.postJSON.brand == 'ntrain - Out of County'" class="grid-12 errors">
         <div class="boxin -messages">
             In order to carry out a rail station search you need to add the To & From stations.
         </div>
@@ -289,6 +287,11 @@
     <div data-ng-if="toStationText != null && ticketing.stationToName == null && stationToReq == true && ticketing.stationFromName != null" class="grid-12 errors">
         <div class="boxin -messages">
             We do not provide tickets to {{toStationText}}. Please choose another.
+        </div>
+    </div>
+    <div data-ng-if="viaOneStationText != null && ticketing.stationViaOneName == null && stationViaOneReq == true" class="grid-12 errors">
+        <div class="boxin -messages">
+            We do not provide tickets via {{viaOneStationText}}. Please choose another.
         </div>
     </div>
     <div data-ng-if="fromfocusState == 'Out' && ticketing.stationFromName == null && stationFromReq == true && tofocusState == 'Out' && ticketing.stationToName == null && stationToReq == true" class="grid-12 errors">
