@@ -161,8 +161,8 @@
                         focus-in="fromFocusIn()" focus-out="fromFocusOut()">
                     </div>
                 </div>
-                <a data-ng-if="ticketing.stationFromName || stationFromName || fromStationText != null && ticketing.stationFromName == null && stationFromReq == true" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
-                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationFromName || stationFromName">
+                <a data-ng-if="ticketing.stationFromName || fromStationText != null && ticketing.stationFromName == null && stationFromReq == true" class="btn-link float--right" href="" data-ng-click="ticketing.clearFromStation();">Clear</a>
+                <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="ticketing.stationFromName">
                     <div>
                         You selected <strong>{{ticketing.stationFromName}}</strong> station which is
                         <strong>{{ stationFromNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
