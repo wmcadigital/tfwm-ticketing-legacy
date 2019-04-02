@@ -742,6 +742,9 @@ BREAKPOINTS
 .railhelp {
   margin: 10px 0;
 }
+.railhelp p {
+  margin-top: 0px;
+}
 
 .ie10-or-better .stylized-select > select {
   padding-right: 80px;

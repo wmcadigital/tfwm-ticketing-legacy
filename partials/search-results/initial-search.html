@@ -226,23 +226,31 @@
     <!-- Via station -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
         class="help-section grid-12">
-        <label class="blue btn-link">Add via station<input class="hidden" type="checkbox" ng-model="stationVia" /></label><br />
-        <div ng-show="stationVia" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
+        <div class="acc accordion-vertical js-accordion" data-module="accordion"></div>
+        <div class="acc__item" ng-class="{true: 'acc--active', false: 'acc--active2'}[stationVia == true]">
+            <label class="btn--navy acc__trigger">Add via station<input class="hidden" type="checkbox"
+                    ng-model="stationVia" /></label><br />
+            <div ng-show="stationVia" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
                 <div angucomplete-alt id="stationViaOne" placeholder="Via" pause="100" selected-object="stationViaOne"
-                        local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
-                        match-class="highlight" initial-value="ticketing.stationViaOneName"
-                        input-name="stationViaOne" input-changed="viaOneStationInputChanged" field-required-class="field-required" field-required="stationViaOneReq"
-                        focus-in="stationViaOneFocusIn()" focus-out="stationViaOneFocusOut()">
-                    </div>
-                    <a data-ng-if="ticketing.stationViaOneName != null || viaOneStationText != null" class="btn-link float--right" href="" data-ng-click="ticketing.clearViaOneStation();">Clear</a>
+                    local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
+                    input-class="form-control padding-right" match-class="highlight"
+                    initial-value="ticketing.stationViaOneName" input-name="stationViaOne"
+                    input-changed="viaOneStationInputChanged" field-required-class="field-required"
+                    field-required="stationViaOneReq" focus-in="stationViaOneFocusIn()"
+                    focus-out="stationViaOneFocusOut()">
+                </div>
+                <a data-ng-if="ticketing.stationViaOneName != null || viaOneStationText != null"
+                    class="btn-link float--right" href="" data-ng-click="ticketing.clearViaOneStation();">Clear</a>
 
-                    <div class="result boxin bg--grey bg--tint" data-ng-show="ticketing.stationViaOneName || stationViaOneName">
-                            <div>
-                                You selected <strong>{{ticketing.stationViaOneName}}</strong> station which is
-                                <strong>{{ stationViaOneNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
+                <div class="result boxin bg--grey bg--tint"
+                    data-ng-show="ticketing.stationViaOneName || stationViaOneName">
+                    <div>
+                        You selected <strong>{{ticketing.stationViaOneName}}</strong> station which is
+                        <strong>{{ stationViaOneNameOoc ? station.Name + ' Out of County': station.name + ' Zone ' +
                                     ticketing.ViaOneZoneNumber }}</strong>.
-                            </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /Via station -->

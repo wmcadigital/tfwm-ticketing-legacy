@@ -697,7 +697,8 @@ $grid-columns: 12;
 }
 
 .railhelp {
-    margin: 10px 0
+    margin: 10px 0;
+    p{margin-top: 0px}
 }
 
 .ie10-or-better .stylized-select>select {

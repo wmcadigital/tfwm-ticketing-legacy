@@ -120,7 +120,7 @@
       .btn {
         text-transform: lowercase; }
 
-        .acc__trigger{background: #edf8fd;color: $purple}
+        .acc__trigger{background: $purple;color: #fff}
       
 
     .stylized-select > select {
@@ -855,7 +855,8 @@ $grid-columns: 12;
 }
 
 .railhelp {
-    margin: 10px 0
+    margin: 10px 0;
+    p{margin-top: 0px}
 }
 
 .ie10-or-better .stylized-select>select {

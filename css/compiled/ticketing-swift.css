@@ -202,8 +202,8 @@ BREAKPOINTS
   text-transform: lowercase;
 }
 .ticketing-page .acc__trigger {
-  background: #edf8fd;
-  color: #773289;
+  background: #773289;
+  color: #fff;
 }
 .ticketing-page .stylized-select > select {
   color: #773289;
@@ -932,6 +932,9 @@ BREAKPOINTS
 
 .railhelp {
   margin: 10px 0;
+}
+.railhelp p {
+  margin-top: 0px;
 }
 
 .ie10-or-better .stylized-select > select {
