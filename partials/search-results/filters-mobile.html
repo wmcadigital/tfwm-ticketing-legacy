@@ -143,7 +143,7 @@
             <div class="fields new-transport-icons-blue nga-fast nga-fade" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postedJSON.brand == 'ntrain' || ticketing.postedJSON.brand == 'nnetwork'">
                 <label class="plain" for="PassengerType">From:</label>
                 <span class="stylized-select">
-                    <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneFrom'
+                    <select id="railZoneFromMobile" name="railZoneFrom" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneFrom'
                         data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
                         <option data-ng-repeat="option in ticketing.filterButtons.railZoneFrom | filter:''" value="{{option}}">Zone {{option}}</option>
@@ -152,7 +152,7 @@
                 <br/><br/>
                 <label class="plain" for="PassengerType">To:</label>
                 <span class="stylized-select">
-                    <select id="railZoneTo" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneTo' data-ng-change="ticketing.update()">
+                    <select id="railZoneToMobile" name="railZoneTo" aria-disabled="false" data-ng-model='ticketing.searchFilters.railZoneTo' data-ng-change="ticketing.update()">
                         <option value="">Any Zones</option>
                         <option data-ng-repeat="option in ticketing.filterButtons.railZoneTo | orderBy:'+option' | filter:''" value="{{option}}">Zone {{option}}</option>
                     </select>

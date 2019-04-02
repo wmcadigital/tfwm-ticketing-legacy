@@ -145,8 +145,7 @@
         
         <div class="grid-6 padding-right">
             <div data-ng-init="ticketing.getStations();ticketing.setStations();">
-                <label class="plain-small hide" for="travellingFrom">From</label>
-
+                <label class="plain-small visuallyhidden" for="stationFrom_value">From</label>
                 <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County'">
                     <div angucomplete-alt id="stationFrom" placeholder="From" pause="100" selected-object="stationFrom"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
@@ -176,7 +175,7 @@
        
         <div class="grid-6 padding-left">
             <div class="fields passselect nga-fast nga-fade" style="margin:0px">
-                <label class="plain-small hide" for="travellingTo_value">To <span data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">Out
+                <label class="plain-small visuallyhidden" for="travellingTo_value">To <span data-ng-if="ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType">Out
                         of County Station</span></label>
                 <div data-ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == 'ntrain'">
                     <div angucomplete-alt id="stationTo" placeholder="To" pause="100" selected-object="stationTo"
@@ -231,7 +230,8 @@
         <div class="acc accordion-vertical js-accordion" data-module="accordion"></div>
         <div class="acc__item" ng-class="{true: 'acc--active', false: 'acc--active2'}[stationVia == true]">
             <label class="btn--purple acc__trigger">Add via station<input class="hidden" type="checkbox"
-                    ng-model="stationVia" /></label><br />
+                    ng-model="stationVia" /></label>
+            <label class="plain-small visuallyhidden" for="stationViaOne_value">Via</label>
             <div ng-show="stationVia" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
                 <div angucomplete-alt id="stationViaOne" placeholder="Via" pause="100" selected-object="stationViaOne"
                     local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1"
@@ -307,7 +307,7 @@
 
     <!-- Duration -->
     <div class="fields how-long grid-12" ng-hide="ticketing.passValue == 'Swift PAYG' || !ticketing.postJSON.passengerType" data-ng-if="ticketing.postJSON.passengerType != '' && (ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand)">
-        <label class="plain duration" for="DurationDay">Duration</label>
+        <label class="plain duration">Duration</label>
         <div class="labels-new">
             <span class="icon-stylized-new" ng-hide="ticketing.postJSON.brand == 'ntrain - Out of County' || ticketing.postJSON.brand == 'ntrain'">
                 <input type="radio" id="DurationDay" name="TimeBand" value="Pay on day / 1 day" data-ng-model="ticketing.postJSON.timeBand">
