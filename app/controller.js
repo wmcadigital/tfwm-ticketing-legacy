@@ -732,14 +732,12 @@
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 vm.toZoneNumber = selected.originalObject.zone;
                 vm.toStationInfoZone = selected.originalObject.zone;
-                //$scope.stationFromReq = true;//set from station to required
                 $scope.stationToReq = false;//set to to required to ensure slection is made from list
                 $scope.toEmpty = true;
             } else {
                 vm.stationToName = null;
                 vm.postJSON.stationNames[1] = null;
                 $scope.stationToTitle = null;
-                //$scope.stationToReq = true;
                 $scope.toEmpty = false;
               }
         };

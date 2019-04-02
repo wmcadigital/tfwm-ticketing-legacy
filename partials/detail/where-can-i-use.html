@@ -281,7 +281,7 @@
             <div data-ng-if="ticket.all.brand == 'ntrain'">
                 <table class="disruption-detail__table">
                     <tbody>
-                        <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true} | orderBy:'name'">
+                        <tr data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true, type:'Rail Operator'} | orderBy:'name'">
                             <td>{{ticket.name}}</td>
                             <td>
                                 <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"

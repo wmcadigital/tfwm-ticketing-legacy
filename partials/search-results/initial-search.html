@@ -226,9 +226,8 @@
     <!-- Via station -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"
         class="help-section grid-12">
-        <label class="blue btn-link">Add via stations<input class="hidden" type="checkbox" ng-model="stationVia" /></label><br />
+        <label class="blue btn-link">Add via station<input class="hidden" type="checkbox" ng-model="stationVia" /></label><br />
         <div ng-show="stationVia" class="railhelp boxin bg--grey bg--tint bdr-bottom--blue">
-                <p>Add Via stations</p>
                 <div angucomplete-alt id="stationViaOne" placeholder="Via" pause="100" selected-object="stationViaOne"
                         local-data="ticketing.stationList" search-fields="name" title-field="name" minlength="1" input-class="form-control padding-right"
                         match-class="highlight" initial-value="ticketing.stationViaOneName"
@@ -247,8 +246,6 @@
         </div>
     </div>
     <!-- /Via station -->
-
-    <p data-ng-if="ticketing.stationFromName && ticketing.stationToName"><b>Travelling From:</b> {{ticketing.stationFromName}} <b>To</b> {{ticketing.stationToName}} <b data-ng-if="ticketing.stationViaOneName">Via</b> {{ticketing.stationViaOneName}}</p>
 
     <!-- Help section if station is not listed in auto complete -->
     <div data-ng-if="ticketing.postJSON.allowTrain && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain - Out of County' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'ntrain' && ticketing.postJSON.passengerType || ticketing.postJSON.brand == 'nnetwork' && ticketing.postJSON.passengerType"

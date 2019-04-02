@@ -80,12 +80,12 @@
                 "brand": $location.search().brand || null,
                 "stationNames": $location.search().stationNames || [[]]
             }; //Define postJSON default values
-            $scope.stationFromName = null;// Clear Stations
-            $scope.stationToName = null;
-            $scope.stationFromTitle = null;
-            $scope.stationToTitle = null;
-            $scope.stationFromNameOocZ5 = null;
-            $scope.stationToNameOocZ5 = null;
+            vm.stationFromName = null;// Clear Stations
+            vm.stationToName = null;
+            vm.stationFromTitle = null;
+            vm.stationToTitle = null;
+            vm.stationFromNameOocZ5 = null;
+            vm.stationToNameOocZ5 = null;
             //vm.openFilters = openFilters;
            // vm.closeFilters = closeFilters;
             vm.fromStationInfo = null;
@@ -163,26 +163,20 @@
             vm.clearStation();
             //Set initial value of from & to stations if in Url
             if ($location.search().stationNames && vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain") {
-                //console.log("test 1");
-                var stations = $location.search().stationNames;
-                var stationSel = stations.toString();
-                var stationSplit = stationSel.split(',');
-                $scope.stationFromName = stationSplit[0];
-                $scope.stationToName = stationSplit[1];
-                vm.stationFromName = stationSplit[0];
-                vm.stationToName = stationSplit[1];
-                vm.stationViaOneName = stationSplit[2];
-                //console.log("1 " + $scope.stationFromName + " to " + $scope.stationToName);
-            }else{
-                //console.log("test 2");
-                $scope.stationFromName = null;
-                $scope.stationToName = null;
+                if ($location.search().stationNames != '[]') {
+                    var stations = $location.search().stationNames;
+                    var stationSel = stations.toString();
+                    var stationSplit = stationSel.split(',');
+                    vm.stationFromName = stationSplit[0];
+                    vm.stationToName = stationSplit[1];
+                    vm.stationViaOneName = stationSplit[2];
+                }
+            } else {
                 vm.stationFromName = null;
                 vm.stationToName = null;
             }
             vm.getStations();
             submit(vm.postJSON);
-            //console.log("submitted");
 
         } else {
             $location.url('').replace();
@@ -633,7 +627,7 @@
          // if no stations set in url make sure from station is set to null. This is to fix back function adding [] in from station
          function clearStation() {
             if ($location.search().stationNames === "[]") {
-                vm.clearFromStation();
+                clearFromStation();
             }
         }
 
@@ -663,30 +657,24 @@
             }
         };
 
-        $scope.stationFromName = null;//set from station to blank
+
         $scope.stationFromReq = false;//set from station to not required
         $scope.stationFromReqOOC = true;//set ooc station to required
         $scope.stationFrom = function (selected) {
             if (selected) {
-                //$scope.stationFromName = selected.originalObject.name; //Set From station
                 vm.stationFromName = selected.originalObject.name; //Set From station
                 vm.postJSON.stationNames[0] = selected.originalObject.name;
-                $scope.stationFromTitle = selected.originalObject.name;
                 $scope.stationFromNameZone = selected.originalObject.zone;
                 $scope.stationFromNameOoc = selected.originalObject.outOfCounty;
                 $scope.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
                 vm.fromZoneNumber = selected.originalObject.zone;
                 vm.fromStationInfoZone = selected.originalObject.zone;
-                //$scope.stationToReq = true;//set to station to required
                 $scope.stationFromReq = false;//set from to required to ensure slection is made from list
                 $scope.fromEmpty = true;
             } else {
-                //$scope.stationFromName = null;
                 vm.stationFromName = null;
                 vm.postJSON.stationNames[0] = null;
-                $scope.stationFromTitle = null;
                 $scope.stationFromReq = false;//set from to required to ensure slection is made from list
-                //vm.stationFromReq = true;//set from to required to ensure slection is made from list
                 $scope.fromEmpty = false;
             }
         };
@@ -694,7 +682,7 @@
          // Reset from station
          function clearFromStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
-            $scope.stationFromName = null;
+            vm.stationFromName = null;
             vm.postJSON.stationNames = [[]];
             $scope.stationFromReq = false;//set from station to not required
             $scope.stationFromNameOocZ5 = null;//clear zone 5 in county
@@ -732,7 +720,6 @@
 
         };
 
-        $scope.stationToName = null;//set to station to blank
         $scope.stationToReq = false;//set to station to not required
         $scope.stationToReqOOC = true;
         $scope.stationTo = function (selected) {
@@ -745,14 +732,12 @@
                 $scope.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
                 vm.toZoneNumber = selected.originalObject.zone;
                 vm.toStationInfoZone = selected.originalObject.zone;
-                //$scope.stationFromReq = true;//set from station to required
                 $scope.stationToReq = false;//set to to required to ensure slection is made from list
                 $scope.toEmpty = true;
             } else {
-                $scope.stationToName = null;
+                vm.stationToName = null;
                 vm.postJSON.stationNames[1] = null;
                 $scope.stationToTitle = null;
-                //$scope.stationToReq = true;
                 $scope.toEmpty = false;
               }
         };
@@ -760,7 +745,6 @@
          // Reset to station
          function clearToStation() {
             $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
-            $scope.stationToName = null;
             vm.stationToName = null;
             vm.postJSON.stationNames = [[]];
             $scope.stationToReq = false;//set to station to not required
@@ -1054,8 +1038,6 @@
                 vm.stationFromName = null;
                 vm.stationToName = null;
                 vm.stationViaOneName = null;
-                $scope.stationFromName = null;
-                $scope.stationToName = null;
             }else{
                 $scope.stationFromReqOOC = false;//set from station to not required
                 $scope.stationToReqOOC = false;//set to station to not required
@@ -1063,8 +1045,6 @@
                     var stations = $location.search().stationNames;
                     var stationSel = stations.toString();
                     var stationSplit = stationSel.split(',');
-                    $scope.stationFromName = stationSplit[0];
-                    $scope.stationToName = stationSplit[1];
                     vm.stationFromName = stationSplit[0];
                     vm.stationToName = stationSplit[1];
                     vm.stationViaOneName = stationSplit[2];
@@ -1234,7 +1214,7 @@
 
         function backButtonLogic() {
             vm.backToSearch = getURL; //use session storage
-            console.log(vm.backToSearch);
+            //console.log(vm.backToSearch);
             $scope.stationFromNameZone = '1';
         }
 
