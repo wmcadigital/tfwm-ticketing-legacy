@@ -86,6 +86,10 @@ BREAKPOINTS
 .ticketing-page .icon-stylized-new svg {
   fill: #773289;
 }
+.ticketing-page .block--side, .ticketing-page .topFilters, .ticketing-page .filtered-header {
+  -webkit-box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
+          box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
+}
 .ticketing-page .-messages a {
   color: #fff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, #ffffff));
@@ -459,6 +463,8 @@ BREAKPOINTS
 }
 .ticketing-page .angular-grid-item .bdr-top--purple.boxin .itemContent {
   padding: 70px 20px 45px 20px;
+  -webkit-box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
+          box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
 }
 .ticketing-page .block--fullwidth .block--side {
   position: -webkit-sticky;
@@ -656,6 +662,10 @@ BREAKPOINTS
 }
 .ticketing-page .online {
   color: #773289 !important;
+}
+.ticketing-page .itemContent {
+  -webkit-box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
+          box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
 }
 .ticketing-page .itemContent .price {
   color: #773289 !important;

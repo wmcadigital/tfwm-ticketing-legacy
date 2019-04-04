@@ -24,6 +24,11 @@
 
     }
 
+    .block--side, .topFilters, .filtered-header{
+        box-shadow: 0 4px 10px 1px rgba(238,238,239,.75);
+    }
+
+
     .-messages{
         a{color: #fff;
             background-image: linear-gradient(transparent 50%, #ffffff 50%);
@@ -414,7 +419,8 @@
             padding: 0px;
 
             .itemContent {
-                padding: 70px 20px 45px 20px
+                padding: 70px 20px 45px 20px;
+                box-shadow: 0 4px 10px 1px rgba(238,238,239,.75);
             }
         }
     }
@@ -656,9 +662,11 @@
         color: $purple !important
     }
 
-    .itemContent .price {
+    .itemContent{box-shadow: 0 4px 10px 1px rgba(238,238,239,.75);
+         .price {
         color: $purple !important
     }
+}
 
     .hideCheck {
         display: none
