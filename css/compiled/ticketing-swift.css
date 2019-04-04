@@ -86,7 +86,7 @@ BREAKPOINTS
 .ticketing-page .icon-stylized-new svg {
   fill: #773289;
 }
-.ticketing-page .block--side, .ticketing-page .topFilters, .ticketing-page .filtered-header {
+.ticketing-page .block--side, .ticketing-page .topFilters, .ticketing-page .filtered-header, .ticketing-page .boxin {
   -webkit-box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
           box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
 }
