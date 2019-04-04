@@ -204,6 +204,8 @@ BREAKPOINTS
 }
 .ticketing-page .btn {
   text-transform: lowercase;
+  background-color: #773289;
+  border-radius: 30px;
 }
 .ticketing-page .acc__trigger {
   background: #773289;

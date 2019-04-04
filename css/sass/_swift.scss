@@ -124,7 +124,10 @@
           box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.5); }
       
       .btn {
-        text-transform: lowercase; }
+        text-transform: lowercase;
+        background-color: $purple;
+        border-radius: 30px;
+        }
 
         .acc__trigger{background: $purple;color: #fff}
       
