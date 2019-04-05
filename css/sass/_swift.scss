@@ -127,6 +127,7 @@
         text-transform: lowercase;
         background-color: $purple;
         border-radius: 30px;
+        color: #ffffff;
         }
 
         .acc__trigger{background: $purple;color: #fff}
@@ -978,4 +979,8 @@ form {
     padding: 0;
     position: absolute;
     width: 1px;
+}
+
+.btn--arrow{
+    &::before{background-color: $darkpurple!important}
 }

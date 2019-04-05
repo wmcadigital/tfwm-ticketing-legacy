@@ -206,6 +206,7 @@ BREAKPOINTS
   text-transform: lowercase;
   background-color: #773289;
   border-radius: 30px;
+  color: #ffffff;
 }
 .ticketing-page .acc__trigger {
   background: #773289;
@@ -1053,4 +1054,8 @@ form .padding-left {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.btn--arrow::before {
+  background-color: #3C1053 !important;
 }
