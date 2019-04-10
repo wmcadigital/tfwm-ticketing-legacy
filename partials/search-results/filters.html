@@ -160,8 +160,8 @@
             </label>
         </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {busTravelArea: filter}).length}} == '0'">
-                <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
-                data-ng-checked="('{{busTravelAreaParameter}}' == '{{filter}}') ? true : false" data-ng-change="ticketing.update();" value="{{filter}}" data-ng-true-value="true" data-ng-false-value="false" />
+                <input id="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
+                    data-ng-change="ticketing.update();" value="{{filter}}" />
                 <label for="busTravelArea{{$index}}">
                     <span data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} ({{ (ticketing.original | filter: {busTravelArea:filter}).length }})</span>
                     <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} ({{ (ticketing.original | filter: {busTravelArea:filter}).length }})</span>
