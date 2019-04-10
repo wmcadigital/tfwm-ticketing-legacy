@@ -82,43 +82,53 @@
     <div class="filter-block"
         data-ng-hide="(ticketing.original | filter: {timePeriod1: true}).length == '0' && (ticketing.original | filter: {timePeriod2: true}).length == '0' && (ticketing.original | filter: {timePeriod3: true}).length == '0' && (ticketing.original | filter: {timePeriod4: true}).length == '0'">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('time')">
-            Time of day
+            Time of weekday travel
             <i class="material-icons">
                 {{ticketing.filterButtons.time ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
             </i>
         </div>
+        <a data-ng-if="ticketing.timePeriodAll || ticketing.searchFilters.timePeriod1 || ticketing.searchFilters.timePeriod2 || ticketing.searchFilters.timePeriod3 || ticketing.searchFilters.timePeriod4" data-ng-click="ticketing.clearTime();">Clear</a>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.time">
-            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: true}).length == '0'">
+            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length == '0'">
+                <input id="timePeriodAll" name="timePeriodAll" type="checkbox" class="stylized"
+                    data-ng-model="ticketing.timePeriodAll" data-ng-checked="timePeriod1CheckAll()"
+                    data-ng-change="ticketing.checkTimeAll();ticketing.update();" data-ng-true-value="'yes'" data-ng-false-value="'no'"
+                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length == '0'" />
+                <label for="timePeriodAll">Anytime
+                    ({{(ticketing.filteredTickets | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length}})
+                </label>
+            </li>
+            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length == '0'">
                 <input id="timePeriod1" name="timePeriod1" type="checkbox" class="stylized"
                     data-ng-model="ticketing.searchFilters.timePeriod1" data-ng-checked="timePeriod1Check()"
-                    data-ng-change="ticketing.update()"
-                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: true}).length == '0'" />
+                    data-ng-change="ticketing.checkTime();ticketing.travelPre930();ticketing.update();"
+                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length == '0'" />
                 <label for="timePeriod1">Before 09:30am
-                    ({{ (ticketing.filteredTickets | filter: {timePeriod1: true}).length}})</label>
+                    ({{ (ticketing.filteredTickets | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length}})</label>
             </li>
-            <li data-ng-hide="(ticketing.original | filter: {timePeriod2: true}).length == '0'">
+            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length == '0'">
                 <input id="timePeriod2" name="timePeriod2" type="checkbox" class="stylized"
                     data-ng-model="ticketing.searchFilters.timePeriod2" data-ng-checked="timePeriod2Check()"
                     data-ng-change="ticketing.update()"
-                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod2: true}).length == '0'" />
+                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length == '0'" />
                 <label for="timePeriod2">09:30am – 3:30pm
-                    ({{ (ticketing.filteredTickets | filter: {timePeriod2: true}).length}})</label>
+                    ({{ (ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length}})</label>
             </li>
-            <li data-ng-hide="(ticketing.original | filter: {timePeriod3: true}).length == '0'">
+            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length == '0'">
                 <input id="timePeriod3" name="timePeriod3" type="checkbox" class="stylized"
                     data-ng-model="ticketing.searchFilters.timePeriod3" data-ng-checked="timePeriod3Check()"
                     data-ng-change="ticketing.update()"
-                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod3: true}).length == '0'" />
+                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length == '0'" />
                 <label for="timePeriod3">3.30pm – 6:00pm
-                    ({{ (ticketing.filteredTickets | filter: {timePeriod3: true}).length }})</label>
+                    ({{ (ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length }})</label>
             </li>
-            <li data-ng-hide="(ticketing.original | filter: {timePeriod4: true}).length == '0'">
+            <li data-ng-hide="(ticketing.original | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length == '0'">
                 <input id="timePeriod4" name="timePeriod4" type="checkbox" class="stylized"
                     data-ng-model="ticketing.searchFilters.timePeriod4" data-ng-checked="timePeriod4Check()"
                     data-ng-change="ticketing.update()"
-                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod4: true}).length == '0'" />
+                    ng-disabled="(ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length == '0'" />
                 <label for="timePeriod4">After 6pm
-                    ({{ (ticketing.filteredTickets | filter: {timePeriod4: true}).length }})</label>
+                    ({{ (ticketing.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length }})</label>
             </li>
         </ul>
     </div>

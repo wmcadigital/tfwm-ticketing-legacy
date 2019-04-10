@@ -39,6 +39,9 @@
         vm.clearToStation = clearToStation; //Function to clear to station
         vm.clearViaOneStation = clearViaOneStation; //Function to clear via one station
         vm.clearStation = clearStation; //Function to clear to from station if not in url - []
+        vm.clearTime = clearTime; //Function to clear time selection
+        vm.checkTimeAll = checkTimeAll;//Function to check time checkboxes
+        vm.checkTime = checkTime;//Function to check time checkboxes
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
@@ -124,6 +127,9 @@
             //rail to zone
             $scope.railZoneToParameter = $location.search().railZoneTo || null;
 
+            //anytime
+            $scope.timePeriodAnytimeParameter = $location.search().timePeriodAll || null;
+
             //pre 9.30
             $scope.timePeriod1Parameter = $location.search().timePeriod1 || null;
 
@@ -143,6 +149,7 @@
             $scope.stationToReq = false;//set from station to not required
             $scope.stationToReqtwo = false;
             $scope.stationFromOOCReq = true;//if Train OOC pass selected make station required
+            $scope.timePeriodAll = true;
         }
 
         defaultVars();
@@ -249,6 +256,7 @@
                 operator: $scope.operatorParameter,
                 railZoneFrom: $scope.railZoneFromParameter,
                 railZoneTo: $scope.railZoneToParameter,
+                timePeriodAll: $scope.timePeriodAnytimeParameter,
                 timePeriod1: $scope.timePeriod1Parameter,
                 timePeriod2: $scope.timePeriod2Parameter,
                 timePeriod3: $scope.timePeriod3Parameter,
@@ -258,6 +266,7 @@
             }); //set search url for sharing/tracking
 
             vm.searchFilters = {};//set scope for search filters and reset on every search
+
             vm.origFilters = {};//set scope for original search filters and reset on every search
             //console.log('this is posted');
             //console.log(vm.postedJSON);
@@ -424,7 +433,6 @@
         }
 
         function update() {
-            //console.log("update");
             var filtered = vm.all;
             var filteredorg = vm.exactMatch;
             var filteredother = vm.otherResults;
@@ -435,6 +443,41 @@
                 if ((key.indexOf('allow') !== -1 && val) || (val === false && key.indexOf('allow') === -1)) {
                     // Delete the filter and value
                     delete vm.searchFilters[key];
+                }
+                //if pre 9.30 is selected
+                if (vm.searchFilters.timePeriod1) {
+                    console.log("pre 930 test");
+                    vm.searchFilters.timePeriod2 = false;
+                    vm.searchFilters.timePeriod3 = false;
+                    vm.searchFilters.timePeriod4 = false;
+                }
+                //if 9.30 - 3.30 is selected
+                if (vm.searchFilters.timePeriod2) {
+                    vm.searchFilters.timePeriod1 = false;
+                    vm.searchFilters.timePeriod3 = false;
+                    vm.searchFilters.timePeriod4 = false;
+                }
+                //if 3.30 - 6 is selected
+                if (vm.searchFilters.timePeriod3) {
+                    vm.searchFilters.timePeriod1 = false;
+                    vm.searchFilters.timePeriod2 = false;
+                    vm.searchFilters.timePeriod4 = false;
+                }
+                //if after 6 is selected
+                if (vm.searchFilters.timePeriod4) {
+                    vm.searchFilters.timePeriod1 = false;
+                    vm.searchFilters.timePeriod2 = false;
+                    vm.searchFilters.timePeriod3 = false;
+                }
+                //if anytime is selected
+                if (vm.timePeriodAll == 'yes') {
+                    console.log("time anytime selected");
+                    //vm.searchFilters.timeLimited = false;
+                    //vm.searchFilters.timePeriod1 = '';
+                    vm.searchFilters.timePeriod1 = true;
+                    vm.searchFilters.timePeriod2 = true;
+                    vm.searchFilters.timePeriod3 = true;
+                    vm.searchFilters.timePeriod4 = true;
                 }
             });
 
@@ -474,7 +517,7 @@
                         }
 
                         // set storage url according to search filters
-                        //set data to bbe displayed in serializer
+                        //set data to be displayed in serializer
                         var obj = {
                             passengerType: vm.postedJSON.passengerType,
                             timeBand: vm.postedJSON.timeBand,
@@ -491,10 +534,6 @@
                             purchasePayzone: vm.searchFilters.purchasePayzone,
                             railZoneFrom: vm.searchFilters.railZoneFrom,
                             railZoneTo: vm.searchFilters.railZoneTo,
-                            timePeriod1: vm.searchFilters.timePeriod1,
-                            timePeriod2: vm.searchFilters.timePeriod2,
-                            timePeriod3: vm.searchFilters.timePeriod3,
-                            timePeriod4: vm.searchFilters.timePeriod4,
                             limit: vm.limit,
                             limitExact: vm.limitExact
                         };
@@ -516,58 +555,76 @@
                             ametro = "allowMetro";
                         }
 
+                        //work out time of day selection and update searchURL
+                        var atime1;
+                        if(vm.searchFilters.timePeriod1 == true){
+                            atime1 = "&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false";
+                        }else if(vm.searchFilters.timePeriod2 == true){
+                            atime1 = "&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false";
+                        }else if(vm.searchFilters.timePeriod3 == true){
+                            atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false";
+                        }else if(vm.searchFilters.timePeriod4 == true){
+                            atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true";
+                        }else if(vm.timePeriodAll == true){
+                            atime1 = "&timePeriodAll=true";
+                        }else{
+                            atime1 = '';
+                        }
+
                         var searchURL;
 
                         // bus only
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + urlstring + atime1;
                             //console.log("bus only - " + searchURL);
                             savedFilter.set("url", searchURL);
                         }
 
                          // bus and train
                          if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // bus and metro
                         if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train only
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + urlstring;
+                            searchURL = "/?" + atrain + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // train and metro
                         if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // metro only
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + ametro + "&" + urlstring;
+                            searchURL = "/?" + ametro + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // all modes selected
                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring;
+                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         // no modes selected
                         if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + urlstring;
+                            searchURL = "/?" + urlstring + atime1;
                             //console.log(searchURL);
                             savedFilter.set("url", searchURL);
                         }
                         //vm.loadingStatus = "success";
+
+                        //console.log(searchURL);
                     }
                 }, 0, false);
             }, 0, false);
@@ -607,6 +664,7 @@
             $scope.purchaseTicCheck=function() { return false; };
             $scope.purchaseRailStationCheck=function() { return false; };
             $scope.purchasePayzoneCheck=function() { return false; };
+            $scope.timePeriod1CheckAll=function() { return false; };
             $scope.timePeriod1Check=function() { return false; };
             $scope.timePeriod2Check=function() { return false; };
             $scope.timePeriod3Check=function() { return false; };
@@ -630,6 +688,85 @@
                 clearFromStation();
             }
         }
+
+       
+
+     //tick anytime checkbox on load
+    //$scope.timePeriod1CheckAll=function() { 
+    //    return true; 
+    //};
+
+    //clear time selections
+    function clearTime() {
+        //uncheck time of day checkboxes
+        $scope.timePeriod1CheckAll = function () {
+            return false;
+        };
+        $scope.timePeriod1Check = function () {
+            return false;
+        };
+        $scope.timePeriod2Check = function () {
+            return false;
+        };
+        $scope.timePeriod3Check = function () {
+            return false;
+        };
+        $scope.timePeriod4Check = function () {
+            return false;
+        };
+        //make time selections false to reset default search criteria
+        vm.timePeriodAll = false;
+        vm.searchFilters.timePeriod1 = false;
+        vm.searchFilters.timePeriod2 = false;
+        vm.searchFilters.timePeriod3 = false;
+        vm.searchFilters.timePeriod4 = false;
+        vm.update();
+    }
+
+    function checkTimeAll() {
+        console.log("qwertyu");
+        console.log(vm.timePeriodAll);
+        if (vm.timePeriodAll == 'yes') {
+            console.log("checktime true");
+            vm.searchFilters.timePeriod1 = true;
+            vm.searchFilters.timePeriod2 = true;
+            vm.searchFilters.timePeriod3 = true;
+            vm.searchFilters.timePeriod4 = true;
+
+            $scope.timePeriod1CheckAll = function () {
+                return true;
+            };
+            $scope.timePeriod1Check = function () {
+                return false;
+            };
+            $scope.timePeriod2Check = function () {
+                return false;
+            };
+            $scope.timePeriod3Check = function () {
+                return false;
+            };
+            $scope.timePeriod4Check = function () {
+                return false;
+            };
+
+        } else if (vm.timePeriodAll == 'no') {
+            console.log("checktime false");
+            vm.searchFilters.timePeriod1 = '';
+            vm.searchFilters.timePeriod2 = '';
+            vm.searchFilters.timePeriod3 = '';
+            vm.searchFilters.timePeriod4 = '';
+        }
+    }
+
+    //disable anytime if another time period is selected
+    function checkTime() {
+        $scope.timePeriodAll = false;
+        if($scope.timePeriodAll == false){
+            $scope.timePeriod1CheckAll=function() { 
+                return false; 
+            };
+        }
+    }
 
         //rail stations - at least 2 required for api to work
         
@@ -923,8 +1060,23 @@
             vm.searchFilters.railZoneTo = $scope.railZoneToParameter;
         }
 
+        //anytime
+        if ($location.search().timePeriodAll == 'true') {
+            //update search filters
+            vm.searchFilters.timeLimited = false;
+            vm.searchFilters.timePeriod1 = '';
+            //open time of day filter
+            vm.filterButtons.time = !vm.filterButtons.time;
+            //set search filters to include ptimePeriod1
+            vm.timePeriodAll = true;
+            //Make sure payzone is ticked
+            $scope.timePeriod1CheckAll = function () {
+                return true;
+            };
+        }
+
          //pre 9.30
-         if ($scope.timePeriod1Parameter) {
+         if ($location.search().timePeriod1 == 'true') {
             //open time of day filter
             vm.filterButtons.time = !vm.filterButtons.time;
             //set search filters to include ptimePeriod1
@@ -936,7 +1088,7 @@
         }
 
         //9.30 - 3.30
-        if ($scope.timePeriod2Parameter) {
+        if ($location.search().timePeriod2 == 'true') {
             //open time of day filter
             vm.filterButtons.time = !vm.filterButtons.time;
             //set search filters to include ptimePeriod1
@@ -948,7 +1100,7 @@
         }
 
         //3.30 - 6
-        if ($scope.timePeriod3Parameter) {
+        if ($location.search().timePeriod3 == 'true') {
             //open time of day filter
             vm.filterButtons.time = !vm.filterButtons.time;
             //set search filters to include ptimePeriod1
@@ -960,7 +1112,7 @@
         }
 
         //after 6
-        if ($scope.timePeriod4Parameter) {
+        if ($location.search().timePeriod4 == 'true') {
             //open time of day filter
             vm.filterButtons.time = !vm.filterButtons.time;
             //set search filters to include ptimePeriod1
