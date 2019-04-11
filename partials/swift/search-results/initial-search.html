@@ -114,24 +114,31 @@
         </div>
         <div class="rowcontainer">
         <div class="grid-7">
-                <div class="help-txt" ng-show="ticketing.showDetails">
-                        <a ng-click="ticketing.showDetails=!ticketing.showDetails" class="modal__close float--right">Close</a>
-                        <p><strong>Young Person up to 18</strong> - For children aged 5-15 inclusive and holders of the Network West Midlands 
-                        <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/' target='_blank'>16-18 photocard</a>.</p>
-                    
-                        <p><strong>Student 18+</strong> - For students who are in full time education aged 18+ or those aged 16-18 who are NOT entitled to the 
-                        Network West Midlands <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/' target='_blank'>16-18 photocard</a>. 
-                        Proof of full-time education and two passport sized photographs will be required to buy this ticket (if purchasing from rail station). 
-                        Or, it may be loaded to a Swift photocard.</p>
-                    
-                        <p><strong>Group/Family</strong> - these vary; check full ticket descriptions.</p>
-                    
-                        <p><strong>Older Persons Passholder</strong> - holder of an English National Concessionary Travel Pass</p>
-                    
-                        <p><strong>Disabled Passholder</strong> - holder of an English National Concessionary Travel Pass</p>
-                    
-                        <p>If you don't match any criteria - search for adult tickets.</p>
-                    </div>
+            <div class="help-txt" ng-show="ticketing.showDetails" data-ng-if="ticket.loadingStatus == 'success'">
+                <a ng-click="ticketing.showDetails=!ticketing.showDetails" class="modal__close float--right">Close</a>
+                <p><strong>Young Person up to 18</strong> - For children aged 5-15 inclusive and holders of the Network
+                    West Midlands
+                    <a href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/'
+                        target='_blank'>16-18 photocard</a>.</p>
+
+                <p><strong>Student 18+</strong> - For students who are in full time education aged 18+ or those aged
+                    16-18 who are NOT entitled to the
+                    Network West Midlands <a
+                        href='https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/'
+                        target='_blank'>16-18 photocard</a>.
+                    Proof of full-time education and two passport sized photographs will be required to buy this ticket
+                    (if purchasing from rail station).
+                    Or, it may be loaded to a Swift photocard.</p>
+
+                <p><strong>Group/Family</strong> - these vary; check full ticket descriptions.</p>
+
+                <p><strong>Older Persons Passholder</strong> - holder of an English National Concessionary Travel Pass
+                </p>
+
+                <p><strong>Disabled Passholder</strong> - holder of an English National Concessionary Travel Pass</p>
+
+                <p>If you don't match any criteria - search for adult tickets.</p>
+            </div>
         </div>
     </div>
     </div>

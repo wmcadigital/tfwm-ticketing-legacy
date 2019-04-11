@@ -144,6 +144,6 @@
 </div>
 -->
 
-<modal-dialog show="ticketing.modalShownFilter">
+<modal-dialog show="ticketing.modalShownFilter" data-ng-if="ticket.loadingStatus == 'success'">
     <filters-mobile></filters-mobile>
 </modal-dialog>
