@@ -470,8 +470,6 @@ BREAKPOINTS
           box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
 }
 .ticketing-page .block--fullwidth .block--side {
-  position: -webkit-sticky;
-  position: sticky;
   top: 15px;
 }
 .ticketing-page .card-img {
@@ -519,6 +517,9 @@ BREAKPOINTS
 }
 .ticketing-page input[type=checkbox]:disabled + label svg {
   fill: #fff;
+}
+.ticketing-page input[type=radio]:disabled + label {
+  background: #dddddd;
 }
 .ticketing-page input[type=text] {
   text-align: center;

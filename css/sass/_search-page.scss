@@ -277,7 +277,7 @@
     }
 
     .block--fullwidth .block--side {
-        position: sticky;
+        //position: sticky;
         top: 15px;
     }
 
@@ -328,6 +328,10 @@
     }
 
     input[type="checkbox"]:disabled+label {
+        background: #dddddd;
+    }
+
+    input[type="radio"]:disabled+label {
         background: #dddddd;
     }
 

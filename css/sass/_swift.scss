@@ -430,7 +430,7 @@
     }
 
     .block--fullwidth .block--side {
-        position: sticky;
+        //position: sticky;
         top: 15px;
     }
 
@@ -484,6 +484,10 @@
         background: #dddddd!important;
         color: #B7B5B5;
         svg{fill: #fff;}
+    }
+
+    input[type="radio"]:disabled+label {
+        background: #dddddd;
     }
 
     input[type=text] {

@@ -143,9 +143,8 @@
         </ul>
     </div>
 
-    <!-- Bus Travel Area -->
-    <div class="filter-block"
-        data-ng-if="ticketing.postedJSON.allowBus || ticketing.postedJSON.brand == 'National Express' || ticketing.postedJSON.brand == 'nbus' || ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach' && ticketing.filterButtons.busTravelArea.length">
+   <!-- Bus Travel Area -->
+   <div class="filter-block" data-ng-if="ticketing.postedJSON.allowBus || ticketing.postedJSON.brand == 'National Express' || ticketing.postedJSON.brand == 'nbus' || ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach' && ticketing.filterButtons.busTravelArea.length">
         <div class="filter-title" data-ng-click="ticketing.toggleFilter('busTravelAreaBtn')">
             Bus Travel Area
             <i class="material-icons">
@@ -153,59 +152,68 @@
             </i>
         </div>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.busTravelAreaBtn">
-            <li>
-                <input id="busTravelArea{{$index}}" name="busTravelArea{{$index}}" type="radio" class="stylized"
-                    data-ng-model="ticketing.searchFilters.busTravelArea"
-                    data-ng-checked="'{{busTravelAreaParameter}}' == '{{filter}}'"
-                    data-ng-change="ticketing.update();" />
+        <li>
+            <input id="busTravelArea" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
+            data-ng-checked="'{{busTravelAreaParameter}}' == '{{filter}}'" data-ng-change="ticketing.update();" />
+            <label for="busTravelArea">
+                All Areas 
+                <span data-ng-if="ticketing.searchFilters.operator == null">({{(ticketing.original | filter: {displayInSwiftSearch: true}).length}})</span>
+                <span data-ng-if="ticketing.searchFilters.operator != null">({{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}})</span>
+            </label>
+        </li>
+            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.filteredTickets | filter: {busTravelArea: filter, displayInSwiftSearch: true}).length}} == '0'">
+                <input id="busTravelArea{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
+                    data-ng-change="ticketing.update();" value="{{filter}}" ng-disabled="ticketing.searchFilters.operator && (ticketing.filteredTickets | filter: {busTravelArea: filter, displayInSwiftSearch: true}).length == '0'" />
                 <label for="busTravelArea{{$index}}">
-                    All Areas ({{(ticketing.original | filter: {displayInSwiftSearch: true}).length}})
-                </label>
-            </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter | filter:''"
-                data-ng-if="filter != null"
-                data-ng-hide="{{(ticketing.original | filter: {busTravelArea: filter, displayInSwiftSearch: true}).length}} == '0'">
-                <input id="busTravelArea{{$index}}" type="radio" class="stylized"
-                    data-ng-model="ticketing.searchFilters.busTravelArea" data-ng-change="ticketing.update();"
-                    value="{{filter}}" />
-                <label for="busTravelArea{{$index}}">
-                    <span
-                        data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}}
-                        ({{ (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length }})</span>
-                    <span
-                        data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}}
-                        ({{ (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length }})</span>
-                    <span
-                        data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}}
-                        ({{ (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length }})</span>
+                    <span data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} 
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span>
+                        <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter, }).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span></span>
+                    <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} 
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span>
+                        <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span></span>
+                    <span data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} 
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span>
+                        <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter, displayInSwiftSearch: true}).length}})</span></span>
                 </label>
             </li>
         </ul>
     </div>
 
-    <!-- Bus Operator -->
-    <div class="filter-block" data-ng-hide="ticketing.postedJSON.allowBus && ticketing.postedJSON.allowMetro && ticketing.postedJSON.allowTrain || ticketing.postedJSON.brand == 'nnetwork'" data-ng-if="ticketing.postedJSON.allowBus && ticketing.filterButtons.operator.length">
-        <div class="filter-title" data-ng-click="ticketing.toggleFilter('operatorBtn')">
-            Bus Operator
-            <i class="material-icons">
-                {{ticketing.filterButtons.operatorBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
-            </i>
-        </div>
-        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.operatorBtn">
-        <li>
-            <input id="operator00" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
-                data-ng-change="ticketing.update();" />
-            <label for="operator00">All Operators ({{(ticketing.original | filter: {displayInSwiftSearch: true}).length}})
-            </label>
-        </li>
-            <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {operator: filter,displayInSwiftSearch: true}).length}} == '0'">
-                <input id="operator{{$index}}" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
-                    data-ng-change="ticketing.update();" value="{{filter}}" />
-                <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}} ({{ (ticketing.original | filter: {operator: filter,displayInSwiftSearch: true}).length}})
-                </label>
-            </li>
-        </ul>
-    </div>
+     <!-- Bus Operator -->
+     <div class="filter-block"
+         data-ng-hide="ticketing.postedJSON.allowBus && ticketing.postedJSON.allowMetro && ticketing.postedJSON.allowTrain || ticketing.postedJSON.brand == 'nnetwork'"
+         data-ng-if="ticketing.postedJSON.allowBus && ticketing.filterButtons.operator.length">
+         <div class="filter-title" data-ng-click="ticketing.toggleFilter('operatorBtn')">
+             Bus Operator
+             <i class="material-icons">
+                 {{ticketing.filterButtons.operatorBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+             </i>
+         </div>
+         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.operatorBtn">
+             <li>
+                 <input id="operator00" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
+                     data-ng-change="ticketing.update();" />
+                 <label for="operator00">All Operators
+                     <span
+                         data-ng-if="ticketing.searchFilters.busTravelArea == null">({{(ticketing.original | filter: {displayInSwiftSearch: true}).length}})</span>
+                     <span
+                         data-ng-if="ticketing.searchFilters.busTravelArea != null">({{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}})</span>
+                 </label>
+             </li>
+             <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter | filter:''"
+                 data-ng-if="filter != null"
+                 data-ng-hide="{{(ticketing.original | filter: {operator: filter, displayInSwiftSearch: true}).length}} == '0'">
+                 <input id="operator{{$index}}" type="radio" class="stylized"
+                     data-ng-model="ticketing.searchFilters.operator" data-ng-change="ticketing.update();"
+                     value="{{filter}}"
+                     ng-disabled="(ticketing.filteredTickets | filter: {operator: filter, displayInSwiftSearch: true}).length == '0'" />
+                 <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}}
+                     <span
+                         data-ng-if="(ticketing.filteredTickets | filter: {operator: filter, displayInSwiftSearch: true}).length != '0'">({{ (ticketing.filteredTickets | filter: {operator: filter, displayInSwiftSearch: true}).length}})</span>
+                 </label>
+             </li>
+         </ul>
+     </div>
 
     <!-- Train Zones-->
     <div class="filter-block" data-ng-if="ticketing.postedJSON.allowTrain || ticketing.postedJSON.brand == 'ntrain' || ticketing.postedJSON.brand == 'nnetwork'">

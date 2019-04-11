@@ -288,8 +288,6 @@ BREAKPOINTS
   padding: 70px 20px 45px 20px;
 }
 .ticketing-page .block--fullwidth .block--side {
-  position: -webkit-sticky;
-  position: sticky;
   top: 15px;
 }
 .ticketing-page .card-img {
@@ -332,6 +330,9 @@ BREAKPOINTS
   padding: 30px;
 }
 .ticketing-page input[type=checkbox]:disabled + label {
+  background: #dddddd;
+}
+.ticketing-page input[type=radio]:disabled + label {
   background: #dddddd;
 }
 .ticketing-page input[type=text] {
