@@ -150,6 +150,8 @@
             $scope.stationToReqtwo = false;
             $scope.stationFromOOCReq = true;//if Train OOC pass selected make station required
             $scope.timePeriodAll = true;
+            vm.fromZoneNumber = null;
+            vm.toZoneNumber = null;
         }
 
         defaultVars();
@@ -303,7 +305,7 @@
                     var ftrain = vm.postedJSON.allowTrain || false;
                     var fmetro = vm.postedJSON.allowMetro || false;
 
-                    if (vm.postedJSON.allowTrain) {
+                    if (vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain") {
                    
                         if (vm.fromStationInfoZone != null) {
                             vm.fromZoneNumber = vm.fromStationInfoZone;
@@ -365,18 +367,17 @@
 
                         if(vm.ViaOneZoneNumber != null){
                             if(vm.ViaOneZoneNumber <  vm.fromZoneNumber){
-                                console.log("via greater then from");
+                                //console.log("via greater then from");
                                 vm.ffromzone = vm.ViaOneZoneNumber;
                             }else if(vm.ViaOneZoneNumber > vm.toZoneNumber){
-                                console.log("via greater then to");
+                                //console.log("via greater then to");
                                 vm.ftozone = vm.ViaOneZoneNumber;
                             }
                         }
                     }
                     
-                    if(vm.postJSON.allowTrain === true || vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain"){
+                    if(vm.postJSON.allowTrain === true){
                         vm.exactMatch = [];
-                        //console.log("Exact Search with rail");
                         if(vm.fromZoneNumber !== null && vm.toZoneNumber !== null){
                             //exact results won't work if from zone is greater then the to zone so do a check
                             if(vm.ffromzone < vm.ftozone){
@@ -388,7 +389,21 @@
                             }
                         }else{
                             vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro});
-                        }}else{
+                        }}else if(vm.postJSON.brand === "nnetwork" || vm.postJSON.brand === "ntrain"){
+                            vm.exactMatch = [];
+                            if(vm.fromZoneNumber !== null && vm.toZoneNumber !== null){
+                                //exact results won't work if from zone is greater then the to zone so do a check
+                                if(vm.ffromzone < vm.ftozone){
+                                    vm.exactMatch = $filter('filter')(response, {railZoneFrom: vm.ffromzone, railZoneTo: vm.ftozone});
+                                }else if (vm.ffromzone > vm.ftozone){
+                                    vm.exactMatch = $filter('filter')(response, {railZoneFrom: vm.ftozone, railZoneTo: vm.ffromzone});
+                                }else if(vm.ffromzone === vm.ftozone){
+                                        vm.exactMatch = $filter('filter')(response, {railZoneFrom: 1, railZoneTo: vm.ftozone});
+                                }
+                            }else{
+                                vm.exactMatch = $filter('filter')(response, { });
+                            }
+                        }else{
                         //console.log("Exact Search without rail");
                         vm.postedJSON.stationNames = null;//make sure no stations are included if train not checked. 
                         vm.exactMatch = $filter('filter')(response, { allowBus: fbus, allowTrain: ftrain, allowMetro: fmetro});
@@ -400,7 +415,7 @@
                     //console.log("all results");
                     //console.log(searchAll);
                     //console.log("search exact results");
-                    //console.log(searchExact);
+                    //console.log(vm.exactMatch);
 
                     for (var i = 0; i < searchExact.length; i++) {
                         var arrlen = searchAll.length;
