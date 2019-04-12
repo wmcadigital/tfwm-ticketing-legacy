@@ -1,42 +1,46 @@
 <div class="filtered-header boxin" data-ng-if="ticketing.loadingStatus === 'success'">
     <h3 class="filtered-header__heading">
-        <span class="type--blue">{{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}}</span> tickets matching your criteria</h3>
-        
-        <div class="mobile-only">
-            <div class="rowcontainer">
-                <div class="grid-6">
-                    <button class="btn btn--tertiary btn--filter" ng-click="ticketing.toggleModalFilter()">Filter</button>
-                </div>
-                <div class="grid-6">
-                    <label class="plain-small visuallyhidden" for="sortBy">Sort By</label>
-                    <span class="stylized-select">
-                        <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy">
-                            <option value="orderSequence">Sort by popularity</option>
-                            <option value="ticketCurrentAmount">Sort by price (Low - High)</option>
-                            <option value="-ticketCurrentAmount">Sort by price (High - Low)</option>
-                        </select>
-                    </span>
-                </div>
+        <span class="type--blue">{{(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length}}</span>
+        tickets matching your criteria</h3>
+
+    <div class="mobile-only">
+        <div class="rowcontainer">
+            <div class="grid-6">
+                <button class="btn btn--tertiary btn--filter" ng-click='ticketing.toggleModalFilter();'>Filter</button>
+            </div>
+            <div class="grid-6">
+                <label class="plain-small visuallyhidden" for="sortBy">Sort By</label>
+                <span class="stylized-select">
+                    <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
+                        <option value="orderSequence">Sort by popularity</option>
+                        <option value="ticketCurrentAmount">Sort by price (Low - High)</option>
+                        <option value="-ticketCurrentAmount">Sort by price (High - Low)</option>
+                    </select>
+                </span>
             </div>
         </div>
+    </div>
 
-    <div class="arrdep-filters cfx mobile--void" ng-hide="(ticketing.filteredTickets | filter: {displayInSwiftSearch: true}).length <= '1'">
+    <div class="arrdep-filters cfx mobile--void" ng-hide="ticketing.filteredTickets.length <= '1'">
         <div class="field">
             <div class="radio-bar">
                 <span>
-                    <input id="radio-1x" name="ordering" title="Popularity" type="radio" value="orderSequence"
+                    <input id="popularity" name="ordering" title="Popularity" type="radio" value="orderSequence"
                         data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
-                    <label for="radio-1x">Popularity</label>
+                    <label for="popularity">Popularity</label>
                 </span>
                 <span>
-                    <input id="radio-2x" name="ordering" title="Price (Low - High)" type="radio" value="ticketCurrentAmount"
-                        data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
-                    <label for="radio-2x">Price (Low - High)</label>
+                    <input id="lowtohigh" name="ordering" title="Price (Low - High)" type="radio"
+                        value="ticketCurrentAmount" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
+                    <label for="lowtohigh">Price (Low - High)</label>
                 </span>
                 <span>
-                    <input id="radio-3x" name="ordering" title="Price (High - Low)" type="radio" value="-ticketCurrentAmount"
-                        data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
-                    <label for="radio-3x">Price (High - Low)</label>
+                    <input id="hightolow" name="ordering" title="Price (High - Low)" type="radio"
+                        value="-ticketCurrentAmount" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
+                    <label for="hightolow">Price (High - Low)</label>
                 </span>
             </div>
         </div>
