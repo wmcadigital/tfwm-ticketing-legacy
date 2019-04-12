@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <div class="event-results__more boxin transparent--bg" data-ng-if="ticketing.origTickets.length > 6 && ticketing.limit < ticketing.origTickets.length && ticketing.loadingStatus == 'success'">
+        <div class="event-results__more boxin transparent--bg" data-ng-if="ticketing.origTickets.length > 6 && ticketing.limitExact < ticketing.origTickets.length && ticketing.loadingStatus == 'success'">
             <button data-event-step="6" id="loadMoreExact" class="btn align--center" data-ng-click="ticketing.loadMoreExact();">Load more</button>
         </div>
 
