@@ -1294,13 +1294,26 @@
             restrict: 'E',
             //this fixes a bug where the cards weren't loading on initial load in slow loading browsers
             link: function (scope, element, attrs) {
-                $timeout(function () {
-                    if (scope.$last) {
-                        angularGridInstance.ticketResults.refresh();
-                    }
-                }, 1000);
+                scope.$$postDigest(function () {
+                    // next we wait for the dom to be ready
+                    angular.element(document).ready(function () {
+                        // finally we apply a timeout with a value
+                        // of 0 ms to allow any lingering js threads
+                        // to catch up
+                        $timeout(function () {
+                            // your dom is ready and rendered
+                            // if you have an ng-show wrapper
+                            // hiding your view from the ugly
+                            // render cycle, we can go ahead
+                            // and unveil that now:
+                            angularGridInstance.ticketResults.refresh();
+                            angularGridInstance.origTicketResults.refresh();
+
+                        }, 0)
+                    });
+                })
             }
-        };
+        }
     }
 
     // TICKET DETAIL CONTROLLER
@@ -1452,11 +1465,13 @@
             restrict: 'E',
             //this fixes a bug where the cards weren't loading on initial load in slow loading browsers
             link: function (scope, element, attrs) {
-                $timeout(function () {
-                    if (scope.$last) {
-                        angularGridInstance.alternativeResults.refresh();
-                    }
-                }, 0);
+                scope.$$postDigest(function () {
+                    angular.element(document).ready(function () {
+                        $timeout(function () {
+                            angularGridInstance.alternativeResults.refresh();
+                        }, 0)
+                    });
+                })
             }
         };
     }
