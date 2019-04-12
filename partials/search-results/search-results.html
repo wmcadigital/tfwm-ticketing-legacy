@@ -146,6 +146,6 @@
 </div>
 -->
 
-<modal-dialog show="ticketing.modalShownFilter" ngcloak>
+<modal-dialog show="ticketing.modalShownFilter" data-ng-cloak data-ng-if="ticketing.loadingStatus == 'success'">
     <filters-mobile></filters-mobile>
 </modal-dialog>
