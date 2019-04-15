@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('ticketingApp.Controller', ["angucomplete-alt"])
+        .module('ticketingApp.Controller', ['angucomplete-alt', 'angularGrid'])
         .controller('TicketingSearchCtrl', ['$scope', '$timeout', '$filter', '$location', 'savedFilter', 'ticketingService', 'angularGridInstance', '$httpParamSerializer', TicketingSearchCtrl])
         .filter('removeHTMLTags', [removeHTMLTags])
         .filter('escapeFilter', [escapeFilter])
@@ -44,6 +44,7 @@
         vm.checkTime = checkTime;//Function to check time checkboxes
         vm.getSwiftPAYG = getSwiftPAYG; //Function to retreive stations
         vm.updateGrid = updateGrid; //Function to update results grid
+        vm.refreshGrid = refreshGrid;//Function to refresh grid
         vm.update = update; //Do filtering logic in controller so sessions can be stored
         vm.loadMore = loadMore; //function to load more results
         vm.loadMoreExact = loadMoreExact; //function to load more exact results
@@ -519,130 +520,129 @@
         }
 
         function updateGrid() {
-            //console.log("update Grid");
             $timeout(function () {
                 $timeout(function () {
                     if (vm.filteredTickets.length) {
-                        if(vm.otherTickets.length){
-                            angularGridInstance.origTicketResults.refresh();
-                        }
+                         //set storage url according to search filters
+                            //set data to be displayed in serializer
+                            var obj = {
+                                passengerType: vm.postedJSON.passengerType,
+                                timeBand: vm.postedJSON.timeBand,
+                                brand: vm.postedJSON.brand,
+                                stationNames: vm.postedJSON.stationNames,
+                                busTravelArea: vm.searchFilters.busTravelArea,
+                                operator: vm.searchFilters.operator,
+                                buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
+                                buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
+                                buyOnSwift: vm.searchFilters.buyOnSwift,
+                                hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
+                                purchaseTic: vm.searchFilters.purchaseTic,
+                                purchaseRailStation: vm.searchFilters.purchaseRailStation,
+                                purchasePayzone: vm.searchFilters.purchasePayzone,
+                                railZoneFrom: vm.searchFilters.railZoneFrom,
+                                railZoneTo: vm.searchFilters.railZoneTo,
+                                limit: vm.limit,
+                                limitExact: vm.limitExact
+                            };
 
-                        if(vm.origTickets.length){
-                            angularGridInstance.ticketResults.refresh();
-                        }
+                            var urlstring = $httpParamSerializer(obj);
 
-                        // set storage url according to search filters
-                        //set data to be displayed in serializer
-                        var obj = {
-                            passengerType: vm.postedJSON.passengerType,
-                            timeBand: vm.postedJSON.timeBand,
-                            brand: vm.postedJSON.brand,
-                            stationNames: vm.postedJSON.stationNames,
-                            busTravelArea: vm.searchFilters.busTravelArea,
-                            operator: vm.searchFilters.operator,
-                            buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
-                            buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
-                            buyOnSwift: vm.searchFilters.buyOnSwift,
-                            hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
-                            purchaseTic: vm.searchFilters.purchaseTic,
-                            purchaseRailStation: vm.searchFilters.purchaseRailStation,
-                            purchasePayzone: vm.searchFilters.purchasePayzone,
-                            railZoneFrom: vm.searchFilters.railZoneFrom,
-                            railZoneTo: vm.searchFilters.railZoneTo,
-                            limit: vm.limit,
-                            limitExact: vm.limitExact
-                        };
-            
-                        var urlstring = $httpParamSerializer(obj);
+                            var abus;
+                            if (vm.postedJSON.allowBus) {
+                                abus = "allowBus";
+                            }
 
-                        var abus;
-                        if(vm.postedJSON.allowBus){
-                            abus = "allowBus";
-                        }
+                            var atrain;
+                            if (vm.postedJSON.allowTrain) {
+                                atrain = "allowTrain";
+                            }
 
-                        var atrain;
-                        if(vm.postedJSON.allowTrain){
-                            atrain = "allowTrain";
-                        }
+                            var ametro;
+                            if (vm.postedJSON.allowMetro) {
+                                ametro = "allowMetro";
+                            }
 
-                        var ametro;
-                        if(vm.postedJSON.allowMetro){
-                            ametro = "allowMetro";
-                        }
+                            //work out time of day selection and update searchURL
+                            var atime1;
+                            if (vm.searchFilters.timePeriod1 == true) {
+                                atime1 = "&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false";
+                            } else if (vm.searchFilters.timePeriod2 == true) {
+                                atime1 = "&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false";
+                            } else if (vm.searchFilters.timePeriod3 == true) {
+                                atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false";
+                            } else if (vm.searchFilters.timePeriod4 == true) {
+                                atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true";
+                            } else if (vm.timePeriodAll == true) {
+                                atime1 = "&timePeriodAll=true";
+                            } else {
+                                atime1 = '';
+                            }
 
-                        //work out time of day selection and update searchURL
-                        var atime1;
-                        if(vm.searchFilters.timePeriod1 == true){
-                            atime1 = "&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false";
-                        }else if(vm.searchFilters.timePeriod2 == true){
-                            atime1 = "&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false";
-                        }else if(vm.searchFilters.timePeriod3 == true){
-                            atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false";
-                        }else if(vm.searchFilters.timePeriod4 == true){
-                            atime1 = "&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true";
-                        }else if(vm.timePeriodAll == true){
-                            atime1 = "&timePeriodAll=true";
-                        }else{
-                            atime1 = '';
-                        }
+                            var searchURL;
 
-                        var searchURL;
+                            // bus only
+                            if (vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + abus + "&" + urlstring + atime1;
+                                //console.log("bus only - " + searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
 
-                        // bus only
-                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + urlstring + atime1;
-                            //console.log("bus only - " + searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
+                            // bus and train
+                            if (vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + abus + "&" + atrain + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // bus and metro
+                            if (vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + abus + "&" + ametro + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // train only
+                            if (!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + atrain + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // train and metro
+                            if (!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // metro only
+                            if (!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + ametro + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // all modes selected
+                            if (vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
+                            // no modes selected
+                            if (!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro) {
+                                searchURL = "/?" + urlstring + atime1;
+                                //console.log(searchURL);
+                                savedFilter.set("url", searchURL);
+                            }
 
-                         // bus and train
-                         if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // bus and metro
-                        if(vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + ametro + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // train only
-                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // train and metro
-                        if(!vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + atrain + "&" + ametro + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // metro only
-                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + ametro + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // all modes selected
-                        if(vm.postedJSON.allowBus && vm.postedJSON.allowTrain && vm.postedJSON.allowMetro){
-                            searchURL = "/?" + abus + "&" + atrain + "&" + ametro + "&" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        // no modes selected
-                        if(!vm.postedJSON.allowBus && !vm.postedJSON.allowTrain && !vm.postedJSON.allowMetro){
-                            searchURL = "/?" + urlstring + atime1;
-                            //console.log(searchURL);
-                            savedFilter.set("url", searchURL);
-                        }
-                        //vm.loadingStatus = "success";
-
-                        //console.log(searchURL);
+                            refreshGrid();
                     }
                 }, 0, false);
             }, 0, false);
+        }
+
+        function refreshGrid() {
+            $timeout(function () {
+                $timeout(function () {
+                        angularGridInstance.ticketResults.refresh();
+                        angularGridInstance.origTicketResults.refresh();
+                }, 900, false);
+            }, 900, false);
         }
 
         // Get Out Of County Rail stations for autocomplete
@@ -1309,11 +1309,11 @@
                             angularGridInstance.ticketResults.refresh();
                             angularGridInstance.origTicketResults.refresh();
 
-                        }, 0)
+                        }, 0);
                     });
-                })
+                });
             }
-        }
+        };
     }
 
     // TICKET DETAIL CONTROLLER
@@ -1469,9 +1469,9 @@
                     angular.element(document).ready(function () {
                         $timeout(function () {
                             angularGridInstance.alternativeResults.refresh();
-                        }, 0)
+                        }, 0);
                     });
-                })
+                });
             }
         };
     }
