@@ -13,21 +13,21 @@
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="ticketing.filterButtons.mode">
             <li data-ng-if="!ticketing.postedJSON.allowBus"> <!-- (ticketing.filteredTickets | filter: {allowBus: true}).length == '0' -->
                 <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowBus"
-                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
+                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" ng-disabled="(ticketing.filteredTickets | filter: {allowBus: true}).length == '0'" />
                 <label for="bus-only-radio">Bus 
                     <span data-ng-if="(ticketing.filteredTickets | filter: {allowBus: true}).length != '0'">({{(ticketing.filteredTickets | filter: {allowBus: true}).length}})</span></label>
             </li>
     
             <li data-ng-if="!ticketing.postedJSON.allowTrain">
                 <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowTrain"
-                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
+                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" ng-disabled="(ticketing.filteredTickets | filter: {allowTrain: true}).length == '0'" />
                 <label for="train-only-radio">Train  
                     <span data-ng-if="(ticketing.filteredTickets | filter: {allowTrain: true}).length != '0'">({{(ticketing.filteredTickets | filter: {allowTrain: true}).length}})</span></label>
             </li>
     
             <li data-ng-if="!ticketing.postedJSON.allowMetro">
                 <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized" data-ng-model="ticketing.searchFilters.allowMetro"
-                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" />
+                    data-ng-change="ticketing.update();ticketing.updateFilters()" data-ng-true-value="false" data-ng-false-value="true" ng-disabled="(ticketing.filteredTickets | filter: {allowMetro: true}).length == '0'" />
                 <label for="tram-only-radio">Tram  
                     <span data-ng-if="(ticketing.filteredTickets | filter: {allowMetro: true}).length != '0'">({{(ticketing.filteredTickets | filter: {allowMetro: true}).length}})</span></label>
             </li>
@@ -155,10 +155,8 @@
         <li>
             <input id="busTravelArea" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.busTravelArea"
             data-ng-checked="'{{busTravelAreaParameter}}' == '{{filter}}'" data-ng-change="ticketing.update();" />
-            <label for="busTravelArea">
-                All Areas 
-                <span data-ng-if="ticketing.searchFilters.operator == null">({{ticketing.original.length}})</span>
-                <span data-ng-if="ticketing.searchFilters.operator != null">({{ticketing.filteredTickets.length}})</span>
+            <label for="busTravelArea"> 
+                All Areas
             </label>
         </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.busTravelArea | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.filteredTickets | filter: {busTravelArea: filter}).length}} == '0'">
@@ -166,13 +164,13 @@
                     data-ng-change="ticketing.update();" value="{{filter}}" ng-disabled="ticketing.searchFilters.operator && (ticketing.filteredTickets | filter: {busTravelArea: filter}).length == '0'" />
                 <label for="busTravelArea{{$index}}">
                     <span data-ng-if="ticketing.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} 
-                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter}).length}})</span>
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
                         <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
-                    <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}} 
-                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter}).length}})</span>
+                    <span data-ng-if="ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}}
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
                         <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
-                    <span data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}} 
-                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.original | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.original | filter: {busTravelArea:filter}).length}})</span>
+                    <span data-ng-hide="ticketing.postedJSON.brand == 'Diamond Bus' || ticketing.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}}
+                        <span data-ng-if="ticketing.searchFilters.operator == null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
                         <span data-ng-if="ticketing.searchFilters.operator != null && (ticketing.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(ticketing.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
                 </label>
             </li>
@@ -192,8 +190,6 @@
             <input id="operator00" type="radio" class="stylized" data-ng-model="ticketing.searchFilters.operator"
                 data-ng-change="ticketing.update();" />
             <label for="operator00">All Operators
-                <span data-ng-if="ticketing.searchFilters.busTravelArea == null">({{ticketing.original.length}})</span>
-                <span data-ng-if="ticketing.searchFilters.busTravelArea != null">({{ticketing.filteredTickets.length}})</span>
             </label>
         </li>
             <li data-ng-repeat="filter in ticketing.filterButtons.operator | orderBy: filter | filter:''" data-ng-if="filter != null" data-ng-hide="{{(ticketing.original | filter: {operator: filter}).length}} == '0'">

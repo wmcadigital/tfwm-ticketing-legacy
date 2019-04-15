@@ -462,7 +462,6 @@
                 }
                 //if pre 9.30 is selected
                 if (vm.searchFilters.timePeriod1) {
-                    console.log("pre 930 test");
                     vm.searchFilters.timePeriod2 = false;
                     vm.searchFilters.timePeriod3 = false;
                     vm.searchFilters.timePeriod4 = false;
@@ -487,7 +486,6 @@
                 }
                 //if anytime is selected
                 if (vm.timePeriodAll == 'yes') {
-                    console.log("time anytime selected");
                     //vm.searchFilters.timeLimited = false;
                     //vm.searchFilters.timePeriod1 = '';
                     vm.searchFilters.timePeriod1 = true;
@@ -739,10 +737,7 @@
     }
 
     function checkTimeAll() {
-        console.log("qwertyu");
-        console.log(vm.timePeriodAll);
         if (vm.timePeriodAll == 'yes') {
-            console.log("checktime true");
             vm.searchFilters.timePeriod1 = true;
             vm.searchFilters.timePeriod2 = true;
             vm.searchFilters.timePeriod3 = true;
@@ -765,7 +760,6 @@
             };
 
         } else if (vm.timePeriodAll == 'no') {
-            console.log("checktime false");
             vm.searchFilters.timePeriod1 = '';
             vm.searchFilters.timePeriod2 = '';
             vm.searchFilters.timePeriod3 = '';
