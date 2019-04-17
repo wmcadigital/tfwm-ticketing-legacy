@@ -90,6 +90,9 @@ BREAKPOINTS
   -webkit-box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
           box-shadow: 0 4px 10px 1px rgba(238, 238, 239, 0.75);
 }
+.ticketing-page .traveller .errors {
+  margin: 25px 0 0 0;
+}
 .ticketing-page .-messages a {
   color: #fff;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, #ffffff));

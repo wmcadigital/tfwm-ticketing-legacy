@@ -28,6 +28,10 @@
         }
     }
 
+    .traveller .errors{
+        margin: 25px 0 0 0;
+    }
+
     .icon-stylized-new input:checked ~ label:after, a.icon-stylized-new:active span:after, a.icon-stylized-new:focus span:after{
         z-index: 10;
     }

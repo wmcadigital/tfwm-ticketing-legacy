@@ -91,7 +91,7 @@
     <!-- /Mode & Pass -->
 
     <!-- Traveller -->
-    <div class="rowcontainer">
+    <div class="rowcontainer traveller">
         <div class="grid-5" ng-hide="ticketing.passValue == 'Swift PAYG'" data-ng-if="ticketing.postJSON.allowBus || ticketing.postJSON.allowTrain || ticketing.postJSON.allowMetro || ticketing.postJSON.brand">
             <span class="help-link float--right" ng-click="ticketing.showDetails=!ticketing.showDetails"></span>
     
@@ -139,6 +139,22 @@
 
                 <p>If you don't match any criteria - search for adult tickets.</p>
             </div>
+        </div>
+    </div>
+    <div data-ng-if="ticketing.postJSON.passengerType == 'Concessionary'" class="grid-12 errors">
+        <div class="boxin -messages">
+            <p><strong>Free Travel in the West Midlands</strong></p>
+            <p>If you are eligible for either our <strong>Older Person’s</strong> or <strong>Disabled Concessionary
+                    Travel Passes</strong> you can travel off-peak on the bus
+                across the UK as well as on the train and tram within Network West Midlands area. Please visit
+                either the <a href="https://www.networkwestmidlands.com/tickets-and-passes/older-persons-pass/"
+                    target="_blank">Older Person’s</a> or <a
+                    href="https://www.networkwestmidlands.com/tickets-and-passes/disabled-persons-pass/"
+                    target="_blank">Disabled Person’s</a> pages for more
+                information on when and how you can apply or renew, eligibility and where and when you can travel.
+            </p>
+            <p>Information on tickets for pre 09.30 and add-ons for out of area travel can be found using this
+                Ticket Finder.</p>
         </div>
     </div>
     </div>

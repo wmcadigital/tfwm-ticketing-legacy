@@ -85,6 +85,9 @@ BREAKPOINTS
 .ticketing-page .block--main .errors {
   margin: 0 0 15px 0;
 }
+.ticketing-page .traveller .errors {
+  margin: 25px 0 0 0;
+}
 .ticketing-page .icon-stylized-new input:checked ~ label:after, .ticketing-page a.icon-stylized-new:active span:after, .ticketing-page a.icon-stylized-new:focus span:after {
   z-index: 10;
 }
