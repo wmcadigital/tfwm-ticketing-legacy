@@ -13,7 +13,7 @@
         <span data-ng-if="ticket.validityId == 450930002"> per month</span>
         <span data-ng-if="ticket.validityId == 450930006"> per month</span>
         <span data-ng-if="ticket.validityId == 450930010"> per month</span>
-        <span data-ng-if="ticket.validityId == 450930000"> a day</span>
+        <span data-ng-if="ticket.validityId == 450930000" data-ng-hide="ticket.type == 'Carnet'"> a day</span>
         <span data-ng-if="ticket.validityId == 450930001"> a week</span>
         <span data-ng-if="ticket.validityId == 450930003"> for 1 year</span>
     </h5>
