@@ -10,7 +10,8 @@
             <div class="grid-6">
                 <label class="plain-small visuallyhidden" for="sortBy">Sort By</label>
                 <span class="stylized-select">
-                    <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy" data-ng-change="ticketing.update();">
+                    <select id="sortBy" name="sortBy" aria-disabled="false" data-ng-model="ticketing.orderBy"
+                        data-ng-change="ticketing.update();">
                         <option value="orderSequence">Sort by popularity</option>
                         <option value="ticketCurrentAmount">Sort by price (Low - High)</option>
                         <option value="-ticketCurrentAmount">Sort by price (High - Low)</option>
@@ -46,105 +47,155 @@
 </div>
 
 <div class="blocks cfx ticketing-search">
-    <div class="block block--side mobile--void" data-ng-if="ticketing.all.length && ticketing.loadingStatus == 'success'">
+    <div class="block block--side mobile--void"
+        data-ng-if="ticketing.all.length && ticketing.loadingStatus == 'success'">
         <filters></filters>
     </div>
 
     <div class="boxin--mask no-bg block block--main">
 
-        <div class="error-message-no-results" data-ng-if="timetables.laodingStatus == 'error' || (ticketing.loadingStatus == 'success' && !ticketing.filteredTickets.length)"
+        <div class="error-message-no-results"
+            data-ng-if="timetables.laodingStatus == 'error' || (ticketing.loadingStatus == 'success' && !ticketing.filteredTickets.length)"
             data-ng-bind-html="ticketing.noResults"></div>
 
         <div class="block align--center" data-ng-if="ticketing.loadingStatus == 'loading'">
             <p>
-                <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner" class="loading-spinner"
-                    height="200" width="200" />
+                <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner"
+                    class="loading-spinner" height="200" width="200" />
             </p>
         </div>
 
 
         <!-- Exact matched to search -->
-        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.origTickets.length == '0'" class="filtered-header boxin bdr-top--navy">
+        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.origTickets.length == '0'"
+            class="filtered-header boxin bdr-top--navy">
             <h3 class="filtered-header__heading">{{ticketing.origTickets.length}} Exact matches to your search</h3>
         </div>
 
         <!-- error messages -->
-        <div data-ng-if="ticketing.filteredTickets.length == '0' && ticketing.loadingStatus === 'success'" class="grid-12 errors">
-                <div class="boxin -messages">
-                        No tickets have been found. Please try changing your search settings.
-                </div>
+        <div data-ng-if="ticketing.filteredTickets.length == '0' && ticketing.loadingStatus === 'success'"
+            class="grid-12 errors">
+            <div class="boxin -messages">
+                No tickets have been found. Please try changing your search settings.
+            </div>
         </div>
 
-        <div data-ng-if="ticketing.origTickets.length == '0' && ticketing.otherTickets.length != '0' && ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.postJSON.brand != null" class="grid-12 errors">
+        <div data-ng-if="ticketing.origTickets.length == '0' && ticketing.otherTickets.length != '0' && ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.postJSON.brand != null" class="grid-12 errors">
             <div class="boxin -messages">
-                    No exact match found, please see below tickets that match some of your search
+                No exact match found, please see below tickets that match some of your search
             </div>
         </div>
         <!-- /error messages -->
 
-        <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
-            ag-id="origTicketResults" data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.origTickets.length == '0'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index">
+        <!-- Exact Results Price -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.origTickets.length == '0' || ticketing.orderBy == 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.origTickets | limitTo: ticketing.limitExact track by $index">
                 <item></item>
             </div>
         </div>
+        <!-- /Exact Results Price -->
 
-        <div class="event-results__more boxin transparent--bg" data-ng-if="ticketing.origTickets.length > 6 && ticketing.limitExact < ticketing.origTickets.length && ticketing.loadingStatus == 'success'">
-            <button data-event-step="6" id="loadMoreExact" class="btn align--center" data-ng-click="ticketing.loadMoreExact();">Load more</button>
+        <!-- DD Exact Results -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.origTickets.length == '0' || ticketing.orderBy != 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.origTickets | filter:{buyOnDirectDebit:true} | limitTo: ticketing.limitExact track by $index">
+                <item></item>
+            </div>
+        </div>
+        <!-- /DD Exact Results -->
+
+        <!-- Non DD Exact Results -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.origTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.origTickets.length == '0' || ticketing.orderBy != 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.origTickets | filter:{buyOnDirectDebit:false} | limitTo: ticketing.limitExact track by $index">
+                <item></item>
+            </div>
+        </div>
+        <!-- /Non DD Exact Results -->
+
+        <div class="event-results__more boxin transparent--bg"
+            data-ng-if="ticketing.origTickets.length > 6 && ticketing.limitExact < ticketing.origTickets.length && ticketing.loadingStatus == 'success'">
+            <button data-event-step="6" id="loadMoreExact" class="btn align--center"
+                data-ng-click="ticketing.loadMoreExact();">Load more</button>
         </div>
 
         <!-- Other matches -->
-        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.otherTickets.length == '0'" class="boxin title bdr-top--navy">
-                <h3 class="filtered-header__heading">{{ticketing.otherTickets.length}} matches to some of your search</h3>
+        <div data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.otherTickets.length == '0'"
+            class="boxin title bdr-top--navy">
+            <h3 class="filtered-header__heading">{{ticketing.otherTickets.length}} matches to some of your search</h3>
         </div>
 
-        <!-- Other Results -->
-        <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
-            ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'" data-ng-hide="ticketing.otherTickets.length == '0'">
-            <div class="grid" data-ng-repeat="ticket in ticketing.otherTickets | limitTo: ticketing.limit track by $index">
+        <!-- Other Results Price -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.otherTickets.length == '0' || ticketing.orderBy == 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.otherTickets | limitTo: ticketing.limit track by $index">
                 <item></item>
             </div>
         </div>
+        <!-- /Other Results Price -->
 
+        <!-- DD Other Results -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.otherTickets.length == '0' || ticketing.orderBy != 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.otherTickets | filter:{buyOnDirectDebit:true} | limitTo: ticketing.limit track by $index">
+                <item></item>
+            </div>
+        </div>
+        <!-- /DD Other Results -->
 
-         <!-- All results -->
-         <!--<div class="ticketing-results-grid search-container" angular-grid="ticketing.filteredTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
-         ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-         <div class="grid" data-ng-repeat="ticket in ticketing.filteredTickets | limitTo: ticketing.limit track by $index" data-count="{{ticketing.filteredTickets.length}}">
-             <item></item>
-         </div>
-        </div>-->
+        <!-- Non DD Other Results -->
+        <div class="ticketing-results-grid search-container" angular-grid="ticketing.otherTickets"
+            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
+            data-ng-if="ticketing.loadingStatus == 'success'"
+            data-ng-hide="ticketing.otherTickets.length == '0' || ticketing.orderBy != 'orderSequence'">
+            <div class="grid"
+                data-ng-repeat="ticket in ticketing.otherTickets | filter:{buyOnDirectDebit:false} | limitTo: ticketing.limit track by $index">
+                <item></item>
+            </div>
+        </div>
+        <!-- /Non DD Other Results -->
 
-
+        <!-- Swift Payg Tickets -->
         <div data-ng-if="ticketing.all.length && ticketing.postJSON.brand == 'Swift PAYG'">
-                <div class="filtered-header boxin bdr-top--navy">
-                        <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
-                    </div>
-
-
-            <div class="ticketing-results-grid search-container" angular-grid="ticketing.swiftPaygTickets" ag-options="{gridWidth : 250, gutterSize: 15}"
-                ag-id="ticketResults" data-ng-if="ticketing.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets" data-ng-if="ticket.swiftCurrentAmount">
+            <div class="filtered-header boxin bdr-top--navy">
+                <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
+            </div>
+            <div class="ticketing-results-grid search-container" angular-grid="ticketing.swiftPaygTickets"
+                ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
+                data-ng-if="ticketing.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in ticketing.swiftPaygTickets"
+                    data-ng-if="ticket.swiftCurrentAmount">
                     <item></item>
                 </div>
             </div>
         </div>
+        <!-- /Swift Payg Tickets -->
 
-        <div class="event-results__more boxin transparent--bg" data-ng-if="ticketing.otherTickets.length > 6 && ticketing.limit < ticketing.otherTickets.length && ticketing.loadingStatus == 'success'">
-            <button data-event-step="6" id="loadMore" class="btn align--center" data-ng-click="ticketing.loadMore();">Load more</button>
+        <div class="event-results__more boxin transparent--bg"
+            data-ng-if="ticketing.otherTickets.length > 6 && ticketing.limit < ticketing.otherTickets.length && ticketing.loadingStatus == 'success'">
+            <button data-event-step="6" id="loadMore" class="btn align--center"
+                data-ng-click="ticketing.loadMore();">Load more</button>
         </div>
 
     </div>
 </div>
-
-
-<!--
-<div id="filterOverlay" class="overlay">
-    <div class="overlay-content">
-        <filters-mobile></filters-mobile>
-    </div>
-</div>
--->
 
 <modal-dialog show="ticketing.modalShownFilter" data-ng-cloak data-ng-if="ticketing.loadingStatus == 'success'">
     <filters-mobile></filters-mobile>
