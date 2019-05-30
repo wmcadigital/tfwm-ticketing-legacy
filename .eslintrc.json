@@ -1,0 +1,42 @@
+{
+    "extends": ["wesbos"],
+    "plugins": ["angular"],
+    "globals": {
+        "angular": true,
+        "dataLayer": true
+    },
+    "rules": {
+        "angular/controller-as-vm": "error",
+        "angular/controller-as-route": "error",
+        "angular/di": ["error", "$inject"],
+        "angular/di-order": ["off", true, "case_sensitive"],
+        "angular/di-unused": "off",
+        "angular/controller-as": "error",
+        "angular/angularelement": "error",
+        "angular/empty-controller": "error",
+        "angular/no-service-method": "error",
+        "angular/window-service": "error",
+
+        "no-use-before-define": "off",
+        "no-var": "off",
+        "strict": "off",
+        "object-shorthand": "off",
+        "prefer-template": "off",
+
+        "prettier/prettier": [
+            "error",
+            {
+                "tabWidth": 2,
+                "singleQuote": true,
+                "printWidth": 100
+            }
+        ]
+    },
+    "env": {
+        "browser": true,
+        "es6": false
+    },
+    "parserOptions": {
+        "ecmaVersion": 5
+    }
+}

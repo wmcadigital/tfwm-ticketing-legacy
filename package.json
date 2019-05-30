@@ -1,24 +1,76 @@
 {
-  "name": "gruntproject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^7.1.1",
-    "grunt": "^1.0.3",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^3.3.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-ng-annotate": "^3.0.0",
-    "grunt-postcss": "^0.8.0",
-    "livereload": "^0.7.0"
-  },
-  "dependencies": {
-    "grunt-cdnify": "^1.0.2"
-  }
+    "name": "nwm-ticketing",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "buildDirs": {
+        "live": {
+            "baseUrl": "//www.networkwestmidlands.com/tickets/",
+            "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
+            "api": "//apis.networkwestmidlands.com/Ticketing/"
+        },
+        "staging": {
+            "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
+            "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
+            "api": "//apisnwm.cenapps.org.uk/Ticketing/"
+        },
+        "local": {
+            "baseUrl": "//localhost:8080",
+            "imgUrl": "/build/img",
+            "api": "//apisnwm.cenapps.org.uk/Ticketing/"
+        }
+    },
+    "scripts": {
+        "upgrade-packages": "ncu -u",
+        "start": "gulp",
+        "fresh": "npm install && gulp",
+        "lint:scripts": "gulp lintScripts",
+        "lint:templates": "gulp lintTemplates",
+        "clean": "gulp clean",
+        "build:scripts": "gulp buildScripts",
+        "build:styles": "gulp buildStyles",
+        "build:templates": "gulp buildTemplates",
+        "build:all": "gulp buildAll",
+        "build:staging": "npm run build:all --build=staging",
+        "build:live": "npm run build:all --build=live"
+    },
+    "author": "Nathan Rogan",
+    "license": "ISC",
+    "devDependencies": {
+        "autoprefixer": "^9.5.0",
+        "babel-eslint": "^10.0.1",
+        "browser-sync": "^2.26.3",
+        "del": "^4.1.0",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-config-prettier": "^4.1.0",
+        "eslint-config-wesbos": "0.0.19",
+        "eslint-plugin-angular": "^4.0.0",
+        "eslint-plugin-html": "^5.0.3",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-jsx-a11y": "^6.2.1",
+        "eslint-plugin-prettier": "^3.0.1",
+        "eslint-plugin-react": "^7.12.4",
+        "eslint-plugin-react-hooks": "^1.6.0",
+        "gulp": "^4.0.0",
+        "gulp-autoprefixer": "^6.0.0",
+        "gulp-clean-css": "^4.0.0",
+        "gulp-cli": "^2.1.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-eslint": "^5.0.0",
+        "gulp-htmlhint": "^2.2.1",
+        "gulp-imagemin": "^5.0.3",
+        "gulp-ng-html2js": "^0.2.2",
+        "gulp-plumber": "^1.2.1",
+        "gulp-replace": "^1.0.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-uglify": "^3.0.2",
+        "node-sass": "^4.11.0",
+        "prettier": "^1.16.4",
+        "sass": "^1.17.4"
+    },
+    "dependencies": {
+        "gulp-htmlmin": "^5.0.1"
+    }
 }

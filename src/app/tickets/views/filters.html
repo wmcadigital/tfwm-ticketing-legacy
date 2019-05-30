@@ -1,0 +1,309 @@
+<div class="boxin bg--blue bg--tint bdr-top--blue ticket-filters">
+    <h3><i class="material-icons icon">filter_list</i>Filter your results</h3>
+    <hr>
+
+    <!-- Exclude Mode(s) -->
+    <div class="filter-block"
+        data-ng-hide="tickets.postedJSON.brand == 'Diamond Bus' || tickets.postedJSON.brand == 'Stagecoach' || tickets.postedJSON.brand == 'Swift PAYG'"
+        data-ng-if="!tickets.postedJSON.allowBus || !tickets.postedJSON.allowTrain || !tickets.postedJSON.allowMetro">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('mode')">
+            Exclude mode(s)
+            <i class="material-icons">
+                {{tickets.filterButtons.mode ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.mode">
+            <li data-ng-if="!tickets.postedJSON.allowBus">
+                <!-- (tickets.filteredTickets | filter: {allowBus: true}).length == '0' -->
+                <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.allowBus" data-ng-checked="tickets.excludeBusCheck()"
+                    data-ng-change="tickets.update();tickets.updateFilters()" data-ng-true-value="false"
+                    data-ng-false-value="true"
+                    ng-disabled="(tickets.filteredTickets | filter: {allowBus: true}).length == '0' && tickets.searchFilters.allowBus != false" />
+                <label for="bus-only-radio">Bus
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {allowBus: true}).length != '0'">({{(tickets.filteredTickets | filter: {allowBus: true}).length}})</span></label>
+            </li>
+
+            <li data-ng-if="!tickets.postedJSON.allowTrain">
+                <input id="train-only-radio" name="trainOnly" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.allowTrain" data-ng-checked="tickets.excludeTrainCheck()"
+                    data-ng-change="tickets.update();tickets.updateFilters()" data-ng-true-value="false"
+                    data-ng-false-value="true"
+                    ng-disabled="(tickets.filteredTickets | filter: {allowTrain: true}).length == '0' && tickets.searchFilters.allowTrain != false" />
+                <label for="train-only-radio">Train
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {allowTrain: true}).length != '0'">({{(tickets.filteredTickets | filter: {allowTrain: true}).length}})</span></label>
+            </li>
+
+            <li data-ng-if="!tickets.postedJSON.allowMetro">
+                <input id="tram-only-radio" name="tramOnly" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.allowMetro" data-ng-checked="tickets.excludeTramCheck()"
+                    data-ng-change="tickets.update();tickets.updateFilters()" data-ng-true-value="false"
+                    data-ng-false-value="true"
+                    ng-disabled="(tickets.filteredTickets | filter: {allowMetro: true}).length == '0' && tickets.searchFilters.allowMetro != false" />
+                <label for="tram-only-radio">Tram
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {allowMetro: true}).length != '0'">({{(tickets.filteredTickets | filter: {allowMetro: true}).length}})</span></label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- How to Buy -->
+    <div class="filter-block">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('payment')">
+            How to Buy
+            <i class="material-icons">
+                {{tickets.filterButtons.payment ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.payment">
+            <li data-ng-hide="(tickets.original | filter: {buyOnDirectDebit: true}).length == '0'">
+                <input id="purchaseDebit" name="purchaseDebit" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.buyOnDirectDebit"
+                    data-ng-checked="tickets.buyOnDirectDebitCheck()" data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {buyOnDirectDebit: true}).length == '0'" />
+                <label for="purchaseDebit">Direct Debit
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {buyOnDirectDebit: true}).length != '0'">({{(tickets.filteredTickets | filter: {buyOnDirectDebit: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {buyOnDirectPurchase: true}).length == '0'">
+                <input id="purchaseDirect" name="purchaseDirect" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.buyOnDirectPurchase"
+                    data-ng-checked="tickets.buyOnDirectPurchaseCheck()" data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {buyOnDirectPurchase: true}).length == '0'" />
+                <label for="purchaseDirect">Quick buy
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {buyOnDirectPurchase: true}).length != '0'">({{(tickets.filteredTickets | filter: {buyOnDirectPurchase: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {buyOnSwift: true}).length == '0'">
+                <input id="purchaseSwift" name="purchaseSwift" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.buyOnSwift" data-ng-checked="tickets.buyOnSwiftCheck()"
+                    data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {buyOnSwift: true}).length == '0'" />
+                <label for="purchaseSwift">Swift
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {buyOnSwift: true}).length != '0'">({{(tickets.filteredTickets | filter: {buyOnSwift: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {hasOnlinePurchaseChannel: true}).length == '0'">
+                <input id="purchaseOnline" name="purchaseOnline" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.hasOnlinePurchaseChannel"
+                    data-ng-checked="tickets.hasOnlinePurchaseChannelCheck()" data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {hasOnlinePurchaseChannel: true}).length == '0'" />
+                <label for="purchaseOnline">Buy Online
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {hasOnlinePurchaseChannel: true}).length != '0'">({{(tickets.filteredTickets | filter: {hasOnlinePurchaseChannel: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {purchaseTic: true}).length == '0'">
+                <input id="purchaseTic" name="purchaseTic" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.purchaseTic" data-ng-checked="tickets.purchaseTicCheck()"
+                    data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {purchaseTic: true}).length == '0'" />
+                <label for="purchaseTic">Buy at Travel Shop
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {purchaseTic: true}).length != '0'">({{(tickets.filteredTickets | filter: {purchaseTic: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {purchaseRailStation: true}).length == '0'">
+                <input id="purchaseRailStation" name="purchaseRailStation" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.purchaseRailStation"
+                    data-ng-checked="tickets.purchaseRailStationCheck()" data-ng-change="tickets.update();"
+                    ng-disabled="(tickets.filteredTickets | filter: {purchaseRailStation: true}).length == '0'" />
+                <label for="purchaseRailStation">Buy at Rail Station
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {purchaseRailStation: true}).length != '0'">({{(tickets.filteredTickets | filter: {purchaseRailStation: true}).length}})</span></label>
+            </li>
+            <li data-ng-hide="(tickets.original | filter: {purchasePayzone: true}).length == '0'">
+                <input id="purchasePayzone" name="purchasePayzone" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.purchasePayzone"
+                    data-ng-checked="tickets.purchasePayzoneCheck()" data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {purchasePayzone: true}).length == '0'" />
+                <label for="purchasePayzone">Buy at Payzone Outlet
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {purchasePayzone: true}).length != '0'">({{(tickets.filteredTickets | filter: {purchasePayzone: true}).length}})</span></label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Time period -->
+    <div class="filter-block"
+        data-ng-hide="(tickets.original | filter: {timePeriod1: true}).length == '0' && (tickets.original | filter: {timePeriod2: true}).length == '0' && (tickets.original | filter: {timePeriod3: true}).length == '0' && (tickets.original | filter: {timePeriod4: true}).length == '0'">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('time')">
+            Time of weekday travel
+            <i class="material-icons">
+                {{tickets.filterButtons.time ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <a data-ng-if="tickets.timePeriodAll == 'true' || tickets.searchFilters.timePeriod1 || tickets.searchFilters.timePeriod2 || tickets.searchFilters.timePeriod3 || tickets.searchFilters.timePeriod4"
+            data-ng-click="tickets.clearTime();">Clear</a>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.time">
+            <li
+                data-ng-hide="(tickets.original | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length == '0'">
+                <input id="timePeriodAll" name="timePeriodAll" type="checkbox" class="stylized"
+                    data-ng-model="tickets.timePeriodAll" data-ng-checked="tickets.timePeriod1CheckAll()"
+                    data-ng-change="tickets.checkTimeAll();tickets.update();" data-ng-true-value="'yes'"
+                    data-ng-false-value="'no'"
+                    ng-disabled="(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length == '0'" />
+                <label for="timePeriodAll">Anytime
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length != '0'">({{(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: true, timePeriod3: true, timePeriod4: true}).length}})</span>
+                </label>
+            </li>
+            <li
+                data-ng-hide="(tickets.original | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length == '0'">
+                <input id="timePeriod1" name="timePeriod1" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.timePeriod1" data-ng-checked="tickets.timePeriod1Check()"
+                    data-ng-change="tickets.checkTime();tickets.travelPre930();tickets.update();"
+                    ng-disabled="(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length == '0'" />
+                <label for="timePeriod1">Before 09:30am
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length != '0'">({{(tickets.filteredTickets | filter: {timePeriod1: true, timePeriod2: false, timePeriod3: false, timePeriod4: false}).length}})</span></label>
+            </li>
+            <li
+                data-ng-hide="(tickets.original | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length == '0'">
+                <input id="timePeriod2" name="timePeriod2" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.timePeriod2" data-ng-checked="tickets.timePeriod2Check()"
+                    data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length == '0'" />
+                <label for="timePeriod2">09:30am – 3:30pm
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length != '0'">({{(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: true, timePeriod3: false, timePeriod4: false}).length}})</span></label>
+            </li>
+            <li
+                data-ng-hide="(tickets.original | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length == '0'">
+                <input id="timePeriod3" name="timePeriod3" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.timePeriod3" data-ng-checked="tickets.timePeriod3Check()"
+                    data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length == '0'" />
+                <label for="timePeriod3">3.30pm – 6:00pm
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length != '0'">({{(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: true, timePeriod4: false}).length}})</span></label>
+            </li>
+            <li
+                data-ng-hide="(tickets.original | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length == '0'">
+                <input id="timePeriod4" name="timePeriod4" type="checkbox" class="stylized"
+                    data-ng-model="tickets.searchFilters.timePeriod4" data-ng-checked="tickets.timePeriod4Check()"
+                    data-ng-change="tickets.update()"
+                    ng-disabled="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length == '0'" />
+                <label for="timePeriod4">After 6pm
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length != '0'">({{(tickets.filteredTickets | filter: {timePeriod1: false, timePeriod2: false, timePeriod3: false, timePeriod4: true}).length}})</span></label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bus Travel Area -->
+    <div class="filter-block"
+        data-ng-if="tickets.postedJSON.allowBus || tickets.postedJSON.brand == 'National Express' || tickets.postedJSON.brand == 'nbus' || tickets.postedJSON.brand == 'Diamond Bus' || tickets.postedJSON.brand == 'Stagecoach' && tickets.filterButtons.busTravelArea.length">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('busTravelAreaBtn')">
+            Bus Travel Area
+            <i class="material-icons">
+                {{tickets.filterButtons.busTravelAreaBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.busTravelAreaBtn">
+            <li>
+                <input id="busTravelArea" type="radio" class="stylized"
+                    data-ng-model="tickets.searchFilters.busTravelArea" data-ng-change="tickets.update();" />
+                <label for="busTravelArea">
+                    All Areas
+                </label>
+            </li>
+            <li data-ng-repeat="filter in tickets.filterButtons.busTravelArea | orderBy: filter | filter:''"
+                data-ng-if="filter != null"
+                data-ng-hide="{{(tickets.original | filter: {busTravelArea: filter}).length}} == '0'">
+                <input id="busTravelArea{{$index}}" type="radio" class="stylized"
+                    data-ng-model="tickets.searchFilters.busTravelArea" data-ng-change="tickets.update();"
+                    value="{{filter}}"
+                    ng-disabled="(tickets.filteredTickets | filter: {busTravelArea: filter}).length == '0'" />
+                <label for="busTravelArea{{$index}}">
+                    <span
+                        data-ng-if="tickets.postedJSON.brand == 'Diamond Bus'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}}
+                        <span
+                            data-ng-if="tickets.searchFilters.operator == null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
+                        <span
+                            data-ng-if="tickets.searchFilters.operator != null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
+                    <span
+                        data-ng-if="tickets.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Stagecoach Bus Area'}}
+                        <span
+                            data-ng-if="tickets.searchFilters.operator == null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
+                        <span
+                            data-ng-if="tickets.searchFilters.operator != null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
+                    <span
+                        data-ng-hide="tickets.postedJSON.brand == 'Diamond Bus' || tickets.postedJSON.brand == 'Stagecoach'">{{filter |replace: 'Entire Operator Area':'Diamond Bus Area'}}
+                        <span
+                            data-ng-if="tickets.searchFilters.operator == null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span>
+                        <span
+                            data-ng-if="tickets.searchFilters.operator != null && (tickets.filteredTickets | filter: {busTravelArea:filter}).length != '0'">({{(tickets.filteredTickets | filter: {busTravelArea:filter}).length}})</span></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bus Operator -->
+    <div class="filter-block"
+        data-ng-hide="tickets.postedJSON.allowBus && tickets.postedJSON.allowMetro && tickets.postedJSON.allowTrain || tickets.postedJSON.brand == 'nnetwork'"
+        data-ng-if="tickets.postedJSON.allowBus && tickets.filterButtons.operator.length">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('operatorBtn')">
+            Bus Operator
+            <i class="material-icons">
+                {{tickets.filterButtons.operatorBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.operatorBtn">
+            <li>
+                <input id="operator00" type="radio" class="stylized" data-ng-model="tickets.searchFilters.operator"
+                    data-ng-change="tickets.update();" />
+                <label for="operator00">All Operators
+                </label>
+            </li>
+            <li data-ng-repeat="filter in tickets.filterButtons.operator | orderBy: filter | filter:''"
+                data-ng-if="filter != null"
+                data-ng-hide="{{(tickets.original | filter: {operator: filter}).length}} == '0'">
+                <input id="operator{{$index}}" type="radio" class="stylized"
+                    data-ng-model="tickets.searchFilters.operator" data-ng-change="tickets.update();" value="{{filter}}"
+                    ng-disabled="(tickets.filteredTickets | filter: {operator: filter}).length == '0'" />
+                <label for="operator{{$index}}">{{filter |replace: 'Network West Midlands':'Multi Operator'}}
+                    <span
+                        data-ng-if="(tickets.filteredTickets | filter: {operator: filter}).length != '0'">({{ (tickets.filteredTickets | filter: {operator: filter}).length}})</span>
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Train Zones-->
+    <div class="filter-block"
+        data-ng-if="tickets.postedJSON.allowTrain || tickets.postedJSON.brand == 'ntrain' || tickets.postedJSON.brand == 'nnetwork'">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('railZoneBtn')">
+            Train/rail zones
+            <i class="material-icons">
+                {{tickets.filterButtons.railZoneBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <div class="nga-fast nga-collapse" data-ng-show="tickets.filterButtons.railZoneBtn">
+            <div class="fields new-transport-icons-blue nga-fast nga-fade"
+                data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postedJSON.brand == 'ntrain' || tickets.postedJSON.brand == 'nnetwork'">
+                <label class="plain" for="PassengerType">From:</label>
+                <span class="stylized-select">
+                    <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false"
+                        data-ng-model="tickets.searchFilters.railZoneFrom" data-ng-change="tickets.update()">
+                        <option value="">Any Zones</option>
+                        <option
+                            data-ng-repeat="option in tickets.filterButtons.railZoneFrom | orderBy: tickets.searchFilters.railZoneFrom | filter:''"
+                            value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+                <br /><br />
+                <label class="plain" for="PassengerType">To:</label>
+                <span class="stylized-select">
+                    <select id="railZoneTo" name="railZoneTo" aria-disabled="false"
+                        data-ng-model="tickets.searchFilters.railZoneTo" data-ng-change="tickets.update()">
+                        <option value="">Any Zones</option>
+                        <option
+                            data-ng-repeat="option in tickets.filterButtons.railZoneTo | orderBy: tickets.searchFilters.railZoneTo | filter:''"
+                            value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
