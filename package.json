@@ -12,12 +12,12 @@
         "staging": {
             "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
             "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//apisnwm.cenapps.org.uk/Ticketing/"
+            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
         },
         "local": {
             "baseUrl": "//localhost:8080",
             "imgUrl": "/build/img",
-            "api": "//apisnwm.cenapps.org.uk/Ticketing/"
+            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
         }
     },
     "scripts": {

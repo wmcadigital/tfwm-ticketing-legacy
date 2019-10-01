@@ -9,8 +9,8 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    var uri = '//apisnwm.cenapps.org.uk/Ticketing/Tickets/';
-    var uri2 = 'http://apisnwm.cenapps.org.uk/Ticketing/';
+    var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
+    var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
     return {
       ticketSearch: function(data) {
         return getData($http.post(uri + '/search', data, { cache: true }));
