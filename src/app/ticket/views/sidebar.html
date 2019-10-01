@@ -70,7 +70,7 @@
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
                 <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit" class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">Buy on Swift</button>
-                <button data-ng-if="ticket.all.buyOnSwift && ticket.all.buyOnDirectDebit" class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">Buy on Direct Debit</button>
+                <a data-ng-if="ticket.all.buyOnSwift && ticket.all.buyOnDirectDebit" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Direct Debit</a>
 
             <div data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount || ticket.all.onlineCurrentAmount && ticket.all.ticketCurrentAmount">
                 <hr>
