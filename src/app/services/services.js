@@ -9,8 +9,10 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
-    var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
+    // var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
+    // var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
+    var uri2 = 'https://apis.networkwestmidlands.com/Ticketing/';
+    var uri = uri2 + 'Tickets/';
     return {
       ticketSearch: function(data) {
         return getData($http.post(uri + '/search', data, { cache: true }));
