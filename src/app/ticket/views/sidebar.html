@@ -26,7 +26,7 @@
             <p data-ng-if="ticket.all.purchaseTic || ticket.all.purchaseRailStation" data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount">buy from</p>
 
             <!-- Price increase message -->
-            <p data-ng-if="ticket.all.ticketFutureAmount" data-ng-hide="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">The price of this ticket increases to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> <span data-ng-if="ticket.all.swiftFutureAmount">standed ticket and <span class="blue">{{ticket.all.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
+            <p data-ng-if="ticket.all.ticketFutureAmount" data-ng-hide="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">The price of this ticket {{ticket.all.ticketCurrentAmount > ticket.all.ticketFutureAmount ? 'decreases' : 'increases'}} to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span> <span data-ng-if="ticket.all.swiftFutureAmount">standed ticket and <span class="blue">{{ticket.all.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </span> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
 
             <p data-ng-if="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">Price is frozen from {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
 
@@ -45,7 +45,7 @@
 
             <!-- Swift PAYG credit tickets -->
             <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
-                when you buy this ticket with Swift PAYG credit 
+                when you buy this ticket with Swift PAYG credit
                 <span data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
                     <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
                     <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
