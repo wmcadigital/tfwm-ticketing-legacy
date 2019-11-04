@@ -29,7 +29,7 @@
 
         <!-- Price increase message -->
         <p data-ng-if="ticket.ticketFutureAmount" data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">The
-            price of this ticket increases to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span>
+            price of this ticket {{ticket.ticketCurrentAmount > ticket.ticketFutureAmount ? 'decreases' : 'increases'}} to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span>
             <span data-ng-if="ticket.swiftFutureAmount">standed ticket and <span class="price">{{ticket.swiftFutureAmount
                     | currency:"£"}}</span> Swift PAYG </span> on {{ticket.ticketFutureDate | date : format :
             shortDate}}</p>
