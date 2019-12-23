@@ -637,3 +637,7 @@ form {
 .labels-new span {
     margin-right: 3px;
 }
+
+.radio-bar > span, .radio-bar > span label {
+    display:table-cell!important
+}

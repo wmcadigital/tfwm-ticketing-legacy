@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'local';
+let build = 'live';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
