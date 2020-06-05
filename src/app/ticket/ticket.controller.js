@@ -174,11 +174,11 @@
     };
   }
 
-   // google pay filter
-   google.$inject = [];
-   function google() {
-    return item === 'Google Pay'; 
-   }
+  // google pay filter
+  google.$inject = [];
+  function google() {
+    return item === 'Google Pay';
+  }
 
   // DIRECTIVES
 
@@ -348,5 +348,4 @@
         '</p>'
     };
   }
-
 })();

@@ -10,7 +10,7 @@
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
     var uri2 = 'https://apis.networkwestmidlands.com/Ticketing/';
-    var uri =  'https://tickets.api.stageapp.net/Tickets/';
+    var uri = 'https://tickets.api.stageapp.net/Tickets/';
     return {
       ticketSearch: function(data) {
         return getData($http.post(uri + '/search', data, { cache: true }));

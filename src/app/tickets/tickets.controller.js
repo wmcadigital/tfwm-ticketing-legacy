@@ -310,8 +310,8 @@
       vm.searchFilters = {}; // et scope for search filters and reset on every search
 
       vm.origFilters = {}; // set scope for original search filters and reset on every search
-       console.log('this is posted');
-       console.log(vm.postedJSON);
+      // console.log('this is posted');
+      // console.log(vm.postedJSON);
 
       // work out all tickets available
       ticketingService.ticketSearch(data).then(function(response) {
@@ -490,9 +490,9 @@
         searchAll = vm.all;
         searchExact = vm.exactMatch;
         // console.log("all results");
-         console.log(searchAll);
+        // console.log(searchAll);
         // console.log("search exact results");
-         console.log(vm.exactMatch);
+        // console.log(vm.exactMatch);
 
         for (i = 0; i < searchExact.length; i += 1) {
           arrlen = searchAll.length;
@@ -1330,7 +1330,7 @@
     function swiftPAYG() {
       vm.passValue = vm.postJSON.brand;
       if (vm.passValue === 'Swift PAYG') {
-        console.log("swift payg");
+        // console.log('swift payg');
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
@@ -1348,11 +1348,11 @@
       }
     }
 
-     // if pass is swift abt
-     function swiftABT() {
+    // if pass is swift abt
+    function swiftABT() {
       vm.passValue = vm.postJSON.brand;
       if (vm.passValue === 'Swift ABT') {
-        console.log("swift abt");
+        // console.log('swift abt');
         vm.isHideCheck = !vm.isHideCheck;
         // vm.postJSON.allowBus = 'false';
         // vm.postJSON.allowMetro = 'true';
