@@ -69,7 +69,7 @@
         <!-- Exact matched to search -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'"
             class="filtered-header boxin bdr-top--navy">
-            <h3 class="filtered-header__heading">{{tickets.origTickets.length}} Exact matches to your search</h3>
+            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</h3>
         </div>
 
         <!-- error messages -->
@@ -108,7 +108,7 @@
         <!-- Other matches -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'"
             class="boxin title bdr-top--navy">
-            <h3 class="filtered-header__heading">{{tickets.otherTickets.length}} matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</h3>
+            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.otherTickets.length}}</span> matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</h3>
         </div>
 
         <!-- search results for other items-->

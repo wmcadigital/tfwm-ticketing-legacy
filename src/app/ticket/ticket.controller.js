@@ -6,6 +6,7 @@
     .controller('TicketDetailCtrl', TicketDetailCtrl)
     .filter('removeHTMLTags', removeHTMLTags)
     .filter('escapeFilter', escapeFilter)
+    .filter('google', google)
     .directive('detailDetails', detailDetails)
     .directive('detailSidebar', detailSidebar)
     .directive('detailAlternative', detailAlternative)
@@ -63,12 +64,13 @@
     vm.limit = 4; // Set paging limit for Alt tickets
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
+    vm.date = new Date();
 
     // Function to get the ticket data with api call
     function initialise(data) {
       ticketingService.getTicket(data).then(function(response) {
         vm.all = response;
-        // console.log(response);
+        console.log(response);
         if (vm.all.relatedTickets.length) {
           vm.related = [];
           angular.forEach(
@@ -97,6 +99,13 @@
       });
     }
 
+    function initialiseFull(data) {
+      ticketingService.getTicketFull(data).then(function(response) {
+        vm.full = response;
+        console.log(response);
+      });
+    }
+
     function openFilters() {
       document.getElementById('filterOverlay').style.display = 'block';
     }
@@ -112,6 +121,7 @@
     }
 
     initialise(vm.ticketID); // initialise API to get ticket
+    initialiseFull(vm.ticketID); // initialise API to get ticket
 
     function toggleClick(type) {
       vm.filterAccordions[type] = !vm.filterAccordions[type];
@@ -163,6 +173,12 @@
       return text ? String(text).replace(/\n/gm, '<br><br>') : '';
     };
   }
+
+   // google pay filter
+   google.$inject = [];
+   function google() {
+    return item === 'Google Pay'; 
+   }
 
   // DIRECTIVES
 
@@ -332,4 +348,5 @@
         '</p>'
     };
   }
+
 })();

@@ -11,13 +11,13 @@
         },
         "staging": {
             "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
-            "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "imgUrl": "https://cloudcdn.wmca.org.uk/staging/nwmassets/apps/ticketing-nwm/live/img",
+            "api": "https://tickets.api.stageapp.net/Tickets/"
         },
         "local": {
             "baseUrl": "//localhost:8080",
             "imgUrl": "/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "api": "https://tickets.api.stageapp.net/Tickets/"
         }
     },
     "scripts": {

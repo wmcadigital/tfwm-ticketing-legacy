@@ -9,7 +9,11 @@
 
 .help-section {
     display: inline-block;
-    margin: 15px 0;
+    // margin: 15px 0;
+}
+
+.acc__item {
+    margin-bottom: 0px;
 }
 
 .transparent--bg {
@@ -62,42 +66,39 @@ a.icon-stylized-new:focus span:after {
     }
 
     .radio-bar {
-        display: -webkit-box;
+        display: inline-block;
 
         @include breakpoint(tablet2) {
             display: inline-block;
         }
 
-        input:checked + label {
-            height: 100% !important;
+        span label {
+            padding: .78em 15px;         
         }
     }
 
     > div {
-        width: 50% !important;
+        @media (min-width: 46.875em){
+        width: 45% !important;
+        }
         @include breakpoint(laptop2) {
-            width: 55% !important;
+            width: 51% !important;
         }
     }
 }
 
 .ticket-item {
-    a {
-        padding: 0px !important;
-    }
-
     .paygimg {
         float: right;
-        margin: 0 0 25px 0;
+        margin: -1px 0 25px 0;
         width: 75%;
 
         @include breakpoint(mobileonly) {
             width: 65%;
         }
     }
-
     .payment-icons {
-        display: block;
+        display: inline;
         width: 100%;
 
         > * {
@@ -106,12 +107,12 @@ a.icon-stylized-new:focus span:after {
         }
 
         .ticket-direct-debit-logo {
-            width: 85px;
-            margin-left: 10px;
+            width: 30px;
+            margin-left: 2px;
         }
 
         .ticket-swift-logo {
-            width: 35px;
+            width: 25px;
         }
     }
 
@@ -132,6 +133,13 @@ a.icon-stylized-new:focus span:after {
 
     a {
         margin-bottom: 8px;
+    }
+    .modes {
+        text-align: right;
+        .icon {
+            height: 30px!important;
+            width: 28px!important;
+        }
     }
 }
 
@@ -212,10 +220,39 @@ input.ng-invalid-field-required-class {
 
 .angular-grid-item {
     .bdr-top--purple.boxin {
-        padding: 0px;
-
+        padding: 0 0 15px 0;
         .itemContent {
             padding: 70px 20px 45px 20px;
+        }
+    }
+}
+
+.itemContent {
+    .summary {
+        margin: 10px 0;
+        font-weight: normal;
+    }
+    .operator {
+        margin: 0 0 10px 0;
+    }
+    ul{
+        list-style: none!important; margin: 0; padding: 0;
+        li {
+            display: inline;line-height: 20px!important;
+            &::after {content: ", ";}
+            &:last-child::after {content: "";}
+            &::before {content: "";margin-left: 0px;line-height: 20px!important;}
+        }
+    }
+    .btn {
+        margin: 15px 0 0 0;
+    }
+    @include breakpoint(mobileonly) {
+        .grid-8 {
+            width: 70%;
+        }
+        .grid-4 {
+            width: 30%;
         }
     }
 }
@@ -584,6 +621,9 @@ form {
     }
     .grid-6 {
         padding: 10px;
+        @include breakpoint(mobileonly) {
+            padding: 0 5px 0 0;
+        }
     }
 }
 
@@ -639,5 +679,16 @@ form {
 }
 
 .radio-bar > span, .radio-bar > span label {
-    display:table-cell!important
+    display:inline-table!important
+}
+
+.filtered-header{
+    @include breakpoint(mobileonly) {
+        .grid-6{
+            width: 50%;
+        }
+        #sortBy {
+            height: 3.2em;
+        }
+    }
 }
