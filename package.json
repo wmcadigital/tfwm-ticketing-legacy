@@ -1,8 +1,10 @@
 {
     "name": "nwm-ticketing",
     "version": "2.0.0",
-    "description": "",
-    "main": "app.js",
+    "description": "Ticketing search app for WMNetwork",
+    "main": "src/app.js",
+    "author": "WMCA",
+    "license": "ISC",
     "repository" : {"type": "git", "url": "git://github.com/rolorogan@bitbucket.org/wmca/nwm-ticketing.git"},
     "buildDirs": {
         "live": {
@@ -35,8 +37,6 @@
         "build:staging": "npm run build:all --build=staging",
         "build:live": "npm run build:all --build=live"
     },
-    "author": "Nathan Rogan",
-    "license": "ISC",
     "devDependencies": {
         "autoprefixer": "^9.8.0",
         "babel-eslint": "^10.1.0",

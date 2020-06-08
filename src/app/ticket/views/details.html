@@ -1,6 +1,12 @@
 <div class="boxin boxin--large"
-    ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
-
+ng-class="
+ticket.all.swiftCurrentAmount >= '0'? 'bdr-top--purple':
+ticket.all.allowBus == true && ticket.all.allowTrain == false && ticket.all.allowMetro == false? 'bdr-top--orange':
+ticket.all.allowBus == false && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--pink':
+ticket.all.allowBus == false && ticket.all.allowTrain == false && ticket.all.allowMetro==true? 'bdr-top--blue':
+ticket.all.allowBus == false && ticket.all.allowMetro == true && ticket.all.allowTrain == true? 'bdr-top--blue':
+ticket.all.swiftCurrentAmount !== '' && ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == true? 'nnetwork':
+ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
     <div class="cfx">
         <div class="col">
             <h1>{{ticket.all.name}}</h1>
@@ -178,7 +184,14 @@
 </div>
 
 <div class="boxin boxin--large"
-    ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+ng-class="
+ticket.all.swiftCurrentAmount >= '0'? 'bdr-top--purple':
+ticket.all.allowBus == true && ticket.all.allowTrain == false && ticket.all.allowMetro == false? 'bdr-top--orange':
+ticket.all.allowBus == false && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--pink':
+ticket.all.allowBus == false && ticket.all.allowTrain == false && ticket.all.allowMetro==true? 'bdr-top--blue':
+ticket.all.allowBus == false && ticket.all.allowMetro == true && ticket.all.allowTrain == true? 'bdr-top--blue':
+ticket.all.swiftCurrentAmount !== '' && ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == true? 'nnetwork':
+ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
     <div data-ng-bind-html="ticket.all.description"></div>
      <!-- Price Levels: -->
     <!--<ul class="">
