@@ -99,7 +99,6 @@ a.icon-stylized-new:focus span:after {
     }
     .payment-icons {
         display: inline;
-        width: 100%;
 
         > * {
             display: inline-block;
@@ -121,7 +120,7 @@ a.icon-stylized-new:focus span:after {
     }
 
     .price {
-        font-weight: normal;
+        font-weight: bold;
         margin-top: 10px;
         font-size: 18px;
         line-height: 30px;
@@ -471,10 +470,6 @@ span.ng-scope.active {
 }
 
 .online {
-    color: $cyan !important;
-}
-
-.itemContent .price {
     color: $cyan !important;
 }
 
