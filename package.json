@@ -1,23 +1,26 @@
 {
     "name": "nwm-ticketing",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
+    "version": "2.0.0",
+    "description": "Ticketing search app for WMNetwork",
+    "main": "src/app.js",
+    "author": "WMCA",
+    "license": "ISC",
+    "repository" : {"type": "git", "url": "git://github.com/rolorogan@bitbucket.org/wmca/nwm-ticketing.git"},
     "buildDirs": {
         "live": {
-            "baseUrl": "//www.networkwestmidlands.com/tickets/",
+            "baseUrl": "//www.wmnetwork.co.uk/tickets/",
             "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
             "api": "//apis.networkwestmidlands.com/Ticketing/"
         },
         "staging": {
             "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
-            "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "imgUrl": "https://cloudcdn.wmca.org.uk/staging/nwmassets/apps/ticketing-nwm/live/img",
+            "api": "https://tickets.api.stageapp.net/Tickets/"
         },
         "local": {
             "baseUrl": "//localhost:8080",
             "imgUrl": "/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "api": "https://tickets.api.stageapp.net/Tickets/"
         }
     },
     "scripts": {
@@ -34,11 +37,9 @@
         "build:staging": "npm run build:all --build=staging",
         "build:live": "npm run build:all --build=live"
     },
-    "author": "Nathan Rogan",
-    "license": "ISC",
     "devDependencies": {
-        "autoprefixer": "^9.7.3",
-        "babel-eslint": "^10.0.3",
+        "autoprefixer": "^9.8.0",
+        "babel-eslint": "^10.1.0",
         "browser-sync": "^2.26.7",
         "del": "^4.1.1",
         "eslint": "^5.16.0",
@@ -47,15 +48,15 @@
         "eslint-config-wesbos": "0.0.19",
         "eslint-plugin-angular": "^4.0.1",
         "eslint-plugin-html": "^5.0.5",
-        "eslint-plugin-import": "^2.19.1",
+        "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-jsx-a11y": "^6.2.3",
-        "eslint-plugin-prettier": "^3.1.2",
-        "eslint-plugin-react": "^7.17.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "eslint-plugin-react": "^7.20.0",
         "eslint-plugin-react-hooks": "^1.7.0",
         "gulp": "^4.0.2",
         "gulp-autoprefixer": "^6.1.0",
-        "gulp-clean-css": "^4.2.0",
-        "gulp-cli": "^2.2.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-cli": "^2.3.0",
         "gulp-concat": "^2.6.1",
         "gulp-eslint": "^5.0.0",
         "gulp-htmlhint": "^2.2.1",
@@ -63,12 +64,12 @@
         "gulp-ng-html2js": "^0.2.3",
         "gulp-plumber": "^1.2.1",
         "gulp-replace": "^1.0.0",
-        "gulp-sass": "^4.0.2",
+        "gulp-sass": "^4.1.0",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-uglify": "^3.0.2",
-        "node-sass": "^4.13.0",
+        "node-sass": "^4.14.1",
         "prettier": "^1.19.1",
-        "sass": "^1.24.0"
+        "sass": "^1.26.8"
     },
     "dependencies": {
         "gulp-htmlmin": "^5.0.1",

@@ -1,29 +1,45 @@
 <div class="block block--fullwidth mobile--void">
     <div class="boxin buy"
-        ng-class="{'bdr-top--purple' : ticket.all.swiftCurrentAmount>='0', 'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'nnetwork' : ticket.all.swiftCurrentAmount!=='' && ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+    ng-class="
+    ticket.all.swiftCurrentAmount >= '0'? 'bdr-top--purple':
+    ticket.all.allowBus == true && ticket.all.allowTrain == false && ticket.all.allowMetro == false? 'bdr-top--orange':
+    ticket.all.allowBus == false && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--pink':
+    ticket.all.allowBus == false && ticket.all.allowTrain == false && ticket.all.allowMetro==true? 'bdr-top--blue':
+    ticket.all.allowBus == false && ticket.all.allowMetro == true && ticket.all.allowTrain == true? 'bdr-top--blue':
+    ticket.all.swiftCurrentAmount !== '' && ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == true? 'nnetwork':
+    ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
         <h3>Price & How to buy </h3>
         <hr>
         <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
 
         <div>
             <p class="price online">
-                <span data-ng-if="ticket.all.swiftCurrentAmount">{{ticket.all.swiftCurrentAmount | currency:"£"}}</span>
-                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.onlineCurrentAmount != '0'">{{ticket.all.onlineCurrentAmount
-                    | currency:"£"}}</span>
-                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'"
-                    data-ng-hide="ticket.all.onlineCurrentAmount">{{ticket.all.ticketCurrentAmount
-                    | currency:"£"}}</span>
-                <span data-ng-if="ticket.all.ticketCurrentAmount == '0'">{{ticket.all.priceOverride}} Credit</span>
+                <span data-ng-if="ticket.all.ticketCurrentAmount == ticket.all.standardCurrentAmount">
+                    {{(ticket.all.standardCurrentAmount | currency:"£")}}
+                </span>
+                <span data-ng-if="ticket.all.standardCurrentAmount != ticket.all.ticketCurrentAmount" data-ng-hide="ticket.all.id == '810' || ticket.all.id == '811'">
+                    {{(ticket.all.standardCurrentAmount | currency:"£")}}<span class="small">(Standard Rate)</span><br>
+                </span>
+                <span data-ng-if="ticket.all.standardDiscountCurrentAmount == ticket.all.ticketCurrentAmount">
+                    {{(ticket.all.standardDiscountCurrentAmount | currency:"£")}} <span class="small">(Discounted Rate)</span><br>
+                </span>
+
+                <span data-ng-if="ticket.all.ticketCurrentAmount == '0' && ticket.all.ticketCurrentAmount != '0.0' ">{{ticket.all.priceOverride}} Credit</span>
+
+                <!--<span data-ng-if="ticket.all.ticketCurrentAmount">{{ticket.all.ticketCurrentAmount | currency:"£"}}</span>-->
+
+                <span data-ng-if="ticket.all.id == '811'">{{ticket.all.ticketCurrentAmount | currency:"£"}}</span>
+
+                <span data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.onlineCurrentAmount != '0'">{{ticket.all.onlineCurrentAmount | currency:"£"}}</span>
+                <span data-ng-if="ticket.all.ticketCurrentAmount == '0' && ticket.all.ticketCurrentAmount != '0.0'">{{ticket.all.priceOverride}} Credit</span>
                 <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930010"> per month</span>
                 <span data-ng-if="ticket.all.validityId == 450930000"> a day</span>
                 <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
                 <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
-                <span data-ng-if="ticket.all.swiftCurrentAmount" style="font-size: 10px;">(until
-                    {{ticket.all.ticketFutureDate | date : format : shortDate}})</span>
             </p>
-            <p data-ng-if="ticket.all.buyTicketUrl"
+            <!-- <p data-ng-if="ticket.all.buyTicketUrl"
                 data-ng-hide="!ticket.all.swiftCurrentAmount || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
                 class="online">when you buy online</p>
 
@@ -31,43 +47,48 @@
 
             <p data-ng-if="ticket.all.purchaseTic || ticket.all.purchaseRailStation"
                 data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount">
-                buy from</p>
+                buy from</p> -->
 
             <!-- Price increase message -->
             <!--<p data-ng-if="ticket.all.ticketFutureAmount" data-ng-hide="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount">The price of this ticket {{ticket.all.ticketCurrentAmount > ticket.all.ticketFutureAmount ? 'decreases' : 'increases'}} to <span class="blue">{{(ticket.all.ticketFutureAmount | currency:"£")}}</span>
                  <div data-ng-if="ticket.all.swiftFutureAmount">standard ticket and <span class="blue">{{ticket.all.swiftFutureAmount | currency:"£"}}</span> Swift PAYG </div> on {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>-->
 
-            <p data-ng-if="ticket.all.swiftCurrentAmount" class="boxin bg--blue bg--tint">
+           <!-- <p data-ng-if="ticket.all.swiftCurrentAmount" class="boxin bg--blue bg--tint">
                 Note - Swift PAYG Price will be the same as the standard ticket Price from
                 {{ticket.all.ticketFutureDate | date : format : shortDate}}
-            </p>
+            </p> -->
 
             <p data-ng-if="ticket.all.ticketCurrentAmount === ticket.all.ticketFutureAmount"><span
                     data-ng-if="ticket.all.swiftCurrentAmount">Standard</span> Price is frozen from
                 {{ticket.all.ticketFutureDate | date : format : shortDate}}</p>
 
-            <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'"
-                data-ng-hide="ticket.all.onlineCurrentAmount">
-                <li data-ng-if="ticket.all.purchaseTic"><a
-                        href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Travel
-                        Centre</a></li>
-                <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/"
-                        target="_blank">Payzone outlet</a></li>
-                <li data-ng-if="ticket.all.purchaseRailStation"><a
-                        href="https://journeyplanner.networkwestmidlands.com/station">Rail
-                        station</a></li>
-                <li data-ng-if="ticket.all.purchaseOnBus">Purchase on <span
-                        data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
-                    <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> <span
-                        data-ng-if="ticket.all.brand == 'National Express'">National
-                        Express
-                    </span> Bus</li>
-                <li data-ng-if="ticket.all.purchaseOnMetro">On Metro</li>
-            </ul>
+            <p>buy this ticket</p>
+                <ul>
+                    <li data-ng-if="ticket.all.purchaseTic"><a
+                            href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">From a Travel
+                            Centre</a></li>
+                    <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/"
+                            target="_blank">From a Payzone outlet</a></li>
+                    <li data-ng-if="ticket.all.purchaseRailStation"><a
+                            href="https://journeyplanner.networkwestmidlands.com/station">From a Rail
+                            station</a></li>
+                    <li data-ng-if="ticket.all.purchaseOnBus">On <span
+                            data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
+                        <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> <span
+                            data-ng-if="ticket.all.brand == 'National Express'">National
+                            Express
+                        </span> Bus</li>
+                    <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/"
+                            target="_blank">On Metro</a></li>
+                    <li data-ng-if="ticket.all.buyOnDirectDebit"><a data-ng-href="{{ticket.all.buyTicketUrl}}"
+                                target="_blank">On Direct Debit <span data-ng-if="ticket.all.buyOnSwift">on Swift</span></a></li>
+                    <li data-ng-if="ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit">On Swift</li>
+                    <li data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"><a ng-href="$*baseUrl/#/ticket/810">On Swift PAYG</a></li>
+                </ul>
 
             <!-- Swift PAYG credit tickets -->
             <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
-                when you buy this ticket with Swift PAYG credit
+                buy this ticket with Swift PAYG credit
                 <span
                     data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
                     <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span
@@ -106,7 +127,7 @@
             <a data-ng-if="ticket.all.buyOnSwift && ticket.all.buyOnDirectDebit" class="btn btn--arrow"
                 data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Direct Debit</a>
 
-            <div
+           <!-- <div
                 data-ng-if="ticket.all.ticketCurrentAmount && ticket.all.swiftCurrentAmount || ticket.all.onlineCurrentAmount && ticket.all.ticketCurrentAmount">
                 <hr>
                 <p class="price">{{ticket.all.ticketCurrentAmount | currency:"£"}}
@@ -136,7 +157,7 @@
                     <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/"
                             target="_blank">On Metro</a></li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

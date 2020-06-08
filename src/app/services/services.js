@@ -9,16 +9,17 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    // var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
-    // var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
     var uri2 = 'https://apis.networkwestmidlands.com/Ticketing/';
-    var uri = uri2 + 'Tickets/';
+    var uri = 'https://tickets.api.stageapp.net/Tickets/';
     return {
       ticketSearch: function(data) {
         return getData($http.post(uri + '/search', data, { cache: true }));
       },
       getTicket: function(data) {
-        return getData($http.get(uri + data + '/simple', { cache: true }));
+        return getData($http.get(uri + data, { cache: true }));
+      },
+      getTicketFull: function(data) {
+        return getData($http.get(uri + data + '/complete', { cache: true }));
       },
       getTerms: function(data) {
         return getData($http.get(uri2 + '/Terms/' + data, { cache: true }));

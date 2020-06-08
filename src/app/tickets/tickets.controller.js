@@ -66,6 +66,7 @@
     }; // set an object for the filters show/hide toggle to fall into
     vm.toggleFilter = toggleFilter;
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
+    vm.swiftABT = swiftABT; // Function for hiding fields if Swift ABT is selected
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
     vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
@@ -213,6 +214,11 @@
     if ($location.search().brand === 'Swift PAYG') {
       getSwiftPAYG();
       swiftPAYG();
+    }
+
+    // if back button pressed or breadcrumb selected. If brand is Swift ABT
+    if ($location.search().brand === 'Swift ABT') {
+      swiftABT();
     }
 
     // Get Rail stations for autocomplete
@@ -1324,10 +1330,36 @@
     function swiftPAYG() {
       vm.passValue = vm.postJSON.brand;
       if (vm.passValue === 'Swift PAYG') {
+        // console.log('swift payg');
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
         vm.postJSON.stationNames = [];
+      } else if (
+        vm.passValue === 'nbus' ||
+        vm.passValue === 'National Express' ||
+        vm.passValue === 'Diamond Bus' ||
+        vm.passValue === 'Stagecoach' ||
+        vm.passValue === 'Swift PAYG' ||
+        vm.passValue === 'West Midlands Metro'
+      ) {
+        // Clear stationNames list if non-rail pass selected
+        vm.postJSON.stationNames = [[]];
+      }
+    }
+
+    // if pass is swift abt
+    function swiftABT() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === 'Swift ABT') {
+        // console.log('swift abt');
+        vm.isHideCheck = !vm.isHideCheck;
+        // vm.postJSON.allowBus = 'false';
+        // vm.postJSON.allowMetro = 'true';
+        // vm.postJSON.allowTrain = 'true';
+        // vm.postJSON.passengerType = "Adult";
+        vm.postJSON.timeBand = null;
+        vm.postJSON.stationNames = null;
       } else if (
         vm.passValue === 'nbus' ||
         vm.passValue === 'National Express' ||
