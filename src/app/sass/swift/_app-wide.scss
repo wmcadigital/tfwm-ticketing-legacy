@@ -1,0 +1,190 @@
+// tickets
+
+/* Custom Grid */
+$grid-columns: 12;
+
+@for $i from 1 through $grid-columns {
+    .grid-#{$i} {
+        width: percentage($i / $grid-columns);
+        display: block;
+
+        @include breakpoint(mobileonly) {
+            width: 100%;
+        }
+    }
+}
+
+[class^=grid-] {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+  }
+
+// hide elements but keep them avaiable for screen readers
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    }
+
+/* Scrollbar Styling */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    z-index: 99999;
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+
+    @include breakpoint(mobileonly) {
+        right: 5px;
+    }
+}
+
+
+/* Modal Styling */
+
+.ng-modal-dialog {
+    display: block;
+    width: 600px;
+    max-width: 100%;
+    height: 600px;
+    max-height: 100%;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    @include breakpoint(tablet2) {
+        min-height: 200px;
+        position: absolute;
+        top: 800px;
+    }
+    @include breakpoint(tablet3) {
+        height: 100%;
+        width: 100%;
+        //display: none;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: white;
+        z-index: 9999;
+    }
+
+    .modal__close {
+        top: 0;
+    }
+
+    .ng-modal-dialog-content {
+        @include breakpoint(tablet3){
+            height: 100%;
+            overflow-y: scroll;
+        }
+        .operators {
+            padding: 20px;
+            margin: 0;
+            overflow-y: scroll;
+            position: absolute;
+            width: 96%;
+            height: 420px;
+            margin-bottom: 140px;
+
+            table {
+                width: 100%;
+
+                tr {
+                    border-bottom: 1px solid #ccc;
+                }
+
+                td {
+                    padding: 25px 0 15px 0;
+                }
+            }
+        }
+
+        .header {
+            background: white;
+            padding: 25px 20px;
+            height: 140px;
+        }
+    }
+}
+
+.ng-modal-dialog.boxin.modal-content {
+    padding: 0px 15px 15px 15px !important;
+    @include breakpoint(tablet2) {
+        padding: 0px!important;
+    }
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.ng-hide {
+    display: none !important;
+}
+
+//style for disabled buttons
+button:disabled,
+button[disabled] {
+    border: 1px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    color: #666666 !important;
+
+    &::after {
+        display: none !important;
+    }
+
+    &::before {
+        display: none !important;
+    }
+
+    &:hover {
+        border: 1px solid #999999 !important;
+        background-color: #f1f1f1 !important;
+        color: #666666;
+        cursor: not-allowed !important;
+    }
+}
+
+select:disabled,
+select[disabled] {
+    border: 2px solid #ccc !important;
+    background-color: #f1f1f1 !important;
+    color: #666666 !important;
+    background: white url(//static.centro.org.uk/nwmAssets/img/select-disable.png) right center repeat-y !important;
+}

@@ -51,8 +51,13 @@ const paths = {
   },
   styles: {
     src: 'src/**/*.scss', // src of stlyes
-    minifySrc: 'src/app/sass/nwm-ticketing.scss', // List of scss file(s) which should be processed, linted & minified
-    output: 'build/css/' // output location of minified styles
+    minifySrc: 'src/app/sass/wmn/wmn-ticketing.scss', // List of scss file(s) which should be processed, linted & minified
+    output: 'build/css/wmn' // output location of minified styles
+  },
+  stylesSwift: {
+    src: 'src/**/*.scss', // src of stlyes
+    minifySrc: 'src/app/sass/swift/swift-ticketing.scss', // List of scss file(s) which should be processed, linted & minified
+    output: 'build/css/swift' // output location of minified styles
   },
   scripts: {
     src: './src/**/*.js', // Src of JS files
@@ -101,6 +106,30 @@ function buildStyles() {
     .pipe(dest(paths.styles.output))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(dest(paths.styles.output))
+    .pipe(browserSync.stream()); // Push new CSS to server without reload
+}
+
+// Process, lint, and minify Sass files for Swift
+function buildSwiftStyles() {
+  console.log(json.buildDirs[build].images);
+
+  return src(paths.stylesSwift.minifySrc)
+    .pipe(
+      plumber({
+        errorHandler: function(error) {
+          console.log(error.message);
+          this.emit('end');
+        }
+      })
+    )
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError)) // Compile Sass
+    .pipe(autoprefixer({ browsers: ['last 5 versions', '> 1% in GB'] })) // Prefix css with older browser support
+    .pipe(cleanCSS({ level: 2 })) // Minify css
+    .pipe(sourcemaps.write(getRoot(paths.stylesSwift.output) + '_sourcemaps/'))
+    .pipe(dest(paths.stylesSwift.output))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(dest(paths.stylesSwift.output))
     .pipe(browserSync.stream()); // Push new CSS to server without reload
 }
 
@@ -195,6 +224,7 @@ const buildAll = series(
   minImages,
   buildScripts,
   buildStyles,
+  buildSwiftStyles,
   buildTemplates,
   lintScripts,
   lintTemplates
@@ -206,12 +236,13 @@ function watchFiles() {
   watch('./**/*.html', series(lintTemplates, buildTemplates, reload)); // Reload when html changes
   watch(paths.images.src, minImages);
   watch(paths.styles.src, buildStyles); // run buildStyles function on scss change(s)
+  watch(paths.stylesSwift.src, buildSwiftStyles); // run buildSwiftStyles function on scss change(s) - swift
   watch(['./package.json', './gulpfile.js'], series(buildAll, reload));
 }
 const dev = series(
   lintScripts,
   lintTemplates,
-  parallel(buildStyles, buildScripts, buildTemplates, minImages),
+  parallel(buildStyles, buildSwiftStyles, buildScripts, buildTemplates, minImages),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
 // Export items to be used in terminal
@@ -221,6 +252,7 @@ exports.lintTemplates = lintTemplates;
 exports.clean = cleanBuild;
 exports.buildScripts = series(buildScripts, lintScripts);
 exports.buildStyles = buildStyles;
+exports.buildSwiftStyles = buildSwiftStyles;
 exports.buildTemplates = series(buildTemplates, lintTemplates);
 exports.minImages = minImages;
 exports.buildAll = buildAll;
