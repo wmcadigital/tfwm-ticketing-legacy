@@ -1,3 +1,4 @@
+/* eslint-disable angular/di */
 (function() {
   'use strict';
 
@@ -31,7 +32,6 @@
   routeProvider.$inject = ['$routeProvider', 'ngAuthSettings'];
   function routeProvider($routeProvider) {
     // console.log(ngAuthSettings.buildNo + ngAuthSettings.apiServiceBaseUri); // Log the build to the console
-
     $routeProvider
       .when('/', {
         title: 'tickets',
