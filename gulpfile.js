@@ -111,7 +111,7 @@ function buildStyles() {
     )
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError)) // Compile Sass
-    .pipe(autoprefixer({ browsers: ['last 5 versions', '> 1% in GB'] })) // Prefix css with older browser support
+    .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.styles.output) + '_sourcemaps/'))
     .pipe(dest(paths.styles.output))
@@ -135,7 +135,7 @@ function buildSwiftStyles() {
     )
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError)) // Compile Sass
-    .pipe(autoprefixer({ browsers: ['last 5 versions', '> 1% in GB'] })) // Prefix css with older browser support
+    .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.stylesSwift.output) + '_sourcemaps/'))
     .pipe(dest(paths.stylesSwift.output))
