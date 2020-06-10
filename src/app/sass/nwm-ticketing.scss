@@ -1,8 +1,0 @@
-@import 'vars'; // Define colors etc.
-
-.ticketing-app {
-    @import 'app-wide'; // CSS that is used in various places of the app
-    @import '../tickets/tickets'; // Search page only CSS
-    @import '../ticket/ticket';
-    @import 'assets/angucomplete-alt';// CSS for station auto-complete
-}

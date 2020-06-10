@@ -1,0 +1,59 @@
+.bg--blue.bg--tint {
+    background-color:$blue!important;
+}
+
+.bdr-top--blue, .bdr-top--navy, .bdr-top--orange, .bdr-top--pink, .nnetwork, .bdr-top--purple {
+    border: none!important;
+}
+
+.filtered-header, .ticketing-app .ticket-filters, .ticketing-app .topFilters {
+    box-shadow: 0 4px 10px 1px rgba(238,238,239,.75);
+}
+
+.icon-stylized-new label, .ticketing-app .ticket-search .how-long .icon-stylized-new label {
+    background-color: white!important;
+    color: $purple!important;
+}
+
+.icon-stylized-new svg { 
+    fill: $purple!important;
+}
+
+.search-results {
+    padding-top: 40px;
+}
+
+.search {
+    margin-bottom: 40px;
+}
+
+.new-transport-icons-blue .icon-stylized-new input:checked ~ label {
+    background-color: $purple!important;
+    color: white!important;
+}
+
+.icon-stylized-new input:checked ~ label svg, a.icon-stylized-new:active svg, a.icon-stylized-new:focus svg {
+    fill: white!important;
+}
+
+.stylized-select::after, .stylized-select::before {
+    background: white!important;
+}
+
+.stylized-select > select {
+    border: none!important;
+    color: $purple!important;
+    background: url(//static.centro.org.uk/nwmAssets/img/select-swift.png) right center repeat-y #fff;
+}
+
+.mobile-only .stylized-select {
+    border:2px solid #ccc;
+    height:57px
+}
+
+.btn {
+    text-transform: lowercase;
+    background-color: $purple;
+    border-radius: 30px;
+    color: white;
+}

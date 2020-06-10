@@ -1,0 +1,151 @@
+@mixin roundedBorder($color) {
+    background-color: none;
+    border: 1px solid $color;
+    color: $wmDarkGray;
+    border-radius: 25px;
+    margin: 10px 0 0;
+    margin-right: 20px;
+    box-shadow: none;
+    transition: all 0.4s ease;
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        background-color: $color;
+        color: $white;
+    }
+}
+
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+@function tintDark($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+$wmOrange: #ff8300;
+$wmOrangeDark: tintDark($wmOrange, 20%);
+$aqua: #6fc6d2;
+$wmLightGray: #ccc;
+$wmGray: #575656;
+$wmDarkGray: #222;
+$textGrey: #464646;
+
+//tickets
+
+/*********************
+COLOURS
+*********************/
+
+$cyan: #9d5baf;
+$navy: #3c1053;
+$orange: #ea0029;
+$green: #ff8300;
+$pink: #0075c9;
+$darkgrey: #333;
+$midgrey: #666;
+$lightgrey: #999;
+$purple: #773289;
+$darkpurple: #3c1053;
+$white: #ffffff;
+$blue: #edf8fd;
+
+/*********************
+BREAKPOINTS
+*********************/
+
+@mixin breakpoint($point) {
+    @if $point == desktop {
+        @media (min-width: 70em) {
+            @content;
+        }
+    } @else if $point == laptop {
+        @media (min-width: 64em) {
+            @content;
+        }
+    } @else if $point == laptop2 {
+        @media (min-width: 929px) and (max-width: 1010px) {
+            @content;
+        }
+    } @else if $point == tablet {
+        @media (max-width: 890px) {
+            @content;
+        }
+    } @else if $point == tablet2 {
+        @media (max-width: 58em) {
+            @content;
+        }
+    } @else if $point == tablet3 {
+        @media (max-width: 890px) {
+            @content;
+        }
+    } @else if $point == phablet {
+        @media (min-width: 37.5em) {
+            @content;
+        }
+    } @else if $point == mobileonly {
+        @media (max-width: 32.125em) {
+            @content;
+        }
+    }
+}
+
+/* New transport Icons*/
+@mixin new-transport-icons($bg, $color, $hover-bg, $hover-color) {
+    .icon-stylized-new {
+        float: left;
+        width: 32.3%;
+        &.-train {
+            margin: 0 1.5%;
+        }
+
+        input {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            &:checked {
+                ~ label {
+                    color: $hover-color;
+                    background-color: $hover-bg;
+                    &:after {
+                        color: $hover-color;
+                        font-family: 'Material Icons';
+                        position: absolute;
+                        content: '\E876';
+                        font-size: 24px;
+                        margin-left: -10px;
+                        top: 0;
+                        right: 4px;
+                        z-index: 9999;
+                        bottom: 0;
+                        margin: auto;
+                    }
+                }
+            }
+        }
+
+        label {
+            background-color: $bg;
+            padding-left: 26px;
+            color: $color;
+        }
+
+        svg {
+            fill: $color;
+            margin: auto 0;
+            width: 28px;
+        }
+        input:checked ~ label svg {
+            fill: $hover-color;
+        }
+    }
+}
+/*End New transport Icons*/

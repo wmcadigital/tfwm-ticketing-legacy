@@ -14,7 +14,7 @@
       // LOCAL
       local: true, // Changes logic in services.js based on if this is available
 
-      buildNo: 'NWM Ticketing v1.0.0'
+      buildNo: 'NWM Ticketing v2.0.0'
     });
   trustedURLs.$inject = ['$sceDelegateProvider'];
   function trustedURLs($sceDelegateProvider) {
@@ -36,7 +36,7 @@
       .when('/', {
         title: 'tickets',
         controller: 'TicketingSearchCtrl',
-        templateUrl: 'tickets/views/index.html',
+        templateUrl: 'tickets/views/swift/index.html',
         controllerAs: 'tickets',
         reloadOnSearch: false
       })
@@ -45,7 +45,7 @@
         title: 'ticket',
         controller: 'TicketDetailCtrl',
         controllerAs: 'ticket',
-        templateUrl: 'ticket/views/index.html',
+        templateUrl: 'ticket/views/shared/index.html',
         resolve: {
           // Before page loads..
           getUnique: [
