@@ -36,7 +36,7 @@
       .when('/', {
         title: 'tickets',
         controller: 'TicketingSearchCtrl',
-        templateUrl: 'tickets/views/swift/index.html',
+        templateUrl: 'tickets/views/oneapp/index.html',
         controllerAs: 'tickets',
         reloadOnSearch: false
       })

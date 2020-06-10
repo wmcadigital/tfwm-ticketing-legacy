@@ -74,5 +74,10 @@
     "dependencies": {
         "gulp-htmlmin": "^5.0.1",
         "jpegtran": "^1.0.6"
-    }
+    },
+    "browserslist": [
+        "last 2 versions",
+        "> 5%",
+        "Firefox ESR"
+    ]
 }
