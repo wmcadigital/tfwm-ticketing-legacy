@@ -4,5 +4,3 @@ build/
 !gitignore
 !package.json
 !package-lock.json
-/.vscode
-/.sass-cache
