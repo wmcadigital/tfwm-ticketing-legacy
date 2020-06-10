@@ -71,6 +71,7 @@ const paths = {
     minifySrc: [
       { src: 'src/app/js/wmn/*.js', minName: 'wmn.app.min.js', lint: true },
       { src: 'src/app/js/swift/*.js', minName: 'swift.app.min.js', lint: true },
+      { src: 'src/app/js/oneapp/*.js', minName: 'oneapp.app.min.js', lint: true },
       { src: 'src/assets/**/*.js', minName: 'assets.min.js', lint: false },
       { src: 'src/app/services/*.js', minName: 'services.min.js', lint: true },
       { src: 'src/app/shared/*.js', minName: 'shared.min.js', lint: true },
