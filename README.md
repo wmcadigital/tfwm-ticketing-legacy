@@ -1,6 +1,6 @@
-# NWM Ticketing page
+# Ticketing Search
 
-> This page shows the NWM Ticket Finder, located: https://www.networkwestmidlands.com/tickets
+Ticketing search for West Midlands Network (WMN) & Swift
 
 ## Release notes
 

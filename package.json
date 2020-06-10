@@ -2,7 +2,7 @@
     "name": "nwm-ticketing",
     "version": "2.0.0",
     "description": "Ticketing search app for WMNetwork",
-    "main": "src/app.js",
+    "main": "src/js/wmn/app.js",
     "author": "WMCA",
     "license": "ISC",
     "repository" : {"type": "git", "url": "git://github.com/rolorogan@bitbucket.org/wmca/nwm-ticketing.git"},

@@ -72,17 +72,7 @@
         <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
     </head>
 
-    <body class="bg--grey bg--tint ticketing-page">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript>
-            <iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-5HPFPWN"
-                height="0"
-                width="0"
-                style="display:none;visibility:hidden"
-            ></iframe>
-        </noscript>
-        <!-- End Google Tag Manager (noscript) -->
+    <body class="ticketing-page">
 
         <div class="ticketing-app wrap wrap--padded" data-ng-view></div>
 
@@ -112,8 +102,11 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 
         <!-- App code -->
+        <script src="build/js/swift.app.min.js"></script>
+        <script src="build/js/services.min.js"></script>
+        <script src="build/js/controller.min.js"></script>
+        <script src="build/js/shared.min.js"></script>
         <script src="build/js/assets.min.js"></script>
-        <script src="build/js/app.min.js"></script>
         <script src="build/js/partials.min.js"></script>
 
         <!--<script src="assets/angucomplete-alt.min.js"></script>-->
