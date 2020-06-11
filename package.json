@@ -1,6 +1,6 @@
 {
     "name": "nwm-ticketing",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Ticketing search app for WMNetwork",
     "main": "src/js/wmn/app.js",
     "author": "WMCA",
@@ -12,18 +12,21 @@
     "buildDirs": {
         "live": {
             "baseUrl": "//www.wmnetwork.co.uk/tickets/",
-            "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//apis.networkwestmidlands.com/Ticketing/"
+            "cdn": "//cloudcdn.wmca.org.uk/wmnetworkassets/apps/ticketing/",
+            "imgUrl": "//cloudcdn.wmca.org.uk/wmnetworkassets/apps/ticketing/img",
+            "api": "https://apis.networkwestmidlands.com/ticketing/"
         },
         "staging": {
-            "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
-            "imgUrl": "https://cloudcdn.wmca.org.uk/staging/nwmassets/apps/ticketing-nwm/live/img",
-            "api": "https://tickets.api.stageapp.net/Tickets/"
+            "baseUrl": "//cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing-nwm",
+            "cdn": "//cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing/",
+            "imgUrl": "https://cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing/img",
+            "api": "https://tickets.api.stageapp.net/"
         },
         "local": {
             "baseUrl": "//localhost:8080",
+            "cdn": "/build/",
             "imgUrl": "/build/img",
-            "api": "https://tickets.api.stageapp.net/Tickets/"
+            "api": "https://tickets.api.stageapp.net/"
         }
     },
     "scripts": {
