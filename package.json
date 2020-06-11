@@ -5,7 +5,10 @@
     "main": "src/js/wmn/app.js",
     "author": "WMCA",
     "license": "ISC",
-    "repository" : {"type": "git", "url": "git://github.com/rolorogan@bitbucket.org/wmca/nwm-ticketing.git"},
+    "repository": {
+        "type": "git",
+        "url": "https://rolorogan@bitbucket.org/wmca/nwm-ticketing.git"
+    },
     "buildDirs": {
         "live": {
             "baseUrl": "//www.wmnetwork.co.uk/tickets/",
