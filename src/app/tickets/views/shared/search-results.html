@@ -93,7 +93,7 @@
            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults"
            data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'">
            <div class="grid"
-               data-ng-repeat="ticket in tickets.origTickets | limitTo: tickets.limitExact track by $index">
+               data-ng-repeat="ticket in tickets.origTickets | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
                <div data-ng-include=" 'tickets/views/shared/item.html' "
                ticket-item></div>
            </div>
@@ -116,7 +116,7 @@
             ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
             data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'">
             <div class="grid"
-                data-ng-repeat="ticket in tickets.otherTickets | orderBy:['-buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
+                data-ng-repeat="ticket in tickets.otherTickets | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
                 <div data-ng-include=" 'tickets/views/shared/item.html' "
                ticket-item></div>
             </div>
