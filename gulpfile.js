@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'staging';
+let build = 'local';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -47,7 +47,18 @@ const paths = {
   output: 'build/', // Default output location for code build
   server: {
     port: 8080,
-    baseDir: './'
+    baseDir: './',
+    index: 'index.html'
+  },
+  serverSwift: {
+    port: 8080,
+    baseDir: './',
+    index: 'index-swift.html'
+  },
+  serverOneapp: {
+    port: 8080,
+    baseDir: './',
+    index: 'index-oneapp.html'
   },
   styles: {
     src: 'src/app/sass/wmn/*.scss', // src of styles
@@ -80,8 +91,20 @@ const paths = {
     output: 'build/js/' // Output location of minified JS files
   },
   templates: {
-    src: './src/app/**/views/**/*.html',
+    src: './src/app/**/views/wmn/*.html',
     minName: 'partials.min.js'
+  },
+  templatesShared: {
+    src: './src/app/**/views/shared/*.html',
+    minName: 'shared.partials.min.js'
+  },
+  templatesSwift: {
+    src: './src/app/**/views/swift/*.html',
+    minName: 'swift.partials.min.js'
+  },
+  templatesOneapp: {
+    src: './src/app/**/views/oneapp/*.html',
+    minName: 'oneapp.partials.min.js'
   },
   images: {
     src: './src/assets/img/**/*',
@@ -207,6 +230,75 @@ function buildTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+// Lint Shared Templates/HTML
+function lintSharedTemplates() {
+  return src(paths.templatesShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function buildSharedTemplates() {
+  return src(paths.templatesShared.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesShared.minName))
+    .pipe(uglify())
+    .pipe(dest('./build/js/'))
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(dest('./build/js/'));
+}
+
+// Lint Swift Templates/HTML
+function lintSwiftTemplates() {
+  return src(paths.templatesShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function buildSwiftTemplates() {
+  return src(paths.templatesSwift.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesSwift.minName))
+    .pipe(uglify())
+    .pipe(dest('./build/js/'))
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(dest('./build/js/'));
+}
+
+// Lint Oneapp Templates/HTML
+function lintOneappTemplates() {
+  return src(paths.templatesOneapp.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function buildOneappTemplates() {
+  return src(paths.templatesOneapp.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesOneapp.minName))
+    .pipe(uglify())
+    .pipe(dest('./build/js/'))
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(dest('./build/js/'));
+}
+
 // Optimise images
 function minImages() {
   return src(paths.images.src)
@@ -214,13 +306,35 @@ function minImages() {
     .pipe(dest(paths.images.dest));
 }
 
-// Server
+// Default WMN Server
 function server(done) {
   browserSync.init({
     server: {
       baseDir: paths.server.baseDir
     },
     port: paths.server.port
+  });
+  done();
+}
+// Swift Server
+function serverSwift(done) {
+  browserSync.init({
+    server: {
+      baseDir: paths.serverSwift.baseDir
+    },
+    port: paths.serverSwift.port,
+    index: paths.serverSwift.index
+  });
+  done();
+}
+// Oneapp Server
+function serverOneapp(done) {
+  browserSync.init({
+    server: {
+      baseDir: paths.serverOneapp.baseDir
+    },
+    port: paths.serverOneapp.port,
+    index: paths.serverOneapp.index
   });
   done();
 }
@@ -237,14 +351,33 @@ const buildAll = series(
   buildStyles,
   buildSwiftStyles,
   buildTemplates,
+  buildSharedTemplates,
+  buildSwiftTemplates,
+  buildOneappTemplates,
   lintScripts,
-  lintTemplates
+  lintTemplates,
+  lintSharedTemplates,
+  lintSwiftTemplates,
+  lintOneappTemplates
 );
 // Watch files for changes
 function watchFiles() {
   // Lint, concat, minify JS then reload server
   watch([paths.scripts.src], series(lintScripts, buildScripts, reload));
-  watch('./**/*.html', series(lintTemplates, buildTemplates, reload)); // Reload when html changes
+  watch(
+    './**/*.html',
+    series(
+      lintTemplates,
+      lintSharedTemplates,
+      lintSwiftTemplates,
+      lintOneappTemplates,
+      buildTemplates,
+      buildSharedTemplates,
+      buildSwiftTemplates,
+      buildOneappTemplates,
+      reload
+    )
+  ); // Reload when html changes
   watch(paths.images.src, minImages);
   watch(paths.styles.src, buildStyles); // run buildStyles function on scss change(s)
   watch(paths.stylesSwift.src, buildSwiftStyles); // run buildSwiftStyles function on scss change(s) - swift
@@ -254,20 +387,74 @@ function watchFiles() {
   watch(paths.ticketsStyles.src, buildSwiftStyles); // update custom ticket search scss
   watch(['./package.json', './gulpfile.js'], series(buildAll, reload));
 }
+// Default WMN
 const dev = series(
   lintScripts,
   lintTemplates,
-  parallel(buildStyles, buildSwiftStyles, buildScripts, buildTemplates, minImages),
+  lintSharedTemplates,
+  parallel(
+    buildStyles,
+    buildSwiftStyles,
+    buildScripts,
+    buildTemplates,
+    buildSharedTemplates,
+    minImages
+  ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
+// Swift version
+const devSwift = series(
+  lintScripts,
+  lintTemplates,
+  lintSharedTemplates,
+  lintSwiftTemplates,
+  parallel(
+    buildSwiftStyles,
+    buildScripts,
+    buildTemplates,
+    buildSharedTemplates,
+    buildSwiftTemplates,
+    minImages
+  ),
+  parallel(watchFiles, serverSwift)
+);
+// Oneapp version
+const devOneapp = series(
+  lintScripts,
+  lintTemplates,
+  lintSharedTemplates,
+  lintOneappTemplates,
+  parallel(
+    buildStyles,
+    buildScripts,
+    buildTemplates,
+    buildSharedTemplates,
+    buildOneappTemplates,
+    minImages
+  ),
+  parallel(watchFiles, serverOneapp)
+);
 // Export items to be used in terminal
 exports.default = dev;
+exports.defaultSwift = devSwift;
+exports.defaultOneapp = devOneapp;
 exports.lintScripts = lintScripts;
-exports.lintTemplates = lintTemplates;
+exports.lintTemplates = series(
+  lintTemplates,
+  lintSharedTemplates,
+  lintSwiftTemplates,
+  lintOneappTemplates
+);
 exports.clean = cleanBuild;
 exports.buildScripts = series(buildScripts, lintScripts);
 exports.buildStyles = buildStyles;
 exports.buildSwiftStyles = buildSwiftStyles;
-exports.buildTemplates = series(buildTemplates, lintTemplates);
+exports.buildTemplates = series(
+  buildTemplates,
+  buildSharedTemplates,
+  buildSwiftTemplates,
+  buildOneappTemplates,
+  lintTemplates
+);
 exports.minImages = minImages;
 exports.buildAll = buildAll;

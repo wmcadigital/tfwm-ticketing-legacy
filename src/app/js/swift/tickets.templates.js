@@ -21,7 +21,7 @@
   searchResults.$inject = [];
   function searchResults() {
     return {
-      templateUrl: 'tickets/views/shared/search-results.html',
+      templateUrl: 'tickets/views/swift/search-results.html',
       restrict: 'E'
     };
   }
