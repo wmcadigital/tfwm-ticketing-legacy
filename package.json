@@ -1,6 +1,6 @@
 {
     "name": "nwm-ticketing",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Ticketing search app for WMNetwork",
     "main": "src/js/wmn/app.js",
     "author": "WMCA",
@@ -12,14 +12,14 @@
     "buildDirs": {
         "live": {
             "baseUrl": "//www.wmnetwork.co.uk/tickets/",
-            "cdn": "//cloudcdn.wmca.org.uk/wmnetworkassets/apps/ticketing/",
-            "imgUrl": "//cloudcdn.wmca.org.uk/wmnetworkassets/apps/ticketing/img",
+            "cdn": "//cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/",
+            "imgUrl": "//cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/build/img",
             "api": "https://apis.networkwestmidlands.com/ticketing/"
         },
         "staging": {
-            "baseUrl": "//cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing-nwm",
-            "cdn": "//cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing/",
-            "imgUrl": "https://cloudcdn.wmca.org.uk/staging/wmnetworkassets/apps/ticketing/img",
+            "baseUrl": "//stagenwm.cenapps.org.uk/oneapp-ticket-search",
+            "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build",
+            "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build/img",
             "api": "https://tickets.api.stageapp.net/"
         },
         "local": {
@@ -30,12 +30,14 @@
         }
     },
     "scripts": {
-        "upgrade-packages": "ncu -u",
+        "upgrade-packages": "npm update",
         "start": "gulp",
+        "start:swift": "gulp defaultSwift",
+        "start:oneapp": "gulp defaultOneapp",
         "fresh": "npm install && gulp",
         "lint:scripts": "gulp lintScripts",
         "lint:templates": "gulp lintTemplates",
-        "clean": "gulp clean",
+        "clean": "gulp clean",  
         "build:scripts": "gulp buildScripts",
         "build:styles": "gulp buildStyles",
         "build:templates": "gulp buildTemplates",
