@@ -9,7 +9,7 @@
     .run(analytics)
     .constant('ngAuthSettings', {
       // this is used for what build you require before uploading to the relevant dir on CDN, just un-comment the one you require below
-      baseURL: '$*baseUrl',
+      baseURL: '$*baseUrlSwift',
       apiServiceBaseUri: '$*api',
 
       // LOCAL
@@ -26,7 +26,7 @@
       // Allow loading from our assets domain.  Notice the difference between * and **.
       'https://static.centro.org.uk/**',
       'http://static.centro.org.uk/**',
-      '$*baseUrl**'
+      '$*baseUrlSwift**'
     ]);
   }
   routeProvider.$inject = ['$routeProvider', 'ngAuthSettings'];

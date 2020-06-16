@@ -33,7 +33,7 @@
         return getData($http.get(uri + 'brands', { cache: true }));
       },
       getSwiftSearch: function() {
-        return getData($http.post(uri + 'Search', { cache: true }));
+        return getData($http.post(uri + 'tickets/search', { cache: true }));
       }
     };
 

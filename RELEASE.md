@@ -16,3 +16,7 @@ Initial release of NWM Ticketing
 ## Ticketing v2.0.2
 
 - Added new dev build scripts for Swift & Oneapp
+
+## Ticketing v2.0.3
+
+- Changed build so t builds all assets at once
