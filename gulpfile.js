@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'local';
+let build = 'staging';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -438,12 +438,18 @@ const dev = series(
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
+  lintSwiftTemplates,
+  lintOneappTemplates,
   parallel(
     buildStyles,
     buildSwiftStyles,
     buildScripts,
     buildTemplates,
     buildSharedTemplates,
+    buildSharedSwiftTemplates,
+    buildSwiftTemplates,
+    buildSharedOneappTemplates,
+    buildOneappTemplates,
     minImages
   ),
   parallel(watchFiles, server)
