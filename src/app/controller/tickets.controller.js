@@ -302,7 +302,7 @@
         excludeBus: vm.excludebusParameter
       }); // set search url for sharing/tracking
 
-      vm.searchFilters = {}; // et scope for search filters and reset on every search
+      vm.searchFilters = {}; // set scope for search filters and reset on every search
 
       vm.origFilters = {}; // set scope for original search filters and reset on every search
       // console.log('this is posted');
@@ -484,8 +484,8 @@
         // compare search reults and exact search results and display difference
         searchAll = vm.all;
         searchExact = vm.exactMatch;
-        // console.log("all results");
-        // console.log(searchAll);
+        console.log('all results');
+        console.log(searchAll);
         // console.log("search exact results");
         // console.log(vm.exactMatch);
 

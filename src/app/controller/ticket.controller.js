@@ -48,6 +48,7 @@
     vm.ticketID = $routeParams.ticket; // set Ticket ID to URL parameter
     vm.filterAccordions = {};
     vm.relatedTickets = {};
+    vm.priceLevelsList = {};
     vm.toggleClick = toggleClick;
     vm.modalShown = false;
     vm.toggleModal = toggleModal;
@@ -62,9 +63,19 @@
 
     // Function to get the ticket data with api call
     function initialise(data) {
-      ticketingService.getTicket(data).then(function(response) {
+      ticketingService.getTicketFull(data).then(function(response) {
         vm.all = response;
-        // console.log(response);
+        vm.priceLevels = response.priceLevels;
+        vm.gpay = false;
+        vm.priceLevelsList = vm.priceLevels.map(function(item) {
+          if (item.type.includes('Google Pay')) {
+            // return item.type;
+            vm.gpay = true;
+          }
+        });
+        console.log(vm.priceLevelsList);
+        console.log(vm.gpay);
+
         if (vm.all.relatedTickets.length) {
           vm.related = [];
           angular.forEach(
@@ -96,7 +107,7 @@
     function initialiseFull(data) {
       ticketingService.getTicketFull(data).then(function(response) {
         vm.full = response;
-        // console.log(response);
+        console.log(response);
       });
     }
 

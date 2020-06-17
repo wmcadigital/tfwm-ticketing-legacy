@@ -116,6 +116,14 @@
                         alt="Buy ticket with Swift on Mobile App" /></a>
             </div>
 
+            <div
+                data-ng-if="ticket.gpay == true">
+                <span>Buy this ticket with Google Pay</span>
+                <a href="https://pay.app.goo.gl/gettheapp-en-GB"
+                    target="_blank"><img class="BuyOnSwift" ng-src="$*imgUrl/gpay.png"
+                        alt="Buy ticket with Google Pay" /></a>
+            </div>
+
             <a data-ng-if="ticket.all.buyTicketUrl"
                 data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
                 class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
