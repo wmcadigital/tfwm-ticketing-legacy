@@ -86,7 +86,8 @@ const paths = {
       { src: 'src/assets/**/*.js', minName: 'assets.min.js', lint: false },
       { src: 'src/app/services/*.js', minName: 'services.min.js', lint: true },
       { src: 'src/app/shared/*.js', minName: 'shared.min.js', lint: true },
-      { src: 'src/app/controller/*.js', minName: 'controller.min.js', lint: true }
+      { src: 'src/app/controller/*.js', minName: 'controller.min.js', lint: true },
+      { src: 'src/app/directives/*.js', minName: 'directives.min.js', lint: true }
     ],
     output: 'build/js/' // Output location of minified JS files
   },
