@@ -25,7 +25,7 @@
     vm.elementIds = [];
 
     // get ticket data form complete api
-    $http.get('$*api' + 'tickets/' + vm.value + '/complete').then(function(response) {
+    $http.get('$*apitickets/' + vm.value + '/complete').then(function(response) {
       // get each priceLevel
       angular.forEach(response.data.priceLevels, function(price) {
         vm.elementIds.push(price.type);
