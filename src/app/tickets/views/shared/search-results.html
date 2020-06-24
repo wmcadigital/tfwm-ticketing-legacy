@@ -69,7 +69,7 @@
         <!-- Exact matched to search -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'"
             class="filtered-header boxin bdr-top--navy">
-            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</h3>
+            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</h3> 
         </div>
 
         <!-- error messages -->
@@ -92,10 +92,10 @@
        <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets"
            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults"
            data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'">
-           <div class="grid"
-               data-ng-repeat="ticket in tickets.origTickets | orderBy:['buyOnDirectDebit', 'ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
+           <div class="grid" data-ng-repeat="ticket in tickets.origTickets | orderBy:['buyOnDirectDebit', 'ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
                <div data-ng-include=" 'tickets/views/shared/item.html' "
-               ticket-item></div>
+               ticket-item>
+               </div>            
            </div>
        </div>
 
