@@ -50,7 +50,6 @@
     vm.getSwiftPAYG = getSwiftPAYG; // Function to retrieve stations
     vm.updateGrid = updateGrid; // Function to update results grid
     vm.update = update; // Do filtering logic in controller so sessions can be stored
-    vm.googlePay = googlePay; // function to check if ticket accepts google pay
     vm.loadMore = loadMore; // function to load more results
     vm.loadMoreExact = loadMoreExact; // function to load more exact results
     vm.filterButtons = {
@@ -337,8 +336,6 @@
           }
         });
 
-        // googlePay(vm.all); // initialise Full API to get price levels
-
         fbus = vm.postedJSON.allowBus || false;
         ftrain = vm.postedJSON.allowTrain || false;
         fmetro = vm.postedJSON.allowMetro || false;
@@ -528,49 +525,6 @@
         $location.hash('sbmBtn');
         $anchorScroll();
       });
-    }
-
-    function googlePay(data) {
-      var items = data;
-      vm.names = [];
-      angular.forEach(
-        items,
-        function(value) {
-          ticketingService.getTicketFull(value.id).then(function(response) {
-            console.log(response);
-            vm.elementIds = [];
-            // vm.elementId = [];
-            // console.log(response.priceLevels);
-            vm.priceLevels = response.priceLevels;
-
-            // get each priceLevel
-            angular.forEach(vm.priceLevels, function(price) {
-              vm.elementIds.push(price.type);
-            });
-
-            console.log(vm.elementIds);
-
-            // remove duplicates from priceLevel
-            vm.unique = vm.elementIds.filter(function(elem, index, self) {
-              return index === self.indexOf(elem);
-            });
-
-            console.log(vm.unique);
-
-            // if priceLevel include Google Pay
-            if (vm.unique.includes('Google Pay')) {
-              vm.gpay = true;
-              vm.names.push(vm.gpay);
-            } else {
-              vm.gpay = false;
-              vm.names.push(vm.gpay);
-            }
-
-            console.log(vm.gpay);
-          });
-        },
-        vm.names
-      );
     }
 
     function update() {
