@@ -35,11 +35,11 @@
     var stations;
     var stationSel;
     var stationSplit;
-    vm.submit = submit; // Function to submit inital search
+    vm.submit = submit; // Function to submit initial search
     vm.clearFilter = clearFilter; // Function to reset filters
-    vm.getStations = getStations; // Function to retreive stations
-    vm.getoocStations = getoocStations; // Function to retreive out of county stations
-    vm.geticStations = geticStations; // Function to retreive in county stations
+    vm.getStations = getStations; // Function to retrieve stations
+    vm.getoocStations = getoocStations; // Function to retrieve out of county stations
+    vm.geticStations = geticStations; // Function to retrieve in county stations
     vm.clearFromStation = clearFromStation; // Function to clear from station
     vm.clearToStation = clearToStation; // Function to clear to station
     vm.clearViaOneStation = clearViaOneStation; // Function to clear via one station
@@ -47,9 +47,10 @@
     vm.clearTime = clearTime; // Function to clear time selection
     vm.checkTimeAll = checkTimeAll; // Function to check time checkboxes
     vm.checkTime = checkTime; // Function to check time checkboxes
-    vm.getSwiftPAYG = getSwiftPAYG; // Function to retreive stations
+    vm.getSwiftPAYG = getSwiftPAYG; // Function to retrieve stations
     vm.updateGrid = updateGrid; // Function to update results grid
     vm.update = update; // Do filtering logic in controller so sessions can be stored
+    vm.googlePay = googlePay; // function to check if ticket accepts google pay
     vm.loadMore = loadMore; // function to load more results
     vm.loadMoreExact = loadMoreExact; // function to load more exact results
     vm.filterButtons = {
@@ -205,7 +206,7 @@
 
     vm.showDetails = false;
 
-    // if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevent tickets are shown
+    // if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevant tickets are shown
     if ($location.search().brand === 'Swift PAYG') {
       getSwiftPAYG();
       swiftPAYG();
@@ -335,6 +336,8 @@
             vm.filterButtons.railZoneTo.push(items.railZoneTo);
           }
         });
+
+        // googlePay(vm.all); // initialise Full API to get price levels
 
         fbus = vm.postedJSON.allowBus || false;
         ftrain = vm.postedJSON.allowTrain || false;
@@ -481,11 +484,11 @@
           });
         }
 
-        // compare search reults and exact search results and display difference
+        // compare search results and exact search results and display difference
         searchAll = vm.all;
         searchExact = vm.exactMatch;
-        console.log('all results');
-        console.log(searchAll);
+        // console.log('all results');
+        // console.log(searchAll);
         // console.log("search exact results");
         // console.log(vm.exactMatch);
 
@@ -527,6 +530,49 @@
       });
     }
 
+    function googlePay(data) {
+      var items = data;
+      vm.names = [];
+      angular.forEach(
+        items,
+        function(value) {
+          ticketingService.getTicketFull(value.id).then(function(response) {
+            console.log(response);
+            vm.elementIds = [];
+            // vm.elementId = [];
+            // console.log(response.priceLevels);
+            vm.priceLevels = response.priceLevels;
+
+            // get each priceLevel
+            angular.forEach(vm.priceLevels, function(price) {
+              vm.elementIds.push(price.type);
+            });
+
+            console.log(vm.elementIds);
+
+            // remove duplicates from priceLevel
+            vm.unique = vm.elementIds.filter(function(elem, index, self) {
+              return index === self.indexOf(elem);
+            });
+
+            console.log(vm.unique);
+
+            // if priceLevel include Google Pay
+            if (vm.unique.includes('Google Pay')) {
+              vm.gpay = true;
+              vm.names.push(vm.gpay);
+            } else {
+              vm.gpay = false;
+              vm.names.push(vm.gpay);
+            }
+
+            console.log(vm.gpay);
+          });
+        },
+        vm.names
+      );
+    }
+
     function update() {
       var filtered = vm.all;
       var filteredorg = vm.exactMatch;
@@ -534,7 +580,7 @@
 
       // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
       angular.forEach(vm.searchFilters, function(val, key) {
-        // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the oppposite/exclude filter values are deleted as the trues will be falses and vice versa)
+        // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the opposite/exclude filter values are deleted as the trues will be false and vice versa)
         if (
           (key.indexOf('allow') !== -1 && val) ||
           (val === false && key.indexOf('allow') === -1)
@@ -604,7 +650,7 @@
 
       // console.log("Search Filters:");
       // console.log(vm.searchFilters);
-      // console.log("Fitered Tickets:");
+      // console.log("Filtered Tickets:");
       // console.log(vm.filteredTickets);
       // console.log('Original Search:');
       // console.log(vm.origTickets);
@@ -964,12 +1010,12 @@
         vm.stationFromNameOocZ5 = selected.originalObject.zone5InCounty;
         vm.fromZoneNumber = selected.originalObject.zone;
         vm.fromStationInfoZone = selected.originalObject.zone;
-        vm.stationFromReq = false; // set from to required to ensure slection is made from list
+        vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
         vm.postJSON.stationNames[0] = null;
-        vm.stationFromReq = false; // set from to required to ensure slection is made from list
+        vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
     };
@@ -1024,7 +1070,7 @@
         vm.stationToNameOocZ5 = selected.originalObject.zone5InCounty;
         vm.toZoneNumber = selected.originalObject.zone;
         vm.toStationInfoZone = selected.originalObject.zone;
-        vm.stationToReq = false; // set to to required to ensure slection is made from list
+        vm.stationToReq = false; // set to to required to ensure selection is made from list
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
@@ -1174,7 +1220,7 @@
       vm.filterButtons.payment = !vm.filterButtons.payment;
       // set search filters to include rail station
       vm.searchFilters.purchaseRailStation = true;
-      // make sure rail stationis ticked
+      // make sure rail station is ticked
       vm.purchaseRailStationCheck = function() {
         return true;
       };
@@ -1231,7 +1277,7 @@
       vm.searchFilters.timePeriod1 = '';
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
-      // set search filters to include ptimePeriod1
+      // set search filters to include timePeriod1
       vm.timePeriodAll = true;
       // make sure payzone is ticked
       vm.timePeriod1CheckAll = function() {
@@ -1243,7 +1289,7 @@
     if ($location.search().timePeriod1 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
-      // set search filters to include ptimePeriod1
+      // set search filters to include timePeriod1
       vm.searchFilters.timePeriod1 = true;
       // make sure payzone is ticked
       vm.timePeriod1Check = function() {
@@ -1255,7 +1301,7 @@
     if ($location.search().timePeriod2 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
-      // set search filters to include ptimePeriod1
+      // set search filters to include timePeriod1
       vm.searchFilters.timePeriod2 = true;
       // make sure payzone is ticked
       vm.timePeriod2Check = function() {
@@ -1267,7 +1313,7 @@
     if ($location.search().timePeriod3 === 'true') {
       // pen time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
-      // set search filters to include ptimePeriod1
+      // set search filters to include timePeriod1
       vm.searchFilters.timePeriod3 = true;
       // make sure payzone is ticked
       vm.timePeriod3Check = function() {
@@ -1279,7 +1325,7 @@
     if ($location.search().timePeriod4 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
-      // set search filters to include ptimePeriod1
+      // set search filters to include timePeriod1
       vm.searchFilters.timePeriod4 = true;
       // make sure payzone is ticked
       vm.timePeriod4Check = function() {
