@@ -20,3 +20,8 @@ Initial release of NWM Ticketing
 ## Ticketing v2.0.3
 
 - Changed build so t builds all assets at once
+
+## Ticketing v2.0.4
+
+- Added Google Pay identifier to search page and product page
+- Reorder search results so DD tickets display last
