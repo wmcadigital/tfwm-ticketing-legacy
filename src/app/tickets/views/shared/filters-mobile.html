@@ -51,7 +51,7 @@
         </div>
 
         <!-- How to Buy -->
-        <div class="filter-block">
+        <div class="filter-block" data-ng-hide="tickets.postedJSON.brand == 'Swift PAYG'">
             <div class="filter-title" data-ng-click="tickets.toggleFilter('payment')">
                 How to Buy
                 <i class="material-icons">
@@ -127,7 +127,7 @@
 
         <!-- Time period -->
         <div class="filter-block"
-            data-ng-hide="(tickets.original | filter: {timePeriod1: true}).length == '0' && (tickets.original | filter: {timePeriod2: true}).length == '0' && (tickets.original | filter: {timePeriod3: true}).length == '0' && (tickets.original | filter: {timePeriod4: true}).length == '0'">
+            data-ng-hide="(tickets.original | filter: {timePeriod1: true}).length == '0' && (tickets.original | filter: {timePeriod2: true}).length == '0' && (tickets.original | filter: {timePeriod3: true}).length == '0' && (tickets.original | filter: {timePeriod4: true}).length == '0' || tickets.postedJSON.brand == 'Swift PAYG'">
             <div class="filter-title" data-ng-click="tickets.toggleFilter('time')">
                 Time of weekday travel
                 <i class="material-icons">
@@ -307,6 +307,9 @@
                     </span>
                 </div>
             </div>
+        </div>
+        <div class="filter-block" data-ng-if="tickets.postedJSON.brand == 'Swift PAYG'">
+            <p>No filter options available</p>
         </div>
         <button type="submit" class="btn btn--arrow btn--blue boxin" ng-click="tickets.hideModalFilter();">Done</button>
     </div>

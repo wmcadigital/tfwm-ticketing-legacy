@@ -25,3 +25,5 @@ Initial release of NWM Ticketing
 
 - Added Google Pay identifier to search page and product page
 - Reorder search results so DD tickets display last
+- New where to buy directive
+- If swift payg pass is chosen show message no filters are available as only one result

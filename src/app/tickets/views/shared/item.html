@@ -62,17 +62,7 @@
             </div>
             <div class="grid-8">
                 <ul>
-                    <li data-ng-if="ticket.purchaseTic">Travel Centres</li>
-                    <li data-ng-if="ticket.purchasePayzone">Payzone outlets</li>
-                    <li data-ng-if="ticket.purchaseRailStation">Rail stations</li>
-                    <li data-ng-if="ticket.purchaseOnBus">On <span data-ng-if="ticket.brand == 'Stagecoach'">Stagecoach</span>
-                    <span data-ng-if="ticket.brand == 'Diamond Bus'">Diamond</span> 
-                    <span data-ng-if="ticket.brand == 'National Express'">National Express</span> Bus</li>
-                    <li data-ng-if="ticket.purchaseOnMetro">On Metro</li>
-                    <li data-ng-if="ticket.buyOnDirectDebit">Direct Debit <span data-ng-if="ticket.buyOnSwift">on Swift</span></li>
-                    <li data-ng-if="ticket.buyOnSwift && !ticket.buyOnDirectDebit">Swift</li>
-                    <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">Swift PAYG</li>
-                    <gpay value="ticket.id"></gpay>
+                    <where-to-buy value="ticket.id"></where-to-buy>
                 </ul>
              </div>
         </div>
