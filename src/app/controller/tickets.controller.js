@@ -101,6 +101,7 @@
       // vm.openFilters = openFilters;
       // vm.closeFilters = closeFilters;
       vm.fromStationInfo = null;
+      vm.buyButton = 'Buy now';
 
       // url parameters
       // exclude bus

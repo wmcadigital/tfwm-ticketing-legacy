@@ -27,3 +27,5 @@ Initial release of NWM Ticketing
 - Reorder search results so DD tickets display last
 - New where to buy directive
 - If swift payg pass is chosen show message no filters are available as only one result
+- Add ability to detect the users device
+- If user is on an android device the buy button updates to "Buy on Google Pay"

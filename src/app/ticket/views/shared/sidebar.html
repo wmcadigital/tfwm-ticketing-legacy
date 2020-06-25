@@ -11,7 +11,7 @@
         <h3>Price & How to buy </h3>
         <hr>
         <p><strong>Ticket: </strong>{{ticket.all.name}}</p>
- <div>device - {{ticket.deviceDetector}}</div>
+
         <div>
             <p class="price online">
                 <span data-ng-if="ticket.all.ticketCurrentAmount == ticket.all.standardCurrentAmount">
@@ -117,7 +117,7 @@
             </div>
 
             <div
-                data-ng-if="ticket.gpay == true">
+                data-ng-if="ticket.gpay == true && ticket.deviceDetector == 'android'">
                 <span>Buy this ticket with Google Pay</span>
                 <a href="https://pay.app.goo.gl/gettheapp-en-GB"
                     target="_blank"><img class="BuyOnSwift" ng-src="$*imgUrl/gpay.png"
@@ -131,7 +131,7 @@
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
             <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit"
-                class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">Buy on Swift</button>
+                class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">{{ticket.buyButtonSwift}}</button>
             <a data-ng-if="ticket.all.buyOnSwift && ticket.all.buyOnDirectDebit" class="btn btn--arrow"
                 data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Direct Debit</a>
 
