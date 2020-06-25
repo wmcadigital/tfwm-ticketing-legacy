@@ -6,7 +6,6 @@
     .controller('TicketDetailCtrl', TicketDetailCtrl)
     .filter('removeHTMLTags', removeHTMLTags)
     .filter('escapeFilter', escapeFilter)
-    .filter('google', google)
     .directive('modalDialog', modalDialog)
     .directive('tabs', tabs)
     .directive('pane', pane)
@@ -199,12 +198,6 @@
     return function(text) {
       return text ? String(text).replace(/\n/gm, '<br><br>') : '';
     };
-  }
-
-  // google pay filter
-  google.$inject = [];
-  function google() {
-    return item === 'Google Pay';
   }
 
   // DIRECTIVES
