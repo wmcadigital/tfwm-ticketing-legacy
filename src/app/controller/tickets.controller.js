@@ -16,7 +16,8 @@
     'savedFilter',
     'ticketingService',
     'angularGridInstance',
-    '$httpParamSerializer'
+    '$httpParamSerializer',
+    'deviceDetector'
   ];
 
   function TicketingSearchCtrl(
@@ -29,7 +30,8 @@
     savedFilter,
     ticketingService,
     angularGridInstance,
-    $httpParamSerializer
+    $httpParamSerializer,
+    deviceDetector
   ) {
     var vm = this;
     var stations;
@@ -65,6 +67,7 @@
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
     vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
+    vm.deviceDetect = deviceDetect; // Function to detect device
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -214,6 +217,12 @@
     // if back button pressed or breadcrumb selected. If brand is Swift ABT
     if ($location.search().brand === 'Swift ABT') {
       swiftABT();
+    }
+
+    // detect device in use
+    vm.deviceDetect();
+    function deviceDetect() {
+      vm.deviceDetector = deviceDetector.device;
     }
 
     // Get Rail stations for autocomplete

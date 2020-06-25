@@ -41,7 +41,7 @@
         "fresh": "npm install && gulp",
         "lint:scripts": "gulp lintScripts",
         "lint:templates": "gulp lintTemplates",
-        "clean": "gulp clean",  
+        "clean": "gulp clean",
         "build:scripts": "gulp buildScripts",
         "build:styles": "gulp buildStyles",
         "build:templates": "gulp buildTemplates",
@@ -85,7 +85,8 @@
     },
     "dependencies": {
         "gulp-htmlmin": "^5.0.1",
-        "jpegtran": "^1.0.6"
+        "jpegtran": "^1.0.6",
+        "ng-device-detector": "^5.1.4"
     },
     "browserslist": [
         "last 2 versions",

@@ -18,10 +18,19 @@
     'getURL',
     '$routeParams',
     '$scope',
-    '$timeout'
+    '$timeout',
+    'deviceDetector'
   ];
 
-  function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope, $timeout) {
+  function TicketDetailCtrl(
+    ticketingService,
+    $interval,
+    getURL,
+    $routeParams,
+    $scope,
+    $timeout,
+    deviceDetector
+  ) {
     var vm = this;
     vm.loadingText = 'Loading...'; // default loading text
     vm.loadingStatus = 'loading'; // default loading status
@@ -60,6 +69,7 @@
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
+    vm.deviceDetect = deviceDetect; // Function to detect device
 
     // Function to get the ticket data with api call
     function initialise(data) {
@@ -125,6 +135,12 @@
 
     function toggleClick(type) {
       vm.filterAccordions[type] = !vm.filterAccordions[type];
+    }
+
+    // detect device in use
+    vm.deviceDetect();
+    function deviceDetect() {
+      vm.deviceDetector = deviceDetector.device;
     }
 
     // popup modals
