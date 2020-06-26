@@ -6,7 +6,6 @@
     .controller('TicketDetailCtrl', TicketDetailCtrl)
     .filter('removeHTMLTags', removeHTMLTags)
     .filter('escapeFilter', escapeFilter)
-    .filter('google', google)
     .directive('modalDialog', modalDialog)
     .directive('tabs', tabs)
     .directive('pane', pane)
@@ -18,10 +17,19 @@
     'getURL',
     '$routeParams',
     '$scope',
-    '$timeout'
+    '$timeout',
+    'deviceDetector'
   ];
 
-  function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope, $timeout) {
+  function TicketDetailCtrl(
+    ticketingService,
+    $interval,
+    getURL,
+    $routeParams,
+    $scope,
+    $timeout,
+    deviceDetector
+  ) {
     var vm = this;
     vm.loadingText = 'Loading...'; // default loading text
     vm.loadingStatus = 'loading'; // default loading status
@@ -60,6 +68,10 @@
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
+    vm.deviceDetect = deviceDetect; // Function to detect device
+    vm.buyButtonSwift = 'Buy on Swift';
+    vm.gpay = false; // Default value for GPay products
+    vm.paygButton = paygButton; // Function to update buy button if product is available on GPay
 
     // Function to get the ticket data with api call
     function initialise(data) {
@@ -103,7 +115,21 @@
             vm.gpay = true;
           }
         });
+        paygButton();
       });
+    }
+
+    // detect device in use
+    vm.deviceDetect();
+    function deviceDetect() {
+      vm.deviceDetector = deviceDetector.device;
+    }
+
+    // update buy button to Buy on Google Pay if available
+    function paygButton() {
+      if (vm.deviceDetector === 'android' && vm.gpay) {
+        vm.buyButtonSwift = 'Buy on Google Pay';
+      }
     }
 
     function openFilters() {
@@ -172,12 +198,6 @@
     return function(text) {
       return text ? String(text).replace(/\n/gm, '<br><br>') : '';
     };
-  }
-
-  // google pay filter
-  google.$inject = [];
-  function google() {
-    return item === 'Google Pay';
   }
 
   // DIRECTIVES

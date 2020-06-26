@@ -3,7 +3,13 @@
   'use strict';
 
   angular
-    .module('ticketingApp', ['ngSanitize', 'ngRoute', 'angucomplete-alt', 'angularGrid'])
+    .module('ticketingApp', [
+      'ngSanitize',
+      'ngRoute',
+      'angucomplete-alt',
+      'angularGrid',
+      'ng.deviceDetector'
+    ])
     .config(trustedURLs)
     .config(routeProvider)
     .run(analytics)
