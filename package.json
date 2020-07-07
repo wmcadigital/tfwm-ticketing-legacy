@@ -7,17 +7,17 @@
         "live": {
             "baseUrl": "//www.networkwestmidlands.com/tickets/",
             "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//apis.networkwestmidlands.com/Ticketing/"
+            "api": "https://apis.networkwestmidlands.com/ticketing/"
         },
         "staging": {
             "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
             "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "api": "https://tickets.api.stageapp.net/tickets"
         },
         "local": {
             "baseUrl": "//localhost:8080",
             "imgUrl": "/build/img",
-            "api": "//ticketingxkbfup3oumfws.azurewebsites.net/Tickets"
+            "api": "https://tickets.api.stageapp.net/tickets"
         }
     },
     "scripts": {
