@@ -11,7 +11,7 @@
   function ticketingService($http) {
     // var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
     // var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
-    var uri2 = 'https://apis.networkwestmidlands.com/Ticketing/';
+    var uri2 = 'https://tickets.api.stageapp.net/';
     var uri = uri2 + 'Tickets/';
     return {
       ticketSearch: function(data) {

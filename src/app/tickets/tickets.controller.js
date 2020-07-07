@@ -66,6 +66,7 @@
     }; // set an object for the filters show/hide toggle to fall into
     vm.toggleFilter = toggleFilter;
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
+    vm.swiftABT = swiftABT; // Function for hiding fields if Swift ABT is selected
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
     vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
@@ -215,6 +216,11 @@
       swiftPAYG();
     }
 
+    // if back button pressed or breadcrumb selected. If brand is Swift ABT
+    if ($location.search().brand === 'Swift ABT') {
+      swiftABT();
+    }
+
     // Get Rail stations for autocomplete
     function getStations() {
       // console.log("get stations");
@@ -255,6 +261,17 @@
           }
         }
       });
+    }
+
+     // if pass is swift abt
+     function swiftABT() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === 'Swift ABT') {
+        console.log('swift abt');
+        vm.isHideCheck = !vm.isHideCheck;
+        vm.postJSON.timeBand = null;
+        vm.postJSON.stationNames = null;
+      }
     }
 
     function submit(data) {
@@ -304,8 +321,8 @@
       vm.searchFilters = {}; // et scope for search filters and reset on every search
 
       vm.origFilters = {}; // set scope for original search filters and reset on every search
-      // console.log('this is posted');
-      // console.log(vm.postedJSON);
+      console.log('this is posted');
+      console.log(vm.postedJSON);
 
       // work out all tickets available
       ticketingService.ticketSearch(data).then(function(response) {
@@ -483,8 +500,8 @@
         // compare search reults and exact search results and display difference
         searchAll = vm.all;
         searchExact = vm.exactMatch;
-        // console.log("all results");
-        // console.log(searchAll);
+        console.log("all results");
+        console.log(searchAll);
         // console.log("search exact results");
         // console.log(vm.exactMatch);
 
