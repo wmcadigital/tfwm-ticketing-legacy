@@ -9,31 +9,31 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    // var uri = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
-    // var uri2 = '//ticketingxkbfup3oumfws.azurewebsites.net/Tickets/';
-    var uri2 = 'https://tickets.api.stageapp.net/';
-    var uri = uri2 + 'Tickets/';
+    var uri = '$*api';
     return {
       ticketSearch: function(data) {
-        return getData($http.post(uri + '/search', data, { cache: true }));
+        return getData($http.post(uri + 'tickets/search', data, { cache: true }));
       },
       getTicket: function(data) {
-        return getData($http.get(uri + data + '/simple', { cache: true }));
+        return getData($http.get(uri + 'tickets/' + data, { cache: true }));
+      },
+      getTicketFull: function(data) {
+        return getData($http.get(uri + 'tickets/' + data + '/complete', { cache: true }));
       },
       getTerms: function(data) {
-        return getData($http.get(uri2 + '/Terms/' + data, { cache: true }));
+        return getData($http.get(uri + 'terms/' + data, { cache: true }));
       },
       getStations: function() {
-        return getData($http.get(uri2 + 'station/train', { cache: true }));
+        return getData($http.get(uri + 'station/train', { cache: true }));
       },
       getOperators: function() {
-        return getData($http.get(uri2 + '/operators', { cache: true }));
+        return getData($http.get(uri + 'operators', { cache: true }));
       },
       getBrands: function() {
-        return getData($http.get(uri2 + '/brands', { cache: true }));
+        return getData($http.get(uri + 'brands', { cache: true }));
       },
       getSwiftSearch: function() {
-        return getData($http.post(uri + 'Search', { cache: true }));
+        return getData($http.post(uri + 'tickets/search', { cache: true }));
       }
     };
 
