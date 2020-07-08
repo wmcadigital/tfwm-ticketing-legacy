@@ -1,1 +1,22 @@
+# Release Notes
+
+## NWM Ticketing v1.0.8
+
+- Update build process
+- New feature - Swift Go pass dropdown
+
+## NWM Ticketing v1.0.6
+
+- Update API endpoints
+
+## NWM Ticketing v1.0.5
+
+- Move modals to sidebar as it broke the button if no "where to buy" block
+- if ticket can be brought on DD and Swift make sure the button states "Buy on Direct Debit"
+- Remove hide logic from "where to buy" block
+- Update api links and copy
+- Added logic so that it shows the word 'decreases' or 'increases' depending on future ticket price
+
 ## NWM Ticketing v1.0.0
+
+Initial Release
