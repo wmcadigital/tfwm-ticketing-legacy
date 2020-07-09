@@ -216,8 +216,8 @@
       swiftPAYG();
     }
 
-    // if back button pressed or breadcrumb selected. If brand is Swift ABT
-    if ($location.search().brand === 'Swift ABT') {
+    // if back button pressed or breadcrumb selected. If brand is Swift ABT or Swift Go
+    if ($location.search().brand === '$*swiftGo') {
       swiftABT();
     }
 
@@ -261,16 +261,6 @@
           }
         }
       });
-    }
-
-     // if pass is swift abt
-     function swiftABT() {
-      vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === 'Swift ABT') {
-        vm.isHideCheck = !vm.isHideCheck;
-        vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = null;
-      }
     }
 
     function submit(data) {
@@ -1354,6 +1344,17 @@
       ) {
         // Clear stationNames list if non-rail pass selected
         vm.postJSON.stationNames = [[]];
+      }
+    }
+
+    // if pass is swift abt
+    function swiftABT() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === '$*swiftGo') {
+        vm.isHideCheck = !vm.isHideCheck;
+        vm.postJSON.passengerType = null;
+        vm.postJSON.timeBand = null;
+        vm.postJSON.stationNames = null;
       }
     }
 
