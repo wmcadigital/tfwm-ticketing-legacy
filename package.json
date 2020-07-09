@@ -5,7 +5,7 @@
     "main": "app.js",
     "buildDirs": {
         "live": {
-            "baseUrl": "//www.networkwestmidlands.com/tickets/",
+            "baseUrl": "//www.wmnetwork.co.uk/tickets/",
             "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
             "api": "https://apis.networkwestmidlands.com/ticketing/"
         },
