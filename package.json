@@ -5,19 +5,22 @@
     "main": "app.js",
     "buildDirs": {
         "live": {
-            "baseUrl": "//www.wmnetwork.co.uk/tickets/",
+            "baseUrl": "https://www.wmnetwork.co.uk/tickets",
             "imgUrl": "//static.centro.org.uk/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "https://apis.networkwestmidlands.com/ticketing/"
+            "api": "https://apis.networkwestmidlands.com/ticketing/",
+            "swiftGo": "Swift Go"
         },
         "staging": {
             "baseUrl": "//stagenwm.cenapps.org.uk/tickets/",
             "imgUrl": "//static.centro.org.uk/Staging/nwmAssets/apps/ticketing-nwm/build/img",
-            "api": "https://tickets.api.stageapp.net/"
+            "api": "https://tickets.api.stageapp.net/",
+            "swiftGo": "Swift ABT"
         },
         "local": {
             "baseUrl": "//localhost:8080",
             "imgUrl": "/build/img",
-            "api": "https://tickets.api.stageapp.net/"
+            "api": "https://tickets.api.stageapp.net/",
+            "swiftGo": "Swift ABT"
         }
     },
     "scripts": {
