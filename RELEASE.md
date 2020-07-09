@@ -1,5 +1,9 @@
 # Release Notes
 
+## NWM Ticketing v1.0.9
+
+- Update build process for the Swift Go pass as they have different names on staging and live endpoints
+
 ## NWM Ticketing v1.0.8
 
 - Update build process
