@@ -58,11 +58,11 @@
                 {{ticket.all.ticketFutureDate | date : format : shortDate}})</span>
         </p>
 
-        <p data-ng-if="ticket.all.swiftCurrentAmount" class="boxin bg--blue bg--tint">
-            Note - Swift PAYG Price will be the same as the standard ticket Price from
-            {{ticket.all.ticketFutureDate | date : format : shortDate}}
-        </p>
-        <p data-ng-if="ticket.all.buyTicketUrl" class="online">when you buy online</p>
+       <p data-ng-if="ticket.all.buyTicketUrl"
+                data-ng-hide="!ticket.all.swiftCurrentAmount || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
+                class="online">when you buy online</p>
+
+        <p data-ng-if="ticket.all.onlineCurrentAmount" class="online">when you buy online</p>
         <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'"
             data-ng-hide="ticket.all.onlineCurrentAmount">
             <li data-ng-if="ticket.all.purchaseTic"><a
