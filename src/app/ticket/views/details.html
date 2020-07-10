@@ -51,7 +51,7 @@
             <span data-ng-if="ticket.all.validityId == 450930002"> per month</span>
             <span data-ng-if="ticket.all.validityId == 450930006"> per month</span>
             <span data-ng-if="ticket.all.validityId == 450930010"> per month</span>
-            <span data-ng-if="ticket.all.validityId == 450930000"> a day</span>
+            <span data-ng-if="ticket.all.validityId == 450930000" data-ng-hide="ticket.all.id == '811'"> a day</span>
             <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
             <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
             <span data-ng-if="ticket.all.swiftCurrentAmount" style="font-size: 10px;">(until
