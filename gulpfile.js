@@ -129,6 +129,7 @@ function minifyJS(jsFile) {
     .pipe(dest(paths.scripts.output))
     .pipe(replace('$*api', json.buildDirs[build].api))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest(paths.scripts.output)); // Spit out concat + minified file in ./build/
 }
 
@@ -164,6 +165,7 @@ function buildTemplates() {
     .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
