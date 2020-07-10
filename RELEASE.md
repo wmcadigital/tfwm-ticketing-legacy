@@ -1,5 +1,10 @@
 # Release Notes
 
+## NWM Ticketing v1.0.10
+
+- Update sidebar & details so "credit" and "a day" does not show for Swift go ticket 811
+- Update details page to use the same logic for "when you buy online"
+
 ## NWM Ticketing v1.0.9
 
 - Update build process for the Swift Go pass as they have different names on staging and live endpoints
