@@ -1,27 +1,11 @@
 # Release Notes
 
-## Ticketing v1.0.0
+## Ticketing v2.0.11
 
-Initial release of NWM Ticketing
+- Updated default station post json to a single array
+- Updated live cdn image location
 
-## Ticketing v2.0.0
-
-- Styling Amends for OneApp
-- Integrate Swift search into one Repo
-
-## Ticketing v2.0.1
-
-- Updated build directories. Fixed issue building service apis
-
-## Ticketing v2.0.2
-
-- Added new dev build scripts for Swift & Oneapp
-
-## Ticketing v2.0.3
-
-- Changed build so t builds all assets at once
-
-## Ticketing v2.0.4
+## Ticketing v2.0.9
 
 - Added Google Pay identifier to search page and product page
 - Reorder search results so DD tickets display last
@@ -29,3 +13,24 @@ Initial release of NWM Ticketing
 - If swift payg pass is chosen show message no filters are available as only one result
 - Add ability to detect the users device
 - If user is on an android device the buy button updates to "Buy on Google Pay"
+
+## Ticketing v2.0.3
+
+- Changed build so t builds all assets at once
+
+## Ticketing v2.0.2
+
+- Added new dev build scripts for Swift & Oneapp
+
+## Ticketing v2.0.1
+
+- Updated build directories. Fixed issue building service apis
+
+## Ticketing v2.0.0
+
+- Styling Amends for OneApp
+- Integrate Swift search into one Repo
+
+## Ticketing v1.0.0
+
+Initial release of NWM Ticketing
