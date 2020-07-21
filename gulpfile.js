@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'local';
+let build = 'live';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -201,6 +201,7 @@ function minifyJS(jsFile) {
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest(paths.scripts.output)); // Spit out concat + minified file in ./build/
 }
 
@@ -238,6 +239,7 @@ function buildTemplates() {
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 

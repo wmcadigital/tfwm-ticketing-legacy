@@ -82,7 +82,7 @@
                     <option value="ntrain">ntrain</option>
                     <option value="ntrain - Out of County">ntrain - Out of County</option>
                     <option value="Stagecoach">Stagecoach</option>
-                    <option value="Swift ABT">Swift Go</option>
+                    <option value="$*swiftGo">Swift Go</option>
                     <option value="Swift PAYG">Swift PAYG</option>
                     <option value="West Midlands Metro">West Midlands Metro</option>
                 </select>
@@ -93,7 +93,7 @@
 
     <!-- Traveller -->
     <div class="rowcontainer traveller">
-        <div class="grid-5" ng-hide="tickets.passValue == 'Swift PAYG' || tickets.passValue == 'Swift ABT'" data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postJSON.brand">
+        <div class="grid-5" ng-hide="tickets.passValue == 'Swift PAYG' || tickets.passValue == '$*swiftGo'" data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postJSON.brand">
             <span tooltip tooltipc=
             "
             Young Person up to 18: - For children aged 5-15 inclusive and holders of the Network West Midlands 
@@ -328,7 +328,7 @@
     <!-- /Rail Stations -->
 
     <!-- Duration -->
-    <div class="fields how-long grid-12" ng-hide="tickets.passValue == 'Swift PAYG' || tickets.passValue == 'Swift ABT' || !tickets.postJSON.passengerType" data-ng-if="tickets.postJSON.passengerType != '' && (tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postJSON.brand)">
+    <div class="fields how-long grid-12" ng-hide="tickets.passValue == 'Swift PAYG' || tickets.passValue == '$*swiftGo' || !tickets.postJSON.passengerType" data-ng-if="tickets.postJSON.passengerType != '' && (tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postJSON.brand)">
         <label class="plain duration">Duration</label>
         <div class="labels-new">
             <span class="icon-stylized-new" ng-hide="tickets.postJSON.brand == 'ntrain - Out of County' || tickets.postJSON.brand == 'ntrain'">
@@ -359,6 +359,6 @@
     </div>
     <!-- /Duration -->
 
-    <button id="sbmBtn" data-ng-if="tickets.postJSON.passengerType && tickets.postJSON.timeBand || tickets.postJSON.brand == 'Swift PAYG' || tickets.passValue == 'Swift ABT'"
+    <button id="sbmBtn" data-ng-if="tickets.postJSON.passengerType && tickets.postJSON.timeBand || tickets.postJSON.brand == 'Swift PAYG' || tickets.passValue == '$*swiftGo'"
         type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy" ng-disabled="tsearch.$invalid">Find tickets</button>
 </form>

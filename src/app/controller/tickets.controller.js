@@ -212,7 +212,7 @@
     }
 
     // if back button pressed or breadcrumb selected. If brand is Swift ABT
-    if ($location.search().brand === 'Swift ABT') {
+    if ($location.search().brand === '$*swiftGo') {
       swiftABT();
     }
 
@@ -1346,7 +1346,7 @@
     // if pass is swift abt
     function swiftABT() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === 'Swift ABT') {
+      if (vm.passValue === '$*swiftGo') {
         // console.log('swift abt');
         vm.isHideCheck = !vm.isHideCheck;
         // vm.postJSON.allowBus = 'false';
