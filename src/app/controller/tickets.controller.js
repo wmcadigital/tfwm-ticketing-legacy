@@ -87,7 +87,7 @@
         passengerType: $location.search().passengerType || '',
         timeBand: $location.search().timeBand || '',
         brand: $location.search().brand || null,
-        stationNames: $location.search().stationNames || [[]]
+        stationNames: $location.search().stationNames || []
       }; // Define postJSON default values
       vm.stationFromName = null; // Clear Stations
       vm.stationToName = null;
@@ -978,7 +978,7 @@
     function clearFromStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       vm.stationFromName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = [];
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1038,7 +1038,7 @@
     function clearToStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
       vm.stationToName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = [];
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
@@ -1092,7 +1092,7 @@
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
       vm.stationViaOneName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = [];
     }
 
     // control filters according to url parameters
@@ -1339,7 +1339,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [[]];
+        vm.postJSON.stationNames = [];
       }
     }
 
@@ -1364,7 +1364,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [[]];
+        vm.postJSON.stationNames = [];
       }
     }
 
