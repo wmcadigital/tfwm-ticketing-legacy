@@ -15,7 +15,7 @@
             "baseUrlSwift": "//www.wmnetwork.co.uk/swift/tickets/",
             "baseUrlOneapp": "//www.wmnetwork.co.uk/oneapp/tickets/",
             "cdn": "//cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/",
-            "imgUrl": "//cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/build/img",
+            "imgUrl": "//cloudcdn.wmca.org.uk/wmnassets/apps/ticket-finder/img",
             "api": "https://apis.networkwestmidlands.com/ticketing/"
         },
         "staging": {
