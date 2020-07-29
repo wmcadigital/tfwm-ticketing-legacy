@@ -87,7 +87,7 @@
         passengerType: $location.search().passengerType || '',
         timeBand: $location.search().timeBand || '',
         brand: $location.search().brand || null,
-        stationNames: $location.search().stationNames || []
+        stationNames: $location.search().stationNames || null
       }; // Define postJSON default values
       vm.stationFromName = null; // Clear Stations
       vm.stationToName = null;
@@ -842,6 +842,7 @@
         return false;
       };
       savedFilter.set('url', '');
+      vm.postJSON.stationNames = null;
       clearFromStation();
       clearToStation();
       clearViaOneStation();
@@ -957,6 +958,7 @@
     vm.stationFromReqOOC = true; // set ooc station to required
     vm.stationFrom = function(selected) {
       if (selected) {
+        vm.postJSON.stationNames = [];
         vm.stationFromName = selected.originalObject.name; // set From station
         vm.postJSON.stationNames[0] = selected.originalObject.name;
         vm.stationFromNameZone = selected.originalObject.zone;
@@ -968,7 +970,7 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        // vm.postJSON.stationNames[0] = null;
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -1028,7 +1030,7 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        // vm.postJSON.stationNames[1] = null;
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1329,7 +1331,7 @@
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = null;
       } else if (
         vm.passValue === 'nbus' ||
         vm.passValue === 'National Express' ||
@@ -1339,7 +1341,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = null;
       }
     }
 
@@ -1364,7 +1366,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = null;
       }
     }
 
