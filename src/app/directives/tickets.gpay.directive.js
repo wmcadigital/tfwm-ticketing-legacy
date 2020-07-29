@@ -100,7 +100,7 @@
 
       // if priceLevel includes Google Pay
       if (vm.unique.includes('Google Pay')) {
-        vm.gpay = false;
+        vm.gpay = true;
       } else {
         vm.gpay = false;
       }
