@@ -1,0 +1,18 @@
+<div class="grid-12">
+    <h5 class="price">
+        <span data-ng-if="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">From {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
+        <span data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">{{(ticket.standardCurrentAmount | currency:"£")}}</span>
+        <span data-ng-if="ticket.standardCurrentAmount != ticket.ticketCurrentAmount" data-ng-hide="ticket.id == '810' || ticket.id == '811'">{{(ticket.standardCurrentAmount | currency:"£")}} <span class="small">(Standard Rate)</span><br></span>
+        <span data-ng-if="ticket.ticketCurrentAmount == '0' && ticket.ticketCurrentAmount != '0.0'">{{ticket.priceOverride}} Credit</span>
+        <span data-ng-if="ticket.onlineCurrentAmount"><p>{{(ticket.onlineCurrentAmount | currency:"£")}} - Online price</p></span>
+        <span data-ng-if="ticket.id == '811'">{{ticket.priceOverride}}</span>
+        <span data-ng-if="ticket.ticketCurrentAmount && ticket.standardCurrentAmount == '0'">{{(ticket.ticketCurrentAmount | currency:"£")}}</span>
+        <span data-ng-if="ticket.ticketCurrentAmount && !ticket.standardCurrentAmount">{{(ticket.ticketCurrentAmount | currency:"£")}}</span>
+        <span data-ng-if="ticket.validityId == 450930002" data-ng-hide="ticket.ticketCurrentAmount && ticket.onlineCurrentAmount"> per month</span>
+        <span data-ng-if="ticket.validityId == 450930006" data-ng-hide="ticket.ticketCurrentAmount && ticket.onlineCurrentAmount"> per month</span>
+        <span data-ng-if="ticket.validityId == 450930010" data-ng-hide="ticket.ticketCurrentAmount && ticket.onlineCurrentAmount"> per month</span>
+        <span data-ng-if="ticket.validityId == 450930000" data-ng-hide="ticket.type == 'Carnet' || ticket.id == '811'"> a day</span>
+        <span data-ng-if="ticket.validityId == 450930001" data-ng-hide="ticket.ticketCurrentAmount && ticket.onlineCurrentAmount"> a week</span>
+        <span data-ng-if="ticket.validityId == 450930003"> for 1 year</span>
+    </h5>
+</div>
