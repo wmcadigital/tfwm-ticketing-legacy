@@ -265,39 +265,6 @@ function buildSharedTemplates() {
     .pipe(dest('./build/js/'));
 }
 
-function buildSharedSwiftTemplates() {
-  return src(paths.templatesShared.src)
-    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
-    .pipe(
-      ngHtml2Js({
-        moduleName: 'ticketingApp'
-      })
-    )
-    .pipe(concat(paths.templatesSwiftShared.minName))
-    .pipe(uglify())
-    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
-    .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
-    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
-    .pipe(dest('./build/js/'));
-}
-
-function buildSharedOneappTemplates() {
-  return src(paths.templatesShared.src)
-    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
-    .pipe(
-      ngHtml2Js({
-        moduleName: 'ticketingApp'
-      })
-    )
-    .pipe(concat(paths.templatesOneappShared.minName))
-    .pipe(uglify())
-    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
-    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
-    .pipe(dest('./build/js/'));
-}
-
 // Lint Swift Templates/HTML
 function lintSwiftTemplates() {
   return src(paths.templatesShared.src)
@@ -397,8 +364,6 @@ const buildAll = series(
   buildSwiftStyles,
   buildTemplates,
   buildSharedTemplates,
-  buildSharedSwiftTemplates,
-  buildSharedOneappTemplates,
   buildSwiftTemplates,
   buildOneappTemplates,
   lintScripts,
@@ -447,9 +412,7 @@ const dev = series(
     buildScripts,
     buildTemplates,
     buildSharedTemplates,
-    buildSharedSwiftTemplates,
     buildSwiftTemplates,
-    buildSharedOneappTemplates,
     buildOneappTemplates,
     minImages
   ),
@@ -461,13 +424,7 @@ const devSwift = series(
   lintTemplates,
   lintSharedTemplates,
   lintSwiftTemplates,
-  parallel(
-    buildSwiftStyles,
-    buildScripts,
-    buildSharedSwiftTemplates,
-    buildSwiftTemplates,
-    minImages
-  ),
+  parallel(buildSwiftStyles, buildScripts, buildSwiftTemplates, minImages),
   parallel(watchFiles, serverSwift)
 );
 // Oneapp version
@@ -476,7 +433,7 @@ const devOneapp = series(
   lintTemplates,
   lintSharedTemplates,
   lintOneappTemplates,
-  parallel(buildStyles, buildScripts, buildSharedOneappTemplates, buildOneappTemplates, minImages),
+  parallel(buildStyles, buildScripts, buildOneappTemplates, minImages),
   parallel(watchFiles, serverOneapp)
 );
 // Export items to be used in terminal
