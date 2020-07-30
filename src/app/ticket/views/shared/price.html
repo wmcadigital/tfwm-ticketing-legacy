@@ -16,8 +16,12 @@
         <span data-ng-if="ticket.all.validityId == 450930000" data-ng-hide="ticket.all.id == '811'"> a day</span>
         <span data-ng-if="ticket.all.validityId == 450930001"> a week</span>
         <span data-ng-if="ticket.all.validityId == 450930003"> for 1 year</span>
-        <span data-ng-if="ticket.all.swiftCurrentAmount" style="font-size: 10px;">(until {{ticket.all.ticketFutureDate | date : format : shortDate}})</span>
     </p>
+
+    <p data-ng-if="ticket.gpay == true && ticket.deviceDetector == 'android'" class="online">
+        when you buy with Google Pay
+    </p>
+
     <p data-ng-if="ticket.all.buyTicketUrl" data-ng-hide="!ticket.all.swiftCurrentAmount || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" class="online">
         when you buy online
     </p>
@@ -57,7 +61,7 @@
     </ul>
 
             <!-- Swift PAYG credit tickets -->
-            <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift">
+            <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android'">
                 when you buy this ticket with Swift PAYG credit
                 <span
                     data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
@@ -78,8 +82,7 @@
                 <a ng-href="$*baseUrl/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
             </div>
 
-            <div
-                data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'">
+            <div data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'" data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android'">
                 <span>Buy this ticket on the Swift on Mobile Android App</span>
                 <a href="https://play.google.com/store/apps/details?id=iomswift.unicard_uk.com.iomswift&hl=en_GB"
                     target="_blank"><img class="BuyOnSwift" ng-src="$*imgUrl/play_badge_new.png"
@@ -127,5 +130,12 @@
                     <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/"
                             target="_blank">On Metro</a></li>
                 </ul>
+            </div>
+            <div data-ng-if="ticket.gpay == true && ticket.deviceDetector == 'android'">
+                <span>Buy this ticket with Google Pay</span>
+                <a href="https://pay.app.goo.gl/gettheapp-en-GB"
+                    target="_blank"><img class="BuyOnSwift" ng-src="$*imgUrl/gpay.png"
+                        alt="Buy ticket with Google Pay" /></a>
+                        <button class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">Buy on Google Pay</button>
             </div>
         </div>

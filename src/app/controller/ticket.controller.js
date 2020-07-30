@@ -17,10 +17,19 @@
     'getURL',
     '$routeParams',
     '$scope',
-    '$timeout'
+    '$timeout',
+    'deviceDetector'
   ];
 
-  function TicketDetailCtrl(ticketingService, $interval, getURL, $routeParams, $scope, $timeout) {
+  function TicketDetailCtrl(
+    ticketingService,
+    $interval,
+    getURL,
+    $routeParams,
+    $scope,
+    $timeout,
+    deviceDetector
+  ) {
     var vm = this;
     vm.loadingText = 'Loading...'; // default loading text
     vm.loadingStatus = 'loading'; // default loading status
@@ -59,6 +68,8 @@
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
+    vm.deviceDetect = deviceDetect; // Function to detect device
+    vm.gpay = false; // Default value for GPay products
 
     // Function to get the ticket data with api call
     function initialise(data) {
@@ -107,9 +118,29 @@
     }
 
     initialise(vm.ticketID); // initialise API to get ticket
+    initialiseFull(vm.ticketID); // initialise API to get ticket
 
     function toggleClick(type) {
       vm.filterAccordions[type] = !vm.filterAccordions[type];
+    }
+
+    function initialiseFull(data) {
+      ticketingService.getTicketFull(data).then(function(response) {
+        vm.full = response;
+        vm.priceLevels = response.priceLevels;
+        vm.gpay = false;
+        vm.priceLevelsList = vm.priceLevels.map(function(item) {
+          if (item.type.includes('Google Pay')) {
+            vm.gpay = true;
+          }
+        });
+      });
+    }
+
+    // detect device in use
+    vm.deviceDetect();
+    function deviceDetect() {
+      vm.deviceDetector = deviceDetector.device;
     }
 
     // popup modals
