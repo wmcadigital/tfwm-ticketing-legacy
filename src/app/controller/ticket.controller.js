@@ -135,7 +135,9 @@
         vm.priceLevelsList = vm.priceLevels.map(function(item) {
           if (item.type.includes('Google Pay')) {
             vm.gpay = true;
+            return true;
           }
+          return false;
         });
       });
     }
