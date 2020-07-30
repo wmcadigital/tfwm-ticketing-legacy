@@ -93,7 +93,10 @@
     },
     "dependencies": {
         "gulp-htmlmin": "^5.0.1",
-        "jpegtran": "^1.0.6"
+        "jpegtran": "^1.0.6",
+        "ng-device-detector": "^5.1.4",
+        "re-tree": "^0.1.7",
+        "ua-device-detector": "^1.1.8"
     },
     "browserslist": [
         "last 2 versions",
