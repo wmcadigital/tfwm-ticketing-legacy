@@ -260,6 +260,7 @@ function buildSharedTemplates() {
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));

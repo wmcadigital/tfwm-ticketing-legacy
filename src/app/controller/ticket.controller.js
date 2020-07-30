@@ -18,7 +18,8 @@
     '$routeParams',
     '$scope',
     '$timeout',
-    'deviceDetector'
+    'deviceDetector',
+    '$location'
   ];
 
   function TicketDetailCtrl(
@@ -28,7 +29,8 @@
     $routeParams,
     $scope,
     $timeout,
-    deviceDetector
+    deviceDetector,
+    $location
   ) {
     var vm = this;
     vm.loadingText = 'Loading...'; // default loading text
@@ -70,6 +72,7 @@
     vm.date = new Date();
     vm.deviceDetect = deviceDetect; // Function to detect device
     vm.gpay = false; // Default value for GPay products
+    vm.searchLocation = $location.host(); // Set the current host
 
     // Function to get the ticket data with api call
     function initialise(data) {
