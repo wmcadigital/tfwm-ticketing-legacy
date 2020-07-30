@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'live';
+let build = 'local';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -144,7 +144,6 @@ function buildStyles() {
     .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.styles.output) + '_sourcemaps/'))
-    .pipe(dest(paths.styles.output))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(dest(paths.styles.output))
     .pipe(browserSync.stream()); // Push new CSS to server without reload
@@ -168,7 +167,6 @@ function buildSwiftStyles() {
     .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.stylesSwift.output) + '_sourcemaps/'))
-    .pipe(dest(paths.stylesSwift.output))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(dest(paths.stylesSwift.output))
     .pipe(browserSync.stream()); // Push new CSS to server without reload
@@ -196,7 +194,6 @@ function minifyJS(jsFile) {
     .pipe(uglify({ mangle: { reserved: ['jQuery'] } })) // Mangle var names etc.
     .pipe(sourcemaps.write(getRoot(paths.scripts.output) + '_sourcemaps/'))
     .pipe(plumber.stop())
-    .pipe(dest(paths.scripts.output))
     .pipe(replace('$*api', json.buildDirs[build].api))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
@@ -234,7 +231,6 @@ function buildTemplates() {
     )
     .pipe(concat(paths.templates.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
@@ -260,11 +256,12 @@ function buildSharedTemplates() {
     )
     .pipe(concat(paths.templatesShared.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -278,9 +275,10 @@ function buildSharedSwiftTemplates() {
     )
     .pipe(concat(paths.templatesSwiftShared.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -294,9 +292,9 @@ function buildSharedOneappTemplates() {
     )
     .pipe(concat(paths.templatesOneappShared.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -317,9 +315,9 @@ function buildSwiftTemplates() {
     )
     .pipe(concat(paths.templatesSwift.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -340,9 +338,9 @@ function buildOneappTemplates() {
     )
     .pipe(concat(paths.templatesOneapp.minName))
     .pipe(uglify())
-    .pipe(dest('./build/js/'))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 

@@ -6,7 +6,6 @@
     .controller('TicketDetailCtrl', TicketDetailCtrl)
     .filter('removeHTMLTags', removeHTMLTags)
     .filter('escapeFilter', escapeFilter)
-    .filter('google', google)
     .directive('modalDialog', modalDialog)
     .directive('tabs', tabs)
     .directive('pane', pane)
@@ -93,19 +92,6 @@
       });
     }
 
-    function initialiseFull(data) {
-      ticketingService.getTicketFull(data).then(function(response) {
-        vm.full = response;
-        vm.priceLevels = response.priceLevels;
-        vm.gpay = false;
-        vm.priceLevelsList = vm.priceLevels.map(function(item) {
-          if (item.type.includes('Google Pay')) {
-            vm.gpay = true;
-          }
-        });
-      });
-    }
-
     function openFilters() {
       document.getElementById('filterOverlay').style.display = 'block';
     }
@@ -121,7 +107,6 @@
     }
 
     initialise(vm.ticketID); // initialise API to get ticket
-    initialiseFull(vm.ticketID); // initialise API to get ticket
 
     function toggleClick(type) {
       vm.filterAccordions[type] = !vm.filterAccordions[type];
@@ -172,12 +157,6 @@
     return function(text) {
       return text ? String(text).replace(/\n/gm, '<br><br>') : '';
     };
-  }
-
-  // google pay filter
-  google.$inject = [];
-  function google() {
-    return item === 'Google Pay';
   }
 
   // DIRECTIVES

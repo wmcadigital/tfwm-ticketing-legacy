@@ -2,7 +2,6 @@
     <div class="grid-12">
         <a class="btn-link float--right" href="" data-ng-click="tickets.clearFilter();">Reset</a>
     </div>
-
     <!-- Mode & Pass -->
     <div class="grid-5">
         <div class="fields new-transport-icons-blue">
@@ -81,7 +80,7 @@
                     <option value="nnetwork">nnetwork</option>
                     <option value="ntrain">ntrain</option>
                     <option value="ntrain - Out of County">ntrain - Out of County</option>
-                    <option value="Stagecoach">Stagecoach</option>
+                    <option data-ng-hide="tickets.searchLocation == '$*swiftHost'" value="Stagecoach">Stagecoach</option>
                     <option value="$*swiftGo">Swift Go</option>
                     <option value="Swift PAYG">Swift PAYG</option>
                     <option value="West Midlands Metro">West Midlands Metro</option>
@@ -190,7 +189,7 @@
         </div>
        
         <div class="grid-6 padding-left">
-            <div class="fields passselect nga-fast nga-fade" style="margin:0px">
+            <div class="fields passselect nga-fast nga-fade" style="margin:0px" data-ng-hide="!tickets.stationFromName">
                 <label class="plain-small visuallyhidden" for="stationTo_value">To <span data-ng-if="tickets.postJSON.brand == 'ntrain - Out of County' && tickets.postJSON.passengerType">Out
                         of County Station</span></label>
                 <div data-ng-hide="tickets.postJSON.brand == 'ntrain - Out of County' || tickets.postJSON.brand == 'ntrain'">
@@ -212,7 +211,7 @@
                 </div>
             </div>
             <!-- If pass is ntrain - Out of County-->
-            <div data-ng-if="tickets.postJSON.brand == 'ntrain - Out of County' && tickets.postJSON.passengerType" data-ng-init="tickets.getoocStations();">
+            <div data-ng-hide="!tickets.stationFromName" data-ng-if="tickets.postJSON.brand == 'ntrain - Out of County' && tickets.postJSON.passengerType" data-ng-init="tickets.getoocStations();">
                 <div angucomplete-alt id="stationTo3" placeholder="To / From out of county station" pause="100" selected-object="tickets.stationTo"
                     local-data="tickets.stationoocList" search-fields="name" title-field="name" minlength="1"
                     input-class="form-control form-control-small" match-class="highlight" initial-value="tickets.stationToName"
@@ -228,6 +227,7 @@
                     field-required-class="required" initial-value="stationToName">
                 </div>
             </div>-->
+            <div data-ng-hide="!tickets.stationFromName">
             <a data-ng-if="tickets.stationToName || stationToName || toStationText != null && tickets.stationToName == null && stationToReq == true" class="btn-link float--right" href="" data-ng-click="tickets.clearToStation();">Clear</a>
 
             <div class="result boxin bg--grey bg--tint bdr-bottom--blue" data-ng-show="tickets.stationToName || stationToName">
@@ -237,12 +237,13 @@
                         tickets.toZoneNumber }}</strong>.
                 </div>
             </div>
+            </div>
         </div>
     </div>
 
     <!-- Via station -->
     <div class="rowcontainer">
-        <div class="grid-6 padding-right" ng-hide="tickets.passValue == 'Swift PAYG'"
+        <div class="grid-6 padding-right" ng-hide="tickets.passValue == 'Swift PAYG' || !tickets.stationFromName"
             data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postJSON.brand">
             <div data-ng-if="tickets.postJSON.allowTrain && tickets.postJSON.passengerType || tickets.postJSON.brand == 'ntrain - Out of County' && tickets.postJSON.passengerType || tickets.postJSON.brand == 'ntrain' && tickets.postJSON.passengerType || tickets.postJSON.brand == 'nnetwork' && tickets.postJSON.passengerType"
                 class="help-section grid-12">
@@ -360,5 +361,5 @@
     <!-- /Duration -->
 
     <button id="sbmBtn" data-ng-if="tickets.postJSON.passengerType && tickets.postJSON.timeBand || tickets.postJSON.brand == 'Swift PAYG' || tickets.passValue == '$*swiftGo'"
-        type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy" ng-disabled="tsearch.$invalid">Find tickets</button>
+    data-ng-hide="tickets.stationFromName && !tickets.stationToName || !tickets.stationFromName && tickets.stationToName || viaOneStationText != null && !tickets.stationFromName && !tickets.stationToName" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy" ng-disabled="tsearch.$invalid">Find tickets</button>
 </form>

@@ -65,6 +65,7 @@
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
     vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
+    vm.searchLocation = $location.host(); // Set the current host
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
