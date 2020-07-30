@@ -2,7 +2,13 @@
     <h5 class="price">
         <span data-ng-if="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">From {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
         <span data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">{{(ticket.standardCurrentAmount | currency:"£")}}</span>
-        <span data-ng-if="ticket.standardCurrentAmount != ticket.ticketCurrentAmount" data-ng-hide="ticket.id == '810' || ticket.id == '811'">{{(ticket.standardCurrentAmount | currency:"£")}} <span class="small">(Standard Rate)</span><br></span>
+        <span data-ng-if="ticket.standardDiscountCurrentAmount">
+            <span>{{(ticket.standardCurrentAmount | currency:"£")}} <span class="small">(Standard Rate)</span><br></span>
+            <span>{{(ticket.standardDiscountCurrentAmount | currency:"£")}} <span class="small">(Discounted Rate)</span><br></span>   
+        </span>
+        <span data-ng-if="!ticket.standardDiscountCurrentAmount">
+            <span data-ng-if="ticket.standardCurrentAmount != ticket.ticketCurrentAmount" data-ng-hide="ticket.id == '810' || ticket.id == '811'">{{(ticket.standardCurrentAmount | currency:"£")}}<br></span>
+        </span>
         <span data-ng-if="ticket.ticketCurrentAmount == '0' && ticket.ticketCurrentAmount != '0.0'">{{ticket.priceOverride}} Credit</span>
         <span data-ng-if="ticket.onlineCurrentAmount"><p>{{(ticket.onlineCurrentAmount | currency:"£")}} - Online price</p></span>
         <span data-ng-if="ticket.id == '811'">{{ticket.priceOverride}}</span>
