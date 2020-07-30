@@ -227,6 +227,9 @@ input.ng-invalid-field-required-class {
 }
 
 .itemContent {
+    a {
+        text-decoration: underline;
+    }
     .summary {
         margin: 10px 0;
         font-weight: normal;
