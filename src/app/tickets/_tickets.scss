@@ -227,7 +227,7 @@ input.ng-invalid-field-required-class {
 }
 
 .itemContent {
-    a {
+    a:not(.btn) {
         text-decoration: underline;
     }
     .summary {
