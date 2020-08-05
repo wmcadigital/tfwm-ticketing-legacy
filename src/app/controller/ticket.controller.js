@@ -65,6 +65,7 @@
     vm.toggleModalBus = toggleModalBus;
     vm.toggleModalTrain = toggleModalTrain;
     vm.toggleModalSwift = toggleModalSwift;
+    vm.toggleModalGPay = toggleModalGPay;
     vm.operatorList = []; // Define Operator list
     vm.limit = 4; // Set paging limit for Alt tickets
     vm.openFilters = openFilters;
@@ -172,6 +173,12 @@
     vm.modalShownSwift = false;
     function toggleModalSwift() {
       vm.modalShownSwift = !vm.modalShownSwift;
+    }
+
+    // google pay
+    vm.modalShownGpay = false;
+    function toggleModalGPay() {
+      vm.modalShownGpay = !vm.modalShownGpay;
     }
 
     $timeout(function() {
