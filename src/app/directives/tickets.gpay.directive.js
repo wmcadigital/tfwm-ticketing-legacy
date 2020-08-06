@@ -23,21 +23,20 @@
   function GpayController($http) {
     var vm = this;
     vm.elementIds = [];
-    vm.whereToBuy = [];
 
     // get ticket data form complete api
     $http.get('$*apitickets/' + vm.value + '/complete').then(function(response) {
       // set where product can be brought
       if (response.data.purchaseTic) {
-        vm.whereToBuy.push('Travel Centres');
+        vm.purchaseTic = true;
       }
 
       if (response.data.purchasePayzone) {
-        vm.whereToBuy.push('Payzone outlets');
+        vm.purchasePayzone = true;
       }
 
       if (response.data.purchaseRailStation) {
-        vm.whereToBuy.push('Rail stations');
+        vm.purchaseRailStation = true;
       }
 
       if (response.data.purchaseOnBus) {
@@ -54,26 +53,20 @@
         if (response.data.brand === 'Diamond Bus') {
           vm.brand = ' Diamond';
         }
-
-        vm.whereToBuy.push('On' + vm.brand + ' bus');
       }
 
       if (response.data.purchaseOnMetro) {
-        vm.whereToBuy.push('On Metro');
+        vm.purchaseOnMetro = true;
       }
 
       if (response.data.buyOnDirectDebit) {
         vm.dd = '';
+        vm.buyOnDirectDebit = true;
 
         if (response.data.buyOnSwift) {
           vm.dd = ' on Swift';
+          vm.buyOnSwift = true;
         }
-
-        vm.whereToBuy.push('Direct Debit' + vm.dd);
-      }
-
-      if (response.data.buyOnSwift && !response.data.buyOnDirectDebit) {
-        vm.whereToBuy.push('Swift');
       }
 
       // work out payg and gpay
@@ -95,7 +88,7 @@
       }
 
       if (vm.payg) {
-        vm.whereToBuy.push('Swift PAYG');
+        vm.purchasePayg = true;
       }
 
       // if priceLevel includes Google Pay
@@ -106,7 +99,7 @@
       }
 
       if (vm.gpay) {
-        vm.whereToBuy.push('Google Pay');
+        vm.purchaseGpay = true;
       }
     });
   }

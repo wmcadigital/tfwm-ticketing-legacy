@@ -1,1 +1,15 @@
-<li ng-repeat="record in vm.whereToBuy" ng-bind="record + ($last ? '' : ', ')"></li>
+<li data-ng-if="vm.purchaseTic">Travel Centres</li>
+<li data-ng-if="vm.purchasePayzone">Payzone outlets</li>
+<li data-ng-if="vm.purchaseRailStation">Rail stations</li>
+<li data-ng-if="vm.purchaseOnBus">On
+    <span data-ng-if="vm.brand == 'Stagecoach'">Stagecoach</span>
+    <span data-ng-if="vm.brand == 'Diamond Bus'">Diamond</span>
+    <span data-ng-if="vm.brand == 'National Express'">National Express</span>
+Bus</li>
+<li data-ng-if="vm.purchaseOnMetro">On Metro</li>
+<li data-ng-if="vm.buyOnDirectDebit">Direct Debit
+    <span data-ng-if="vm.buyOnSwift">on Swift</span>
+</li>
+<li data-ng-if="vm.buyOnSwift && !vm.buyOnDirectDebit">Swift</li>
+<li data-ng-if="vm.swiftCurrentAmount && !vm.buyOnSwift">Swift PAYG</li>
+<li data-ng-if="vm.purchaseGpay">Google Pay</li>
