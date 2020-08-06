@@ -125,15 +125,12 @@
         <!-- Swift Payg Tickets -->
         <div data-ng-if="tickets.all.length && tickets.postJSON.brand == 'Swift PAYG'">
             <div class="filtered-header boxin bdr-top--navy">
-                <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
+                <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.swiftPaygIds.length}}</span> Tickets you can buy with Swift Pay As You Go</h3>
             </div>
-            <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygTickets"
-                ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
-                data-ng-if="tickets.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygTickets"
-                    data-ng-if="ticket.swiftCurrentAmount">
-                    <div data-ng-include=" 'tickets/views/shared/item.html' "
-                    ticket-item></div>
+            <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds"
+                ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults">
+                <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds">
+                    <div data-ng-include=" 'tickets/views/shared/item.html' " ticket-item></div>
                 </div>
             </div>
         </div>

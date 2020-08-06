@@ -79,6 +79,7 @@
       vm.stationicList = []; // Define in county Station list
       vm.swiftPaygTickets = []; // Define Swift PAYG tickets
       vm.loadingStatus = ''; // Set results status to blank
+      vm.swiftPaygloadingStatus = ''; // Set results status to blank
       vm.passValue = ''; // Set pass select value to blank
       vm.orderBy = 'orderSequence';
       vm.limit = parseInt($location.search().limit) || 6; // Set paging limit to what's in url or default to 6
@@ -1402,7 +1403,16 @@
     // get tickets you can buy on swift
     function getSwiftPAYG() {
       ticketingService.getSwiftSearch().then(function(response) {
+        vm.swiftPaygIds = [];
         vm.swiftPaygTickets = response;
+
+        angular.forEach(response, function(item, index) {
+          if(item.swiftCurrentAmount){
+            vm.swiftPaygIds.push(item);
+          }
+        });
+
+        console.log(vm.swiftPaygIds);
       });
     }
 
