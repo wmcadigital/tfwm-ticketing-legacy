@@ -41,17 +41,18 @@
 
       if (response.data.purchaseOnBus) {
         vm.brand = '';
+        vm.purchaseOnBus = true;
 
         if (response.data.brand === 'National Express') {
-          vm.brand = ' National Express';
+          vm.brand = 'National Express';
         }
 
         if (response.data.brand === 'Stagecoach') {
-          vm.brand = ' Stagecoach';
+          vm.brand = 'Stagecoach';
         }
 
         if (response.data.brand === 'Diamond Bus') {
-          vm.brand = ' Diamond';
+          vm.brand = 'Diamond';
         }
       }
 

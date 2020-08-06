@@ -65,7 +65,6 @@
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
     vm.swiftABT = swiftABT; // Function for hiding fields if Swift ABT is selected
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
-    vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
@@ -221,9 +220,7 @@
     }
 
     // detect device in use
-
     vm.deviceDetect();
-
     function deviceDetect() {
       vm.deviceDetector = deviceDetector.device;
     }
@@ -1299,12 +1296,6 @@
       vm.timePeriod4Check = function() {
         return true;
       };
-    }
-
-    // toggle swift modal popup
-    vm.modalShownSwift = false;
-    function toggleModalSwift() {
-      vm.modalShownSwift = !vm.modalShownSwift;
     }
 
     // filters

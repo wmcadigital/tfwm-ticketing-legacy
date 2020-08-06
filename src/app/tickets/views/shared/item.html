@@ -67,11 +67,8 @@
             <span data-ng-if="ticket.swiftCurrentAmount">Standard</span> Price is frozen from {{ticket.ticketFutureDate | date : format : shortDate}}
         </p>
 
-        <!-- show buy now buttun if ticket has a buy url -->
-        <a data-ng-if="ticket.buyTicketUrl" class="float--left btn btn--arrow btn--navy" data-ng-href="{{ticket.buyTicketUrl}}">Buy now</a>
-
-        <!-- show if you can buy the ticket on Swift PAYG only-->
-        <a data-ng-if="ticket.swiftCurrentAmount" class="float--left btn btn--arrow btn--navy" ng-href="https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:%27AAC001%27}]">Buy now</a>
+        <!-- display buy now button -->
+        <gpay-button value="ticket.id"></gpay-button>
 
     </div>
 </div>
