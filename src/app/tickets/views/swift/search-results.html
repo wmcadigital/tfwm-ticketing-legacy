@@ -127,10 +127,10 @@
             <div class="filtered-header boxin">
                 <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
             </div>
-            <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygTickets"
+            <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds"
                 ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
                 data-ng-if="tickets.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygTickets"
+                <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds"
                     data-ng-if="ticket.swiftCurrentAmount">
                     <div data-ng-include=" 'tickets/views/shared/item.html' "
                         ticket-item></div>

@@ -77,7 +77,7 @@
       vm.stationList = []; // Define Station list
       vm.stationoocList = []; // Define out of county Station list
       vm.stationicList = []; // Define in county Station list
-      vm.swiftPaygTickets = []; // Define Swift PAYG tickets
+      vm.swiftPaygIds = []; // Define Swift PAYG tickets
       vm.loadingStatus = ''; // Set results status to blank
       vm.swiftPaygloadingStatus = ''; // Set results status to blank
       vm.passValue = ''; // Set pass select value to blank
@@ -1404,15 +1404,12 @@
     function getSwiftPAYG() {
       ticketingService.getSwiftSearch().then(function(response) {
         vm.swiftPaygIds = [];
-        vm.swiftPaygTickets = response;
 
-        angular.forEach(response, function(item, index) {
-          if(item.swiftCurrentAmount){
+        angular.forEach(response, function(item) {
+          if (item.swiftCurrentAmount) {
             vm.swiftPaygIds.push(item);
           }
         });
-
-        console.log(vm.swiftPaygIds);
       });
     }
 
