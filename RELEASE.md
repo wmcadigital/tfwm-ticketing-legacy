@@ -1,15 +1,29 @@
 # Release Notes
 
-## Ticketing v2.0.4
+## Ticketing v2.9.12
 
-- Added Google Pay identifier to search page and product page
-- Reorder search results so DD tickets display last
-- New where to buy directive
-- If swift payg pass is chosen show message no filters are available as only one result
+- New: Price directive for ticket search & related tickets - Shared directive and add “From” if Swift price is lower
+- New: Price directive for ticket page - Shared directive for sidebar and mobile view
+- New: shared search directive - All ticket finders share the same search but can hide pass options depending on the ticket finder
+- New: Added Google Pay to “Where to buy” i the search results
+- New: If the device is Android any GPay tickets will have a new button saying “Buy on Google Pay” (it will also hide the “buy from” information and Swift on Mobile information)
+- New Added popup modal for NFC explanation only on Android
+- New: Added new popup for Swift PAYG within ticket search results
+- New: Added a ticket counter for tickets you can buy on Swift PAYG
+- New: Added rollover help text to google pay on the search results page
+- Update: Show stagecoach and swift go passes on all finders
+- Update: Remove breadcrumb from Oneapp finder
+- Update: Add underline to item titles
+- Update: Added standard and discounted rates if available
+- Update: Direct Debit tickets are shown last in the search results
+- Update: Display no filters for Swift PAYG as non available
+- Update: Updated Swift PAYG tickets so it only filters matched results rather then all products
+- Fix: Fixed an issue with the modals on mobile
+- Fix: Search with train - API was updated to a more compliant format. Ticket finder has been updated so it works correctly.
 
 ## Ticketing v2.0.3
 
-- Changed build so t builds all assets at once
+- Changed build so it builds all assets at once
 
 ## Ticketing v2.0.2
 
