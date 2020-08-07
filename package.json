@@ -1,6 +1,6 @@
 {
     "name": "nwm-ticketing",
-    "version": "2.9.12",
+    "version": "2.9.13",
     "description": "Ticketing search app for WMNetwork",
     "main": "src/js/wmn/app.js",
     "author": "WMCA",
@@ -22,10 +22,10 @@
             "swiftGo": "Swift Go"
         },
         "staging": {
-            "baseUrl": "//stagenwm.cenapps.org.uk/wmn-ticket-search",
-            "baseUrlSwift": "//stagenwm.cenapps.org.uk/swift-ticket-search",
+            "baseUrl": "https://stagenwm.cenapps.org.uk/wmn-ticket-search",
+            "baseUrlSwift": "https://stagenwm.cenapps.org.uk/swift-ticket-search",
             "swiftHost": "stagenwm.cenapps.org.uk/swift-ticket-search",
-            "baseUrlOneapp": "//stagenwm.cenapps.org.uk/oneapp-ticket-search",
+            "baseUrlOneapp": "https://stagenwm.cenapps.org.uk/oneapp-ticket-search",
             "oneappHost": "stagenwm.cenapps.org.uk/oneapp-ticket-search",
             "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build",
             "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build/img",
