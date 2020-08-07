@@ -244,6 +244,7 @@ input.ng-invalid-field-required-class {
             &::after {content: ", ";}
             &:last-child::after {content: "";}
             &::before {content: "";margin-left: 0px;line-height: 20px!important;}
+            a {display: inline-block;}
         }
     }
     .btn {
