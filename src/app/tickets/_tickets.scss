@@ -312,7 +312,13 @@ input.ng-invalid-field-required-class {
 }
 
 input[type='checkbox']:disabled + label {
-    background: #dddddd;
+    background: #dddddd!important;
+    svg{
+        fill: #fff!important;
+    }
+    span{
+        color: #b7b5b5;
+    }
 }
 
 input[type='radio']:disabled + label {
