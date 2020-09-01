@@ -990,7 +990,7 @@
     function clearFromStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       vm.stationFromName = null;
-      vm.postJSON.stationNames = [];
+      vm.postJSON.stationNames = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1050,7 +1050,7 @@
     function clearToStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
       vm.stationToName = null;
-      vm.postJSON.stationNames = [];
+      vm.postJSON.stationNames = null;
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
@@ -1104,7 +1104,7 @@
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
       vm.stationViaOneName = null;
-      vm.postJSON.stationNames = [];
+      vm.postJSON.stationNames = null;
     }
 
     // control filters according to url parameters
