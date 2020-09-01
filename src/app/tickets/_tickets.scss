@@ -242,7 +242,7 @@ input.ng-invalid-field-required-class {
         li {
             display: inline;line-height: 20px!important;
             &::after {content: ", ";}
-            &:last-child::after {content: "";}
+            &:last-of-type::after {content: "";}
             &::before {content: "";margin-left: 0px;line-height: 20px!important;}
             a {display: inline-block;}
         }
