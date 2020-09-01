@@ -198,7 +198,6 @@ function minifyJS(jsFile) {
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest(paths.scripts.output)); // Spit out concat + minified file in ./build/
 }
 
@@ -235,7 +234,6 @@ function buildTemplates() {
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
@@ -263,7 +261,6 @@ function buildSharedTemplates() {
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
@@ -287,7 +284,6 @@ function buildSwiftTemplates() {
     .pipe(uglify())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -310,7 +306,6 @@ function buildOneappTemplates() {
     .pipe(uglify())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
