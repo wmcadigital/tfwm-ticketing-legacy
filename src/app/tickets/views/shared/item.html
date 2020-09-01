@@ -45,6 +45,20 @@
             </div>
             <div class="grid-8">
                 <ul>
+                    <li data-ng-if="ticket.purchaseTic">Travel Centres</li>
+                    <li data-ng-if="ticket.purchasePayzone">Payzone outlets</li>
+                    <li data-ng-if="ticket.purchaseRailStation">Rail stations</li>
+                    <li data-ng-if="ticket.purchaseOnBus">On
+                        <span data-ng-if="ticket.brand == 'Stagecoach'">Stagecoach</span>
+                        <span data-ng-if="ticket.brand == 'Diamond Bus'">Diamond</span>
+                        <span data-ng-if="ticket.brand == 'National Express'">National Express</span>
+                        Bus</li>
+                    <li data-ng-if="ticket.purchaseOnMetro">On Metro</li>
+                    <li data-ng-if="ticket.buyOnDirectDebit">Direct Debit
+                        <span data-ng-if="ticket.buyOnSwift">on Swift</span>
+                    </li>
+                    <li data-ng-if="ticket.buyOnSwift && !ticket.buyOnDirectDebit">Swift</li>
+                    <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">Swift PAYG</li>
                     <where-to-buy value="ticket.id"></where-to-buy>
                 </ul>
              </div>
@@ -69,6 +83,25 @@
 
         <!-- display buy now button -->
         <gpay-button value="ticket.id"></gpay-button>
+
+        <!-- buy button for all other tickets apart from swift payg -->
+        <div data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || tickets.deviceDetector  == 'android'">
+            <a class="float--left btn btn--arrow btn--navy" data-ng-href="{{::ticket.buyTicketUrl}}">
+                {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" :
+                    ticket.buyOnSwift ? "Buy on Swift" :
+                    ticket.purchaseTic ? "Buy at travel centre" :
+                    ticket.hasOnlinePurchaseChannel ? "Buy now" : "Buy now"}}</a>
+        </div>
+
+        <!-- if product is swift payg or ticket can only be brought on swift payg -->
+        <div data-ng-if="ticket.isPayAsYouGo || ticket.swiftCurrentAmount">
+            <a class="float--left btn btn--arrow btn--navy" data-ng-href="{{::ticket.buyTicketUrl}}">Buy on pay as you go</a>
+        </div>
+
+         <!-- if product has no online buy link -->
+        <div data-ng-if="!ticket.buyTicketUrl">
+            <a class="float--left btn btn--arrow" data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">More information</a>
+        </div>
 
     </div>
 </div>

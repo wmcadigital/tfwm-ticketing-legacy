@@ -19,13 +19,12 @@
     return directive;
   }
 
-  gpaybuttonController.$inject = ['$http', 'deviceDetector'];
-  function gpaybuttonController($http, deviceDetector) {
+  gpaybuttonController.$inject = ['$scope', '$http', 'deviceDetector'];
+  function gpaybuttonController($scope, $http, deviceDetector) {
     var vm = this;
     vm.elementIds = [];
     vm.gpay = false;
     vm.toggleModalGPay = toggleModalGPay; // function to control gpay modal
-    vm.toggleModalSwift = toggleModalSwift; // function to control swift payg modal
     vm.deviceDetect = deviceDetect; // function to detect device
 
     // get ticket data form complete api
@@ -47,36 +46,18 @@
       } else {
         vm.gpay = false;
       }
-
-      if (response.data.isPayAsYouGo) {
-        vm.isPayAsYouGo = true;
-      } else {
-        vm.isPayAsYouGo = false;
-      }
     });
 
     // get ticket data form simple api
     $http.get('$*apitickets/' + vm.value + '/simple').then(function(response) {
       // get the buy ticket url
       vm.ticketUrl = response.data.buyTicketUrl;
-
-      if (response.data.swiftCurrentAmount) {
-        vm.swiftCurrentAmount = true;
-      } else {
-        vm.swiftCurrentAmount = false;
-      }
     });
 
     // google pay modal pop-up
     vm.modalShownGpay = false;
     function toggleModalGPay() {
       vm.modalShownGpay = !vm.modalShownGpay;
-    }
-
-    // swift modal pop-up
-    vm.modalShownSwift = false;
-    function toggleModalSwift() {
-      vm.modalShownSwift = !vm.modalShownSwift;
     }
 
     // detect device in use
