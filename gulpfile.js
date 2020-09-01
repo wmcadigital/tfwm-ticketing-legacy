@@ -236,6 +236,7 @@ function buildTemplates() {
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 
@@ -263,6 +264,7 @@ function buildSharedTemplates() {
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 

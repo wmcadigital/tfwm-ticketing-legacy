@@ -189,7 +189,7 @@
         vm.postJSON.brand === 'nnetwork' ||
         vm.postJSON.brand === 'ntrain'
       ) {
-        if ($location.search().stationNames !== '[]') {
+        if ($location.search().stationNames) {
           stations = $location.search().stationNames;
           stationSel = stations.toString();
           stationSplit = stationSel.split(',');
