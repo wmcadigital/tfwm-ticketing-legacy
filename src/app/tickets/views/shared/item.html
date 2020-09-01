@@ -95,7 +95,7 @@
 
         <!-- if product is swift payg or ticket can only be brought on swift payg -->
         <div data-ng-if="ticket.isPayAsYouGo || ticket.swiftCurrentAmount">
-            <a class="float--left btn btn--arrow btn--navy" data-ng-href="{{::ticket.buyTicketUrl}}">Buy on pay as you go</a>
+            <a class="float--left btn btn--arrow btn--navy" data-ng-href="$*paygLink?[{matrixId:'AAC001'}]">Buy on pay as you go</a>
         </div>
 
          <!-- if product has no online buy link -->
