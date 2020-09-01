@@ -216,7 +216,7 @@
     }
 
     // if back button pressed or breadcrumb selected. If brand is Swift ABT
-    if ($location.search().brand === '$*swiftGo') {
+    if ($location.search().brand === 'Swift Go') {
       swiftABT();
     }
 
@@ -1352,13 +1352,8 @@
     // if pass is swift abt
     function swiftABT() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === '$*swiftGo') {
-        // console.log('swift abt');
+      if (vm.passValue === 'Swift Go') {
         vm.isHideCheck = !vm.isHideCheck;
-        // vm.postJSON.allowBus = 'false';
-        // vm.postJSON.allowMetro = 'true';
-        // vm.postJSON.allowTrain = 'true';
-        // vm.postJSON.passengerType = "Adult";
         vm.postJSON.timeBand = null;
         vm.postJSON.stationNames = null;
       } else if (
