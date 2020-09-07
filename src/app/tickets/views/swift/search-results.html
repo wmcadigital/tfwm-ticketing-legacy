@@ -85,7 +85,7 @@
         <refresher condition="tickets.filteredTickets.length">
             <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults" data-ng-hide="tickets.origTickets.length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
                 <div class="grid" data-ng-repeat="ticket in tickets.origTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
-                    <div data-ng-include=" 'tickets/views/shared/item.html' " ticket-item="ticket-item"></div>
+                    <item></item>
                 </div>
             </div>
         </refresher>
@@ -107,7 +107,7 @@
         <refresher condition="tickets.filteredTickets.length">
             <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-hide="(tickets.otherTickets | filter:{displayInSwiftSearch:true}).length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
                 <div class="grid" data-ng-repeat="ticket in tickets.otherTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
-                    <div data-ng-include=" 'tickets/views/shared/item.html' " ticket-item="ticket-item"></div>
+                    <item></item>
                 </div>
             </div>
         </refresher>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-if="tickets.loadingStatus == 'success'">
                     <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds" data-ng-if="ticket.swiftCurrentAmount">
-                        <div data-ng-include=" 'tickets/views/shared/item.html' " ticket-item="ticket-item"></div>
+                        <item></item>
                     </div>
                 </div>
             </div>
