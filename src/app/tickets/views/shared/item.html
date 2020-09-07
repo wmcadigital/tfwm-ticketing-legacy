@@ -60,7 +60,7 @@
                     <li data-ng-if="ticket.buyOnSwift && !ticket.buyOnDirectDebit">Swift</li>
                     <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">Swift PAYG</li>
                     <li data-ng-if="ticket.purchaseLocations.swiftOnMobile" data-ng-mouseover="tooltip=true" data-ng-mouseleave="tooltip=false">
-                        ,<span class="blue rollover">
+                        <span class="blue rollover">
                             Google Pay</span>
                         <div class="field-help tooltip" ng-show="tooltip">
                             <span>This ticket can be used on<br>
