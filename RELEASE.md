@@ -1,5 +1,21 @@
 # Release Notes
 
+## Ticketing v2.12.25
+
+- new: item directive
+- new: add refresher directive
+- new: add device detector debugger
+- update: implement new api in ticket search
+- update: where to buy in related products item
+- update: where to buy in ticket details
+- update: hide cyan top border
+- update: remove individual shared partials
+- update: move the loading spinner to the main index
+- update: button cta styling
+- update: new staging api
+- bugfix: remove comma before gpay in where to buy
+- bugfix: sort filter style on swift finder
+
 ## Ticketing v2.9.15
 
 - New: Price directive for ticket search & related tickets - Shared directive and add “From” if Swift price is lower
