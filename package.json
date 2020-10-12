@@ -29,7 +29,7 @@
             "oneappHost": "stagenwm.cenapps.org.uk/oneapp-ticket-search",
             "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build",
             "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/build/img",
-            "api": "https://tickets.api.stageapp.net/",
+            "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
             "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
         },
         "local": {
@@ -40,7 +40,7 @@
             "oneappHost": "localhostOneapp",
             "cdn": "/build/",
             "imgUrl": "/build/img",
-            "api": "https://wmcaapiticketing20200901120051.azurewebsites.net/",
+            "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
             "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
         }
     },
