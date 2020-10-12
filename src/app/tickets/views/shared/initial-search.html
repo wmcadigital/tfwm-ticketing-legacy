@@ -363,3 +363,4 @@
     <button id="sbmBtn" data-ng-if="tickets.postJSON.passengerType && tickets.postJSON.timeBand || tickets.postJSON.brand == 'Swift PAYG' || tickets.passValue == 'Swift Go'"
     data-ng-hide="tickets.stationFromName && !tickets.stationToName || !tickets.stationFromName && tickets.stationToName || viaOneStationText != null && !tickets.stationFromName && !tickets.stationToName" type="submit" class="btn btn--arrow submitSpinner nga-fast nga-fade btn--navy" ng-disabled="tsearch.$invalid">Find tickets</button>
 </form>
+<p>Device: {{tickets.deviceDetector}}</p>
