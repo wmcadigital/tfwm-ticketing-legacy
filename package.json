@@ -40,7 +40,7 @@
             "oneappHost": "localhostOneapp",
             "cdn": "/build/",
             "imgUrl": "/build/img",
-            "api": "https://tickets.api.stageapp.net/",
+            "api": "https://wmcaapiticketing20200901120051.azurewebsites.net/",
             "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
         }
     },

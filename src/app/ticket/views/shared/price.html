@@ -26,7 +26,7 @@
         when you buy online
     </p>
 
-    <p data-ng-if="ticket.all.purchaseTic || ticket.all.purchaseRailStation" data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.deviceDetector == 'android'">
+    <p data-ng-if="ticket.all.purchaseLocations.tic || ticket.all.purchaseLocations.railStation" data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.deviceDetector == 'android'">
         buy from
     </p>
 
@@ -36,22 +36,22 @@
     </p>
 
     <ul data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'" data-ng-hide="ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.deviceDetector == 'android'">
-        <li data-ng-if="ticket.all.purchaseTic">
+        <li data-ng-if="ticket.all.purchaseLocations.tic">
             <a href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Travel Centre</a>
         </li>
-        <li data-ng-if="ticket.all.purchasePayzone">
+        <li data-ng-if="ticket.all.purchaseLocations.payzone">
             <a href="https://www.payzone.co.uk/consumers/" target="_blank">Payzone outlet</a>
         </li>
-        <li data-ng-if="ticket.all.purchaseRailStation">
+        <li data-ng-if="ticket.all.purchaseLocations.railStation">
             <a href="https://journeyplanner.networkwestmidlands.com/station">Rail station</a>
         </li>
-        <li data-ng-if="ticket.all.purchaseOnBus">
+        <li data-ng-if="ticket.all.purchaseLocations.onBus">
             Purchase on <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
                         <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> 
                         <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> 
                         Bus
         </li>
-        <li data-ng-if="ticket.all.purchaseOnMetro">
+        <li data-ng-if="ticket.all.purchaseLocations.onMetro">
             On Metro
         </li>
     </ul>
@@ -60,20 +60,20 @@
             <div class="blue swift" data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift" data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android'">
                 when you buy this ticket with Swift PAYG credit
                 <span
-                    data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
+                    data-ng-if="ticket.all.purchaseLocations.onBus && !ticket.all.purchaseLocations.railStation && !ticket.all.purchaseLocations.onMetro">on
                     <span data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span> <span
                         data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span>
                     <span data-ng-if="ticket.all.brand == 'National Express'">National Express</span> Bus</span>
                 <span
-                    data-ng-if="!ticket.all.purchaseOnBus && ticket.all.purchaseOnTrain && !ticket.all.purchaseOnMetro">on
+                    data-ng-if="!ticket.all.purchaseLocations.onBus && ticket.all.purchaseLocations.railStation && !ticket.all.purchaseLocations.onMetro">on
                     Train.
                 </span>
                 <span
-                    data-ng-if="!ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
+                    data-ng-if="!ticket.all.purchaseLocations.onBus && !ticket.all.purchaseLocations.railStation && ticket.all.purchaseLocations.onMetro">on
                     Metro.
                 </span>
                 <span
-                    data-ng-if="ticket.all.purchaseOnBus && !ticket.all.purchaseOnTrain && ticket.all.purchaseOnMetro">on
+                    data-ng-if="ticket.all.purchaseLocations.onBus && !ticket.all.purchaseLocations.railStation && ticket.all.purchaseLocations.onMetro">on
                     Bus or Metro.</span>
                 <a ng-href="$*baseUrl/#/ticket/810"><button class="btn btn--arrow">Buy Swift PAYG credit</button></a>
             </div>
@@ -109,21 +109,21 @@
                 </p>
                 <p><span data-ng-if="ticket.all.swiftCurrentAmount">when you</span> buy this ticket from</p>
                 <ul>
-                    <li data-ng-if="ticket.all.purchaseTic"><a
+                    <li data-ng-if="ticket.purchaseLocations.tic"><a
                             href="http://www.networkwestmidlands.com/get-in-touch/travel-centres" target="_blank">Travel
                             Centre</a></li>
-                    <li data-ng-if="ticket.all.purchasePayzone"><a href="https://www.payzone.co.uk/consumers/"
+                    <li data-ng-if="ticket.all.purchaseLocations.payzone"><a href="https://www.payzone.co.uk/consumers/"
                             target="_blank">Payzone outlet</a></li>
-                    <li data-ng-if="ticket.all.purchaseRailStation"><a
+                    <li data-ng-if="ticket.all.purchaseLocations.railStation"><a
                             href="https://journeyplanner.networkwestmidlands.com/station">Rail
                             station</a></li>
-                    <li data-ng-if="ticket.all.purchaseOnBus">On <span
+                    <li data-ng-if="ticket.all.purchaseLocations.onBus">On <span
                             data-ng-if="ticket.all.brand == 'Stagecoach'">Stagecoach</span>
                         <span data-ng-if="ticket.all.brand == 'Diamond Bus'">Diamond</span> <span
                             data-ng-if="ticket.all.brand == 'National Express'">National
                             Express
                         </span> Bus</li>
-                    <li data-ng-if="ticket.all.purchaseOnMetro"><a href="https://westmidlandsmetro.com/"
+                    <li data-ng-if="ticket.all.purchaseLocations.onMetro"><a href="https://westmidlandsmetro.com/"
                             target="_blank">On Metro</a></li>
                 </ul>
             </div>
