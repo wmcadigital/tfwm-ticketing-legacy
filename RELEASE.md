@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.12.26
+
+- update: fix release staging url
+
 ## Ticketing v2.12.25
 
 - new: item directive
