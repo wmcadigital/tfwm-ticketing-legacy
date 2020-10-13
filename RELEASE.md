@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.12.27
+
+- bugfix: fix image to to use lowercase file names as cdn does not like uppercase
+
 ## Ticketing v2.12.26
 
 - update: fix release staging url
