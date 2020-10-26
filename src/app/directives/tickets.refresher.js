@@ -17,7 +17,7 @@
   function refresherController($scope, $transclude, $attrs, $element) {
     var childScope;
 
-    $scope.$watch($attrs.condition, function(value) {
+    $scope.$watch($attrs.condition, function() {
       $element.empty();
       if (childScope) {
         childScope.$destroy();
