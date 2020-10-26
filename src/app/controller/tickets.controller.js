@@ -54,6 +54,8 @@
     vm.update = update; // Do filtering logic in controller so sessions can be stored
     vm.loadMore = loadMore; // function to load more results
     vm.loadMoreExact = loadMoreExact; // function to load more exact results
+    vm.refreshExact = refreshExact; // function to refresh the exact results grid
+    vm.refreshOther = refreshOther; // function to refresh the other results grid
     vm.filterButtons = {
       operator: [],
       operatorLength: 0,
@@ -1323,6 +1325,7 @@
       vm.limit += 6;
       $location.search('limit', vm.limit);
       vm.updateGrid();
+      vm.refreshOther();
     }
 
     // exact matches load more button
@@ -1330,6 +1333,27 @@
       vm.limitExact += 6;
       $location.search('limitExact', vm.limitExact);
       vm.updateGrid();
+      vm.refreshExact();
+    }
+
+    // refresh exact results grid
+    refreshExact.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshExact() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.origTicketResults.refresh();
+        }, 0);
+      });
+    }
+
+    // refresh other results grid
+    refreshOther.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshOther() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.ticketResults.refresh();
+        }, 0);
+      });
     }
 
     // toggle filter accordions
