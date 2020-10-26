@@ -47,6 +47,12 @@
         <div class="block block--side">
             <div class="blocks">
                 <detail-sidebar></detail-sidebar>
+                <label class="blue btn-link float--right">Debug <input class="hidden" type="checkbox" ng-model="deviceInfo" /></label><br />
+                <div ng-show="deviceInfo" class="boxin bg--grey bg--tint">
+                    <h3>Debug</h3>
+                    <p>URL - {{ticket.searchLocation}}</p>
+
+                </div>
             </div>
         </div>
     </div>

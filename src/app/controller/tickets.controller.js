@@ -54,6 +54,8 @@
     vm.update = update; // Do filtering logic in controller so sessions can be stored
     vm.loadMore = loadMore; // function to load more results
     vm.loadMoreExact = loadMoreExact; // function to load more exact results
+    vm.refreshExact = refreshExact; // function to refresh the exact results grid
+    vm.refreshOther = refreshOther; // function to refresh the other results grid
     vm.filterButtons = {
       operator: [],
       operatorLength: 0,
@@ -223,7 +225,7 @@
     // detect device in use
     vm.deviceDetect();
     function deviceDetect() {
-      vm.deviceDetector = deviceDetector.device;
+      vm.deviceDetector = deviceDetector;
     }
 
     // Get Rail stations for autocomplete
@@ -600,14 +602,24 @@
       // order filtering
       if (vm.orderBy === 'orderSequence') {
         vm.origTickets.sort(function(a, b) {
+          // set conditional attributes for refresher
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
       } else if (vm.orderBy === 'ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
           return a.ticketCurrentAmount - b.ticketCurrentAmount;
         });
       } else if (vm.orderBy === '-ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
           return b.ticketCurrentAmount - a.ticketCurrentAmount;
         });
       }
@@ -1313,6 +1325,7 @@
       vm.limit += 6;
       $location.search('limit', vm.limit);
       vm.updateGrid();
+      vm.refreshOther();
     }
 
     // exact matches load more button
@@ -1320,6 +1333,27 @@
       vm.limitExact += 6;
       $location.search('limitExact', vm.limitExact);
       vm.updateGrid();
+      vm.refreshExact();
+    }
+
+    // refresh exact results grid
+    refreshExact.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshExact() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.origTicketResults.refresh();
+        }, 0);
+      });
+    }
+
+    // refresh other results grid
+    refreshOther.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshOther() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.ticketResults.refresh();
+        }, 0);
+      });
     }
 
     // toggle filter accordions
