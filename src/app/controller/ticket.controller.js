@@ -68,6 +68,7 @@
     vm.toggleModalGPay = toggleModalGPay;
     vm.operatorList = []; // Define Operator list
     vm.limit = 4; // Set paging limit for Alt tickets
+    vm.deviceDetect = deviceDetect; // Function to detect device
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
@@ -107,6 +108,19 @@
       });
     }
 
+    // detect device in use
+    vm.deviceDetect();
+    function deviceDetect() {
+      vm.deviceDetector = deviceDetector;
+      vm.userAgent = deviceDetector.raw.userAgent;
+      // check if userAgent is Swift One app
+      if (vm.userAgent.includes('SwiftOneApp')) {
+        vm.oneApp = true;
+      } else {
+        vm.oneApp = false;
+      }
+    }
+
     function openFilters() {
       document.getElementById('filterOverlay').style.display = 'block';
     }
@@ -141,12 +155,6 @@
           return false;
         });
       });
-    }
-
-    // detect device in use
-    vm.deviceDetect();
-    function deviceDetect() {
-      vm.deviceDetector = deviceDetector.device;
     }
 
     // popup modals
