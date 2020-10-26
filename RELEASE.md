@@ -1,9 +1,11 @@
 # Release Notes
 
-## Ticketing v2.13.29
+## Ticketing v2.14.30
 
 - new: mobility credits directive
+- new: ticket debugger
 - fix: grid refresh when load more results
+- fix: separate shared templates to fix urls
 - update: device debug info
 
 ## Ticketing v2.12.27
