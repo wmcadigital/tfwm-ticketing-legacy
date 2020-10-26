@@ -226,6 +226,13 @@
     vm.deviceDetect();
     function deviceDetect() {
       vm.deviceDetector = deviceDetector;
+      vm.userAgent = deviceDetector.raw.userAgent;
+      // check if userAgent is Swift One app
+      if (vm.userAgent.includes('SwiftOneApp')) {
+        vm.oneApp = true;
+      } else {
+        vm.oneApp = false;
+      }
     }
 
     // Get Rail stations for autocomplete

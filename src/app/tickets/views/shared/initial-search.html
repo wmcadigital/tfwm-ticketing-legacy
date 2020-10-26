@@ -369,6 +369,8 @@
     <h3>Device Debug</h3>
     <p>You are using <b>{{tickets.deviceDetector.browser}}</b> on <b>{{tickets.deviceDetector.os}} ({{tickets.deviceDetector.os_version}})</b>.</p>
     <p>Your <b>{{tickets.deviceDetector.browser}}</b> version is <b>{{tickets.deviceDetector.browser_version}}</b></p>
-    <p>Device - <b></b>{{tickets.deviceDetector.device}}</p>
+    <p>Device - {{tickets.deviceDetector.device}}</p>
+    <p>User Agent - {{tickets.deviceDetector.raw.userAgent}}</p>
+    <p>OneApp? - {{tickets.oneApp}}</p>
     <p>Complete deviceDetector data - <b></b><pre style="white-space:pre-wrap">{{tickets.deviceDetector}}<pre></p>
 </div>
