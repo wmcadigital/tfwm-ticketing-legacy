@@ -97,13 +97,19 @@
         </p>
 
         <!-- buy button for all other tickets apart from swift payg -->
-        <div data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || tickets.deviceDetector  == 'android'">
+        <div data-ng-hide="ticket.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true' || ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || tickets.oneApp  == 'true'">
             <a class="float--left btn btn--arrow" data-ng-href="{{::ticket.buyTicketUrl}}"
             ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' ">
                 {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" :
                     ticket.buyOnSwift ? "Buy on Swift" :
                     ticket.purchaseLocations.tic ? "Buy at travel centre" :
                     ticket.hasOnlinePurchaseChannel ? "Buy now" : "Buy now"}}</a>
+        </div>
+        
+
+        <!-- if product can be brought on Google Pay -->
+        <div data-ng-if="ticket.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'">
+            <a class="float--left btn btn--arrow btn--navy" data-ng-href="{{::ticket.buyTicketUrl}}">Buy on Google Pay</a>
         </div>
 
         <!-- if product is swift payg or ticket can only be brought on swift payg -->
