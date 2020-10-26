@@ -86,12 +86,12 @@
             </div>
 
             <a data-ng-if="ticket.all.buyTicketUrl"
-                data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
+                data-ng-hide="ticket.all.id == '810' || ticket.all.buyOnSwift || ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'"
                 class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">
                 {{ticket.all.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.all.buyOnSwift ? "Buy on Swift" : ticket.all.hasOnlinePurchaseChannel
                 ? "Quick buy" : "Buy at travel centre"}}</a>
 
-            <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit" data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android'"
+            <button data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit" data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'"
                 class="btn btn--arrow" data-ng-click="ticket.toggleModalSwift()">Buy on Swift</button>
             <a data-ng-if="ticket.all.buyOnSwift && ticket.all.buyOnDirectDebit" class="btn btn--arrow"
                 data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Direct Debit</a>
@@ -127,7 +127,8 @@
                             target="_blank">On Metro</a></li>
                 </ul>
             </div>
-            <div data-ng-if="ticket.gpay == true && ticket.deviceDetector == 'android'">
+            
+            <div data-ng-if="ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'">
                 <span>Buy this ticket with Google Pay</span>
                 <a href="https://pay.app.goo.gl/gettheapp-en-GB"
                     target="_blank"><img class="BuyOnSwift" ng-src="$*imgUrl/gpay.png"
