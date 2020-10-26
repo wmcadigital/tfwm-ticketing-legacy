@@ -1,5 +1,11 @@
 # Release Notes
 
+## Ticketing v2.13.29
+
+- new: mobility credits directive
+- fix: grid refresh when load more results
+- update: device debug info
+
 ## Ticketing v2.12.27
 
 - bugfix: fix image to to use lowercase file names as cdn does not like uppercase

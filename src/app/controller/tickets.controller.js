@@ -225,7 +225,7 @@
     // detect device in use
     vm.deviceDetect();
     function deviceDetect() {
-      vm.deviceDetector = deviceDetector.device;
+      vm.deviceDetector = deviceDetector;
     }
 
     // Get Rail stations for autocomplete
