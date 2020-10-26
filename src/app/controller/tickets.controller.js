@@ -600,14 +600,24 @@
       // order filtering
       if (vm.orderBy === 'orderSequence') {
         vm.origTickets.sort(function(a, b) {
+          // set conditional attributes for refresher
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
       } else if (vm.orderBy === 'ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
           return a.ticketCurrentAmount - b.ticketCurrentAmount;
         });
       } else if (vm.orderBy === '-ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
           return b.ticketCurrentAmount - a.ticketCurrentAmount;
         });
       }

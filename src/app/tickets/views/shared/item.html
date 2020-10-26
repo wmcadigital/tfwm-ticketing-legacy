@@ -14,6 +14,13 @@
             <h4 class="event__title">{{ticket.name}} 
                 <span class="payment-icons"> 
                     <img ng-src="$*imgUrl/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.buyOnSwift" alt="Buy on Swift" title="This ticket can be purchased on Swift" />
+                    <refresher condition="tickets.sortPlw == 'yes'">
+                        <refresher condition="tickets.sortPop == 'yes'">
+                            <refresher condition="tickets.sortPhl == 'yes'">
+                                <mobility-credits value="ticket.id"></mobility-credits>
+                            </refresher>
+                        </refresher>
+                    </refresher>
                     <img ng-src="$*imgUrl/direct-debit-icon.png" class="ticket-direct-debit-logo" data-ng-if="ticket.buyOnDirectDebit" alt="Buy on Direct Debit" title="This ticket can be purchased on Direct Debit" />
                 </span>
             </h4>
