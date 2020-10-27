@@ -1,5 +1,5 @@
 <div id="detail" class="wrap">
-    <ol class="breadcrumb" aria-label="You are here" data-ng-hide="ticket.oneApp == 'true'">
+    <ol class="breadcrumb" aria-label="You are here" data-ng-hide="ticket.oneApp == true">
         <li>
             <a href="http://www.networkwestmidlands.com/">Home</a>
         </li>
@@ -48,12 +48,6 @@
         <div class="block block--side">
             <div class="blocks">
                 <detail-sidebar></detail-sidebar>
-                <label class="blue btn-link float--right">Debug <input class="hidden" type="checkbox" ng-model="deviceInfo" /></label><br />
-                <div ng-show="deviceInfo" class="boxin bg--grey bg--tint">
-                    <h3>Debug</h3>
-                    <p>URL - {{ticket.searchLocation}}</p>
-
-                </div>
             </div>
         </div>
     </div>
