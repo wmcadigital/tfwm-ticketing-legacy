@@ -1,5 +1,22 @@
 # Release Notes
 
+## Ticketing v2.15.43
+
+- new: gpay button directive
+- update: check if user is on SwiftOneApp
+- update: remove unused value from refresher directive
+- update: buy on google pay button
+- update: gpay button on ticket page
+- update: gpay button on ticket page
+- update - add margin to one app version
+- update: display mode on mobile
+- update: add margin to oneapp
+- update: debugger info
+- update: oneapp updates
+- fix: hide breadcrumb if on oneapp
+- fix: payg button on rail tickets
+- fix: buy at travel centre link
+
 ## Ticketing v2.14.30
 
 - new: mobility credits directive
