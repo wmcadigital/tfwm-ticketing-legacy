@@ -110,7 +110,7 @@
   <div
     class="blue swift"
     data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
-    data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android'"
+    data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
   >
     when you buy this ticket with Swift PAYG credit
     <span
@@ -137,6 +137,11 @@
     <a ng-href="$*baseUrl/#/ticket/810"
       ><button class="btn btn--arrow">Buy Swift PAYG credit</button></a
     >
+  </div>
+
+  <!-- if product can be brought on GPay -->
+  <div data-ng-if="ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp">
+    <g-pay value="ticket.all.id"></g-pay>
   </div>
 
   <div
@@ -168,7 +173,7 @@
 
   <button
     data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit"
-    data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'"
+    data-ng-hide="ticket.gpay == true && ticket.deviceDetector == 'android' || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
     class="btn btn--arrow"
     data-ng-click="ticket.toggleModalSwift()"
   >
@@ -229,20 +234,5 @@
         <a href="https://westmidlandsmetro.com/" target="_blank">On Metro</a>
       </li>
     </ul>
-  </div>
-
-  <div
-    data-ng-if="ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true'"
-  >
-    <span>Buy this ticket with Google Pay</span>
-    <a href="https://pay.app.goo.gl/gettheapp-en-GB" target="_blank"
-      ><img
-        class="BuyOnSwift"
-        ng-src="$*imgUrl/gpay.png"
-        alt="Buy ticket with Google Pay"
-    /></a>
-    <button class="btn btn--arrow" data-ng-click="ticket.toggleModalGPay()">
-      Buy on Google Pay
-    </button>
   </div>
 </div>
