@@ -92,12 +92,12 @@
             <span class="price">{{(ticket.swiftFutureAmount | currency:"£")}}</span> on {{ticket.ticketFutureDate | date : format : shortDate}}
         </p>
 
-        <p data-ng-if="ticket.ticketCurrentAmount === ticket.ticketFutureAmount || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
+        <p data-ng-if="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">
             <span data-ng-if="ticket.swiftCurrentAmount">Standard</span> Price is frozen from {{ticket.ticketFutureDate | date : format : shortDate}}
         </p>
 
         <!-- buy button for all other tickets apart from swift payg -->
-        <div data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl">
+        <div data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
             <a class="float--left btn btn--arrow"
             data-ng-href="{{ticket.purchaseLocations.tic == true && ticket.hasOnlinePurchaseChannel == false ? 'https://www.wmnetwork.co.uk/get-in-touch/travel-centres/':ticket.buyTicketUrl}}"
             ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' ">
