@@ -70,6 +70,7 @@
     vm.toggleModalFilter = toggleModalFilter;
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
+    vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -1447,6 +1448,15 @@
           }
         });
       });
+    }
+
+    // if pass is swift abt
+    function selectPass() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === '') {
+        console.log('select pass');
+        vm.clearFilter();
+      }
     }
 
     // set current date to test for ticketFutureDate

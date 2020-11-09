@@ -70,7 +70,7 @@
             <label class="plain" for="SelectedBrand">Pass</label>
             <span class="stylized-select">
                 <select id="SelectedBrand" name="Brand" aria-disabled="false" data-ng-model="tickets.postJSON.brand"
-                    data-ng-change="tickets.clearModes();tickets.swiftABT();tickets.swiftPAYG();tickets.getSwiftPAYG();tickets.ntrainOOC();"
+                    data-ng-change="tickets.clearModes();tickets.swiftABT();tickets.swiftPAYG();tickets.getSwiftPAYG();tickets.ntrainOOC();tickets.selectPass();"
                     ng-disabled="tickets.postJSON.allowMetro || tickets.postJSON.allowBus || tickets.postJSON.allowTrain">
                     <option value="">Select your pass</option>
                     <option value="Diamond Bus">Diamond Bus</option>
