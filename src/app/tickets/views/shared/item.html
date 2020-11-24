@@ -100,7 +100,7 @@
         <div data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
             <a class="float--left btn btn--arrow"
             data-ng-href="{{ticket.purchaseLocations.tic && !ticket.hasOnlinePurchaseChannel ? 'https://www.wmnetwork.co.uk/get-in-touch/travel-centres/':ticket.buyTicketUrl}}"
-            ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' ">
+            ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' " target="_parent">
                 {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" :
                     ticket.buyOnSwift ? "Buy on Swift" :
                     ticket.hasOnlinePurchaseChannel ? "Buy now" :
@@ -120,7 +120,7 @@
         </div>
 
          <!-- if product has no online buy link -->
-        <div data-ng-if="!ticket.buyTicketUrl" data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount">
+        <div data-ng-if="!ticket.buyTicketUrl" data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
             <a class="float--left btn btn--arrow" data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">More information</a>
         </div>
 
