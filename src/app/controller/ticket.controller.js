@@ -19,7 +19,7 @@
     '$scope',
     '$timeout',
     'deviceDetector',
-    '$location',
+    '$location'
   ];
 
   function TicketDetailCtrl(
@@ -50,13 +50,10 @@
       'Waiting for something in the server.',
       'Creating randomly generated feature.',
       "It's not you. It's me.",
-      'Eating your internet cookies...Yummy!',
+      'Eating your internet cookies...Yummy!'
     ]; // loading messages
     vm.loading = $interval(function() {
-      vm.loadingText =
-        vm.loadingArray[
-          Math.round(Math.random() * (vm.loadingArray.length - 1))
-        ];
+      vm.loadingText = vm.loadingArray[Math.round(Math.random() * (vm.loadingArray.length - 1))];
     }, 3500); // show random loading message based on milliseconds set
     vm.ticketID = $routeParams.ticket; // set Ticket ID to URL parameter
     vm.filterAccordions = {};
@@ -219,7 +216,7 @@
     return {
       restrict: 'E',
       scope: {
-        show: '=',
+        show: '='
       },
       replace: true, // Replace with the template below
       transclude: true, // we want to insert custom content inside the directive
@@ -239,7 +236,7 @@
         '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
         '<div class="ng-modal-dialog-content" ng-transclude></div>' +
         '</div>' +
-        '</div>',
+        '</div>'
     };
   }
 
@@ -267,7 +264,7 @@
             if (panes.length === 0) $scope.select(panel);
             panes.push(panel);
           };
-        },
+        }
       ],
       template:
         '<div class="cfx">' +
@@ -281,7 +278,7 @@
         '</div>' +
         '<div class="tab-content" ng-transclude></div>' +
         '</div>',
-      replace: true,
+      replace: true
     };
   }
 
@@ -294,9 +291,8 @@
       link: function(scope, element, attrs, tabsCtrl) {
         tabsCtrl.addPane(scope);
       },
-      template:
-        '<div class="tab-pane" ng-class="{active: selected}" ng-transclude></div>',
-      replace: true,
+      template: '<div class="tab-pane" ng-class="{active: selected}" ng-transclude></div>',
+      replace: true
     };
   }
 
@@ -310,7 +306,7 @@
           this.showHover = function() {
             $scope.isShown = $scope.isShown !== true;
           };
-        },
+        }
       ],
       transclude: true,
       link: function(scope, element, attrs, ctrl) {
@@ -326,7 +322,7 @@
         '<p class="field-help tooltip" ng-show="isShown">' +
         '<span class="close modal__close"></span>' +
         '<span data-ng-bind-html="copy"></span>' +
-        '</p>',
+        '</p>'
     };
   }
 })();

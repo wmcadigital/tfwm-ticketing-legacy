@@ -1,9 +1,7 @@
 (function() {
   'use strict';
 
-  angular
-    .module('ticketingApp')
-    .controller('PageSettingsCtrl', PageSettingsCtrl);
+  angular.module('ticketingApp').controller('PageSettingsCtrl', PageSettingsCtrl);
 
   // PAGE SETTINGS CONTROLLER
   PageSettingsCtrl.$inject = ['pageService'];

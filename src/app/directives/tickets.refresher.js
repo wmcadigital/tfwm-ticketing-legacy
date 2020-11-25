@@ -7,7 +7,7 @@
   function refresher() {
     const directive = {
       transclude: true,
-      controller: refresherController,
+      controller: refresherController
     };
 
     return directive;

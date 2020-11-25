@@ -9,11 +9,11 @@
       restrict: 'EA',
       templateUrl: 'tickets/views/shared/gpay.html',
       scope: {
-        value: '=',
+        value: '='
       },
       controller: gpayController,
       controllerAs: 'vm',
-      bindToController: true,
+      bindToController: true
     };
 
     return directive;
@@ -26,10 +26,8 @@
     vm.whereToBuy = [];
 
     // get ticket data form complete api
-    $http
-      .get('$*apitickets/' + vm.value + '/complete')
-      .then(function(response) {
-        vm.matrixID = response.data.matrixId;
-      });
+    $http.get('$*apitickets/' + vm.value + '/complete').then(function(response) {
+      vm.matrixID = response.data.matrixId;
+    });
   }
 })();

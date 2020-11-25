@@ -1,128 +1,193 @@
-<div class="boxin ticket-item nga-fast nga-fade" ng-class="
+<div
+  class="boxin ticket-item nga-fast nga-fade"
+  ng-class="
         ticket.swiftCurrentAmount >= '0'? 'bdr-top--purple':
         ticket.allowBus == true && ticket.allowTrain == false && ticket.allowMetro == false? 'bdr-top--orange':
         ticket.allowBus == false && ticket.allowTrain == true && ticket.allowMetro == false? 'bdr-top--pink':
         ticket.allowBus == false && ticket.allowTrain == false && ticket.allowMetro==true? 'bdr-top--blue':
         ticket.allowBus == false && ticket.allowMetro == true && ticket.allowTrain == true? 'bdr-top--blue':
         ticket.swiftCurrentAmount !== '' && ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == true? 'nnetwork':
-        ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
-
-    <span data-ng-if="ticket.swiftCurrentAmount"><a ng-href="$*baseUrl/#/ticket/810"><img class="paygimg" ng-src="$*imgUrl/payg.png" /></a></span>
-    <div class="itemContent">
-        <div class="grid-8">
-            <a data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">
-            <h4 class="event__title">{{ticket.name}} 
-                <span class="payment-icons"> 
-                    <img ng-src="$*imgUrl/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.buyOnSwift" alt="Buy on Swift" title="This ticket can be purchased on Swift" />
-                    <!-- <refresher condition="tickets.sortPlw == 'yes'">
+        ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' "
+>
+  <span data-ng-if="ticket.swiftCurrentAmount"
+    ><a ng-href="$*baseUrl/#/ticket/810"
+      ><img class="paygimg" ng-src="$*imgUrl/payg.png"/></a
+  ></span>
+  <div class="itemContent">
+    <div class="grid-8">
+      <a data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">
+        <h4 class="event__title">
+          {{ticket.name}}
+          <span class="payment-icons">
+            <img
+              ng-src="$*imgUrl/swift-logo.png"
+              class="ticket-swift-logo"
+              data-ng-if="ticket.buyOnSwift"
+              alt="Buy on Swift"
+              title="This ticket can be purchased on Swift"
+            />
+            <!-- <refresher condition="tickets.sortPlw == 'yes'">
                         <refresher condition="tickets.sortPop == 'yes'">
                             <refresher condition="tickets.sortPhl == 'yes'">
                                 <mobility-credits value="ticket.id"></mobility-credits>
                             </refresher>
                         </refresher>
                     </refresher> -->
-                    <img ng-src="$*imgUrl/direct-debit-icon.png" class="ticket-direct-debit-logo" data-ng-if="ticket.buyOnDirectDebit" alt="Buy on Direct Debit" title="This ticket can be purchased on Direct Debit" />
-                </span>
-            </h4>
-            </a>
-        </div>
-        <div class="grid-4 modes">
-             <!-- Valid on: -->
-             <span class="icon icon--bus" data-ng-if="ticket.allowBus" title="{{ticket.operator}}"></span>
-             <span class="icon icon--train" data-ng-if="ticket.allowTrain"></span>
-             <span class="icon icon--tram" data-ng-if="ticket.allowMetro"></span>
-        </div>
-        <price></price>
-        <div class="grid-12 summary">
-            {{ticket.summary | removeHTMLTags}}
-        </div>
-
-        <div class="grid-12 operator" data-ng-if="ticket.operator != null">
-            <div class="grid-4">
-                <strong>Operator:</strong>
-            </div>
-            <div class="grid-8">
-                {{ticket.operator}}
-             </div>
-        </div>
-
-        <div class="grid-12 where" data-ng-if="ticket.purchaseLocations.tic || ticket.purchaseLocations.payzone || ticket.purchaseLocations.railStation || ticket.purchaseLocations.onBus || ticket.purchaseLocations.onMetro || ticket.buyOnDirectDebit || ticket.buyOnSwift">
-            <div class="grid-4">
-                <strong>Where to buy:</strong>
-            </div>
-            <div class="grid-8">
-                <ul>
-                    <li data-ng-if="ticket.purchaseLocations.tic">Travel Centres</li>
-                    <li data-ng-if="ticket.purchaseLocations.payzone">Payzone outlets</li>
-                    <li data-ng-if="ticket.purchaseLocations.railStation">Rail stations</li>
-                    <li data-ng-if="ticket.purchaseLocations.onBus">On
-                        <span data-ng-if="ticket.brand == 'Stagecoach'">Stagecoach</span>
-                        <span data-ng-if="ticket.brand == 'Diamond Bus'">Diamond</span>
-                        <span data-ng-if="ticket.brand == 'National Express'">National Express</span>
-                        Bus</li>
-                    <li data-ng-if="ticket.purchaseLocations.onMetro">On Metro</li>
-                    <li data-ng-if="ticket.buyOnDirectDebit">Direct Debit
-                        <span data-ng-if="ticket.buyOnSwift">on Swift</span>
-                    </li>
-                    <li data-ng-if="ticket.buyOnSwift && !ticket.buyOnDirectDebit">Swift</li>
-                    <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">Swift PAYG</li>
-                    <li data-ng-if="ticket.purchaseLocations.swiftOnMobile" data-ng-mouseover="tooltip=true" data-ng-mouseleave="tooltip=false">
-                        <span class="blue rollover">
-                            Google Pay</span>
-                        <div class="field-help tooltip" ng-show="tooltip">
-                            <span>This ticket can be used on<br>
-                                    an Android mobile</span>
-                            </div>
-                        </li>
-                    </li>
-                </ul>
-             </div>
-        </div>
-    
-        <!-- Price increase message -->
-        <p data-ng-if="ticket.ticketFutureAmount"
-            data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">The
-            price of this ticket {{ticket.ticketCurrentAmount > ticket.ticketFutureAmount ? 'decreases' : 'increases'}}
-            to <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span> on
-            {{ticket.ticketFutureDate | date : format : shortDate}}
-        </p>
-
-        <p data-ng-if="ticket.swiftFutureAmount" data-ng-hide="ticket.swiftFutureAmount === ticket.swiftFutureAmount">
-            The Swift PAYG price of this ticket {{ticket.swiftFutureAmount > ticket.swiftFutureAmount ? 'decreases' : 'increases'}} to 
-            <span class="price">{{(ticket.swiftFutureAmount | currency:"£")}}</span> on {{ticket.ticketFutureDate | date : format : shortDate}}
-        </p>
-
-        <p data-ng-if="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">
-            <span data-ng-if="ticket.swiftCurrentAmount">Standard</span> Price is frozen from {{ticket.ticketFutureDate | date : format : shortDate}}
-        </p>
-
-        <!-- buy button for all other tickets apart from swift payg -->
-        <div data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
-            <a class="float--left btn btn--arrow"
-            data-ng-href="{{ticket.purchaseLocations.tic && !ticket.hasOnlinePurchaseChannel ? 'https://www.wmnetwork.co.uk/get-in-touch/travel-centres/':ticket.buyTicketUrl}}"
-            ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' " target="_parent">
-                {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" :
-                    ticket.buyOnSwift ? "Buy on Swift" :
-                    ticket.hasOnlinePurchaseChannel ? "Buy now" :
-                    ticket.purchaseLocations.tic ? "Buy at travel centre" : "Buy now"
-                }}    
-            </a>
-        </div>
-
-        <!-- if product can be brought on GPay -->
-        <div data-ng-if="ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
-            <g-pay value="ticket.id"></g-pay>
-        </div>
-        
-        <!-- if product is swift payg or ticket can only be brought on swift payg -->
-        <div data-ng-if="ticket.isPayAsYouGo || ticket.swiftCurrentAmount" data-ng-hide="ticket.purchaseLocations.swiftOnMobile && tickets.oneApp || ticket.id == '811'">
-            <a class="float--left btn btn--arrow btn--navy" data-ng-href="$*paygLink?[{matrixId:'AAC001'}]">Buy on pay as you go</a>
-        </div>
-
-         <!-- if product has no online buy link -->
-        <div data-ng-if="!ticket.buyTicketUrl" data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
-            <a class="float--left btn btn--arrow" data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">More information</a>
-        </div>
-
+            <img
+              ng-src="$*imgUrl/direct-debit-icon.png"
+              class="ticket-direct-debit-logo"
+              data-ng-if="ticket.buyOnDirectDebit"
+              alt="Buy on Direct Debit"
+              title="This ticket can be purchased on Direct Debit"
+            />
+          </span>
+        </h4>
+      </a>
     </div>
+    <div class="grid-4 modes">
+      <!-- Valid on: -->
+      <span
+        class="icon icon--bus"
+        data-ng-if="ticket.allowBus"
+        title="{{ticket.operator}}"
+      ></span>
+      <span class="icon icon--train" data-ng-if="ticket.allowTrain"></span>
+      <span class="icon icon--tram" data-ng-if="ticket.allowMetro"></span>
+    </div>
+    <price></price>
+    <div class="grid-12 summary">
+      {{ticket.summary | removeHTMLTags}}
+    </div>
+
+    <div class="grid-12 operator" data-ng-if="ticket.operator != null">
+      <div class="grid-4">
+        <strong>Operator:</strong>
+      </div>
+      <div class="grid-8">
+        {{ticket.operator}}
+      </div>
+    </div>
+
+    <div
+      class="grid-12 where"
+      data-ng-if="ticket.purchaseLocations.tic || ticket.purchaseLocations.payzone || ticket.purchaseLocations.railStation || ticket.purchaseLocations.onBus || ticket.purchaseLocations.onMetro || ticket.buyOnDirectDebit || ticket.buyOnSwift"
+    >
+      <div class="grid-4">
+        <strong>Where to buy:</strong>
+      </div>
+      <div class="grid-8">
+        <ul>
+          <li data-ng-if="ticket.purchaseLocations.tic">Travel Centres</li>
+          <li data-ng-if="ticket.purchaseLocations.payzone">Payzone outlets</li>
+          <li data-ng-if="ticket.purchaseLocations.railStation">
+            Rail stations
+          </li>
+          <li data-ng-if="ticket.purchaseLocations.onBus">
+            On
+            <span data-ng-if="ticket.brand == 'Stagecoach'">Stagecoach</span>
+            <span data-ng-if="ticket.brand == 'Diamond Bus'">Diamond</span>
+            <span data-ng-if="ticket.brand == 'National Express'"
+              >National Express</span
+            >
+            Bus
+          </li>
+          <li data-ng-if="ticket.purchaseLocations.onMetro">On Metro</li>
+          <li data-ng-if="ticket.buyOnDirectDebit">
+            Direct Debit
+            <span data-ng-if="ticket.buyOnSwift">on Swift</span>
+          </li>
+          <li data-ng-if="ticket.buyOnSwift && !ticket.buyOnDirectDebit">
+            Swift
+          </li>
+          <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">
+            Swift PAYG
+          </li>
+          <li
+            data-ng-if="ticket.purchaseLocations.swiftOnMobile"
+            data-ng-mouseover="tooltip=true"
+            data-ng-mouseleave="tooltip=false"
+          >
+            <span class="blue rollover"> Google Pay</span>
+            <div class="field-help tooltip" ng-show="tooltip">
+              <span
+                >This ticket can be used on<br />
+                an Android mobile</span
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Price increase message -->
+    <p
+      data-ng-if="ticket.ticketFutureAmount"
+      data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount"
+    >
+      The price of this ticket {{ticket.ticketCurrentAmount &gt;
+      ticket.ticketFutureAmount ? 'decreases' : 'increases'}} to
+      <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span>
+      on {{ticket.ticketFutureDate | date : format : shortDate}}
+    </p>
+
+    <p
+      data-ng-if="ticket.swiftFutureAmount"
+      data-ng-hide="ticket.swiftFutureAmount === ticket.swiftFutureAmount"
+    >
+      The Swift PAYG price of this ticket {{ticket.swiftFutureAmount &gt;
+      ticket.swiftFutureAmount ? 'decreases' : 'increases'}} to
+      <span class="price">{{(ticket.swiftFutureAmount | currency:"£")}}</span>
+      on {{ticket.ticketFutureDate | date : format : shortDate}}
+    </p>
+
+    <p data-ng-if="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">
+      <span data-ng-if="ticket.swiftCurrentAmount">Standard</span> Price is
+      frozen from {{ticket.ticketFutureDate | date : format : shortDate}}
+    </p>
+
+    <!-- buy button for all other tickets apart from swift payg -->
+    <div
+      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp"
+    >
+      <a
+        class="float--left btn btn--arrow"
+        data-ng-href="{{ticket.purchaseLocations.tic && !ticket.hasOnlinePurchaseChannel ? 'https://www.wmnetwork.co.uk/get-in-touch/travel-centres/':ticket.buyTicketUrl}}"
+        ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' "
+        target="_parent"
+      >
+        {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.buyOnSwift ?
+        "Buy on Swift" : ticket.hasOnlinePurchaseChannel ? "Buy now" :
+        ticket.purchaseLocations.tic ? "Buy at travel centre" : "Buy now" }}
+      </a>
+    </div>
+
+    <!-- if product can be brought on GPay -->
+    <div data-ng-if="ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
+      <g-pay value="ticket.id"></g-pay>
+    </div>
+
+    <!-- if product is swift payg or ticket can only be brought on swift payg -->
+    <div
+      data-ng-if="ticket.isPayAsYouGo || ticket.swiftCurrentAmount"
+      data-ng-hide="ticket.purchaseLocations.swiftOnMobile && tickets.oneApp || ticket.id == '811'"
+    >
+      <a
+        class="float--left btn btn--arrow btn--navy"
+        data-ng-href="$*paygLink?[{matrixId:'AAC001'}]"
+        >Buy on pay as you go</a
+      >
+    </div>
+
+    <!-- if product has no online buy link -->
+    <div
+      data-ng-if="!ticket.buyTicketUrl"
+      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.purchaseLocations.swiftOnMobile && tickets.oneApp"
+    >
+      <a
+        class="float--left btn btn--arrow"
+        data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}"
+        >More information</a
+      >
+    </div>
+  </div>
 </div>

@@ -7,7 +7,7 @@
   function search() {
     const directive = {
       restrict: 'E',
-      templateUrl: 'tickets/views/shared/initial-search.html',
+      templateUrl: 'tickets/views/shared/initial-search.html'
     };
 
     return directive;

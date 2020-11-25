@@ -17,7 +17,7 @@
     'ticketingService',
     'angularGridInstance',
     '$httpParamSerializer',
-    'deviceDetector',
+    'deviceDetector'
   ];
 
   function TicketingSearchCtrl(
@@ -61,7 +61,7 @@
       operatorLength: 0,
       busTravelArea: [],
       railZoneFrom: [],
-      railZoneTo: [],
+      railZoneTo: []
     }; // set an object for the filters show/hide toggle to fall into
     vm.toggleFilter = toggleFilter;
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
@@ -94,7 +94,7 @@
         passengerType: $location.search().passengerType || '',
         timeBand: $location.search().timeBand || '',
         brand: $location.search().brand || null,
-        stationNames: $location.search().stationNames || null,
+        stationNames: $location.search().stationNames || null
       }; // Define postJSON default values
       vm.stationFromName = null; // Clear Stations
       vm.stationToName = null;
@@ -111,26 +111,22 @@
       vm.excludebusParameter = $location.search().excludeBus || null;
 
       // direct debit
-      vm.buyOnDirectDebitParameter =
-        $location.search().buyOnDirectDebit || null;
+      vm.buyOnDirectDebitParameter = $location.search().buyOnDirectDebit || null;
 
       // quick buy
-      vm.buyOnDirectPurchaseParameter =
-        $location.search().buyOnDirectPurchase || null;
+      vm.buyOnDirectPurchaseParameter = $location.search().buyOnDirectPurchase || null;
 
       // swift
       vm.buyOnSwiftParameter = $location.search().buyOnSwift || null;
 
       // buy online
-      vm.hasOnlinePurchaseChannelParameter =
-        $location.search().hasOnlinePurchaseChannel || null;
+      vm.hasOnlinePurchaseChannelParameter = $location.search().hasOnlinePurchaseChannel || null;
 
       // tic
       vm.purchaseTicParameter = $location.search().purchaseTic || null;
 
       // rail station
-      vm.purchaseRailStationParameter =
-        $location.search().purchaseRailStation || null;
+      vm.purchaseRailStationParameter = $location.search().purchaseRailStation || null;
 
       // payzone
       vm.purchasePayzoneParameter = $location.search().purchasePayzone || null;
@@ -323,7 +319,7 @@
         timePeriod4: vm.timePeriod4Parameter,
         limit: vm.limit,
         limitExact: vm.limitExact,
-        excludeBus: vm.excludebusParameter,
+        excludeBus: vm.excludebusParameter
       }); // set search url for sharing/tracking
 
       vm.searchFilters = {}; // set scope for search filters and reset on every search
@@ -345,16 +341,12 @@
           }
 
           // Check bus area
-          if (
-            vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1
-          ) {
+          if (vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1) {
             vm.filterButtons.busTravelArea.push(items.busTravelArea);
           }
 
           // Check rail zone from
-          if (
-            vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1
-          ) {
+          if (vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1) {
             vm.filterButtons.railZoneFrom.push(items.railZoneFrom);
           }
 
@@ -450,7 +442,7 @@
                 allowTrain: ftrain,
                 allowMetro: fmetro,
                 railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone,
+                railZoneTo: vm.ftozone
               });
             } else if (vm.ffromzone > vm.ftozone) {
               vm.exactMatch = $filter('filter')(response, {
@@ -458,7 +450,7 @@
                 allowTrain: ftrain,
                 allowMetro: fmetro,
                 railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone,
+                railZoneTo: vm.ffromzone
               });
             } else if (vm.ffromzone === vm.ftozone) {
               vm.exactMatch = $filter('filter')(response, {
@@ -466,37 +458,34 @@
                 allowTrain: ftrain,
                 allowMetro: fmetro,
                 railZoneFrom: 1,
-                railZoneTo: vm.ftozone,
+                railZoneTo: vm.ftozone
               });
             }
           } else {
             vm.exactMatch = $filter('filter')(response, {
               allowBus: fbus,
               allowTrain: ftrain,
-              allowMetro: fmetro,
+              allowMetro: fmetro
             });
           }
-        } else if (
-          vm.postJSON.brand === 'nnetwork' ||
-          vm.postJSON.brand === 'ntrain'
-        ) {
+        } else if (vm.postJSON.brand === 'nnetwork' || vm.postJSON.brand === 'ntrain') {
           vm.exactMatch = [];
           if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
             // exact results won't work if from zone is greater then the to zone so do a check
             if (vm.ffromzone < vm.ftozone) {
               vm.exactMatch = $filter('filter')(response, {
                 railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone,
+                railZoneTo: vm.ftozone
               });
             } else if (vm.ffromzone > vm.ftozone) {
               vm.exactMatch = $filter('filter')(response, {
                 railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone,
+                railZoneTo: vm.ffromzone
               });
             } else if (vm.ffromzone === vm.ftozone) {
               vm.exactMatch = $filter('filter')(response, {
                 railZoneFrom: 1,
-                railZoneTo: vm.ftozone,
+                railZoneTo: vm.ftozone
               });
             }
           } else {
@@ -508,7 +497,7 @@
           vm.exactMatch = $filter('filter')(response, {
             allowBus: fbus,
             allowTrain: ftrain,
-            allowMetro: fmetro,
+            allowMetro: fmetro
           });
         }
 
@@ -524,9 +513,7 @@
           arrlen = searchAll.length;
           for (j = 0; j < arrlen; j += 1) {
             if (searchExact[i] === searchAll[j]) {
-              searchAll = searchAll
-                .slice(0, j)
-                .concat(searchAll.slice(j + 1, arrlen));
+              searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
             }
           }
         }
@@ -681,11 +668,9 @@
                   busTravelArea: vm.searchFilters.busTravelArea,
                   operator: vm.searchFilters.operator,
                   buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
-                  buyOnDirectPurchase:
-                    vm.searchFilters.buyOnDirectPurchase || null,
+                  buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
                   buyOnSwift: vm.searchFilters.buyOnSwift,
-                  hasOnlinePurchaseChannel:
-                    vm.searchFilters.hasOnlinePurchaseChannel,
+                  hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
                   purchaseTic: vm.searchFilters.purchaseTic,
                   purchaseRailStation: vm.searchFilters.purchaseRailStation,
                   purchasePayzone: vm.searchFilters.purchasePayzone,
@@ -693,7 +678,7 @@
                   railZoneTo: vm.searchFilters.railZoneTo,
                   limit: vm.limit,
                   limitExact: vm.limitExact,
-                  excludeBus: vm.searchFilters.allowBus,
+                  excludeBus: vm.searchFilters.allowBus
                 };
 
                 urlstring = $httpParamSerializer(obj);
@@ -712,17 +697,13 @@
 
                 // work out time of day selection and update searchURL
                 if (vm.searchFilters.timePeriod1 === true) {
-                  atime =
-                    '&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false';
+                  atime = '&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod2 === true) {
-                  atime =
-                    '&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false';
+                  atime = '&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod3 === true) {
-                  atime =
-                    '&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false';
+                  atime = '&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod4 === true) {
-                  atime =
-                    '&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true';
+                  atime = '&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true';
                 } else if (vm.timePeriodAll === true) {
                   atime = '&timePeriodAll=true';
                 } else {
@@ -746,8 +727,7 @@
                   vm.postedJSON.allowTrain &&
                   !vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    '/?' + abus + '&' + atrain + '&' + urlstring + atime;
+                  searchURL = '/?' + abus + '&' + atrain + '&' + urlstring + atime;
                   // console.log(searchURL);
                   savedFilter.set('url', searchURL);
                 }
@@ -757,8 +737,7 @@
                   !vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    '/?' + abus + '&' + ametro + '&' + urlstring + atime;
+                  searchURL = '/?' + abus + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
                   savedFilter.set('url', searchURL);
                 }
@@ -778,8 +757,7 @@
                   vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    '/?' + atrain + '&' + ametro + '&' + urlstring + atime;
+                  searchURL = '/?' + atrain + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
                   savedFilter.set('url', searchURL);
                 }
@@ -799,16 +777,7 @@
                   vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    '/?' +
-                    abus +
-                    '&' +
-                    atrain +
-                    '&' +
-                    ametro +
-                    '&' +
-                    urlstring +
-                    atime;
+                  searchURL = '/?' + abus + '&' + atrain + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
                   savedFilter.set('url', searchURL);
                 }
@@ -840,7 +809,7 @@
         // console.log("out of county stations");
         // console.log(response);
         const OutOfCounty = $filter('filter')(response, {
-          outOfCounty: 'true',
+          outOfCounty: 'true'
         });
         vm.stationoocList = OutOfCounty;
       });

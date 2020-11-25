@@ -7,7 +7,7 @@
   function ticketPrice() {
     const directive = {
       restrict: 'E',
-      templateUrl: 'ticket/views/shared/price.html',
+      templateUrl: 'ticket/views/shared/price.html'
     };
 
     return directive;

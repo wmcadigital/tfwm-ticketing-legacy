@@ -9,11 +9,11 @@
       restrict: 'EA',
       templateUrl: 'tickets/views/shared/mobility-credits.html',
       scope: {
-        value: '=',
+        value: '='
       },
       controller: mobilityCreditsController,
       controllerAs: 'vm',
-      bindToController: true,
+      bindToController: true
     };
 
     return directive;
@@ -26,25 +26,23 @@
     vm.whereToBuy = [];
 
     // get ticket data form complete api
-    $http
-      .get('$*apitickets/' + vm.value + '/complete')
-      .then(function(response) {
-        // work out if product has mobility credits in it's features
-        angular.forEach(response.data.features, function(price) {
-          vm.elementIds.push(price.name);
-        });
-
-        // remove duplicates from features
-        vm.unique = vm.elementIds.filter(function(elem, index, self) {
-          return index === self.indexOf(elem);
-        });
-
-        // if features include Mobility Credits
-        if (vm.unique.includes('Mobility Credits')) {
-          vm.mobC = true;
-        } else {
-          vm.mobC = false;
-        }
+    $http.get('$*apitickets/' + vm.value + '/complete').then(function(response) {
+      // work out if product has mobility credits in it's features
+      angular.forEach(response.data.features, function(price) {
+        vm.elementIds.push(price.name);
       });
+
+      // remove duplicates from features
+      vm.unique = vm.elementIds.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+      });
+
+      // if features include Mobility Credits
+      if (vm.unique.includes('Mobility Credits')) {
+        vm.mobC = true;
+      } else {
+        vm.mobC = false;
+      }
+    });
   }
 })();
