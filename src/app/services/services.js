@@ -9,16 +9,20 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    var uri = '$*api';
+    const uri = '$*api';
     return {
       ticketSearch: function(data) {
-        return getData($http.post(uri + 'tickets/search', data, { cache: true }));
+        return getData(
+          $http.post(uri + 'tickets/search', data, { cache: true })
+        );
       },
       getTicket: function(data) {
         return getData($http.get(uri + 'tickets/' + data, { cache: true }));
       },
       getTicketFull: function(data) {
-        return getData($http.get(uri + 'tickets/' + data + '/complete', { cache: true }));
+        return getData(
+          $http.get(uri + 'tickets/' + data + '/complete', { cache: true })
+        );
       },
       getTerms: function(data) {
         return getData($http.get(uri + 'terms/' + data, { cache: true }));
@@ -34,7 +38,7 @@
       },
       getSwiftSearch: function() {
         return getData($http.post(uri + 'tickets/search', { cache: true }));
-      }
+      },
     };
 
     function getData(jsonData) {
@@ -70,7 +74,7 @@
     }
     return {
       set: set,
-      get: get
+      get: get,
     };
   }
 
@@ -81,12 +85,14 @@
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {
-          route: $location.absUrl().split('https://www.networkwestmidlands.com')[1]
-        }
+          route: $location
+            .absUrl()
+            .split('https://www.networkwestmidlands.com')[1],
+        },
       });
     }
     return {
-      update: update
+      update: update,
     };
   }
 })();

@@ -5,9 +5,9 @@
 
   // function to display item
   function item() {
-    var directive = {
+    const directive = {
       restrict: 'E',
-      templateUrl: 'tickets/views/shared/item.html'
+      templateUrl: 'tickets/views/shared/item.html',
     };
 
     return directive;

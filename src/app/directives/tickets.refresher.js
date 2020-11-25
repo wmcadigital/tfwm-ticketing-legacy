@@ -5,9 +5,9 @@
 
   // function to display refresh the grid
   function refresher() {
-    var directive = {
+    const directive = {
       transclude: true,
-      controller: refresherController
+      controller: refresherController,
     };
 
     return directive;
@@ -15,7 +15,7 @@
 
   refresherController.$inject = ['$scope', '$transclude', '$attrs', '$element'];
   function refresherController($scope, $transclude, $attrs, $element) {
-    var childScope;
+    let childScope;
 
     $scope.$watch($attrs.condition, function() {
       $element.empty();

@@ -8,7 +8,7 @@
       'ngRoute',
       'angucomplete-alt',
       'angularGrid',
-      'ng.deviceDetector'
+      'ng.deviceDetector',
     ])
     .config(trustedURLs)
     .config(routeProvider)
@@ -21,7 +21,7 @@
       // LOCAL
       local: true, // Changes logic in services.js based on if this is available
 
-      buildNo: 'NWM Ticketing v2.0.0'
+      buildNo: 'NWM Ticketing v2.0.0',
     });
   trustedURLs.$inject = ['$sceDelegateProvider'];
   function trustedURLs($sceDelegateProvider) {
@@ -32,7 +32,7 @@
       // Allow loading from our assets domain.  Notice the difference between * and **.
       'https://static.centro.org.uk/**',
       'http://static.centro.org.uk/**',
-      '$*baseUrl**'
+      '$*baseUrl**',
     ]);
   }
   routeProvider.$inject = ['$routeProvider', 'ngAuthSettings'];
@@ -44,7 +44,7 @@
         controller: 'TicketingSearchCtrl',
         templateUrl: 'tickets/views/wmn/index.html',
         controllerAs: 'tickets',
-        reloadOnSearch: false
+        reloadOnSearch: false,
       })
 
       .when('/ticket/:ticket', {
@@ -59,35 +59,35 @@
             function(savedFilter) {
               // Get the search page history url from cache
               return savedFilter.get('stateless');
-            }
+            },
           ],
           getURL: [
             'savedFilter',
             function(savedFilter) {
               // get saved url from cache
               return savedFilter.get('url');
-            }
-          ]
+            },
+          ],
         },
-        reloadOnSearch: false
+        reloadOnSearch: false,
       })
       .otherwise({
         title: 'tickets',
-        redirectTo: '/'
+        redirectTo: '/',
       });
   }
 
   // Safely instantiate dataLayer  - This is so Google Analytics tracks properly via Tag Manager
   analytics.$inject = ['$rootScope', '$location', '$window'];
   function analytics($rootScope, $location, $window) {
-    var dataLayer = $window.dataLayer || [];
+    const dataLayer = $window.dataLayer || [];
 
     $rootScope.$on('$routeChangeSuccess', function() {
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {
-          route: $location.absUrl().split('https://www.wmca.org.uk')[1]
-        }
+          route: $location.absUrl().split('https://www.wmca.org.uk')[1],
+        },
       });
     });
   }

@@ -5,9 +5,9 @@
 
   // function to display price in product item
   function price() {
-    var directive = {
+    const directive = {
       restrict: 'E',
-      templateUrl: 'tickets/views/shared/price.html'
+      templateUrl: 'tickets/views/shared/price.html',
     };
 
     return directive;
