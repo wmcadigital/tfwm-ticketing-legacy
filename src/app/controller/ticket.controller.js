@@ -105,6 +105,7 @@
           // console.log(response);
         });
         backButtonLogic(); // Determine back button logic
+        vm.loadingStatus = 'success'; // set success loading status
       });
     }
 
@@ -188,10 +189,6 @@
     function toggleModalGPay() {
       vm.modalShownGpay = !vm.modalShownGpay;
     }
-
-    $timeout(function() {
-      vm.loadingStatus = 'success';
-    }, 0);
   }
 
   // FILTERS
