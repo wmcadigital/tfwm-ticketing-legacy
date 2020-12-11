@@ -147,7 +147,7 @@
 
     <!-- buy button for all other tickets apart from swift payg -->
     <div
-      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp"
+      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.deviceDetector.os == 'android'"
     >
       <a
         class="float--left btn btn--arrow"
@@ -162,14 +162,14 @@
     </div>
 
     <!-- if product can be brought on GPay -->
-    <div data-ng-if="ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp">
+    <div data-ng-if="ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.deviceDetector.os == 'android'">
       <g-pay value="ticket.id"></g-pay>
     </div>
 
     <!-- if product is swift payg or ticket can only be brought on swift payg -->
     <div
       data-ng-if="ticket.isPayAsYouGo || ticket.swiftCurrentAmount"
-      data-ng-hide="ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp || ticket.id == '811'"
+      data-ng-hide="ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.deviceDetector.os == 'android' || ticket.id == '811'"
     >
       <a
         class="float--left btn btn--arrow btn--navy"
@@ -180,7 +180,7 @@
     <!-- if product has no online buy link -->
     <div
       data-ng-if="!ticket.buyTicketUrl"
-      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp"
+      data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.deviceDetector.os == 'android'"
     >
       <a
         class="float--left btn btn--arrow"
