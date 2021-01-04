@@ -5,7 +5,7 @@
 
   // function to display price in product item
   function search() {
-    var directive = {
+    const directive = {
       restrict: 'E',
       templateUrl: 'tickets/views/shared/initial-search.html'
     };

@@ -32,7 +32,7 @@
     deviceDetector,
     $location
   ) {
-    var vm = this;
+    const vm = this;
     vm.loadingText = 'Loading...'; // default loading text
     vm.loadingStatus = 'loading'; // default loading status
     vm.loadingArray = [
@@ -105,6 +105,7 @@
           // console.log(response);
         });
         backButtonLogic(); // Determine back button logic
+        vm.loadingStatus = 'success'; // set success loading status
       });
     }
 
@@ -118,6 +119,11 @@
         vm.oneApp = true;
       } else {
         vm.oneApp = false;
+      }
+      if (vm.userAgent.includes('android')) {
+        vm.android = true;
+      } else {
+        vm.android = false;
       }
     }
 
@@ -188,10 +194,6 @@
     function toggleModalGPay() {
       vm.modalShownGpay = !vm.modalShownGpay;
     }
-
-    $timeout(function() {
-      vm.loadingStatus = 'success';
-    }, 0);
   }
 
   // FILTERS
@@ -249,7 +251,7 @@
         '$scope',
         function($scope) {
           // eslint-disable-next-line no-multi-assign
-          var panes = ($scope.panes = []);
+          const panes = ($scope.panes = []);
 
           // eslint-disable-next-line no-shadow
           $scope.select = function(pane) {

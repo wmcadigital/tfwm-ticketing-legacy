@@ -5,7 +5,7 @@ sass.compiler = require('node-sass');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
 // JS vars
-const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 // HTML vars
@@ -191,7 +191,7 @@ function minifyJS(jsFile) {
     )
     .pipe(sourcemaps.init())
     .pipe(concat(jsFile.minName)) // concat all js files in folder
-    .pipe(uglify({ mangle: { reserved: ['jQuery'] } })) // Mangle var names etc.
+    .pipe(terser())
     .pipe(sourcemaps.write(getRoot(paths.scripts.output) + '_sourcemaps/'))
     .pipe(plumber.stop())
     .pipe(replace('$*api', json.buildDirs[build].api))
@@ -229,7 +229,7 @@ function buildTemplates() {
       })
     )
     .pipe(concat(paths.templates.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
@@ -266,7 +266,7 @@ function buildSharedTemplates() {
       })
     )
     .pipe(concat(paths.templatesShared.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
@@ -286,7 +286,7 @@ function buildSharedSwiftTemplates() {
       })
     )
     .pipe(concat(paths.templatesSwiftShared.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
@@ -304,7 +304,7 @@ function buildSharedOneappTemplates() {
       })
     )
     .pipe(concat(paths.templatesOneappShared.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
@@ -329,7 +329,7 @@ function buildSwiftTemplates() {
       })
     )
     .pipe(concat(paths.templatesSwift.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
@@ -352,7 +352,7 @@ function buildOneappTemplates() {
       })
     )
     .pipe(concat(paths.templatesOneapp.minName))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))

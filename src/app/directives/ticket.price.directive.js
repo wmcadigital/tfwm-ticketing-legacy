@@ -5,7 +5,7 @@
 
   // function to display price in product sidebar and mobile details
   function ticketPrice() {
-    var directive = {
+    const directive = {
       restrict: 'E',
       templateUrl: 'ticket/views/shared/price.html'
     };

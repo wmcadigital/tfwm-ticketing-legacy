@@ -5,7 +5,7 @@
 
   // function to retrieve pricelevels and return if product is available on Google Pay
   function mobilityCredits() {
-    var directive = {
+    const directive = {
       restrict: 'EA',
       templateUrl: 'tickets/views/shared/mobility-credits.html',
       scope: {
@@ -21,7 +21,7 @@
 
   mobilityCreditsController.$inject = ['$http'];
   function mobilityCreditsController($http) {
-    var vm = this;
+    const vm = this;
     vm.elementIds = [];
     vm.whereToBuy = [];
 

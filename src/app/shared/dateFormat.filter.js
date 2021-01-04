@@ -5,12 +5,12 @@
 
   dateFormat.$inject = ['$filter'];
   function dateFormat($filter) {
-    var tomorrow = new Date();
+    let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow = tomorrow.setHours(0, 0, 0, 0);
 
     return function(text) {
-      var tempdate = new Date(text).setHours(0, 0, 0, 0);
+      const tempdate = new Date(text).setHours(0, 0, 0, 0);
 
       if (text === null || text === undefined) {
         return false;

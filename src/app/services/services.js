@@ -9,7 +9,7 @@
 
   ticketingService.$inject = ['$http'];
   function ticketingService($http) {
-    var uri = '$*api';
+    const uri = '$*api';
     return {
       ticketSearch: function(data) {
         return getData($http.post(uri + 'tickets/search', data, { cache: true }));

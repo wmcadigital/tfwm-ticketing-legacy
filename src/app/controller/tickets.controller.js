@@ -33,10 +33,10 @@
     $httpParamSerializer,
     deviceDetector
   ) {
-    var vm = this;
-    var stations;
-    var stationSel;
-    var stationSplit;
+    const vm = this;
+    let stations;
+    let stationSel;
+    let stationSplit;
     vm.submit = submit; // Function to submit initial search
     vm.clearFilter = clearFilter; // Function to reset filters
     vm.getStations = getStations; // Function to retrieve stations
@@ -70,6 +70,7 @@
     vm.toggleModalFilter = toggleModalFilter;
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
+    vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -233,21 +234,26 @@
       } else {
         vm.oneApp = false;
       }
+      if (vm.userAgent.includes('android')) {
+        vm.android = true;
+      } else {
+        vm.android = false;
+      }
     }
 
     // Get Rail stations for autocomplete
     function getStations() {
       // console.log("get stations");
       ticketingService.getStations().then(function(response) {
-        var fromRail;
-        var toRail;
-        var ViaOneRail;
-        var dataFromRail;
-        var dataToRail;
-        var dataViaOnRail;
-        var dataFromRailData;
-        var dataToRailData;
-        var dataViaOneRailData;
+        let fromRail;
+        let toRail;
+        let ViaOneRail;
+        let dataFromRail;
+        let dataToRail;
+        let dataViaOnRail;
+        let dataFromRailData;
+        let dataToRailData;
+        let dataViaOneRailData;
         // console.log("rail stations");
         // console.log(response);
         vm.stationList = response;
@@ -278,17 +284,17 @@
     }
 
     function submit(data) {
-      var fbus;
-      var ftrain;
-      var fmetro;
-      var i;
-      var j;
-      var arrlen;
-      var bus;
-      var train;
-      var metro;
-      var searchAll;
-      var searchExact;
+      let fbus;
+      let ftrain;
+      let fmetro;
+      let i;
+      let j;
+      let arrlen;
+      let bus;
+      let train;
+      let metro;
+      let searchAll;
+      let searchExact;
       vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
 
@@ -547,9 +553,9 @@
     }
 
     function update() {
-      var filtered = vm.all;
-      var filteredorg = vm.exactMatch;
-      var filteredother = vm.otherResults;
+      let filtered = vm.all;
+      let filteredorg = vm.exactMatch;
+      let filteredother = vm.otherResults;
 
       // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
       angular.forEach(vm.searchFilters, function(val, key) {
@@ -649,13 +655,13 @@
         function() {
           $timeout(
             function() {
-              var searchURL;
-              var urlstring;
-              var abus;
-              var atrain;
-              var ametro;
-              var atime;
-              var obj;
+              let searchURL;
+              let urlstring;
+              let abus;
+              let atrain;
+              let ametro;
+              let atime;
+              let obj;
               if (vm.filteredTickets.length) {
                 // set storage url according to search filters
                 // set data to be displayed in serializer
@@ -807,7 +813,9 @@
       ticketingService.getStations().then(function(response) {
         // console.log("out of county stations");
         // console.log(response);
-        var OutOfCounty = $filter('filter')(response, { outOfCounty: 'true' });
+        const OutOfCounty = $filter('filter')(response, {
+          outOfCounty: 'true'
+        });
         vm.stationoocList = OutOfCounty;
       });
     }
@@ -815,7 +823,7 @@
     // get In County Rail stations for autocomplete
     function geticStations() {
       ticketingService.getStations().then(function(response) {
-        var inCounty = $filter('filter')(response, { outOfCounty: 'false' });
+        const inCounty = $filter('filter')(response, { outOfCounty: 'false' });
         vm.stationicList = inCounty;
       });
     }
@@ -1449,6 +1457,15 @@
       });
     }
 
+    // if pass is swift abt
+    function selectPass() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === '') {
+        console.log('select pass');
+        vm.clearFilter();
+      }
+    }
+
     // set current date to test for ticketFutureDate
     vm.date = new Date();
   }
@@ -1458,7 +1475,7 @@
   // filter to replace text
   replace.$inject = [];
   function replace() {
-    var regex;
+    let regex;
     return function(input, from, to) {
       if (input === undefined) {
         return;

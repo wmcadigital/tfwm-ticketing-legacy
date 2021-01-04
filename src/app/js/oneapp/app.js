@@ -80,7 +80,7 @@
   // Safely instantiate dataLayer  - This is so Google Analytics tracks properly via Tag Manager
   analytics.$inject = ['$rootScope', '$location', '$window'];
   function analytics($rootScope, $location, $window) {
-    var dataLayer = $window.dataLayer || [];
+    const dataLayer = $window.dataLayer || [];
 
     $rootScope.$on('$routeChangeSuccess', function() {
       dataLayer.push({

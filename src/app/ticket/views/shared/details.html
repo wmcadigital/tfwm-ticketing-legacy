@@ -1,75 +1,91 @@
-<div class="boxin boxin--large"
-    ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+<div
+  class="boxin boxin--large"
+  ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}"
+>
+  <div class="cfx">
+    <div class="col">
+      <h1>{{ticket.all.name}}</h1>
+    </div>
 
-    <div class="cfx">
-        <div class="col">
-            <h1>{{ticket.all.name}}</h1>
+    <div class="col">
+      <p class="summary">Summary</p>
+      <p data-ng-bind-html="ticket.all.summary"></p>
+
+      <p class="useon">
+        Use on
+        <!-- Valid on: -->
+        <span
+          class="icon icon--bus"
+          data-ng-if="ticket.all.allowBus"
+          title="{{ticket.all.operator}}"
+        ></span>
+        <span
+          class="icon icon--train"
+          data-ng-if="ticket.all.allowTrain"
+        ></span>
+        <span class="icon icon--tram" data-ng-if="ticket.all.allowMetro"></span>
+      </p>
+    </div>
+  </div>
+
+  <style type="text/css"></style>
+
+  <!-- Features: -->
+  <div
+    class="boxin bg--grey bg--tint ts--info features"
+    data-ng-if="ticket.all.features.length != '0'"
+    ng-init="tooltip=false"
+  >
+    <ul class="bare-list bare-list--horizontal">
+      <li
+        ng-repeat="features in ticket.all.features | orderBy:'referenceCode'"
+        data-ng-mouseover="tooltip=true"
+        data-ng-mouseleave="tooltip=false"
+      >
+        <span data-ng-if="features.description == ''"
+          ><span class="iconcustom icon--tick"></span> {{features.name}}</span
+        >
+        <span data-ng-if="features.description != ''" class="blue rollover"
+          ><span class="iconcustom icon--tick"></span> {{features.name}}</span
+        >
+        <div
+          data-ng-if="features.description != ''"
+          class="field-help tooltip"
+          ng-show="tooltip"
+        >
+          <span data-ng-bind-html="features.description"></span>
         </div>
+      </li>
+    </ul>
+  </div>
 
-        <div class="col">
-            <p class="summary">Summary</p>
-            <p data-ng-bind-html="ticket.all.summary"></p>
-
-            <p class="useon">Use on
-                <!-- Valid on: -->
-                <span class="icon icon--bus" data-ng-if="ticket.all.allowBus" title="{{ticket.all.operator}}"></span>
-                <span class="icon icon--train" data-ng-if="ticket.all.allowTrain"></span>
-                <span class="icon icon--tram" data-ng-if="ticket.all.allowMetro"></span>
-            </p>
-        </div>
-    </div>
-
-    <style type="text/css">
-
-    </style>
-
-    <!-- Features: -->
-    <div class="boxin bg--grey bg--tint ts--info features" data-ng-if="ticket.all.features.length != '0'"
-        ng-init="tooltip=false">
-        <ul class="bare-list bare-list--horizontal">
-            <li ng-repeat="features in ticket.all.features | orderBy:'referenceCode'" data-ng-mouseover="tooltip=true"
-                data-ng-mouseleave="tooltip=false">
-                <span data-ng-if="features.description == ''"><span class="iconcustom icon--tick"></span>
-                    {{features.name}}</span>
-                <span data-ng-if="features.description != ''" class="blue rollover"><span
-                        class="iconcustom icon--tick"></span> {{features.name}}</span>
-                <div data-ng-if="features.description != ''" class="field-help tooltip" ng-show="tooltip"><span
-                        data-ng-bind-html="features.description"></span></div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="display--tablet">
-        <hr>
-        <ticket-price></ticket-price>
-    </div>
-
+  <div class="display--tablet">
+    <hr />
+    <ticket-price></ticket-price>
+  </div>
 </div>
 
-<div class="boxin boxin--large"
-    ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}">
+<div
+  class="boxin boxin--large"
+  ng-class="{'bdr-top--orange' : ticket.all.allowBus==true && ticket.all.allowTrain==false && ticket.all.allowMetro==false, 'bdr-top--green' : ticket.all.allowBus==false && ticket.all.allowTrain==true && ticket.all.allowMetro==false, 'bdr-top--pink' : ticket.all.allowBus==false && ticket.all.allowTrain==false && ticket.all.allowMetro==true, 'bdr-top--blue' : ticket.all.allowBus==true && ticket.all.allowMetro==true && ticket.all.allowTrain==false, 'bdr-009fe3' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==true, 'bdr-top--cyan' : ticket.all.allowBus==true && ticket.all.allowTrain==true && ticket.all.allowMetro==false}"
+>
+  <div data-ng-bind-html="ticket.all.description"></div>
 
-    <div data-ng-bind-html="ticket.all.description"></div>
-
-    <!-- Accordion -->
-    <div class="acc accordion-vertical js-accordion" data-module="accordion">
-        <!-- Terms and conditions -->
-        <div data-ng-click="ticket.toggleClick('terms')" data-ng-show="ticket.relatedTerms">
-            <div class="{{ticket.filterAccordions.terms ? 'acc__item acc--active' : 'acc__item' }}">
-                <span class="acc__trigger">Terms and Conditions</span>
-                <div class="acc__content" data-ng-show="ticket.filterAccordions.terms">
-                    <div data-ng-bind-html="ticket.relatedTerms | escapeFilter"></div>
-                </div>
-            </div>
+  <!-- Accordion -->
+  <div class="acc accordion-vertical js-accordion" data-module="accordion">
+    <!-- Terms and conditions -->
+    <div
+      data-ng-click="ticket.toggleClick('terms')"
+      data-ng-show="ticket.relatedTerms"
+    >
+      <div
+        class="{{ticket.filterAccordions.terms ? 'acc__item acc--active' : 'acc__item' }}"
+      >
+        <span class="acc__trigger">Terms and Conditions</span>
+        <div class="acc__content" data-ng-show="ticket.filterAccordions.terms">
+          <div data-ng-bind-html="ticket.relatedTerms | escapeFilter"></div>
         </div>
+      </div>
     </div>
-
-    <label class="blue btn-link float--right">Debug <input class="hidden" type="checkbox" ng-model="deviceInfo" /></label><br />
-    <div ng-show="deviceInfo" class="boxin bg--grey bg--tint">
-        <h3>Debug</h3>
-        <p>Version - 2.14.35-dev11</p>
-        <p>URL - {{ticket.searchLocation}}</p>
-        <p>oneApp - {{ticket.oneApp}}
-    </div>
-
+  </div>
 </div>

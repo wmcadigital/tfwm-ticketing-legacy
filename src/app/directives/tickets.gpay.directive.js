@@ -5,7 +5,7 @@
 
   // function to retrieve pricelevels and return if product is available on Google Pay
   function gPay() {
-    var directive = {
+    const directive = {
       restrict: 'EA',
       templateUrl: 'tickets/views/shared/gpay.html',
       scope: {
@@ -21,7 +21,7 @@
 
   gpayController.$inject = ['$http'];
   function gpayController($http) {
-    var vm = this;
+    const vm = this;
     vm.elementIds = [];
     vm.whereToBuy = [];
 

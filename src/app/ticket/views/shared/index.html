@@ -197,7 +197,7 @@
 </modal-dialog>
 
 <modal-dialog show="ticket.modalShownGpay" modalclass="bdr-top--cyan"
-    data-ng-if="ticket.gpay == true && ticket.deviceDetector == 'android'">
+    data-ng-if="ticket.gpay == true && ticket.deviceDetector.os == 'android'">
     <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
         <div class="boxin">
             <h2>Google Pay</h2>
