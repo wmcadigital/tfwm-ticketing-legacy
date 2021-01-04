@@ -1,5 +1,39 @@
 # Release Notes
 
+## Ticketing v2.15.65
+
+- update: only show gpay button on android
+- update: remove os test line
+- update: new android check
+
+## Ticketing v2.15.62
+
+- update: gpay button only for day tickets
+- update: payg button copy to Buy Swift PAYG credit
+- update: live api endpoint
+- fix: gpay button logic
+
+## Ticketing v2.15.58
+
+- update: hide mobility credits as not needed
+- update: vars to modern standards
+- update: uglify to terser for es support
+- fix: hide More Information if ticket can be brought on gpay
+- fix: add a target \_parent to item button
+- fix: prettier issues 
+- fix: details loading status
+
+## Ticketing v2.15.51
+
+- update: remove time of day clear button
+- update: hide get on google play on android and ios
+- update: remove debug sections
+- fix: reset if Select your pass is re-selected
+- fix: hide main buy button if on oneapp
+- fix: gpay double button
+- fix: hasOnlinePurchaseChannel button order
+- fix: hide payg credit on mobile if gpay
+
 ## Ticketing v2.15.43
 
 - new: gpay button directive
