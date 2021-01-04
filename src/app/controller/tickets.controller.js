@@ -234,6 +234,11 @@
       } else {
         vm.oneApp = false;
       }
+      if (vm.userAgent.includes('android')) {
+        vm.android = true;
+      } else {
+        vm.android = false;
+      }
     }
 
     // Get Rail stations for autocomplete

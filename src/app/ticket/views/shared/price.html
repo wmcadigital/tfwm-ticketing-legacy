@@ -59,7 +59,7 @@
 
   <p
     data-ng-if="ticket.all.purchaseLocations.tic || ticket.all.purchaseLocations.railStation"
-    data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.deviceDetector.os == 'android'"
+    data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.android"
   >
     buy from
   </p>
@@ -73,7 +73,7 @@
 
   <ul
     data-ng-if="!ticket.all.swiftCurrentAmount && ticket.all.ticketCurrentAmount != '0'"
-    data-ng-hide="ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.deviceDetector.os == 'android'"
+    data-ng-hide="ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.android"
   >
     <li data-ng-if="ticket.all.purchaseLocations.tic">
       <a
@@ -110,7 +110,7 @@
   <div
     class="blue swift"
     data-ng-if="ticket.all.swiftCurrentAmount && !ticket.all.buyOnSwift"
-    data-ng-hide="ticket.gpay == true && ticket.deviceDetector.os == 'android' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
+    data-ng-hide="ticket.gpay == true && ticket.android || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
   >
     when you buy this ticket with Swift PAYG credit
     <span
@@ -146,7 +146,7 @@
 
   <div
     data-ng-if="ticket.all.id == '379' || ticket.all.id == '373' || ticket.all.id == '380002' || ticket.all.id == '375'"
-    data-ng-hide="ticket.gpay == true && ticket.deviceDetector.device == 'android' || ticket.deviceDetector.device == 'android' || ticket.deviceDetector.device == 'iphone' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
+    data-ng-hide="ticket.gpay == true && ticket.android || ticket.android || ticket.deviceDetector.device == 'iphone' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
   >
     <span>Buy this ticket on the Swift on Mobile Android App</span>
     <a
@@ -173,7 +173,7 @@
 
   <button
     data-ng-if="ticket.all.id == '810' || ticket.all.buyOnSwift && !ticket.all.buyOnDirectDebit"
-    data-ng-hide="ticket.gpay == true && ticket.deviceDetector.os == 'android' || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
+    data-ng-hide="ticket.gpay == true && ticket.android || ticket.all.purchaseLocations.swiftOnMobile == true && ticket.oneApp == 'true' || ticket.all.purchaseLocations.swiftOnMobile && ticket.oneApp"
     class="btn btn--arrow"
     data-ng-click="ticket.toggleModalSwift()"
   >
