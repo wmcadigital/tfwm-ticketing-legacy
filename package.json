@@ -12,10 +12,10 @@
   "buildDirs": {
     "live": {
       "baseUrl": "https://www.wmnetwork.co.uk/tickets",
-      "baseUrlSwift": "https://www.wmnetwork.co.uk/swift/tickets",
-      "swiftHost": "www.wmnetwork.co.uk/swift/tickets",
+      "baseUrlSwift": "https://www.wmnetwork.co.uk/swift/ticket-finder",
+      "swiftHost": "www.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://www.wmnetwork.co.uk/oneapp-ticket-search",
-      "oneappHost": "www.wmnetwork.co.uk/oneapp/tickets",
+      "oneappHost": "www.wmnetwork.co.uk/oneapp-ticket-search",
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.65",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.65/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
