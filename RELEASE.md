@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.66
+
+- update: base urls
+
 ## Ticketing v2.15.65
 
 - update: only show gpay button on android
