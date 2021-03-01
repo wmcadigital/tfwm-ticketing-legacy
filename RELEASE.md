@@ -1,8 +1,9 @@
 # Release Notes
 
-## Ticketing v2.15.66
+## Ticketing v2.15.67
 
 - update: base urls
+- update 16-18 photocard to the year 2002
 
 ## Ticketing v2.15.65
 
