@@ -1,5 +1,10 @@
 # Release Notes
 
+## Ticketing v2.15.69
+
+- update: Add link to swift go operators
+- fix: make false value null for modes
+
 ## Ticketing v2.15.67
 
 - update: base urls
