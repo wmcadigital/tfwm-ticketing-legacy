@@ -25,7 +25,7 @@
           id="jpbus"
           name="transportModeBus"
           data-ng-model="tickets.postJSON.allowBus"
-          data-ng-false-value="false"
+          data-ng-false-value="null"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
@@ -57,7 +57,7 @@
           id="jptrain"
           name="transportModeTrain"
           data-ng-model="tickets.postJSON.allowTrain"
-          data-ng-false-value="false"
+          data-ng-false-value="null"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
@@ -87,7 +87,7 @@
           id="jptram"
           name="transportModeTram"
           data-ng-model="tickets.postJSON.allowMetro"
-          data-ng-false-value="false"
+          data-ng-false-value="null"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
