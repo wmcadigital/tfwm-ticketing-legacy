@@ -204,7 +204,6 @@
     widthView();
     function widthView() {
       const screenWidth = $window.innerWidth;
-      console.log('width function');
 
       if (screenWidth < 890) {
         vm.includeMobileTemplate = true;
