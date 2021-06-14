@@ -3,8 +3,8 @@
         <span data-ng-if="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">From {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
         <span data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">{{(ticket.standardCurrentAmount | currency:"£")}}</span>
         <span data-ng-if="ticket.standardDiscountCurrentAmount">
-            <span>{{(ticket.standardCurrentAmount | currency:"£")}} <span class="small">(Standard Rate)</span><br></span>
-            <span>{{(ticket.standardDiscountCurrentAmount | currency:"£")}} <span class="small">(Discounted Rate)</span><br></span>   
+            <span class="discounted">{{(ticket.standardCurrentAmount | currency:"£")}}</span>&nbsp;
+            <span>{{(ticket.standardDiscountCurrentAmount | currency:"£")}}</span>   
         </span>
         <span data-ng-if="!ticket.standardDiscountCurrentAmount">
             <span data-ng-if="ticket.standardCurrentAmount != ticket.ticketCurrentAmount" data-ng-hide="ticket.id == '810' || ticket.id == '811'">{{(ticket.standardCurrentAmount | currency:"£")}}<br></span>
