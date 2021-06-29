@@ -1,5 +1,15 @@
 # Release Notes
 
+## Ticketing v2.15.75
+
+- new: discount price style
+
+## Ticketing v2.15.74
+
+- update: nx bus map
+- fix: double image in light window (ticket page)
+- fix: swift payg opening in parent window
+
 ## Ticketing v2.15.69
 
 - update: Add link to swift go operators

@@ -1,14 +1,13 @@
 <div>
   <p class="price online">
     <span data-ng-if="ticket.all.standardDiscountCurrentAmount">
-      <span
-        >{{(ticket.all.standardCurrentAmount | currency:"£")}}
-        <span class="small">(Standard Rate)</span><br
-      /></span>
-      <span
-        >{{(ticket.all.standardDiscountCurrentAmount | currency:"£")}}
-        <span class="small">(Discounted Rate)</span><br
-      /></span>
+      <span class="discounted">
+        {{(ticket.all.standardCurrentAmount | currency:"£")}}
+      </span>
+      &nbsp;
+      <span>
+        {{(ticket.all.standardDiscountCurrentAmount | currency:"£")}}
+      </span>
     </span>
 
     <span data-ng-if="ticket.all.swiftCurrentAmount"
@@ -58,7 +57,7 @@
   </p>
 
   <p
-    data-ng-if="ticket.all.purchaseLocations.tic || ticket.all.purchaseLocations.railStation"
+    data-ng-if="ticket.all.purchaseLocations.tic || ticket.all.purchaseLocations.railStation || ticket.all.purchaseLocations.payzone"
     data-ng-hide="ticket.all.swiftCurrentAmount || ticket.all.id == '810' || ticket.all.onlineCurrentAmount || ticket.gpay == true && ticket.android"
   >
     buy from
