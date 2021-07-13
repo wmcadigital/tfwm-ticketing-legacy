@@ -1,6 +1,6 @@
 {
   "name": "nwm-ticketing",
-  "version": "2.15.75",
+  "version": "2.15.77",
   "description": "Ticketing search app for WMNetwork",
   "main": "src/js/wmn/app.js",
   "author": "WMCA",
@@ -16,8 +16,8 @@
       "swiftHost": "www.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://www.wmnetwork.co.uk/oneapp-ticket-search",
       "oneappHost": "www.wmnetwork.co.uk/oneapp-ticket-search",
-      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.75",
-      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.75/img",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.77",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.77/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },

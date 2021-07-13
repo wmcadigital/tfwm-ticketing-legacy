@@ -81,7 +81,7 @@
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {
-          route: $location.absUrl().split('https://www.networkwestmidlands.com')[1]
+          route: $location.absUrl().split('https://legacy.wmnetwork.co.uk/')[1]
         }
       });
     }

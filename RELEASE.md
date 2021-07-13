@@ -1,5 +1,10 @@
 # Release Notes
 
+## Ticketing v2.15.77
+
+- remove drop it like its hot advert
+- replace network west midlands links to tfwm.org.uk / legacy.wmnetwork.co.uk
+
 ## Ticketing v2.15.75
 
 - new: discount price style
