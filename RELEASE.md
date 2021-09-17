@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.78
+
+- fix: cta button on some tickets in oneapp
+
 ## Ticketing v2.15.77
 
 - remove drop it like its hot advert
