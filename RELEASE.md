@@ -1,5 +1,14 @@
 # Release Notes
 
+## Ticketing v2.15.81
+
+- update: legacy wmnetwork domain
+
+## Ticketing v2.15.80
+
+- fix: ticket price display on ticket page
+- update: year on 16-18 advert
+
 ## Ticketing v2.15.78
 
 - fix: cta button on some tickets in oneapp
