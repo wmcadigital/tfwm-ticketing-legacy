@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.82
+
+- update: nbus and metro zone images
+
 ## Ticketing v2.15.81
 
 - update: legacy wmnetwork domain
