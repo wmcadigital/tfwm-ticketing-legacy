@@ -3,21 +3,12 @@
 
   angular
     .module('ticketingApp')
-    .directive('initialSearch', initialSearch)
     .directive('searchResults', searchResults)
     .directive('filters', filters)
     .directive('filtersMobile', filtersMobile)
     .directive('ticketItem', ticketItem);
 
   // DIRECTIVES
-  initialSearch.$inject = [];
-  function initialSearch() {
-    return {
-      templateUrl: 'tickets/views/wmn/initial-search.html',
-      restrict: 'E'
-    };
-  }
-
   searchResults.$inject = [];
   function searchResults() {
     return {

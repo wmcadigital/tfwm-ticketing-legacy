@@ -1,8 +1,15 @@
 
 <div class="wrap wrap--padded search">
     <div class="boxin boxin--large bg--blue bg--tint topFilters">
-        <initial-search data-ng-cloak></initial-search>
+        <search data-ng-cloak></search>
     </div>
+</div>
+
+<div class="block align--center" data-ng-if="tickets.loadingStatus == 'loading' || tickets.loadingStatus == 'changing'">
+    <p>
+        <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner"
+            class="loading-spinner" height="200" width="200" />
+    </p>
 </div>
 
 <div data-ng-if="tickets.loadingStatus === 'success'" class="bg--grey bg--tint search-results">

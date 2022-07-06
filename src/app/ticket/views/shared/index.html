@@ -1,7 +1,7 @@
 <div id="detail" class="wrap">
-    <ol class="breadcrumb" aria-label="You are here">
+    <ol class="breadcrumb" aria-label="You are here" data-ng-hide="ticket.oneApp == true">
         <li>
-            <a href="http://www.networkwestmidlands.com/">Home</a>
+            <a href="https://www.tfwm.org.uk/">Home</a>
         </li>
         <li>
             <a href="#{{ticket.backToSearch}}">Ticket finder</a>
@@ -10,7 +10,7 @@
             <a aria-current="page">{{ticket.all.name}}</a>
         </li>
     </ol>
-
+    
     <div class="blocks cfx">
         <div class="block align--center" data-ng-cloak data-ng-if="ticket.loadingStatus == 'loading'">
             <div class="boxin boxin--large">
@@ -32,7 +32,7 @@
                     <detail-details></detail-details>
                 </div>
 
-                <div class="display--tablet">
+                <div ng-if="ticket.includeMobileTemplate" class="display--tablet">
                         <detail-where></detail-where>
                 </div>
 
@@ -52,3 +52,166 @@
         </div>
     </div>
 </div>
+
+<!-- pop-up modals -->
+<modal-dialog show="ticket.modalShownSwift" modalclass="bdr-top--cyan"
+    data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
+    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
+        <div class="boxin">
+            <h2>Swift Card</h2>
+
+            <span
+                data-ng-if="ticket.all.isAdult || ticket.all.passengerType == 'Student18Plus' || ticket.all.passengerType == 'Concessionary'"><img
+                    src="$*imgUrl/season-swift-cardx2.png" alt="Adult season tickets" /></span>
+            <span data-ng-if="ticket.all.isChild"><img src="$*imgUrl/child-swift-card.png"
+                    alt="Child season tickets" /></span>
+            <span data-ng-if="ticket.all.id == '810'" data-ng-hide="ticket.all.id != '810'"><img
+                    src="$*imgUrl/payg-swift-cardx2.png" alt="Swift pay as you go" /></span>
+            <!-- <span><img src="build/img/16-18-card.png" alt="16-18 photocard" /></span>-->
+
+            <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
+                bought online.</p>
+
+            <p data-ng-if="ticket.all.requirePhotocard == true"><b>{{ticket.all.name}}</b> requires <span
+                    data-ng-if="ticket.all.passengerType == 'Child'">a Child</span><span
+                    data-ng-if="ticket.all.passengerType == 'Adult'">an Adult</span> Swift photocard</p>
+
+            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
+                target="_blank">Buy on Swift</a>
+        </div>
+    </div>
+</modal-dialog>
+
+<modal-dialog show="ticket.modalShownBus" modalclass="bdr-top--orange"
+    data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
+    <div class="boxin">
+        <div class="header">
+            <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
+            <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
+        </div>
+        <div class="operators">
+            <div data-ng-if="ticket.all.id == '811'">
+                <br>
+                <a target="_blank" href="https://legacy.wmnetwork.co.uk/swift/swift-go-fare-caps/">Click here to view operators accepting Swift Go (Opens in new tab)</a>
+            </div>
+            <div data-ng-if="ticket.all.brand == 'nbus'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr
+                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
+                                        Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a
+                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div data-ng-if="ticket.all.brand == 'nnetwork'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr
+                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
+                                        Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a
+                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr
+                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
+                                        Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a
+                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</modal-dialog>
+
+<modal-dialog show="ticket.modalShownTrain" modalclass="bdr-top--green"
+    data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
+    <div class="boxin">
+        <div class="header">
+            <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
+            <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
+        </div>
+        <div class="operators">
+            <div data-ng-if="ticket.all.brand == 'ntrain'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr
+                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true, type:'Rail Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
+                                        Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a
+                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div data-ng-if="ticket.all.brand == 'nnetwork'">
+                <table class="disruption-detail__table">
+                    <tbody>
+                        <tr
+                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
+                            <td>{{ticket.name}}</td>
+                            <td>
+                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
+                                        target="_blank">Operator
+                                        Website</a></span>
+                                <span class="align--right" data-ng-if="!ticket.website"><a
+                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                                        target="_blank">Operator Information</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</modal-dialog>
+
+<modal-dialog show="ticket.modalShownGpay" modalclass="bdr-top--cyan"
+    data-ng-if="ticket.gpay == true && ticket.deviceDetector.os == 'android'">
+    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
+        <div class="boxin">
+            <h2>Google Pay</h2>
+
+            <span><img src="$*imgUrl/gpay.png" alt="Adult season tickets" /></span>
+
+            <p>To use this ticket you will need Google Pay and an Android device with Near Field Communication (NFC) capability.</p>
+
+            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
+                target="_blank">Buy on Swift</a>
+        </div>
+    </div>
+</modal-dialog>

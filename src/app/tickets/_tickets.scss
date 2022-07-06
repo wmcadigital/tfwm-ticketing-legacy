@@ -111,8 +111,14 @@ a.icon-stylized-new:focus span:after {
         }
 
         .ticket-swift-logo {
-            width: 25px;
+            height: 30px;
         }
+
+        .ticket-mc-logo {
+            height: 30px;
+            margin: 0 10px;
+        }
+
     }
 
     .event__title {
@@ -227,6 +233,9 @@ input.ng-invalid-field-required-class {
 }
 
 .itemContent {
+    a:not(.btn) {
+        text-decoration: underline;
+    }
     .summary {
         margin: 10px 0;
         font-weight: normal;
@@ -238,7 +247,10 @@ input.ng-invalid-field-required-class {
         list-style: none!important; margin: 0; padding: 0;
         li {
             display: inline;line-height: 20px!important;
+            &::after {content: ", ";}
+            &:last-of-type::after {content: "";}
             &::before {content: "";margin-left: 0px;line-height: 20px!important;}
+            a {display: inline-block;}
         }
     }
     .btn {
@@ -306,7 +318,13 @@ input.ng-invalid-field-required-class {
 }
 
 input[type='checkbox']:disabled + label {
-    background: #dddddd;
+    background: #dddddd!important;
+    svg{
+        fill: #fff!important;
+    }
+    span{
+        color: #b7b5b5;
+    }
 }
 
 input[type='radio']:disabled + label {
@@ -684,4 +702,8 @@ form {
             height: 3.2em;
         }
     }
+}
+
+.icon-stylized-new span {
+    display: inline;
 }

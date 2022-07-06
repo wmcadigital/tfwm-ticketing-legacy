@@ -9,7 +9,7 @@
         <div class="block block--fullwidth">
             <div data-ng-if="ticket.loadingStatus == 'success'" angular-grid="ticket.related" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="alternativeResults">
                 <div data-ng-repeat="ticket in ticket.related" data-count="{{ticket.related.length}}">
-                    <detail-related></detail-related>
+                    <item></item>
                 </div>
             </div>
         </div>

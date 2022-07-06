@@ -1,9 +1,9 @@
 <ol class="breadcrumb" aria-label="You are here">
     <li>
-        <a href="//networkwestmidlands.com/">Home</a>
+        <a href="https://www.tfwm.org.uk/">Home</a>
     </li>
     <li>
-        <a href="//www.networkwestmidlands.com/plan-your-journey/">Plan your journey</a>
+        <a href="https://www.tfwm.org.uk/">Plan your journey</a>
     </li>
     <li class="active">
         <a aria-current="page">Ticket finder</a>
@@ -17,7 +17,7 @@
                 <div class="boxin bdr-top--blue">
                     <h1>Ticket finder</h1>
                     <hr>
-                    <initial-search data-ng-cloak></initial-search>
+                    <search data-ng-cloak></search>
                 </div>
             </div>
         </div>
@@ -29,14 +29,14 @@
                     <h3>Aged 16-18?</h3>
                     <hr>
                     <p class="type--small">
-                        If you're aged 16-18 and born after 31 August 2001, you may still be eligible for child fares with a 16-18 photocard
+                        If you're aged 16-18 and born after 31 August 2003, you may still be eligible for child fares with a 16-18 photocard
                     </p>
                     <p>
-                        <a href="https://www.networkwestmidlands.com/tickets-and-passes/child/16-18-photocard/" class="btn btn--arrow">Find out more</a>
+                        <a href="https://www.tfwm.org.uk/swift-and-tickets/discounts-and-free-travel-passes/swift-16-18-photocard/" class="btn btn--arrow">Find out more</a>
                     </p>
                 </div>
             </div>
-            <div class="block block--fullwidth">
+            <!--<div class="block block--fullwidth">
                 <div class="boxin bdr-top--blue">
                     <h3>Drop it like it's hot</h3>
                     <hr>
@@ -44,10 +44,10 @@
                         For a limited time only we have reduced the price of some of our nbus and nbus+metro tickets.
                     </p>
                     <p>
-                        <a href="https://www.networkwestmidlands.com/tickets-and-passes/drop-it-like-its-hot/" class="btn btn--arrow">Find out more</a>
+                        <a href="https://legacy.wmnetwork.co.uk/tickets-and-passes/drop-it-like-its-hot/" class="btn btn--arrow">Find out more</a>
                     </p>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -59,23 +59,3 @@
         </div>
     </div>
 </div>
-
-<!-- pop-up modals -->
-<modal-dialog show="ticket.modalShownSwift" class="bdr-top--cyan hide" data-ng-cloak data-ng-if="tickets.loadingStatus == 'success'">
-    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
-        <div class="boxin">
-            <h2>Swift Card</h2>
-
-            <span data-ng-if="ticket.all.isAdult || ticket.all.passengerType == 'Student18Plus' || ticket.all.passengerType == 'Concessionary'"><img src="$*imgUrl/season-swift-cardx2.png" alt="Adult season tickets" /></span>
-            <span data-ng-if="ticket.all.isChild"><img src="$*imgUrl/child-swift-card.png" alt="Child season tickets" /></span>
-            <span data-ng-if="ticket.all.id == '810'" data-ng-hide="ticket.all.id != '810'"><img src="$*imgUrl/payg-swift-cardx2.png" alt="Swift pay as you go" /></span>
-            <!-- <span><img src="build/img/16-18-card.png" alt="16-18 photocard" /></span>-->
-
-            <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when bought online.</p>
-
-            <p data-ng-if="ticket.all.requirePhotocard == true"><b>{{ticket.all.name}}</b> requires <span data-ng-if="ticket.all.passengerType == 'Child'">a Child</span><span data-ng-if="ticket.all.passengerType == 'Adult'">an Adult</span>  Swift photocard</p>
-
-            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Swift</a>
-        </div>
-    </div>
-</modal-dialog>

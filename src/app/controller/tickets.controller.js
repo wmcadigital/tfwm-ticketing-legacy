@@ -33,10 +33,10 @@
     $httpParamSerializer,
     deviceDetector
   ) {
-    var vm = this;
-    var stations;
-    var stationSel;
-    var stationSplit;
+    const vm = this;
+    let stations;
+    let stationSel;
+    let stationSplit;
     vm.submit = submit; // Function to submit initial search
     vm.clearFilter = clearFilter; // Function to reset filters
     vm.getStations = getStations; // Function to retrieve stations
@@ -54,6 +54,8 @@
     vm.update = update; // Do filtering logic in controller so sessions can be stored
     vm.loadMore = loadMore; // function to load more results
     vm.loadMoreExact = loadMoreExact; // function to load more exact results
+    vm.refreshExact = refreshExact; // function to refresh the exact results grid
+    vm.refreshOther = refreshOther; // function to refresh the other results grid
     vm.filterButtons = {
       operator: [],
       operatorLength: 0,
@@ -65,9 +67,10 @@
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
     vm.swiftABT = swiftABT; // Function for hiding fields if Swift ABT is selected
     vm.ntrainOOC = ntrainOOC; // Function for setting out of county tickets
-    vm.toggleModalSwift = toggleModalSwift;
     vm.toggleModalFilter = toggleModalFilter;
+    vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
+    vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -77,8 +80,9 @@
       vm.stationList = []; // Define Station list
       vm.stationoocList = []; // Define out of county Station list
       vm.stationicList = []; // Define in county Station list
-      vm.swiftPaygTickets = []; // Define Swift PAYG tickets
+      vm.swiftPaygIds = []; // Define Swift PAYG tickets
       vm.loadingStatus = ''; // Set results status to blank
+      vm.swiftPaygloadingStatus = ''; // Set results status to blank
       vm.passValue = ''; // Set pass select value to blank
       vm.orderBy = 'orderSequence';
       vm.limit = parseInt($location.search().limit) || 6; // Set paging limit to what's in url or default to 6
@@ -90,7 +94,7 @@
         passengerType: $location.search().passengerType || '',
         timeBand: $location.search().timeBand || '',
         brand: $location.search().brand || null,
-        stationNames: $location.search().stationNames || [[]]
+        stationNames: $location.search().stationNames || null
       }; // Define postJSON default values
       vm.stationFromName = null; // Clear Stations
       vm.stationToName = null;
@@ -101,7 +105,6 @@
       // vm.openFilters = openFilters;
       // vm.closeFilters = closeFilters;
       vm.fromStationInfo = null;
-      vm.buyButton = 'Buy now';
 
       // url parameters
       // exclude bus
@@ -189,7 +192,7 @@
         vm.postJSON.brand === 'nnetwork' ||
         vm.postJSON.brand === 'ntrain'
       ) {
-        if ($location.search().stationNames !== '[]') {
+        if ($location.search().stationNames) {
           stations = $location.search().stationNames;
           stationSel = stations.toString();
           stationSplit = stationSel.split(',');
@@ -216,29 +219,41 @@
     }
 
     // if back button pressed or breadcrumb selected. If brand is Swift ABT
-    if ($location.search().brand === 'Swift ABT') {
+    if ($location.search().brand === 'Swift Go') {
       swiftABT();
     }
 
     // detect device in use
     vm.deviceDetect();
     function deviceDetect() {
-      vm.deviceDetector = deviceDetector.device;
+      vm.deviceDetector = deviceDetector;
+      vm.userAgent = deviceDetector.raw.userAgent;
+      // check if userAgent is Swift One app
+      if (vm.userAgent.includes('SwiftOneApp')) {
+        vm.oneApp = true;
+      } else {
+        vm.oneApp = false;
+      }
+      if (vm.userAgent.includes('android')) {
+        vm.android = true;
+      } else {
+        vm.android = false;
+      }
     }
 
     // Get Rail stations for autocomplete
     function getStations() {
       // console.log("get stations");
       ticketingService.getStations().then(function(response) {
-        var fromRail;
-        var toRail;
-        var ViaOneRail;
-        var dataFromRail;
-        var dataToRail;
-        var dataViaOnRail;
-        var dataFromRailData;
-        var dataToRailData;
-        var dataViaOneRailData;
+        let fromRail;
+        let toRail;
+        let ViaOneRail;
+        let dataFromRail;
+        let dataToRail;
+        let dataViaOnRail;
+        let dataFromRailData;
+        let dataToRailData;
+        let dataViaOneRailData;
         // console.log("rail stations");
         // console.log(response);
         vm.stationList = response;
@@ -269,17 +284,17 @@
     }
 
     function submit(data) {
-      var fbus;
-      var ftrain;
-      var fmetro;
-      var i;
-      var j;
-      var arrlen;
-      var bus;
-      var train;
-      var metro;
-      var searchAll;
-      var searchExact;
+      let fbus;
+      let ftrain;
+      let fmetro;
+      let i;
+      let j;
+      let arrlen;
+      let bus;
+      let train;
+      let metro;
+      let searchAll;
+      let searchExact;
       vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
 
@@ -538,9 +553,9 @@
     }
 
     function update() {
-      var filtered = vm.all;
-      var filteredorg = vm.exactMatch;
-      var filteredother = vm.otherResults;
+      let filtered = vm.all;
+      let filteredorg = vm.exactMatch;
+      let filteredother = vm.otherResults;
 
       // For each filter in the search filters loop through and delete any that state false, this is so it doesn't explicitly match false and shows everything.
       angular.forEach(vm.searchFilters, function(val, key) {
@@ -600,14 +615,24 @@
       // order filtering
       if (vm.orderBy === 'orderSequence') {
         vm.origTickets.sort(function(a, b) {
+          // set conditional attributes for refresher
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
       } else if (vm.orderBy === 'ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
           return a.ticketCurrentAmount - b.ticketCurrentAmount;
         });
       } else if (vm.orderBy === '-ticketCurrentAmount') {
         vm.origTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
           return b.ticketCurrentAmount - a.ticketCurrentAmount;
         });
       }
@@ -630,13 +655,13 @@
         function() {
           $timeout(
             function() {
-              var searchURL;
-              var urlstring;
-              var abus;
-              var atrain;
-              var ametro;
-              var atime;
-              var obj;
+              let searchURL;
+              let urlstring;
+              let abus;
+              let atrain;
+              let ametro;
+              let atime;
+              let obj;
               if (vm.filteredTickets.length) {
                 // set storage url according to search filters
                 // set data to be displayed in serializer
@@ -788,7 +813,9 @@
       ticketingService.getStations().then(function(response) {
         // console.log("out of county stations");
         // console.log(response);
-        var OutOfCounty = $filter('filter')(response, { outOfCounty: 'true' });
+        const OutOfCounty = $filter('filter')(response, {
+          outOfCounty: 'true'
+        });
         vm.stationoocList = OutOfCounty;
       });
     }
@@ -796,7 +823,7 @@
     // get In County Rail stations for autocomplete
     function geticStations() {
       ticketingService.getStations().then(function(response) {
-        var inCounty = $filter('filter')(response, { outOfCounty: 'false' });
+        const inCounty = $filter('filter')(response, { outOfCounty: 'false' });
         vm.stationicList = inCounty;
       });
     }
@@ -852,6 +879,7 @@
         return false;
       };
       savedFilter.set('url', '');
+      vm.postJSON.stationNames = null;
       clearFromStation();
       clearToStation();
       clearViaOneStation();
@@ -967,6 +995,7 @@
     vm.stationFromReqOOC = true; // set ooc station to required
     vm.stationFrom = function(selected) {
       if (selected) {
+        vm.postJSON.stationNames = [];
         vm.stationFromName = selected.originalObject.name; // set From station
         vm.postJSON.stationNames[0] = selected.originalObject.name;
         vm.stationFromNameZone = selected.originalObject.zone;
@@ -978,7 +1007,7 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        // vm.postJSON.stationNames[0] = null;
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -988,7 +1017,7 @@
     function clearFromStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       vm.stationFromName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1038,7 +1067,7 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        // vm.postJSON.stationNames[1] = null;
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1048,7 +1077,7 @@
     function clearToStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
       vm.stationToName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = null;
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
@@ -1102,7 +1131,7 @@
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
       vm.stationViaOneName = null;
-      vm.postJSON.stationNames = [[]];
+      vm.postJSON.stationNames = null;
     }
 
     // control filters according to url parameters
@@ -1297,12 +1326,6 @@
       };
     }
 
-    // toggle swift modal popup
-    vm.modalShownSwift = false;
-    function toggleModalSwift() {
-      vm.modalShownSwift = !vm.modalShownSwift;
-    }
-
     // filters
     vm.hideModalFilter = function() {
       vm.modalShownFilter = !vm.modalShownFilter;
@@ -1317,6 +1340,7 @@
       vm.limit += 6;
       $location.search('limit', vm.limit);
       vm.updateGrid();
+      vm.refreshOther();
     }
 
     // exact matches load more button
@@ -1324,6 +1348,27 @@
       vm.limitExact += 6;
       $location.search('limitExact', vm.limitExact);
       vm.updateGrid();
+      vm.refreshExact();
+    }
+
+    // refresh exact results grid
+    refreshExact.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshExact() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.origTicketResults.refresh();
+        }, 0);
+      });
+    }
+
+    // refresh other results grid
+    refreshOther.$inject = ['$timeout', 'angularGridInstance'];
+    function refreshOther() {
+      angular.element(document).ready(function() {
+        $timeout(function() {
+          angularGridInstance.ticketResults.refresh();
+        }, 0);
+      });
     }
 
     // toggle filter accordions
@@ -1339,7 +1384,7 @@
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = null;
       } else if (
         vm.passValue === 'nbus' ||
         vm.passValue === 'National Express' ||
@@ -1349,20 +1394,15 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [[]];
+        vm.postJSON.stationNames = null;
       }
     }
 
     // if pass is swift abt
     function swiftABT() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === 'Swift ABT') {
-        // console.log('swift abt');
+      if (vm.passValue === 'Swift Go') {
         vm.isHideCheck = !vm.isHideCheck;
-        // vm.postJSON.allowBus = 'false';
-        // vm.postJSON.allowMetro = 'true';
-        // vm.postJSON.allowTrain = 'true';
-        // vm.postJSON.passengerType = "Adult";
         vm.postJSON.timeBand = null;
         vm.postJSON.stationNames = null;
       } else if (
@@ -1374,7 +1414,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = [[]];
+        vm.postJSON.stationNames = null;
       }
     }
 
@@ -1407,8 +1447,23 @@
     // get tickets you can buy on swift
     function getSwiftPAYG() {
       ticketingService.getSwiftSearch().then(function(response) {
-        vm.swiftPaygTickets = response;
+        vm.swiftPaygIds = [];
+
+        angular.forEach(response, function(item) {
+          if (item.swiftCurrentAmount) {
+            vm.swiftPaygIds.push(item);
+          }
+        });
       });
+    }
+
+    // if pass is swift abt
+    function selectPass() {
+      vm.passValue = vm.postJSON.brand;
+      if (vm.passValue === '') {
+        console.log('select pass');
+        vm.clearFilter();
+      }
     }
 
     // set current date to test for ticketFutureDate
@@ -1420,7 +1475,7 @@
   // filter to replace text
   replace.$inject = [];
   function replace() {
-    var regex;
+    let regex;
     return function(input, from, to) {
       if (input === undefined) {
         return;

@@ -6,7 +6,7 @@
   // PAGE SETTINGS CONTROLLER
   PageSettingsCtrl.$inject = ['pageService'];
   function PageSettingsCtrl(pageService) {
-    var vm = this;
+    const vm = this;
 
     vm.title = pageService.title;
     vm.breadcrumb = pageService.breadcrumb;

@@ -18,7 +18,9 @@
     '$routeParams',
     '$scope',
     '$timeout',
-    'deviceDetector'
+    'deviceDetector',
+    '$location',
+    '$window'
   ];
 
   function TicketDetailCtrl(
@@ -28,9 +30,11 @@
     $routeParams,
     $scope,
     $timeout,
-    deviceDetector
+    deviceDetector,
+    $location,
+    $window
   ) {
-    var vm = this;
+    const vm = this;
     vm.loadingText = 'Loading...'; // default loading text
     vm.loadingStatus = 'loading'; // default loading status
     vm.loadingArray = [
@@ -63,15 +67,17 @@
     vm.toggleModalBus = toggleModalBus;
     vm.toggleModalTrain = toggleModalTrain;
     vm.toggleModalSwift = toggleModalSwift;
+    vm.toggleModalGPay = toggleModalGPay;
+    vm.widthView = widthView; // Check width of page
     vm.operatorList = []; // Define Operator list
     vm.limit = 4; // Set paging limit for Alt tickets
+    vm.deviceDetect = deviceDetect; // Function to detect device
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
     vm.deviceDetect = deviceDetect; // Function to detect device
-    vm.buyButtonSwift = 'Buy on Swift';
     vm.gpay = false; // Default value for GPay products
-    vm.paygButton = paygButton; // Function to update buy button if product is available on GPay
+    vm.searchLocation = $location.host(); // Set the current host
 
     // Function to get the ticket data with api call
     function initialise(data) {
@@ -102,33 +108,25 @@
           // console.log(response);
         });
         backButtonLogic(); // Determine back button logic
-      });
-    }
-
-    function initialiseFull(data) {
-      ticketingService.getTicketFull(data).then(function(response) {
-        vm.full = response;
-        vm.priceLevels = response.priceLevels;
-        vm.gpay = false;
-        vm.priceLevelsList = vm.priceLevels.map(function(item) {
-          if (item.type.includes('Google Pay')) {
-            vm.gpay = true;
-          }
-        });
-        paygButton();
+        vm.loadingStatus = 'success'; // set success loading status
       });
     }
 
     // detect device in use
     vm.deviceDetect();
     function deviceDetect() {
-      vm.deviceDetector = deviceDetector.device;
-    }
-
-    // update buy button to Buy on Google Pay if available
-    function paygButton() {
-      if (vm.deviceDetector === 'android' && vm.gpay) {
-        vm.buyButtonSwift = 'Buy on Google Pay';
+      vm.deviceDetector = deviceDetector;
+      vm.userAgent = deviceDetector.raw.userAgent;
+      // check if userAgent is Swift One app
+      if (vm.userAgent.includes('SwiftOneApp')) {
+        vm.oneApp = true;
+      } else {
+        vm.oneApp = false;
+      }
+      if (vm.userAgent.includes('android')) {
+        vm.android = true;
+      } else {
+        vm.android = false;
       }
     }
 
@@ -151,6 +149,21 @@
 
     function toggleClick(type) {
       vm.filterAccordions[type] = !vm.filterAccordions[type];
+    }
+
+    function initialiseFull(data) {
+      ticketingService.getTicketFull(data).then(function(response) {
+        vm.full = response;
+        vm.priceLevels = response.priceLevels;
+        vm.gpay = false;
+        vm.priceLevelsList = vm.priceLevels.map(function(item) {
+          if (item.type.includes('Google Pay')) {
+            vm.gpay = true;
+            return true;
+          }
+          return false;
+        });
+      });
     }
 
     // popup modals
@@ -179,9 +192,33 @@
       vm.modalShownSwift = !vm.modalShownSwift;
     }
 
-    $timeout(function() {
-      vm.loadingStatus = 'success';
-    }, 0);
+    // google pay
+    vm.modalShownGpay = false;
+    function toggleModalGPay() {
+      vm.modalShownGpay = !vm.modalShownGpay;
+    }
+
+    // check resolution so the where can i use view is not shown twice
+    vm.includeDesktopTemplate = false;
+    vm.includeMobileTemplate = false;
+    widthView();
+    function widthView() {
+      const screenWidth = $window.innerWidth;
+
+      if (screenWidth < 890) {
+        vm.includeMobileTemplate = true;
+        vm.includeDesktopTemplate = false;
+      } else {
+        vm.includeMobileTemplate = false;
+        vm.includeDesktopTemplate = true;
+      }
+    }
+
+    // ensure where can i use view is reloaded when page resolution goes below 890px
+    const appWindow = angular.element($window);
+    appWindow.bind('resize', function() {
+      widthView();
+    });
   }
 
   // FILTERS
@@ -239,7 +276,7 @@
         '$scope',
         function($scope) {
           // eslint-disable-next-line no-multi-assign
-          var panes = ($scope.panes = []);
+          const panes = ($scope.panes = []);
 
           // eslint-disable-next-line no-shadow
           $scope.select = function(pane) {

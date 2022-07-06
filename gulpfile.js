@@ -5,7 +5,7 @@ sass.compiler = require('node-sass');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
 // JS vars
-const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const eslint = require('gulp-eslint');
 // HTML vars
@@ -25,7 +25,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'local';
+let build = 'live';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -144,7 +144,6 @@ function buildStyles() {
     .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.styles.output) + '_sourcemaps/'))
-    .pipe(dest(paths.styles.output))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(dest(paths.styles.output))
     .pipe(browserSync.stream()); // Push new CSS to server without reload
@@ -168,7 +167,6 @@ function buildSwiftStyles() {
     .pipe(autoprefixer()) // Prefix css with older browser support
     .pipe(cleanCSS({ level: 2 })) // Minify css
     .pipe(sourcemaps.write(getRoot(paths.stylesSwift.output) + '_sourcemaps/'))
-    .pipe(dest(paths.stylesSwift.output))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(dest(paths.stylesSwift.output))
     .pipe(browserSync.stream()); // Push new CSS to server without reload
@@ -193,10 +191,9 @@ function minifyJS(jsFile) {
     )
     .pipe(sourcemaps.init())
     .pipe(concat(jsFile.minName)) // concat all js files in folder
-    .pipe(uglify({ mangle: { reserved: ['jQuery'] } })) // Mangle var names etc.
+    .pipe(terser())
     .pipe(sourcemaps.write(getRoot(paths.scripts.output) + '_sourcemaps/'))
     .pipe(plumber.stop())
-    .pipe(dest(paths.scripts.output))
     .pipe(replace('$*api', json.buildDirs[build].api))
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
@@ -232,18 +229,30 @@ function buildTemplates() {
       })
     )
     .pipe(concat(paths.templates.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 
 // Lint Shared Templates/HTML
 function lintSharedTemplates() {
   return src(paths.templatesShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function lintSharedSwiftTemplates() {
+  return src(paths.templatesSwiftShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function lintSharedOneappTemplates() {
+  return src(paths.templatesOneappShared.src)
     .pipe(htmlHint('.htmlhintrc'))
     .pipe(htmlHint.reporter());
 }
@@ -257,17 +266,19 @@ function buildSharedTemplates() {
       })
     )
     .pipe(concat(paths.templatesShared.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 
 function buildSharedSwiftTemplates() {
-  return src(paths.templatesShared.src)
+  return src(paths.templatesSwiftShared.src)
     .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
     .pipe(
       ngHtml2Js({
@@ -275,15 +286,17 @@ function buildSharedSwiftTemplates() {
       })
     )
     .pipe(concat(paths.templatesSwiftShared.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 
 function buildSharedOneappTemplates() {
-  return src(paths.templatesShared.src)
+  return src(paths.templatesOneappShared.src)
     .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
     .pipe(
       ngHtml2Js({
@@ -291,10 +304,12 @@ function buildSharedOneappTemplates() {
       })
     )
     .pipe(concat(paths.templatesOneappShared.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
     .pipe(dest('./build/js/'));
 }
 
@@ -314,10 +329,10 @@ function buildSwiftTemplates() {
       })
     )
     .pipe(concat(paths.templatesSwift.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlSwift))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -337,10 +352,10 @@ function buildOneappTemplates() {
       })
     )
     .pipe(concat(paths.templatesOneapp.minName))
-    .pipe(uglify())
-    .pipe(dest('./build/js/'))
+    .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
     .pipe(dest('./build/js/'));
 }
 
@@ -404,6 +419,8 @@ const buildAll = series(
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
+  lintSharedSwiftTemplates,
+  lintSharedOneappTemplates,
   lintSwiftTemplates,
   lintOneappTemplates
 );
@@ -416,10 +433,14 @@ function watchFiles() {
     series(
       lintTemplates,
       lintSharedTemplates,
+      lintSharedSwiftTemplates,
+      lintSharedOneappTemplates,
       lintSwiftTemplates,
       lintOneappTemplates,
       buildTemplates,
       buildSharedTemplates,
+      buildSharedSwiftTemplates,
+      buildSharedOneappTemplates,
       buildSwiftTemplates,
       buildOneappTemplates,
       reload
@@ -439,6 +460,8 @@ const dev = series(
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
+  lintSharedSwiftTemplates,
+  lintSharedOneappTemplates,
   lintSwiftTemplates,
   lintOneappTemplates,
   parallel(
@@ -448,8 +471,8 @@ const dev = series(
     buildTemplates,
     buildSharedTemplates,
     buildSharedSwiftTemplates,
-    buildSwiftTemplates,
     buildSharedOneappTemplates,
+    buildSwiftTemplates,
     buildOneappTemplates,
     minImages
   ),
@@ -460,14 +483,9 @@ const devSwift = series(
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
+  lintSharedSwiftTemplates,
   lintSwiftTemplates,
-  parallel(
-    buildSwiftStyles,
-    buildScripts,
-    buildSharedSwiftTemplates,
-    buildSwiftTemplates,
-    minImages
-  ),
+  parallel(buildSwiftStyles, buildScripts, buildSwiftTemplates, minImages),
   parallel(watchFiles, serverSwift)
 );
 // Oneapp version
@@ -475,8 +493,9 @@ const devOneapp = series(
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
+  lintSharedOneappTemplates,
   lintOneappTemplates,
-  parallel(buildStyles, buildScripts, buildSharedOneappTemplates, buildOneappTemplates, minImages),
+  parallel(buildStyles, buildScripts, buildOneappTemplates, minImages),
   parallel(watchFiles, serverOneapp)
 );
 // Export items to be used in terminal
@@ -487,6 +506,8 @@ exports.lintScripts = lintScripts;
 exports.lintTemplates = series(
   lintTemplates,
   lintSharedTemplates,
+  lintSharedSwiftTemplates,
+  lintSharedOneappTemplates,
   lintSwiftTemplates,
   lintOneappTemplates
 );
@@ -497,6 +518,8 @@ exports.buildSwiftStyles = buildSwiftStyles;
 exports.buildTemplates = series(
   buildTemplates,
   buildSharedTemplates,
+  buildSharedSwiftTemplates,
+  buildSharedOneappTemplates,
   buildSwiftTemplates,
   buildOneappTemplates,
   lintTemplates

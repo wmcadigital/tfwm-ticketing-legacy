@@ -46,13 +46,6 @@
     </div>
 </div>
 
-<div class="block align--center" data-ng-if="tickets.loadingStatus == 'loading'">
-    <p>
-        <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-grey.gif" alt="Loading Spinner"
-            class="loading-spinner" height="200" width="200" />
-    </p>
-</div>
-
 <div class="blocks cfx tickets-search">
     <div class="block block--side mobile--void"
         data-ng-if="tickets.all.length && tickets.loadingStatus == 'success'">
@@ -89,15 +82,14 @@
 
 
         <!-- search results for exact items-->
-        <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets"
-            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults" data-ng-hide="tickets.origTickets.length == '0'"
-            data-ng-if="tickets.loadingStatus == 'success'">
-            <div class="grid"
-                data-ng-repeat="ticket in tickets.origTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
-                <div data-ng-include=" 'tickets/views/shared/item.html' "
-                ticket-item></div>
+        <refresher condition="tickets.filteredTickets.length">
+            <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults" data-ng-hide="tickets.origTickets.length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in tickets.origTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
+                    <item></item>
+                </div>
             </div>
-        </div>
+        </refresher>
+
 
         <div class="event-results__more boxin transparent--bg"
             data-ng-if="(tickets.origTickets | filter:{displayInSwiftSearch:true}).length > 6 && tickets.limitExact < (tickets.origTickets | filter:{displayInSwiftSearch:true}).length && tickets.loadingStatus == 'success'">
@@ -112,31 +104,29 @@
         </div>
 
         <!-- search results for other items-->
-        <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets"
-            ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-hide="(tickets.otherTickets | filter:{displayInSwiftSearch:true}).length == '0'"
-            data-ng-if="tickets.loadingStatus == 'success'">
-            <div class="grid"
-                data-ng-repeat="ticket in tickets.otherTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
-                <div data-ng-include=" 'tickets/views/shared/item.html' "
-                ticket-item></div>
-            </div>
-        </div>
-
-        <!-- Swift Payg Tickets -->
-        <div data-ng-if="tickets.all.length && tickets.postJSON.brand == 'Swift PAYG'">
-            <div class="filtered-header boxin">
-                <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
-            </div>
-            <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygTickets"
-                ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults"
-                data-ng-if="tickets.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygTickets"
-                    data-ng-if="ticket.swiftCurrentAmount">
-                    <div data-ng-include=" 'tickets/views/shared/item.html' "
-                        ticket-item></div>
+        <refresher condition="tickets.filteredTickets.length">
+            <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-hide="(tickets.otherTickets | filter:{displayInSwiftSearch:true}).length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in tickets.otherTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
+                    <item></item>
                 </div>
             </div>
-        </div>
+        </refresher>
+
+
+        <!-- Swift Payg Tickets -->
+        <refresher condition="tickets.filteredTickets.length">
+            <div data-ng-if="tickets.all.length && tickets.postJSON.brand == 'Swift PAYG'">
+                <div class="filtered-header boxin">
+                    <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
+                </div>
+                <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-if="tickets.loadingStatus == 'success'">
+                    <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds" data-ng-if="ticket.swiftCurrentAmount">
+                        <item></item>
+                    </div>
+                </div>
+            </div>
+        </refresher>
+
         <!-- /Swift Payg Tickets -->
 
         <div class="event-results__more boxin transparent--bg"
