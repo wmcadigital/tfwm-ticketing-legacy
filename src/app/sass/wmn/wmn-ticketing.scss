@@ -7,6 +7,11 @@
     @import '../assets/angucomplete-alt';// CSS for station auto-complete
 }
 
+.testing {
+    @import '../assets/screen.scss';
+    @import '../assets/nwm-custom.scss';
+}
+
 .oneapp{
     margin: 20px auto;
 }

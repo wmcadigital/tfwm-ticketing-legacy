@@ -1,9 +1,9 @@
 node_modules/
 _sourcemaps/
-build/
 !gitignore
 !package.json
 !package-lock.json
 /.vscode
 /.sass-cache
 .history
+.vs
