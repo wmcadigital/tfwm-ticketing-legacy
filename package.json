@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",
+    "babel-eslint": "^10.1.0",
     "browser-sync": "^2.26.13",
     "del": "^4.1.1",
     "eslint": "^5.16.0",
