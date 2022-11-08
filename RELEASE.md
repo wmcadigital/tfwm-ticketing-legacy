@@ -1,8 +1,11 @@
 # Release Notes
 
-## Ticketing v2.15.83
+## Ticketing v2.15.85
 
 - update: add swift kiosks to purchase location
+- update: replace metro map to latest version
+- fix: visited link within error box
+
 ## Ticketing v2.15.82
 
 - update: nbus and metro zone images
