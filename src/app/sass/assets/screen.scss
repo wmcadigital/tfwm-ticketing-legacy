@@ -419,7 +419,7 @@ ol:last-child,
 
 .btn-link,
 input,
-.ie10-or-better .stylized-select>select,
+.stylized-select>select,
 .navbar__search input[type],
 .navbar__search-btn,
 .navbar__burger,
@@ -463,7 +463,7 @@ a.link--back:before,
 .price-list:before {
     content: "";
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -511,9 +511,9 @@ a.link--back:before,
     ___________________________________________________________________ */
 .fields.-leaving-arriving,
 .fields.-leaving-arriving>.field-group,
-.ie10-or-better .radio-bar,
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label,
+.radio-bar,
+.radio-bar>span,
+.radio-bar>span label,
 .journey-overview,
 .journey__header {
     display: block;
@@ -536,15 +536,15 @@ a.link--back:before,
     justify-content: space-between;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span,
+.radio-bar>span label {
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label,
+.radio-bar>span,
+.radio-bar>span label,
 .journey-overview {
     -ms-flex-align: center;
     -webkit-align-items: center;
@@ -553,7 +553,7 @@ a.link--back:before,
 
 .fields.-leaving-arriving,
 .fields.-leaving-arriving>.field-group,
-.ie10-or-better .radio-bar {
+.radio-bar {
     -ms-flex-align: stretch;
     -webkit-align-items: stretch;
     align-items: stretch;
@@ -785,7 +785,7 @@ h3,
     font-family: "WF_Network", sans-serif;
     font-weight: 700;
     font-size: 26px;
-    font-size: 2.6rem;
+    font-size: 1.8rem;
     line-height: 36px;
     line-height: 3.6rem;
 }
@@ -837,9 +837,9 @@ figcaption p,
     font-family: "WF_Droid_Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;
-    font-size: 1.4rem;
+    font-size: 1rem;
     line-height: 24px;
-    line-height: 2.4rem;
+    line-height: 1.9rem;
 }
 
 ul li,
@@ -871,11 +871,6 @@ html {
 
 * {
     margin: 0;
-}
-
-html,
-body {
-    height: 100%;
 }
 
 body {
@@ -1019,7 +1014,7 @@ a.link--arrow:after {
     content: '';
     vertical-align: middle;
     margin-left: 5px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 190px auto;
     width: 8px;
     height: 15px;
@@ -2290,15 +2285,15 @@ label.required:after {
     color: #D4351C;
 }
 
-.ie10-or-better .error .stylized-select:before,
-.ie10-or-better .error .stylized-select:after,
-.ie10-or-better .field--error .stylized-select:before,
-.ie10-or-better .field--error .stylized-select:after {
+.error .stylized-select:before,
+.error .stylized-select:after,
+.field--error .stylized-select:before,
+.field--error .stylized-select:after {
     background-color: #D4351C;
 }
 
-.ie10-or-better .error .stylized-select select,
-.ie10-or-better .field--error .stylized-select select {
+.error .stylized-select select,
+.field--error .stylized-select select {
     border-color: #D4351C;
 }
 
@@ -2337,7 +2332,7 @@ label.required:after {
     font-size: 1.6rem;
 }
 
-.ie10-or-better .stylized-select>select {
+.stylized-select>select {
     background: white;
     border: 2px solid #ccc;
     padding: .85em;
@@ -2348,16 +2343,16 @@ label.required:after {
     border-bottom-width: 0;
     padding-right: 60px;
     color: #9D5BAF;
-    background: white url(../img/select-wmn.png) right center repeat-y;
+    background: white url(../../img/select-wmn.png) right center repeat-y;
 }
 
-.ie10-or-better .stylized-select>select::-ms-expand {
+.stylized-select>select::-ms-expand {
     opacity: 0;
     width: 0;
 }
 
-.ie10-or-better .stylized-select:before,
-.ie10-or-better .stylized-select:after {
+.stylized-select:before,
+.stylized-select:after {
     position: absolute;
     content: "";
     height: 2px;
@@ -2367,11 +2362,11 @@ label.required:after {
     background: #ccc;
 }
 
-.ie10-or-better .stylized-select:before {
+.stylized-select:before {
     top: 0;
 }
 
-.ie10-or-better .stylized-select:after {
+.stylized-select:after {
     bottom: 0;
 }
 
@@ -2739,14 +2734,14 @@ label.required:after {
     margin-top: .3em;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span,
+.radio-bar>span label {
     -ms-flex: 1;
     -webkit-flex: 1;
     flex: 1;
 }
 
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span label {
     width: 100%;
 }
 
@@ -3161,7 +3156,7 @@ td.ui-datepicker-unselectable span {
 .icon:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -3703,9 +3698,9 @@ h4 .icon {
     margin-right: 10px;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 16px;
-    line-height: 1.6rem;
+    line-height: 1.2rem;
     -webkit-transition: color 200ms ease-out, background-color 200ms ease-out;
     -moz-transition: color 200ms ease-out, background-color 200ms ease-out;
     transition: color 200ms ease-out, background-color 200ms ease-out;
@@ -3778,7 +3773,7 @@ button.btn {
     margin-top: -5px;
     width: 28px;
     height: 12px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -137px -383px;
     background-size: 308px auto;
     z-index: 10;
@@ -3934,7 +3929,7 @@ button.btn {
     top: 17px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -255px -18px;
     background-size: 308px auto;
     z-index: 10;
@@ -3960,7 +3955,7 @@ button.btn {
     top: 12px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -558px -373px;
     background-size: 308px auto;
     z-index: 10;
@@ -3995,7 +3990,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -21px -614px;
     background-size: 308px auto;
     z-index: 10;
@@ -4030,7 +4025,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -129px -566px;
     background-size: 308px auto;
     z-index: 10;
@@ -4071,7 +4066,7 @@ button.btn {
     top: 6px;
     width: 25px;
     height: 26px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -21px -567px;
     background-size: 308px auto;
     z-index: 10;
@@ -4080,7 +4075,7 @@ button.btn {
 .btn--changemethod:after {
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-position: -72px -566px;
 }
 
@@ -4165,7 +4160,7 @@ button.btn {
     width: 53px;
     height: 53px;
     background-color: #666666;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     text-indent: -9999px;
     overflow: hidden;
@@ -4280,7 +4275,7 @@ hr+.linklist {
     position: absolute;
     width: 10px;
     height: 16px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 0;
@@ -4408,7 +4403,7 @@ hr+.linklist {
     right: 20px;
     width: 19px;
     height: 30px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -254px -417px;
     z-index: 1;
@@ -5115,7 +5110,7 @@ hr+.linklist {
 .breadcrumb[class] a {
     font-weight: normal;
     color: inherit;
-    font-size: 90%;
+    font-size: 70%;
     padding: 0;
     background: 0;
 }
@@ -5343,7 +5338,7 @@ hr+.linklist {
 .disruption__header:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -5399,7 +5394,7 @@ hr+.linklist {
 .disruption__alert:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -5593,7 +5588,7 @@ hr+.linklist {
         right: 15px;
         width: 30px;
         height: 30px;
-        background-image: url("../img/icons-wmn.png");
+        background-image: url("../../img/icons-wmn.png");
         background-size: 308px auto;
         background-position: -248px -417px;
         z-index: 1;
@@ -6223,7 +6218,7 @@ hr+.linklist {
         right: 15px;
         width: 30px;
         height: 30px;
-        background-image: url("../img/icons-wmn.png");
+        background-image: url("../../img/icons-wmn.png");
         background-size: 308px auto;
         background-position: -248px -417px;
         z-index: 1;
@@ -6291,7 +6286,7 @@ hr+.linklist {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 0;
@@ -6389,7 +6384,7 @@ hr+.linklist {
 .swap-fields__btn:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -254px -689px;
     width: 20px;
@@ -6520,7 +6515,7 @@ hr+.linklist {
 .journey>li.delayed .icon:before {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 282px auto;
     width: 24px;
     height: 22px;
@@ -8281,7 +8276,7 @@ p.tabbed-search__title {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 15px;
@@ -9227,7 +9222,7 @@ p.tabbed-search__title {
     top: 10px;
     left: 50%;
     margin-left: -16px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -19px -611px;
     -webkit-transition: transform 150ms ease-in-out;
@@ -9731,7 +9726,7 @@ td.arrdep__mob+td.arrdep__mob {
     position: absolute;
     width: 125px;
     height: 138px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("../../img/icons-wmn.png");
     background-size: 462px auto;
     top: 0;
     left: 0;

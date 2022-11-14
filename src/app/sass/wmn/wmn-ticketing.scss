@@ -7,7 +7,8 @@
     @import '../assets/angucomplete-alt';// CSS for station auto-complete
 }
 
-.testing {
+.ticketApp {
+    @import '/node_modules/material-icons/css/material-icons.min.css';
     @import '../assets/screen.scss';
     @import '../assets/nwm-custom.scss';
 }

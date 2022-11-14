@@ -90,13 +90,14 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-terser": "^2.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.3",
     "prettier": "^1.19.1",
     "sass": "^1.26.8"
   },
   "dependencies": {
     "gulp-htmlmin": "^5.0.1",
     "jpegtran": "^1.0.6",
+    "material-icons": "^1.11.9",
     "ng-device-detector": "^5.1.4",
     "re-tree": "^0.1.7",
     "ua-device-detector": "^1.1.8"
