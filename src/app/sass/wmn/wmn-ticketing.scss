@@ -4,15 +4,16 @@
     @import '../shared/app-wide'; // CSS that is used in various places of the app
     @import '../../tickets/tickets'; // Search page only CSS
     @import '../../ticket/ticket';
-    @import '../assets/angucomplete-alt';// CSS for station auto-complete
+    @import '../assets/angucomplete-alt'; // CSS for station auto-complete
 }
 
-.ticketApp {
-    @import '/node_modules/material-icons/css/material-icons.min.css';
-    @import '../assets/screen.scss';
-    @import '../assets/nwm-custom.scss';
-}
+@import '../assets/screen.scss';
+@import '../assets/nwm-custom.scss';
 
-.oneapp{
+.btn.btn--arrow {color: white;text-decoration:none;font-weight: normal;}
+.type--blue {font-size: 1.4375rem;}
+h3 span {font-size: 1.4375rem;}
+
+.oneapp {
     margin: 20px auto;
 }
