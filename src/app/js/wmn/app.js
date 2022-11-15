@@ -30,8 +30,8 @@
       'self',
       'http://censlwebdev01/**',
       // Allow loading from our assets domain.  Notice the difference between * and **.
-      'https://static.centro.org.uk/**',
-      'http://static.centro.org.uk/**',
+      'https:https://cloudcdn.wmca.org.uk//**',
+      'http:https://cloudcdn.wmca.org.uk//**',
       '$*baseUrl**'
     ]);
   }

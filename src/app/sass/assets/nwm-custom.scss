@@ -207,7 +207,7 @@ input[data-autocomplete-geolocate] {
 /* n Icon */
 @font-face {
     font-family: 'iconmodes';
-    src: url('http://static.centro.org.uk/Fonts/iconmodes/iconmodes.eot');
+    src: url('http:https://cloudcdn.wmca.org.uk//Fonts/iconmodes/iconmodes.eot');
 }
 
 @font-face {
@@ -546,7 +546,7 @@ div#hCloak a img {
 }
 
 .icontick::after {
-    background-image: url("http://static.centro.org.uk/img/nwm/other/tick.png");
+    background-image: url("http:https://cloudcdn.wmca.org.uk//img/nwm/other/tick.png");
     background-size: 30px auto;
     background-position: 10px 0;
     content: "";
@@ -1554,7 +1554,7 @@ a[class*="simple-pagination-navigation-next"]::after {
     background-attachment: scroll;
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
-    background-image: url("http://static.centro.org.uk/nwmAssets/img/thin-arrows.svg"), none;
+    background-image: url("http:https://cloudcdn.wmca.org.uk//nwmAssets/img/thin-arrows.svg"), none;
     background-origin: padding-box;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2793,7 +2793,7 @@ iframe.bestTicket--popup-form {
 
 
 .homepage header .black-alpha-overlay {
-    background-image: url('//static.centro.org.uk/Staging/nwmAssets/img/black-alpha-bg.png');
+    background-image: url('https://cloudcdn.wmca.org.uk//Staging/nwmAssets/img/black-alpha-bg.png');
     position: absolute;
     width: 100%;
     height: 100%;
