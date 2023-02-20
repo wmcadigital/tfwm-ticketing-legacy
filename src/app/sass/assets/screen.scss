@@ -764,9 +764,9 @@ h1,
     font-family: "WF_Network", sans-serif;
     font-weight: 700;
     font-size: 50px;
-    font-size: 3.5rem;
+    font-size: 2.2rem;
     line-height: 62px;
-    line-height: 5rem;
+    line-height: 3.9rem;
 }
 
 h2,
@@ -809,9 +809,9 @@ p,
     font-family: "WF_Droid_Sans", sans-serif;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 26px;
-    line-height: 2.6rem;
+    line-height: 1.6rem;
 }
 
 .contact-info__phone,
@@ -862,11 +862,6 @@ ol li,
     color: white;
 }
 
-html {
-    font-size: 62.5%;
-    -webkit-font-smoothing: antialiased;
-}
-
 * {
     margin: 0;
 }
@@ -875,7 +870,7 @@ body {
     color: #333333;
     font-family: "WF_Droid_Sans", sans-serif;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 1.2;
 }
 
@@ -4341,7 +4336,7 @@ hr+.linklist {
     width: 100%;
     padding: 18px 20px;
     overflow: hidden;
-    font-size: 150%;
+    font-size: 1rem;
     line-height: 1;
     -webkit-transition: background-color 250ms ease-out;
     -moz-transition: background-color 250ms ease-out;
