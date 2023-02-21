@@ -1,6 +1,6 @@
 {
   "name": "nwm-ticketing",
-  "version": "2.15.86",
+  "version": "2.15.88",
   "description": "Ticketing search app for TfWM",
   "main": "src/js/wmn/app.js",
   "author": "WMCA",
@@ -16,8 +16,8 @@
       "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
       "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
-      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.86",
-      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.86/img",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.88",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.88/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
