@@ -1,5 +1,11 @@
 # Release Notes
 
+## Ticketing v2.15.88
+
+- fix: remove extra trailing slash after cdn links
+- update: git url
+- update: oneapp base url
+
 ## Ticketing v2.15.85
 
 - update: add swift kiosks to purchase location
