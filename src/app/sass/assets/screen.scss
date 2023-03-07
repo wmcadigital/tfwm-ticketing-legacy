@@ -954,18 +954,6 @@ ul li:before {
     line-height: 3.6rem;
 }
 
-ol {
-    counter-reset: nwm-counter;
-}
-
-ol li:before {
-    content: counter(nwm-counter);
-    counter-increment: nwm-counter;
-    color: #9D5BAF;
-    font-weight: bold;
-    margin-right: 10px;
-}
-
 .btn-link {
     font-family: inherit;
     font-size: 100%;
@@ -975,10 +963,9 @@ ol li:before {
 
 a,
 .btn-link {
-    font-weight: bold;
+    font-weight: normal;
     color: #9D5BAF;
     display: inline;
-    text-decoration: none;
 }
 
 a:hover,
@@ -1979,8 +1966,6 @@ input[type=email] {
     border: 2px solid #ccc;
     background-color: white;
     padding: .85em;
-    font-size: 16px;
-    font-size: 1.6rem;
 }
 
 textarea:focus,
