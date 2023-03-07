@@ -1,5 +1,11 @@
 # Release Notes
 
+## Ticketing v2.15.91
+
+- fix: build process for arm processors
+- fix: display price change full width of item
+- update: screen css updates
+
 ## Ticketing v2.15.88
 
 - fix: remove extra trailing slash after cdn links

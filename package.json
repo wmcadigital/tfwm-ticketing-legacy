@@ -1,6 +1,6 @@
 {
   "name": "nwm-ticketing",
-  "version": "2.15.88",
+  "version": "2.15.91",
   "description": "Ticketing search app for TfWM",
   "main": "src/js/wmn/app.js",
   "author": "WMCA",
