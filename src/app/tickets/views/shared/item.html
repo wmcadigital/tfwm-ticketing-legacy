@@ -123,10 +123,7 @@
     </div>
 
     <!-- Price increase message -->
-    <p
-      data-ng-if="ticket.ticketFutureAmount"
-      data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount"
-    >
+    <p class="grid-12" data-ng-if="ticket.ticketFutureAmount" data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">
       The price of this ticket {{ticket.ticketCurrentAmount &gt;
       ticket.ticketFutureAmount ? 'decreases' : 'increases'}} to
       <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span>

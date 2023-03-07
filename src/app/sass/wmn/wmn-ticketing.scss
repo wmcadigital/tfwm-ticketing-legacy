@@ -1,5 +1,7 @@
 @import 'vars'; // Define colors etc.
 
+@import url(https://unpkg.com/wmn-design-system@2.4.0/build/css/wmnds.min.css);
+
 .ticketing-app {
     @import '../shared/app-wide'; // CSS that is used in various places of the app
     @import '../../tickets/tickets'; // Search page only CSS

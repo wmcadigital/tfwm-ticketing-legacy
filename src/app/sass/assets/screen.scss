@@ -954,18 +954,6 @@ ul li:before {
     line-height: 3.6rem;
 }
 
-ol {
-    counter-reset: nwm-counter;
-}
-
-ol li:before {
-    content: counter(nwm-counter);
-    counter-increment: nwm-counter;
-    color: #9D5BAF;
-    font-weight: bold;
-    margin-right: 10px;
-}
-
 .btn-link {
     font-family: inherit;
     font-size: 100%;
@@ -975,10 +963,9 @@ ol li:before {
 
 a,
 .btn-link {
-    font-weight: bold;
+    font-weight: normal;
     color: #9D5BAF;
     display: inline;
-    text-decoration: none;
 }
 
 a:hover,
@@ -1979,8 +1966,6 @@ input[type=email] {
     border: 2px solid #ccc;
     background-color: white;
     padding: .85em;
-    font-size: 16px;
-    font-size: 1.6rem;
 }
 
 textarea:focus,
@@ -3684,9 +3669,9 @@ h4 .icon {
     margin-right: 10px;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 16px;
-    line-height: 1.2rem;
+    line-height: 1.1rem;
     -webkit-transition: color 200ms ease-out, background-color 200ms ease-out;
     -moz-transition: color 200ms ease-out, background-color 200ms ease-out;
     transition: color 200ms ease-out, background-color 200ms ease-out;
