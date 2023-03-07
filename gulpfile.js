@@ -1,7 +1,6 @@
 const { src, dest, watch, series, parallel } = require("gulp");
 // SASS vars
-const sass = require("gulp-sass");
-sass.compiler = require("node-sass");
+const sass = require('gulp-sass')(require('sass'));
 const cleanCSS = require("gulp-clean-css");
 const autoprefixer = require("gulp-autoprefixer");
 // JS vars
