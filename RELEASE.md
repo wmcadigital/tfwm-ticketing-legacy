@@ -1,5 +1,10 @@
 # Release Notes
 
+## Ticketing v2.15.93
+
+- update: ensure boxin links are white
+- update: ticket page breadcrumb to use ds version
+
 ## Ticketing v2.15.91
 
 - fix: build process for arm processors

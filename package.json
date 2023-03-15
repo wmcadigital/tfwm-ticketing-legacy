@@ -1,6 +1,6 @@
 {
   "name": "nwm-ticketing",
-  "version": "2.15.92",
+  "version": "2.15.93",
   "description": "Ticketing search app for TfWM",
   "main": "src/js/wmn/app.js",
   "author": "WMCA",
@@ -16,8 +16,8 @@
       "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
       "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
-      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.92",
-      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.92/img",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.93",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.93/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
@@ -27,8 +27,8 @@
       "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
       "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
-      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.92.2",
-      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.92.2/img",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.93.2",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.93.2/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
