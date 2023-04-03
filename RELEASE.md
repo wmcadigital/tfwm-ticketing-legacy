@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.94
+
+- update: live cdn links
+
 ## Ticketing v2.15.93
 
 - update: ensure boxin links are white

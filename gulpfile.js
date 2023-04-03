@@ -24,7 +24,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'livetest';
+let build = 'live';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -42,7 +42,7 @@ function determineBuild(done) {
       build = 'azure';
       break;
     default:
-      build = 'livetest';
+      build = 'live';
       break;
   }
   done();
