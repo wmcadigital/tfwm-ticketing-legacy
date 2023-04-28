@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.95
+
+- update: image links uyse lowercase
+
 ## Ticketing v2.15.94
 
 - update: live cdn links
