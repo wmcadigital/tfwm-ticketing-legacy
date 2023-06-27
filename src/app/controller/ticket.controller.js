@@ -71,13 +71,23 @@
       vm.ticketID === '382' ||
       vm.ticketID === '385' ||
       vm.ticketID === '383' ||
-      vm.ticketID === '383002'
+      vm.ticketID === '383002' ||
+      vm.ticketID === '382001'
     ) {
-      $window.location.href = '/#/ticket/63';
+      $window.location.href = '$*baseUrl/#/ticket/63';
     }
 
-    if (vm.ticketID === '650001' || vm.ticketID === '379001') {
-      $window.location.href = '/#/ticket/65';
+    if (
+      vm.ticketID === '650001' ||
+      vm.ticketID === '379001' ||
+      vm.ticketID === '442010' ||
+      vm.ticketID === '442009' ||
+      vm.ticketID === '442005' ||
+      vm.ticketID === '442006' ||
+      vm.ticketID === '442001' ||
+      vm.ticketID === '442002'
+    ) {
+      $window.location.href = '$*baseUrl/#/ticket/65';
     }
 
     if (
@@ -92,14 +102,13 @@
       vm.ticketID === '427' ||
       vm.ticketID === '428' ||
       vm.ticketID === '418' ||
-      vm.ticketID === '432' ||
       vm.ticketID === '419'
     ) {
-      $window.location.href = '/#/ticket/45';
+      $window.location.href = '$*baseUrl/#/ticket/45';
     }
 
     if (vm.ticketID === '640002') {
-      $window.location.href = '/#/ticket/48';
+      $window.location.href = '$*baseUrl/#/ticket/48';
     }
 
     if (
@@ -109,17 +118,18 @@
       vm.ticketID === '397' ||
       vm.ticketID === '424' ||
       vm.ticketID === '429' ||
-      vm.ticketID === '433'
+      vm.ticketID === '433' ||
+      vm.ticketID === '432'
     ) {
-      $window.location.href = '/#/ticket/50';
+      $window.location.href = '$*baseUrl/#/ticket/50';
     }
 
     if (vm.ticketID === '611' || vm.ticketID === '658' || vm.ticketID === '441') {
-      $window.location.href = '/#/ticket/57';
+      $window.location.href = '$*baseUrl/#/ticket/57';
     }
 
     if (vm.ticketID === '640003') {
-      $window.location.href = '/#/ticket/652';
+      $window.location.href = '$*baseUrl/#/ticket/652';
     }
 
     if (
@@ -132,26 +142,66 @@
       vm.ticketID === '553011' ||
       vm.ticketID === '553012'
     ) {
-      $window.location.href = '/#/ticket/660029';
+      $window.location.href = '$*baseUrl/#/ticket/660029';
     }
 
     if (
       vm.ticketID === '874' ||
       vm.ticketID === '873' ||
-      vm.ticketID === '442015' ||
-      vm.ticketID === '382001' ||
       vm.ticketID === '384' ||
       vm.ticketID === '386' ||
       vm.ticketID === '878' ||
       vm.ticketID === '877' ||
+      vm.ticketID === '445'
+    ) {
+      $window.location.href = '$*baseUrl/#/ticket/64';
+    }
+
+    if (
+      vm.ticketID === '676' ||
+      vm.ticketID === '677' ||
+      vm.ticketID === '442015' ||
       vm.ticketID === '865' ||
       vm.ticketID === '866'
     ) {
-      $window.location.href = '/#/ticket/64';
+      $window.location.href = '$*baseUrl/#/ticket/46';
     }
 
-    if (vm.ticketID === '676' || vm.ticketID === '677' || vm.ticketID === '445') {
-      $window.location.href = '/#/ticket/46';
+    if (vm.ticketID === '444' || vm.ticketID === '604') {
+      $window.location.href = '$*baseUrl/#/ticket/630005';
+    }
+
+    if (vm.ticketID === '442014' || vm.ticketID === '442011') {
+      $window.location.href = '$*baseUrl/#/ticket/58';
+    }
+
+    if (vm.ticketID === '602') {
+      $window.location.href =
+        '$*baseUrl/#/?allowBus&passengerType=Student&timeBand=Longer%20than%20a%20month&limit=6&limitExact=6#sbmBtn';
+    }
+
+    if (vm.ticketID === '714' || vm.ticketID === '718') {
+      $window.location.href = '$*baseUrl/#/ticket/630002';
+    }
+
+    if (vm.ticketID === '715' || vm.ticketID === '719') {
+      $window.location.href = '$*baseUrl/#/ticket/630003';
+    }
+
+    if (vm.ticketID === '394' || vm.ticketID === '395' || vm.ticketID === '396') {
+      $window.location.href = '$*baseUrl/#/ticket/391';
+    }
+
+    if (vm.ticketID === '413' || vm.ticketID === '426' || vm.ticketID === '431') {
+      $window.location.href = '$*baseUrl/#/ticket/59';
+    }
+
+    if (vm.ticketID === '399') {
+      $window.location.href = '$*baseUrl/#/ticket/555';
+    }
+
+    if (vm.ticketID === '415') {
+      $window.location.href = '$*baseUrl/#/ticket/557';
     }
 
     if (
@@ -162,44 +212,7 @@
       vm.ticketID === '442001' ||
       vm.ticketID === '442002'
     ) {
-      $window.location.href = '/#/';
-    }
-
-    if (vm.ticketID === '444' || vm.ticketID === '604') {
-      $window.location.href = '/#/ticket/630005';
-    }
-
-    if (vm.ticketID === '442014' || vm.ticketID === '442011') {
-      $window.location.href = '/#/ticket/58';
-    }
-
-    if (vm.ticketID === '602') {
-      $window.location.href =
-        '/#/?allowBus&passengerType=Student&timeBand=Longer%20than%20a%20month&limit=6&limitExact=6#sbmBtn';
-    }
-
-    if (vm.ticketID === '714' || vm.ticketID === '718') {
-      $window.location.href = '/#/ticket/630002';
-    }
-
-    if (vm.ticketID === '715' || vm.ticketID === '719') {
-      $window.location.href = '/#/ticket/630003';
-    }
-
-    if (vm.ticketID === '394' || vm.ticketID === '395' || vm.ticketID === '396') {
-      $window.location.href = '/#/ticket/391';
-    }
-
-    if (vm.ticketID === '413' || vm.ticketID === '426' || vm.ticketID === '431') {
-      $window.location.href = '/#/ticket/59';
-    }
-
-    if (vm.ticketID === '399') {
-      $window.location.href = '/#/ticket/555';
-    }
-
-    if (vm.ticketID === '415') {
-      $window.location.href = '/#/ticket/557';
+      $window.location.href = '$*baseUrl/#/';
     }
 
     // Function to get the ticket data with api call
