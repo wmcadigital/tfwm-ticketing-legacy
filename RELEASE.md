@@ -1,8 +1,13 @@
 # Release Notes
 
+## Ticketing v2.15.97
+
+- update: add redirects
+- update: nbus map
+
 ## Ticketing v2.15.95
 
-- update: image links uyse lowercase
+- update: image links use lowercase
 
 ## Ticketing v2.15.94
 
