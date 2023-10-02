@@ -1,5 +1,10 @@
 # Release Notes
 
+## Ticketing v2.15.99
+
+- fix: display nx map on nx tickets
+- fix: button alignment on where to use component
+
 ## Ticketing v2.15.97
 
 - update: add redirects

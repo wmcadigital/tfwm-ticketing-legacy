@@ -701,11 +701,6 @@ form {
   margin-right: 3px;
 }
 
-.radio-bar > span,
-.radio-bar > span label {
-  display: inline-table !important;
-}
-
 .filtered-header {
   @include breakpoint(mobileonly) {
     .grid-6 {
