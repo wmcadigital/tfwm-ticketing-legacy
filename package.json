@@ -1,7 +1,7 @@
 {
   "name": "nwm-ticketing",
   "version": "2.15.99",
-  "description": "Ticketing search app for WMNetwork",
+  "description": "Ticketing search app for TfWM",
   "main": "index.html",
   "app_location": "index.html",
   "author": "WMCA",
