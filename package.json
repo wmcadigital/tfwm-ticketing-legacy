@@ -2,7 +2,8 @@
   "name": "nwm-ticketing",
   "version": "2.15.99",
   "description": "Ticketing search app for WMNetwork",
-  "main": "src/js/wmn/app.js",
+  "main": "index.html",
+  "app_location": "index.html",
   "author": "WMCA",
   "license": "ISC",
   "repository": {
