@@ -10,12 +10,12 @@
         ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' "
 >
   <span data-ng-if="ticket.swiftCurrentAmount"
-    ><a ng-href="$*baseUrl/#/ticket/810"
-      ><img class="paygimg" ng-src="$*imgUrl/PAYG.png"/></a
+    ><a ng-href="$*baseUrl#/ticket/810"
+      ><img class="paygimg" ng-src="$*imgUrl/payg.png"/></a
   ></span>
   <div class="itemContent">
     <div class="grid-8">
-      <a data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">
+      <a data-ng-href="$*baseUrl#/ticket/{{ticket.id}}">
         <h4 class="event__title">
           {{ticket.name}}
           <span class="payment-icons">
@@ -102,6 +102,9 @@
           <li data-ng-if="ticket.swiftCurrentAmount && !ticket.buyOnSwift">
             Swift PAYG
           </li>
+          <li data-ng-if="ticket.purchaseLocations.swiftKiosk">
+            Swift Kiosk
+          </li>
           <li
             data-ng-if="ticket.purchaseLocations.swiftOnMobile"
             data-ng-mouseover="tooltip=true"
@@ -120,10 +123,7 @@
     </div>
 
     <!-- Price increase message -->
-    <p
-      data-ng-if="ticket.ticketFutureAmount"
-      data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount"
-    >
+    <p class="grid-12" data-ng-if="ticket.ticketFutureAmount" data-ng-hide="ticket.ticketCurrentAmount === ticket.ticketFutureAmount">
       The price of this ticket {{ticket.ticketCurrentAmount &gt;
       ticket.ticketFutureAmount ? 'decreases' : 'increases'}} to
       <span class="price">{{(ticket.ticketFutureAmount | currency:"£")}}</span>

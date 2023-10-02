@@ -1,199 +1,291 @@
 <div class="block block--fullwidth">
-    <div class="boxin" ng-class="
+  <div
+    class="boxin"
+    ng-class="
             ticket.all.swiftCurrentAmount >= '0'? 'bdr-top--purple':
             ticket.all.allowBus == true && ticket.all.allowTrain == false && ticket.all.allowMetro == false? 'bdr-top--orange':
             ticket.all.allowBus == false && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--pink':
             ticket.all.allowBus == false && ticket.all.allowTrain == false && ticket.all.allowMetro==true? 'bdr-top--blue':
             ticket.all.allowBus == false && ticket.all.allowMetro == true && ticket.all.allowTrain == true? 'bdr-top--blue':
             ticket.all.swiftCurrentAmount !== '' && ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == true? 'nnetwork':
-            ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
-        <h3>
-            Where can I use?
-        </h3>
-        <hr>
-            <p class="type--small">
+            ticket.all.allowBus == true && ticket.all.allowTrain == true && ticket.all.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' "
+  >
+    <h3>
+      Where can I use?
+    </h3>
+    <hr />
+    <p class="type--small"></p>
 
-                <div data-ng-if="ticket.all.allowBus && ticket.all.allowTrain || ticket.all.allowBus && ticket.all.allowMetro || ticket.all.allowTrain && ticket.all.allowMetro || ticket.all.allowBus && ticket.all.allowTrain && ticket.all.allowMetro">
-                    <tabs>
-                        <pane data-ng-if="ticket.all.allowBus" title="Bus">
-                            <div class="imgwrapper">
-                                <a ng-href="$*imgUrl/nbus_nnetworkMap.png" data-lightbox="bus"><img ng-src="$*imgUrl/nbus_nnetworkMap-thumbnail.png"/>
-                                    <i class="material-icons">
-                                        zoom_out_map
-                                    </i>
-                                </a>
-                            </div>
-                            <p class="summary">Bus operators who accept this ticket</p>
-                            <button class="btn btn--arrow" data-ng-click="ticket.toggleModalBus()">See bus operators</button>
+    <div
+      data-ng-if="ticket.all.allowBus && ticket.all.allowTrain || ticket.all.allowBus && ticket.all.allowMetro || ticket.all.allowTrain && ticket.all.allowMetro || ticket.all.allowBus && ticket.all.allowTrain && ticket.all.allowMetro"
+    >
+      <tabs>
+        <pane data-ng-if="ticket.all.brand == 'nBus'" title="Bus">
+          <div class="imgwrapper">
+            <a ng-href="$*imgUrl/nbus_nnetworkmap.png" data-lightbox="bus"
+              ><img ng-src="$*imgUrl/nbus_nnetworkmap-thumbnail.png" />
+              <i class="material-icons">
+                zoom_out_map
+              </i>
+            </a>
+          </div>
+          <p class="summary">Bus operators who accept this ticket</p>
+          <button
+            class="btn btn--arrow"
+            data-ng-click="ticket.toggleModalBus()"
+          >
+            See bus operators
+          </button>
+        </pane>
+        <pane data-ng-if="ticket.all.brand == 'National Express'" title="Bus">
+          <div class="imgwrapper">
+            <a
+              ng-href="$*imgUrl/nx-west-midlands-travelcard-area.jpg"
+              data-lightbox="bus"
+              ><img
+                ng-src="$*imgUrl/nx-west-midlands-travelcard-area-thumbnail.jpg"
+              />
+              <i class="material-icons">
+                zoom_out_map
+              </i>
+            </a>
+          </div>
+        </pane>
+        <pane data-ng-if="ticket.all.allowTrain" title="Train">
+          <div class="imgwrapper">
+            <a ng-href="$*imgUrl/nwmzonalcurves.png" data-lightbox="train"
+              ><img ng-src="$*imgUrl/nwmzonalcurves-thumbnail.png" />
+              <i class="material-icons">
+                zoom_out_map
+              </i>
+            </a>
+          </div>
+          <p class="summary">Train operators who accept this ticket</p>
+          <button
+            class="btn btn--arrow"
+            data-ng-click="ticket.toggleModalTrain()"
+          >
+            See train operators
+          </button>
+        </pane>
+        <pane data-ng-if="ticket.all.allowMetro" title="Tram">
+          <div>
+            <div class="imgwrapper">
+              <a ng-href="$*imgUrl/metro-line-route.png" data-lightbox="tram"
+                ><img ng-src="$*imgUrl/metro-line-route-thumbnail.png" />
+                <i class="material-icons">
+                  zoom_out_map
+                </i>
+              </a>
+            </div>
+            <p class="summary">
+              Trams are operated by
+              <a href="https://westmidlandsmetro.com/" target="_blank"
+                >West Midlands Metro</a
+              >
+            </p>
+          </div>
+        </pane>
+      </tabs>
+    </div>
+    <div
+      data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro"
+    >
+      <div
+        class="imgwrapper"
+        data-ng-hide="ticket.all.busTravelArea == 'Walsall' || ticket.all.busTravelArea == 'Sandwell & Dudley'"
+      >
+        <a
+          data-ng-if="ticket.all.brand == 'nbus'"
+          ng-href="$*imgUrl/nbus_nnetworkmap.png"
+          data-lightbox="bus"
+          ><img ng-src="$*imgUrl/nbus_nnetworkmap-thumbnail.png" />
+          <i class="material-icons">
+            zoom_out_map
+          </i>
+        </a>
+      </div>
 
+      <div
+        data-ng-if="ticket.all.brand == 'National Express'"
+        data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'"
+      >
+        <div class="imgwrapper">
+          <a
+            ng-href="$*imgUrl/nx-west-midlands-travelcard-area.jpg"
+            data-lightbox="nx"
+            ><img
+              ng-src="$*imgUrl/nx-west-midlands-travelcard-area-thumbnail.jpg"
+            />
+            <br />View National Express network map
+            <i class="material-icons">
+              zoom_out_map
+            </i>
+          </a>
+        </div>
+        <p>Use on National Express buses only</p>
+      </div>
+      <!-- walsall nbus zone -->
+      <div
+        data-ng-if="ticket.all.busTravelArea == 'Walsall'"
+        data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'"
+      >
+        <div class="imgwrapper">
+          <a ng-href="$*imgUrl/nbus_walsall.png" data-lightbox="nbus walsall"
+            ><img ng-src="$*imgUrl/nbus_walsall.png" /> <br />View Walsall nBus
+            network map
+            <i class="material-icons">
+              zoom_out_map
+            </i>
+          </a>
+        </div>
+      </div>
+      <!-- walsall low fare zone -->
+      <div
+        data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'"
+      >
+        <div class="imgwrapper">
+          <a href="https://nxbus.co.uk/walsall" target="_blank"
+            ><img ng-src="$*imgUrl/walsall-low-fare-zone-map.png" /> <br />View
+            National Express Walsall low fare zone map
+            <i class="material-icons">
+              exit_to_app
+            </i>
+          </a>
+        </div>
+        <p>Use on National Express Walsall low fare zone</p>
+      </div>
+      <!-- sandwell and dudley nbus zone -->
+      <div
+        data-ng-if="ticket.all.busTravelArea == 'Sandwell & Dudley'"
+        data-ng-hide="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'"
+      >
+        <div class="imgwrapper">
+          <a
+            ng-href="$*imgUrl/nbus_sandwell_dudley.png"
+            data-lightbox="nbus sandwell & dudley"
+          >
+            <img ng-src="$*imgUrl/nbus_sandwell_dudley.png" />
+            <br />View Sandwell &amp; Dudley nBus network map
+            <i class="material-icons">
+              zoom_out_map
+            </i>
+          </a>
+        </div>
+      </div>
+      <!-- sandwell and dudley low fare zone -->
+      <div
+        data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'"
+      >
+        <div class="imgwrapper">
+          <a href="https://nxbus.co.uk/paylocal" target="_blank"
+            ><img ng-src="$*imgUrl/s-d-low-fare-zone-map.png" /> <br />View
+            National Express Sandwell & Dudley low fare zone map
+            <i class="material-icons">
+              exit_to_app
+            </i>
+          </a>
+        </div>
+        <p>Use on National Express Sandwell &amp; Dudley low fare zone</p>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
+        <div class="imgwrapper">
+          <a
+            href="https://www.diamondbuses.com/about-us/network-maps/"
+            target="_blank"
+            title="View Diamond network maps"
+          >
+            <img
+              ng-src="$*imgUrl/diamond-westmids-zone-map_apr2018.png"
+              alt="Diamond network maps"
+            />
+            <br />View Diamond network maps
+            <i class="material-icons">
+              exit_to_app
+            </i>
+          </a>
+        </div>
+        <p>Use on Diamond buses only</p>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'Stagecoach' ">
+        <div class="imgwrapper">
+          <a
+            href="https://www.stagecoachbus.com/maps"
+            target="_blank"
+            title="View Diamond network maps"
+          >
+            <img
+              ng-src="$*imgUrl/stagecoach-coventrymap_edit-08.17.png"
+              alt="Diamond network maps"
+            />
+            <br />View Stagecoach network maps
+            <i class="material-icons">
+              exit_to_app
+            </i>
+          </a>
+        </div>
+        <p>Use on Stagecoach buses only</p>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'Johnsons' ">
+        <div class="imgwrapper">
+          <a
+            href="http://www.johnsonscoaches.co.uk/bus-route-maps/"
+            target="_blank"
+            title="View Johnsons network maps"
+          >
+            <img
+              ng-src="$*imgUrl/johnsons-map.jpg"
+              alt="Johnsons network maps"
+            />
+            <br />View Johnsons network maps
+            <i class="material-icons">
+              exit_to_app
+            </i>
+          </a>
+        </div>
+        <p>Use on Johnsons buses only</p>
+      </div>
 
-                        </pane>
-                        <pane data-ng-if="ticket.all.allowTrain" title="Train">
-                            <div class="imgwrapper">
-                                <a ng-href="$*imgUrl/NWMzonalcurves.png" data-lightbox="train"><img ng-src="$*imgUrl/NWMzonalcurves-thumbnail.png"/>
-                                    <i class="material-icons">
-                                        zoom_out_map
-                                    </i>
-                                </a>
-                            </div>
-                            <p class="summary">Train operators who accept this ticket</p>
-                            <button class="btn btn--arrow" data-ng-click="ticket.toggleModalTrain()">See train operators</button>
-
-
-                        </pane>
-                        <pane data-ng-if="ticket.all.allowMetro" title="Tram">
-                            <div>
-                                <div class="imgwrapper">
-                                    <a ng-href="$*imgUrl/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="$*imgUrl/Metro-Line-Route-thumbnail.png"/>
-                                        <i class="material-icons">
-                                            zoom_out_map
-                                        </i>
-                                    </a>
-                                </div>
-                                <p class="summary">Trams are operated by
-                                    <a href="https://westmidlandsmetro.com/" target="_blank">West
-                                                                            Midlands Metro</a>
-                                </p>
-                            </div>
-                        </pane>
-                    </tabs>
-
-                </div>
-                <div data-ng-if="ticket.all.allowBus && !ticket.all.allowTrain && !ticket.all.allowMetro">
-                    <div class="imgwrapper" data-ng-hide="ticket.all.busTravelArea == 'Walsall' || ticket.all.busTravelArea == 'Sandwell & Dudley'">
-                        <a data-ng-if="ticket.all.brand == 'nbus'" ng-href="$*imgUrl/nbus_nnetworkMap.png" data-lightbox="bus"><img ng-src="$*imgUrl/nbus_nnetworkMap-thumbnail.png"/>
-                            <i class="material-icons">
-                                zoom_out_map
-                            </i>
-                        </a>
-                    </div>
-
-                    <div data-ng-if="ticket.all.brand == 'National Express'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863' || ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
-                        <div class="imgwrapper">
-                            <a ng-href="$*imgUrl/nx-west-midlands-travelcard-area.jpg" data-lightbox="nx"><img ng-src="$*imgUrl/nx-west-midlands-travelcard-area-thumbnail.jpg"/>
-                                <br>View National Express network map
-                                    <i class="material-icons">
-                                        zoom_out_map
-                                    </i>
-                                </a>
-                            </div>
-                            <p>Use on National Express buses only</p>
-                        </div>
-                        <!-- walsall nbus zone -->
-                        <div data-ng-if="ticket.all.busTravelArea == 'Walsall'" data-ng-hide="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
-                            <div class="imgwrapper">
-                                <a ng-href="$*imgUrl/nbus_walsall.png" data-lightbox="nbus walsall"><img ng-src="$*imgUrl/nbus_walsall.png"/>
-                                    <br>View Walsall nBus network map
-                                        <i class="material-icons">
-                                            zoom_out_map
-                                        </i>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- walsall low fare zone -->
-                            <div data-ng-if="ticket.all.id == '419' || ticket.all.id == '433' || ticket.all.id == '863'">
-                                <div class="imgwrapper">
-                                    <a href="https://nxbus.co.uk/walsall" target="_blank"><img ng-src="$*imgUrl/walsall-low-fare-zone-map.png"/>
-                                        <br>View National Express Walsall low fare zone map
-                                            <i class="material-icons">
-                                                exit_to_app
-                                            </i>
-                                        </a>
-                                    </div>
-                                    <p>Use on National Express Walsall low fare zone</p>
-                                </div>
-                                <!-- sandwell and dudley nbus zone -->
-                                <div data-ng-if="ticket.all.busTravelArea == 'Sandwell & Dudley'" data-ng-hide="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
-                                    <div class="imgwrapper">
-                                        <a ng-href="$*imgUrl/nbus_sandwell_dudley.png" data-lightbox="nbus sandwell & dudley">
-                                            <img ng-src="$*imgUrl/nbus_sandwell_dudley.png"/>
-                                            <br>View Sandwell &amp; Dudley nBus network map
-                                                <i class="material-icons">
-                                                    zoom_out_map
-                                                </i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- sandwell and dudley low fare zone -->
-                                    <div data-ng-if="ticket.all.id == '418' || ticket.all.id == '432' || ticket.all.id == '862'">
-                                        <div class="imgwrapper">
-                                            <a href="https://nxbus.co.uk/paylocal" target="_blank"><img ng-src="$*imgUrl/s-d-low-fare-zone-map.png"/>
-                                                <br>View National Express Sandwell & Dudley low fare zone map
-                                                    <i class="material-icons">
-                                                        exit_to_app
-                                                    </i>
-                                                </a>
-                                            </div>
-                                            <p>Use on National Express Sandwell &amp; Dudley low fare zone</p>
-                                        </div>
-                                        <div data-ng-if="ticket.all.brand == 'Diamond Bus' ">
-                                            <div class="imgwrapper">
-                                                <a href="https://www.diamondbuses.com/about-us/network-maps/" target="_blank" title="View Diamond network maps">
-                                                    <img ng-src="$*imgUrl/Diamond-westmids-zone-map_apr2018.png" alt="Diamond network maps"/>
-                                                    <br>View Diamond network maps
-                                                        <i class="material-icons">
-                                                            exit_to_app
-                                                        </i>
-                                                    </a>
-                                                </div>
-                                                <p>Use on Diamond buses only</p>
-                                            </div>
-                                            <div data-ng-if="ticket.all.brand == 'Stagecoach' ">
-                                                <div class="imgwrapper">
-                                                    <a href="https://www.stagecoachbus.com/maps" target="_blank" title="View Diamond network maps">
-                                                        <img ng-src="$*imgUrl/Stagecoach-Coventrymap_EDIT-08.17.png" alt="Diamond network maps"/>
-                                                        <br>View Stagecoach network maps
-                                                            <i class="material-icons">
-                                                                exit_to_app
-                                                            </i>
-                                                        </a>
-                                                    </div>
-                                                    <p>Use on Stagecoach buses only</p>
-                                                </div>
-                                                <div data-ng-if="ticket.all.brand == 'Johnsons' ">
-                                                    <div class="imgwrapper">
-                                                        <a href="http://www.johnsonscoaches.co.uk/bus-route-maps/" target="_blank" title="View Johnsons network maps">
-                                                            <img ng-src="$*imgUrl/Johnsons-Map.jpg" alt="Johnsons network maps"/>
-                                                            <br>View Johnsons network maps
-                                                                <i class="material-icons">
-                                                                    exit_to_app
-                                                                </i>
-                                                            </a>
-                                                        </div>
-                                                        <p>Use on Johnsons buses only</p>
-                                                    </div>
-
-                                                    <div data-ng-if="!ticket.all.isSingleOperatorTicket">
-                                                        <p class="summary">Bus operators who accept this ticket</p>
-                                                        <button class="btn btn--arrow" data-ng-click="ticket.toggleModalBus()">See bus operators</button>
-                                                    </div>
-                                                </div>
-                                                <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
-                                                    <div class="imgwrapper">
-                                                        <a ng-href="$*imgUrl/NWMzonalcurves.png" data-lightbox="train"><img ng-src="$*imgUrl/NWMzonalcurves-thumbnail.png"/>
-                                                            <i class="material-icons">
-                                                                zoom_out_map
-                                                            </i>
-                                                        </a>
-                                                    </div>
-                                                    <p class="summary">Train operators who accept this ticket</p>
-                                                    <button class="btn btn--arrow" data-ng-click="ticket.toggleModalTrain()">See train operators</button>
-                                                </div>
-                                                <div data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro">
-                                                    <div class="imgwrapper">
-                                                        <a ng-href="$*imgUrl/Metro-Line-Route.png" data-lightbox="tram"><img ng-src="$*imgUrl/Metro-Line-Route-thumbnail.png"/>
-                                                            <i class="material-icons">
-                                                                zoom_out_map
-                                                            </i>
-                                                        </a>
-                                                    </div>
-                                                    <p class="summary">Trams are operated by
-                                                        <a href="https://westmidlandsmetro.com/" target="_blank">West
-                                                                                    Midlands
-                                                                                    Metro
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </p>
-                                        </div>
-                                    </div>
+      <div data-ng-if="!ticket.all.isSingleOperatorTicket">
+        <p class="summary">Bus operators who accept this ticket</p>
+        <button class="btn btn--arrow" data-ng-click="ticket.toggleModalBus()">
+          See bus operators
+        </button>
+      </div>
+    </div>
+    <div
+      data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro"
+    >
+      <div class="imgwrapper">
+        <a ng-href="$*imgUrl/nwmzonalcurves.png" data-lightbox="train"
+          ><img ng-src="$*imgUrl/nwmzonalcurves-thumbnail.png" />
+          <i class="material-icons">
+            zoom_out_map
+          </i>
+        </a>
+      </div>
+      <p class="summary">Train operators who accept this ticket</p>
+      <button class="btn btn--arrow" data-ng-click="ticket.toggleModalTrain()">
+        See train operators
+      </button>
+    </div>
+    <div
+      data-ng-if="!ticket.all.allowBus && !ticket.all.allowTrain && ticket.all.allowMetro"
+    >
+      <div class="imgwrapper">
+        <a ng-href="$*imgUrl/metro-line-route.png" data-lightbox="tram"
+          ><img ng-src="$*imgUrl/Metro-Line-R  oute-thumbnail.png" />
+          <i class="material-icons">
+            zoom_out_map
+          </i>
+        </a>
+      </div>
+      <p class="summary">
+        Trams are operated by
+        <a href="https://westmidlandsmetro.com/" target="_blank"
+          >West Midlands Metro
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

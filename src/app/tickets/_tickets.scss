@@ -1,709 +1,733 @@
 .ticket-search .how-long .icon-stylized-new label {
-    background-color: $cyan;
-    color: white;
+  background-color: $cyan;
+  color: white;
 }
 
 .new-transport-icons-blue {
-    @include new-transport-icons(#9d5baf, white, #3c1053, white);
+  @include new-transport-icons(#9d5baf, white, #3c1053, white);
 }
 
 .help-section {
-    display: inline-block;
-    // margin: 15px 0;
+  display: inline-block;
+  // margin: 15px 0;
 }
 
 .acc__item {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .transparent--bg {
-    background: none !important;
+  background: none !important;
 }
 
 .boxin:last-child {
-    margin-bottom: none !important;
+  margin-bottom: none !important;
 }
 
 .block--main {
-    .boxin {
-        margin-top: 0px;
-    }
-    .title {
-        display: flex;
-    }
+  .boxin {
+    margin-top: 0px;
+  }
+  .title {
+    display: flex;
+  }
 
-    .errors {
-        margin: 0 0 15px 0;
-    }
+  .errors {
+    margin: 0 0 15px 0;
+  }
 }
 
 .traveller .errors {
-    margin: 25px 0 0 0;
+  margin: 25px 0 0 0;
+}
+
+.boxin.-messages a {
+  color: #fff;
+  font-weight: bold;
 }
 
 .icon-stylized-new input:checked ~ label:after,
 a.icon-stylized-new:active span:after,
 a.icon-stylized-new:focus span:after {
-    z-index: 10;
+  z-index: 10;
 }
 
 .block--side {
-    @include breakpoint(tablet) {
-        display: none;
-    }
+  @include breakpoint(tablet) {
+    display: none;
+  }
 }
 
 .display--tablet {
-    display: none;
-    @include breakpoint(tablet) {
-        display: block;
-    }
+  display: none;
+  @include breakpoint(tablet) {
+    display: block;
+  }
 }
 
 .arrdep-filters {
-    @include breakpoint(mobileonly) {
-        display: flex;
+  @include breakpoint(mobileonly) {
+    display: flex;
+  }
+
+  .radio-bar {
+    display: inline-block;
+
+    @include breakpoint(tablet2) {
+      display: inline-block;
     }
 
-    .radio-bar {
-        display: inline-block;
-
-        @include breakpoint(tablet2) {
-            display: inline-block;
-        }
-
-        span label {
-            padding: .78em 15px;         
-        }
+    span label {
+      padding: 0.78em 15px;
     }
+  }
 
-    > div {
-        @media (min-width: 46.875em){
-        width: 45% !important;
-        }
-        @include breakpoint(laptop2) {
-            width: 51% !important;
-        }
+  > div {
+    @media (min-width: 46.875em) {
+      width: 45% !important;
     }
+    @include breakpoint(laptop2) {
+      width: 51% !important;
+    }
+  }
 }
 
 .ticket-item {
-    .paygimg {
-        float: right;
-        margin: -1px 0 25px 0;
-        width: 75%;
+  .paygimg {
+    float: right;
+    margin: -1px 0 25px 0;
+    width: 75%;
 
-        @include breakpoint(mobileonly) {
-            width: 65%;
-        }
+    @include breakpoint(mobileonly) {
+      width: 65%;
     }
-    .payment-icons {
-        display: inline;
+  }
+  .payment-icons {
+    display: inline;
 
-        > * {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .ticket-direct-debit-logo {
-            width: 30px;
-            margin-left: 2px;
-        }
-
-        .ticket-swift-logo {
-            height: 30px;
-        }
-
-        .ticket-mc-logo {
-            height: 30px;
-            margin: 0 10px;
-        }
-
+    > * {
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    .event__title {
-        font-size: 22px;
+    .ticket-direct-debit-logo {
+      width: 30px;
+      margin-left: 2px;
     }
 
-    .price {
-        font-weight: bold;
-        margin-top: 10px;
-        font-size: 18px;
-        line-height: 30px;
+    .ticket-swift-logo {
+      height: 30px;
     }
 
-    .event__date {
-        margin-bottom: 40px;
+    .ticket-mc-logo {
+      height: 30px;
+      margin: 0 10px;
     }
+  }
 
-    a {
-        margin-bottom: 8px;
+  .event__title {
+    font-size: 22px;
+  }
+
+  .price {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  .event__date {
+    margin-bottom: 40px;
+  }
+
+  a {
+    margin-bottom: 8px;
+  }
+  .modes {
+    text-align: right;
+    .icon {
+      height: 30px !important;
+      width: 28px !important;
     }
-    .modes {
-        text-align: right;
-        .icon {
-            height: 30px!important;
-            width: 28px!important;
-        }
-    }
+  }
 }
 
 .ticket-filters {
-    hr {
-        margin-bottom: 0;
-        background-color: $cyan;
-    }
-    //move close button because of overflow-y scroll
-    .modal__close {
-        right: 10px;
-    }
+  hr {
+    margin-bottom: 0;
+    background-color: $cyan;
+  }
+  //move close button because of overflow-y scroll
+  .modal__close {
+    right: 10px;
+  }
 
-    .icon {
+  .icon {
+    color: $cyan;
+
+    &:after {
+      background-image: none;
+    }
+  }
+
+  .filter-block {
+    border-bottom: 1px solid #ccc;
+
+    .filter-title {
+      padding: 20px 0;
+      display: block;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+
+      &:hover {
         color: $cyan;
+      }
 
-        &:after {
-            background-image: none;
-        }
+      i {
+        float: right;
+        color: $cyan;
+        font-weight: bold;
+      }
     }
+  }
 
-    .filter-block {
-        border-bottom: 1px solid #ccc;
-
-        .filter-title {
-            padding: 20px 0;
-            display: block;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-
-            &:hover {
-                color: $cyan;
-            }
-
-            i {
-                float: right;
-                color: $cyan;
-                font-weight: bold;
-            }
-        }
+  .checkbox-list {
+    label {
+      background-color: transparent;
     }
+  }
 
-    .checkbox-list {
-        label {
-            background-color: transparent;
-        }
+  ul {
+    padding: 0 0 20px 0;
+    margin: 0;
+
+    label {
+      border: 0;
     }
-
-    ul {
-        padding: 0 0 20px 0;
-        margin: 0;
-
-        label {
-            border: 0;
-        }
-    }
+  }
 }
 
 .error {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .stationlist {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 form input.ng-invalid-autocomplete-required,
 .field-required-class,
 input.ng-invalid-field-required-class {
-    border: red 1px solid !important;
+  border: red 1px solid !important;
 }
 
 .errors {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .angular-grid-item {
-    .bdr-top--purple.boxin {
-        padding: 0 0 15px 0;
-        .itemContent {
-           padding: 20px 20px 45px 20px;
-        }
+  .bdr-top--purple.boxin {
+    padding: 0 0 15px 0;
+    .itemContent {
+      padding: 20px 20px 45px 20px;
     }
+  }
 }
 
 .itemContent {
-    a:not(.btn) {
-        text-decoration: underline;
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+  .summary {
+    margin: 10px 0;
+    font-weight: normal;
+  }
+  .operator {
+    margin: 0 0 10px 0;
+  }
+  ul {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      line-height: 20px !important;
+      &::after {
+        content: ", ";
+      }
+      &:last-of-type::after {
+        content: "";
+      }
+      &::before {
+        content: "";
+        margin-left: 0px;
+        line-height: 20px !important;
+      }
+      a {
+        display: inline-block;
+      }
     }
-    .summary {
-        margin: 10px 0;
-        font-weight: normal;
+  }
+  .btn {
+    margin: 15px 0 0 0;
+  }
+  @include breakpoint(mobileonly) {
+    .grid-8 {
+      width: 70%;
     }
-    .operator {
-        margin: 0 0 10px 0;
+    .grid-4 {
+      width: 30%;
     }
-    ul{
-        list-style: none!important; margin: 0; padding: 0;
-        li {
-            display: inline;line-height: 20px!important;
-            &::after {content: ", ";}
-            &:last-of-type::after {content: "";}
-            &::before {content: "";margin-left: 0px;line-height: 20px!important;}
-            a {display: inline-block;}
-        }
-    }
-    .btn {
-        margin: 15px 0 0 0;
-    }
-    @include breakpoint(mobileonly) {
-        .grid-8 {
-            width: 70%;
-        }
-        .grid-4 {
-            width: 30%;
-        }
-    }
+  }
 }
 
 .block--fullwidth .block--side {
-    //position: sticky;
-    top: 15px;
+  //position: sticky;
+  top: 15px;
 }
 
 .card-img {
-    width: 180px;
-    float: left;
-    margin: 30px 20px 20px 0;
-}
-
-.boxin--large h1 {
-    font-size: 3rem;
-    line-height: 3.5rem;
+  width: 180px;
+  float: left;
+  margin: 30px 20px 20px 0;
 }
 
 .ticket-detail {
-    float: right;
+  float: right;
 }
 
 .ticket-name {
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .features {
-    background: #f4f4f4 !important;
-    padding: 20px;
+  background: #f4f4f4 !important;
+  padding: 20px;
 }
 
 .price {
-    font-weight: normal;
-    margin-top: 0;
-    font-size: 24px;
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 24px;
 }
 
 .summary {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .useon {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .acc {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .modalSwift {
-    padding: 30px;
+  padding: 30px;
 }
 
-input[type='checkbox']:disabled + label {
-    background: #dddddd!important;
-    svg{
-        fill: #fff!important;
-    }
-    span{
-        color: #b7b5b5;
-    }
+input[type="checkbox"]:disabled + label {
+  background: #dddddd !important;
+  svg {
+    fill: #fff !important;
+  }
+  span {
+    color: #b7b5b5;
+  }
 }
 
-input[type='radio']:disabled + label {
-    background: #dddddd;
+input[type="radio"]:disabled + label {
+  background: #dddddd;
 }
 
-input[type='text'] {
-    text-align: center;
+input[type="text"] {
+  text-align: center;
 }
 
 .orcont {
-    float: left;
-    width: 30px;
+  float: left;
+  width: 30px;
 }
 
 .orcontent {
-    padding: 60px 0 20px 20px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+  padding: 60px 0 20px 20px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .BuyOnSwift {
-    margin: 15px 0;
+  margin: 15px 0;
 }
 
 form .blocks .block {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 label.plain-small {
-    font-size: 14px;
-    margin: 0 0 5px 0;
-    display: block;
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  display: block;
 }
 
 .to {
-    .orcontent {
-        padding: 40px 0 20px 20px;
-    }
+  .orcontent {
+    padding: 40px 0 20px 20px;
+  }
 }
 
 .highlight {
-    color: $cyan;
+  color: $cyan;
 }
 
 .col {
-    width: 50%;
-    float: left;
-    padding-right: 10px;
+  width: 50%;
+  float: left;
+  padding-right: 10px;
 }
 
 .bdr-top--cyan {
-    border-top: 6px solid $cyan;
+  border-top: 6px solid $cyan;
 }
 
 .nnetwork {
-    border-top: 6px solid $cyan;
+  border-top: 6px solid $cyan;
 }
 
 .bdr-top--purple {
-    border-top: 6px solid $purple;
+  border-top: 6px solid $purple;
 }
 
 @include breakpoint(tablet3) {
-    .mobile--void {
-        display: none !important;
-    }
-    .mobile-only {
-        display: block;
-    }
+  .mobile--void {
+    display: none !important;
+  }
+  .mobile-only {
+    display: block;
+  }
 }
 
 .block--side {
-    p {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+  p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 
-    ul {
-        margin-top: 5px;
-    }
+  ul {
+    margin-top: 5px;
+  }
 }
 
 @include breakpoint(tablet2) {
-    .orcontent {
-        height: 40px;
-        width: 100%;
-        text-align: left;
-        display: table-row;
-    }
+  .orcontent {
+    height: 40px;
+    width: 100%;
+    text-align: left;
+    display: table-row;
+  }
 
-    .orcont {
-        float: none;
-        width: 100%;
-    }
+  .orcont {
+    float: none;
+    width: 100%;
+  }
 
-    .passselect {
-        float: left;
-        display: contents;
-    }
+  .passselect {
+    float: left;
+    display: contents;
+  }
 
-    .blocks--halves .block {
-        width: 100%;
-    }
+  .blocks--halves .block {
+    width: 100%;
+  }
 }
 
 @include breakpoint(mobileonly) {
-    .col {
-        width: 100%;
-        float: left;
-        padding-right: 10px;
-    }
+  .col {
+    width: 100%;
+    float: left;
+    padding-right: 10px;
+  }
 
-    .summary {
-        margin: 15px 0 0 0;
-    }
+  .summary {
+    margin: 15px 0 0 0;
+  }
 
-    .ticketing-results-grid {
-        background: white;
-    }
+  .ticketing-results-grid {
+    background: white;
+  }
 
-    .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
-        width: 100% !important;
-    }
+  .ticketing-page .ng-modal-dialog .ng-modal-dialog-content .operators {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 1000px) and (min-width: 890px) {
-    .orcontent {
-        padding: 60px 0 0px 0px;
-    }
+  .orcontent {
+    padding: 60px 0 0px 0px;
+  }
 }
 
 ​
 /* Tab Styling */
 
 .tab-content {
-    position: initial !important;
+  position: initial !important;
 }
 
 .tab-pane.ng-scope.ng-isolate-scope {
-    display: none;
+  display: none;
 }
 
 .tab-pane.ng-scope.ng-isolate-scope.active {
-    display: block;
+  display: block;
 }
 
 span.ng-scope.active {
-    background-color: #333;
-    color: white;
+  background-color: #333;
+  color: white;
 }
 
 .buy .price {
-    color: $darkgrey;
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 45px;
+  color: $darkgrey;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 45px;
 }
 
 .online {
-    color: $cyan !important;
+  color: $cyan !important;
 }
 
 .hideCheck {
-    display: none;
+  display: none;
 }
 
 .hideSave {
-    display: none;
+  display: none;
 }
 
 label.blue {
-    color: $cyan !important;
+  color: $cyan !important;
 }
 
 .help-link:after {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /* Icon over image popup */
 
 .imgwrapper {
-    position: relative;
+  position: relative;
 }
 
 .imgwrapper:hover img {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .imgwrapper .material-icons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 50px;
-    color: #9d5baf;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 50px;
+  color: #9d5baf;
 }
 
 .or {
-    padding: 60px 0 20px 0;
-    text-align: center;
+  padding: 60px 0 20px 0;
+  text-align: center;
 
-    @include breakpoint(mobileonly) {
-        text-align: left;
-        padding: 0px;
-    }
+  @include breakpoint(mobileonly) {
+    text-align: left;
+    padding: 0px;
+  }
 }
 
 .rowcontainer {
-    display: inline-block;
-    width: 100%;
+  display: inline-block;
+  width: 100%;
 }
 
 .form-control {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 .railhelp {
-    margin: 10px 0;
-    p {
-        margin-top: 0px;
-    }
+  margin: 10px 0;
+  p {
+    margin-top: 0px;
+  }
 }
 
 .ie10-or-better .stylized-select > select {
-    padding-right: 80px;
+  padding-right: 80px;
 }
 
 label.plain,
 .label.plain {
-    display: table !important;
+  display: table !important;
 }
 
 .stylized-select {
-    display: block;
+  display: block;
 }
 
 form {
-    .title {
-        margin: 20px 0 10px 0;
+  .title {
+    margin: 20px 0 10px 0;
+  }
+
+  .padding-right {
+    padding-right: 15px;
+
+    @include breakpoint(mobileonly) {
+      padding-right: 0px;
     }
+  }
 
-    .padding-right {
-        padding-right: 15px;
+  .padding-left {
+    padding-left: 15px;
 
-        @include breakpoint(mobileonly) {
-            padding-right: 0px;
-        }
+    @include breakpoint(mobileonly) {
+      padding-left: 0px;
     }
-
-    .padding-left {
-        padding-left: 15px;
-
-        @include breakpoint(mobileonly) {
-            padding-left: 0px;
-        }
-    }
+  }
 }
 
 .result {
-    margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 .blue {
-    color: $cyan;
+  color: $cyan;
 }
 
 .swift {
-    .btn {
-        margin-top: 10px;
-    }
+  .btn {
+    margin-top: 10px;
+  }
 }
 
 .btn--filter {
-    min-width: 0;
-    width: 100%;
-    padding: 18px 60px 18px 25px;
-    height: auto;
-    min-height: 0;
-    position: relative;
-    clear: right;
-    -webkit-perspective: 400px;
-    -moz-perspective: 400px;
-    perspective: 400px;
-    &:after {
-        content: '';
-        position: absolute;
-        right: 10px;
-        top: 12px;
-        width: 28px;
-        height: 28px;
-        background-image: url(//static.centro.org.uk/nwmAssets/img/icons-custom.png);
-        background-position: -385px -256px;
-        background-size: 308px auto;
-        z-index: 10;
-        -webkit-transition: transform 300ms ease-out;
-        -moz-transition: transform 300ms ease-out;
-        transition: transform 300ms ease-out;
-    }
+  min-width: 0;
+  width: 100%;
+  padding: 18px 60px 18px 25px;
+  height: auto;
+  min-height: 0;
+  position: relative;
+  clear: right;
+  -webkit-perspective: 400px;
+  -moz-perspective: 400px;
+  perspective: 400px;
+  &:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    width: 28px;
+    height: 28px;
+    background-image: url(https://cloudcdn.wmca.org.uk/nwmAssets/img/icons-custom.png);
+    background-position: -385px -256px;
+    background-size: 308px auto;
+    z-index: 10;
+    -webkit-transition: transform 300ms ease-out;
+    -moz-transition: transform 300ms ease-out;
+    transition: transform 300ms ease-out;
+  }
 }
 
 .mobile-only {
-    .stylized-select {
-        margin: none !important;
+  .stylized-select {
+    margin: none !important;
+  }
+  .grid-6 {
+    padding: 10px;
+    @include breakpoint(mobileonly) {
+      padding: 0 5px 0 0;
     }
-    .grid-6 {
-        padding: 10px;
-        @include breakpoint(mobileonly) {
-            padding: 0 5px 0 0;
-        }
-    }
+  }
 }
 
 //Filter overlay for mobile
 .overlay {
-    //display: none;
-    width: 600px;
-    max-width: 100%;
-    height: 600px;
-    max-height: 100%;
-    position: fixed;
-    z-index: 10000;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    .operators {
-        height: 450px;
-        overflow-y: scroll;
-        @include breakpoint(tablet3) {
-            height: 100%;
-        }
-    }
+  //display: none;
+  width: 600px;
+  max-width: 100%;
+  height: 600px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 10000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  .operators {
+    height: 450px;
+    overflow-y: scroll;
     @include breakpoint(tablet3) {
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        z-index: 1;
-        //top: 0;
-        //left: 0;
-        background-color: white;
-        z-index: 9999;
-        .ng-modal-dialog-content {
-            height: 100%;
-            overflow-y: scroll;
-        }
+      height: 100%;
     }
-    .bg--blue.bg--tint {
-        @include breakpoint(tablet3) {
-            background-color: #fff;
-        }
+  }
+  @include breakpoint(tablet3) {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    //top: 0;
+    //left: 0;
+    background-color: white;
+    z-index: 9999;
+    .ng-modal-dialog-content {
+      height: 100%;
+      overflow-y: scroll;
     }
+  }
+  .bg--blue.bg--tint {
+    @include breakpoint(tablet3) {
+      background-color: #fff;
+    }
+  }
 }
 
 .overlay.boxin {
-    @include breakpoint(tablet3) {
-        margin: 0px;
-    }
+  @include breakpoint(tablet3) {
+    margin: 0px;
+  }
 }
 
 .labels-new span {
-    margin-right: 3px;
+  margin-right: 3px;
 }
 
-.radio-bar > span, .radio-bar > span label {
-    display:inline-table!important
-}
-
-.filtered-header{
-    @include breakpoint(mobileonly) {
-        .grid-6{
-            width: 50%;
-        }
-        #sortBy {
-            height: 3.2em;
-        }
+.filtered-header {
+  @include breakpoint(mobileonly) {
+    .grid-6 {
+      width: 50%;
     }
+    #sortBy {
+      height: 3.2em;
+    }
+  }
 }
 
 .icon-stylized-new span {
-    display: inline;
+  display: inline;
+}
+
+.error {
+  .boxin {
+    a:visited {
+      color: #fff;
+    }
+  }
+}
+
+body > div.tickets > div > div > div.block.block--main > div > div > div > search > form > div.rowcontainer.traveller > div.grid-12.errors.ng-scope > div > p:nth-child(2) > a:nth-child(3) {
+    color: pink!important;
+}
+
+h3.filtered-header__heading, h3 {
+  font-size: 1.5rem;
 }

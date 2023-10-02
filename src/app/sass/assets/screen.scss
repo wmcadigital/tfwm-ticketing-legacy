@@ -419,7 +419,7 @@ ol:last-child,
 
 .btn-link,
 input,
-.ie10-or-better .stylized-select>select,
+.stylized-select>select,
 .navbar__search input[type],
 .navbar__search-btn,
 .navbar__burger,
@@ -463,7 +463,7 @@ a.link--back:before,
 .price-list:before {
     content: "";
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: 0 0;
     background-repeat: no-repeat;
@@ -511,9 +511,9 @@ a.link--back:before,
     ___________________________________________________________________ */
 .fields.-leaving-arriving,
 .fields.-leaving-arriving>.field-group,
-.ie10-or-better .radio-bar,
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label,
+.radio-bar,
+.radio-bar>span,
+.radio-bar>span label,
 .journey-overview,
 .journey__header {
     display: block;
@@ -536,15 +536,15 @@ a.link--back:before,
     justify-content: space-between;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span,
+.radio-bar>span label {
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label,
+.radio-bar>span,
+.radio-bar>span label,
 .journey-overview {
     -ms-flex-align: center;
     -webkit-align-items: center;
@@ -553,7 +553,7 @@ a.link--back:before,
 
 .fields.-leaving-arriving,
 .fields.-leaving-arriving>.field-group,
-.ie10-or-better .radio-bar {
+.radio-bar {
     -ms-flex-align: stretch;
     -webkit-align-items: stretch;
     align-items: stretch;
@@ -648,7 +648,6 @@ video {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
 
@@ -696,32 +695,32 @@ table {
 
 @font-face {
     font-family: 'WF_Network';
-    src: url("../fonts/NetworkTT-Regular.eot");
-    src: url("../fonts/NetworkTT-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/NetworkTT-Regular.woff") format("woff"), url("../fonts/NetworkTT-Regular.ttf") format("truetype");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Regular.eot");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Regular.eot?#iefix") format("embedded-opentype"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Regular.woff") format("woff"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'WF_Network';
-    src: url("../fonts/NetworkTT-Bold.eot");
-    src: url("../fonts/NetworkTT-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/NetworkTT-Bold.woff") format("woff"), url("../fonts/NetworkTT-Bold.ttf") format("truetype");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Bold.eot");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Bold.eot?#iefix") format("embedded-opentype"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Bold.woff") format("woff"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/NetworkTT-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'WF_Droid_Sans';
-    src: url("../fonts/DroidSans.eot");
-    src: url("../fonts/DroidSans.eot?#iefix") format("embedded-opentype"), url("../fonts/DroidSans.woff") format("woff"), url("../fonts/DroidSans.ttf") format("truetype");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans.eot");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans.eot?#iefix") format("embedded-opentype"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans.woff") format("woff"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'WF_Droid_Sans';
-    src: url("../fonts/DroidSans-Bold.eot");
-    src: url("../fonts/DroidSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/DroidSans-Bold.woff") format("woff"), url("../fonts/DroidSans-Bold.ttf") format("truetype");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans-Bold.eot");
+    src: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans-Bold.eot?#iefix") format("embedded-opentype"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans-Bold.woff") format("woff"), url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/fonts/DroidSans-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
 }
@@ -765,9 +764,9 @@ h1,
     font-family: "WF_Network", sans-serif;
     font-weight: 700;
     font-size: 50px;
-    font-size: 5rem;
+    font-size: 2.2rem;
     line-height: 62px;
-    line-height: 6.2rem;
+    line-height: 3.9rem;
 }
 
 h2,
@@ -787,7 +786,7 @@ h3,
     font-size: 26px;
     font-size: 2.6rem;
     line-height: 36px;
-    line-height: 3.6rem;
+    line-height: 2.5rem;
 }
 
 h4,
@@ -810,9 +809,9 @@ p,
     font-family: "WF_Droid_Sans", sans-serif;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 26px;
-    line-height: 2.6rem;
+    line-height: 1.6rem;
 }
 
 .contact-info__phone,
@@ -837,9 +836,9 @@ figcaption p,
     font-family: "WF_Droid_Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;
-    font-size: 1.4rem;
+    font-size: 1rem;
     line-height: 24px;
-    line-height: 2.4rem;
+    line-height: 1.5rem;
 }
 
 ul li,
@@ -848,9 +847,8 @@ ol li,
     font-family: "WF_Droid_Sans", sans-serif;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 36px;
-    line-height: 3.6rem;
 }
 
 ::selection {
@@ -864,25 +862,15 @@ ol li,
     color: white;
 }
 
-html {
-    font-size: 62.5%;
-    -webkit-font-smoothing: antialiased;
-}
-
 * {
     margin: 0;
-}
-
-html,
-body {
-    height: 100%;
 }
 
 body {
     color: #333333;
     font-family: "WF_Droid_Sans", sans-serif;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1rem;
     line-height: 1.2;
 }
 
@@ -958,25 +946,12 @@ ul.ui-autocomplete[class] {
 }
 
 ul li:before {
-    content: "\2022\ ";
     color: #9D5BAF;
     vertical-align: middle;
     font-size: 32px;
     font-size: 3.2rem;
     line-height: 36px;
     line-height: 3.6rem;
-}
-
-ol {
-    counter-reset: nwm-counter;
-}
-
-ol li:before {
-    content: counter(nwm-counter);
-    counter-increment: nwm-counter;
-    color: #9D5BAF;
-    font-weight: bold;
-    margin-right: 10px;
 }
 
 .btn-link {
@@ -988,19 +963,9 @@ ol li:before {
 
 a,
 .btn-link {
-    font-weight: bold;
+    font-weight: normal;
     color: #9D5BAF;
     display: inline;
-    text-decoration: none;
-    background-repeat: repeat-x;
-    background-image: -webkit-linear-gradient(transparent 50%, #9D5BAF 50%);
-    background-image: linear-gradient(transparent 50%, #9D5BAF 50%);
-    background-size: 1px 2px;
-    background-position: 0 100%;
-    padding-bottom: 3px;
-    -webkit-transition: color 300ms ease-out, background-image 300ms ease-out;
-    -moz-transition: color 300ms ease-out, background-image 300ms ease-out;
-    transition: color 300ms ease-out, background-image 300ms ease-out;
 }
 
 a:hover,
@@ -1019,7 +984,7 @@ a.link--arrow:after {
     content: '';
     vertical-align: middle;
     margin-left: 5px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 190px auto;
     width: 8px;
     height: 15px;
@@ -1402,6 +1367,9 @@ body .blocks--halves.new--block-thirds:before {
     line-height: 1.2;
     padding: 26px;
     padding-left: 69px;
+    a:visited{
+        color: #fff;
+    }
 }
 
 .boxin.-messages p {
@@ -1998,8 +1966,6 @@ input[type=email] {
     border: 2px solid #ccc;
     background-color: white;
     padding: .85em;
-    font-size: 16px;
-    font-size: 1.6rem;
 }
 
 textarea:focus,
@@ -2078,8 +2044,8 @@ input[type=text].input--fullwidth {
 
 input[data-autocomplete-geolocate] {
     background: white 95% center no-repeat;
-    background-image: url(../img/svg2png/pin.png);
-    background-image: url(../img/pin.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/pin.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/pin.svg), none;
     background-position: right 12px center;
     padding-right: 30px;
 }
@@ -2095,8 +2061,8 @@ input[data-autocomplete-geolocate] {
     right: 2px;
     bottom: 2px;
     background: white 95% center no-repeat;
-    background-image: url(../img/svg2png/pin.png);
-    background-image: url(../img/pin.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/pin.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/pin.svg), none;
     background-position: right 12px center;
     padding-right: 30px;
 }
@@ -2290,15 +2256,15 @@ label.required:after {
     color: #D4351C;
 }
 
-.ie10-or-better .error .stylized-select:before,
-.ie10-or-better .error .stylized-select:after,
-.ie10-or-better .field--error .stylized-select:before,
-.ie10-or-better .field--error .stylized-select:after {
+.error .stylized-select:before,
+.error .stylized-select:after,
+.field--error .stylized-select:before,
+.field--error .stylized-select:after {
     background-color: #D4351C;
 }
 
-.ie10-or-better .error .stylized-select select,
-.ie10-or-better .field--error .stylized-select select {
+.error .stylized-select select,
+.field--error .stylized-select select {
     border-color: #D4351C;
 }
 
@@ -2337,7 +2303,7 @@ label.required:after {
     font-size: 1.6rem;
 }
 
-.ie10-or-better .stylized-select>select {
+.stylized-select>select {
     background: white;
     border: 2px solid #ccc;
     padding: .85em;
@@ -2348,16 +2314,16 @@ label.required:after {
     border-bottom-width: 0;
     padding-right: 60px;
     color: #9D5BAF;
-    background: white url(../img/select-wmn.png) right center repeat-y;
+    background: white url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/select-wmn.png) right center repeat-y;
 }
 
-.ie10-or-better .stylized-select>select::-ms-expand {
+.stylized-select>select::-ms-expand {
     opacity: 0;
     width: 0;
 }
 
-.ie10-or-better .stylized-select:before,
-.ie10-or-better .stylized-select:after {
+.stylized-select:before,
+.stylized-select:after {
     position: absolute;
     content: "";
     height: 2px;
@@ -2367,11 +2333,11 @@ label.required:after {
     background: #ccc;
 }
 
-.ie10-or-better .stylized-select:before {
+.stylized-select:before {
     top: 0;
 }
 
-.ie10-or-better .stylized-select:after {
+.stylized-select:after {
     bottom: 0;
 }
 
@@ -2401,7 +2367,7 @@ label.required:after {
     display: inline-block;
     width: 27px;
     height: 22px;
-    background: url(../img/checkbox-wmn.svg) 0 2px no-repeat;
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/checkbox-wmn.svg) 0 2px no-repeat;
     vertical-align: -3px;
     margin-right: 7px;
 }
@@ -2520,7 +2486,7 @@ label.required:after {
     left: 50%;
     margin-left: -10px;
     top: 3px;
-    background: url(../img/tick.svg) center no-repeat;
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/tick.svg) center no-repeat;
 }
 
 .ie9-or-better [type="radio"].icon-stylized:disabled~label,
@@ -2612,7 +2578,7 @@ label.required:after {
     content: '';
     width: 23px;
     height: 23px;
-    background-image: url(../img/more.gif);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/more.gif);
     position: absolute;
     top: 50%;
     left: 11px;
@@ -2719,7 +2685,7 @@ label.required:after {
     left: 7%;
     top: 50%;
     margin-top: -11px;
-    background: url(../img/tick.svg) center no-repeat;
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/tick.svg) center no-repeat;
     width: 19px;
     height: 19px;
 }
@@ -2739,14 +2705,14 @@ label.required:after {
     margin-top: .3em;
 }
 
-.ie10-or-better .radio-bar>span,
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span,
+.radio-bar>span label {
     -ms-flex: 1;
     -webkit-flex: 1;
     flex: 1;
 }
 
-.ie10-or-better .radio-bar>span label {
+.radio-bar>span label {
     width: 100%;
 }
 
@@ -3161,7 +3127,7 @@ td.ui-datepicker-unselectable span {
 .icon:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -3703,9 +3669,9 @@ h4 .icon {
     margin-right: 10px;
     font-weight: 400;
     font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     line-height: 16px;
-    line-height: 1.6rem;
+    line-height: 1.1rem;
     -webkit-transition: color 200ms ease-out, background-color 200ms ease-out;
     -moz-transition: color 200ms ease-out, background-color 200ms ease-out;
     transition: color 200ms ease-out, background-color 200ms ease-out;
@@ -3778,7 +3744,7 @@ button.btn {
     margin-top: -5px;
     width: 28px;
     height: 12px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -137px -383px;
     background-size: 308px auto;
     z-index: 10;
@@ -3934,7 +3900,7 @@ button.btn {
     top: 17px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -255px -18px;
     background-size: 308px auto;
     z-index: 10;
@@ -3960,7 +3926,7 @@ button.btn {
     top: 12px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -558px -373px;
     background-size: 308px auto;
     z-index: 10;
@@ -3995,7 +3961,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -21px -614px;
     background-size: 308px auto;
     z-index: 10;
@@ -4030,7 +3996,7 @@ button.btn {
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -129px -566px;
     background-size: 308px auto;
     z-index: 10;
@@ -4071,7 +4037,7 @@ button.btn {
     top: 6px;
     width: 25px;
     height: 26px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -21px -567px;
     background-size: 308px auto;
     z-index: 10;
@@ -4080,7 +4046,7 @@ button.btn {
 .btn--changemethod:after {
     width: 28px;
     height: 28px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-position: -72px -566px;
 }
 
@@ -4105,8 +4071,8 @@ button.btn {
     overflow: hidden;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(../img/svg2png/search.png);
-    background-image: url(../img/search.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/search.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/search.svg), none;
 }
 
 .btn--next,
@@ -4121,8 +4087,8 @@ button.btn {
     content: "";
     position: absolute;
     background: center no-repeat;
-    background-image: url(../img/svg2png/thin-arrows.png);
-    background-image: url(../img/thin-arrows.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/thin-arrows.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/thin-arrows.svg), none;
     top: 50%;
     margin-top: -6px;
     height: 11px;
@@ -4165,7 +4131,7 @@ button.btn {
     width: 53px;
     height: 53px;
     background-color: #666666;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     text-indent: -9999px;
     overflow: hidden;
@@ -4280,7 +4246,7 @@ hr+.linklist {
     position: absolute;
     width: 10px;
     height: 16px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 0;
@@ -4355,7 +4321,7 @@ hr+.linklist {
     width: 100%;
     padding: 18px 20px;
     overflow: hidden;
-    font-size: 150%;
+    font-size: 1rem;
     line-height: 1;
     -webkit-transition: background-color 250ms ease-out;
     -moz-transition: background-color 250ms ease-out;
@@ -4408,7 +4374,7 @@ hr+.linklist {
     right: 20px;
     width: 19px;
     height: 30px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -254px -417px;
     z-index: 1;
@@ -4826,8 +4792,8 @@ hr+.linklist {
     bottom: 0;
     width: 60px;
     background: center no-repeat;
-    background-image: url(../img/svg2png/search.png);
-    background-image: url(../img/search.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/search.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/search.svg), none;
 }
 
 .navbar__search-btn:hover,
@@ -5081,55 +5047,6 @@ hr+.linklist {
     }
 }
 
-.breadcrumb[class] {
-    margin: 19px 15px 20px;
-    padding: 0;
-    line-height: 1.3;
-}
-
-.breadcrumb[class] li {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: inherit;
-}
-
-.breadcrumb[class] li,
-.breadcrumb[class] a {
-    display: inline-block;
-}
-
-.breadcrumb[class] li:before {
-    display: none;
-}
-
-.breadcrumb[class] li+li:before {
-    background-position: -207px -527px;
-    width: 6px;
-    height: 14px;
-    margin-right: 8px;
-    margin-left: 6px;
-    vertical-align: -2px;
-}
-
-.breadcrumb[class] a {
-    font-weight: normal;
-    color: inherit;
-    font-size: 90%;
-    padding: 0;
-    background: 0;
-}
-
-.breadcrumb[class] a[href] {
-    border-bottom: 1px solid;
-}
-
-.breadcrumb[class] a[href]:hover,
-.breadcrumb[class] a[href]:focus {
-    text-decoration: none;
-    color: #9D5BAF;
-}
-
 .journey-link {
     padding-left: 45px;
 }
@@ -5191,7 +5108,7 @@ hr+.linklist {
 }
 
 .journeydot--black:before {
-    background-image: url(../img/dashes.gif);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/dashes.gif);
 }
 
 .timetable-mode p {
@@ -5343,7 +5260,7 @@ hr+.linklist {
 .disruption__header:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -5399,7 +5316,7 @@ hr+.linklist {
 .disruption__alert:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     width: 30px;
     height: 32px;
@@ -5593,7 +5510,7 @@ hr+.linklist {
         right: 15px;
         width: 30px;
         height: 30px;
-        background-image: url("../img/icons-wmn.png");
+        background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
         background-size: 308px auto;
         background-position: -248px -417px;
         z-index: 1;
@@ -5972,8 +5889,8 @@ hr+.linklist {
     content: "";
     position: absolute;
     background: center no-repeat;
-    background-image: url(../img/svg2png/thin-arrows.png);
-    background-image: url(../img/thin-arrows.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/thin-arrows.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/thin-arrows.svg), none;
     top: 50%;
     left: 50%;
     margin-top: -6px;
@@ -6223,7 +6140,7 @@ hr+.linklist {
         right: 15px;
         width: 30px;
         height: 30px;
-        background-image: url("../img/icons-wmn.png");
+        background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
         background-size: 308px auto;
         background-position: -248px -417px;
         z-index: 1;
@@ -6291,7 +6208,7 @@ hr+.linklist {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 0;
@@ -6389,7 +6306,7 @@ hr+.linklist {
 .swap-fields__btn:after {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -254px -689px;
     width: 20px;
@@ -6483,8 +6400,8 @@ hr+.linklist {
     margin-right: 0;
     vertical-align: middle;
     background: center no-repeat;
-    background-image: url(../img/svg2png/chevron.png);
-    background-image: url(../img/chevron.svg), none;
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/svg2png/chevron.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/chevron.svg), none;
 }
 
 .journey-overview__steps>li:last-child:after {
@@ -6520,7 +6437,7 @@ hr+.linklist {
 .journey>li.delayed .icon:before {
     content: '';
     position: absolute;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 282px auto;
     width: 24px;
     height: 22px;
@@ -6795,7 +6712,7 @@ hr+.linklist {
     left: 0;
     right: 0;
     height: 50px;
-    background: url(../img/large-fold-map-wmn.png) center top no-repeat;
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/large-fold-map-wmn.png) center top no-repeat;
 }
 
 .journey__details {
@@ -7015,7 +6932,7 @@ hr+.linklist {
 .detailed-dir ol li:after {
     content: '';
     position: absolute;
-    background-image: url(../img/icons-arrows.png);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-arrows.png);
     background-size: 465px 24px;
     background-repeat: no-repeat;
     width: 25px;
@@ -7090,8 +7007,8 @@ hr+.linklist {
 /*  .journey__step.-walk
     ___________________________________________________________________ */
 .journey__step.-walk .journey__line {
-    -webkit-border-image: url(../img/dashes.png) 4 round;
-    border-image: url(../img/dashes.png) 4 round;
+    -webkit-border-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/dashes.png) 4 round;
+    border-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/dashes.png) 4 round;
 }
 
 .no-borderimage .journey__step.-walk .journey__line {
@@ -8144,7 +8061,7 @@ p.tabbed-search__title {
 
 .event-results__loader {
     display: block;
-    background: url(../img/spinner.gif);
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/spinner.gif);
     background-size: contain;
     width: 55px;
     height: 55px;
@@ -8281,7 +8198,7 @@ p.tabbed-search__title {
     position: absolute;
     width: 10px;
     height: 18px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -203px -379px;
     right: 15px;
@@ -8835,7 +8752,7 @@ p.tabbed-search__title {
 
 .search-results__loader {
     display: block;
-    background: url(../img/spinner.gif);
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/spinner.gif);
     background-size: contain;
     width: 55px;
     height: 55px;
@@ -9227,7 +9144,7 @@ p.tabbed-search__title {
     top: 10px;
     left: 50%;
     margin-left: -16px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 308px auto;
     background-position: -19px -611px;
     -webkit-transition: transform 150ms ease-in-out;
@@ -9336,7 +9253,7 @@ p.tabbed-search__title {
     width: 18px;
     height: 18px;
     vertical-align: middle;
-    background: url(../img/status-sprite.png);
+    background: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/status-sprite.png);
     background-position: -25px -1px;
 }
 
@@ -9731,7 +9648,7 @@ td.arrdep__mob+td.arrdep__mob {
     position: absolute;
     width: 125px;
     height: 138px;
-    background-image: url("../img/icons-wmn.png");
+    background-image: url("https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/icons-wmn.png");
     background-size: 462px auto;
     top: 0;
     left: 0;
@@ -9930,7 +9847,7 @@ td.arrdep__mob+td.arrdep__mob {
 
 .vbranch__end {
     display: none;
-    background-image: url(../img/vbranch-end.jpg);
+    background-image: url(https://cdnpremium.blob.core.windows.net/cdn/nwmassets/img/vbranch-end.jpg);
     background-size: contain;
     background-color: white;
     background-position: center;

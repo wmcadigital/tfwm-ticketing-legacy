@@ -1,217 +1,319 @@
 <div id="detail" class="wrap">
-    <ol class="breadcrumb" aria-label="You are here" data-ng-hide="ticket.oneApp == true">
-        <li>
-            <a href="https://www.tfwm.org.uk/">Home</a>
-        </li>
-        <li>
-            <a href="#{{ticket.backToSearch}}">Ticket finder</a>
-        </li>
-        <li>
-            <a aria-current="page">{{ticket.all.name}}</a>
-        </li>
+  <nav aria-label="Breadcrumbs" class="wmnds-breadcrumb">
+    <ol class="wmnds-breadcrumb__list">
+      <li class="wmnds-breadcrumb__list-item">
+        <a href="https://www.tfwm.org.uk/" class="wmnds-breadcrumb__link"
+          >Home</a
+        >
+      </li>
+      <li class="wmnds-breadcrumb__list-item">
+        <a href="#{{ticket.backToSearch}}" class="wmnds-breadcrumb__link"
+          >Ticket finder</a
+        >
+      </li>
+      <li class="wmnds-breadcrumb__list-item">
+        <a
+          href="#"
+          class="wmnds-breadcrumb__link wmnds-breadcrumb__link--current"
+          aria-current="page"
+          >{{ticket.all.name}}</a
+        >
+      </li>
     </ol>
-    
-    <div class="blocks cfx">
-        <div class="block align--center" data-ng-cloak data-ng-if="ticket.loadingStatus == 'loading'">
-            <div class="boxin boxin--large">
-                <p>
-                    <img src="//static.centro.org.uk/nwmAssets/img/nwm-loader-white.gif" alt="Loading Spinner" class="loading-spinner"
-                        height="200" width="200">
-                </p>
-                <strong class="nga-fade nga-slow" style="font-size:24px;">
-                    {{ticket.loadingText}}
-                </strong>
-            </div>
-        </div>
+  </nav>
+
+  <div class="blocks cfx">
+    <div
+      class="block align--center"
+      data-ng-cloak
+      data-ng-if="ticket.loadingStatus == 'loading'"
+    >
+      <div class="boxin boxin--large">
+        <p>
+          <img
+            src="https://cloudcdn.wmca.org.uk/nwmAssets/img/nwm-loader-white.gif"
+            alt="Loading Spinner"
+            class="loading-spinner"
+            height="200"
+            width="200"
+          />
+        </p>
+        <strong class="nga-fade nga-slow" style="font-size:24px;">
+          {{ticket.loadingText}}
+        </strong>
+      </div>
     </div>
+  </div>
 
-    <div class="blocks cfx" data-ng-if="ticket.loadingStatus == 'success'">
-        <div class="block block--main">
-            <div class="blocks">
-                <div class="block block--fullwidth">
-                    <detail-details></detail-details>
-                </div>
-
-                <div ng-if="ticket.includeMobileTemplate" class="display--tablet">
-                        <detail-where></detail-where>
-                </div>
-
-                <div class="block" data-ng-if="ticket.loadingStatus == 'success'">
-                        <div class="blocks">
-                            <div class="block block--fullwidth">
-                               <detail-alternative></detail-alternative>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+  <div class="blocks cfx" data-ng-if="ticket.loadingStatus == 'success'">
+    <div class="block block--main">
+      <div class="blocks">
+        <div class="block block--fullwidth">
+          <detail-details></detail-details>
         </div>
-        <div class="block block--side">
-            <div class="blocks">
-                <detail-sidebar></detail-sidebar>
-            </div>
+
+        <div ng-if="ticket.includeMobileTemplate" class="display--tablet">
+          <detail-where></detail-where>
         </div>
+
+        <div class="block" data-ng-if="ticket.loadingStatus == 'success'">
+          <div class="blocks">
+            <div class="block block--fullwidth">
+              <detail-alternative></detail-alternative>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="block block--side">
+      <div class="blocks">
+        <detail-sidebar></detail-sidebar>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- pop-up modals -->
-<modal-dialog show="ticket.modalShownSwift" modalclass="bdr-top--cyan"
-    data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo">
-    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
-        <div class="boxin">
-            <h2>Swift Card</h2>
-
-            <span
-                data-ng-if="ticket.all.isAdult || ticket.all.passengerType == 'Student18Plus' || ticket.all.passengerType == 'Concessionary'"><img
-                    src="$*imgUrl/season-swift-cardx2.png" alt="Adult season tickets" /></span>
-            <span data-ng-if="ticket.all.isChild"><img src="$*imgUrl/child-swift-card.png"
-                    alt="Child season tickets" /></span>
-            <span data-ng-if="ticket.all.id == '810'" data-ng-hide="ticket.all.id != '810'"><img
-                    src="$*imgUrl/payg-swift-cardx2.png" alt="Swift pay as you go" /></span>
-            <!-- <span><img src="build/img/16-18-card.png" alt="16-18 photocard" /></span>-->
-
-            <p>New to Swift? Please bear in mind it can take up to 5 working days for your new Swift card to arrive when
-                bought online.</p>
-
-            <p data-ng-if="ticket.all.requirePhotocard == true"><b>{{ticket.all.name}}</b> requires <span
-                    data-ng-if="ticket.all.passengerType == 'Child'">a Child</span><span
-                    data-ng-if="ticket.all.passengerType == 'Adult'">an Adult</span> Swift photocard</p>
-
-            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
-                target="_blank">Buy on Swift</a>
-        </div>
-    </div>
-</modal-dialog>
-
-<modal-dialog show="ticket.modalShownBus" modalclass="bdr-top--orange"
-    data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'">
+<modal-dialog
+  show="ticket.modalShownSwift"
+  modalclass="bdr-top--cyan"
+  data-ng-if="ticket.all.buyOnSwift || ticket.all.isPayAsYouGo"
+>
+  <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
     <div class="boxin">
-        <div class="header">
-            <h2><span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus operators</h2>
-            <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
-        </div>
-        <div class="operators">
-            <div data-ng-if="ticket.all.id == '811'">
-                <br>
-                <a target="_blank" href="https://legacy.wmnetwork.co.uk/swift/swift-go-fare-caps/">Click here to view operators accepting Swift Go (Opens in new tab)</a>
-            </div>
-            <div data-ng-if="ticket.all.brand == 'nbus'">
-                <table class="disruption-detail__table">
-                    <tbody>
-                        <tr
-                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'">
-                            <td>{{ticket.name}}</td>
-                            <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                        target="_blank">Operator
-                                        Website</a></span>
-                                <span class="align--right" data-ng-if="!ticket.website"><a
-                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
-                                        target="_blank">Operator Information</a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div data-ng-if="ticket.all.brand == 'nnetwork'">
-                <table class="disruption-detail__table">
-                    <tbody>
-                        <tr
-                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'">
-                            <td>{{ticket.name}}</td>
-                            <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                        target="_blank">Operator
-                                        Website</a></span>
-                                <span class="align--right" data-ng-if="!ticket.website"><a
-                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
-                                        target="_blank">Operator Information</a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
-                <table class="disruption-detail__table">
-                    <tbody>
-                        <tr
-                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'">
-                            <td>{{ticket.name}}</td>
-                            <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                        target="_blank">Operator
-                                        Website</a></span>
-                                <span class="align--right" data-ng-if="!ticket.website"><a
-                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
-                                        target="_blank">Operator Information</a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      <h2>Swift Card</h2>
+
+      <span
+        data-ng-if="ticket.all.isAdult || ticket.all.passengerType == 'Student18Plus' || ticket.all.passengerType == 'Concessionary'"
+        ><img src="$*imgUrl/season-swift-cardx2.png" alt="Adult season tickets"
+      /></span>
+      <span data-ng-if="ticket.all.isChild"
+        ><img src="$*imgUrl/child-swift-card.png" alt="Child season tickets"
+      /></span>
+      <span
+        data-ng-if="ticket.all.id == '810'"
+        data-ng-hide="ticket.all.id != '810'"
+        ><img src="$*imgUrl/payg-swift-cardx2.png" alt="Swift pay as you go"
+      /></span>
+      <!-- <span><img src="build/img/16-18-card.png" alt="16-18 photocard" /></span>-->
+
+      <p>
+        New to Swift? Please bear in mind it can take up to 5 working days for
+        your new Swift card to arrive when bought online.
+      </p>
+
+      <p data-ng-if="ticket.all.requirePhotocard == true">
+        <b>{{ticket.all.name}}</b> requires
+        <span data-ng-if="ticket.all.passengerType == 'Child'">a Child</span
+        ><span data-ng-if="ticket.all.passengerType == 'Adult'">an Adult</span>
+        Swift photocard
+      </p>
+
+      <a
+        data-ng-if="ticket.all.buyTicketUrl"
+        class="btn btn--arrow"
+        data-ng-href="{{ticket.all.buyTicketUrl}}"
+        target="_blank"
+        >Buy on Swift</a
+      >
     </div>
+  </div>
 </modal-dialog>
 
-<modal-dialog show="ticket.modalShownTrain" modalclass="bdr-top--green"
-    data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'">
+<modal-dialog
+  show="ticket.modalShownBus"
+  modalclass="bdr-top--orange"
+  data-ng-if="ticket.all.allowBus || ticket.all.brand == 'nbus' || ticket.all.brand == 'nnetwork'"
+>
+  <div class="boxin">
+    <div class="header">
+      <h2>
+        <span class="icon icon--bus ng-scope" title="Use on Train"></span> Bus
+        operators
+      </h2>
+      <p>See bus operators that accept <strong>{{ticket.all.name}}</strong></p>
+    </div>
+    <div class="operators">
+      <div data-ng-if="ticket.all.id == '811'">
+        <br />
+        <a
+          target="_blank"
+          href="https://legacy.wmnetwork.co.uk/swift/swift-go-fare-caps/"
+          >Click here to view operators accepting Swift Go (Opens in new tab)</a
+        >
+      </div>
+      <div data-ng-if="ticket.all.brand == 'nbus'">
+        <table class="disruption-detail__table">
+          <tbody>
+            <tr
+              data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnBus:true, type:'Bus Operator'} | orderBy:'name'"
+            >
+              <td>{{ticket.name}}</td>
+              <td>
+                <span class="align--right" data-ng-if="ticket.website"
+                  ><a href="{{ticket.website}}" target="_blank"
+                    >Operator Website</a
+                  ></span
+                >
+                <span class="align--right" data-ng-if="!ticket.website"
+                  ><a
+                    href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                    target="_blank"
+                    >Operator Information</a
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'nnetwork'">
+        <table class="disruption-detail__table">
+          <tbody>
+            <tr
+              data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Bus Operator'} | orderBy:'name'"
+            >
+              <td>{{ticket.name}}</td>
+              <td>
+                <span class="align--right" data-ng-if="ticket.website"
+                  ><a href="{{ticket.website}}" target="_blank"
+                    >Operator Website</a
+                  ></span
+                >
+                <span class="align--right" data-ng-if="!ticket.website"
+                  ><a
+                    href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                    target="_blank"
+                    >Operator Information</a
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'Swift PAYG'">
+        <table class="disruption-detail__table">
+          <tbody>
+            <tr
+              data-ng-repeat="ticket in ticket.operatorList | filter:{acceptPayg:true, type:'Bus Operator'} | orderBy:'name'"
+            >
+              <td>{{ticket.name}}</td>
+              <td>
+                <span class="align--right" data-ng-if="ticket.website"
+                  ><a href="{{ticket.website}}" target="_blank"
+                    >Operator Website</a
+                  ></span
+                >
+                <span class="align--right" data-ng-if="!ticket.website"
+                  ><a
+                    href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                    target="_blank"
+                    >Operator Information</a
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</modal-dialog>
+
+<modal-dialog
+  show="ticket.modalShownTrain"
+  modalclass="bdr-top--green"
+  data-ng-if="ticket.all.allowTrain || ticket.all.brand == 'ntrain' || ticket.all.brand == 'nnetwork'"
+>
+  <div class="boxin">
+    <div class="header">
+      <h2>
+        <span class="icon icon--train ng-scope" title="Use on Train"></span>
+        Train operators
+      </h2>
+      <p>
+        See train operators that accept <strong>{{ticket.all.name}}</strong>
+      </p>
+    </div>
+    <div class="operators">
+      <div data-ng-if="ticket.all.brand == 'ntrain'">
+        <table class="disruption-detail__table">
+          <tbody>
+            <tr
+              data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true, type:'Rail Operator'} | orderBy:'name'"
+            >
+              <td>{{ticket.name}}</td>
+              <td>
+                <span class="align--right" data-ng-if="ticket.website"
+                  ><a href="{{ticket.website}}" target="_blank"
+                    >Operator Website</a
+                  ></span
+                >
+                <span class="align--right" data-ng-if="!ticket.website"
+                  ><a
+                    href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                    target="_blank"
+                    >Operator Information</a
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-ng-if="ticket.all.brand == 'nnetwork'">
+        <table class="disruption-detail__table">
+          <tbody>
+            <tr
+              data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'"
+            >
+              <td>{{ticket.name}}</td>
+              <td>
+                <span class="align--right" data-ng-if="ticket.website"
+                  ><a href="{{ticket.website}}" target="_blank"
+                    >Operator Website</a
+                  ></span
+                >
+                <span class="align--right" data-ng-if="!ticket.website"
+                  ><a
+                    href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
+                    target="_blank"
+                    >Operator Information</a
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</modal-dialog>
+
+<modal-dialog
+  show="ticket.modalShownGpay"
+  modalclass="bdr-top--cyan"
+  data-ng-if="ticket.gpay == true && ticket.deviceDetector.os == 'android'"
+>
+  <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
     <div class="boxin">
-        <div class="header">
-            <h2><span class="icon icon--train ng-scope" title="Use on Train"></span> Train operators</h2>
-            <p>See train operators that accept <strong>{{ticket.all.name}}</strong></p>
-        </div>
-        <div class="operators">
-            <div data-ng-if="ticket.all.brand == 'ntrain'">
-                <table class="disruption-detail__table">
-                    <tbody>
-                        <tr
-                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnTrain:true, type:'Rail Operator'} | orderBy:'name'">
-                            <td>{{ticket.name}}</td>
-                            <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                        target="_blank">Operator
-                                        Website</a></span>
-                                <span class="align--right" data-ng-if="!ticket.website"><a
-                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
-                                        target="_blank">Operator Information</a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div data-ng-if="ticket.all.brand == 'nnetwork'">
-                <table class="disruption-detail__table">
-                    <tbody>
-                        <tr
-                            data-ng-repeat="ticket in ticket.operatorList | filter:{acceptnNetwork:true, type:'Rail Operator'} | orderBy:'name'">
-                            <td>{{ticket.name}}</td>
-                            <td>
-                                <span class="align--right" data-ng-if="ticket.website"><a href="{{ticket.website}}"
-                                        target="_blank">Operator
-                                        Website</a></span>
-                                <span class="align--right" data-ng-if="!ticket.website"><a
-                                        href="https://journeyplanner.tfwm.org.uk/operator/{{ticket.Name}}"
-                                        target="_blank">Operator Information</a></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      <h2>Google Pay</h2>
+
+      <span><img src="$*imgUrl/gpay.png" alt="Adult season tickets"/></span>
+
+      <p>
+        To use this ticket you will need Google Pay and an Android device with
+        Near Field Communication (NFC) capability.
+      </p>
+
+      <a
+        data-ng-if="ticket.all.buyTicketUrl"
+        class="btn btn--arrow"
+        data-ng-href="{{ticket.all.buyTicketUrl}}"
+        target="_blank"
+        >Buy on Swift</a
+      >
     </div>
-</modal-dialog>
-
-<modal-dialog show="ticket.modalShownGpay" modalclass="bdr-top--cyan"
-    data-ng-if="ticket.gpay == true && ticket.deviceDetector.os == 'android'">
-    <div class="modalSwift" data-ng-if="ticket.loadingStatus == 'success'">
-        <div class="boxin">
-            <h2>Google Pay</h2>
-
-            <span><img src="$*imgUrl/gpay.png" alt="Adult season tickets" /></span>
-
-            <p>To use this ticket you will need Google Pay and an Android device with Near Field Communication (NFC) capability.</p>
-
-            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}"
-                target="_blank">Buy on Swift</a>
-        </div>
-    </div>
+  </div>
 </modal-dialog>

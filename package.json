@@ -1,33 +1,55 @@
 {
   "name": "nwm-ticketing",
-  "version": "2.15.83",
-  "description": "Ticketing search app for WMNetwork",
+  "version": "2.15.99",
+  "description": "Ticketing search app for TfWM",
   "main": "src/js/wmn/app.js",
   "author": "WMCA",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://rolorogan@bitbucket.org/wmca/nwm-ticketing.git"
+    "url": "https://github.com/wmcadigital/tfwm-ticketing-legacy.git"
   },
   "buildDirs": {
     "live": {
       "baseUrl": "https://legacy.wmnetwork.co.uk/tickets",
       "baseUrlSwift": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
-      "swiftHost": "legacy.wmnetwork.co.uk/swift/ticket-finder",
+      "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
       "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
-      "oneappHost": "legacy.wmnetwork.co.uk/oneapp-ticket-search",
-      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.83",
-      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.83/img",
+      "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
+      "cdn": "https://cdnpremium.blob.core.windows.net/cdn/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
+      "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
+    },
+    "livetest": {
+      "baseUrl": "https://legacy.wmnetwork.co.uk/ticket-finder-live",
+      "baseUrlSwift": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
+      "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder",
+      "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
+      "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search",
+      "cdn": "https://cloudcdn.wmca.org.uk/staging/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/staging/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
     "staging": {
-      "baseUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy/",
-      "baseUrlSwift": "https://wmcadigital.github.io/tfwm-ticketing-legacy/",
-      "swiftHost": "stagenwm.cenapps.org.uk/swift-ticket-search",
-      "baseUrlOneapp": "https://wmcadigital.github.io/tfwm-ticketing-legacy/",
-      "oneappHost": "stagenwm.cenapps.org.uk/oneapp-ticket-search",
-      "cdn": "https://wmcadigital.github.io/tfwm-ticketing-legacy/build",
+      "baseUrl": "https://legacy.wmnetwork.co.uk/ticket-finder-staging",
+      "baseUrlSwift": "https://legacy.wmnetwork.co.uk/swift/ticket-finder-staging",
+      "swiftHost": "https://legacy.wmnetwork.co.uk/swift/ticket-finder-staging",
+      "baseUrlOneapp": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search-staging",
+      "oneappHost": "https://legacy.wmnetwork.co.uk/oneapp-ticket-search-staging",
+      "cdn": "https://cloudcdn.wmca.org.uk/staging/wmnassets/apps/ticketing/2.15.99.4",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/staging/wmnassets/apps/ticketing/2.15.99.4/img",
+      "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
+    },
+    "azure": {
+      "baseUrl": "",
+      "baseUrlSwift": "",
+      "swiftHost": "",
+      "baseUrlOneapp": "",
+      "oneappHost": "",
+      "cdn": "/build",
       "imgUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy/build/img",
       "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
       "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
@@ -36,7 +58,7 @@
       "baseUrl": "//localhost:8080",
       "baseUrlSwift": "//localhost:8080",
       "swiftHost": "localhostSwift",
-      "baseUrlOneapp": "//localhost:8080",
+      "baseUrlOneapp": "https://legacy.wmnetwork.co.uk",
       "oneappHost": "localhostOneapp",
       "cdn": "/build/",
       "imgUrl": "/build/img",
@@ -86,10 +108,10 @@
     "gulp-ng-html2js": "^0.2.3",
     "gulp-plumber": "^1.2.1",
     "gulp-replace": "^1.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-terser": "^2.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.3",
     "prettier": "^1.19.1",
     "sass": "^1.26.8"
   },
@@ -97,6 +119,7 @@
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",
     "jpegtran": "^1.0.6",
+    "material-icons": "^1.11.9",
     "ng-device-detector": "^5.1.4",
     "re-tree": "^0.1.7",
     "ua-device-detector": "^1.1.8"
