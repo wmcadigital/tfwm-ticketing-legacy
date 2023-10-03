@@ -22,6 +22,8 @@ const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
 const fs = require('fs');
 
+var gulpCopy = require('gulp-copy');
+
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
 let build = 'live';
@@ -53,17 +55,17 @@ const paths = {
   server: {
     port: 8080,
     baseDir: './',
-    index: 'index.html'
+    index: 'build/index.html'
   },
   serverSwift: {
     port: 8080,
     baseDir: './',
-    index: 'index-swift.html'
+    index: 'build/index-swift.html'
   },
   serverOneapp: {
     port: 8080,
     baseDir: './',
-    index: 'index-oneapp.html'
+    index: 'build/index-oneapp.html'
   },
   styles: {
     src: 'src/app/sass/wmn/*.scss', // src of styles
@@ -376,6 +378,10 @@ function buildOneappTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+function movePages() {
+  return src(['*.html']).pipe(gulpCopy('build', { prefix: 1 }));
+}
+
 // Optimise images
 function minImages() {
   return src(paths.images.src)
@@ -439,7 +445,8 @@ const buildAll = series(
   lintSharedSwiftTemplates,
   lintSharedOneappTemplates,
   lintSwiftTemplates,
-  lintOneappTemplates
+  lintOneappTemplates,
+  movePages
 );
 // Watch files for changes
 function watchFiles() {
@@ -491,7 +498,8 @@ const dev = series(
     buildSharedOneappTemplates,
     buildSwiftTemplates,
     buildOneappTemplates,
-    minImages
+    minImages,
+    movePages
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -541,5 +549,6 @@ exports.buildTemplates = series(
   buildOneappTemplates,
   lintTemplates
 );
+exports.movePages = movePages;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
