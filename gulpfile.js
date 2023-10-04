@@ -26,7 +26,7 @@ var gulpCopy = require('gulp-copy');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'live';
+let build = 'azure';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -44,7 +44,7 @@ function determineBuild(done) {
       build = 'azure';
       break;
     default:
-      build = 'live';
+      build = 'azure';
       break;
   }
   done();
@@ -378,8 +378,16 @@ function buildOneappTemplates() {
     .pipe(dest('./build/js/'));
 }
 
-function movePages() {
-  return src(['*.html']).pipe(gulpCopy('build', { prefix: 1 }));
+function moveMain() {
+  return src(['index.html']).pipe(gulpCopy('build', { prefix: 1 }));
+}
+
+function moveSwift() {
+  return src(['swift/index.html']).pipe(gulpCopy('build/swift', { prefix: 1 }));
+}
+
+function moveOneapp() {
+  return src(['oneapp/index.html']).pipe(gulpCopy('build/oneapp', { prefix: 1 }));
 }
 
 // Optimise images
@@ -446,7 +454,9 @@ const buildAll = series(
   lintSharedOneappTemplates,
   lintSwiftTemplates,
   lintOneappTemplates,
-  movePages
+  moveMain,
+  moveSwift,
+  moveOneapp
 );
 // Watch files for changes
 function watchFiles() {
@@ -499,7 +509,9 @@ const dev = series(
     buildSwiftTemplates,
     buildOneappTemplates,
     minImages,
-    movePages
+    moveMain,
+    moveSwift,
+    moveOneapp
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -549,6 +561,8 @@ exports.buildTemplates = series(
   buildOneappTemplates,
   lintTemplates
 );
-exports.movePages = movePages;
+exports.moveMain = moveMain;
+exports.moveSwift = moveSwift;
+exports.moveOneapp = moveOneapp;
 exports.minImages = minImages;
 exports.buildAll = buildAll;

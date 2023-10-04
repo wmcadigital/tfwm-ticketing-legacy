@@ -33,6 +33,17 @@
       "api": "https://tickets.api.stageapp.net/",
       "swiftGo": "Swift ABT"
     },
+    "azure": {
+      "baseUrl": "https://red-pebble-0b5b33b03.3.azurestaticapps.net",
+      "baseUrlSwift": "https://red-pebble-0b5b33b03.3.azurestaticapps.net/swift",
+      "swiftHost": "red-pebble-0b5b33b03.3.azurestaticapps.net/swift",
+      "baseUrlOneapp": "https://red-pebble-0b5b33b03.3.azurestaticapps.net/oneapp",
+      "oneappHost": "red-pebble-0b5b33b03.3.azurestaticapps.net/oneapp",
+      "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://tickets.api.stageapp.net/",
+      "swiftGo": "Swift ABT"
+    },
     "local": {
       "baseUrl": "//localhost:8080",
       "baseUrlSwift": "//localhost:8080",
@@ -99,6 +110,7 @@
   "dependencies": {
     "gulp-copy": "^4.0.1",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-rename": "^2.0.0",
     "gulp-terser": "^2.1.0",
     "jpegtran": "^1.0.6",
     "ng-device-detector": "^5.1.4",
