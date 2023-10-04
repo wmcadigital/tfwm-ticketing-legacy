@@ -34,13 +34,13 @@
       "swiftGo": "Swift ABT"
     },
     "azure": {
-      "baseUrl": "https://red-pebble-0b5b33b03.3.azurestaticapps.net",
-      "baseUrlSwift": "https://red-pebble-0b5b33b03.3.azurestaticapps.net/swift",
-      "swiftHost": "red-pebble-0b5b33b03.3.azurestaticapps.net/swift",
-      "baseUrlOneapp": "https://red-pebble-0b5b33b03.3.azurestaticapps.net/oneapp",
-      "oneappHost": "red-pebble-0b5b33b03.3.azurestaticapps.net/oneapp",
-      "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99",
-      "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99/img",
+      "baseUrl": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net",
+      "baseUrlSwift": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
+      "swiftHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
+      "baseUrlOneapp": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
+      "oneappHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://apis.networkwestmidlands.com/ticketing/",
       "swiftGo": "Swift Go"
     },
