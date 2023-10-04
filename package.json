@@ -41,8 +41,8 @@
       "oneappHost": "red-pebble-0b5b33b03.3.azurestaticapps.net/oneapp",
       "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99/img",
-      "api": "https://tickets.api.stageapp.net/",
-      "swiftGo": "Swift ABT"
+      "api": "https://apis.networkwestmidlands.com/ticketing/",
+      "swiftGo": "Swift Go"
     },
     "local": {
       "baseUrl": "//localhost:8080",
