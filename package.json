@@ -33,6 +33,17 @@
       "api": "https://tickets.api.stageapp.net/",
       "swiftGo": "Swift ABT"
     },
+    "azure": {
+      "baseUrl": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net",
+      "baseUrlSwift": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
+      "swiftHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
+      "baseUrlOneapp": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
+      "oneappHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://apis.networkwestmidlands.com/ticketing/",
+      "swiftGo": "Swift Go"
+    },
     "local": {
       "baseUrl": "//localhost:8080",
       "baseUrlSwift": "//localhost:8080",
@@ -57,6 +68,7 @@
     "build:scripts": "gulp buildScripts",
     "build:styles": "gulp buildStyles",
     "build:templates": "gulp buildTemplates",
+    "build:pages": "gulp movePages",
     "build:all": "gulp buildAll",
     "build": "gulp buildAll",
     "build:staging": "npm run build:all --build=staging",
@@ -96,7 +108,9 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "gulp-copy": "^4.0.1",
     "gulp-htmlmin": "^5.0.1",
+    "gulp-rename": "^2.0.0",
     "gulp-terser": "^2.1.0",
     "jpegtran": "^1.0.6",
     "ng-device-detector": "^5.1.4",

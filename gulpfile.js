@@ -22,9 +22,11 @@ const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
 const fs = require('fs');
 
+var gulpCopy = require('gulp-copy');
+
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'live';
+let build = 'azure';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -42,7 +44,7 @@ function determineBuild(done) {
       build = 'azure';
       break;
     default:
-      build = 'live';
+      build = 'azure';
       break;
   }
   done();
@@ -53,17 +55,17 @@ const paths = {
   server: {
     port: 8080,
     baseDir: './',
-    index: 'index.html'
+    index: 'build/index.html'
   },
   serverSwift: {
     port: 8080,
     baseDir: './',
-    index: 'index-swift.html'
+    index: 'build/index-swift.html'
   },
   serverOneapp: {
     port: 8080,
     baseDir: './',
-    index: 'index-oneapp.html'
+    index: 'build/index-oneapp.html'
   },
   styles: {
     src: 'src/app/sass/wmn/*.scss', // src of styles
@@ -376,6 +378,18 @@ function buildOneappTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+function moveMain() {
+  return src(['index.html']).pipe(gulpCopy('build', { prefix: 1 }));
+}
+
+function moveSwift() {
+  return src(['swift/index.html']).pipe(gulpCopy('build/swift', { prefix: 1 }));
+}
+
+function moveOneapp() {
+  return src(['oneapp/index.html']).pipe(gulpCopy('build/oneapp', { prefix: 1 }));
+}
+
 // Optimise images
 function minImages() {
   return src(paths.images.src)
@@ -439,7 +453,10 @@ const buildAll = series(
   lintSharedSwiftTemplates,
   lintSharedOneappTemplates,
   lintSwiftTemplates,
-  lintOneappTemplates
+  lintOneappTemplates,
+  moveMain,
+  moveSwift,
+  moveOneapp
 );
 // Watch files for changes
 function watchFiles() {
@@ -491,7 +508,10 @@ const dev = series(
     buildSharedOneappTemplates,
     buildSwiftTemplates,
     buildOneappTemplates,
-    minImages
+    minImages,
+    moveMain,
+    moveSwift,
+    moveOneapp
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -541,5 +561,8 @@ exports.buildTemplates = series(
   buildOneappTemplates,
   lintTemplates
 );
+exports.moveMain = moveMain;
+exports.moveSwift = moveSwift;
+exports.moveOneapp = moveOneapp;
 exports.minImages = minImages;
 exports.buildAll = buildAll;

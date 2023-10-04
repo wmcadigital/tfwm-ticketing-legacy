@@ -5,7 +5,7 @@ $grid-columns: 12;
 
 @for $i from 1 through $grid-columns {
   .grid-#{$i} {
-    width: calc($i / $grid-columns);
+    width: percentage($i / $grid-columns);
     display: block;
 
     @include breakpoint(mobileonly) {
