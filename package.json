@@ -28,9 +28,20 @@
       "swiftHost": "stagenwm.cenapps.org.uk/swift-ticket-search",
       "baseUrlOneapp": "https://stagenwm.cenapps.org.uk/oneapp-ticket-search",
       "oneappHost": "stagenwm.cenapps.org.uk/oneapp-ticket-search",
-      "cdn": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99",
-      "imgUrl": "https://cdnpremium.blob.core.windows.net/cdn/staging/wmnassets/apps/ticketing/2.15.99/img",
-      "api": "https://tickets.api.stageapp.net/",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://ticketingv2mzr3ie67n5b62.azurewebsites.net/",
+      "swiftGo": "Swift ABT"
+    },
+    "ghpages": {
+      "baseUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy",
+      "baseUrlSwift": "https://wmcadigital.github.io/tfwm-ticketing-legacy/swift",
+      "swiftHost": "wmcadigital.github.io/tfwm-ticketing-legacy",
+      "baseUrlOneapp": "https://wmcadigital.github.io/tfwm-ticketing-legacy/oneapp",
+      "oneappHost": "wmcadigital.github.io/tfwm-ticketing-legacy/oneapp",
+      "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://ticketingv2mzr3ie67n5b62.azurewebsites.net/",
       "swiftGo": "Swift ABT"
     },
     "azure": {
