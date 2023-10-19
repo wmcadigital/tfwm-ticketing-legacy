@@ -20,7 +20,8 @@
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://apis.networkwestmidlands.com/ticketing/",
-      "swiftGo": "Swift Go"
+      "swiftGo": "Swift Go",
+      "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
     "staging": {
       "baseUrl": "https://stagenwm.cenapps.org.uk/wmn-ticket-search",
@@ -31,7 +32,8 @@
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://ticketingv2mzr3ie67n5b62.azurewebsites.net/",
-      "swiftGo": "Swift ABT"
+      "swiftGo": "Swift ABT",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     },
     "ghpages": {
       "baseUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy",
@@ -42,18 +44,31 @@
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://ticketingv2mzr3ie67n5b62.azurewebsites.net/",
-      "swiftGo": "Swift ABT"
+      "swiftGo": "Swift ABT",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     },
-    "azure": {
-      "baseUrl": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net",
-      "baseUrlSwift": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
-      "swiftHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/swift",
-      "baseUrlOneapp": "https://red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
-      "oneappHost": "red-pebble-0b5b33b03-22.westeurope.3.azurestaticapps.net/oneapp",
+    "gh": {
+      "baseUrl": "",
+      "baseUrlSwift": "",
+      "swiftHost": "",
+      "baseUrlOneapp": "",
+      "oneappHost": "",
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
-      "api": "https://apis.networkwestmidlands.com/ticketing/",
-      "swiftGo": "Swift Go"
+      "api": "https://ticketingv2mzr3ie67n5b62.azurewebsites.net/",
+      "swiftGo": "Swift Go",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
+    },
+    "azure": {
+      "baseUrl": "",
+      "baseUrlSwift": "",
+      "swiftHost": "",
+      "baseUrlOneapp": "",
+      "oneappHost": "",
+      "cdn": "/build",
+      "imgUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy/build/img",
+      "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     },
     "local": {
       "baseUrl": "//localhost:8080",
@@ -64,7 +79,8 @@
       "cdn": "/build/",
       "imgUrl": "/build/img",
       "api": "https://tickets.api.stageapp.net/",
-      "swiftGo": "Swift ABT"
+      "swiftGo": "Swift ABT",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     }
   },
   "scripts": {
