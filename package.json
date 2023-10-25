@@ -66,7 +66,7 @@
       "baseUrlOneapp": "",
       "oneappHost": "",
       "cdn": "/build",
-      "imgUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy/build/img",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
       "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
       "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     },
