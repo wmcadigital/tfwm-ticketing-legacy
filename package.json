@@ -70,6 +70,17 @@
       "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
       "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     },
+    "azurelive": {
+      "baseUrl": "",
+      "baseUrlSwift": "",
+      "swiftHost": "",
+      "baseUrlOneapp": "",
+      "oneappHost": "",
+      "cdn": "/build",
+      "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
+      "api": "https://apis.networkwestmidlands.com/ticketing/",
+      "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
+    },
     "local": {
       "baseUrl": "//localhost:8080",
       "baseUrlSwift": "//localhost:8080",
