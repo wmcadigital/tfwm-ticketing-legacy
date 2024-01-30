@@ -47,8 +47,8 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" integrity="sha256-auPoJwk/+RK6KSkib92Dkq1Y5hEkZvKtvSwucs15Skg="
             crossorigin="anonymous" />
         <!--[if gte IE 9]><!-->
-        <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/screen.css?v=0.1" />
-        <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/nwm-custom.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/screen.css?v=0.1" />
+        <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/nwm-custom.css" /> -->
         <!--<link rel="stylesheet" type="text/css" href="/css/compiled/ticketing.css" />-->
         <link rel="stylesheet" type="text/css" href="../css/swift/swift-ticketing.css" rel="stylesheet" />
         <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -72,11 +72,22 @@
         <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
         <script src="https://cloudcdn.wmca.org.uk/swiftAssets/js/iframeResizer.contentWindow.min.js"></script>
+
     </head>
 
-    <body class="ticketing-page">
+    <body class="bg--grey bg--tint ticketing-page">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-5HPFPWN"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+            ></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
 
-        <div class="ticketing-app" data-ng-view></div>
+    <div class="ticketing-app oneapp wrap wrap--padded" data-ng-view></div>
 
     <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-ui-custom.min.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/openlayers/v3.5.0/ol.js" type="text/javascript"></script>
