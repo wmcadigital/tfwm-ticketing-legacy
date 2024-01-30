@@ -1,5 +1,7 @@
 @import 'vars'; // Define colors etc.
 
+@import url(https://unpkg.com/wmn-design-system@2.4.0/build/css/wmnds.min.css);
+
 .ticketing-app {
     @import '../shared/app-wide'; // CSS that is used in various places of the app
     @import '../../tickets/tickets'; // Search page only CSS
@@ -7,4 +9,15 @@
     @import '../../tickets/tickets-swift'; // Swift CSS for Search page
     @import '../../ticket/ticket-swift'; // Swift CSS for Product page
     @import '../assets/angucomplete-alt';// CSS for station auto-complete
+}
+
+@import '../assets/screen.scss';
+@import '../assets/nwm-custom.scss';
+
+.btn.btn--arrow {color: white;text-decoration:none;font-weight: normal;}
+.type--blue {font-size: 1.4375rem;}
+h3 span {font-size: 1.4375rem;}
+
+.oneapp {
+    margin: 20px auto;
 }
