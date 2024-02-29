@@ -19,7 +19,7 @@
       "oneappHost": "www.wmnetwork.co.uk/oneapp/tickets/",
       "cdn": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
-      "api": "https://api.wmnetwork.co.uk/ticketing/",
+      "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "swiftGo": "Swift Go",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
@@ -78,7 +78,7 @@
       "oneappHost": "",
       "cdn": "/build",
       "imgUrl": "https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/img",
-      "api": "https://api.wmnetwork.co.uk/ticketing/",
+      "api": "https://api.wmnetwork.co.uk/ticketing/v2/",
       "paygLink": "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp"
     },
     "local": {
