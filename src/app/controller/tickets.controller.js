@@ -195,9 +195,6 @@
 
     vm.eligibilityDate = newDate.getFullYear();
 
-    console.log(newDate);
-    console.log(newDate.getFullYear());
-
     // If location.search contains search criteria force the submit on page load
     if (
       $location.search().allowBus ||

@@ -1,8 +1,9 @@
 # Release Notes
 
-## Ticketing v2.15.100
+## Ticketing v2.15.101
 
 - update: amend links to legacy.wmnetwork.org.uk
+- update: add new function for 16-18 year
 
 ## Ticketing v2.15.99
 

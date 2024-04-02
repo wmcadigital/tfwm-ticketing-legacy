@@ -32,7 +32,7 @@
 
     // get ticket data form complete api - work out if product is gpay
     $http.get('$*apitickets/' + vm.value + '/complete').then(function(response) {
-      console.log(response);
+      // console.log(response);
 
       // work out payg and gpay
       // get each priceLevel
