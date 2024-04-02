@@ -105,6 +105,7 @@
       // vm.openFilters = openFilters;
       // vm.closeFilters = closeFilters;
       vm.fromStationInfo = null;
+      vm.eligibilityDate = null;
 
       // url parameters
       // exclude bus
@@ -171,6 +172,28 @@
     }
 
     defaultVars();
+
+    // work out 16-18 elibility year
+    function subtractYears(dates, years) {
+      // 👇 make copy with "Date" constructor
+      const dateCopy = new Date(dates);
+      dateCopy.setFullYear(date.getFullYear() - years);
+      return dateCopy;
+    }
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+
+    const date = new Date(`${year}-09-01T00:00:00.000Z`);
+    let newDate = subtractYears(date, 18);
+
+    if (currentDate > date) {
+      newDate = subtractYears(date, 18);
+    } else {
+      newDate = subtractYears(date, 19);
+    }
+
+    vm.eligibilityDate = newDate.getFullYear();
 
     // If location.search contains search criteria force the submit on page load
     if (
