@@ -81,7 +81,7 @@
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {
-          route: $location.absUrl().split('https://legacy.wmnetwork.co.uk/')[1]
+          route: $location.absUrl().split('https://tfwm.org.uk/')[1]
         }
       });
     }
