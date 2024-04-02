@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.100
+
+- update: amend links to legacy.wmnetwork.org.uk
+
 ## Ticketing v2.15.99
 
 - fix: display nx map on nx tickets
