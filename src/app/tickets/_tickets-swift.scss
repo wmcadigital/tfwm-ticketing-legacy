@@ -57,3 +57,11 @@
     border-radius: 30px;
     color: white;
 }
+
+[class*=wmnds-].wmnds-n-icon__svg {
+    display: inline-block;
+    width: 1rem;
+    height: calc(1rem* 1.04742);
+    fill: currentColor;
+    vertical-align: revert;
+  }
