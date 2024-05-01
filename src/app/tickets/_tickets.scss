@@ -731,3 +731,18 @@ body > div.tickets > div > div > div.block.block--main > div > div > div > searc
 h3.filtered-header__heading, h3 {
   font-size: 1.5rem;
 }
+
+[class*=wmnds-].wmnds-n-icon__svg {
+  display: inline-block;
+  width: 1rem;
+  height: calc(1rem* 1.04742);
+  fill: currentColor;
+  vertical-align: revert;
+}
+
+.title {
+  .wmnds-n-icon__svg {
+    width: 1.8rem;
+    height: calc(1.8rem* 1.04742);
+  }
+}
