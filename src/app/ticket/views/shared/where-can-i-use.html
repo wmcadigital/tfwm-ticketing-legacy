@@ -17,7 +17,7 @@
     <div
       data-ng-if="ticket.all.allowBus && ticket.all.allowTrain || ticket.all.allowBus && ticket.all.allowMetro || ticket.all.allowTrain && ticket.all.allowMetro || ticket.all.allowBus && ticket.all.allowTrain && ticket.all.allowMetro">
       <tabs>
-        <pane data-ng-if="ticket.all.brand == 'nBus' || ticket.all.id == '811'" title="Bus">
+        <pane data-ng-if="ticket.all.brand == 'nBus' || ticket.all.brand == 'nnetwork' || ticket.all.id == '811'" title="Bus">
           <div class="imgwrapper">
             <a ng-href="$*imgUrl/nbus_nnetworkmap.png" data-lightbox="bus"><img
                 ng-src="$*imgUrl/nbus_nnetworkmap-thumbnail.png" />
