@@ -1039,6 +1039,7 @@
     // reset from station
     function clearFromStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationFromOOC');
       vm.stationFromName = null;
       vm.postJSON.stationNames = null;
       vm.stationFromReq = false; // set from station to not required
@@ -1069,7 +1070,7 @@
         vm.stationToReq = true;
       }
 
-      if (vm.toStationText != null && vm.stationToName == null) {
+      if (vm.toStationText !== null && vm.stationToName === null) {
         vm.stationToReq = true;
       }
     };
@@ -1078,7 +1079,7 @@
     vm.stationToReqOOC = true;
     vm.stationTo = function(selected) {
       if (selected) {
-        vm.stationToName = selected.originalObject.name; // set To Station
+        vm.stationToName = selected.title; // set To Station
         vm.postJSON.stationNames[1] = selected.originalObject.name;
         vm.stationToTitle = selected.originalObject.name;
         vm.stationToNameZone = selected.originalObject.zone;
@@ -1099,12 +1100,14 @@
     // reset to station
     function clearToStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
-      vm.stationToName = null;
-      vm.postJSON.stationNames = null;
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo2');
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo3');
+      vm.stationToName = '';
+      // vm.postJSON.stationNames = '';
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
-      vm.toStationText = null;
+      vm.toStationText = '';
     }
 
     // via station
