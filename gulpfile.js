@@ -393,6 +393,10 @@ function moveOneapp() {
   return src(['oneapp/index.html']).pipe(gulpCopy('build/oneapp', { prefix: 1 }));
 }
 
+function moveApp() {
+  return src(['app/index.html']).pipe(gulpCopy('build/app', { prefix: 1 }));
+}
+
 // Optimise images
 function minImages() {
   return src(paths.images.src)
@@ -459,7 +463,8 @@ const buildAll = series(
   lintOneappTemplates,
   moveMain,
   moveSwift,
-  moveOneapp
+  moveOneapp,
+  moveApp
 );
 // Watch files for changes
 function watchFiles() {
@@ -514,7 +519,8 @@ const dev = series(
     minImages,
     moveMain,
     moveSwift,
-    moveOneapp
+    moveOneapp,
+    moveApp
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -567,5 +573,6 @@ exports.buildTemplates = series(
 exports.moveMain = moveMain;
 exports.moveSwift = moveSwift;
 exports.moveOneapp = moveOneapp;
+exports.moveApp = moveApp;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
