@@ -26,7 +26,7 @@ var gulpCopy = require('gulp-copy');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'local';
+let build = 'ghpagesApp';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -47,7 +47,7 @@ function determineBuild(done) {
       build = 'azurelive';
       break;
     default:
-      build = 'local';
+      build = 'ghpagesApp';
       break;
   }
   done();
@@ -178,6 +178,27 @@ const paths = {
     ],
     output: 'build/app/js/'
   },
+  scriptsAppTest: {
+    src: './src/**/*.js', // Src of JS files
+    // List of JS folders to concatenate, lint and minified to one file (DON'T LINT ASSETS AS IT WILL TAKE TOO LONG TO SCAN MINIFIED LIBS)
+    minifySrc: [
+      { src: 'src/app/js/app/*.js', minName: 'app-test.app.min.js', lint: true },
+      { src: 'src/assets/**/*.js', minName: 'app-test.assets.min.js', lint: false },
+      { src: 'src/app/services/*.js', minName: 'app-test.services.min.js', lint: true },
+      { src: 'src/app/shared/*.js', minName: 'app-test.shared.min.js', lint: true },
+      {
+        src: 'src/app/controller/*.js',
+        minName: 'app-test.controller.min.js',
+        lint: true
+      },
+      {
+        src: 'src/app/directives/*.js',
+        minName: 'app-test.directives.min.js',
+        lint: true
+      }
+    ],
+    output: 'build/app-test/js/'
+  },
   templates: {
     src: './src/app/**/views/wmn/*.html',
     minName: 'tfwm.partials.min.js'
@@ -185,6 +206,10 @@ const paths = {
   templatesApp: {
     src: './src/app/**/views/app/*.html',
     minName: 'app.partials.min.js'
+  },
+  templatesAppTest: {
+    src: './src/app/**/views/app/*.html',
+    minName: 'app-test.partials.min.js'
   },
   templatesShared: {
     src: './src/app/**/views/shared/*.html',
@@ -212,10 +237,6 @@ const paths = {
   },
   templatesOneapp: {
     src: './src/app/**/views/app/*.html',
-    minName: 'oneapp.partials.min.js'
-  },
-  templatesAppTest: {
-    src: './src/app/**/views/oneapp/*.html',
     minName: 'oneapp.partials.min.js'
   },
   images: {
@@ -296,6 +317,11 @@ function buildAppScripts(done) {
   done();
 }
 
+function buildAppTestScripts(done) {
+  paths.scriptsAppTest.minifySrc.map(jsFile => minifyJS(jsFile));
+  done();
+}
+
 // Placeholder function for buildScripts to loop through
 function minifyJS(jsFile) {
   return src(jsFile.src)
@@ -365,6 +391,24 @@ function buildAppTemplates() {
       })
     )
     .pipe(concat(paths.templatesApp.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
+function buildAppTestTemplates() {
+  return src(paths.templatesAppTest.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesAppTest.minName))
     .pipe(terser())
     .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
     .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
@@ -479,6 +523,24 @@ function buildSharedAppTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+function buildSharedAppTestTemplates() {
+  return src(paths.templatesAppTestShared.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesAppTestShared.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
 // Lint Swift Templates/HTML
 function lintSwiftTemplates() {
   return src(paths.templatesShared.src)
@@ -537,22 +599,6 @@ function lintAppTestTemplates() {
   return src(paths.templatesAppTest.src)
     .pipe(htmlHint('.htmlhintrc'))
     .pipe(htmlHint.reporter());
-}
-
-function buildAppTestTemplates() {
-  return src(paths.templatesAppTest.src)
-    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
-    .pipe(
-      ngHtml2Js({
-        moduleName: 'ticketingApp'
-      })
-    )
-    .pipe(concat(paths.templatesAppTest.minName))
-    .pipe(terser())
-    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
-    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
-    .pipe(replace('$*swiftGo', json.buildDirs[build].swiftGo))
-    .pipe(dest('./build/js/'));
 }
 
 function moveMain() {
@@ -631,17 +677,19 @@ const buildAll = series(
   buildTfwmScripts,
   buildOneappScripts,
   buildAppScripts,
+  buildAppTestScripts,
   buildStyles,
   buildSwiftStyles,
   buildTemplates,
   buildAppTemplates,
+  buildAppTestTemplates,
   buildSharedTemplates,
   buildSharedSwiftTemplates,
   buildSharedOneappTemplates,
   buildSharedAppTemplates,
+  buildSharedAppTestTemplates,
   buildSwiftTemplates,
   buildOneappTemplates,
-  buildAppTestTemplates,
   lintScripts,
   lintTemplates,
   lintSharedTemplates,
@@ -679,13 +727,14 @@ function watchFiles() {
       lintAppTestTemplates,
       buildTemplates,
       buildAppTemplates,
+      buildAppTestTemplates,
       buildSharedTemplates,
       buildSharedSwiftTemplates,
       buildSharedOneappTemplates,
       buildSharedAppTemplates,
+      buildSharedAppTestTemplates,
       buildSwiftTemplates,
       buildOneappTemplates,
-      buildAppTestTemplates,
       reload
     )
   ); // Reload when html changes
@@ -718,15 +767,17 @@ const dev = series(
     buildTfwmScripts,
     buildOneappScripts,
     buildAppScripts,
+    buildAppTestScripts,
     buildTemplates,
     buildAppTemplates,
+    buildAppTestTemplates,
     buildSharedTemplates,
     buildSharedSwiftTemplates,
     buildSharedOneappTemplates,
     buildSharedAppTemplates,
+    buildSharedAppTestTemplates,
     buildSwiftTemplates,
     buildOneappTemplates,
-    buildAppTestTemplates,
     minImages,
     moveMain,
     moveTfWM,
@@ -783,17 +834,18 @@ exports.buildScripts = series(buildScripts, lintScripts);
 exports.buildTfwmScripts = series(buildTfwmScripts);
 exports.buildOneappScripts = series(buildOneappScripts);
 exports.buildAppScripts = series(buildAppScripts);
+exports.buildAppTestScripts = series(buildAppTestScripts);
 exports.buildStyles = buildStyles;
 exports.buildSwiftStyles = buildSwiftStyles;
 exports.buildTemplates = series(
   buildTemplates,
   buildAppTemplates,
+  buildAppTestTemplates,
   buildSharedTemplates,
   buildSharedSwiftTemplates,
   buildSharedOneappTemplates,
   buildSwiftTemplates,
-  buildOneappTemplates,
-  buildAppTestTemplates
+  buildOneappTemplates
 );
 exports.moveMain = moveMain;
 exports.moveTfWM = moveTfWM;
