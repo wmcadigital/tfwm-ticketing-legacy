@@ -33,7 +33,7 @@
 
             <p data-ng-if="ticket.all.requirePhotocard == true"><b>{{ticket.all.name}}</b> requires <span data-ng-if="ticket.all.passengerType == 'Child'">a Child</span><span data-ng-if="ticket.all.passengerType == 'Adult'">an Adult</span>  Swift photocard</p>
 
-            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="{{ticket.all.buyTicketUrl}}" target="_blank">Buy on Swift</a>
+            <a data-ng-if="ticket.all.buyTicketUrl" class="btn btn--arrow" data-ng-href="$*buyTicketUrl" target="_blank">Buy on Swift</a>
         </div>
     </div>
 </modal-dialog>

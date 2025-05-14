@@ -26,11 +26,14 @@ var gulpCopy = require('gulp-copy');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'ghpagesApp';
+let build = 'ghpagesSCAppStaging';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
   switch (process.env.npm_config_build) {
+    case 'local':
+      build = 'local';
+      break;
     case 'staging':
       build = 'staging';
       break;
@@ -40,14 +43,17 @@ function determineBuild(done) {
     case 'livetest':
       build = 'livetest';
       break;
-    case 'azure':
-      build = 'azure';
+    case 'ghpages':
+      build = 'ghpages';
       break;
-    case 'azurelive':
-      build = 'azurelive';
+    case 'ghpagesSCAppProd':
+      build = 'ghpagesSCAppProd';
+      break;
+    case 'ghpagesSCAppStaging':
+      build = 'ghpagesSCAppStaging';
       break;
     default:
-      build = 'ghpagesApp';
+      build = 'ghpagesSCAppStaging';
       break;
   }
   done();
@@ -379,6 +385,7 @@ function buildTemplates() {
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -397,6 +404,7 @@ function buildAppTemplates() {
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -415,6 +423,7 @@ function buildAppTestTemplates() {
     .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -466,6 +475,7 @@ function buildSharedTemplates() {
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -484,6 +494,7 @@ function buildSharedSwiftTemplates() {
     .pipe(replace('$*swiftHost', json.buildDirs[build].swiftHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -502,6 +513,7 @@ function buildSharedOneappTemplates() {
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -520,6 +532,7 @@ function buildSharedAppTemplates() {
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -538,6 +551,7 @@ function buildSharedAppTestTemplates() {
     .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
     .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
     .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(replace('$*buyTicketUrl', json.buildDirs[build].buyTicketUrl))
     .pipe(dest('./build/js/'));
 }
 
@@ -618,12 +632,21 @@ function moveOneapp() {
 }
 
 function moveApp() {
-  return src(['app/index.html']).pipe(gulpCopy('build/app', { prefix: 1 }));
+  return src(['app/index.html']).pipe(gulpCopy('build/sc-app-prod', { prefix: 1 }));
 }
 
 function moveAppTest() {
-  return src(['app-test/index.html']).pipe(gulpCopy('build/app-test', { prefix: 1 }));
+  return src(['app-test/index.html']).pipe(gulpCopy('build/sc-app-stg', { prefix: 1 }));
 }
+
+function moveSCProd() {
+  return src(['tfwm-sc-prod/index.html']).pipe(gulpCopy('build/sc-prod', { prefix: 1 }));
+}
+
+function moveSCStg() {
+  return src(['tfwm-sc-stg/index.html']).pipe(gulpCopy('build/sc-stg', { prefix: 1 }));
+}
+
 
 // Optimise images
 function minImages() {
@@ -706,7 +729,9 @@ const buildAll = series(
   moveSwift,
   moveOneapp,
   moveApp,
-  moveAppTest
+  moveAppTest,
+  moveSCProd,
+  moveSCStg
 );
 // Watch files for changes
 function watchFiles() {
@@ -784,7 +809,9 @@ const dev = series(
     moveSwift,
     moveOneapp,
     moveApp,
-    moveAppTest
+    moveAppTest,
+    moveSCProd,
+    moveSCStg
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -853,5 +880,7 @@ exports.moveSwift = moveSwift;
 exports.moveOneapp = moveOneapp;
 exports.moveApp = moveApp;
 exports.moveAppTest = moveAppTest;
+exports.moveSCProd = moveSCProd;
+exports.moveSCStg = moveSCStg;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
