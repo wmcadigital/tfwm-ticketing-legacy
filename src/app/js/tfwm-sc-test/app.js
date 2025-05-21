@@ -1,3 +1,4 @@
+/* eslint-disable angular/window-service */
 /* eslint-disable angular/di */
 (function() {
   'use strict';
@@ -15,7 +16,7 @@
     .run(analytics)
     .constant('ngAuthSettings', {
       // this is used for what build you require before uploading to the relevant dir on CDN, just un-comment the one you require below
-      baseURL: '$*baseUrl',
+      baseURL: '$*baseUrlScTest',
       apiServiceBaseUri: '$*api',
 
       // LOCAL
@@ -32,7 +33,7 @@
       // Allow loading from our assets domain.  Notice the difference between * and **.
       'https:https://cloudcdn.wmca.org.uk/**',
       'http:https://cloudcdn.wmca.org.uk/**',
-      '$*baseUrl**'
+      '$*baseUrlScTest**'
     ]);
   }
   routeProvider.$inject = ['$routeProvider', 'ngAuthSettings'];
@@ -42,7 +43,7 @@
       .when('/', {
         title: 'tickets',
         controller: 'TicketingSearchCtrl',
-        templateUrl: 'tickets/views/wmn/index.html',
+        templateUrl: 'tickets/views/tfwm/index.html',
         controllerAs: 'tickets',
         reloadOnSearch: false
       })

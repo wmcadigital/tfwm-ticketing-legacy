@@ -71,14 +71,15 @@ a.icon-stylized-new:focus span:after {
   }
 
   .radio-bar {
-    display: inline-block;
+    display: inline-flex;
 
     @include breakpoint(tablet2) {
-      display: inline-block;
+      display: inline-flex;
     }
 
     span label {
       padding: 0.78em 15px;
+      height: 100%;
     }
   }
 
@@ -401,7 +402,7 @@ label.plain-small {
   border-top: 6px solid $purple;
 }
 
-@include breakpoint(tablet3) {
+@include breakpoint(tablet4) {
   .mobile--void {
     display: none !important;
   }

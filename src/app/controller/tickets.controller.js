@@ -1,3 +1,4 @@
+/* eslint-disable angular/window-service */
 /* eslint-disable no-useless-escape */
 (function() {
   'use strict';
@@ -18,7 +19,8 @@
     'ticketingService',
     'angularGridInstance',
     '$httpParamSerializer',
-    'deviceDetector'
+    'deviceDetector',
+    '$http'
   ];
 
   function TicketingSearchCtrl(
@@ -32,7 +34,8 @@
     ticketingService,
     angularGridInstance,
     $httpParamSerializer,
-    deviceDetector
+    deviceDetector,
+    $http
   ) {
     const vm = this;
     let stations;
@@ -263,6 +266,11 @@
       } else {
         vm.android = false;
       }
+      if (vm.deviceDetector.os === 'android' || vm.deviceDetector.os === 'ios') {
+        vm.isMobile = true;
+      } else {
+        vm.isMobile = false;
+      }
     }
 
     // Get Rail stations for autocomplete
@@ -384,16 +392,79 @@
             vm.filterButtons.railZoneTo.push(items.railZoneTo);
           }
 
-          // Check if the buy ticket url is a smartcitizen url and if so format it correctly
-          if (items.buyTicketUrl.includes('smartcitizen.net')) {
-            items.buyTicketUrl = items.buyTicketUrl
+          // eslint-disable-next-line angular/window-service
+          // console.log(window?.setTicketFinder?.name);
+          // console.log(items);
+          // console.log(items.buyTicketUrl);
+
+          // unicard
+          // "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?[{matrixId:'CAA118'}]",
+          // "https://ticketing.cenapps.org.uk/DirectDebit/34",
+
+          // "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:'KAA045'}]",
+          // "buyTicketUrl": "https://ticketing.networkwestmidlands.com/DirectDebit/411",
+
+          // Smart Citizen
+          // https://m-public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+          // https://m-public-tfwm.smartcitizen.net/?matrixId=AAA116
+
+          // https://public-tfwmdev.smartcitizen.net/?matrixId=AAA116
+          // https://public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+
+          // https://public-tfwmlive.smartcitizen.net//?matrixId=AAA116
+
+          // console.log('Original: ' + items.buyTicketUrl);
+
+          if (window?.setTicketFinder?.name.includes('Unicard Desktop Production')) {
+            // console.log('Unicard app detected (Production)');
+            if (!items.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
+              // eslint-disable-next-line no-unused-vars
+              const [host, queryString] = items.buyTicketUrl.split('?');
+              items.buyTicketUrl =
+                'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
+            }
+          }
+
+          if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
+            // console.log('Unicard app detected (Test)');
+            if (!items.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
+              // eslint-disable-next-line no-unused-vars
+              const [host, queryString] = items.buyTicketUrl.split('?');
+              items.buyTicketUrl =
+                'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
+            }
+          }
+
+          // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
+          if (
+            items.buyTicketUrl.includes('matrixId') &&
+            window?.setTicketFinder?.name.includes('Smart Citizen')
+          ) {
+            // console.log('Smart Citizen app detected' + window?.setTicketFinder?.name);
+            let baseUrl = '';
+            if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
+              baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
+              baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
+              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
+              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Dev')) {
+              baseUrl = 'https://public-tfwmdev.smartcitizen.net';
+            }
+            // console.log('baseurl: ' + baseUrl);
+            // eslint-disable-next-line no-unused-vars
+            const [host, queryString] = items.buyTicketUrl.split('?');
+            const matrixid = queryString
               .replace('https://', '')
               .replace(/[\[\]]/g, '')
               .replace(/[{}]/g, '')
               .replace(/:/g, '=')
               .replace(/'/g, '');
-            items.buyTicketUrl = 'https://' + items.buyTicketUrl;
+            items.buyTicketUrl = baseUrl + '?' + matrixid;
           }
+          // console.log('Final: ' + items.buyTicketUrl);
           return items.buyTicketUrl;
         });
 
