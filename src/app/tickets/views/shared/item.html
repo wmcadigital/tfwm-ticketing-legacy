@@ -15,7 +15,7 @@
   ></span>
   <div class="itemContent">
     <div class="grid-8">
-      <a data-ng-href="$*baseUrl#/ticket/{{ticket.id}}">
+      <a data-ng-href="$*baseUrl{{vm.finderLink}}#/ticket/{{ticket.id}}">
         <h4 class="event__title">
           {{ticket.name}}
           <span class="payment-icons">
@@ -26,13 +26,6 @@
               alt="Buy on Swift"
               title="This ticket can be purchased on Swift"
             />
-            <!-- <refresher condition="tickets.sortPlw == 'yes'">
-                        <refresher condition="tickets.sortPop == 'yes'">
-                            <refresher condition="tickets.sortPhl == 'yes'">
-                                <mobility-credits value="ticket.id"></mobility-credits>
-                            </refresher>
-                        </refresher>
-                    </refresher> -->
             <img
               ng-src="$*imgUrl/direct-debit-icon.png"
               class="ticket-direct-debit-logo"

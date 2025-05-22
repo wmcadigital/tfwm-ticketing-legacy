@@ -12,7 +12,7 @@
   },
   "buildDirs": {
     "local": {
-      "baseUrl": "//localhost:8081/build/tfwm",
+      "baseUrl": "//localhost:8081/build/",
       "baseUrlSwift": "//localhost:8081/build/swift",
       "swiftHost": "//localhost:8081/build/swift",
       "baseUrlOneapp": "//localhost:8081/build/oneapp",

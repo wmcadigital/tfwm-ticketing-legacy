@@ -19,8 +19,7 @@
     'ticketingService',
     'angularGridInstance',
     '$httpParamSerializer',
-    'deviceDetector',
-    '$http'
+    'deviceDetector'
   ];
 
   function TicketingSearchCtrl(
@@ -34,8 +33,7 @@
     ticketingService,
     angularGridInstance,
     $httpParamSerializer,
-    deviceDetector,
-    $http
+    deviceDetector
   ) {
     const vm = this;
     let stations;
@@ -176,6 +174,8 @@
     }
 
     defaultVars();
+
+    vm.slug = 'testing789';
 
     // work out 16-18 elibility year
     function subtractYears(dates, years) {
@@ -415,7 +415,7 @@
 
           // console.log('Original: ' + items.buyTicketUrl);
 
-          if (window?.setTicketFinder?.name.includes('Unicard Desktop Production')) {
+          if (window?.setTicketFinder?.name.includes('TfWM Ticket Finder')) {
             // console.log('Unicard app detected (Production)');
             if (!items.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
               // eslint-disable-next-line no-unused-vars
