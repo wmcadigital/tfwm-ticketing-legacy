@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--[if lt IE 8]>   <html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8" data-ng-app="timetablesApp"> <![endif]-->
+<!--[if IE 8]>      <html lang="en" class="no-js lt-ie10 lt-ie9 ie8" data-ng-app="timetablesApp"> <![endif]-->
+<!--[if IE 9]>      <html lang="en" class="no-js lt-ie10 ie9-or-better ie9" data-ng-app="timetablesApp"></html> <![endif]-->
+<!--[if ! IE]><!-->
+<html lang="en" class="ie9-or-better ie10-or-better js flexbox borderimage svg can-blend" data-ng-app="ticketingApp">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w, d, s, l, i) {
+              w[l] = w[l] || [];
+  w[l].push({
+                'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+              });
+  var f = d.getElementsByTagName(s)[0];
+  var j = d.createElement(s);
+  var dl = l != 'dataLayer' ? '&l=' + l : '';
+  j.async = true;
+  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+  f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');
+</script>
+    <!-- End Google Tag Manager -->
+    <meta name="keywords"
+        content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
+    <meta name="description" content="Search for bus, train & tram tickets around the West Midlands">
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:type" content="article" />
+    <meta name="robots" content="index,follow" />
+
+    <title>Ticketing Search</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/favicon-32x32.png"
+        sizes="32x32">
+    <link rel="icon" type="image/png" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/android-chrome-192x192.png"
+        sizes="192x192">
+    <link rel="icon" type="image/png" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/favicon-96x96.png"
+        sizes="96x96">
+    <link rel="icon" type="image/png" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/favicon-16x16.png"
+        sizes="16x16">
+    <link rel="manifest" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/manifest.json">
+    <link rel="shortcut icon" href="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="https://cloudcdn.wmca.org.uk/nwmAssets/img/icons/browserconfig.xml">
+    <meta name="theme-color" content="#009de0">
+
+    <link rel="stylesheet" href="https://cloudcdn.wmca.org.uk/openlayers/v3.5.0/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cloudcdn.wmca.org.uk/css/jquery/magnific-popup.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css"
+        integrity="sha256-auPoJwk/+RK6KSkib92Dkq1Y5hEkZvKtvSwucs15Skg=" crossorigin="anonymous" />
+    <!--[if gte IE 9]><!-->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/screen.css?v=0.1" />
+        <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/nwm-custom.css" /> -->
+    <!--<link rel="stylesheet" type="text/css" href="/css/compiled/ticketing.css" />-->
+    <link rel="stylesheet" type="text/css" href="../css/tfwm/tfwm-ticketing.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!--<![endif]-->
+    <!--[if lte IE 8]>
+            <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/nwmAssets/css/ie8.css" />
+        <![endif]-->
+
+    <!--[if IE]>
+            <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/nwmAssets/css/ie.css" />
+        <![endif]-->
+
+    <link rel="stylesheet" type="text/css" media="print" href="https://cloudcdn.wmca.org.uk/nwmAssets/css/print.css" />
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/modernizr-custom.min.js"></script>
+    <!--[if lt IE 9]>
+            <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/html5.js"></script>
+            <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/respond.js"></script>
+        <![endif]-->
+
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-2.1.3.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/swiftAssets/js/iframeResizer.contentWindow.min.js"></script>
+
+</head>
+
+<body class="ticketing-page">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HPFPWN" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="ticketing-app" data-ng-view></div>
+
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-ui-custom.min.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/openlayers/v3.5.0/ol.js" type="text/javascript"></script>
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery.smoothstate.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/svg-injector.min.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery.equalHeights.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/js/jquery/jquery.countdown.min.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/js/jquery/jquery.validate.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/js/jquery/jquery.ba-replacetext.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"
+        integrity="sha256-DiHJ7hbvMejsMyP76bpVWacb5HSHQ2sQlrJV8n7KEvA=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/angular/nganimate.css" />
+    <!-- Core Angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+
+    <!-- App code -->
+    <script src="../js/tfwm-sc-mobile.app.min.js"></script>
+    <script src="../js/services-sc.min.js"></script>
+    <script src="../js/app-test.controller.min.js"></script>
+    <script src="../js/app-test.directives.min.js"></script>
+    <script src="../js/app-test.shared.min.js"></script>
+    <script src="../js/app-test.assets.min.js"></script>
+    <script src="../js/app-test.partials.min.js"></script>
+    <script src="../js/app-test.shared.partials.min.js"></script>
+
+    <!--<script src="assets/angucomplete-alt.min.js"></script>-->
+    <script src="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
+    <script src="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/js/nwm.js"></script>
+    <!--<script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/nwm-custom.js"></script>-->
+
+    <script>
+        // set the ticket finder name
+        // eslint-disable-next-line angular/window-service
+        window.setTicketFinder = {
+          name: 'Smart Citizen Mobile Test'
+        };
+    </script>
+
+</body>
+
+</html>
