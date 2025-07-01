@@ -7,14 +7,20 @@
 
 <head>
     <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');</script>
+    <script>(function(w, d, s, l, i) {
+              w[l] = w[l] || [];
+  w[l].push({
+                'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+              });
+  var f = d.getElementsByTagName(s)[0];
+  var j = d.createElement(s);
+  var dl = l != 'dataLayer' ? '&l=' + l : '';
+  j.async = true;
+  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+  f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');
+</script>
     <!-- End Google Tag Manager -->
     <meta name="keywords"
         content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
@@ -74,7 +80,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/screen.css?v=0.1" />
         <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/nwm-custom.css" /> -->
     <!--<link rel="stylesheet" type="text/css" href="/css/compiled/ticketing.css" />-->
-    <link rel="stylesheet" type="text/css" href="../css/wmn/wmn-ticketing.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/tfwm/tfwm-ticketing.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <!--<![endif]-->
     <!--[if lte IE 8]>
@@ -96,7 +102,15 @@
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/swiftAssets/js/iframeResizer.contentWindow.min.js"></script>
-
+    <script src="https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js" crossorigin="anonymous"></script>
+    <script>
+        Sentry.onLoad(function() {
+          Sentry.init({
+            dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+            _experiments: { enableLogs: true }
+          });
+        });
+    </script>
 </head>
 
 <body class="bg--grey bg--tint ticketing-page">
@@ -143,6 +157,14 @@
     <script src="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/js/nwm.js"></script>
     <!--<script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/nwm-custom.js"></script>-->
+
+    <script>
+        // set the ticket finder name
+        // eslint-disable-next-line angular/window-service
+        window.setTicketFinder = {
+          name: 'Oneapp Ticket Finder'
+        };
+    </script>
 
 </body>
 

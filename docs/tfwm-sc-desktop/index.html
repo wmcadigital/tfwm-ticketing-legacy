@@ -13,14 +13,20 @@
 
 <head>
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');</script>
+  <script>(function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+  w[l].push({
+          'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+        });
+  var f = d.getElementsByTagName(s)[0];
+  var j = d.createElement(s);
+  var dl = l != 'dataLayer' ? '&l=' + l : '';
+  j.async = true;
+  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+  f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');
+</script>
   <!-- End Google Tag Manager -->
   <meta name="keywords"
     content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
@@ -121,6 +127,15 @@
   <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-2.1.3.min.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
+  <script src="https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.onLoad(function() {
+      Sentry.init({
+        dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+        _experiments: { enableLogs: true }
+      });
+    });
+  </script>
 </head>
 
 <body class="bg--grey bg--tint ticketing-page">
@@ -176,7 +191,7 @@
     const ajax = new XMLHttpRequest();
     ajax.open('GET', 'https://cloudcdn.wmca.org.uk/tfwmassets/ds/2.4.2/img/wmnds-icons.min.svg', true);
     ajax.send();
-    ajax.onload = function () {
+    ajax.onload = function() {
       const div = document.createElement('div');
       div.style.display = 'none';
       div.innerHTML = ajax.responseText;

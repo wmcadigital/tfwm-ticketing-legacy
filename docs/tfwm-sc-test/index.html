@@ -8,19 +8,19 @@
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w, d, s, l, i) {
-              w[l] = w[l] || [];
-  w[l].push({
+            w[l] = w[l] || [];
+            w[l].push({
                 'gtm.start': new Date().getTime(),
-    event: 'gtm.js'
-              });
-  var f = d.getElementsByTagName(s)[0];
-  var j = d.createElement(s);
-  var dl = l != 'dataLayer' ? '&l=' + l : '';
-  j.async = true;
-  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-  f.parentNode.insertBefore(j, f);
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0];
+            var j = d.createElement(s);
+            var dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');
-</script>
+    </script>
     <!-- End Google Tag Manager -->
     <meta name="keywords"
         content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
@@ -102,7 +102,15 @@
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/swiftAssets/js/iframeResizer.contentWindow.min.js"></script>
-
+    <script src='https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js' crossorigin="anonymous"></script>
+    <script>
+        Sentry.onLoad(function() {
+          Sentry.init({
+            dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+            _experiments: { enableLogs: true }
+          });
+        });
+    </script>
 </head>
 
 <body class="ticketing-page">
