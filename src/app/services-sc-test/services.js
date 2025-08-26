@@ -48,6 +48,7 @@
 
     function getDataFail(response) {
       // Log error
+      // console.log(response);
       console.warn(
         'Status: ' +
           response.status +

@@ -8,6 +8,15 @@
   <meta name="author" content="Author Name">
   <title>Document</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.onLoad(function () {
+      Sentry.init({
+        dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+        _experiments: { enableLogs: true }
+      });
+    });
+  </script>
 </head>
 <body>
   <header>
@@ -19,6 +28,8 @@
         <li><a href="/build/tfwm/index.html#/">TfWM</a></li>
         <li><a href="/build/swift/index.html#/">Swift</a></li>
         <li><a href="/build/oneapp/index.html#/">Oneapp</a></li>
+        <li><a href="/build/tfwm-sc-desktop/index.html#/">Smart Citizen Desktop (Production)</a></li>
+        <li><a href="/build/tfwm-sc-desktop-test/index.html#/">Smart Citizen desktop (Test)</a></li>
         <li><a href="/build/tfwm-sc/index.html#/">Smart Citizen (Production)</a></li>
         <li><a href="/build/tfwm-sc-test/index.html#/">Smart Citizen (Test)</a></li>
         <li><a href="/build/tfwm-sc-dev/index.html#/">Smart Citizen (Dev)</a></li>

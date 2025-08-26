@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 8]>   <html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8" data-ng-app="timetablesApp"> <![endif]-->
 <!--[if IE 8]>      <html lang="en" class="no-js lt-ie10 lt-ie9 ie8" data-ng-app="timetablesApp"> <![endif]-->
@@ -6,22 +7,6 @@
 <html lang="en" class="ie9-or-better ie10-or-better js flexbox borderimage svg can-blend" data-ng-app="ticketingApp">
 
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w, d, s, l, i) {
-              w[l] = w[l] || [];
-  w[l].push({
-                'gtm.start': new Date().getTime(),
-    event: 'gtm.js'
-              });
-  var f = d.getElementsByTagName(s)[0];
-  var j = d.createElement(s);
-  var dl = l != 'dataLayer' ? '&l=' + l : '';
-  j.async = true;
-  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-  f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');
-</script>
-    <!-- End Google Tag Manager -->
     <meta name="keywords"
         content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
     <meta name="description" content="Search for bus, train & tram tickets around the West Midlands">
@@ -102,16 +87,18 @@
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/swiftAssets/js/iframeResizer.contentWindow.min.js"></script>
-
+    <script src="https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js" crossorigin="anonymous"></script>
+    <script>
+        Sentry.onLoad(function() {
+          Sentry.init({
+            dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+            _experiments: { enableLogs: true }
+          });
+        });
+    </script>
 </head>
 
 <body class="ticketing-page">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HPFPWN" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <div class="ticketing-app" data-ng-view></div>
 
@@ -137,13 +124,13 @@
 
     <!-- App code -->
     <script src="../js/tfwm-sc-mobile.app.min.js"></script>
-    <script src="../js/services-sc.min.js"></script>
+    <script src="../js/services-sc-test.min.js"></script>
     <script src="../js/app-test.controller.min.js"></script>
     <script src="../js/app-test.directives.min.js"></script>
     <script src="../js/app-test.shared.min.js"></script>
     <script src="../js/app-test.assets.min.js"></script>
     <script src="../js/app-test.partials.min.js"></script>
-    <script src="../js/app-test.shared.partials.min.js"></script>
+    <script src="../js/tfwm.shared.partials.min.js"></script>
 
     <!--<script src="assets/angucomplete-alt.min.js"></script>-->
     <script src="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>

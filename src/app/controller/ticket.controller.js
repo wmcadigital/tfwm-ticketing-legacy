@@ -217,90 +217,125 @@
 
     // Function to get the ticket data with api call
     function initialise(data) {
-      ticketingService.getTicket(data).then(function(response) {
-        vm.all = response;
-        if (vm.all.relatedTickets.length) {
-          vm.related = [];
-          angular.forEach(
-            vm.all.relatedTickets,
-            function(item) {
-              ticketingService.getTicket(item.id).then(function(related) {
-                vm.relatedTickets[item.id] = related;
-                vm.relatedList = vm.relatedTickets[item.id];
-                // push items into a single array
-                vm.related.push(vm.relatedList);
+      ticketingService
+        .getTicket(data)
+        .then(function(response) {
+          vm.all = response;
+          if (vm.all.relatedTickets.length) {
+            vm.related = [];
+            angular.forEach(
+              vm.all.relatedTickets,
+              function(item) {
+                ticketingService
+                  .getTicket(item.id)
+                  .then(function(related) {
+                    vm.relatedTickets[item.id] = related;
+                    vm.relatedList = vm.relatedTickets[item.id];
+                    // push items into a single array
+                    vm.related.push(vm.relatedList);
+                  })
+                  .catch(function(error) {
+                    vm.errorMessage =
+                      'There was a problem loading ticket data. Please try again later.';
+                    vm.loadingStatus = 'error';
+                    console.error(error);
+                  });
+              },
+              vm.related
+            );
+          }
+          if (vm.all.documents.length) {
+            ticketingService
+              .getTerms(data)
+              .then(function(terms) {
+                vm.relatedTerms = terms;
+              })
+              .catch(function(error) {
+                vm.errorMessage =
+                  'There was a problem loading terms and conditions data. Please try again later.';
+                vm.loadingStatus = 'error';
+                console.error(error);
               });
-            },
-            vm.related
-          );
-        }
-        if (vm.all.documents.length) {
-          ticketingService.getTerms(data).then(function(terms) {
-            vm.relatedTerms = terms;
-          });
-        }
-        ticketingService.getOperators().then(function(operator) {
-          vm.operatorList = operator;
-          // console.log(response);
+          }
+          ticketingService
+            .getOperators()
+            .then(function(operator) {
+              vm.operatorList = operator;
+              // console.log(response);
+            })
+            .catch(function(error) {
+              vm.errorMessage =
+                'There was a problem loading operator data. Please try again later.';
+              vm.loadingStatus = 'error';
+              console.error(error);
+            });
+
+          if (window?.setTicketFinder?.name.includes('Unicard Desktop Production')) {
+            // console.log('Unicard app detected (Production)');
+            if (!vm.all.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
+              // eslint-disable-next-line no-unused-vars
+              const [host, queryString] = vm.all.buyTicketUrl.split('?');
+              vm.all.buyTicketUrl =
+                'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
+            }
+          }
+
+          if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
+            // console.log('Unicard app detected (Test)');
+            if (!vm.all.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
+              // eslint-disable-next-line no-unused-vars
+              const [host, queryString] = vm.all.buyTicketUrl.split('?');
+              vm.all.buyTicketUrl =
+                'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
+            }
+          }
+
+          // console.log('Buy ticket URL: ' + vm.all.buyTicketUrl);
+
+          // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
+          if (
+            vm.all.buyTicketUrl &&
+            vm.all.buyTicketUrl.includes('matrixId') &&
+            window?.setTicketFinder?.name.includes('Smart Citizen')
+          ) {
+            let baseUrl = '';
+            if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
+              baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
+              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
+              baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
+              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
+              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
+              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
+            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Dev')) {
+              baseUrl = 'https://public-tfwmdev.smartcitizen.net';
+            }
+            // console.log('baseurl: ' + baseUrl);
+            // eslint-disable-next-line no-unused-vars
+            const [host, queryString] = vm.all.buyTicketUrl.split('?');
+            const matrixid = queryString
+              .replace('https://', '')
+              // eslint-disable-next-line no-useless-escape
+              .replace(/[\[\]]/g, '')
+              .replace(/[{}]/g, '')
+              .replace(/:/g, '=')
+              .replace(/'/g, '');
+            vm.all.buyTicketUrl = baseUrl + '?' + matrixid;
+          }
+          // console.log('Final: ' + vm.all.buyTicketUrl);
+
+          backButtonLogic(); // Determine back button logic
+          vm.loadingStatus = 'success'; // set success loading status
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-
-        if (window?.setTicketFinder?.name.includes('Unicard Desktop Production')) {
-          // console.log('Unicard app detected (Production)');
-          if (!vm.all.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
-            // eslint-disable-next-line no-unused-vars
-            const [host, queryString] = vm.all.buyTicketUrl.split('?');
-            vm.all.buyTicketUrl =
-              'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
-          }
-        }
-
-        if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
-          // console.log('Unicard app detected (Test)');
-          if (!vm.all.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
-            // eslint-disable-next-line no-unused-vars
-            const [host, queryString] = vm.all.buyTicketUrl.split('?');
-            vm.all.buyTicketUrl =
-              'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
-          }
-        }
-
-        // console.log('Buy ticket URL: ' + vm.all.buyTicketUrl);
-
-        // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
-        if (
-          vm.all.buyTicketUrl &&
-          vm.all.buyTicketUrl.includes('matrixId') &&
-          window?.setTicketFinder?.name.includes('Smart Citizen')
-        ) {
-          let baseUrl = '';
-          if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-            baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
-          } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
-            baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
-          } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
-            baseUrl = 'https://public-tfwmlive.smartcitizen.net';
-          } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
-            baseUrl = 'https://public-tfwmtest.smartcitizen.net';
-          } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Dev')) {
-            baseUrl = 'https://public-tfwmdev.smartcitizen.net';
-          }
-          // console.log('baseurl: ' + baseUrl);
-          // eslint-disable-next-line no-unused-vars
-          const [host, queryString] = vm.all.buyTicketUrl.split('?');
-          const matrixid = queryString
-            .replace('https://', '')
-            // eslint-disable-next-line no-useless-escape
-            .replace(/[\[\]]/g, '')
-            .replace(/[{}]/g, '')
-            .replace(/:/g, '=')
-            .replace(/'/g, '');
-          vm.all.buyTicketUrl = baseUrl + '?' + matrixid;
-        }
-        // console.log('Final: ' + vm.all.buyTicketUrl);
-
-        backButtonLogic(); // Determine back button logic
-        vm.loadingStatus = 'success'; // set success loading status
-      });
     }
 
     // detect device in use
@@ -343,18 +378,25 @@
     }
 
     function initialiseFull(data) {
-      ticketingService.getTicketFull(data).then(function(response) {
-        vm.full = response;
-        vm.priceLevels = response.priceLevels;
-        vm.gpay = false;
-        vm.priceLevelsList = vm.priceLevels.map(function(item) {
-          if (item.type.includes('Google Pay')) {
-            vm.gpay = true;
-            return true;
-          }
-          return false;
+      ticketingService
+        .getTicketFull(data)
+        .then(function(response) {
+          vm.full = response;
+          vm.priceLevels = response.priceLevels;
+          vm.gpay = false;
+          vm.priceLevelsList = vm.priceLevels.map(function(item) {
+            if (item.type.includes('Google Pay')) {
+              vm.gpay = true;
+              return true;
+            }
+            return false;
+          });
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-      });
     }
 
     // popup modals

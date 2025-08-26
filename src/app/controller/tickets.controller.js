@@ -5,12 +5,25 @@
 
   angular
     .module('ticketingApp')
+    .factory('$exceptionHandler', $exceptionHandler)
     .controller('TicketingSearchCtrl', TicketingSearchCtrl)
     .filter('replace', replace);
+
+  $exceptionHandler.$inject = ['$log', '$window'];
+  function $exceptionHandler($log, $window) {
+    return function(exception) {
+      console.log('Exception caught by $exceptionHandler:');
+      $log.error(exception);
+      if ($window.Sentry && $window.Sentry.captureException) {
+        $window.Sentry.captureException(exception);
+      }
+    };
+  }
 
   TicketingSearchCtrl.$inject = [
     'ngAuthSettings',
     '$scope',
+    '$interval',
     '$anchorScroll',
     '$timeout',
     '$filter',
@@ -25,6 +38,7 @@
   function TicketingSearchCtrl(
     ngAuthSettings,
     $scope,
+    $interval,
     $anchorScroll,
     $timeout,
     $filter,
@@ -39,6 +53,8 @@
     let stations;
     let stationSel;
     let stationSplit;
+    let apiTimeoutPromise = null;
+    let retryIntervalPromise = null;
     vm.submit = submit; // Function to submit initial search
     vm.clearFilter = clearFilter; // Function to reset filters
     vm.getStations = getStations; // Function to retrieve stations
@@ -177,6 +193,8 @@
 
     vm.slug = 'testing789';
 
+    console.log('v2.16.3');
+
     // work out 16-18 elibility year
     function subtractYears(dates, years) {
       // 👇 make copy with "Date" constructor
@@ -276,43 +294,64 @@
     // Get Rail stations for autocomplete
     function getStations() {
       // console.log("get stations");
-      ticketingService.getStations().then(function(response) {
-        let fromRail;
-        let toRail;
-        let ViaOneRail;
-        let dataFromRail;
-        let dataToRail;
-        let dataViaOnRail;
-        let dataFromRailData;
-        let dataToRailData;
-        let dataViaOneRailData;
-        // console.log("rail stations");
-        // console.log(response);
-        vm.stationList = response;
-        // if going direct to page with stations work out zone information
-        if (vm.stationFromName !== null) {
-          fromRail = vm.stationFromName || null;
-          toRail = vm.stationToName || null;
-          ViaOneRail = vm.stationViaOneName || null;
-          dataFromRail = $filter('filter')(response, { name: fromRail });
-          dataToRail = $filter('filter')(response, { name: toRail });
-          dataViaOnRail = $filter('filter')(response, { name: ViaOneRail });
-          dataFromRailData = dataFromRail['0'];
-          dataToRailData = dataToRail['0'];
-          dataViaOneRailData = dataViaOnRail['0'];
-          vm.fromStationInfo = dataFromRailData;
-          vm.toStationInfo = dataToRailData;
-          vm.ViaOneStationInfo = dataViaOneRailData;
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          let fromRail;
+          let toRail;
+          let ViaOneRail;
+          let dataFromRail;
+          let dataToRail;
+          let dataViaOnRail;
+          let dataFromRailData;
+          let dataToRailData;
+          let dataViaOneRailData;
+          // console.log("rail stations");
+          // console.log(response);
+          vm.stationList = response;
+          // if going direct to page with stations work out zone information
+          if (vm.stationFromName !== null) {
+            fromRail = vm.stationFromName || null;
+            toRail = vm.stationToName || null;
+            ViaOneRail = vm.stationViaOneName || null;
+            dataFromRail = $filter('filter')(response, { name: fromRail });
+            dataToRail = $filter('filter')(response, { name: toRail });
+            dataViaOnRail = $filter('filter')(response, { name: ViaOneRail });
+            dataFromRailData = dataFromRail['0'];
+            dataToRailData = dataToRail['0'];
+            dataViaOneRailData = dataViaOnRail['0'];
+            vm.fromStationInfo = dataFromRailData;
+            vm.toStationInfo = dataToRailData;
+            vm.ViaOneStationInfo = dataViaOneRailData;
 
-          if (vm.fromStationInfo != null) {
-            vm.fromZoneNumber = vm.fromStationInfo.zone;
-            vm.toZoneNumber = vm.toStationInfo.zone;
-            if (vm.ViaOneStationInfo != null) {
-              vm.ViaOneZoneNumber = vm.ViaOneStationInfo.zone;
+            if (vm.fromStationInfo != null) {
+              vm.fromZoneNumber = vm.fromStationInfo.zone;
+              vm.toZoneNumber = vm.toStationInfo.zone;
+              if (vm.ViaOneStationInfo != null) {
+                vm.ViaOneZoneNumber = vm.ViaOneStationInfo.zone;
+              }
             }
           }
-        }
-      });
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
+        });
+    }
+
+    function retryTicketSearch(data) {
+      // Retry after 5 seconds if not already retrying
+      if (!retryIntervalPromise) {
+        retryIntervalPromise = $interval(
+          function() {
+            submit(data);
+          },
+          5000,
+          2
+        ); // Only retry once per timeout/error
+      }
     }
 
     function submit(data) {
@@ -329,6 +368,25 @@
       let searchExact;
       vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
+
+      // Set a timeout for the API call (e.g., 10 seconds)
+      apiTimeoutPromise = $timeout(function() {
+        vm.errorMessage = 'The ticket search is taking too long. Retrying...';
+        vm.loadingStatus = 'timeout';
+
+        // Sentry log for slow API
+        if (window.Sentry && window.Sentry.captureMessage) {
+          window.Sentry.captureMessage('Ticket search API call is slow or unresponsive', {
+            level: 'warning',
+            extra: {
+              postJSON: vm.postJSON,
+              url: $location.absUrl()
+            }
+          });
+        }
+
+        submit(data);
+      }, 10000);
 
       $location.search({
         allowBus: vm.postedJSON.allowBus,
@@ -366,297 +424,346 @@
       // console.log(vm.postedJSON);
 
       // work out all tickets available
-      ticketingService.ticketSearch(data).then(function(response) {
-        vm.all = response;
-        vm.original = response;
+      ticketingService
+        .ticketSearch(data)
+        .then(function(response) {
+          $timeout.cancel(apiTimeoutPromise);
+          vm.all = response;
+          vm.original = response;
 
-        // For each item in the results
-        angular.forEach(vm.all, function(items) {
-          // Check the operator and push it to filters
-          if (vm.filterButtons.operator.indexOf(items.operator) === -1) {
-            vm.filterButtons.operator.push(items.operator);
-          }
+          // For each item in the results
+          angular.forEach(vm.all, function(items) {
+            // Check the operator and push it to filters
+            if (vm.filterButtons.operator.indexOf(items.operator) === -1) {
+              vm.filterButtons.operator.push(items.operator);
+            }
 
-          // Check bus area
-          if (vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1) {
-            vm.filterButtons.busTravelArea.push(items.busTravelArea);
-          }
+            // Check bus area
+            if (vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1) {
+              vm.filterButtons.busTravelArea.push(items.busTravelArea);
+            }
 
-          // Check rail zone from
-          if (vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1) {
-            vm.filterButtons.railZoneFrom.push(items.railZoneFrom);
-          }
+            // Check rail zone from
+            if (vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1) {
+              vm.filterButtons.railZoneFrom.push(items.railZoneFrom);
+            }
 
-          // Check rail zone to
-          if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
-            vm.filterButtons.railZoneTo.push(items.railZoneTo);
-          }
+            // Check rail zone to
+            if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
+              vm.filterButtons.railZoneTo.push(items.railZoneTo);
+            }
 
-          // eslint-disable-next-line angular/window-service
-          // console.log(window?.setTicketFinder?.name);
-          // console.log(items);
-          // console.log(items.buyTicketUrl);
+            // eslint-disable-next-line angular/window-service
+            // console.log(window?.setTicketFinder?.name);
+            // console.log(items);
+            // console.log(items.buyTicketUrl);
 
-          // unicard
-          // "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?[{matrixId:'CAA118'}]",
-          // "https://ticketing.cenapps.org.uk/DirectDebit/34",
+            // unicard
+            // "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?[{matrixId:'CAA118'}]",
+            // "https://ticketing.cenapps.org.uk/DirectDebit/34",
 
-          // "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:'KAA045'}]",
-          // "buyTicketUrl": "https://ticketing.networkwestmidlands.com/DirectDebit/411",
+            // "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:'KAA045'}]",
+            // "buyTicketUrl": "https://ticketing.networkwestmidlands.com/DirectDebit/411",
 
-          // Smart Citizen
-          // https://m-public-tfwmtest.smartcitizen.net/?matrixId=AAA116
-          // https://m-public-tfwm.smartcitizen.net/?matrixId=AAA116
+            // Smart Citizen
+            // https://m-public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+            // https://m-public-tfwm.smartcitizen.net/?matrixId=AAA116
 
-          // https://public-tfwmdev.smartcitizen.net/?matrixId=AAA116
-          // https://public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+            // https://public-tfwmdev.smartcitizen.net/?matrixId=AAA116
+            // https://public-tfwmtest.smartcitizen.net/?matrixId=AAA116
 
-          // https://public-tfwmlive.smartcitizen.net//?matrixId=AAA116
+            // https://public-tfwmlive.smartcitizen.net//?matrixId=AAA116
 
-          // console.log('Original: ' + items.buyTicketUrl);
+            // console.log('Original: ' + items.buyTicketUrl);
 
-          if (window?.setTicketFinder?.name.includes('TfWM Ticket Finder')) {
-            // console.log('Unicard app detected (Production)');
-            if (!items.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
+            if (window?.setTicketFinder?.name.includes('TfWM Ticket Finder')) {
+              // console.log('Unicard app detected (Production)');
+              if (!items.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
+                // eslint-disable-next-line no-unused-vars
+                const [host, queryString] = items.buyTicketUrl.split('?');
+                items.buyTicketUrl =
+                  'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
+              }
+            }
+
+            if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
+              // console.log('Unicard app detected (Test)');
+              if (!items.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
+                // eslint-disable-next-line no-unused-vars
+                const [host, queryString] = items.buyTicketUrl.split('?');
+                items.buyTicketUrl =
+                  'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
+              }
+            }
+
+            // console.log(window?.setTicketFinder?.name);
+
+            if (
+              items.swiftCurrentAmount &&
+              window?.setTicketFinder?.name.includes('Smart Citizen')
+            ) {
+              console.log('payg detected');
+              let baseUrl2 = '';
+              if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
+                baseUrl2 = 'https://m-public-tfwmlive.smartcitizen.net';
+              } else if (
+                window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
+              ) {
+                baseUrl2 = 'https://public-tfwmlive.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
+                baseUrl2 = 'https://m-public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
+                baseUrl2 = 'https://public-tfwmlive.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
+                baseUrl2 = 'https://public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
+                baseUrl2 = 'https://public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Dev')) {
+                baseUrl2 = 'https://public-tfwmdev.smartcitizen.net';
+              }
+
+              const paygUrl = baseUrl2 + '/?matrixId=AAC001';
+
+              console.log(paygUrl);
+
+              items.buyTicketUrl = baseUrl2 + '/?matrixId=AAC001';
+            }
+
+            // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
+            if (
+              items.buyTicketUrl.includes('matrixId') &&
+              window?.setTicketFinder?.name.includes('Smart Citizen')
+            ) {
+              // console.log('Smart Citizen app detected' + window?.setTicketFinder?.name);
+              let baseUrl = '';
+              if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
+                baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
+              } else if (
+                window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
+              ) {
+                baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
+                baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
+                baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
+                baseUrl = 'https://public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
+                baseUrl = 'https://public-tfwmtest.smartcitizen.net';
+              } else if (window?.setTicketFinder?.name.includes('Smart Citizen Dev')) {
+                baseUrl = 'https://public-tfwmdev.smartcitizen.net';
+              }
+              // console.log('baseurl: ' + baseUrl);
               // eslint-disable-next-line no-unused-vars
               const [host, queryString] = items.buyTicketUrl.split('?');
-              items.buyTicketUrl =
-                'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
+              const matrixid = queryString
+                .replace('https://', '')
+                .replace(/[\[\]]/g, '')
+                .replace(/[{}]/g, '')
+                .replace(/:/g, '=')
+                .replace(/'/g, '');
+              items.buyTicketUrl = baseUrl + '?' + matrixid;
             }
-          }
+            // console.log('Final: ' + items.buyTicketUrl);
+            return items.buyTicketUrl;
+          });
 
-          if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
-            // console.log('Unicard app detected (Test)');
-            if (!items.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
-              // eslint-disable-next-line no-unused-vars
-              const [host, queryString] = items.buyTicketUrl.split('?');
-              items.buyTicketUrl =
-                'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
-            }
-          }
+          fbus = vm.postedJSON.allowBus || false;
+          ftrain = vm.postedJSON.allowTrain || false;
+          fmetro = vm.postedJSON.allowMetro || false;
 
-          // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
           if (
-            items.buyTicketUrl.includes('matrixId') &&
-            window?.setTicketFinder?.name.includes('Smart Citizen')
+            vm.postJSON.allowTrain === true ||
+            vm.postJSON.brand === 'nnetwork' ||
+            vm.postJSON.brand === 'ntrain'
           ) {
-            // console.log('Smart Citizen app detected' + window?.setTicketFinder?.name);
-            let baseUrl = '';
-            if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-              baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
-              baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
-              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
-              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Dev')) {
-              baseUrl = 'https://public-tfwmdev.smartcitizen.net';
+            if (vm.fromStationInfoZone != null) {
+              vm.fromZoneNumber = vm.fromStationInfoZone;
+            } else if (vm.fromStationInfo != null) {
+              vm.fromZoneNumber = vm.fromStationInfo.zone;
+            } else {
+              vm.fromZoneNumber = null;
             }
-            // console.log('baseurl: ' + baseUrl);
-            // eslint-disable-next-line no-unused-vars
-            const [host, queryString] = items.buyTicketUrl.split('?');
-            const matrixid = queryString
-              .replace('https://', '')
-              .replace(/[\[\]]/g, '')
-              .replace(/[{}]/g, '')
-              .replace(/:/g, '=')
-              .replace(/'/g, '');
-            items.buyTicketUrl = baseUrl + '?' + matrixid;
-          }
-          // console.log('Final: ' + items.buyTicketUrl);
-          return items.buyTicketUrl;
-        });
 
-        fbus = vm.postedJSON.allowBus || false;
-        ftrain = vm.postedJSON.allowTrain || false;
-        fmetro = vm.postedJSON.allowMetro || false;
+            if (vm.toStationInfoZone != null) {
+              vm.toZoneNumber = vm.toStationInfoZone;
+            } else if (vm.toStationInfo != null) {
+              vm.toZoneNumber = vm.toStationInfo.zone;
+            } else {
+              vm.toZoneNumber = null;
+            }
 
-        if (
-          vm.postJSON.allowTrain === true ||
-          vm.postJSON.brand === 'nnetwork' ||
-          vm.postJSON.brand === 'ntrain'
-        ) {
-          if (vm.fromStationInfoZone != null) {
-            vm.fromZoneNumber = vm.fromStationInfoZone;
-          } else if (vm.fromStationInfo != null) {
-            vm.fromZoneNumber = vm.fromStationInfo.zone;
-          } else {
-            vm.fromZoneNumber = null;
-          }
+            if (vm.fromZoneNumber === '1') {
+              vm.ffromzone = 1;
+            } else if (vm.fromZoneNumber === '2') {
+              vm.ffromzone = 2;
+            } else if (vm.fromZoneNumber === '3') {
+              vm.ffromzone = 3;
+            } else if (vm.fromZoneNumber === '4') {
+              vm.ffromzone = 4;
+            } else if (vm.fromZoneNumber === '5') {
+              vm.ffromzone = 5;
+            } else {
+              vm.ffromzone = null;
+            }
 
-          if (vm.toStationInfoZone != null) {
-            vm.toZoneNumber = vm.toStationInfoZone;
-          } else if (vm.toStationInfo != null) {
-            vm.toZoneNumber = vm.toStationInfo.zone;
-          } else {
-            vm.toZoneNumber = null;
-          }
+            if (vm.toZoneNumber === '1') {
+              vm.ftozone = 1;
+            } else if (vm.toZoneNumber === '2') {
+              vm.ftozone = 2;
+            } else if (vm.toZoneNumber === '3') {
+              vm.ftozone = 3;
+            } else if (vm.toZoneNumber === '4') {
+              vm.ftozone = 4;
+            } else if (vm.toZoneNumber === '5') {
+              vm.ftozone = 5;
+            } else {
+              vm.ftozone = null;
+            }
 
-          if (vm.fromZoneNumber === '1') {
-            vm.ffromzone = 1;
-          } else if (vm.fromZoneNumber === '2') {
-            vm.ffromzone = 2;
-          } else if (vm.fromZoneNumber === '3') {
-            vm.ffromzone = 3;
-          } else if (vm.fromZoneNumber === '4') {
-            vm.ffromzone = 4;
-          } else if (vm.fromZoneNumber === '5') {
-            vm.ffromzone = 5;
-          } else {
-            vm.ffromzone = null;
-          }
+            if (vm.ViaOneZoneNumber === '1') {
+              vm.fViaOnezone = 1;
+            } else if (vm.ViaOneZoneNumber === '2') {
+              vm.fViaOnezone = 2;
+            } else if (vm.ViaOneZoneNumber === '3') {
+              vm.fViaOnezone = 3;
+            } else if (vm.ViaOneZoneNumber === '4') {
+              vm.fViaOnezone = 4;
+            } else if (vm.ViaOneZoneNumber === '5') {
+              vm.fViaOnezone = 5;
+            } else {
+              vm.fViaOnezone = null;
+            }
 
-          if (vm.toZoneNumber === '1') {
-            vm.ftozone = 1;
-          } else if (vm.toZoneNumber === '2') {
-            vm.ftozone = 2;
-          } else if (vm.toZoneNumber === '3') {
-            vm.ftozone = 3;
-          } else if (vm.toZoneNumber === '4') {
-            vm.ftozone = 4;
-          } else if (vm.toZoneNumber === '5') {
-            vm.ftozone = 5;
-          } else {
-            vm.ftozone = null;
-          }
-
-          if (vm.ViaOneZoneNumber === '1') {
-            vm.fViaOnezone = 1;
-          } else if (vm.ViaOneZoneNumber === '2') {
-            vm.fViaOnezone = 2;
-          } else if (vm.ViaOneZoneNumber === '3') {
-            vm.fViaOnezone = 3;
-          } else if (vm.ViaOneZoneNumber === '4') {
-            vm.fViaOnezone = 4;
-          } else if (vm.ViaOneZoneNumber === '5') {
-            vm.fViaOnezone = 5;
-          } else {
-            vm.fViaOnezone = null;
-          }
-
-          if (vm.ViaOneZoneNumber != null) {
-            if (vm.ViaOneZoneNumber < vm.fromZoneNumber) {
-              vm.ffromzone = vm.ViaOneZoneNumber;
-            } else if (vm.ViaOneZoneNumber > vm.toZoneNumber) {
-              vm.ftozone = vm.ViaOneZoneNumber;
+            if (vm.ViaOneZoneNumber != null) {
+              if (vm.ViaOneZoneNumber < vm.fromZoneNumber) {
+                vm.ffromzone = vm.ViaOneZoneNumber;
+              } else if (vm.ViaOneZoneNumber > vm.toZoneNumber) {
+                vm.ftozone = vm.ViaOneZoneNumber;
+              }
             }
           }
-        }
 
-        if (vm.postJSON.allowTrain === true) {
-          vm.exactMatch = [];
-          if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
-            // exact results won't work if from zone is greater then the to zone so do a check
-            if (vm.ffromzone < vm.ftozone) {
+          if (vm.postJSON.allowTrain === true) {
+            vm.exactMatch = [];
+            if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
+              // exact results won't work if from zone is greater then the to zone so do a check
+              if (vm.ffromzone < vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: vm.ffromzone,
+                  railZoneTo: vm.ftozone
+                });
+              } else if (vm.ffromzone > vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: vm.ftozone,
+                  railZoneTo: vm.ffromzone
+                });
+              } else if (vm.ffromzone === vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: 1,
+                  railZoneTo: vm.ftozone
+                });
+              }
+            } else {
               vm.exactMatch = $filter('filter')(response, {
                 allowBus: fbus,
                 allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone
-              });
-            } else if (vm.ffromzone > vm.ftozone) {
-              vm.exactMatch = $filter('filter')(response, {
-                allowBus: fbus,
-                allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone
-              });
-            } else if (vm.ffromzone === vm.ftozone) {
-              vm.exactMatch = $filter('filter')(response, {
-                allowBus: fbus,
-                allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: 1,
-                railZoneTo: vm.ftozone
+                allowMetro: fmetro
               });
             }
+          } else if (vm.postJSON.brand === 'nnetwork' || vm.postJSON.brand === 'ntrain') {
+            vm.exactMatch = [];
+            if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
+              // exact results won't work if from zone is greater then the to zone so do a check
+              if (vm.ffromzone < vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: vm.ffromzone,
+                  railZoneTo: vm.ftozone
+                });
+              } else if (vm.ffromzone > vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: vm.ftozone,
+                  railZoneTo: vm.ffromzone
+                });
+              } else if (vm.ffromzone === vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: 1,
+                  railZoneTo: vm.ftozone
+                });
+              }
+            } else {
+              vm.exactMatch = $filter('filter')(response, {});
+            }
           } else {
+            // console.log("Exact Search without rail");
+            vm.postedJSON.stationNames = null; // make sure no stations are included if train not checked.
             vm.exactMatch = $filter('filter')(response, {
               allowBus: fbus,
               allowTrain: ftrain,
               allowMetro: fmetro
             });
           }
-        } else if (vm.postJSON.brand === 'nnetwork' || vm.postJSON.brand === 'ntrain') {
-          vm.exactMatch = [];
-          if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
-            // exact results won't work if from zone is greater then the to zone so do a check
-            if (vm.ffromzone < vm.ftozone) {
-              vm.exactMatch = $filter('filter')(response, {
-                railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone
-              });
-            } else if (vm.ffromzone > vm.ftozone) {
-              vm.exactMatch = $filter('filter')(response, {
-                railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone
-              });
-            } else if (vm.ffromzone === vm.ftozone) {
-              vm.exactMatch = $filter('filter')(response, {
-                railZoneFrom: 1,
-                railZoneTo: vm.ftozone
-              });
-            }
-          } else {
-            vm.exactMatch = $filter('filter')(response, {});
-          }
-        } else {
-          // console.log("Exact Search without rail");
-          vm.postedJSON.stationNames = null; // make sure no stations are included if train not checked.
-          vm.exactMatch = $filter('filter')(response, {
-            allowBus: fbus,
-            allowTrain: ftrain,
-            allowMetro: fmetro
-          });
-        }
 
-        // compare search results and exact search results and display difference
-        searchAll = vm.all;
-        searchExact = vm.exactMatch;
-        // console.log('all results');
-        // console.log(searchAll);
-        // console.log("search exact results");
-        // console.log(vm.exactMatch);
+          // compare search results and exact search results and display difference
+          searchAll = vm.all;
+          searchExact = vm.exactMatch;
+          // console.log('all results');
+          // console.log(searchAll);
+          // console.log("search exact results");
+          // console.log(vm.exactMatch);
 
-        for (i = 0; i < searchExact.length; i += 1) {
-          arrlen = searchAll.length;
-          for (j = 0; j < arrlen; j += 1) {
-            if (searchExact[i] === searchAll[j]) {
-              searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
+          for (i = 0; i < searchExact.length; i += 1) {
+            arrlen = searchAll.length;
+            for (j = 0; j < arrlen; j += 1) {
+              if (searchExact[i] === searchAll[j]) {
+                searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
+              }
             }
           }
-        }
 
-        vm.otherResults = searchAll;
+          vm.otherResults = searchAll;
 
-        bus = vm.postedJSON.allowBus;
-        train = vm.postedJSON.allowTrain;
-        metro = vm.postedJSON.allowMetro;
+          bus = vm.postedJSON.allowBus;
+          train = vm.postedJSON.allowTrain;
+          metro = vm.postedJSON.allowMetro;
 
-        // if 1 or 2 modes selected open up the exclude mode filter
-        if (
-          bus !== null ||
-          (bus !== null && train !== null) ||
-          (bus !== null && metro !== null) ||
-          (train !== null && metro !== null)
-        ) {
-          vm.toggleFilter('mode');
-        }
+          // if 1 or 2 modes selected open up the exclude mode filter
+          if (
+            bus !== null ||
+            (bus !== null && train !== null) ||
+            (bus !== null && metro !== null) ||
+            (train !== null && metro !== null)
+          ) {
+            vm.toggleFilter('mode');
+          }
 
-        // if all modes selected open up how to buy filter
-        if (bus !== null && train !== null && metro !== null) {
-          vm.toggleFilter('payment');
-        }
+          // if all modes selected open up how to buy filter
+          if (bus !== null && train !== null && metro !== null) {
+            vm.toggleFilter('payment');
+          }
 
-        vm.update(); // When feed is loaded run it through the filters
-        vm.loadingStatus = 'success';
-        // scroll to results
-        $location.hash('sbmBtn');
-        $anchorScroll();
-      });
+          vm.update(); // When feed is loaded run it through the filters
+          vm.loadingStatus = 'success';
+          vm.errorMessage = ''; // Clear any error messages
+          // scroll to results
+          $location.hash('sbmBtn');
+          $anchorScroll();
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          retryTicketSearch(data);
+          console.error(error);
+        });
     }
 
     function update() {
@@ -917,22 +1024,38 @@
 
     // get Out Of County Rail stations for autocomplete
     function getoocStations() {
-      ticketingService.getStations().then(function(response) {
-        // console.log("out of county stations");
-        // console.log(response);
-        const OutOfCounty = $filter('filter')(response, {
-          outOfCounty: 'true'
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          // console.log("out of county stations");
+          // console.log(response);
+          const OutOfCounty = $filter('filter')(response, {
+            outOfCounty: 'true'
+          });
+          vm.stationoocList = OutOfCounty;
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-        vm.stationoocList = OutOfCounty;
-      });
     }
 
     // get In County Rail stations for autocomplete
     function geticStations() {
-      ticketingService.getStations().then(function(response) {
-        const inCounty = $filter('filter')(response, { outOfCounty: 'false' });
-        vm.stationicList = inCounty;
-      });
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          const inCounty = $filter('filter')(response, { outOfCounty: 'false' });
+          vm.stationicList = inCounty;
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
+        });
     }
 
     // reset search
@@ -986,7 +1109,7 @@
         return false;
       };
       savedFilter.set('url', '');
-      vm.postJSON.stationNames = null;
+      vm.postJSON.stationNames = [];
       clearFromStation();
       clearToStation();
       clearViaOneStation();
@@ -1241,7 +1364,7 @@
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
       vm.stationViaOneName = null;
-      vm.postJSON.stationNames = null;
+      vm.postJSON.stationNames = [];
     }
 
     // control filters according to url parameters
@@ -1494,7 +1617,7 @@
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       } else if (
         vm.passValue === 'nbus' ||
         vm.passValue === 'National Express' ||
@@ -1504,7 +1627,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       }
     }
 
@@ -1514,7 +1637,7 @@
       if (vm.passValue === 'Swift Go') {
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       } else if (
         vm.passValue === 'nbus' ||
         vm.passValue === 'National Express' ||
@@ -1524,7 +1647,7 @@
         vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       }
     }
 
@@ -1556,15 +1679,22 @@
 
     // get tickets you can buy on swift
     function getSwiftPAYG() {
-      ticketingService.getSwiftSearch().then(function(response) {
-        vm.swiftPaygIds = [];
+      ticketingService
+        .getSwiftSearch()
+        .then(function(response) {
+          vm.swiftPaygIds = [];
 
-        angular.forEach(response, function(item) {
-          if (item.swiftCurrentAmount) {
-            vm.swiftPaygIds.push(item);
-          }
+          angular.forEach(response, function(item) {
+            if (item.swiftCurrentAmount) {
+              vm.swiftPaygIds.push(item);
+            }
+          });
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading Swift data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-      });
     }
 
     // if pass is swift abt

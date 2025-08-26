@@ -3,16 +3,19 @@
 
   angular
     .module('ticketingApp')
-    .factory('ticketingService', ['$http', ticketingService])
+    .factory('ticketingService', ['$http', '$cacheFactory', ticketingService])
     .factory('savedFilter', [savedFilter])
     .factory('updatePageView', ['$location', updatePageView]);
 
-  ticketingService.$inject = ['$http'];
-  function ticketingService($http) {
+  ticketingService.$inject = ['$http', '$cacheFactory'];
+  function ticketingService($http, $cacheFactory) {
     const uri = '$*api';
+    // Create a custom cache object
+    const postCache = $cacheFactory('postCache');
+
     return {
       ticketSearch: function(data) {
-        return getData($http.post(uri + 'tickets/search', data, { cache: true }));
+        return getData($http.post(uri + 'tickets/search', data, { cache: postCache }));
       },
       getTicket: function(data) {
         return getData($http.get(uri + 'tickets/' + data, { cache: true }));
@@ -33,7 +36,7 @@
         return getData($http.get(uri + 'brands', { cache: true }));
       },
       getSwiftSearch: function() {
-        return getData($http.post(uri + 'tickets/search', { cache: true }));
+        return getData($http.post(uri + 'tickets/search', { cache: postCache }));
       }
     };
 

@@ -53,6 +53,8 @@
     </p>
 </div>
 
+<div data-ng-if="tickets.errorMessage" class="grid-12 errors ng-scope"><div class="boxin -messages"><p><strong>Something has gone wrong</strong></p><p>{{ tickets.errorMessage }}</p></div></div>
+
 <div class="blocks cfx tickets-search">
     <div class="block block--side mobile--void"
         data-ng-if="tickets.all.length && tickets.loadingStatus == 'success'">

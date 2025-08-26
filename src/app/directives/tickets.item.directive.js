@@ -29,10 +29,14 @@
     } else if (window?.setTicketFinder?.name.includes('Oneapp Ticket Finder')) {
       vm.finderLink = 'oneapp/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
-      vm.finderLink = 'tfwm-sc/';
-    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Dev')) {
-      vm.finderLink = 'tfwm-sc-dev/';
+      vm.finderLink = 'tfwm-sc-desktop/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
+      vm.finderLink = 'tfwm-sc-desktop-test/';
+    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
+      vm.finderLink = 'tfwm-sc/';
+    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Dev')) {
+      vm.finderLink = 'tfwm-sc-dev/';
+    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
       vm.finderLink = 'tfwm-sc-test/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
       vm.finderLink = 'tfwm-sc-mobile/';
