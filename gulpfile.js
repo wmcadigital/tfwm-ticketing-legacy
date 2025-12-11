@@ -26,7 +26,7 @@ var gulpCopy = require('gulp-copy');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'azure';
+let build = 'azurelive';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -47,7 +47,7 @@ function determineBuild(done) {
       build = 'azurelive';
       break;
     default:
-      build = 'azure';
+      build = 'azurelive';
       break;
   }
   done();
