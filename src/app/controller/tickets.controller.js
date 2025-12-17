@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 (function() {
   'use strict';
 
@@ -383,18 +382,6 @@
           if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
             vm.filterButtons.railZoneTo.push(items.railZoneTo);
           }
-
-          // Check if the buy ticket url is a smartcitizen url and if so format it correctly
-          if (items.buyTicketUrl.includes('smartcitizen.net')) {
-            items.buyTicketUrl = items.buyTicketUrl
-              .replace('https://', '')
-              .replace(/[\[\]]/g, '')
-              .replace(/[{}]/g, '')
-              .replace(/:/g, '=')
-              .replace(/'/g, '');
-            items.buyTicketUrl = 'https://' + items.buyTicketUrl;
-          }
-          return items.buyTicketUrl;
         });
 
         fbus = vm.postedJSON.allowBus || false;
@@ -1043,7 +1030,7 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        // vm.postJSON.stationNames[0] = null;
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -1054,7 +1041,7 @@
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFromOOC');
       vm.stationFromName = null;
-      vm.postJSON.stationNames[0] = null;
+      vm.postJSON.stationNames = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1104,7 +1091,7 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        // vm.postJSON.stationNames[1] = null;
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1116,7 +1103,7 @@
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo2');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo3');
       vm.stationToName = '';
-      vm.postJSON.stationNames[1] = null;
+      // vm.postJSON.stationNames = '';
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
