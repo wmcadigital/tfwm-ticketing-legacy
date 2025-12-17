@@ -236,7 +236,7 @@ const paths = {
     minName: 'swift.partials.min.js'
   },
   templatesOneapp: {
-    src: './src/app/**/views/app/*.html',
+    src: './src/app/**/views/oneapp/*.html',
     minName: 'oneapp.partials.min.js'
   },
   images: {
@@ -636,7 +636,8 @@ function minImages() {
 function server(done) {
   browserSync.init({
     server: {
-      baseDir: paths.server.baseDir
+      baseDir: ['build', paths.server.baseDir],
+      index: 'index.html'
     },
     port: paths.server.port
   });
@@ -646,10 +647,10 @@ function server(done) {
 function serverSwift(done) {
   browserSync.init({
     server: {
-      baseDir: paths.serverSwift.baseDir
+      baseDir: ['build', paths.serverSwift.baseDir],
+      index: 'index-swift.html'
     },
-    port: paths.serverSwift.port,
-    index: paths.serverSwift.index
+    port: paths.serverSwift.port
   });
   done();
 }
@@ -657,10 +658,10 @@ function serverSwift(done) {
 function serverOneapp(done) {
   browserSync.init({
     server: {
-      baseDir: paths.serverOneapp.baseDir
+      baseDir: ['build', paths.serverOneapp.baseDir],
+      index: 'index-oneapp.html'
     },
-    port: paths.serverOneapp.port,
-    index: paths.serverOneapp.index
+    port: paths.serverOneapp.port
   });
   done();
 }

@@ -134,7 +134,7 @@
       "appHost": "",
       "cdn": "/build/",
       "imgUrl": "/build/img",
-      "api": "https://tickets.api.stageapp.net/",
+      "api": "https://wmca-api-portal-staging.azure-api.net/ticketing/v2/",
       "swiftGo": "Swift ABT",
       "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp"
     }
