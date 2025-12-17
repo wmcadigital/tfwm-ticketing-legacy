@@ -13,14 +13,20 @@
 
 <head>
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5HPFPWN');</script>
+  <script>(function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+  w[l].push({
+          'gtm.start': new Date().getTime(),
+    event: 'gtm.js'
+        });
+  var f = d.getElementsByTagName(s)[0];
+  var j = d.createElement(s);
+  var dl = l != 'dataLayer' ? '&l=' + l : '';
+  j.async = true;
+  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+  f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-NVSWZS');
+</script>
   <!-- End Google Tag Manager -->
   <meta name="keywords"
     content="Centro,public transport, buses, coaches, taxis, trains, metro, mobility, travel, west midlands, getting around, planes, cars, pedestrian, traffic,Passenger Transport Authority, Passenger Transport Executive,showcase route,network west midlands, Local Transport Plan, Five Year Plan" />
@@ -81,10 +87,10 @@
 
   <!-- <link
       rel="stylesheet"
-      href="https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/css/wmn/wmn-ticketing.css"
+      href="https://cloudcdn.wmca.org.uk/wmnassets/apps/ticketing/2.15.99/css/tfwm/tfwm-ticketing.css"
     /> -->
 
-  <link rel="stylesheet" type="text/css" href="css/wmn/wmn-ticketing.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/tfwm/tfwm-ticketing.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css"
     integrity="sha256-auPoJwk/+RK6KSkib92Dkq1Y5hEkZvKtvSwucs15Skg=" crossorigin="anonymous" />
@@ -92,7 +98,7 @@
   <!--<link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/screen.css?v=0.1" />
         <link rel="stylesheet" type="text/css" href="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/wmn-css/nwm-custom.css" />-->
 
-  <link rel="stylesheet" type="text/css" href="css/wmn/wmn-ticketing.css" rel="stylesheet" />
+
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!--<![endif]-->
   <!--[if lte IE 8]>
@@ -121,18 +127,27 @@
   <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-2.1.3.min.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/mvc/5.1/jquery.validate.unobtrusive.min.js"></script>
+  <script src="https://js.sentry-cdn.com/27b36c8c62eab745c480523b91978937.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.onLoad(function() {
+      Sentry.init({
+        dsn: 'https://27b36c8c62eab745c480523b91978937@o489652.ingest.us.sentry.io/4509593672155136',
+        _experiments: { enableLogs: true }
+      });
+    });
+  </script>
 </head>
 
 <body class="bg--grey bg--tint ticketing-page">
   <!-- Google Tag Manager (noscript) -->
   <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HPFPWN" height="0" width="0"
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVSWZS" height="0" width="0"
       style="display:none;visibility:hidden"></iframe>
   </noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <div class="testing">
-    <div class="ticketing-app wrap wrap--padded" data-ng-view></div>
-  </div>
+
+  <div class="ticketing-app wrap wrap--padded" data-ng-view></div>
+
   <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-ui-custom.min.js"></script>
   <script src="https://cloudcdn.wmca.org.uk/openlayers/v3.5.0/ol.js" type="text/javascript"></script>
   <!-- this is only required if using page transitions on T8 -->
@@ -155,14 +170,14 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 
   <!-- App code -->
-  <script src="js/wmn.app.min.js"></script>
-  <script src="js/services.min.js"></script>
-  <script src="js/controller.min.js"></script>
-  <script src="js/directives.min.js"></script>
-  <script src="js/shared.min.js"></script>
-  <script src="js/assets.min.js"></script>
-  <script src="js/partials.min.js"></script>
-  <script src="js/shared.partials.min.js"></script>
+  <script src="../js/tfwm.app.min.js"></script>
+  <script src="../js/tfwm.services.min.js"></script>
+  <script src="../js/tfwm.controller.min.js"></script>
+  <script src="../js/tfwm.directives.min.js"></script>
+  <script src="../js/tfwm.shared.min.js"></script>
+  <script src="../js/tfwm.assets.min.js"></script>
+  <script src="../js/tfwm.partials.min.js"></script>
+  <script src="../js/tfwm.shared.partials.min.js"></script>
 
   <!--<script src="assets/angucomplete-alt.min.js"></script>-->
   <script src="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
@@ -170,6 +185,14 @@
   <!--<script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/nwm-custom.js"></script>-->
 
   <script src="https://cloudcdn.wmca.org.uk/tfwmassets/js/header-footer.min.js"></script>
+
+  <script>
+    // set the ticket finder name
+    // eslint-disable-next-line angular/window-service
+    window.setTicketFinder = {
+      name: 'TfWM Ticket Finder'
+    };
+  </script>
 
 </body>
 
