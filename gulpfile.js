@@ -97,6 +97,8 @@ const paths = {
         minName: 'oneapp.app.min.js',
         lint: true
       },
+      { src: 'src/app/js/app/*.js', minName: 'app.app.min.js', lint: true },
+      { src: 'src/app/js/app-test/*.js', minName: 'app-test.app.min.js', lint: true },
       { src: 'src/assets/**/*.js', minName: 'assets.min.js', lint: false },
       { src: 'src/app/services/*.js', minName: 'services.min.js', lint: true },
       { src: 'src/app/shared/*.js', minName: 'shared.min.js', lint: true },
@@ -113,13 +115,105 @@ const paths = {
     ],
     output: 'build/js/' // Output location of minified JS files
   },
+  scriptsTfwm: {
+    src: './src/**/*.js', // Src of JS files
+    // List of JS folders to concatenate, lint and minified to one file (DON'T LINT ASSETS AS IT WILL TAKE TOO LONG TO SCAN MINIFIED LIBS)
+    minifySrc: [
+      { src: 'src/app/js/wmn/*.js', minName: 'tfwm.app.min.js', lint: true },
+      { src: 'src/assets/**/*.js', minName: 'tfwm.assets.min.js', lint: false },
+      { src: 'src/app/services/*.js', minName: 'tfwm.services.min.js', lint: true },
+      { src: 'src/app/shared/*.js', minName: 'tfwm.shared.min.js', lint: true },
+      {
+        src: 'src/app/controller/*.js',
+        minName: 'tfwm.controller.min.js',
+        lint: true
+      },
+      {
+        src: 'src/app/directives/*.js',
+        minName: 'tfwm.directives.min.js',
+        lint: true
+      }
+    ],
+    output: 'build/tfwm/js/'
+  },
+  scriptsOneapp: {
+    src: './src/**/*.js', // Src of JS files
+    // List of JS folders to concatenate, lint and minified to one file (DON'T LINT ASSETS AS IT WILL TAKE TOO LONG TO SCAN MINIFIED LIBS)
+    minifySrc: [
+      { src: 'src/app/js/oneapp/*.js', minName: 'oneapp.app.min.js', lint: true },
+      { src: 'src/assets/**/*.js', minName: 'oneapp.assets.min.js', lint: false },
+      { src: 'src/app/services/*.js', minName: 'oneapp.services.min.js', lint: true },
+      { src: 'src/app/shared/*.js', minName: 'oneapp.shared.min.js', lint: true },
+      {
+        src: 'src/app/controller/*.js',
+        minName: 'oneapp.controller.min.js',
+        lint: true
+      },
+      {
+        src: 'src/app/directives/*.js',
+        minName: 'oneapp.directives.min.js',
+        lint: true
+      }
+    ],
+    output: 'build/oneapp/js/'
+  },
+  scriptsApp: {
+    src: './src/**/*.js', // Src of JS files
+    // List of JS folders to concatenate, lint and minified to one file (DON'T LINT ASSETS AS IT WILL TAKE TOO LONG TO SCAN MINIFIED LIBS)
+    minifySrc: [
+      { src: 'src/app/js/app/*.js', minName: 'app.app.min.js', lint: true },
+      { src: 'src/assets/**/*.js', minName: 'app.assets.min.js', lint: false },
+      { src: 'src/app/services/*.js', minName: 'app.services.min.js', lint: true },
+      { src: 'src/app/shared/*.js', minName: 'app.shared.min.js', lint: true },
+      {
+        src: 'src/app/controller/*.js',
+        minName: 'app.controller.min.js',
+        lint: true
+      },
+      {
+        src: 'src/app/directives/*.js',
+        minName: 'app.directives.min.js',
+        lint: true
+      }
+    ],
+    output: 'build/app/js/'
+  },
+  scriptsAppTest: {
+    src: './src/**/*.js', // Src of JS files
+    // List of JS folders to concatenate, lint and minified to one file (DON'T LINT ASSETS AS IT WILL TAKE TOO LONG TO SCAN MINIFIED LIBS)
+    minifySrc: [
+      { src: 'src/app/js/app/*.js', minName: 'app-test.app.min.js', lint: true },
+      { src: 'src/assets/**/*.js', minName: 'app-test.assets.min.js', lint: false },
+      { src: 'src/app/services/*.js', minName: 'app-test.services.min.js', lint: true },
+      { src: 'src/app/shared/*.js', minName: 'app-test.shared.min.js', lint: true },
+      {
+        src: 'src/app/controller/*.js',
+        minName: 'app-test.controller.min.js',
+        lint: true
+      },
+      {
+        src: 'src/app/directives/*.js',
+        minName: 'app-test.directives.min.js',
+        lint: true
+      }
+    ],
+    output: 'build/app-test/js/'
+  },
   templates: {
     src: './src/app/**/views/wmn/*.html',
-    minName: 'partials.min.js'
+    minName: 'tfwm.partials.min.js'
+  },
+  templatesApp: {
+    src: './src/app/**/views/app/*.html',
+    minName: 'app.partials.min.js'
+  },
+  templatesAppTest: {
+    src: './src/app/**/views/app/*.html',
+    minName: 'app-test.partials.min.js'
   },
   templatesShared: {
     src: './src/app/**/views/shared/*.html',
-    minName: 'shared.partials.min.js'
+    minName: 'tfwm.shared.partials.min.js'
   },
   templatesSwiftShared: {
     src: './src/app/**/views/shared/*.html',
@@ -129,12 +223,20 @@ const paths = {
     src: './src/app/**/views/shared/*.html',
     minName: 'oneapp.shared.partials.min.js'
   },
+  templatesAppShared: {
+    src: './src/app/**/views/shared/*.html',
+    minName: 'app.shared.partials.min.js'
+  },
+  templatesAppTestShared: {
+    src: './src/app/**/views/shared/*.html',
+    minName: 'app-test.shared.partials.min.js'
+  },
   templatesSwift: {
     src: './src/app/**/views/swift/*.html',
     minName: 'swift.partials.min.js'
   },
   templatesOneapp: {
-    src: './src/app/**/views/oneapp/*.html',
+    src: './src/app/**/views/app/*.html',
     minName: 'oneapp.partials.min.js'
   },
   images: {
@@ -200,6 +302,26 @@ function buildScripts(done) {
   done();
 }
 
+function buildTfwmScripts(done) {
+  paths.scriptsTfwm.minifySrc.map(jsFile => minifyJS(jsFile));
+  done();
+}
+
+function buildOneappScripts(done) {
+  paths.scriptsOneapp.minifySrc.map(jsFile => minifyJS(jsFile));
+  done();
+}
+
+function buildAppScripts(done) {
+  paths.scriptsApp.minifySrc.map(jsFile => minifyJS(jsFile));
+  done();
+}
+
+function buildAppTestScripts(done) {
+  paths.scriptsAppTest.minifySrc.map(jsFile => minifyJS(jsFile));
+  done();
+}
+
 // Placeholder function for buildScripts to loop through
 function minifyJS(jsFile) {
   return src(jsFile.src)
@@ -260,6 +382,42 @@ function buildTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+function buildAppTemplates() {
+  return src(paths.templatesApp.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesApp.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
+function buildAppTestTemplates() {
+  return src(paths.templatesAppTest.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesAppTest.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrl))
+    .pipe(replace('$*baseUrlSwift', json.buildDirs[build].baseUrlSwift))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
 // Lint Shared Templates/HTML
 function lintSharedTemplates() {
   return src(paths.templatesShared.src)
@@ -275,6 +433,18 @@ function lintSharedSwiftTemplates() {
 
 function lintSharedOneappTemplates() {
   return src(paths.templatesOneappShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function lintSharedAppTemplates() {
+  return src(paths.templatesAppShared.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+function lintSharedAppTestTemplates() {
+  return src(paths.templatesAppTestShared.src)
     .pipe(htmlHint('.htmlhintrc'))
     .pipe(htmlHint.reporter());
 }
@@ -335,6 +505,42 @@ function buildSharedOneappTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+function buildSharedAppTemplates() {
+  return src(paths.templatesAppShared.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesAppShared.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
+function buildSharedAppTestTemplates() {
+  return src(paths.templatesAppTestShared.src)
+    .pipe(htmlMin({ collapseWhitespace: true, removeComments: true }))
+    .pipe(
+      ngHtml2Js({
+        moduleName: 'ticketingApp'
+      })
+    )
+    .pipe(concat(paths.templatesAppTestShared.minName))
+    .pipe(terser())
+    .pipe(replace('$*baseUrl', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*baseUrlOneapp', json.buildDirs[build].baseUrlOneapp))
+    .pipe(replace('$*oneappHost', json.buildDirs[build].oneappHost))
+    .pipe(replace('$*imgUrl', json.buildDirs[build].imgUrl))
+    .pipe(replace('$*paygLink', json.buildDirs[build].paygLink))
+    .pipe(dest('./build/js/'));
+}
+
 // Lint Swift Templates/HTML
 function lintSwiftTemplates() {
   return src(paths.templatesShared.src)
@@ -381,8 +587,26 @@ function buildOneappTemplates() {
     .pipe(dest('./build/js/'));
 }
 
+// Lint App Templates/HTML
+function lintAppTemplates() {
+  return src(paths.templatesApp.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
+// Lint App-test Templates/HTML
+function lintAppTestTemplates() {
+  return src(paths.templatesAppTest.src)
+    .pipe(htmlHint('.htmlhintrc'))
+    .pipe(htmlHint.reporter());
+}
+
 function moveMain() {
   return src(['index.html']).pipe(gulpCopy('build', { prefix: 1 }));
+}
+
+function moveTfWM() {
+  return src(['tfwm/index.html']).pipe(gulpCopy('build/tfwm', { prefix: 1 }));
 }
 
 function moveSwift() {
@@ -391,6 +615,14 @@ function moveSwift() {
 
 function moveOneapp() {
   return src(['oneapp/index.html']).pipe(gulpCopy('build/oneapp', { prefix: 1 }));
+}
+
+function moveApp() {
+  return src(['app/index.html']).pipe(gulpCopy('build/app', { prefix: 1 }));
+}
+
+function moveAppTest() {
+  return src(['app-test/index.html']).pipe(gulpCopy('build/app-test', { prefix: 1 }));
 }
 
 // Optimise images
@@ -442,12 +674,20 @@ const buildAll = series(
   cleanBuild,
   minImages,
   buildScripts,
+  buildTfwmScripts,
+  buildOneappScripts,
+  buildAppScripts,
+  buildAppTestScripts,
   buildStyles,
   buildSwiftStyles,
   buildTemplates,
+  buildAppTemplates,
+  buildAppTestTemplates,
   buildSharedTemplates,
   buildSharedSwiftTemplates,
   buildSharedOneappTemplates,
+  buildSharedAppTemplates,
+  buildSharedAppTestTemplates,
   buildSwiftTemplates,
   buildOneappTemplates,
   lintScripts,
@@ -455,11 +695,18 @@ const buildAll = series(
   lintSharedTemplates,
   lintSharedSwiftTemplates,
   lintSharedOneappTemplates,
+  lintSharedAppTemplates,
+  lintSharedAppTestTemplates,
   lintSwiftTemplates,
   lintOneappTemplates,
+  lintAppTemplates,
+  lintAppTestTemplates,
   moveMain,
+  moveTfWM,
   moveSwift,
-  moveOneapp
+  moveOneapp,
+  moveApp,
+  moveAppTest
 );
 // Watch files for changes
 function watchFiles() {
@@ -472,12 +719,20 @@ function watchFiles() {
       lintSharedTemplates,
       lintSharedSwiftTemplates,
       lintSharedOneappTemplates,
+      lintSharedAppTemplates,
+      lintSharedAppTestTemplates,
       lintSwiftTemplates,
       lintOneappTemplates,
+      lintAppTemplates,
+      lintAppTestTemplates,
       buildTemplates,
+      buildAppTemplates,
+      buildAppTestTemplates,
       buildSharedTemplates,
       buildSharedSwiftTemplates,
       buildSharedOneappTemplates,
+      buildSharedAppTemplates,
+      buildSharedAppTestTemplates,
       buildSwiftTemplates,
       buildOneappTemplates,
       reload
@@ -499,22 +754,37 @@ const dev = series(
   lintSharedTemplates,
   lintSharedSwiftTemplates,
   lintSharedOneappTemplates,
+  lintSharedAppTemplates,
+  lintSharedAppTestTemplates,
   lintSwiftTemplates,
   lintOneappTemplates,
+  lintAppTemplates,
+  lintAppTestTemplates,
   parallel(
     buildStyles,
     buildSwiftStyles,
     buildScripts,
+    buildTfwmScripts,
+    buildOneappScripts,
+    buildAppScripts,
+    buildAppTestScripts,
     buildTemplates,
+    buildAppTemplates,
+    buildAppTestTemplates,
     buildSharedTemplates,
     buildSharedSwiftTemplates,
     buildSharedOneappTemplates,
+    buildSharedAppTemplates,
+    buildSharedAppTestTemplates,
     buildSwiftTemplates,
     buildOneappTemplates,
     minImages,
     moveMain,
+    moveTfWM,
     moveSwift,
-    moveOneapp
+    moveOneapp,
+    moveApp,
+    moveAppTest
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -534,7 +804,11 @@ const devOneapp = series(
   lintTemplates,
   lintSharedTemplates,
   lintSharedOneappTemplates,
+  lintSharedAppTemplates,
+  lintSharedAppTestTemplates,
   lintOneappTemplates,
+  lintAppTemplates,
+  lintAppTestTemplates,
   parallel(buildStyles, buildScripts, buildOneappTemplates, minImages),
   parallel(watchFiles, serverOneapp)
 );
@@ -548,24 +822,36 @@ exports.lintTemplates = series(
   lintSharedTemplates,
   lintSharedSwiftTemplates,
   lintSharedOneappTemplates,
+  lintSharedAppTemplates,
+  lintSharedAppTestTemplates,
   lintSwiftTemplates,
-  lintOneappTemplates
+  lintOneappTemplates,
+  lintAppTemplates,
+  lintAppTemplates
 );
 exports.clean = cleanBuild;
 exports.buildScripts = series(buildScripts, lintScripts);
+exports.buildTfwmScripts = series(buildTfwmScripts);
+exports.buildOneappScripts = series(buildOneappScripts);
+exports.buildAppScripts = series(buildAppScripts);
+exports.buildAppTestScripts = series(buildAppTestScripts);
 exports.buildStyles = buildStyles;
 exports.buildSwiftStyles = buildSwiftStyles;
 exports.buildTemplates = series(
   buildTemplates,
+  buildAppTemplates,
+  buildAppTestTemplates,
   buildSharedTemplates,
   buildSharedSwiftTemplates,
   buildSharedOneappTemplates,
   buildSwiftTemplates,
-  buildOneappTemplates,
-  lintTemplates
+  buildOneappTemplates
 );
 exports.moveMain = moveMain;
+exports.moveTfWM = moveTfWM;
 exports.moveSwift = moveSwift;
 exports.moveOneapp = moveOneapp;
+exports.moveApp = moveApp;
+exports.moveAppTest = moveAppTest;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
