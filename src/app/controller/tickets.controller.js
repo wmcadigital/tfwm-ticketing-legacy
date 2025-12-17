@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 (function() {
   'use strict';
 
@@ -383,18 +382,6 @@
           if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
             vm.filterButtons.railZoneTo.push(items.railZoneTo);
           }
-
-          // Check if the buy ticket url is a smartcitizen url and if so format it correctly
-          if (items.buyTicketUrl.includes('smartcitizen.net')) {
-            items.buyTicketUrl = items.buyTicketUrl
-              .replace('https://', '')
-              .replace(/[\[\]]/g, '')
-              .replace(/[{}]/g, '')
-              .replace(/:/g, '=')
-              .replace(/'/g, '');
-            items.buyTicketUrl = 'https://' + items.buyTicketUrl;
-          }
-          return items.buyTicketUrl;
         });
 
         fbus = vm.postedJSON.allowBus || false;
