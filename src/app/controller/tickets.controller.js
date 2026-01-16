@@ -1030,7 +1030,7 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        // vm.postJSON.stationNames[0] = null;
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -1041,7 +1041,7 @@
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFromOOC');
       vm.stationFromName = null;
-      vm.postJSON.stationNames[0] = null;
+      vm.postJSON.stationNames = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1091,7 +1091,7 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        // vm.postJSON.stationNames[1] = null;
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1103,7 +1103,7 @@
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo2');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo3');
       vm.stationToName = '';
-      vm.postJSON.stationNames[1] = null;
+      // vm.postJSON.stationNames = '';
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;

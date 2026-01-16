@@ -1,5 +1,9 @@
 # Release Notes
 
+## Ticketing v2.15.102
+
+- fix: issue when removing and adding a train station
+
 ## Ticketing v2.15.101
 
 - update: amend links to legacy.wmnetwork.org.uk
