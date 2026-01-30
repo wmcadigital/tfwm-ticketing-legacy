@@ -25,7 +25,7 @@
           id="jpbus"
           name="transportModeBus"
           data-ng-model="tickets.postJSON.allowBus"
-          data-ng-false-value="null"
+          data-ng-false-value="false"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
@@ -33,7 +33,8 @@
           <svg
             xmlns="http://www.w3.org/2000/svg"
             id="Layer_1"
-            viewbox="0 0 24 24"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <style type="text/css">
               .st0 {
@@ -57,12 +58,15 @@
           id="jptrain"
           name="transportModeTrain"
           data-ng-model="tickets.postJSON.allowTrain"
-          data-ng-false-value="null"
+          data-ng-false-value="false"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
         <label for="jptrain" data-ng-click="tickets.clearStation();">
-          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          >
             <style type="text/css">
               .st0 {
                 fill: none;
@@ -87,12 +91,14 @@
           id="jptram"
           name="transportModeTram"
           data-ng-model="tickets.postJSON.allowMetro"
-          data-ng-false-value="null"
+          data-ng-false-value="false"
           data-ng-true-value="true"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
         <label for="jptram">
-          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24"
+          aria-hidden="true">
             <style type="text/css">
               .st0 {
                 fill: none;
