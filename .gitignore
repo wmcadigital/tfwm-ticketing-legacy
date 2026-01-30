@@ -1,5 +1,5 @@
 node_modules/
-build/
+/build/
 _sourcemaps/
 !gitignore
 !package.json

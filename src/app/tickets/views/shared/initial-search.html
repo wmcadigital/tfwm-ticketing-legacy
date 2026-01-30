@@ -60,9 +60,10 @@
           data-ng-model="tickets.postJSON.allowTrain"
           data-ng-false-value="false"
           data-ng-true-value="true"
+          data-ng-change="tickets.clearStation();"
           ng-disabled="tickets.postJSON.brand && tickets.postJSON.brand != ''"
         />
-        <label for="jptrain" data-ng-click="tickets.clearStation();">
+        <label for="jptrain">
           <svg xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 24 24"
           aria-hidden="true"
