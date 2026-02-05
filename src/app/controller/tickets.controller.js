@@ -89,6 +89,7 @@
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
     vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
+    vm.openAccordion = openAccordion; // Function to open accordion 
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -1703,6 +1704,28 @@
       if (vm.passValue === '') {
         console.log('select pass');
         vm.clearFilter();
+      }
+    }
+
+    function openAccordion(event) {
+      const accordionBtn = event && event.currentTarget;
+      if (!accordionBtn) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const accordion = accordionBtn.closest ? accordionBtn.closest('.wmnds-accordion') : null;
+      if (!accordion) {
+        return;
+      }
+
+      if (accordion.classList.contains('wmnds-is--open')) {
+        accordion.classList.remove('wmnds-is--open');
+        accordionBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        accordion.classList.add('wmnds-is--open');
+        accordionBtn.setAttribute('aria-expanded', 'true');
       }
     }
 

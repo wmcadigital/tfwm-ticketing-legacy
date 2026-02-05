@@ -3385,3 +3385,24 @@ a.icon-stylized-new:focus span:after {
 .sm__link--in {
     background-position: -242px -182px;
 }
+
+.wmnds-accordion {
+    button{
+        padding: 0px !important;
+        margin-bottom: 4px !important;
+        .wmnds-accordion__summary h4{
+            font-weight: lighter !important; 
+            font-size: 14px !important;           
+        }
+        svg{
+            width: 21px !important;
+            height: 21px !important;
+        }   
+    }
+
+    .wmnds-accordion__content{
+        border: 1px solid lightgray !important;
+        min-width: 265px;        
+    }
+
+}
