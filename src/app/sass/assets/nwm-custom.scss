@@ -3089,6 +3089,23 @@ a.icon-stylized-new {
     padding: 15px 40px;
 }
 
+/* Visually hide the checkbox while keeping it keyboard and screen-reader accessible, preventing the native focus indicator. */
+.icon-stylized-new input[type="checkbox"] {
+  position: absolute;
+  left: -9999px;   // move focus ring off-screen
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Show a strong focus indicator on the visible control (label) */
+.icon-stylized-new > input[type="checkbox"]:focus-visible + label {
+  outline: 4px solid #008dc9;     /* replace with your focus token/colour */
+}
+
 .labels-new {
     overflow: hidden;
     width: 100%;
