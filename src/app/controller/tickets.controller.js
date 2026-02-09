@@ -1763,11 +1763,11 @@
     function srPronunciation(text) {
        if (!text) return text;
 
-  // Remove any previous joiners/spaces we may have added (prevents double insertion)
-  const cleaned = text.replace(/[\u200B\u2060]/g, '');
-
-  // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
-  return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
+       // Remove any previous joiners/spaces we may have added (prevents double insertion)
+        const cleaned = text.replace(/[\u200B\u2060]/g, '');
+        
+        // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
+        return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
     }
 
     // set current date to test for ticketFutureDate
