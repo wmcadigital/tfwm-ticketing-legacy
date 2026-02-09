@@ -16,8 +16,8 @@
   <div class="itemContent">
     <div class="grid-8">
       <a data-ng-href="$*baseUrl{{vm.finderLink}}#/ticket/{{ticket.id}}">
-        <h4 class="event__title">
-          {{ticket.name}}
+        <span class="event__title">
+          {{tickets.srPronunciation(ticket.name)}}
           <span class="payment-icons">
             <img
               ng-src="$*imgUrl/swift-logo.png"
@@ -34,7 +34,7 @@
               title="This ticket can be purchased on Direct Debit"
             />
           </span>
-        </h4>
+        </span>
       </a>
     </div>
     <div class="grid-4 modes">

@@ -90,6 +90,8 @@
     vm.deviceDetect = deviceDetect; // Function to detect device
     vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
     vm.openAccordion = openAccordion; // Function to open accordion 
+    vm.getValiditySuffix = getValiditySuffix; // Function to get the suffix for the price based on the ticket validity
+    vm.srPronunciation = srPronunciation; // Function to get the pronunciation for screen readers
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -1727,6 +1729,45 @@
         accordion.classList.add('wmnds-is--open');
         accordionBtn.setAttribute('aria-expanded', 'true');
       }
+    }
+
+    // Returns the appropriate validity suffix (day, week, month, year) based on ticket rules
+    function getValiditySuffix(ticket) {
+      // If ticketCurrentAmount AND onlineCurrentAmount, show no suffix (matches your hide condition)
+      if (ticket.ticketCurrentAmount && ticket.onlineCurrentAmount) return '';
+
+      // Map validityId to suffix
+      switch (ticket.validityId) {
+        case 450930002:
+        case 450930006:
+        case 450930010:
+          return ' per month';
+
+        case 450930000:
+          // your existing exception rules
+          if (ticket.type === 'Carnet' || ticket.id === '811') return '';
+          return ' a day';
+
+        case 450930001:
+          return ' a week';
+
+        case 450930003:
+          return ' for 1 year';
+
+        default:
+          return '';
+      }
+    }
+
+    // Ensures screen readers pronounce nbus, ntrain, and nnetwork correctly
+    function srPronunciation(text) {
+       if (!text) return text;
+
+  // Remove any previous joiners/spaces we may have added (prevents double insertion)
+  const cleaned = text.replace(/[\u200B\u2060]/g, '');
+
+  // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
+  return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
     }
 
     // set current date to test for ticketFutureDate
