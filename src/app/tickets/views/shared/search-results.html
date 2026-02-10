@@ -1,6 +1,6 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="tickets.loadingStatus === 'success'">
-    <h3 class="filtered-header__heading">
-        <span class="type--blue">{{tickets.filteredTickets.length}}</span> tickets matching your criteria</h3>
+    <p tabindex="0" class="filtered-header__heading">
+        <span class="type--blue">{{tickets.filteredTickets.length}}</span> tickets matching your criteria</p>
 
     <div class="mobile-only">
         <div class="rowcontainer">
@@ -71,7 +71,7 @@
         <!-- Exact matched to search -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'"
             class="filtered-header boxin bdr-top--navy">
-            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</h3> 
+            <p tabindex="0" class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</p> 
         </div>
 
         <!-- error messages -->
@@ -109,7 +109,7 @@
         <!-- Other matches -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'"
             class="boxin title bdr-top--navy">
-            <h3 class="filtered-header__heading"><span class="type--blue">{{tickets.otherTickets.length}}</span> matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</h3>
+            <p tabindex="0" class="filtered-header__heading"><span class="type--blue">{{tickets.otherTickets.length}}</span> matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</p>
         </div>
 
         <!-- search results for other items-->
