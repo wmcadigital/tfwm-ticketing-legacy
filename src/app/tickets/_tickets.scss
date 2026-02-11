@@ -139,10 +139,12 @@ a.icon-stylized-new:focus span:after {
   }
 
   .price {
+    p{
     font-weight: bold;
     margin-top: 10px;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 30px;    
+  }
   }
 
   .event__date {
