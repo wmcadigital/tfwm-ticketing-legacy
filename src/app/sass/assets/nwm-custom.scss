@@ -3101,13 +3101,19 @@ a.icon-stylized-new {
   border: 0;
 }
 
+
+$focusBackColor: rgb(8, 184, 237); /* replace with your focus token/colour */
+
 /* Show a strong focus indicator on the visible control (label) */
-.icon-stylized-new > input[type="checkbox"]:focus-visible + label {
-  outline: 4px solid #008dc9;     /* replace with your focus token/colour */
+.icon-stylized-new > input[type="checkbox"]:focus-visible + label,
+.icon-stylized-new > input[type="radio"]:focus-visible + label,
+:where(a, button, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 4px solid $focusBackColor !important;
+  outline-offset: 1px !important;
+  border-radius: 3px !important; /* optional */
 }
 
 .labels-new {
-    overflow: hidden;
     width: 100%;
 }
 
