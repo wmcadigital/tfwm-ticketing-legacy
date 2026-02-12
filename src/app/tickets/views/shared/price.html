@@ -1,8 +1,8 @@
 <div class="grid-12">
     <div class="price">
         <span data-ng-if="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">From {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
-        <span data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">
-            <p>
+        <span class="icon-stylized-new" data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">
+            <p tabindex="0">
                 {{(ticket.standardCurrentAmount | currency:"£")}} {{ tickets.getValiditySuffix(ticket)}}
             </p>
         </span>   

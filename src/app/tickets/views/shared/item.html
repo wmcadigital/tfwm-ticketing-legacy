@@ -49,22 +49,27 @@
     </div>
     <price></price>
     <div class="grid-12 summary">
+      <span tabindex="0" class="icon-stylized-new">
       {{ticket.summary | removeHTMLTags}}
+      </span>
     </div>
 
     <div class="grid-12 operator" data-ng-if="ticket.operator != null">
+      <span tabindex="0" class="icon-stylized-new">
       <div class="grid-4">
         <strong>Operator:</strong>
       </div>
       <div class="grid-8">
         {{ticket.operator}}
       </div>
+      </span>
     </div>
 
     <div
       class="grid-12 where"
       data-ng-if="ticket.purchaseLocations.tic || ticket.purchaseLocations.payzone || ticket.purchaseLocations.railStation || ticket.purchaseLocations.onBus || ticket.purchaseLocations.onMetro || ticket.buyOnDirectDebit || ticket.buyOnSwift"
     >
+    <span tabindex="0" class="icon-stylized-new">
       <div class="grid-4">
         <strong>Where to buy:</strong>
       </div>
@@ -113,6 +118,7 @@
           </li>
         </ul>
       </div>
+      </span>
     </div>
 
     <!-- Price increase message -->
