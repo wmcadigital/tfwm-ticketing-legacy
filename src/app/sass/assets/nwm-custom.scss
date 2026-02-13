@@ -3107,7 +3107,7 @@ $focusBackColor: rgb(8, 184, 237); /* replace with your focus token/colour */
 /* Show a strong focus indicator on the visible control (label) */
 .icon-stylized-new > input[type="checkbox"]:focus-visible + label,
 .icon-stylized-new > input[type="radio"]:focus-visible + label,
-:where(a, p, button, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+:where(a, p, li, button, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
   outline: 3px solid $focusBackColor !important;
   outline-offset: 2px !important;
   border-radius: 2px !important; /* optional */
@@ -3411,6 +3411,7 @@ a.icon-stylized-new:focus span:after {
 }
 
 .wmnds-accordion {
+    background: transparent !important;
     button{
         padding: 0px !important;
         margin-bottom: 4px !important;
@@ -3426,7 +3427,23 @@ a.icon-stylized-new:focus span:after {
 
     .wmnds-accordion__content{
         border: 1px solid lightgray !important;
+        padding: 0px !important;
         min-width: 265px;        
     }
 
+}
+
+.wmnds-accordion__summary-wrapper{
+    position: relative;
+    .filter-title{
+        font-weight: 800;
+    }
+    i{
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9D5BAF;
+        font-weight: 800;
+    }
 }

@@ -1,7 +1,9 @@
-<div class="bg--blue bg--tint bdr-top--blue ticket-filters boxin">
+<div id="mobile-filters-root" class="bg--blue bg--tint bdr-top--blue ticket-filters boxin">
   <!--<a class="modal__close js-modal-close" data-ng-click="tickets.closeFilters()" >Close</a>-->
   <div class="boxin">
-    <h3>Filter your results</h3>
+    <h3 tabindex="0" data-ng-keydown="tickets.focusFirstMobileFilter($event)">
+      Filter your results
+    </h3>
     <p>
       <span class="type--blue">{{tickets.filteredTickets.length}}</span> tickets
       matching your criteria
@@ -12,7 +14,16 @@
       data-ng-hide="tickets.postedJSON.brand == 'Diamond Bus' || tickets.postedJSON.brand == 'Stagecoach' || tickets.postedJSON.brand == 'Swift PAYG'"
       data-ng-if="!tickets.postedJSON.allowBus || !tickets.postedJSON.allowTrain || !tickets.postedJSON.allowMetro"
     >
-      <div class="filter-title" data-ng-click="tickets.toggleFilter('mode')">
+      <div
+        id="mode-filter-title-mobile"
+        class="filter-title"
+        tabindex="0"
+        role="button"
+        data-ng-attr-aria-expanded="{{tickets.filterButtons.mode ? 'true' : 'false'}}"
+        aria-controls="mode-filter-options-mobile"
+        data-ng-click="tickets.toggleFilter('mode')"
+        data-ng-keydown="tickets.toggleFilterFromKeyboard($event, 'mode')"
+      >
         Exclude mode(s)
         <i class="material-icons">
           {{tickets.filterButtons.mode ? 'keyboard_arrow_up' :
@@ -20,6 +31,7 @@
         </i>
       </div>
       <ul
+        id="mode-filter-options-mobile"
         class="checkbox-list nga-fast nga-collapse"
         data-ng-show="tickets.filterButtons.mode"
       >
