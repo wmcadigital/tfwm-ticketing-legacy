@@ -10,12 +10,12 @@
             Exclude mode(s)
         </div>
         <i class="material-icons">
-            {{tickets.filterButtons.busTravelAreaBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            {{tickets.filterButtons.mode ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
         </i>
         </button>
     <!-- accordion content -->
-    <div class="wmnds-accordion__content" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
-        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.mode ? 'false' : 'true'">
+    <div class="wmnds-accordion__content filter-title" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
+        <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.mode">
                 <li data-ng-if="!tickets.postedJSON.allowBus">
                     <!-- (tickets.filteredTickets | filter: {allowBus: true}).length == '0' -->
                     <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized"
@@ -54,7 +54,7 @@
     </div>
 
     <div class="wmnds-accordion filter-block">
-    <button aria-controls="accordion-01" class="wmnds-accordion__summary-wrapper filter-title" aria-expanded="false"
+    <button aria-controls="accordion-02" class="wmnds-accordion__summary-wrapper filter-title" aria-expanded="false"
     data-ng-click="tickets.openAccordion($event); tickets.toggleFilter('time')">
         <!-- accordion summary -->
         <div class="filter-title">
@@ -66,7 +66,7 @@
         </i>
         </button>
     <!-- accordion content -->
-    <div class="wmnds-accordion__content" id="accordion-01" data-ng-click="tickets.toggleFilter('time')">
+    <div class="wmnds-accordion__content filter-title" id="accordion-02" data-ng-click="tickets.toggleFilter('mode')">
         <a data-ng-if="tickets.timePeriodAll == 'true' || tickets.searchFilters.timePeriod1 || tickets.searchFilters.timePeriod2 || tickets.searchFilters.timePeriod3 || tickets.searchFilters.timePeriod4"
             data-ng-click="tickets.clearTime();">Clear</a>
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.time">
@@ -139,7 +139,7 @@
         </i>
         </button>
     <!-- accordion content -->
-    <div class="wmnds-accordion__content" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
+    <div class="wmnds-accordion__content filter-title" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.busTravelAreaBtn">
                 <li>
                     <input id="busTravelArea" type="radio" class="stylized"
@@ -192,7 +192,7 @@
         </i>
         </button>
     <!-- accordion content -->
-    <div class="wmnds-accordion__content" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
+    <div class="wmnds-accordion__content filter-title" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
         <ul class="checkbox-list nga-fast nga-collapse" data-ng-show="tickets.filterButtons.operatorBtn">
                 <li>
                     <input id="operator00" type="radio" class="stylized" data-ng-model="tickets.searchFilters.operator"
@@ -216,7 +216,7 @@
     </div>
 
     <div class="wmnds-accordion filter-block">
-    <button aria-controls="accordion-01" class="wmnds-accordion__summary-wrapper filter-title" aria-expanded="false"
+    <button aria-controls="accordion-01" class="wmnds-accordion__summary-wrapper" aria-expanded="false"
     data-ng-click="tickets.openAccordion($event); tickets.toggleFilter('railZoneBtn')">
         <!-- accordion summary -->
         <div class="filter-title">
@@ -227,7 +227,7 @@
         </i>
         </button>
     <!-- accordion content -->
-    <div class="wmnds-accordion__content" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
+    <div class="wmnds-accordion__content filter-title" id="accordion-01" data-ng-click="tickets.toggleFilter('mode')">
         <div class="nga-fast nga-collapse" data-ng-show="tickets.filterButtons.railZoneBtn">
                 <div class="fields new-transport-icons-blue nga-fast nga-fade"
                     data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postedJSON.brand == 'ntrain' || tickets.postedJSON.brand == 'nnetwork'">
@@ -331,6 +331,43 @@
             </li>
         </ul>
     </div>
+
+    <!-- Train Zones-->
+    <!-- <div class="filter-block"
+        data-ng-if="tickets.postedJSON.allowTrain || tickets.postedJSON.brand == 'ntrain' || tickets.postedJSON.brand == 'nnetwork'">
+        <div class="filter-title" data-ng-click="tickets.toggleFilter('railZoneBtn')">
+            Train/rail zones
+            <i class="material-icons">
+                {{tickets.filterButtons.railZoneBtn ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+            </i>
+        </div>
+        <div class="nga-fast nga-collapse" data-ng-show="tickets.filterButtons.railZoneBtn">
+            <div class="fields new-transport-icons-blue nga-fast nga-fade"
+                data-ng-if="tickets.postJSON.allowBus || tickets.postJSON.allowTrain || tickets.postJSON.allowMetro || tickets.postedJSON.brand == 'ntrain' || tickets.postedJSON.brand == 'nnetwork'">
+                <label class="plain" for="PassengerType">From:</label>
+                <span class="stylized-select">
+                    <select id="railZoneFrom" name="railZoneFrom" aria-disabled="false"
+                        data-ng-model="tickets.searchFilters.railZoneFrom" data-ng-change="tickets.update()">
+                        <option value="">Any Zones</option>
+                        <option
+                            data-ng-repeat="option in tickets.filterButtons.railZoneFrom | orderBy: tickets.searchFilters.railZoneFrom | filter:''"
+                            value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+                <br /><br />
+                <label class="plain" for="PassengerType">To:</label>
+                <span class="stylized-select">
+                    <select id="railZoneTo" name="railZoneTo" aria-disabled="false"
+                        data-ng-model="tickets.searchFilters.railZoneTo" data-ng-change="tickets.update()">
+                        <option value="">Any Zones</option>
+                        <option
+                            data-ng-repeat="option in tickets.filterButtons.railZoneTo | orderBy: tickets.searchFilters.railZoneTo | filter:''"
+                            value="{{option}}">Zone {{option}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+    </div> -->
 
     <div class="filter-block" data-ng-if="tickets.postedJSON.brand == 'Swift PAYG'">
         <p>No filter options available</p>
