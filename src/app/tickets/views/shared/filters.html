@@ -13,8 +13,9 @@
             </i>
         </div> -->
 
-          <button aria-controls="accordion-01" class="wmnds-accordion__summary-wrapper" aria-expanded="false"
-            data-ng-click="tickets.openAccordion($event); tickets.toggleFilter('mode')">
+          <button aria-controls="accordion-01" data-ng-click="tickets.toggleFilter('mode')"
+          class="wmnds-accordion__summary-wrapper"           
+          aria-expanded="true">
             <!-- accordion summary -->
             <div class="filter-title">
                 Exclude mode(s)
@@ -23,8 +24,9 @@
                 {{tickets.filterButtons.mode ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
             </i>
         </button>
-        <ul class="checkbox-list nga-fast nga-collapse" 
-            data-ng-show="tickets.filterButtons.mode">
+
+        <div class="wmnds-accordion__content filter-title" id="accordion-01" data-ng-show="tickets.filterButtons.mode">
+        <ul class="checkbox-list nga-fast nga-collapse" >
                 <li data-ng-if="!tickets.postedJSON.allowBus">
                     <!-- (tickets.filteredTickets | filter: {allowBus: true}).length == '0' -->
                     <input id="bus-only-radio" name="busOnly" type="checkbox" class="stylized"
@@ -62,6 +64,7 @@
                             | filter: {allowMetro: true}).length}})</span></label>
                 </li>
             </ul>
+            </div>
     </div>
 
     <!-- How to Buy -->
@@ -77,7 +80,7 @@
             </div>
         </button>
         <div class="wmnds-accordion__content filter-title" id="accordion-01"
-            data-ng-click="tickets.toggleFilter('payment')">
+            >
             <a data-ng-if="tickets.searchFilters.buyOnDirectDebit || tickets.searchFilters.buyOnDirectPurchase || tickets.searchFilters.buyOnSwift || tickets.searchFilters.hasOnlinePurchaseChannel || tickets.searchFilters.purchaseTic || tickets.searchFilters.purchaseRailStation || tickets.searchFilters.purchasePayzone"
                 data-ng-click="tickets.clearPayment();">Clear</a>
             <ul class="checkbox-list nga-fast nga-collapse" 
