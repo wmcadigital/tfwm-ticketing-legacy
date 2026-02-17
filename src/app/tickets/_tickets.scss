@@ -191,6 +191,7 @@ a.icon-stylized-new:focus span:after {
       cursor: pointer;
       width: 100%;
       text-align: left;
+      background-color: transparent;
 
       &:hover {
         color: $cyan;
@@ -211,7 +212,7 @@ a.icon-stylized-new:focus span:after {
   }
 
   ul {
-    padding: 0 0 20px 0;
+    padding: 0;
     margin: 0;
 
     label {

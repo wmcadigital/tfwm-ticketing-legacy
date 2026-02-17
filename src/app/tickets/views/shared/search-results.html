@@ -24,18 +24,18 @@
     <div class="arrdep-filters cfx mobile--void" ng-hide="tickets.filteredTickets.length <= '1'">
         <div class="field">
             <div class="radio-bar">
-                <span>
+                <span class="icon-stylized-new">
                     <input id="popularity" name="ordering" title="Popularity" type="radio" value="orderSequence"
                         data-ng-model="tickets.orderBy" data-ng-change="tickets.update()">
                     <label for="popularity">Popularity</label>
                 </span>
-                <span>
+                <span class="icon-stylized-new">
                     <input id="lowtohigh" name="ordering" title="Price (Low - High)" type="radio"
                         value="ticketCurrentAmount" data-ng-model="tickets.orderBy"
                         data-ng-change="tickets.update();">
                     <label for="lowtohigh">Price (Low - High)</label>
                 </span>
-                <span>
+                <span class="icon-stylized-new">
                     <input id="hightolow" name="ordering" title="Price (High - Low)" type="radio"
                         value="-ticketCurrentAmount" data-ng-model="tickets.orderBy"
                         data-ng-change="tickets.update();">
