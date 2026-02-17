@@ -3426,13 +3426,13 @@ a.icon-stylized-new:focus span:after {
     }
     .wmnds-accordion__content{
         border: 1px solid lightgray !important;
-        padding: 0px !important;
         min-width: 265px;        
     }
 }
 
 .ticket-filters .wmnds-accordion__content{
     border: none !important;
+    padding: 0px !important;    
 }
 
 .wmnds-accordion__summary-wrapper{
