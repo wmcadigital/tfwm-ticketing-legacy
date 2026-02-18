@@ -89,7 +89,7 @@
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
     vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
-    vm.openAccordion = openAccordion; // Function to open accordion 
+    vm.openAccordion = openAccordion; // Function to open accordion
     vm.getValiditySuffix = getValiditySuffix; // Function to get the suffix for the price based on the ticket validity
     vm.srPronunciation = srPronunciation; // Function to get the pronunciation for screen readers
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
@@ -424,7 +424,7 @@
 
       vm.origFilters = {}; // set scope for original search filters and reset on every search
       // console.log('this is posted');
-      // console.log(vm.postedJSON);
+      console.log(vm.postedJSON);
 
       // work out all tickets available
       ticketingService
@@ -1761,13 +1761,13 @@
 
     // Ensures screen readers pronounce nbus, ntrain, and nnetwork correctly
     function srPronunciation(text) {
-       if (!text) return text;
+      if (!text) return text;
 
-       // Remove any previous joiners/spaces we may have added (prevents double insertion)
-        const cleaned = text.replace(/[\u200B\u2060]/g, '');
-        
-        // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
-        return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
+      // Remove any previous joiners/spaces we may have added (prevents double insertion)
+      const cleaned = text.replace(/[\u200B\u2060]/g, '');
+
+      // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
+      return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
     }
 
     // set current date to test for ticketFutureDate

@@ -491,9 +491,9 @@
       },
       template:
         '<div ng-show="show" class="mod">' +
-        '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
+        '<div ng-show="show" class="modal" ng-click="hideModal()" keyboard-click></div>' +
         '<div class="overlay modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
-        '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
+        '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()" keyboard-click>X</div>' +
         '<div class="ng-modal-dialog-content" ng-transclude></div>' +
         '</div>' +
         '</div>'
@@ -532,7 +532,7 @@
         '<div class="radio-bar">' +
         '<span ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
         '<input name="option" id="{{pane.title}}" type="radio">' +
-        '<label ng-click="select(pane)" for="{{pane.title}}" style="height: 44px;">{{pane.title}}</label>' +
+        '<label ng-click="select(pane)" for="{{pane.title}}" style="height: 44px;" keyboard-click>{{pane.title}}</label>' +
         '</span>' +
         '</div>' +
         '</div>' +
