@@ -85,7 +85,7 @@ a.icon-stylized-new:focus span:after {
       display: inline-flex;
     }
 
-    span label {
+    div label {
       padding: 0.78em 15px;
       height: 100%;
     }
@@ -584,6 +584,7 @@ label.plain,
 
 .stylized-select {
   display: block;
+  float: right;
 }
 
 form {
@@ -757,4 +758,8 @@ p.filtered-header__heading, h3.filtered-header__heading, h3 {
     width: 1.8rem;
     height: calc(1.8rem* 1.04742);
   }
+}
+
+fieldset {
+    padding: 0 !important;
 }
