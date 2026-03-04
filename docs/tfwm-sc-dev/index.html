@@ -100,7 +100,7 @@
 
 <body class="ticketing-page">
 
-    <div class="ticketing-app" data-ng-view></div>
+    <main class="ticketing-app" data-ng-view></main>
 
     <script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/vendor/jquery-ui-custom.min.js"></script>
     <script src="https://cloudcdn.wmca.org.uk/openlayers/v3.5.0/ol.js" type="text/javascript"></script>
@@ -143,19 +143,6 @@
         window.setTicketFinder = {
           name: 'Smart Citizen Dev'
         };
-
-        if (!document.getElementById('wmnds-icons-svg')) {
-          const ajax = new XMLHttpRequest();
-          ajax.open('GET', 'https://cloudcdn.wmca.org.uk/tfwmassets/ds/base/img/wmnds-icons.min.svg', true);
-          ajax.send();
-          ajax.onload = function() {
-            const div = document.createElement('div');
-            div.id = 'wmnds-icons-svg';
-            div.style.display = 'none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
-          };
-        }
     </script>
 
 </body>
