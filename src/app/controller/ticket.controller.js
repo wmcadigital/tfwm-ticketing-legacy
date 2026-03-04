@@ -302,11 +302,11 @@
             if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
               baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
-              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+              baseUrl = 'https://public-tfwm.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
               baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
-              baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+              baseUrl = 'https://public-tfwm.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
               baseUrl = 'https://public-tfwmtest.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
