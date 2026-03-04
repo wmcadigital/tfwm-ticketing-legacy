@@ -475,7 +475,7 @@
             // https://public-tfwmdev.smartcitizen.net/?matrixId=AAA116
             // https://public-tfwmtest.smartcitizen.net/?matrixId=AAA116
 
-            // https://public-tfwmlive.smartcitizen.net//?matrixId=AAA116
+            // https://public-tfwm.smartcitizen.net//?matrixId=AAA116
 
             // console.log('Original: ' + items.buyTicketUrl);
 
@@ -512,11 +512,11 @@
               } else if (
                 window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
               ) {
-                baseUrl2 = 'https://public-tfwmlive.smartcitizen.net';
+                baseUrl2 = 'https://public-tfwm.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
                 baseUrl2 = 'https://m-public-tfwmtest.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
-                baseUrl2 = 'https://public-tfwmlive.smartcitizen.net';
+                baseUrl2 = 'https://public-tfwm.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
                 baseUrl2 = 'https://public-tfwmtest.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
@@ -544,11 +544,11 @@
               } else if (
                 window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
               ) {
-                baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+                baseUrl = 'https://public-tfwm.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
                 baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
-                baseUrl = 'https://public-tfwmlive.smartcitizen.net';
+                baseUrl = 'https://public-tfwm.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
                 baseUrl = 'https://public-tfwmtest.smartcitizen.net';
               } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
