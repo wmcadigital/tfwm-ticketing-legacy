@@ -83,8 +83,8 @@
 
         <!-- search results for exact items-->
         <refresher condition="tickets.filteredTickets.length">
-            <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="origTicketResults" data-ng-hide="tickets.origTickets.length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in tickets.origTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
+            <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="origTicketResults" data-ng-hide="tickets.origTickets.length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in tickets.origTickets | filter:{displayInSwiftSearch:true} | orderBy:['ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
                     <item></item>
                 </div>
             </div>
@@ -105,8 +105,8 @@
 
         <!-- search results for other items-->
         <refresher condition="tickets.filteredTickets.length">
-            <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-hide="(tickets.otherTickets | filter:{displayInSwiftSearch:true}).length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
-                <div class="grid" data-ng-repeat="ticket in tickets.otherTickets | filter:{displayInSwiftSearch:true} | orderBy:['buyOnDirectDebit','ticket.orderBy'] | limitTo: tickets.limit track by $index">
+            <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="ticketResults" data-ng-hide="(tickets.otherTickets | filter:{displayInSwiftSearch:true}).length == '0'" data-ng-if="tickets.loadingStatus == 'success'">
+                <div class="grid" data-ng-repeat="ticket in tickets.otherTickets | filter:{displayInSwiftSearch:true} | orderBy:['ticket.orderBy'] | limitTo: tickets.limit track by $index">
                     <item></item>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                 <div class="filtered-header boxin">
                     <h3 class="filtered-header__heading">Tickets you can buy with Swift Pay As You Go</h3>
                 </div>
-                <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds" ag-options="{gridWidth : 250, gutterSize: 15}" ag-id="ticketResults" data-ng-if="tickets.loadingStatus == 'success'">
+                <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="ticketResults" data-ng-if="tickets.loadingStatus == 'success'">
                     <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds" data-ng-if="ticket.swiftCurrentAmount">
                         <item></item>
                     </div>

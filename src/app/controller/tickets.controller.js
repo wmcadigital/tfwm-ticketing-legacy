@@ -637,6 +637,12 @@
 
       // order filtering
       if (vm.orderBy === 'orderSequence') {
+        vm.filteredTickets.sort(function(a, b) {
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
+          return b.buyOnDirectDebit - a.buyOnDirectDebit;
+        });
         vm.origTickets.sort(function(a, b) {
           // set conditional attributes for refresher
           vm.sortPop = 'yes';
@@ -644,30 +650,72 @@
           vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
+        vm.otherTickets.sort(function(a, b) {
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
+          return b.buyOnDirectDebit - a.buyOnDirectDebit;
+        });
       } else if (vm.orderBy === 'ticketCurrentAmount') {
+        vm.filteredTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return aVal - bVal;
+        });
         vm.origTickets.sort(function(a, b) {
           vm.sortPop = 'no';
           vm.sortPlw = 'yes';
           vm.sortPhl = 'no';
-          return a.ticketCurrentAmount - b.ticketCurrentAmount;
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return aVal - bVal;
+        });
+        vm.otherTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return aVal - bVal;
         });
       } else if (vm.orderBy === '-ticketCurrentAmount') {
+        vm.filteredTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return bVal - aVal;
+        });
         vm.origTickets.sort(function(a, b) {
           vm.sortPop = 'no';
           vm.sortPlw = 'no';
           vm.sortPhl = 'yes';
-          return b.ticketCurrentAmount - a.ticketCurrentAmount;
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return bVal - aVal;
+        });
+        vm.otherTickets.sort(function(a, b) {
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          return bVal - aVal;
         });
       }
 
-      // console.log("Search Filters:");
-      // console.log(vm.searchFilters);
-      // console.log("Filtered Tickets:");
-      // console.log(vm.filteredTickets);
-      // console.log('Original Search:');
-      // console.log(vm.origTickets);
-      // console.log('Other Results:');
-      // console.log(vm.otherTickets);
+      console.log("Search Filters:");
+      console.log(vm.searchFilters);
+      console.log("Filtered Tickets:");
+      console.log(vm.filteredTickets);
+      console.log('Original Search:');
+      console.log(vm.origTickets);
+      console.log('Other Results:');
+      console.log(vm.otherTickets);
 
       vm.updateGrid();
     }
