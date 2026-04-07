@@ -300,7 +300,7 @@
           ) {
             let baseUrl = '';
             if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-              baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
+              baseUrl = 'https://m-public-tfwm.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
               baseUrl = 'https://public-tfwm.smartcitizen.net';
             } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {

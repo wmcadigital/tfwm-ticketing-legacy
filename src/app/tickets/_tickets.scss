@@ -173,6 +173,16 @@ a.icon-stylized-new:focus span:after {
     right: 10px;
   }
 
+  h2 {
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+
+  button {
+    border: 0;
+    font-size: 1rem;
+  }
+
   .icon {
     color: $cyan;
 
@@ -584,7 +594,6 @@ label.plain,
 
 .stylized-select {
   display: block;
-  float: right;
 }
 
 form {

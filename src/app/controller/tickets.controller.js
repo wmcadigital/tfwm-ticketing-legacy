@@ -424,7 +424,7 @@
 
       vm.origFilters = {}; // set scope for original search filters and reset on every search
       // console.log('this is posted');
-      console.log(vm.postedJSON);
+      // console.log(vm.postedJSON);
 
       // work out all tickets available
       ticketingService
@@ -505,10 +505,10 @@
               items.swiftCurrentAmount &&
               window?.setTicketFinder?.name.includes('Smart Citizen')
             ) {
-              console.log('payg detected');
+              // console.log('payg detected');
               let baseUrl2 = '';
               if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-                baseUrl2 = 'https://m-public-tfwmlive.smartcitizen.net';
+                baseUrl2 = 'https://m-public-tfwm.smartcitizen.net';
               } else if (
                 window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
               ) {
@@ -527,7 +527,7 @@
 
               const paygUrl = baseUrl2 + '/?matrixId=AAC001';
 
-              console.log(paygUrl);
+              // console.log(paygUrl);
 
               items.buyTicketUrl = baseUrl2 + '/?matrixId=AAC001';
             }
@@ -540,7 +540,7 @@
               // console.log('Smart Citizen app detected' + window?.setTicketFinder?.name);
               let baseUrl = '';
               if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-                baseUrl = 'https://m-public-tfwmlive.smartcitizen.net';
+                baseUrl = 'https://m-public-tfwm.smartcitizen.net';
               } else if (
                 window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')
               ) {
@@ -1704,7 +1704,7 @@
     function selectPass() {
       vm.passValue = vm.postJSON.brand;
       if (vm.passValue === '') {
-        console.log('select pass');
+        // console.log('select pass');
         vm.clearFilter();
       }
     }
