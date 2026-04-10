@@ -1,6 +1,6 @@
 <div class="filtered-header boxin bdr-top--blue" data-ng-if="tickets.loadingStatus === 'success'">
     <div class="rowcontainer">
-        <p tabindex="0" class="grid-6 filtered-header__heading">
+        <p aria-live="polite" aria-atomic="true" class="grid-6 filtered-header__heading">
             <span class="type--blue">{{tickets.filteredTickets.length}}</span> tickets matching your criteria
         </p>
 
@@ -50,7 +50,7 @@
         <!-- Exact matched to search -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'"
             class="filtered-header boxin bdr-top--navy">
-            <p tabindex="0" class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</p> 
+            <h2 class="filtered-header__heading"><span class="type--blue">{{tickets.origTickets.length}}</span> Exact matches to your search</h2> 
         </div>
 
         <!-- error messages -->
@@ -71,7 +71,7 @@
 
        <!-- search results for exact items-->
         <refresher condition="tickets.filteredTickets.length">
-            <div class="tickets-results-grid search-container" angular-grid="tickets.origTickets" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="origTicketResults" data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'">
+            <div class="tickets-results-grid search-container" data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.origTickets.length == '0'">
                 <div class="grid" data-ng-repeat="ticket in tickets.origTickets | orderBy:['ticket.orderBy'] | limitTo: tickets.limitExact track by $index">
                     <item></item>
                 </div>
@@ -88,12 +88,12 @@
         <!-- Other matches -->
         <div data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'"
             class="boxin title bdr-top--navy">
-            <p tabindex="0" class="filtered-header__heading"><span class="type--blue">{{tickets.otherTickets.length}}</span> matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</p>
+            <h2 class="filtered-header__heading"><span class="type--blue">{{tickets.otherTickets.length}}</span> matches to <span data-ng-if="tickets.postJSON.brand == null">some of</span> your search</h2>
         </div>
 
         <!-- search results for other items-->
         <refresher condition="tickets.filteredTickets.length">
-            <div class="tickets-results-grid search-container" angular-grid="tickets.otherTickets" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="ticketResults" data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'">
+            <div class="tickets-results-grid search-container" data-ng-if="tickets.loadingStatus == 'success'" data-ng-hide="tickets.otherTickets.length == '0'">
                 <div class="grid" data-ng-repeat="ticket in tickets.otherTickets | orderBy:['ticket.orderBy'] | limitTo: tickets.limit track by $index">
                     <item></item>
                 </div>
@@ -108,7 +108,7 @@
                         <span class="type--blue">{{tickets.swiftPaygIds.length}}</span>
                         Tickets you can buy with Swift Pay As You Go</h3>
                 </div>
-                <div class="tickets-results-grid search-container" angular-grid="tickets.swiftPaygIds" ag-options="{gridWidth : 300, gutterSize: 15}" ag-id="ticketResults">
+                <div class="tickets-results-grid search-container">
                     <div class="grid" data-ng-repeat="ticket in tickets.swiftPaygIds | orderBy:['ticket.orderBy']">
                         <item></item>
                     </div>

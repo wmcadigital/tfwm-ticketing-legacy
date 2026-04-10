@@ -81,7 +81,6 @@
       "buyTicketUrl": "https://ticketing.cenapps.org.uk/"
     },
     "ghpages": {
-      "baseUrl": "https://wmcadigital.github.io/tfwm-ticketing-legacy/",
       "baseUrlSwift": "https://wmcadigital.github.io/tfwm-ticketing-legacy/swift/",
       "swiftHost": "wmcadigital.github.io/tfwm-ticketing-legacy",
       "baseUrlOneapp": "https://wmcadigital.github.io/tfwm-ticketing-legacy/oneapp/",

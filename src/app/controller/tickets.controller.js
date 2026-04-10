@@ -30,7 +30,6 @@
     '$location',
     'savedFilter',
     'ticketingService',
-    'angularGridInstance',
     '$httpParamSerializer',
     'deviceDetector'
   ];
@@ -45,7 +44,6 @@
     $location,
     savedFilter,
     ticketingService,
-    angularGridInstance,
     $httpParamSerializer,
     deviceDetector
   ) {
@@ -92,6 +90,7 @@
     vm.openAccordion = openAccordion; // Function to open accordion
     vm.getValiditySuffix = getValiditySuffix; // Function to get the suffix for the price based on the ticket validity
     vm.srPronunciation = srPronunciation; // Function to get the pronunciation for screen readers
+    vm.getCurrentUrl = getCurrentUrl; // Function to get the current URL
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -198,7 +197,7 @@
 
     console.log('v2.16.3');
 
-    // work out 16-18 elibility year
+    // work out 16-18 eligibility year
     function subtractYears(dates, years) {
       // 👇 make copy with "Date" constructor
       const dateCopy = new Date(dates);
@@ -372,6 +371,19 @@
       vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
 
+      // If railZoneFromParameter and railZoneToParameter both have values, keep stationNames; otherwise set to null
+      if (
+        vm.railZoneFromParameter === null ||
+        vm.railZoneToParameter === null ||
+        vm.stationFromName === null ||
+        vm.stationToName === null ||
+        !vm.fromStationText ||
+        !vm.toStationText ||
+        (Array.isArray(vm.postedJSON.stationNames) && vm.postedJSON.stationNames.length === 0)
+      ) {
+        vm.postedJSON.stationNames = null;
+      }
+
       // Set a timeout for the API call (e.g., 10 seconds)
       apiTimeoutPromise = $timeout(function() {
         vm.errorMessage = 'The ticket search is taking too long. Retrying...';
@@ -428,7 +440,7 @@
 
       // work out all tickets available
       ticketingService
-        .ticketSearch(data)
+        .ticketSearch(vm.postedJSON)
         .then(function(response) {
           $timeout.cancel(apiTimeoutPromise);
           vm.all = response;
@@ -525,7 +537,7 @@
                 baseUrl2 = 'https://public-tfwmdev.smartcitizen.net';
               }
 
-              const paygUrl = baseUrl2 + '/?matrixId=AAC001';
+              // const paygUrl = baseUrl2 + '/?matrixId=AAC001';
 
               // console.log(paygUrl);
 
@@ -902,19 +914,19 @@
         });
       }
 
-      console.log("Search Filters:");
-      console.log(vm.searchFilters);
-      console.log("Filtered Tickets:");
-      console.log(vm.filteredTickets);
-      console.log('Original Search:');
-      console.log(vm.origTickets);
-      console.log('Other Results:');
-      console.log(vm.otherTickets);
+      // console.log("Search Filters:");
+      // console.log(vm.searchFilters);
+      // console.log("Filtered Tickets:");
+      // console.log(vm.filteredTickets);
+      // console.log('Original Search:');
+      // console.log(vm.origTickets);
+      // console.log('Other Results:');
+      // console.log(vm.otherTickets);
 
       vm.updateGrid();
     }
 
-    updateGrid.$inject = ['$timeout', 'angularGridInstance'];
+    updateGrid.$inject = ['$timeout'];
     function updateGrid() {
       $timeout(
         function() {
@@ -1160,7 +1172,7 @@
         return false;
       };
       savedFilter.set('url', '');
-      vm.postJSON.stationNames = [];
+      // vm.postJSON.stationNames = [];
       clearFromStation();
       clearToStation();
       clearViaOneStation();
@@ -1276,7 +1288,7 @@
     vm.stationFromReqOOC = true; // set ooc station to required
     vm.stationFrom = function(selected) {
       if (selected) {
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = []; // make sure station names array is created to avoid errors
         vm.stationFromName = selected.originalObject.name; // set From station
         vm.postJSON.stationNames[0] = selected.originalObject.name;
         vm.stationFromNameZone = selected.originalObject.zone;
@@ -1288,7 +1300,9 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        if (vm.postJSON.stationNames) {
+          vm.postJSON.stationNames[0] = null;
+        }
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -1298,8 +1312,10 @@
     function clearFromStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationFromOOC');
+      if (vm.stationFromName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[0] = null;
+      }
       vm.stationFromName = null;
-      vm.postJSON.stationNames[0] = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1338,6 +1354,9 @@
     vm.stationTo = function(selected) {
       if (selected) {
         vm.stationToName = selected.title; // set To Station
+        if (!vm.postJSON.stationNames) {
+          vm.postJSON.stationNames = null;
+        }
         vm.postJSON.stationNames[1] = selected.originalObject.name;
         vm.stationToTitle = selected.originalObject.name;
         vm.stationToNameZone = selected.originalObject.zone;
@@ -1349,7 +1368,9 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        if (vm.postJSON.stationNames) {
+          vm.postJSON.stationNames[1] = null;
+        }
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1360,8 +1381,10 @@
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo2');
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo3');
+      if (vm.stationToName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[1] = null;
+      }
       vm.stationToName = '';
-      vm.postJSON.stationNames[1] = null;
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
@@ -1394,6 +1417,9 @@
     vm.stationViaOne = function(selected) {
       if (selected) {
         vm.stationViaOneName = selected.originalObject.name; // set To Station
+        if (!vm.postJSON.stationNames) {
+          vm.postJSON.stationNames = null;
+        }
         vm.postJSON.stationNames[2] = selected.originalObject.name;
         vm.stationViaOneTitle = selected.originalObject.name;
         vm.stationViaOneNameZone = selected.originalObject.zone;
@@ -1412,10 +1438,11 @@
     // reset via one station
     function clearViaOneStation() {
       $scope.$broadcast('angucomplete-alt:clearInput', 'stationViaOne');
+      if (vm.stationViaOneName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[2] = null;
+      }
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
-      vm.stationViaOneName = null;
-      vm.postJSON.stationNames = [];
     }
 
     // control filters according to url parameters
@@ -1636,23 +1663,15 @@
     }
 
     // refresh exact results grid
-    refreshExact.$inject = ['$timeout', 'angularGridInstance'];
+    refreshExact.$inject = ['$timeout'];
     function refreshExact() {
-      angular.element(document).ready(function() {
-        $timeout(function() {
-          angularGridInstance.origTicketResults.refresh();
-        }, 0);
-      });
+      // CSS Grid handles layout automatically, no refresh needed
     }
 
     // refresh other results grid
-    refreshOther.$inject = ['$timeout', 'angularGridInstance'];
+    refreshOther.$inject = ['$timeout'];
     function refreshOther() {
-      angular.element(document).ready(function() {
-        $timeout(function() {
-          angularGridInstance.ticketResults.refresh();
-        }, 0);
-      });
+      // CSS Grid handles layout automatically, no refresh needed
     }
 
     // toggle filter accordions
@@ -1817,6 +1836,16 @@
       // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
       return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
     }
+
+    // Get the current URL (before #/)
+    function getCurrentUrl() {
+      const fullUrl = $location.absUrl();
+      const url = fullUrl.split('#')[0];
+      vm.currentUrl = url;
+      return url;
+    }
+
+    getCurrentUrl();
 
     // set current date to test for ticketFutureDate
     vm.date = new Date();

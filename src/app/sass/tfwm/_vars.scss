@@ -89,6 +89,10 @@ BREAKPOINTS
         @media (min-width: 37.5em) {
             @content;
         }
+    } @else if $point == phablet2 {
+        @media (max-width: 630px) {
+            @content;
+        }
     } @else if $point == mobileonly {
         @media (max-width: 32.125em) {
             @content;

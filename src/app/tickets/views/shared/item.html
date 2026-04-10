@@ -12,8 +12,8 @@
           ng-src="$*imgUrl/payg.png" /></a></span>
     <div class="itemContent">
       <div class="grid-8">
-        <a data-ng-href="$*baseUrl#/ticket/{{ticket.id}}">
-          <h4 class="event__title">
+        <a data-ng-href="{{vm.currentUrl}}#/ticket/{{ticket.id}}">
+          <h3 class="event__title">
             {{ticket.name}}
             <span class="payment-icons">
               <img ng-src="$*imgUrl/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.buyOnSwift"
@@ -29,14 +29,14 @@
                 data-ng-if="ticket.buyOnDirectDebit" alt="Buy on Direct Debit"
                 title="This ticket can be purchased on Direct Debit" />
             </span>
-          </h4>
+          </h3>
         </a>
       </div>
       <div class="grid-4 modes">
         <!-- Valid on: -->
-        <span class="icon icon--bus" data-ng-if="ticket.allowBus" title="{{ticket.operator}}"></span>
-        <span class="icon icon--train" data-ng-if="ticket.allowTrain"></span>
-        <span class="icon icon--tram" data-ng-if="ticket.allowMetro"></span>
+        <span class="icon icon--bus" data-ng-if="ticket.allowBus" aria-label="Use on {{ticket.operator}}"></span>
+        <span class="icon icon--train" data-ng-if="ticket.allowTrain" aria-label="Use on train"></span>
+        <span class="icon icon--tram" data-ng-if="ticket.allowMetro" aria-label="Use on metro"></span>
       </div>
       <price></price>
       <div class="grid-12 summary">
@@ -57,7 +57,7 @@
         <div class="grid-4">
           <strong>Where to buy:</strong>
         </div>
-        <div class="grid-8">
+        <div class="grid-8 where-to-buy">
           <ul>
             <li data-ng-if="ticket.purchaseLocations.tic">Travel Centres</li>
             <li data-ng-if="ticket.purchaseLocations.payzone">Payzone outlets</li>
