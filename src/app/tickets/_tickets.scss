@@ -1,3 +1,25 @@
+@media (prefers-reduced-motion: reduce) {
+  .nga-fast, .nga-fade {
+    animation: none !important;
+  }
+}
+
+// CSS Grid for ticket results
+.tickets-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+
+  @include breakpoint(phablet2) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.grid {
+  height: 100%;
+}
+
+
 .ticket-search .how-long .icon-stylized-new label {
   background-color: $cyan;
   color: white;
@@ -728,8 +750,9 @@ body > div.tickets > div > div > div.block.block--main > div > div > div > searc
     color: pink!important;
 }
 
-h3.filtered-header__heading, h3 {
+p.filtered-header__heading, h3.filtered-header__heading, h3, h2.filtered-header__heading, h2 {
   font-size: 1.5rem;
+  line-height: 1.6rem;
 }
 
 [class*=wmnds-].wmnds-n-icon__svg {
