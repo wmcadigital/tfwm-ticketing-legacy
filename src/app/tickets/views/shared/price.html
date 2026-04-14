@@ -1,5 +1,5 @@
 <div class="grid-12">
-    <h5 class="price">
+    <span class="price">
         <span data-ng-if="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">From {{(ticket.swiftCurrentAmount | currency:"£")}}</span>
         <span data-ng-if="ticket.ticketCurrentAmount == ticket.standardCurrentAmount" data-ng-hide="ticket.swiftCurrentAmount < ticket.standardCurrentAmount">{{(ticket.standardCurrentAmount | currency:"£")}}</span>
         <span data-ng-if="ticket.standardDiscountCurrentAmount">
@@ -20,5 +20,5 @@
         <span data-ng-if="ticket.validityId == 450930000" data-ng-hide="ticket.type == 'Carnet' || ticket.id == '811'"> a day</span>
         <span data-ng-if="ticket.validityId == 450930001" data-ng-hide="ticket.ticketCurrentAmount && ticket.onlineCurrentAmount"> a week</span>
         <span data-ng-if="ticket.validityId == 450930003"> for 1 year</span>
-    </h5>
+    </span>
 </div>

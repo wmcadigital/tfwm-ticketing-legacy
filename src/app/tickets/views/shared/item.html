@@ -13,7 +13,7 @@
     <div class="itemContent">
       <div class="grid-8">
         <a data-ng-href="$*baseUrl#/ticket/{{ticket.id}}">
-          <h4 class="event__title">
+          <h3 class="event__title">
             {{ticket.name}}
             <span class="payment-icons">
               <img ng-src="$*imgUrl/swift-logo.png" class="ticket-swift-logo" data-ng-if="ticket.buyOnSwift"
@@ -29,7 +29,7 @@
                 data-ng-if="ticket.buyOnDirectDebit" alt="Buy on Direct Debit"
                 title="This ticket can be purchased on Direct Debit" />
             </span>
-          </h4>
+          </h3>
         </a>
       </div>
       <div class="grid-4 modes">
