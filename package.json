@@ -103,7 +103,7 @@
       "scapi": "https://ticketingv2-smartcitizen-staging-d0g9gfc7aqewfxc2.uksouth-01.azurewebsites.net/",
       "testscapi": "https://ticketingv2-smartcitizen-test-c7bxbje6hrhgb2cp.uksouth-01.azurewebsites.net/",
       "swiftGo": "Swift ABT",
-      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp",
+      "paygLink": "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?[{matrixId:%27AAC001%27}]",
       "buyTicketUrl": "https://ticketing.cenapps.org.uk/"
     }
   },

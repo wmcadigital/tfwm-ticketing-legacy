@@ -21,7 +21,8 @@
     '$timeout',
     'deviceDetector',
     '$location',
-    '$window'
+    '$window',
+    'buyTicketUrlService'
   ];
 
   function TicketDetailCtrl(
@@ -33,7 +34,8 @@
     $timeout,
     deviceDetector,
     $location,
-    $window
+    $window,
+    buyTicketUrlService
   ) {
     const vm = this;
     vm.loadingText = 'Loading...'; // default loading text
@@ -270,63 +272,12 @@
               console.error(error);
             });
 
-          if (window?.setTicketFinder?.name.includes('Unicard Desktop Production')) {
-            // console.log('Unicard app detected (Production)');
-            if (!vm.all.buyTicketUrl.includes('ticketing.networkwestmidlands.com')) {
-              // eslint-disable-next-line no-unused-vars
-              const [host, queryString] = vm.all.buyTicketUrl.split('?');
-              vm.all.buyTicketUrl =
-                'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
-            }
-          }
-
-          if (window?.setTicketFinder?.name.includes('Unicard Desktop Test')) {
-            // console.log('Unicard app detected (Test)');
-            if (!vm.all.buyTicketUrl.includes('ticketing.cenapps.org.uk')) {
-              // eslint-disable-next-line no-unused-vars
-              const [host, queryString] = vm.all.buyTicketUrl.split('?');
-              vm.all.buyTicketUrl =
-                'https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?' + queryString;
-            }
-          }
-
-          // console.log('Buy ticket URL: ' + vm.all.buyTicketUrl);
-
-          // Check if the buy ticket url is a smartcitizen ticket finder and format it differently
-          if (
-            vm.all.buyTicketUrl &&
-            vm.all.buyTicketUrl.includes('matrixId') &&
-            window?.setTicketFinder?.name.includes('Smart Citizen')
-          ) {
-            let baseUrl = '';
-            if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
-              baseUrl = 'https://m-public-tfwm.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Production')) {
-              baseUrl = 'https://public-tfwm.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
-              baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Production')) {
-              baseUrl = 'https://public-tfwm.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
-              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Desktop Test')) {
-              baseUrl = 'https://public-tfwmtest.smartcitizen.net';
-            } else if (window?.setTicketFinder?.name.includes('Smart Citizen Dev')) {
-              baseUrl = 'https://public-tfwmdev.smartcitizen.net';
-            }
-            // console.log('baseurl: ' + baseUrl);
-            // eslint-disable-next-line no-unused-vars
-            const [host, queryString] = vm.all.buyTicketUrl.split('?');
-            const matrixid = queryString
-              .replace('https://', '')
-              // eslint-disable-next-line no-useless-escape
-              .replace(/[\[\]]/g, '')
-              .replace(/[{}]/g, '')
-              .replace(/:/g, '=')
-              .replace(/'/g, '');
-            vm.all.buyTicketUrl = baseUrl + '?' + matrixid;
-          }
-          // console.log('Final: ' + vm.all.buyTicketUrl);
+          // Normalize buyTicketUrl using shared service
+          vm.all.buyTicketUrl = buyTicketUrlService.normalize(
+            vm.all.buyTicketUrl,
+            window?.setTicketFinder?.name,
+            vm.all.swiftCurrentAmount
+          );
 
           backButtonLogic(); // Determine back button logic
           vm.loadingStatus = 'success'; // set success loading status

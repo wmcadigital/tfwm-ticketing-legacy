@@ -24,7 +24,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'ghpages';
+let build = 'live';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -49,8 +49,8 @@ const paths = {
   output: 'build/', // Default output location for code build
   server: {
     port: 8081,
-    baseDir: './',
-    index: 'build/index.html'
+    baseDir: 'build',
+    index: 'index.html'
   },
   serverTest: {
     port: 8081,
@@ -98,6 +98,8 @@ const paths = {
         lint: true
       },
       { src: 'src/app/js/tfwm-sc/*.js', minName: 'tfwm-sc.app.min.js', lint: true },
+      { src: 'src/app/js/portal/*.js', minName: 'portal.app.min.js', lint: true },
+      { src: 'src/app/js/mobile/*.js', minName: 'mobile.app.min.js', lint: true },
       { src: 'src/app/js/tfwm-sc-dev/*.js', minName: 'tfwm-sc-dev.app.min.js', lint: true },
       { src: 'src/app/js/tfwm-sc-mobile/*.js', minName: 'tfwm-sc-mobile.app.min.js', lint: true },
       { src: 'src/app/js/tfwm-sc-test/*.js', minName: 'tfwm-sc-test.app.min.js', lint: true },
@@ -622,19 +624,19 @@ function lintAppTestTemplates() {
 }
 
 function moveMain() {
-  return src(['index.html']).pipe(dest('build'));
+  return src(['pages/tfwm/index.html']).pipe(dest('build'));
 }
 
 function moveProd() {
-  return src(['pages/index-prod/index.html']).pipe(dest('build'));
+  return src(['pages/index-prod/index.html']).pipe(dest('build/prod'));
 }
 
 function moveTest() {
-  return src(['pages/index-test/index.html']).pipe(dest('build'));
+  return src(['pages/index-test/index.html']).pipe(dest('build/test'));
 }
 
 function moveTfWM() {
-  return src(['pages/tfwm/index.html']).pipe(dest('build/tfwm'));
+  return src(['pages/tfwm/index.html']).pipe(dest('build'));
 }
 
 function moveSwift() {
@@ -671,6 +673,14 @@ function moveSCDeskProd() {
 
 function moveSCDeskTest() {
   return src(['pages/tfwm-sc-desktop-test/index.html']).pipe(dest('build/tfwm-sc-desktop-test'));
+}
+
+function movePortal() {
+  return src(['pages/portal/index.html']).pipe(dest('build/portal'));
+}
+
+function moveMobile() {
+  return src(['pages/mobile/index.html']).pipe(dest('build/mobile'));
 }
 
 // Optimise images
@@ -778,13 +788,10 @@ const buildProd = series(
   lintOneappTemplates,
   lintAppTemplates,
   lintAppTestTemplates,
-  moveProd,
   moveTfWM,
-  moveSwift,
   moveOneapp,
-  moveApp,
-  moveAppTest,
-  moveSCProd
+  movePortal,
+  moveMobile
 );
 
 const buildTest = series(
@@ -829,7 +836,9 @@ const buildTest = series(
   moveSCTest,
   moveSCDev,
   moveSCDeskProd,
-  moveSCDeskTest
+  moveSCDeskTest,
+  movePortal,
+  moveMobile
 );
 
 // Watch files for changes
@@ -913,12 +922,24 @@ const dev = series(
     moveSCTest,
     moveSCDev,
     moveSCDeskProd,
-    moveSCDeskTest
+    moveSCDeskTest,
+    movePortal,
+    moveMobile
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
 // Production version
 const devProd = series(
+  cleanBuild,
+  lintScripts,
+  lintTemplates,
+  lintSharedTemplates,
+  lintSharedSwiftTemplates,
+  lintSwiftTemplates,
+  parallel(buildProd),
+  parallel(watchFiles, server)
+);
+const prod = series(
   cleanBuild,
   lintScripts,
   lintTemplates,
@@ -940,7 +961,7 @@ const devTest = series(
   parallel(watchFiles, serverTest)
 );
 // Export items to be used in terminal
-exports.default = dev;
+exports.default = prod;
 exports.defaultProd = devProd;
 exports.defaultTest = devTest;
 exports.lintScripts = lintScripts;
@@ -987,6 +1008,8 @@ exports.moveSCTest = moveSCTest;
 exports.moveSCDev = moveSCDev;
 exports.moveSCDeskProd = moveSCDeskProd;
 exports.moveSCDeskTest = moveSCDeskTest;
+exports.movePortal = movePortal;
+exports.moveMobile = moveMobile;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
 exports.buildProd = buildProd;
