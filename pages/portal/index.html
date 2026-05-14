@@ -101,7 +101,7 @@
 
     <!-- Portal-specific: hide design-system breadcrumbs rendered inside app views -->
     <style>
-        .wmnds-breadcrumb {
+        .wmnds-breadcrumb, .block-cta {
             display: none !important;
         }
     </style>
@@ -172,7 +172,7 @@
         };
     </script>
 
-    <!-- Accessibility: ensure the first `.block--side` is hidden from assistive technology -->
+    <!-- Accessibility: ensure the first `.block--cta` is hidden from assistive technology -->
     <script>
         (function() {
           function hideBlockSide(el) {
@@ -197,7 +197,7 @@
 
           function process() {
             if (!document.querySelector) return;
-            var first = document.querySelector('.block--side');
+            var first = document.querySelector('.block--cta');
             if (first) hideBlockSide(first);
           }
 
@@ -214,7 +214,7 @@
           // Observe DOM for dynamically added nodes (Angular views)
           try {
             var observer = new MutationObserver(function() {
-              // On any mutation, attempt to hide the first .block--side if present
+              // On any mutation, attempt to hide the first .block--cta if present
               process();
             });
             observer.observe(document.body, { childList: true, subtree: true });

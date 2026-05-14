@@ -28,7 +28,18 @@
           ) {
             parts = url.split('?');
             queryString = parts[1] || '';
-            url = 'https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?' + queryString;
+            // remove square brackets and parentheses from query string
+            try {
+              queryString = queryString
+                .replace('https://', '')
+                .replace(/\[|\]|\(|\)/g, '')
+                .replace(/[{}]/g, '')
+                .replace(/:/g, '=')
+                .replace(/'/g, '');
+            } catch (e) {
+              // eslint-disable-next-line no-empty
+            }
+            url = 'https://my.swiftcard.org.uk/?' + queryString;
           }
         } catch (e) {
           // noop
@@ -54,6 +65,7 @@
           baseUrl2 = 'https://public-tfwmdev.smartcitizen.net';
         else if (finder.includes('Swift Portal')) baseUrl2 = 'https://my.swiftcard.org.uk';
         else if (finder.includes('Swift Portal Mobile')) baseUrl2 = 'https://my.swiftcard.org.uk';
+        // else if (finder.includes('TfWM Ticket Finder')) baseUrl2 = 'https://my.swiftcard.org.uk';
 
         if (baseUrl2) {
           url = baseUrl2 + '/?matrixId=AAC001';
@@ -86,9 +98,15 @@
 
           parts2 = url.split('?');
           queryString2 = parts2[1] || '';
+          // strip square brackets and parentheses from the query string
+          try {
+            queryString2 = queryString2.replace(/\[|\]|\(|\)/g, '');
+          } catch (e) {
+            // eslint-disable-next-line no-empty
+          }
           matrixid = queryString2
             .replace('https://', '')
-            .replace(/\[|\]/g, '')
+            .replace(/\[|\]|\(|\)/g, '')
             .replace(/[{}]/g, '')
             .replace(/:/g, '=')
             .replace(/'/g, '');
