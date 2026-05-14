@@ -86,7 +86,7 @@
       dataLayer.push({
         event: 'ngRouteChange',
         attributes: {
-          route: $location.absUrl().split('https://www.tfwm.org.uk')[1]
+          route: $location.absUrl().split('https://www.wmca.org.uk')[1]
         }
       });
     });
