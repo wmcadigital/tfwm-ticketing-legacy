@@ -128,7 +128,7 @@
     "upgrade-packages": "npm update"
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.0",
+    "autoprefixer": "^10.5.0",
     "babel-eslint": "^9.0.0 || ^10.1.0",
     "browser-sync": "^2.26.7",
     "del": "^4.1.1",
@@ -144,7 +144,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
+    "gulp-autoprefixer": "^10.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-cli": "^2.3.0",
     "gulp-concat": "^2.6.1",
