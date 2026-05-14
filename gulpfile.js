@@ -39,7 +39,7 @@ function determineBuild(done) {
       build = 'live';
       break;
     default:
-      build = 'ghpages';
+      build = 'live';
       break;
   }
   done();
