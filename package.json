@@ -123,6 +123,8 @@
     "build:Test": "gulp buildTest",
     "build:staging": "npm run build:all --build=staging",
     "build:live": "npm run build:all --build=live",
+    "build": "npm run build:all",
+    "build:azure": "npm run build:all",
     "upgrade-packages": "npm update"
   },
   "devDependencies": {
