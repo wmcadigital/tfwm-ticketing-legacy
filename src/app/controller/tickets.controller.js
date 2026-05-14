@@ -1,42 +1,60 @@
+/* eslint-disable angular/window-service */
+/* eslint-disable no-useless-escape */
 (function() {
-  "use strict";
+  'use strict';
 
   angular
-    .module("ticketingApp")
-    .controller("TicketingSearchCtrl", TicketingSearchCtrl)
-    .filter("replace", replace);
+    .module('ticketingApp')
+    .factory('$exceptionHandler', $exceptionHandler)
+    .controller('TicketingSearchCtrl', TicketingSearchCtrl)
+    .filter('replace', replace);
+
+  $exceptionHandler.$inject = ['$log', '$window'];
+  function $exceptionHandler($log, $window) {
+    return function(exception) {
+      console.log('Exception caught by $exceptionHandler:');
+      $log.error(exception);
+      if ($window.Sentry && $window.Sentry.captureException) {
+        $window.Sentry.captureException(exception);
+      }
+    };
+  }
 
   TicketingSearchCtrl.$inject = [
-    "ngAuthSettings",
-    "$scope",
-    "$anchorScroll",
-    "$timeout",
-    "$filter",
-    "$location",
-    "savedFilter",
-    "ticketingService",
-    "angularGridInstance",
-    "$httpParamSerializer",
-    "deviceDetector",
+    'ngAuthSettings',
+    '$scope',
+    '$interval',
+    '$anchorScroll',
+    '$timeout',
+    '$filter',
+    '$location',
+    'savedFilter',
+    'ticketingService',
+    '$httpParamSerializer',
+    'deviceDetector',
+    'buyTicketUrlService'
   ];
 
   function TicketingSearchCtrl(
     ngAuthSettings,
     $scope,
+    $interval,
     $anchorScroll,
     $timeout,
     $filter,
     $location,
     savedFilter,
     ticketingService,
-    angularGridInstance,
     $httpParamSerializer,
     deviceDetector,
+    buyTicketUrlService
   ) {
     const vm = this;
     let stations;
     let stationSel;
     let stationSplit;
+    let apiTimeoutPromise = null;
+    let retryIntervalPromise = null;
     vm.submit = submit; // Function to submit initial search
     vm.clearFilter = clearFilter; // Function to reset filters
     vm.getStations = getStations; // Function to retrieve stations
@@ -61,7 +79,7 @@
       operatorLength: 0,
       busTravelArea: [],
       railZoneFrom: [],
-      railZoneTo: [],
+      railZoneTo: []
     }; // set an object for the filters show/hide toggle to fall into
     vm.toggleFilter = toggleFilter;
     vm.swiftPAYG = swiftPAYG; // Function for hiding fields if Swift PAYG is selected
@@ -71,6 +89,10 @@
     vm.searchLocation = $location.host(); // Set the current host
     vm.deviceDetect = deviceDetect; // Function to detect device
     vm.selectPass = selectPass; // Function to reset filters if select your pass is selected
+    vm.openAccordion = openAccordion; // Function to open accordion
+    vm.getValiditySuffix = getValiditySuffix; // Function to get the suffix for the price based on the ticket validity
+    vm.srPronunciation = srPronunciation; // Function to get the pronunciation for screen readers
+    vm.getCurrentUrl = getCurrentUrl; // Function to get the current URL
     // Set up the default Vars on page load, and so that they can be reset with 'reset filters' button
     function defaultVars() {
       vm.all = []; // Set results to blank array
@@ -81,20 +103,20 @@
       vm.stationoocList = []; // Define out of county Station list
       vm.stationicList = []; // Define in county Station list
       vm.swiftPaygIds = []; // Define Swift PAYG tickets
-      vm.loadingStatus = ""; // Set results status to blank
-      vm.swiftPaygloadingStatus = ""; // Set results status to blank
-      vm.passValue = ""; // Set pass select value to blank
-      vm.orderBy = "orderSequence";
+      vm.loadingStatus = ''; // Set results status to blank
+      vm.swiftPaygloadingStatus = ''; // Set results status to blank
+      vm.passValue = ''; // Set pass select value to blank
+      vm.orderBy = 'orderSequence';
       vm.limit = parseInt($location.search().limit) || 6; // Set paging limit to what's in url or default to 6
       vm.limitExact = parseInt($location.search().limitExact) || 6; // Set paging limit for exact results to what's in url or default to 6
       vm.postJSON = {
         allowBus: $location.search().allowBus || null,
         allowMetro: $location.search().allowMetro || null,
         allowTrain: $location.search().allowTrain || null,
-        passengerType: $location.search().passengerType || "",
-        timeBand: $location.search().timeBand || "",
+        passengerType: $location.search().passengerType || '',
+        timeBand: $location.search().timeBand || '',
         brand: $location.search().brand || null,
-        stationNames: $location.search().stationNames || null,
+        stationNames: $location.search().stationNames || null
       }; // Define postJSON default values
       vm.stationFromName = null; // Clear Stations
       vm.stationToName = null;
@@ -112,26 +134,22 @@
       vm.excludebusParameter = $location.search().excludeBus || null;
 
       // direct debit
-      vm.buyOnDirectDebitParameter =
-        $location.search().buyOnDirectDebit || null;
+      vm.buyOnDirectDebitParameter = $location.search().buyOnDirectDebit || null;
 
       // quick buy
-      vm.buyOnDirectPurchaseParameter =
-        $location.search().buyOnDirectPurchase || null;
+      vm.buyOnDirectPurchaseParameter = $location.search().buyOnDirectPurchase || null;
 
       // swift
       vm.buyOnSwiftParameter = $location.search().buyOnSwift || null;
 
       // buy online
-      vm.hasOnlinePurchaseChannelParameter =
-        $location.search().hasOnlinePurchaseChannel || null;
+      vm.hasOnlinePurchaseChannelParameter = $location.search().hasOnlinePurchaseChannel || null;
 
       // tic
       vm.purchaseTicParameter = $location.search().purchaseTic || null;
 
       // rail station
-      vm.purchaseRailStationParameter =
-        $location.search().purchaseRailStation || null;
+      vm.purchaseRailStationParameter = $location.search().purchaseRailStation || null;
 
       // payzone
       vm.purchasePayzoneParameter = $location.search().purchasePayzone || null;
@@ -177,7 +195,11 @@
 
     defaultVars();
 
-    // work out 16-18 elibility year
+    vm.slug = 'testing789';
+
+    console.log('v3.0.0');
+
+    // work out 16-18 eligibility year
     function subtractYears(dates, years) {
       // 👇 make copy with "Date" constructor
       const dateCopy = new Date(dates);
@@ -216,16 +238,16 @@
       // Set initial value of from & to stations if in Url
       if (
         ($location.search().stationNames && vm.postJSON.allowTrain === true) ||
-        vm.postJSON.brand === "nnetwork" ||
-        vm.postJSON.brand === "ntrain"
+        vm.postJSON.brand === 'nnetwork' ||
+        vm.postJSON.brand === 'ntrain'
       ) {
         if ($location.search().stationNames) {
           stations = $location.search().stationNames;
           stationSel = stations.toString();
-          stationSplit = stationSel.split(",");
-          vm.stationFromName = stationSplit["0"];
-          vm.stationToName = stationSplit["1"];
-          vm.stationViaOneName = stationSplit["2"];
+          stationSplit = stationSel.split(',');
+          vm.stationFromName = stationSplit['0'];
+          vm.stationToName = stationSplit['1'];
+          vm.stationViaOneName = stationSplit['2'];
         }
       } else {
         vm.stationFromName = null;
@@ -234,19 +256,19 @@
       vm.getStations();
       submit(vm.postJSON);
     } else {
-      $location.url("").replace();
+      $location.url('').replace();
     }
 
     vm.showDetails = false;
 
     // if back button pressed or breadcrumb selected. If brand is Swift PAYG make sure relevant tickets are shown
-    if ($location.search().brand === "Swift PAYG") {
+    if ($location.search().brand === 'Swift PAYG') {
       getSwiftPAYG();
       swiftPAYG();
     }
 
     // if back button pressed or breadcrumb selected. If brand is Swift ABT
-    if ($location.search().brand === "Swift Go") {
+    if ($location.search().brand === 'Swift Go') {
       swiftABT();
     }
 
@@ -256,58 +278,84 @@
       vm.deviceDetector = deviceDetector;
       vm.userAgent = deviceDetector.raw.userAgent;
       // check if userAgent is Swift One app
-      if (vm.userAgent.includes("SwiftOneApp")) {
+      if (vm.userAgent.includes('SwiftOneApp')) {
         vm.oneApp = true;
       } else {
         vm.oneApp = false;
       }
-      if (vm.userAgent.includes("android")) {
+      if (vm.userAgent.includes('android')) {
         vm.android = true;
       } else {
         vm.android = false;
+      }
+      if (vm.deviceDetector.os === 'android' || vm.deviceDetector.os === 'ios') {
+        vm.isMobile = true;
+      } else {
+        vm.isMobile = false;
       }
     }
 
     // Get Rail stations for autocomplete
     function getStations() {
       // console.log("get stations");
-      ticketingService.getStations().then(function(response) {
-        let fromRail;
-        let toRail;
-        let ViaOneRail;
-        let dataFromRail;
-        let dataToRail;
-        let dataViaOnRail;
-        let dataFromRailData;
-        let dataToRailData;
-        let dataViaOneRailData;
-        // console.log("rail stations");
-        // console.log(response);
-        vm.stationList = response;
-        // if going direct to page with stations work out zone information
-        if (vm.stationFromName !== null) {
-          fromRail = vm.stationFromName || null;
-          toRail = vm.stationToName || null;
-          ViaOneRail = vm.stationViaOneName || null;
-          dataFromRail = $filter("filter")(response, { name: fromRail });
-          dataToRail = $filter("filter")(response, { name: toRail });
-          dataViaOnRail = $filter("filter")(response, { name: ViaOneRail });
-          dataFromRailData = dataFromRail["0"];
-          dataToRailData = dataToRail["0"];
-          dataViaOneRailData = dataViaOnRail["0"];
-          vm.fromStationInfo = dataFromRailData;
-          vm.toStationInfo = dataToRailData;
-          vm.ViaOneStationInfo = dataViaOneRailData;
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          let fromRail;
+          let toRail;
+          let ViaOneRail;
+          let dataFromRail;
+          let dataToRail;
+          let dataViaOnRail;
+          let dataFromRailData;
+          let dataToRailData;
+          let dataViaOneRailData;
+          // console.log("rail stations");
+          // console.log(response);
+          vm.stationList = response;
+          // if going direct to page with stations work out zone information
+          if (vm.stationFromName !== null) {
+            fromRail = vm.stationFromName || null;
+            toRail = vm.stationToName || null;
+            ViaOneRail = vm.stationViaOneName || null;
+            dataFromRail = $filter('filter')(response, { name: fromRail });
+            dataToRail = $filter('filter')(response, { name: toRail });
+            dataViaOnRail = $filter('filter')(response, { name: ViaOneRail });
+            dataFromRailData = dataFromRail['0'];
+            dataToRailData = dataToRail['0'];
+            dataViaOneRailData = dataViaOnRail['0'];
+            vm.fromStationInfo = dataFromRailData;
+            vm.toStationInfo = dataToRailData;
+            vm.ViaOneStationInfo = dataViaOneRailData;
 
-          if (vm.fromStationInfo != null) {
-            vm.fromZoneNumber = vm.fromStationInfo.zone;
-            vm.toZoneNumber = vm.toStationInfo.zone;
-            if (vm.ViaOneStationInfo != null) {
-              vm.ViaOneZoneNumber = vm.ViaOneStationInfo.zone;
+            if (vm.fromStationInfo != null) {
+              vm.fromZoneNumber = vm.fromStationInfo.zone;
+              vm.toZoneNumber = vm.toStationInfo.zone;
+              if (vm.ViaOneStationInfo != null) {
+                vm.ViaOneZoneNumber = vm.ViaOneStationInfo.zone;
+              }
             }
           }
-        }
-      });
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
+        });
+    }
+
+    function retryTicketSearch(data) {
+      // Retry after 5 seconds if not already retrying
+      if (!retryIntervalPromise) {
+        retryIntervalPromise = $interval(
+          function() {
+            submit(data);
+          },
+          5000,
+          2
+        ); // Only retry once per timeout/error
+      }
     }
 
     function submit(data) {
@@ -322,8 +370,40 @@
       let metro;
       let searchAll;
       let searchExact;
-      vm.loadingStatus = "loading";
+      vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
+
+      // If railZoneFromParameter and railZoneToParameter both have values, keep stationNames; otherwise set to null
+      if (
+        vm.railZoneFromParameter === null ||
+        vm.railZoneToParameter === null ||
+        vm.stationFromName === null ||
+        vm.stationToName === null ||
+        !vm.fromStationText ||
+        !vm.toStationText ||
+        (Array.isArray(vm.postedJSON.stationNames) && vm.postedJSON.stationNames.length === 0)
+      ) {
+        vm.postedJSON.stationNames = null;
+      }
+
+      // Set a timeout for the API call (e.g., 10 seconds)
+      apiTimeoutPromise = $timeout(function() {
+        vm.errorMessage = 'The ticket search is taking too long. Retrying...';
+        vm.loadingStatus = 'timeout';
+
+        // Sentry log for slow API
+        if (window.Sentry && window.Sentry.captureMessage) {
+          window.Sentry.captureMessage('Ticket search API call is slow or unresponsive', {
+            level: 'warning',
+            extra: {
+              postJSON: vm.postJSON,
+              url: $location.absUrl()
+            }
+          });
+        }
+
+        submit(data);
+      }, 10000);
 
       $location.search({
         allowBus: vm.postedJSON.allowBus,
@@ -351,7 +431,7 @@
         timePeriod4: vm.timePeriod4Parameter,
         limit: vm.limit,
         limitExact: vm.limitExact,
-        excludeBus: vm.excludebusParameter,
+        excludeBus: vm.excludebusParameter
       }); // set search url for sharing/tracking
 
       vm.searchFilters = {}; // set scope for search filters and reset on every search
@@ -361,231 +441,261 @@
       // console.log(vm.postedJSON);
 
       // work out all tickets available
-      ticketingService.ticketSearch(data).then(function(response) {
-        vm.all = response;
-        vm.original = response;
+      ticketingService
+        .ticketSearch(vm.postedJSON)
+        .then(function(response) {
+          $timeout.cancel(apiTimeoutPromise);
+          vm.all = response;
+          vm.original = response;
 
-        // For each item in the results
-        angular.forEach(vm.all, function(items) {
-          // Check the operator and push it to filters
-          if (vm.filterButtons.operator.indexOf(items.operator) === -1) {
-            vm.filterButtons.operator.push(items.operator);
-          }
+          // For each item in the results
+          angular.forEach(vm.all, function(items) {
+            // Check the operator and push it to filters
+            if (vm.filterButtons.operator.indexOf(items.operator) === -1) {
+              vm.filterButtons.operator.push(items.operator);
+            }
 
-          // Check bus area
+            // Check bus area
+            if (vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1) {
+              vm.filterButtons.busTravelArea.push(items.busTravelArea);
+            }
+
+            // Check rail zone from
+            if (vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1) {
+              vm.filterButtons.railZoneFrom.push(items.railZoneFrom);
+            }
+
+            // Check rail zone to
+            if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
+              vm.filterButtons.railZoneTo.push(items.railZoneTo);
+            }
+
+            // eslint-disable-next-line angular/window-service
+            // console.log(window?.setTicketFinder?.name);
+            // console.log(items);
+            // console.log(items.buyTicketUrl);
+
+            // unicard
+            // "https://natex-ssp.unicard-uk.com/ssp/swift/dnr_importBasket.jsp?[{matrixId:'CAA118'}]",
+            // "https://ticketing.cenapps.org.uk/DirectDebit/34",
+
+            // "https://my.swiftcard.org.uk/ssp/swift/dnr_importBasket.jsp?[{matrixId:'KAA045'}]",
+            // "buyTicketUrl": "https://ticketing.networkwestmidlands.com/DirectDebit/411",
+
+            // Smart Citizen
+            // https://m-public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+            // https://m-public-tfwm.smartcitizen.net/?matrixId=AAA116
+
+            // https://public-tfwmdev.smartcitizen.net/?matrixId=AAA116
+            // https://public-tfwmtest.smartcitizen.net/?matrixId=AAA116
+
+            // https://public-tfwm.smartcitizen.net//?matrixId=AAA116
+
+            // Normalize buyTicketUrl using shared service
+            items.buyTicketUrl = buyTicketUrlService.normalize(
+              items.buyTicketUrl,
+              window?.setTicketFinder?.name,
+              items.swiftCurrentAmount
+            );
+            return items.buyTicketUrl;
+          });
+
+          fbus = vm.postedJSON.allowBus || false;
+          ftrain = vm.postedJSON.allowTrain || false;
+          fmetro = vm.postedJSON.allowMetro || false;
+
           if (
-            vm.filterButtons.busTravelArea.indexOf(items.busTravelArea) === -1
+            vm.postJSON.allowTrain === true ||
+            vm.postJSON.brand === 'nnetwork' ||
+            vm.postJSON.brand === 'ntrain'
           ) {
-            vm.filterButtons.busTravelArea.push(items.busTravelArea);
-          }
+            if (vm.fromStationInfoZone != null) {
+              vm.fromZoneNumber = vm.fromStationInfoZone;
+            } else if (vm.fromStationInfo != null) {
+              vm.fromZoneNumber = vm.fromStationInfo.zone;
+            } else {
+              vm.fromZoneNumber = null;
+            }
 
-          // Check rail zone from
-          if (
-            vm.filterButtons.railZoneFrom.indexOf(items.railZoneFrom) === -1
-          ) {
-            vm.filterButtons.railZoneFrom.push(items.railZoneFrom);
-          }
+            if (vm.toStationInfoZone != null) {
+              vm.toZoneNumber = vm.toStationInfoZone;
+            } else if (vm.toStationInfo != null) {
+              vm.toZoneNumber = vm.toStationInfo.zone;
+            } else {
+              vm.toZoneNumber = null;
+            }
 
-          // Check rail zone to
-          if (vm.filterButtons.railZoneTo.indexOf(items.railZoneTo) === -1) {
-            vm.filterButtons.railZoneTo.push(items.railZoneTo);
-          }
-        });
+            if (vm.fromZoneNumber === '1') {
+              vm.ffromzone = 1;
+            } else if (vm.fromZoneNumber === '2') {
+              vm.ffromzone = 2;
+            } else if (vm.fromZoneNumber === '3') {
+              vm.ffromzone = 3;
+            } else if (vm.fromZoneNumber === '4') {
+              vm.ffromzone = 4;
+            } else if (vm.fromZoneNumber === '5') {
+              vm.ffromzone = 5;
+            } else {
+              vm.ffromzone = null;
+            }
 
-        fbus = vm.postedJSON.allowBus || false;
-        ftrain = vm.postedJSON.allowTrain || false;
-        fmetro = vm.postedJSON.allowMetro || false;
+            if (vm.toZoneNumber === '1') {
+              vm.ftozone = 1;
+            } else if (vm.toZoneNumber === '2') {
+              vm.ftozone = 2;
+            } else if (vm.toZoneNumber === '3') {
+              vm.ftozone = 3;
+            } else if (vm.toZoneNumber === '4') {
+              vm.ftozone = 4;
+            } else if (vm.toZoneNumber === '5') {
+              vm.ftozone = 5;
+            } else {
+              vm.ftozone = null;
+            }
 
-        if (
-          vm.postJSON.allowTrain === true ||
-          vm.postJSON.brand === "nnetwork" ||
-          vm.postJSON.brand === "ntrain"
-        ) {
-          if (vm.fromStationInfoZone != null) {
-            vm.fromZoneNumber = vm.fromStationInfoZone;
-          } else if (vm.fromStationInfo != null) {
-            vm.fromZoneNumber = vm.fromStationInfo.zone;
-          } else {
-            vm.fromZoneNumber = null;
-          }
+            if (vm.ViaOneZoneNumber === '1') {
+              vm.fViaOnezone = 1;
+            } else if (vm.ViaOneZoneNumber === '2') {
+              vm.fViaOnezone = 2;
+            } else if (vm.ViaOneZoneNumber === '3') {
+              vm.fViaOnezone = 3;
+            } else if (vm.ViaOneZoneNumber === '4') {
+              vm.fViaOnezone = 4;
+            } else if (vm.ViaOneZoneNumber === '5') {
+              vm.fViaOnezone = 5;
+            } else {
+              vm.fViaOnezone = null;
+            }
 
-          if (vm.toStationInfoZone != null) {
-            vm.toZoneNumber = vm.toStationInfoZone;
-          } else if (vm.toStationInfo != null) {
-            vm.toZoneNumber = vm.toStationInfo.zone;
-          } else {
-            vm.toZoneNumber = null;
-          }
-
-          if (vm.fromZoneNumber === "1") {
-            vm.ffromzone = 1;
-          } else if (vm.fromZoneNumber === "2") {
-            vm.ffromzone = 2;
-          } else if (vm.fromZoneNumber === "3") {
-            vm.ffromzone = 3;
-          } else if (vm.fromZoneNumber === "4") {
-            vm.ffromzone = 4;
-          } else if (vm.fromZoneNumber === "5") {
-            vm.ffromzone = 5;
-          } else {
-            vm.ffromzone = null;
-          }
-
-          if (vm.toZoneNumber === "1") {
-            vm.ftozone = 1;
-          } else if (vm.toZoneNumber === "2") {
-            vm.ftozone = 2;
-          } else if (vm.toZoneNumber === "3") {
-            vm.ftozone = 3;
-          } else if (vm.toZoneNumber === "4") {
-            vm.ftozone = 4;
-          } else if (vm.toZoneNumber === "5") {
-            vm.ftozone = 5;
-          } else {
-            vm.ftozone = null;
-          }
-
-          if (vm.ViaOneZoneNumber === "1") {
-            vm.fViaOnezone = 1;
-          } else if (vm.ViaOneZoneNumber === "2") {
-            vm.fViaOnezone = 2;
-          } else if (vm.ViaOneZoneNumber === "3") {
-            vm.fViaOnezone = 3;
-          } else if (vm.ViaOneZoneNumber === "4") {
-            vm.fViaOnezone = 4;
-          } else if (vm.ViaOneZoneNumber === "5") {
-            vm.fViaOnezone = 5;
-          } else {
-            vm.fViaOnezone = null;
-          }
-
-          if (vm.ViaOneZoneNumber != null) {
-            if (vm.ViaOneZoneNumber < vm.fromZoneNumber) {
-              vm.ffromzone = vm.ViaOneZoneNumber;
-            } else if (vm.ViaOneZoneNumber > vm.toZoneNumber) {
-              vm.ftozone = vm.ViaOneZoneNumber;
+            if (vm.ViaOneZoneNumber != null) {
+              if (vm.ViaOneZoneNumber < vm.fromZoneNumber) {
+                vm.ffromzone = vm.ViaOneZoneNumber;
+              } else if (vm.ViaOneZoneNumber > vm.toZoneNumber) {
+                vm.ftozone = vm.ViaOneZoneNumber;
+              }
             }
           }
-        }
 
-        if (vm.postJSON.allowTrain === true) {
-          vm.exactMatch = [];
-          if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
-            // exact results won't work if from zone is greater then the to zone so do a check
-            if (vm.ffromzone < vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
+          if (vm.postJSON.allowTrain === true) {
+            vm.exactMatch = [];
+            if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
+              // exact results won't work if from zone is greater then the to zone so do a check
+              if (vm.ffromzone < vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: vm.ffromzone,
+                  railZoneTo: vm.ftozone
+                });
+              } else if (vm.ffromzone > vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: vm.ftozone,
+                  railZoneTo: vm.ffromzone
+                });
+              } else if (vm.ffromzone === vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  allowBus: fbus,
+                  allowTrain: ftrain,
+                  allowMetro: fmetro,
+                  railZoneFrom: 1,
+                  railZoneTo: vm.ftozone
+                });
+              }
+            } else {
+              vm.exactMatch = $filter('filter')(response, {
                 allowBus: fbus,
                 allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone,
-              });
-            } else if (vm.ffromzone > vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
-                allowBus: fbus,
-                allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone,
-              });
-            } else if (vm.ffromzone === vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
-                allowBus: fbus,
-                allowTrain: ftrain,
-                allowMetro: fmetro,
-                railZoneFrom: 1,
-                railZoneTo: vm.ftozone,
+                allowMetro: fmetro
               });
             }
+          } else if (vm.postJSON.brand === 'nnetwork' || vm.postJSON.brand === 'ntrain') {
+            vm.exactMatch = [];
+            if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
+              // exact results won't work if from zone is greater then the to zone so do a check
+              if (vm.ffromzone < vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: vm.ffromzone,
+                  railZoneTo: vm.ftozone
+                });
+              } else if (vm.ffromzone > vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: vm.ftozone,
+                  railZoneTo: vm.ffromzone
+                });
+              } else if (vm.ffromzone === vm.ftozone) {
+                vm.exactMatch = $filter('filter')(response, {
+                  railZoneFrom: 1,
+                  railZoneTo: vm.ftozone
+                });
+              }
+            } else {
+              vm.exactMatch = $filter('filter')(response, {});
+            }
           } else {
-            vm.exactMatch = $filter("filter")(response, {
+            // console.log("Exact Search without rail");
+            vm.postedJSON.stationNames = null; // make sure no stations are included if train not checked.
+            vm.exactMatch = $filter('filter')(response, {
               allowBus: fbus,
               allowTrain: ftrain,
-              allowMetro: fmetro,
+              allowMetro: fmetro
             });
           }
-        } else if (
-          vm.postJSON.brand === "nnetwork" ||
-          vm.postJSON.brand === "ntrain"
-        ) {
-          vm.exactMatch = [];
-          if (vm.fromZoneNumber !== null && vm.toZoneNumber !== null) {
-            // exact results won't work if from zone is greater then the to zone so do a check
-            if (vm.ffromzone < vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
-                railZoneFrom: vm.ffromzone,
-                railZoneTo: vm.ftozone,
-              });
-            } else if (vm.ffromzone > vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
-                railZoneFrom: vm.ftozone,
-                railZoneTo: vm.ffromzone,
-              });
-            } else if (vm.ffromzone === vm.ftozone) {
-              vm.exactMatch = $filter("filter")(response, {
-                railZoneFrom: 1,
-                railZoneTo: vm.ftozone,
-              });
-            }
-          } else {
-            vm.exactMatch = $filter("filter")(response, {});
-          }
-        } else {
-          // console.log("Exact Search without rail");
-          vm.postedJSON.stationNames = null; // make sure no stations are included if train not checked.
-          vm.exactMatch = $filter("filter")(response, {
-            allowBus: fbus,
-            allowTrain: ftrain,
-            allowMetro: fmetro,
-          });
-        }
 
-        // compare search results and exact search results and display difference
-        searchAll = vm.all;
-        searchExact = vm.exactMatch;
-        // console.log('all results');
-        // console.log(searchAll);
-        // console.log("search exact results");
-        // console.log(vm.exactMatch);
+          // compare search results and exact search results and display difference
+          searchAll = vm.all;
+          searchExact = vm.exactMatch;
+          // console.log('all results');
+          // console.log(searchAll);
+          // console.log("search exact results");
+          // console.log(vm.exactMatch);
 
-        for (i = 0; i < searchExact.length; i += 1) {
-          arrlen = searchAll.length;
-          for (j = 0; j < arrlen; j += 1) {
-            if (searchExact[i] === searchAll[j]) {
-              searchAll = searchAll
-                .slice(0, j)
-                .concat(searchAll.slice(j + 1, arrlen));
+          for (i = 0; i < searchExact.length; i += 1) {
+            arrlen = searchAll.length;
+            for (j = 0; j < arrlen; j += 1) {
+              if (searchExact[i] === searchAll[j]) {
+                searchAll = searchAll.slice(0, j).concat(searchAll.slice(j + 1, arrlen));
+              }
             }
           }
-        }
 
-        vm.otherResults = searchAll;
+          vm.otherResults = searchAll;
 
-        bus = vm.postedJSON.allowBus;
-        train = vm.postedJSON.allowTrain;
-        metro = vm.postedJSON.allowMetro;
+          bus = vm.postedJSON.allowBus;
+          train = vm.postedJSON.allowTrain;
+          metro = vm.postedJSON.allowMetro;
 
-        // if 1 or 2 modes selected open up the exclude mode filter
-        if (
-          bus !== null ||
-          (bus !== null && train !== null) ||
-          (bus !== null && metro !== null) ||
-          (train !== null && metro !== null)
-        ) {
-          vm.toggleFilter("mode");
-        }
+          // if 1 or 2 modes selected open up the exclude mode filter
+          if (
+            bus !== null ||
+            (bus !== null && train !== null) ||
+            (bus !== null && metro !== null) ||
+            (train !== null && metro !== null)
+          ) {
+            vm.toggleFilter('mode');
+          }
 
-        // if all modes selected open up how to buy filter
-        if (bus !== null && train !== null && metro !== null) {
-          vm.toggleFilter("payment");
-        }
+          // if all modes selected open up how to buy filter
+          if (bus !== null && train !== null && metro !== null) {
+            vm.toggleFilter('payment');
+          }
 
-        vm.update(); // When feed is loaded run it through the filters
-        vm.loadingStatus = "success";
-        // scroll to results
-        $location.hash("sbmBtn");
-        $anchorScroll();
-      });
+          vm.update(); // When feed is loaded run it through the filters
+          vm.loadingStatus = 'success';
+          vm.errorMessage = ''; // Clear any error messages
+          // scroll to results
+          $location.hash('sbmBtn');
+          $anchorScroll();
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          retryTicketSearch(data);
+          console.error(error);
+        });
     }
 
     function update() {
@@ -597,8 +707,8 @@
       angular.forEach(vm.searchFilters, function(val, key) {
         // if Key/Property contains 'Allow" and the value is true || if Key/Property doesn't contain 'Allow' and val is false (this is to make sure the opposite/exclude filter values are deleted as the trues will be false and vice versa)
         if (
-          (key.indexOf("allow") !== -1 && val) ||
-          (val === false && key.indexOf("allow") === -1)
+          (key.indexOf('allow') !== -1 && val) ||
+          (val === false && key.indexOf('allow') === -1)
         ) {
           // Delete the filter and value
           delete vm.searchFilters[key];
@@ -628,7 +738,7 @@
           vm.searchFilters.timePeriod3 = false;
         }
         // if anytime is selected
-        if (vm.timePeriodAll === "yes") {
+        if (vm.timePeriodAll === 'yes') {
           // vm.searchFilters.timeLimited = false;
           // vm.searchFilters.timePeriod1 = '';
           vm.searchFilters.timePeriod1 = true;
@@ -639,115 +749,91 @@
       });
 
       // Filter results by the filters selected
-      filtered = $filter("filter")(filtered, vm.searchFilters);
-      filteredorg = $filter("filter")(filteredorg, vm.searchFilters);
-      filteredother = $filter("filter")(filteredother, vm.searchFilters);
+      filtered = $filter('filter')(filtered, vm.searchFilters);
+      filteredorg = $filter('filter')(filteredorg, vm.searchFilters);
+      filteredother = $filter('filter')(filteredother, vm.searchFilters);
 
       // Sort results by selected option
-      vm.filteredTickets = $filter("orderBy")(filtered, vm.orderBy);
-      vm.origTickets = $filter("orderBy")(filteredorg, vm.orderBy);
-      vm.otherTickets = $filter("orderBy")(filteredother, vm.orderBy);
+      vm.filteredTickets = $filter('orderBy')(filtered, vm.orderBy);
+      vm.origTickets = $filter('orderBy')(filteredorg, vm.orderBy);
+      vm.otherTickets = $filter('orderBy')(filteredother, vm.orderBy);
 
       // order filtering
-      if (vm.orderBy === "orderSequence") {
+      if (vm.orderBy === 'orderSequence') {
         vm.filteredTickets.sort(function(a, b) {
-          vm.sortPop = "yes";
-          vm.sortPlw = "no";
-          vm.sortPhl = "no";
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
         vm.origTickets.sort(function(a, b) {
           // set conditional attributes for refresher
-          vm.sortPop = "yes";
-          vm.sortPlw = "no";
-          vm.sortPhl = "no";
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
         vm.otherTickets.sort(function(a, b) {
-          vm.sortPop = "yes";
-          vm.sortPlw = "no";
-          vm.sortPhl = "no";
+          vm.sortPop = 'yes';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'no';
           return b.buyOnDirectDebit - a.buyOnDirectDebit;
         });
-      } else if (vm.orderBy === "ticketCurrentAmount") {
+      } else if (vm.orderBy === 'ticketCurrentAmount') {
         vm.filteredTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "yes";
-          vm.sortPhl = "no";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return aVal - bVal;
         });
         vm.origTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "yes";
-          vm.sortPhl = "no";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return aVal - bVal;
         });
         vm.otherTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "yes";
-          vm.sortPhl = "no";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'yes';
+          vm.sortPhl = 'no';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return aVal - bVal;
         });
-      } else if (vm.orderBy === "-ticketCurrentAmount") {
+      } else if (vm.orderBy === '-ticketCurrentAmount') {
         vm.filteredTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "no";
-          vm.sortPhl = "yes";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return bVal - aVal;
         });
         vm.origTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "no";
-          vm.sortPhl = "yes";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return bVal - aVal;
         });
         vm.otherTickets.sort(function(a, b) {
-          vm.sortPop = "no";
-          vm.sortPlw = "no";
-          vm.sortPhl = "yes";
-          const aVal = parseFloat(
-            String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
-          const bVal = parseFloat(
-            String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ""),
-          );
+          vm.sortPop = 'no';
+          vm.sortPlw = 'no';
+          vm.sortPhl = 'yes';
+          const aVal = parseFloat(String(a.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
+          const bVal = parseFloat(String(b.ticketCurrentAmount).replace(/[^\d.-]/g, ''));
           return bVal - aVal;
         });
       }
 
-      // console.log('Search Filters:');
+      // console.log("Search Filters:");
       // console.log(vm.searchFilters);
-      // console.log('Filtered Tickets:');
+      // console.log("Filtered Tickets:");
       // console.log(vm.filteredTickets);
       // console.log('Original Search:');
       // console.log(vm.origTickets);
@@ -757,7 +843,7 @@
       vm.updateGrid();
     }
 
-    updateGrid.$inject = ["$timeout", "angularGridInstance"];
+    updateGrid.$inject = ['$timeout'];
     function updateGrid() {
       $timeout(
         function() {
@@ -781,11 +867,9 @@
                   busTravelArea: vm.searchFilters.busTravelArea,
                   operator: vm.searchFilters.operator,
                   buyOnDirectDebit: vm.searchFilters.buyOnDirectDebit,
-                  buyOnDirectPurchase:
-                    vm.searchFilters.buyOnDirectPurchase || null,
+                  buyOnDirectPurchase: vm.searchFilters.buyOnDirectPurchase || null,
                   buyOnSwift: vm.searchFilters.buyOnSwift,
-                  hasOnlinePurchaseChannel:
-                    vm.searchFilters.hasOnlinePurchaseChannel,
+                  hasOnlinePurchaseChannel: vm.searchFilters.hasOnlinePurchaseChannel,
                   purchaseTic: vm.searchFilters.purchaseTic,
                   purchaseRailStation: vm.searchFilters.purchaseRailStation,
                   purchasePayzone: vm.searchFilters.purchasePayzone,
@@ -793,40 +877,36 @@
                   railZoneTo: vm.searchFilters.railZoneTo,
                   limit: vm.limit,
                   limitExact: vm.limitExact,
-                  excludeBus: vm.searchFilters.allowBus,
+                  excludeBus: vm.searchFilters.allowBus
                 };
 
                 urlstring = $httpParamSerializer(obj);
 
                 if (vm.postedJSON.allowBus) {
-                  abus = "allowBus";
+                  abus = 'allowBus';
                 }
 
                 if (vm.postedJSON.allowTrain) {
-                  atrain = "allowTrain";
+                  atrain = 'allowTrain';
                 }
 
                 if (vm.postedJSON.allowMetro) {
-                  ametro = "allowMetro";
+                  ametro = 'allowMetro';
                 }
 
                 // work out time of day selection and update searchURL
                 if (vm.searchFilters.timePeriod1 === true) {
-                  atime =
-                    "&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false";
+                  atime = '&timePeriod1=true&timePeriod2=false&timePeriod3=false&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod2 === true) {
-                  atime =
-                    "&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false";
+                  atime = '&timePeriod1=false&timePeriod2=true&timePeriod3=false&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod3 === true) {
-                  atime =
-                    "&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false";
+                  atime = '&timePeriod1=false&timePeriod2=false&timePeriod3=true&timePeriod4=false';
                 } else if (vm.searchFilters.timePeriod4 === true) {
-                  atime =
-                    "&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true";
+                  atime = '&timePeriod1=false&timePeriod2=false&timePeriod3=false&timePeriod4=true';
                 } else if (vm.timePeriodAll === true) {
-                  atime = "&timePeriodAll=true";
+                  atime = '&timePeriodAll=true';
                 } else {
-                  atime = "";
+                  atime = '';
                 }
 
                 // bus only
@@ -835,9 +915,9 @@
                   !vm.postedJSON.allowTrain &&
                   !vm.postedJSON.allowMetro
                 ) {
-                  searchURL = "/?" + abus + "&" + urlstring + atime;
+                  searchURL = '/?' + abus + '&' + urlstring + atime;
                   // console.log("bus only - " + searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
 
                 // bus and train
@@ -846,10 +926,9 @@
                   vm.postedJSON.allowTrain &&
                   !vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    "/?" + abus + "&" + atrain + "&" + urlstring + atime;
+                  searchURL = '/?' + abus + '&' + atrain + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // bus and metro
                 if (
@@ -857,10 +936,9 @@
                   !vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    "/?" + abus + "&" + ametro + "&" + urlstring + atime;
+                  searchURL = '/?' + abus + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // train only
                 if (
@@ -868,9 +946,9 @@
                   vm.postedJSON.allowTrain &&
                   !vm.postedJSON.allowMetro
                 ) {
-                  searchURL = "/?" + atrain + "&" + urlstring + atime;
+                  searchURL = '/?' + atrain + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // train and metro
                 if (
@@ -878,10 +956,9 @@
                   vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    "/?" + atrain + "&" + ametro + "&" + urlstring + atime;
+                  searchURL = '/?' + atrain + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // metro only
                 if (
@@ -889,9 +966,9 @@
                   !vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL = "/?" + ametro + "&" + urlstring + atime;
+                  searchURL = '/?' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // all modes selected
                 if (
@@ -899,18 +976,9 @@
                   vm.postedJSON.allowTrain &&
                   vm.postedJSON.allowMetro
                 ) {
-                  searchURL =
-                    "/?" +
-                    abus +
-                    "&" +
-                    atrain +
-                    "&" +
-                    ametro +
-                    "&" +
-                    urlstring +
-                    atime;
+                  searchURL = '/?' + abus + '&' + atrain + '&' + ametro + '&' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // no modes selected
                 if (
@@ -918,45 +986,61 @@
                   !vm.postedJSON.allowTrain &&
                   !vm.postedJSON.allowMetro
                 ) {
-                  searchURL = "/?" + urlstring + atime;
+                  searchURL = '/?' + urlstring + atime;
                   // console.log(searchURL);
-                  savedFilter.set("url", searchURL);
+                  savedFilter.set('url', searchURL);
                 }
                 // load.log(searchURL);
               }
             },
             0,
-            false,
+            false
           );
         },
         0,
-        false,
+        false
       );
     }
 
     // get Out Of County Rail stations for autocomplete
     function getoocStations() {
-      ticketingService.getStations().then(function(response) {
-        // console.log("out of county stations");
-        // console.log(response);
-        const OutOfCounty = $filter("filter")(response, {
-          outOfCounty: "true",
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          // console.log("out of county stations");
+          // console.log(response);
+          const OutOfCounty = $filter('filter')(response, {
+            outOfCounty: 'true'
+          });
+          vm.stationoocList = OutOfCounty;
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-        vm.stationoocList = OutOfCounty;
-      });
     }
 
     // get In County Rail stations for autocomplete
     function geticStations() {
-      ticketingService.getStations().then(function(response) {
-        const inCounty = $filter("filter")(response, { outOfCounty: "false" });
-        vm.stationicList = inCounty;
-      });
+      ticketingService
+        .getStations()
+        .then(function(response) {
+          const inCounty = $filter('filter')(response, { outOfCounty: 'false' });
+          vm.stationicList = inCounty;
+        })
+        .catch(function(error) {
+          vm.errorMessage =
+            'There was a problem loading train station data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
+        });
     }
 
     // reset search
     function clearFilter() {
-      $location.url("").replace();
+      $location.url('').replace();
       defaultVars();
       // clear filter checkboxes
       vm.excludeBusCheck = function() {
@@ -1004,8 +1088,8 @@
       vm.timePeriod4Check = function() {
         return false;
       };
-      savedFilter.set("url", "");
-      vm.postJSON.stationNames = null;
+      savedFilter.set('url', '');
+      // vm.postJSON.stationNames = [];
       clearFromStation();
       clearToStation();
       clearViaOneStation();
@@ -1020,7 +1104,7 @@
 
     // if no stations set in url make sure from station is set to null. This is to fix back function adding [] in from station
     function clearStation() {
-      if ($location.search().stationNames === "[]") {
+      if ($location.search().stationNames === '[]') {
         clearFromStation();
       }
     }
@@ -1053,7 +1137,7 @@
     }
 
     function checkTimeAll() {
-      if (vm.timePeriodAll === "yes") {
+      if (vm.timePeriodAll === 'yes') {
         vm.searchFilters.timePeriod1 = true;
         vm.searchFilters.timePeriod2 = true;
         vm.searchFilters.timePeriod3 = true;
@@ -1074,11 +1158,11 @@
         vm.timePeriod4Check = function() {
           return false;
         };
-      } else if (vm.timePeriodAll === "no") {
-        vm.searchFilters.timePeriod1 = "";
-        vm.searchFilters.timePeriod2 = "";
-        vm.searchFilters.timePeriod3 = "";
-        vm.searchFilters.timePeriod4 = "";
+      } else if (vm.timePeriodAll === 'no') {
+        vm.searchFilters.timePeriod1 = '';
+        vm.searchFilters.timePeriod2 = '';
+        vm.searchFilters.timePeriod3 = '';
+        vm.searchFilters.timePeriod4 = '';
       }
     }
 
@@ -1095,18 +1179,18 @@
     // rail stations - at least 2 required for api to work
 
     // set From Rail Station
-    vm.fromEmpty = "none";
+    vm.fromEmpty = 'none';
 
     vm.fromStationInputChanged = function(str) {
       vm.fromStationText = str;
     };
 
-    vm.fromfocusState = "None";
+    vm.fromfocusState = 'None';
     vm.fromFocusIn = function() {
-      vm.fromfocusState = "In";
+      vm.fromfocusState = 'In';
     };
     vm.fromFocusOut = function() {
-      vm.fromfocusState = "Out";
+      vm.fromfocusState = 'Out';
 
       if (vm.stationToName != null) {
         vm.stationFromReq = true;
@@ -1121,7 +1205,7 @@
     vm.stationFromReqOOC = true; // set ooc station to required
     vm.stationFrom = function(selected) {
       if (selected) {
-        vm.postJSON.stationNames = [];
+        vm.postJSON.stationNames = []; // make sure station names array is created to avoid errors
         vm.stationFromName = selected.originalObject.name; // set From station
         vm.postJSON.stationNames[0] = selected.originalObject.name;
         vm.stationFromNameZone = selected.originalObject.zone;
@@ -1133,7 +1217,9 @@
         vm.fromEmpty = true;
       } else {
         vm.stationFromName = null;
-        vm.postJSON.stationNames[0] = null;
+        if (vm.postJSON.stationNames) {
+          vm.postJSON.stationNames[0] = null;
+        }
         vm.stationFromReq = false; // set from to required to ensure selection is made from list
         vm.fromEmpty = false;
       }
@@ -1141,10 +1227,12 @@
 
     // reset from station
     function clearFromStation() {
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationFrom");
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationFromOOC");
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationFrom');
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationFromOOC');
+      if (vm.stationFromName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[0] = null;
+      }
       vm.stationFromName = null;
-      vm.postJSON.stationNames[0] = null;
       vm.stationFromReq = false; // set from station to not required
       vm.stationFromNameOocZ5 = null; // clear zone 5 in county
       vm.fromStationInfoZone = null;
@@ -1152,22 +1240,22 @@
     }
 
     // set To Rail Station
-    vm.toEmpty = "none";
+    vm.toEmpty = 'none';
 
     vm.toStationInputChanged = function(str) {
       vm.toStationText = str;
     };
 
-    vm.tofocusState = "None";
+    vm.tofocusState = 'None';
     vm.toFocusIn = function() {
-      vm.tofocusState = "In";
+      vm.tofocusState = 'In';
 
       if (vm.stationFromName != null) {
         vm.stationToReq = true;
       }
     };
     vm.toFocusOut = function() {
-      vm.tofocusState = "Out";
+      vm.tofocusState = 'Out';
 
       if (vm.stationFromName != null) {
         vm.stationToReq = true;
@@ -1183,6 +1271,9 @@
     vm.stationTo = function(selected) {
       if (selected) {
         vm.stationToName = selected.title; // set To Station
+        if (!vm.postJSON.stationNames) {
+          vm.postJSON.stationNames = null;
+        }
         vm.postJSON.stationNames[1] = selected.originalObject.name;
         vm.stationToTitle = selected.originalObject.name;
         vm.stationToNameZone = selected.originalObject.zone;
@@ -1194,7 +1285,9 @@
         vm.toEmpty = true;
       } else {
         vm.stationToName = null;
-        vm.postJSON.stationNames[1] = null;
+        if (vm.postJSON.stationNames) {
+          vm.postJSON.stationNames[1] = null;
+        }
         vm.stationToTitle = null;
         vm.toEmpty = false;
       }
@@ -1202,15 +1295,17 @@
 
     // reset to station
     function clearToStation() {
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationTo");
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationTo2");
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationTo3");
-      vm.stationToName = "";
-      vm.postJSON.stationNames[1] = null;
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo');
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo2');
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationTo3');
+      if (vm.stationToName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[1] = null;
+      }
+      vm.stationToName = '';
       vm.stationToReq = false; // set to station to not required
       vm.stationToNameOocZ5 = null; // clear zone 5 in county
       vm.toStationInfoZone = null;
-      vm.toStationText = "";
+      vm.toStationText = '';
     }
 
     // via station
@@ -1218,12 +1313,12 @@
       vm.viaOneStationText = str;
     };
 
-    vm.viaOnefocusState = "None";
+    vm.viaOnefocusState = 'None';
     vm.stationViaOneFocusIn = function() {
-      vm.viaOnefocusState = "In";
+      vm.viaOnefocusState = 'In';
     };
     vm.stationViaOneFocusOut = function() {
-      vm.viaOnefocusState = "Out";
+      vm.viaOnefocusState = 'Out';
 
       if (vm.stationViaOneName != null) {
         vm.stationviaOneReq = true;
@@ -1239,6 +1334,9 @@
     vm.stationViaOne = function(selected) {
       if (selected) {
         vm.stationViaOneName = selected.originalObject.name; // set To Station
+        if (!vm.postJSON.stationNames) {
+          vm.postJSON.stationNames = null;
+        }
         vm.postJSON.stationNames[2] = selected.originalObject.name;
         vm.stationViaOneTitle = selected.originalObject.name;
         vm.stationViaOneNameZone = selected.originalObject.zone;
@@ -1256,11 +1354,12 @@
 
     // reset via one station
     function clearViaOneStation() {
-      $scope.$broadcast("angucomplete-alt:clearInput", "stationViaOne");
+      $scope.$broadcast('angucomplete-alt:clearInput', 'stationViaOne');
+      if (vm.stationViaOneName !== null && vm.postJSON.stationNames) {
+        vm.postJSON.stationNames[2] = null;
+      }
       vm.stationViaOneName = null;
       vm.viaOneStationText = null;
-      vm.stationViaOneName = null;
-      vm.postJSON.stationNames = null;
     }
 
     // control filters according to url parameters
@@ -1393,10 +1492,10 @@
     }
 
     // anytime
-    if ($location.search().timePeriodAll === "true") {
+    if ($location.search().timePeriodAll === 'true') {
       // update search filters
       vm.searchFilters.timeLimited = false;
-      vm.searchFilters.timePeriod1 = "";
+      vm.searchFilters.timePeriod1 = '';
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
       // set search filters to include timePeriod1
@@ -1408,7 +1507,7 @@
     }
 
     // pre 9.30
-    if ($location.search().timePeriod1 === "true") {
+    if ($location.search().timePeriod1 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
       // set search filters to include timePeriod1
@@ -1420,7 +1519,7 @@
     }
 
     // 9.30 - 3.30
-    if ($location.search().timePeriod2 === "true") {
+    if ($location.search().timePeriod2 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
       // set search filters to include timePeriod1
@@ -1432,7 +1531,7 @@
     }
 
     // 3.30 - 6
-    if ($location.search().timePeriod3 === "true") {
+    if ($location.search().timePeriod3 === 'true') {
       // pen time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
       // set search filters to include timePeriod1
@@ -1444,7 +1543,7 @@
     }
 
     // after 6
-    if ($location.search().timePeriod4 === "true") {
+    if ($location.search().timePeriod4 === 'true') {
       // open time of day filter
       vm.filterButtons.time = !vm.filterButtons.time;
       // set search filters to include timePeriod1
@@ -1467,7 +1566,7 @@
     // other matches and swift load more button
     function loadMore() {
       vm.limit += 6;
-      $location.search("limit", vm.limit);
+      $location.search('limit', vm.limit);
       vm.updateGrid();
       vm.refreshOther();
     }
@@ -1475,29 +1574,21 @@
     // exact matches load more button
     function loadMoreExact() {
       vm.limitExact += 6;
-      $location.search("limitExact", vm.limitExact);
+      $location.search('limitExact', vm.limitExact);
       vm.updateGrid();
       vm.refreshExact();
     }
 
     // refresh exact results grid
-    refreshExact.$inject = ["$timeout", "angularGridInstance"];
+    refreshExact.$inject = ['$timeout'];
     function refreshExact() {
-      angular.element(document).ready(function() {
-        $timeout(function() {
-          angularGridInstance.origTicketResults.refresh();
-        }, 0);
-      });
+      // CSS Grid handles layout automatically, no refresh needed
     }
 
     // refresh other results grid
-    refreshOther.$inject = ["$timeout", "angularGridInstance"];
+    refreshOther.$inject = ['$timeout'];
     function refreshOther() {
-      angular.element(document).ready(function() {
-        $timeout(function() {
-          angularGridInstance.ticketResults.refresh();
-        }, 0);
-      });
+      // CSS Grid handles layout automatically, no refresh needed
     }
 
     // toggle filter accordions
@@ -1508,42 +1599,42 @@
     // if pass is swift payg
     function swiftPAYG() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === "Swift PAYG") {
+      if (vm.passValue === 'Swift PAYG') {
         // console.log('swift payg');
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.passengerType = null;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       } else if (
-        vm.passValue === "nbus" ||
-        vm.passValue === "National Express" ||
-        vm.passValue === "Diamond Bus" ||
-        vm.passValue === "Stagecoach" ||
-        vm.passValue === "Swift PAYG" ||
-        vm.passValue === "West Midlands Metro"
+        vm.passValue === 'nbus' ||
+        vm.passValue === 'National Express' ||
+        vm.passValue === 'Diamond Bus' ||
+        vm.passValue === 'Stagecoach' ||
+        vm.passValue === 'Swift PAYG' ||
+        vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       }
     }
 
     // if pass is swift abt
     function swiftABT() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === "Swift Go") {
+      if (vm.passValue === 'Swift Go') {
         vm.isHideCheck = !vm.isHideCheck;
         vm.postJSON.timeBand = null;
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       } else if (
-        vm.passValue === "nbus" ||
-        vm.passValue === "National Express" ||
-        vm.passValue === "Diamond Bus" ||
-        vm.passValue === "Stagecoach" ||
-        vm.passValue === "Swift PAYG" ||
-        vm.passValue === "West Midlands Metro"
+        vm.passValue === 'nbus' ||
+        vm.passValue === 'National Express' ||
+        vm.passValue === 'Diamond Bus' ||
+        vm.passValue === 'Stagecoach' ||
+        vm.passValue === 'Swift PAYG' ||
+        vm.passValue === 'West Midlands Metro'
       ) {
         // Clear stationNames list if non-rail pass selected
-        vm.postJSON.stationNames = null;
+        vm.postJSON.stationNames = [];
       }
     }
 
@@ -1551,7 +1642,7 @@
     function ntrainOOC() {
       vm.passValue = vm.postJSON.brand;
 
-      if (vm.passValue === "ntrain - Out of County") {
+      if (vm.passValue === 'ntrain - Out of County') {
         vm.isHideCheck = !vm.isHideCheck;
         vm.stationFromReqOOC = true; // set from station to required
         vm.stationToReqOOC = true; // set to station to required
@@ -1565,35 +1656,113 @@
           // if station names in url assign station vars
           stations = $location.search().stationNames;
           stationSel = stations.toString();
-          stationSplit = stationSel.split(",");
-          vm.stationFromName = stationSplit["0"];
-          vm.stationToName = stationSplit["1"];
-          vm.stationViaOneName = stationSplit["2"];
+          stationSplit = stationSel.split(',');
+          vm.stationFromName = stationSplit['0'];
+          vm.stationToName = stationSplit['1'];
+          vm.stationViaOneName = stationSplit['2'];
         }
       }
     }
 
     // get tickets you can buy on swift
     function getSwiftPAYG() {
-      ticketingService.getSwiftSearch().then(function(response) {
-        vm.swiftPaygIds = [];
+      ticketingService
+        .getSwiftSearch()
+        .then(function(response) {
+          vm.swiftPaygIds = [];
 
-        angular.forEach(response, function(item) {
-          if (item.swiftCurrentAmount) {
-            vm.swiftPaygIds.push(item);
-          }
+          angular.forEach(response, function(item) {
+            if (item.swiftCurrentAmount) {
+              vm.swiftPaygIds.push(item);
+            }
+          });
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading Swift data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-      });
     }
 
     // if pass is swift abt
     function selectPass() {
       vm.passValue = vm.postJSON.brand;
-      if (vm.passValue === "") {
-        console.log("select pass");
+      if (vm.passValue === '') {
+        // console.log('select pass');
         vm.clearFilter();
       }
     }
+
+    function openAccordion(event) {
+      const accordionBtn = event && event.currentTarget;
+      if (!accordionBtn) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const accordion = accordionBtn.closest ? accordionBtn.closest('.wmnds-accordion') : null;
+      if (!accordion) {
+        return;
+      }
+
+      if (accordion.classList.contains('wmnds-is--open')) {
+        accordion.classList.remove('wmnds-is--open');
+        accordionBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        accordion.classList.add('wmnds-is--open');
+        accordionBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // Returns the appropriate validity suffix (day, week, month, year) based on ticket rules
+    function getValiditySuffix(ticket) {
+      // If ticketCurrentAmount AND onlineCurrentAmount, show no suffix (matches your hide condition)
+      if (ticket.ticketCurrentAmount && ticket.onlineCurrentAmount) return '';
+
+      // Map validityId to suffix
+      switch (ticket.validityId) {
+        case 450930002:
+        case 450930006:
+        case 450930010:
+          return ' per month';
+
+        case 450930000:
+          // your existing exception rules
+          if (ticket.type === 'Carnet' || ticket.id === '811') return '';
+          return ' a day';
+
+        case 450930001:
+          return ' a week';
+
+        case 450930003:
+          return ' for 1 year';
+
+        default:
+          return '';
+      }
+    }
+
+    // Ensures screen readers pronounce nbus, ntrain, and nnetwork correctly
+    function srPronunciation(text) {
+      if (!text) return text;
+
+      // Remove any previous joiners/spaces we may have added (prevents double insertion)
+      const cleaned = text.replace(/[\u200B\u2060]/g, '');
+
+      // nbus / nnbus / ntrain / nnetwork -> n + WORD JOINER + bus/train/network
+      return cleaned.replace(/\bn+(bus|train|network)\b/gi, 'n\u2060$1');
+    }
+
+    // Get the current URL (before #/)
+    function getCurrentUrl() {
+      const fullUrl = $location.absUrl();
+      const url = fullUrl.split('#')[0];
+      vm.currentUrl = url;
+      return url;
+    }
+
+    getCurrentUrl();
 
     // set current date to test for ticketFutureDate
     vm.date = new Date();
@@ -1609,7 +1778,7 @@
       if (input === undefined) {
         return;
       }
-      regex = new RegExp(from, "g");
+      regex = new RegExp(from, 'g');
       return input.replace(regex, to);
     };
   }

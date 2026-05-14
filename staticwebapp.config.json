@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "route": "/portal/*",
+      "rewrite": "/portal/index.html"
+    },
+    {
+      "route": "/oneapp/*",
+      "rewrite": "/oneapp/index.html"
+    },
+    {
+      "route": "/mobile/*",
+      "rewrite": "/mobile/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/api/*", "/js/*", "/css/*", "/img/*", "/portal/*", "/oneapp/*", "/mobile/*"]
+  }
+}

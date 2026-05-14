@@ -142,7 +142,6 @@
         alt="Buy ticket with Swift on Mobile App"
     /></a>
   </div>
-
   <!-- buy button for all other tickets apart from swift payg -->
   <div
     data-ng-hide="ticket.all.isPayAsYouGo || ticket.all.swiftCurrentAmount || !ticket.all.buyTicketUrl || ticket.all.validityId == 450930000 && ticket.all.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.android"
@@ -174,7 +173,7 @@
   >
     <a
       class="float--left btn btn--arrow btn--navy"
-      data-ng-href="$*paygLink?[{matrixId:'AAC001'}]"
+      data-ng-href="{{ticket.all.buyTicketUrl}}"
       target="_parent"
       >Buy Swift PAYG credit</a
     >

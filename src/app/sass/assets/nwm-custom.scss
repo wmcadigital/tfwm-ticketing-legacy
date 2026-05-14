@@ -3074,7 +3074,6 @@ a.icon-stylized-new {
 
 .icon-stylized-new label,
 .icon-stylized-new>span {
-    background-color: white;
     position: relative;
     font-family: inherit;
     font-size: 14px;
@@ -3090,8 +3089,32 @@ a.icon-stylized-new {
     padding: 15px 40px;
 }
 
+/* Visually hide the checkbox while keeping it keyboard and screen-reader accessible, preventing the native focus indicator. */
+.icon-stylized-new input[type="checkbox"] {
+  position: absolute;
+  left: -9999px;   // move focus ring off-screen
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+
+$focusBackColor: rgb(8, 184, 237); /* replace with your focus token/colour */
+
+/* Show a strong focus indicator on the visible control (label) */
+.icon-stylized-new > input[type="checkbox"]:focus-visible + label,
+.icon-stylized-new > input[type="radio"]:focus-visible + label,
+:where(a, p, li, button, input, select, textarea, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid $focusBackColor !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important; /* optional */
+  z-index: 1;
+}
+
 .labels-new {
-    overflow: hidden;
     width: 100%;
 }
 
@@ -3385,4 +3408,44 @@ a.icon-stylized-new:focus span:after {
 
 .sm__link--in {
     background-position: -242px -182px;
+}
+
+.wmnds-accordion {
+    background: transparent !important;
+    button{
+        padding: 0px !important;
+        margin-bottom: 4px !important;
+        .wmnds-accordion__summary h4{
+            font-weight: lighter !important; 
+            font-size: 14px !important;           
+        }
+        svg{
+            width: 21px !important;
+            height: 21px !important;
+        }   
+    }
+    .wmnds-accordion__content{
+        border: 1px solid lightgray !important;
+        min-width: 265px;        
+    }
+}
+
+.ticket-filters .wmnds-accordion__content{
+    border: none !important;
+    padding: 0px !important;    
+}
+
+.wmnds-accordion__summary-wrapper{
+    position: relative;
+    .filter-title{
+        font-weight: 800;
+    }
+    i{
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9D5BAF;
+        font-weight: 800;
+    }
 }

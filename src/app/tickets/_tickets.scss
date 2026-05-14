@@ -4,21 +4,13 @@
   }
 }
 
-// CSS Grid for ticket results
-.tickets-results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
-
-  @include breakpoint(phablet2) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
+.icon-stylized-new {
+  cursor: default;
 }
 
-.grid {
-  height: 100%;
+.icon-stylized-new label {
+  cursor: pointer;
 }
-
 
 .ticket-search .how-long .icon-stylized-new label {
   background-color: $cyan;
@@ -93,14 +85,15 @@ a.icon-stylized-new:focus span:after {
   }
 
   .radio-bar {
-    display: inline-block;
+    display: inline-flex;
 
     @include breakpoint(tablet2) {
-      display: inline-block;
+      display: inline-flex;
     }
 
-    span label {
+    div label {
       padding: 0.78em 15px;
+      height: 100%;
     }
   }
 
@@ -152,10 +145,12 @@ a.icon-stylized-new:focus span:after {
   }
 
   .price {
+    p{
     font-weight: bold;
     margin-top: 10px;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 30px;    
+  }
   }
 
   .event__date {
@@ -174,6 +169,21 @@ a.icon-stylized-new:focus span:after {
   }
 }
 
+// CSS Grid for ticket results
+.tickets-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+
+  @include breakpoint(phablet2) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.grid {
+  height: 100%;
+}
+
 .ticket-filters {
   hr {
     margin-bottom: 0;
@@ -182,6 +192,16 @@ a.icon-stylized-new:focus span:after {
   //move close button because of overflow-y scroll
   .modal__close {
     right: 10px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+
+  button {
+    border: 0;
+    font-size: 1rem;
   }
 
   .icon {
@@ -202,6 +222,7 @@ a.icon-stylized-new:focus span:after {
       cursor: pointer;
       width: 100%;
       text-align: left;
+      background-color: transparent;
 
       &:hover {
         color: $cyan;
@@ -222,7 +243,7 @@ a.icon-stylized-new:focus span:after {
   }
 
   ul {
-    padding: 0 0 20px 0;
+    padding: 0;
     margin: 0;
 
     label {
@@ -265,7 +286,11 @@ input.ng-invalid-field-required-class {
   .summary {
     margin: 10px 0;
     font-weight: normal;
+    // min-height: 80px;
   }
+  // .where-to-buy {
+  //   min-height: 84px;
+  // }
   .operator {
     margin: 0 0 10px 0;
   }
@@ -423,7 +448,7 @@ label.plain-small {
   border-top: 6px solid $purple;
 }
 
-@include breakpoint(tablet3) {
+@include breakpoint(tablet4) {
   .mobile--void {
     display: none !important;
   }
@@ -768,4 +793,8 @@ p.filtered-header__heading, h3.filtered-header__heading, h3, h2.filtered-header_
     width: 1.8rem;
     height: calc(1.8rem* 1.04742);
   }
+}
+
+fieldset {
+    padding: 0 !important;
 }

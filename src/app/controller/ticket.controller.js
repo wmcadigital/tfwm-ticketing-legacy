@@ -1,3 +1,4 @@
+/* eslint-disable angular/window-service */
 (function() {
   'use strict';
 
@@ -20,7 +21,8 @@
     '$timeout',
     'deviceDetector',
     '$location',
-    '$window'
+    '$window',
+    'buyTicketUrlService'
   ];
 
   function TicketDetailCtrl(
@@ -32,7 +34,8 @@
     $timeout,
     deviceDetector,
     $location,
-    $window
+    $window,
+    buyTicketUrlService
   ) {
     const vm = this;
     vm.loadingText = 'Loading...'; // default loading text
@@ -59,7 +62,6 @@
     vm.openFilters = openFilters;
     vm.closeFilters = closeFilters;
     vm.date = new Date();
-    vm.deviceDetect = deviceDetect; // Function to detect device
     vm.gpay = false; // Default value for GPay products
     vm.searchLocation = $location.host(); // Set the current host
 
@@ -217,35 +219,74 @@
 
     // Function to get the ticket data with api call
     function initialise(data) {
-      ticketingService.getTicket(data).then(function(response) {
-        vm.all = response;
-        if (vm.all.relatedTickets.length) {
-          vm.related = [];
-          angular.forEach(
-            vm.all.relatedTickets,
-            function(item) {
-              ticketingService.getTicket(item.id).then(function(related) {
-                vm.relatedTickets[item.id] = related;
-                vm.relatedList = vm.relatedTickets[item.id];
-                // push items into a single array
-                vm.related.push(vm.relatedList);
+      ticketingService
+        .getTicket(data)
+        .then(function(response) {
+          vm.all = response;
+          if (vm.all.relatedTickets.length) {
+            vm.related = [];
+            angular.forEach(
+              vm.all.relatedTickets,
+              function(item) {
+                ticketingService
+                  .getTicket(item.id)
+                  .then(function(related) {
+                    vm.relatedTickets[item.id] = related;
+                    vm.relatedList = vm.relatedTickets[item.id];
+                    // push items into a single array
+                    vm.related.push(vm.relatedList);
+                  })
+                  .catch(function(error) {
+                    vm.errorMessage =
+                      'There was a problem loading ticket data. Please try again later.';
+                    vm.loadingStatus = 'error';
+                    console.error(error);
+                  });
+              },
+              vm.related
+            );
+          }
+          if (vm.all.documents.length) {
+            ticketingService
+              .getTerms(data)
+              .then(function(terms) {
+                vm.relatedTerms = terms;
+              })
+              .catch(function(error) {
+                vm.errorMessage =
+                  'There was a problem loading terms and conditions data. Please try again later.';
+                vm.loadingStatus = 'error';
+                console.error(error);
               });
-            },
-            vm.related
+          }
+          ticketingService
+            .getOperators()
+            .then(function(operator) {
+              vm.operatorList = operator;
+              // console.log(response);
+            })
+            .catch(function(error) {
+              vm.errorMessage =
+                'There was a problem loading operator data. Please try again later.';
+              vm.loadingStatus = 'error';
+              console.error(error);
+            });
+
+          // Normalize buyTicketUrl using shared service
+          vm.all.buyTicketUrl = buyTicketUrlService.normalize(
+            vm.all.buyTicketUrl,
+            window?.setTicketFinder?.name,
+            vm.all.swiftCurrentAmount
           );
-        }
-        if (vm.all.documents.length) {
-          ticketingService.getTerms(data).then(function(terms) {
-            vm.relatedTerms = terms;
-          });
-        }
-        ticketingService.getOperators().then(function(operator) {
-          vm.operatorList = operator;
-          // console.log(response);
+
+          backButtonLogic(); // Determine back button logic
+          vm.loadingStatus = 'success'; // set success loading status
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-        backButtonLogic(); // Determine back button logic
-        vm.loadingStatus = 'success'; // set success loading status
-      });
     }
 
     // detect device in use
@@ -288,18 +329,25 @@
     }
 
     function initialiseFull(data) {
-      ticketingService.getTicketFull(data).then(function(response) {
-        vm.full = response;
-        vm.priceLevels = response.priceLevels;
-        vm.gpay = false;
-        vm.priceLevelsList = vm.priceLevels.map(function(item) {
-          if (item.type.includes('Google Pay')) {
-            vm.gpay = true;
-            return true;
-          }
-          return false;
+      ticketingService
+        .getTicketFull(data)
+        .then(function(response) {
+          vm.full = response;
+          vm.priceLevels = response.priceLevels;
+          vm.gpay = false;
+          vm.priceLevelsList = vm.priceLevels.map(function(item) {
+            if (item.type.includes('Google Pay')) {
+              vm.gpay = true;
+              return true;
+            }
+            return false;
+          });
+        })
+        .catch(function(error) {
+          vm.errorMessage = 'There was a problem loading ticket data. Please try again later.';
+          vm.loadingStatus = 'error';
+          console.error(error);
         });
-      });
     }
 
     // popup modals
@@ -394,9 +442,9 @@
       },
       template:
         '<div ng-show="show" class="mod">' +
-        '<div ng-show="show" class="modal" ng-click="hideModal()"></div>' +
+        '<div ng-show="show" class="modal" ng-click="hideModal()" keyboard-click></div>' +
         '<div class="overlay modal-content {{dialogStyle.class}}" ng-style="dialogStyle">' +
-        '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()">X</div>' +
+        '<div class="ng-modal-close modal__close js-modal-close" ng-click="hideModal()" keyboard-click>X</div>' +
         '<div class="ng-modal-dialog-content" ng-transclude></div>' +
         '</div>' +
         '</div>'
@@ -435,7 +483,7 @@
         '<div class="radio-bar">' +
         '<span ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
         '<input name="option" id="{{pane.title}}" type="radio">' +
-        '<label ng-click="select(pane)" for="{{pane.title}}" style="height: 44px;">{{pane.title}}</label>' +
+        '<label ng-click="select(pane)" for="{{pane.title}}" style="height: 44px;" keyboard-click>{{pane.title}}</label>' +
         '</span>' +
         '</div>' +
         '</div>' +
