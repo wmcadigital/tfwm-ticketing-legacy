@@ -114,6 +114,13 @@
 </head>
 
 <body class="bg--grey bg--tint ticketing-page">
+    <!-- Portal-specific: hide design-system breadcrumbs rendered inside app views -->
+    <style>
+        .wmnds-breadcrumb, .block-cta {
+            display: none !important;
+        }
+    </style>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVSWZS" height="0" width="0"
@@ -144,14 +151,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 
     <!-- App code -->
-    <script src="../js/oneapp.app.min.js"></script>
-    <script src="../js/services.min.js"></script>
-    <script src="../js/controller.min.js"></script>
-    <script src="../js/directives.min.js"></script>
-    <script src="../js/shared.min.js"></script>
-    <script src="../js/assets.min.js"></script>
-    <script src="../js/oneapp.partials.min.js"></script>
-    <script src="../js/oneapp.shared.partials.min.js"></script>
+    <script src="../js/tfwm.app.min.js"></script>
+    <script src="../js/tfwm.services.min.js"></script>
+    <script src="../js/tfwm.controller.min.js"></script>
+    <script src="../js/tfwm.directives.min.js"></script>
+    <script src="../js/tfwm.shared.min.js"></script>
+    <script src="../js/tfwm.assets.min.js"></script>
+    <script src="../js/tfwm.partials.min.js"></script>
+    <script src="../js/tfwm.shared.partials.min.js"></script>
 
     <!--<script src="assets/angucomplete-alt.min.js"></script>-->
     <script src="https://cloudcdn.wmca.org.uk/nwmAssets/apps/shared/sharedFilters.js"></script>
@@ -164,6 +171,56 @@
         window.setTicketFinder = {
           name: 'Oneapp Ticket Finder'
         };
+    </script>
+
+    <!-- Accessibility: ensure the first `.block--cta` is hidden from assistive technology -->
+    <script>
+        (function() {
+          function hideBlockSide(el) {
+            try {
+              if (!el) return;
+              if (el.getAttribute && el.getAttribute('aria-hidden') === 'true') return;
+              if (el.setAttribute) el.setAttribute('aria-hidden', 'true');
+              if (el.setAttribute) el.setAttribute('tabindex', '-1');
+              try {
+                if ('inert' in el) el.inert = true;
+                else el.setAttribute && el.setAttribute('inert', '');
+                // Also hide visually
+                try {
+                  el.style && (el.style.display = 'none');
+        } catch (e) {}
+                try {
+                  el.hidden = true;
+        } catch (e) {}
+              } catch (e) {}
+            } catch (e) {}
+          }
+
+          function process() {
+            if (!document.querySelector) return;
+            var first = document.querySelector('.block--cta');
+            if (first) hideBlockSide(first);
+          }
+
+          // Run on DOM ready and shortly after (Angular may inject views)
+          if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            process();
+          } else {
+            document.addEventListener('DOMContentLoaded', process);
+          }
+
+          // Also run after a short delay in case views render later
+          setTimeout(process, 500);
+
+          // Observe DOM for dynamically added nodes (Angular views)
+          try {
+            var observer = new MutationObserver(function() {
+              // On any mutation, attempt to hide the first .block--cta if present
+              process();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+          } catch (e) {}
+        })();
     </script>
 
 </body>
