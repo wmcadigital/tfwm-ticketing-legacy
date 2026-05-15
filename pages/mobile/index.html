@@ -158,18 +158,18 @@
     <script src="https://cloudcdn.wmca.org.uk/Staging/nwmAssets/js/nwm.js"></script>
     <!--<script src="https://cloudcdn.wmca.org.uk/nwmAssets/js/nwm-custom.js"></script>-->
 
-    <!-- Ajax SVGs from WMN Design System -->
-    <script>
-        const ajax = new XMLHttpRequest();
-        ajax.open('GET', 'https://cloudcdn.wmca.org.uk/tfwmassets/ds/2.4.2/img/wmnds-icons.min.svg', true);
-        ajax.send();
-        ajax.onload = function() {
-          const div = document.createElement('div');
-          div.style.display = 'none';
-          div.innerHTML = ajax.responseText;
-          document.body.insertBefore(div, document.body.childNodes[0]);
-        };
-    </script>
+  <!-- Ajax SVGs from WMN Design System -->
+  <script>
+    const icons = new XMLHttpRequest();
+    icons.open('GET', 'https://cloudcdn.wmca.org.uk/tfwmassets/ds/2.4.2/img/wmnds-icons.min.svg', true);
+    icons.send();
+    icons.onload = function() {
+      const div = document.createElement('div');
+      div.style.display = 'none';
+      div.innerHTML = icons.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+    };
+  </script>
 
     <script>
         // set the ticket finder name
