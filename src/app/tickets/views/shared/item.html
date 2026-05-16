@@ -146,7 +146,7 @@
       <!-- if product has no online buy link -->
       <div data-ng-if="!ticket.buyTicketUrl"
         data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.android">
-        <a class="float--left btn btn--arrow" data-ng-href="$*baseUrl/#/ticket/{{ticket.id}}">More information</a>
+        <a class="float--left btn btn--arrow" data-ng-href="{{vm.currentUrl}}#/ticket/{{ticket.id}}">More information</a>
       </div>
 
     </div>
