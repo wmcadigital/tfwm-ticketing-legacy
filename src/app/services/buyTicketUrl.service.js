@@ -50,7 +50,7 @@
       if (isSwiftCurrentAmount && finder.includes('Smart Citizen')) {
         baseUrl2 = '';
         if (finder.includes('Smart Citizen Mobile Production'))
-          baseUrl2 = 'https://my.swiftcard.org.uk';
+          baseUrl2 = 'https://m-public-tfwm.smartcitizen.net';
         else if (finder.includes('Smart Citizen Desktop Production'))
           baseUrl2 = 'https://public-tfwm.smartcitizen.net';
         else if (finder.includes('Smart Citizen Mobile Test'))
@@ -95,7 +95,8 @@
           else if (finder.includes('Smart Citizen Dev'))
             baseUrl = 'https://public-tfwmdev.smartcitizen.net';
           else if (finder.includes('Swift Portal')) baseUrl = 'https://my.swiftcard.org.uk';
-          else if (finder.includes('Swift Mobile Portal')) baseUrl = 'https://my.swiftcard.org.uk';
+          else if (finder.includes('Swift Mobile Portal'))
+            baseUrl = 'https://m-public-tfwm.smartcitizen.net';
 
           parts2 = url.split('?');
           queryString2 = parts2[1] || '';
