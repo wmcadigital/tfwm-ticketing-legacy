@@ -50,13 +50,13 @@
       if (isSwiftCurrentAmount && finder.includes('Smart Citizen')) {
         baseUrl2 = '';
         if (finder.includes('Smart Citizen Mobile Production'))
-          baseUrl2 = 'https://m-public-tfwm.smartcitizen.net';
+          baseUrl2 = 'https://my.swiftcard.org.uk';
         else if (finder.includes('Smart Citizen Desktop Production'))
           baseUrl2 = 'https://public-tfwm.smartcitizen.net';
         else if (finder.includes('Smart Citizen Mobile Test'))
           baseUrl2 = 'https://m-public-tfwmtest.smartcitizen.net';
         else if (finder.includes('Smart Citizen Production'))
-          baseUrl2 = 'https://public-tfwm.smartcitizen.net';
+          baseUrl2 = 'https://my.swiftcard.org.uk';
         else if (finder.includes('Smart Citizen Test'))
           baseUrl2 = 'https://public-tfwmtest.smartcitizen.net';
         else if (finder.includes('Smart Citizen Desktop Test'))
@@ -64,7 +64,8 @@
         else if (finder.includes('Smart Citizen Dev'))
           baseUrl2 = 'https://public-tfwmdev.smartcitizen.net';
         else if (finder.includes('Swift Portal')) baseUrl2 = 'https://my.swiftcard.org.uk';
-        else if (finder.includes('Swift Portal Mobile')) baseUrl2 = 'https://my.swiftcard.org.uk';
+        else if (finder.includes('Swift Portal Mobile'))
+          baseUrl2 = 'https://m-public-tfwm.smartcitizen.net';
         // else if (finder.includes('TfWM Ticket Finder')) baseUrl2 = 'https://my.swiftcard.org.uk';
 
         if (baseUrl2) {
@@ -86,7 +87,7 @@
           else if (finder.includes('Smart Citizen Mobile Test'))
             baseUrl = 'https://m-public-tfwmtest.smartcitizen.net';
           else if (finder.includes('Smart Citizen Production'))
-            baseUrl = 'https://public-tfwm.smartcitizen.net';
+            baseUrl = 'https://my.swiftcard.org.uk';
           else if (finder.includes('Smart Citizen Test'))
             baseUrl = 'https://public-tfwmtest.smartcitizen.net';
           else if (finder.includes('Smart Citizen Desktop Test'))
