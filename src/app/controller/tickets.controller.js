@@ -373,15 +373,27 @@
       vm.loadingStatus = 'loading';
       angular.copy(vm.postJSON, vm.postedJSON); // save initial search variables
 
-      // If railZoneFromParameter and railZoneToParameter both have values, keep stationNames; otherwise set to null
+      // Build stationNames from selected stations if train is selected and stations are provided
       if (
-        vm.railZoneFromParameter === null ||
-        vm.railZoneToParameter === null ||
-        vm.stationFromName === null ||
-        vm.stationToName === null ||
-        !vm.fromStationText ||
-        !vm.toStationText ||
-        (Array.isArray(vm.postedJSON.stationNames) && vm.postedJSON.stationNames.length === 0)
+        vm.postedJSON.allowTrain === true &&
+        vm.stationFromName !== null &&
+        vm.stationToName !== null
+      ) {
+        // Construct stationNames array from selected stations
+        vm.postedJSON.stationNames = [vm.stationFromName, vm.stationToName];
+        if (vm.stationViaOneName) {
+          vm.postedJSON.stationNames.push(vm.stationViaOneName);
+        }
+      }
+
+      // If train is selected but stations or zone information is missing, set stationNames to null
+      if (
+        vm.postedJSON.allowTrain === true &&
+        (vm.stationFromName === null ||
+          vm.stationToName === null ||
+          vm.fromZoneNumber === null ||
+          vm.toZoneNumber === null ||
+          (Array.isArray(vm.postedJSON.stationNames) && vm.postedJSON.stationNames.length === 0))
       ) {
         vm.postedJSON.stationNames = null;
       }
