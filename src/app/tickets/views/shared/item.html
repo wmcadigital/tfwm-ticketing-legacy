@@ -123,7 +123,8 @@
         data-ng-hide="ticket.isPayAsYouGo || ticket.swiftCurrentAmount || !ticket.buyTicketUrl || ticket.validityId == 450930000 && ticket.purchaseLocations.swiftOnMobile && tickets.oneApp && tickets.android">
         <a class="float--left btn btn--arrow"
           data-ng-href="{{ticket.purchaseLocations.tic && !ticket.hasOnlinePurchaseChannel ? 'https://www.tfwm.org.uk/swift-and-tickets/how-to-buy-and-top-up-with-swift/':ticket.buyTicketUrl}}"
-          ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' ">
+          ng-class="ticket.hasOnlinePurchaseChannel ? 'btn--navy' : '' "
+          target="_parent">
           {{ticket.buyOnDirectDebit ? "Buy on Direct Debit" : ticket.buyOnSwift ?
           "Buy on Swift" : ticket.hasOnlinePurchaseChannel ? "Buy now" :
           ticket.purchaseLocations.tic ? "Buy at travel centre" : "Buy now" }}
