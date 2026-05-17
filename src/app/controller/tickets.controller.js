@@ -398,6 +398,18 @@
         vm.postedJSON.stationNames = null;
       }
 
+      // If brand is not a train brand, don't send stationNames in the payload
+      if (
+        vm.postedJSON.brand === 'nbus' ||
+        vm.postedJSON.brand === 'Diamond Bus' ||
+        vm.postedJSON.brand === 'National Express' ||
+        vm.postedJSON.brand === 'Swift Go' ||
+        vm.postedJSON.brand === 'Swift PAYG - Pay as you go' ||
+        vm.postedJSON.brand === 'West Midlands Metro'
+      ) {
+        vm.postedJSON.stationNames = null;
+      }
+
       // Set a timeout for the API call (e.g., 10 seconds)
       apiTimeoutPromise = $timeout(function() {
         vm.errorMessage = 'The ticket search is taking too long. Retrying...';
