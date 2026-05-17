@@ -8,7 +8,7 @@
         ticket.allowBus == false && ticket.allowMetro == true && ticket.allowTrain == true? 'bdr-top--blue':
         ticket.swiftCurrentAmount !== '' && ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == true? 'nnetwork':
         ticket.allowBus == true && ticket.allowTrain == true && ticket.allowMetro == false? 'bdr-top--cyan': 'bdr-top--purple' ">
-    <span data-ng-if="ticket.swiftCurrentAmount"><a ng-href="$*baseUrl#/ticket/810"><img class="paygimg"
+    <span data-ng-if="ticket.swiftCurrentAmount"><a ng-href="{{vm.currentUrl}}/#/ticket/810"><img class="paygimg"
           ng-src="$*imgUrl/payg.png" /></a></span>
     <div class="itemContent">
       <div class="grid-8">
