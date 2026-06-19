@@ -149,7 +149,7 @@
     "gulp-cli": "^2.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^5.0.0",
-    "gulp-htmlhint": "^2.2.1",
+    "gulp-htmlhint": "^4.0.2",
     "gulp-imagemin": "^6.2.0",
     "gulp-ng-html2js": "^0.2.3",
     "gulp-plumber": "^1.2.1",
