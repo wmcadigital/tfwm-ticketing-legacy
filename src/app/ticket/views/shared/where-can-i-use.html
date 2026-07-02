@@ -43,8 +43,8 @@
         </pane>
         <pane data-ng-if="ticket.all.allowTrain" title="Train">
           <div class="imgwrapper">
-            <a ng-href="$*imgUrl/nwmzonalcurves.png" data-lightbox="train"><img
-                ng-src="$*imgUrl/nwmzonalcurves-thumbnail.png" />
+            <a ng-href="$*imgUrl/wmr_network_map_a3_297x420_mar26_online.png" data-lightbox="train"><img
+                ng-src="$*imgUrl/wmr_network_map_a3_297x420_mar26_online_thumbnail.png"  alt="Thumbnail showing the West Midlands Railway zone diagram"/>
               <i class="material-icons">
                 zoom_out_map
               </i>
@@ -201,15 +201,15 @@
     </div>
     <div data-ng-if="!ticket.all.allowBus && ticket.all.allowTrain && !ticket.all.allowMetro">
       <div class="imgwrapper" data-ng-if="ticket.all.id != '900103' && ticket.all.id != '900100' && ticket.all.id != '900101' && ticket.all.id != '900102'">
-        <a ng-href="$*imgUrl/nwmzonalcurves.png" data-lightbox="train">
-          <img ng-src="$*imgUrl/nwmzonalcurves-thumbnail.png" />
+        <a ng-href="$*imgUrl/wmr_network_map_a3_297x420_mar26_online.png" data-lightbox="train">
+          <img ng-src="$*imgUrl/wmr_network_map_a3_297x420_mar26_online_thumbnail.png"  alt="Thumbnail showing the West Midlands Railway zone diagram"/>
           <i class="material-icons">zoom_out_map</i>
         </a>
       </div>
       <div data-ng-if="ticket.all.id == '900103' || ticket.all.id == '900100' || ticket.all.id == '900101' || ticket.all.id == '900102'">
-        <a href="https://cloudcdn.wmca.org.uk/documents/tfwm/wmr_network_map_zones_1-5_only.pdf" target="_blank">
-          <img ng-src="$*imgUrl/wmr-network-map-zones-1-5.png" alt="Thumbnail showing the West Midlands Railway zone diagram" />
-          View the West Midlands Railway network map zones 1-5 (Opens in a new tab)
+        <a href="https://cloudcdn.wmca.org.uk/documents/tfwm/wmr_network_map_double_royal_tocs_no_chase.pdf" target="_blank">
+          <img ng-src="$*imgUrl/wmr_network_map_double_royal_tocs_no_chase_thumbnail.png" alt="Thumbnail showing the West Midlands Railway zone diagram" />
+          View the West Midlands Railway network map for this ticket (Opens in a new tab)
         </a>
       </div>
       <p class="summary">Train operators who accept this ticket</p>
