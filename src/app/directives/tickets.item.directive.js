@@ -17,10 +17,11 @@
     return directive;
   }
 
-  function itemController() {
+  function itemController(buyTicketUrlService) {
     const vm = this;
     vm.elementIds = [];
     vm.whereToBuy = [];
+    vm.baseUrl2 = buyTicketUrlService.getBaseUrl2(window?.setTicketFinder?.name);
 
     if (window?.setTicketFinder?.name.includes('TfWM Ticket Finder')) {
       vm.finderLink = 'tfwm/';
@@ -46,4 +47,6 @@
       vm.finderLink = '';
     }
   }
+
+  itemController.$inject = ['buyTicketUrlService'];
 })();

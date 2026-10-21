@@ -4,6 +4,30 @@
   angular.module('ticketingApp').factory('buyTicketUrlService', buyTicketUrlFactory);
 
   function buyTicketUrlFactory() {
+    function getBaseUrl2(setTicketFinderName) {
+      var finder = setTicketFinderName || '';
+
+      if (finder.includes('Smart Citizen Mobile Production'))
+        return 'https://m-public-tfwm.smartcitizen.net';
+      if (finder.includes('Smart Citizen Desktop Production'))
+        return 'https://public-tfwm.smartcitizen.net';
+      if (finder.includes('Smart Citizen Mobile Test'))
+        return 'https://m-public-tfwmtest.smartcitizen.net';
+      if (finder.includes('Smart Citizen Mobile Staging'))
+        return 'https://m-public-tfwmstaging.smartcitizen.net';
+      if (finder.includes('Smart Citizen Production')) return 'https://my.swiftcard.org.uk';
+      if (finder.includes('Smart Citizen Test')) return 'https://public-tfwmtest.smartcitizen.net';
+      if (finder.includes('Smart Citizen Staging'))
+        return 'https://public-tfwmstaging.smartcitizen.net';
+      if (finder.includes('Smart Citizen Desktop Test'))
+        return 'https://public-tfwmtest.smartcitizen.net';
+      if (finder.includes('Smart Citizen Dev')) return 'https://public-tfwmdev.smartcitizen.net';
+      if (finder.includes('Swift Portal Mobile')) return 'https://m-public-tfwm.smartcitizen.net';
+      if (finder.includes('Swift Portal')) return 'https://my.swiftcard.org.uk';
+
+      return 'https://my.swiftcard.org.uk';
+    }
+
     function normalize(originalUrl, setTicketFinderName, isSwiftCurrentAmount) {
       var url;
       var finder;
@@ -122,7 +146,8 @@
     }
 
     return {
-      normalize: normalize
+      normalize: normalize,
+      getBaseUrl2: getBaseUrl2
     };
   }
 })();
