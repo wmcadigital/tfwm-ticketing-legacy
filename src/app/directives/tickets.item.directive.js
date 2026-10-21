@@ -21,7 +21,11 @@
     const vm = this;
     vm.elementIds = [];
     vm.whereToBuy = [];
-    vm.baseUrl2 = buyTicketUrlService.getBaseUrl2(window?.setTicketFinder?.name);
+    vm.baseUrl2 = buyTicketUrlService.normalize(
+      'https://my.swiftcard.org.uk/?matrixId=AAC001',
+      window?.setTicketFinder?.name,
+      true
+    );
 
     if (window?.setTicketFinder?.name.includes('TfWM Ticket Finder')) {
       vm.finderLink = 'tfwm/';
