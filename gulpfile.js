@@ -24,7 +24,7 @@ const fs = require('fs');
 
 const json = JSON.parse(fs.readFileSync('./package.json'));
 
-let build = 'live';
+let build = 'ghpages';
 // Function that is ran when buildAll is called to determine buildEnv
 // This matches the buildDirs in package.json
 function determineBuild(done) {
@@ -39,7 +39,7 @@ function determineBuild(done) {
       build = 'live';
       break;
     default:
-      build = 'live';
+      build = 'ghpages';
       break;
   }
   done();
@@ -663,6 +663,10 @@ function moveSCTest() {
   return src(['pages/tfwm-sc-test/index.html']).pipe(dest('build/tfwm-sc-test'));
 }
 
+function moveSCStg() {
+  return src(['pages/tfwm-sc-stg/index.html']).pipe(dest('build/tfwm-sc-stg'));
+}
+
 function moveSCDev() {
   return src(['pages/tfwm-sc-dev/index.html']).pipe(dest('build/tfwm-sc-dev'));
 }
@@ -681,6 +685,10 @@ function movePortal() {
 
 function moveMobile() {
   return src(['pages/mobile/index.html']).pipe(dest('build/mobile'));
+}
+
+function moveSCMobileStg() {
+  return src(['pages/tfwm-sc-mobile-stg/index.html']).pipe(dest('build/tfwm-sc-mobile-stg'));
 }
 
 // Optimise images
@@ -791,7 +799,8 @@ const buildProd = series(
   moveTfWM,
   moveOneapp,
   movePortal,
-  moveMobile
+  moveMobile,
+  moveSCMobileStg
 );
 
 const buildTest = series(
@@ -834,11 +843,13 @@ const buildTest = series(
   moveAppTest,
   moveSCProd,
   moveSCTest,
+  moveSCStg,
   moveSCDev,
   moveSCDeskProd,
   moveSCDeskTest,
   movePortal,
-  moveMobile
+  moveMobile,
+  moveSCMobileStg
 );
 
 // Watch files for changes
@@ -920,11 +931,13 @@ const dev = series(
     moveAppTest,
     moveSCProd,
     moveSCTest,
+    moveSCStg,
     moveSCDev,
     moveSCDeskProd,
     moveSCDeskTest,
     movePortal,
-    moveMobile
+    moveMobile,
+    moveSCMobileStg
   ),
   parallel(watchFiles, server)
 ); // run buildStyles & minifyJS on start, series so () => run in an order and parallel so () => can run at same time
@@ -1005,11 +1018,13 @@ exports.moveApp = moveApp;
 exports.moveAppTest = moveAppTest;
 exports.moveSCProd = moveSCProd;
 exports.moveSCTest = moveSCTest;
+exports.moveSCStg = moveSCStg;
 exports.moveSCDev = moveSCDev;
 exports.moveSCDeskProd = moveSCDeskProd;
 exports.moveSCDeskTest = moveSCDeskTest;
 exports.movePortal = movePortal;
 exports.moveMobile = moveMobile;
+exports.moveSCMobileStg = moveSCMobileStg;
 exports.minImages = minImages;
 exports.buildAll = buildAll;
 exports.buildProd = buildProd;

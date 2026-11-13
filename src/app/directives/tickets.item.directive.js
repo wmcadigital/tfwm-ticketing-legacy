@@ -43,10 +43,14 @@
       vm.finderLink = 'tfwm-sc-dev/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Test')) {
       vm.finderLink = 'tfwm-sc-test/';
+    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Staging')) {
+      vm.finderLink = 'tfwm-sc-stg/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Production')) {
       vm.finderLink = 'tfwm-sc-mobile/';
     } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Test')) {
       vm.finderLink = 'tfwm-sc-mobile-test/';
+    } else if (window?.setTicketFinder?.name.includes('Smart Citizen Mobile Staging')) {
+      vm.finderLink = 'tfwm-sc-mobile-stg/';
     } else {
       vm.finderLink = '';
     }
